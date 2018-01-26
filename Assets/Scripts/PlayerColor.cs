@@ -1,6 +1,4 @@
-﻿
-
-/// <summary>
+﻿/// <summary>
 /// 
 /// </summary>
 public enum PlayerColor {

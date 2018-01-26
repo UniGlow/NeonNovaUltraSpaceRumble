@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 114818117907448600}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -183,7 +183,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 10
+  rotateSpeed: 1000
+  attackCooldown: 0.2
+  projectileSpeed: 20
+  defendCooldown: 3
+  speedBoost: 1.5
   playerColor: 2
+  ability: 0
+  playerNumber: 1
+  projectilePrefab: {fileID: 1693907411783006, guid: c023009a9133c5b4da7f7564326be655,
+    type: 2}
 --- !u!212 &212008712569731534
 SpriteRenderer:
   m_ObjectHideFlags: 1
