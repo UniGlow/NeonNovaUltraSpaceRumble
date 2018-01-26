@@ -3,91 +3,55 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Handles everything related to the movement of Haru, our playable Character
+/// 
 /// </summary>
-[RequireComponent(typeof(Rigidbody))]
-public class PlayerController : SubscribedBehaviour
-{
+public class Player : SubscribedBehaviour {
 
     #region Variable Declarations
     // Variables that should be visible in Inspector
     [Header("Movement")]
-    [SerializeField] float movementSpeed = 10;
-    [SerializeField] float rotateSpeed = 1000;
-
-    [Header("Damage")]
-    [SerializeField] float attackCooldown = 0.2f;
-    [SerializeField] float projectileSpeed = 10f;
-
-    [Header("Tank")]
-    [SerializeField] float defendCooldown = 3f;
-
-    [Header("Opfer")]
-    [SerializeField] float speedBoost = 1.5f;
+    [SerializeField]
+    protected float movementSpeed = 10;
+    [SerializeField]
+    protected float rotateSpeed = 1000;
 
     [Header("Properties")]
-    [SerializeField] PlayerColor playerColor;
-    [SerializeField] Ability ability;
-    [SerializeField] int playerNumber;
-
-    [Header("References")]
-    [SerializeField] GameObject projectilePrefab;
+    [Range(1, 4)]
+    [SerializeField]
+    protected int playerNumber;
 
     // Movement Variables
-    private float horizontalInput;
-    private float verticalInput;
-    private float horizontalLookInput;
-    private float verticalLookInput;
-    private bool movable = true;
-
-    private bool cooldown = true;
+    protected float horizontalInput;
+    protected float verticalInput;
+    protected float horizontalLookInput;
+    protected float verticalLookInput;
+    protected bool movable = true;
 
     // Component References
-    private new Rigidbody rigidbody;
+    protected new Rigidbody rigidbody;
     #endregion
 
 
-    
+
     #region Unity Event Functions
     // Use this for initialization
-    void Start()
-    {
+    protected virtual void Start() {
         rigidbody = GetComponent<Rigidbody>();
     }
 
-    void FixedUpdate()
-    {
+    protected virtual void FixedUpdate() {
         MoveCharacter();
         RotateCharacter();
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    protected virtual void Update() {
         if (movable) {
             horizontalInput = Input.GetAxis(Constants.INPUT_HORIZONTAL + playerNumber) * movementSpeed;
             verticalInput = Input.GetAxis(Constants.INPUT_VERTICAL + playerNumber) * movementSpeed;
             horizontalLookInput = Input.GetAxis(Constants.INPUT_LOOK_HORIZONTAL + playerNumber) * movementSpeed;
             verticalLookInput = Input.GetAxis(Constants.INPUT_LOOK_VERTICAL + playerNumber) * movementSpeed;
         }
-
-        if (ability == Ability.Damage) {
-            Attack();
-        }
-        else if (ability == Ability.Tank) {
-            Defend();
-        }
-        else if (ability == Ability.Opfer) {
-            Run();
-        }
-    }
-    #endregion
-
-
-
-    #region Custom Event Functions
-    protected override void OnLevelCompleted() {
-        
     }
     #endregion
 
@@ -125,32 +89,6 @@ public class PlayerController : SubscribedBehaviour
             Vector3 lookDirection = new Vector3(horizontalLookInput, 0f, verticalLookInput);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(lookDirection, Vector3.up), Time.deltaTime * rotateSpeed);
         }
-    }
-
-    private void Attack() {
-        if (Input.GetButton(Constants.INPUT_ABILITY + playerNumber) && cooldown) {
-            GameObject projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
-            projectile.GetComponent<Rigidbody>().velocity = transform.forward * projectileSpeed;
-            cooldown = false;
-            StartCoroutine(ResetCooldown(attackCooldown));
-        }
-    }
-
-    private void Defend() {
-
-    }
-
-    private void Run() {
-
-    }
-    #endregion
-
-
-
-    #region Coroutines
-    IEnumerator ResetCooldown(float time) {
-        yield return new WaitForSecondsRealtime(time);
-        cooldown = true;
     }
     #endregion
 }
