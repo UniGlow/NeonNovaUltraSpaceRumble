@@ -12,6 +12,7 @@ public class PlayerController : SubscribedBehaviour
     #region Variable Declarations
     // Variables that should be visible in Inspector
     [SerializeField] float movementSpeed = 10;
+    [SerializeField] PlayerColor playerColor;
 
     // Movement Variables
     private float horizontalInput;
