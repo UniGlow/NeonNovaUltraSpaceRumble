@@ -15,6 +15,8 @@ public class HeroProjectile : Projectile {
 
     #region Unity Event Functions
     override protected void OnTriggerEnter(Collider other) {
+        base.OnTriggerEnter(other);
+
         if (other.tag.Contains(Constants.TAG_BOSS)) {
             BossHealth.Instance.TakeDamage(damage);
             Destroy(gameObject);
