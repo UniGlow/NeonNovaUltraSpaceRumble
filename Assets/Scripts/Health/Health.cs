@@ -45,6 +45,11 @@ public class Health : SubscribedBehaviour {
         // Rescale the green part of the healthbar
         Vector3 newScale = new Vector3(((float)currentHealth / maxHealth) * originalHealthbarScale, healthbarForeground.transform.localScale.y, healthbarForeground.transform.localScale.z);
         healthbarForeground.transform.localScale = newScale;
+
+        if (currentHealth <= 0) {
+            currentHealth = 0;
+            Time.timeScale = 0;
+        }
     }
     #endregion
 }
