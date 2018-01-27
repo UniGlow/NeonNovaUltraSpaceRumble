@@ -9,6 +9,11 @@ public class HeroHealth : Health {
 
     #region Variable Declarations
     public static HeroHealth Instance;
+
+    [Header("Object References")]
+    [SerializeField] SpriteRenderer[] healthIndicators;
+
+    private float originalHealthbarScale;
     #endregion
 
 
@@ -32,6 +37,10 @@ public class HeroHealth : Health {
 
     override protected void Start() {
         base.Start();
+
+        foreach (SpriteRenderer spriteRend in healthIndicators) {
+            spriteRend.sprite = healthbarSprites[healthbarSprites.Length - 1];
+        }
     }
 
     override protected void Update() {
@@ -45,6 +54,12 @@ public class HeroHealth : Health {
     override public void TakeDamage(int damage) {
         base.TakeDamage(damage);
 
+        // Update Healthbars
+        foreach (SpriteRenderer spriteRend in healthIndicators) {
+            spriteRend.sprite = healthbarSprites[Mathf.CeilToInt(((float)currentHealth / (float)maxHealth) * healthbarSprites.Length)];
+        }
+
+        // Dead?
         if (currentHealth <= 0) {
             print("Boss wins!");
         }

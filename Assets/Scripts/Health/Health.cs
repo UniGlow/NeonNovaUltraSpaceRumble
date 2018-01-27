@@ -12,10 +12,7 @@ public class Health : SubscribedBehaviour {
     [SerializeField] protected Gradient hpColor;
 
     [Header("Object References")]
-    [SerializeField]
-    GameObject healthbarForeground;
-
-    private float originalHealthbarScale;
+    [SerializeField] protected Sprite[] healthbarSprites;
 
     protected int currentHealth;
     #endregion
@@ -25,7 +22,6 @@ public class Health : SubscribedBehaviour {
     #region Unity Event Functions
     virtual protected void Start() {
         currentHealth = maxHealth;
-        originalHealthbarScale = healthbarForeground.transform.localScale.x;
     }
 
     virtual protected void Update() {
@@ -38,13 +34,6 @@ public class Health : SubscribedBehaviour {
     #region Public Functions
     virtual public void TakeDamage(int damage) {
         currentHealth -= damage;
-
-        // Set new color of the healthbar
-        healthbarForeground.GetComponent<UnityEngine.UI.Image>().color = hpColor.Evaluate((float)currentHealth / maxHealth);
-
-        // Rescale the green part of the healthbar
-        Vector3 newScale = new Vector3(((float)currentHealth / maxHealth) * originalHealthbarScale, healthbarForeground.transform.localScale.y, healthbarForeground.transform.localScale.z);
-        healthbarForeground.transform.localScale = newScale;
 
         if (currentHealth <= 0) {
             currentHealth = 0;

@@ -8,6 +8,8 @@ using UnityEngine;
 public class BossHealth : Health {
 
     #region Variable Declarations
+    [SerializeField] SpriteRenderer healthIndicator;
+
     public static BossHealth Instance;
     #endregion
 
@@ -32,6 +34,8 @@ public class BossHealth : Health {
 
     override protected void Start() {
         base.Start();
+
+        healthIndicator.sprite = healthbarSprites[healthbarSprites.Length-1];
 	}
 	
 	override protected void Update() {
@@ -45,7 +49,12 @@ public class BossHealth : Health {
     override public void TakeDamage(int damage) {
         base.TakeDamage(damage);
 
+        // Update Healthbar
+        healthIndicator.sprite = healthbarSprites[Mathf.CeilToInt(((float)currentHealth / (float)maxHealth) * healthbarSprites.Length)];
+
+        // Dead?
         if (currentHealth <= 0) {
+            healthIndicator.enabled = false;
             print("Heroes win!");
         }
     }
