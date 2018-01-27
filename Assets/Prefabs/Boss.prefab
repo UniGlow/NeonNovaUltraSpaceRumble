@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4042691140480942}
   - component: {fileID: 212530305700027776}
   m_Layer: 0
-  m_Name: PrototypIndikator
+  m_Name: IndicatorArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -308,7 +308,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 23b5821210816b441a8958b749895ca2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3b5d5750bb7b042e0b1198b84127d31f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
