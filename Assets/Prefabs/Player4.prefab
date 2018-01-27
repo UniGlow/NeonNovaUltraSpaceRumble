@@ -255,7 +255,7 @@ MonoBehaviour:
   ability: 1
   projectilePrefab: {fileID: 1693907411783006, guid: c023009a9133c5b4da7f7564326be655,
     type: 2}
-  shieldBubble: {fileID: 0}
+  shieldBubble: {fileID: 1816892940821140}
 --- !u!114 &114699855876217798
 MonoBehaviour:
   m_ObjectHideFlags: 1
