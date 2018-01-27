@@ -31,6 +31,7 @@ public class HomingMissile : SubscribedBehaviour {
     private void OnTriggerEnter(Collider other) {
         if (other.tag.Contains(Constants.TAG_HERO)) {
             HeroHealth.Instance.TakeDamage(damage);
+            other.transform.parent.GetComponent<Transmission>().EndTransmission();
         }
         else if (other.tag.Contains(Constants.TAG_BOSS)) {
             BossHealth.Instance.TakeDamage(damage);
@@ -52,7 +53,7 @@ public class HomingMissile : SubscribedBehaviour {
     public void AcquireNewTarget() {
         Hero[] heroes = GameObject.FindObjectsOfType<Hero>();
         foreach (Hero hero in heroes) {
-            if (hero.Ability == Ability.Opfer) {
+            if (hero.ability == Ability.Opfer) {
                 target = hero.transform;
             }
         }
