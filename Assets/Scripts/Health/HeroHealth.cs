@@ -46,8 +46,7 @@ public class HeroHealth : Health {
         base.TakeDamage(damage);
 
         if (currentHealth <= 0) {
-            currentHealth = 0;
-            print("Heroes dead!");
+            print("Boss wins!");
         }
     }
     #endregion

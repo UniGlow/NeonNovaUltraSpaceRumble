@@ -17,6 +17,9 @@ public class BossProjectile : Projectile {
     override protected void OnTriggerEnter(Collider other) {
         base.OnTriggerEnter(other);
 
+        if (other.tag.Contains(Constants.TAG_SHIELD)) {
+            Destroy(gameObject);
+        }
         if (other.tag.Contains(Constants.TAG_HERO)) {
             HeroHealth.Instance.TakeDamage(damage);
             Destroy(gameObject);

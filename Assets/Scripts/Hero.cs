@@ -29,8 +29,11 @@ public class Hero : Player {
     [Header("References")]
     [SerializeField] GameObject projectilePrefab;
     [SerializeField] GameObject shieldBubble;
+    [SerializeField] GameObject wobbleBobble;
 
     private bool cooldown = true;
+
+    public Ability Ability { get { return ability; } }
     #endregion
 
 
@@ -85,6 +88,7 @@ public class Hero : Player {
 
     private void Defend() {
         shieldBubble.SetActive(true);
+        wobbleBobble.SetActive(true);
         cooldown = false;
         StartCoroutine(ResetDefendCooldown());
     }
@@ -106,6 +110,7 @@ public class Hero : Player {
     IEnumerator ResetDefendCooldown() {
         yield return new WaitForSecondsRealtime(defendCooldown);
         shieldBubble.SetActive(false);
+        wobbleBobble.SetActive(false);
         cooldown = true;
     }
     #endregion
