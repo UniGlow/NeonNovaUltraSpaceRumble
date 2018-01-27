@@ -22,6 +22,7 @@ public class Transmission : SubscribedBehaviour {
     bool receiverFound = false;
     float currenTransmissionDuration;
     bool transmissionCooldownB = true;
+    HomingMissile homingMissile;
 	#endregion
 	
 	
@@ -29,6 +30,7 @@ public class Transmission : SubscribedBehaviour {
 	#region Unity Event Functions
 	private void Start() {
         hero = GetComponent<Hero>();
+        homingMissile = GameObject.FindObjectOfType<HomingMissile>();
 	}
 	
 	private void Update() {        
@@ -103,6 +105,7 @@ public class Transmission : SubscribedBehaviour {
             Ability newAbility = receiver.GetComponent<Hero>().ability;
             receiver.GetComponent<Hero>().ability = hero.ability;
             hero.ability = newAbility;
+            homingMissile.AcquireNewTarget();
             transmissionPS.Play();
             receiver.GetComponent<Transmission>().transmissionPS.Play();
             EndTransmission();
