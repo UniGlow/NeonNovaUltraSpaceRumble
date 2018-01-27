@@ -19,7 +19,8 @@ public class Hero : Player {
     [SerializeField] float defendCooldown = 3f;
 
     [Header("Opfer")]
-    [SerializeField] float speedBoost = 1.5f;
+    [Tooltip("Proportional to base movement speed")]
+    [SerializeField] float speedBoost = 0.5f;
 
     [Header("Properties")]
     [SerializeField] PlayerColor playerColor;
@@ -27,6 +28,7 @@ public class Hero : Player {
 
     [Header("References")]
     [SerializeField] GameObject projectilePrefab;
+    [SerializeField] GameObject shieldBubble;
 
     private bool cooldown = true;
     #endregion
@@ -38,15 +40,7 @@ public class Hero : Player {
     override protected void Update() {
         base.Update();
 
-        if (ability == Ability.Damage) {
-            Attack();
-        }
-        else if (ability == Ability.Tank) {
-            Defend();
-        }
-        else if (ability == Ability.Opfer) {
-            Run();
-        }
+        HandleAbilities();
     }
     #endregion
 
@@ -61,36 +55,56 @@ public class Hero : Player {
 
 
     #region Public Funtcions
-    
+
     #endregion
 
 
 
     #region Private Functions
-    private void Attack() {
-        if (Input.GetButton(Constants.INPUT_ABILITY + playerNumber) && cooldown) {
-            GameObject projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
-            projectile.GetComponent<Projectile>().damage = damagePerShot;
-            projectile.GetComponent<Rigidbody>().velocity = transform.forward * projectileSpeed;
+    private void HandleAbilities() {
+        if (ability == Ability.Opfer) {
+            Run();
+        }
+        else if (Input.GetButton(Constants.INPUT_ABILITY + playerNumber) && cooldown) {
+            if (ability == Ability.Damage) {
+                Attack();
+                StartCoroutine(ResetAttackCooldown());
+            }
+            else if (ability == Ability.Tank) {
+                Defend();
+                StartCoroutine(ResetDefendCooldown());
+            }
             cooldown = false;
-            StartCoroutine(ResetCooldown(attackCooldown));
         }
     }
 
-    private void Defend() {
+    private void Attack() {
+        GameObject projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
+        projectile.GetComponent<Projectile>().damage = damagePerShot;
+        projectile.GetComponent<Rigidbody>().velocity = transform.forward * projectileSpeed;
+    }
 
+    private void Defend() {
+        shieldBubble.SetActive(true);
     }
 
     private void Run() {
-
+        horizontalInput *= (speedBoost + 1);
+        verticalInput *= (speedBoost + 1);
     }
     #endregion
 
 
 
     #region Coroutines
-    IEnumerator ResetCooldown(float time) {
-        yield return new WaitForSecondsRealtime(time);
+    IEnumerator ResetAttackCooldown() {
+        yield return new WaitForSecondsRealtime(attackCooldown);
+        cooldown = true;
+    }
+
+    IEnumerator ResetDefendCooldown() {
+        yield return new WaitForSecondsRealtime(defendCooldown);
+        shieldBubble.SetActive(false);
         cooldown = true;
     }
     #endregion
