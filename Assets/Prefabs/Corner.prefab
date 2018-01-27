@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4872388590474788}
   m_Layer: 0
-  m_Name: Corner001
+  m_Name: Corner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 23868522870274018}
   m_Layer: 0
   m_Name: Wall007
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 23501128449799488}
   m_Layer: 0
   m_Name: Wall002
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

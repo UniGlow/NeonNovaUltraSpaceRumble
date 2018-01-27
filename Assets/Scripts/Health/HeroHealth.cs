@@ -44,6 +44,11 @@ public class HeroHealth : Health {
     #region Public Functions
     override public void TakeDamage(int damage) {
         base.TakeDamage(damage);
+
+        if (currentHealth <= 0) {
+            currentHealth = 0;
+            print("Heroes dead!");
+        }
     }
     #endregion
 }
