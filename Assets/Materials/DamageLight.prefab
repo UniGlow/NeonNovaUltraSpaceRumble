@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4436101278887036}
   - component: {fileID: 108402420617977504}
   m_Layer: 0
-  m_Name: Point light
+  m_Name: DamageLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,8 +50,8 @@ Light:
   serializedVersion: 8
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2.3
-  m_Range: 3.4480615
+  m_Intensity: 2.63
+  m_Range: 4.86
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
