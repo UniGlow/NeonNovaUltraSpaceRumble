@@ -22,6 +22,7 @@ public class BossProjectile : Projectile {
         }
         if (other.tag.Contains(Constants.TAG_HERO)) {
             HeroHealth.Instance.TakeDamage(damage);
+            other.transform.parent.GetComponent<Transmission>().EndTransmission();
             Destroy(gameObject);
         }
     }
