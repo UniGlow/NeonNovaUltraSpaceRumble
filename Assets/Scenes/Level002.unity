@@ -891,6 +891,24 @@ Transform:
   m_PrefabParentObject: {fileID: 4750793601828844, guid: a3881aec1f08b6f46a238e1f8916406f,
     type: 2}
   m_PrefabInternal: {fileID: 531998177}
+--- !u!1 &825059587 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: bba51838468aa304fa86b119f91512c4, type: 3}
+  m_PrefabInternal: {fileID: 1873275083}
+--- !u!64 &825059588
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 825059587}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: bba51838468aa304fa86b119f91512c4, type: 3}
 --- !u!1 &1003704831
 GameObject:
   m_ObjectHideFlags: 0
@@ -976,6 +994,24 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1003704831}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1071904165 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: bba51838468aa304fa86b119f91512c4, type: 3}
+  m_PrefabInternal: {fileID: 1187071386}
+--- !u!64 &1071904166
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1071904165}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: bba51838468aa304fa86b119f91512c4, type: 3}
 --- !u!1001 &1184636180
 Prefab:
   m_ObjectHideFlags: 0
@@ -1121,7 +1157,8 @@ Prefab:
       propertyPath: m_TagString
       value: Wall
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: bba51838468aa304fa86b119f91512c4, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: bba51838468aa304fa86b119f91512c4, type: 3}
   m_IsPrefabParent: 0
 --- !u!4 &1187071387 stripped
@@ -1455,7 +1492,8 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: bff4897da1aee284cb583e330b1edb3d, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: bba51838468aa304fa86b119f91512c4, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: bba51838468aa304fa86b119f91512c4, type: 3}
   m_IsPrefabParent: 0
 --- !u!4 &1873275084 stripped
