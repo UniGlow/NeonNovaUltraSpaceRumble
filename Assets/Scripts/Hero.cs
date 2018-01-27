@@ -77,7 +77,7 @@ public class Hero : Player {
 
     private void Attack() {
         GameObject projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
-        projectile.GetComponent<Projectile>().damage = damagePerShot;
+        projectile.GetComponent<HeroProjectile>().damage = damagePerShot;
         projectile.GetComponent<Rigidbody>().velocity = transform.forward * projectileSpeed;
         cooldown = false;
         StartCoroutine(ResetAttackCooldown());

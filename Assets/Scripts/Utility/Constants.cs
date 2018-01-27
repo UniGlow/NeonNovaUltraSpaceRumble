@@ -13,6 +13,7 @@ public class Constants
     public static readonly string INPUT_LOOK_HORIZONTAL = "LookHorizontal";
     public static readonly string INPUT_LOOK_VERTICAL = "LookVertical";
     public static readonly string INPUT_ABILITY = "Ability";
+    public static readonly string INPUT_TRANSMIT = "Transmit";
     public static readonly string INPUT_DEBUGMODE = "DebugMode";
     public static readonly string INPUT_ESCAPE = "Escape";
     public static readonly string INPUT_SUBMIT = "Submit";
@@ -21,6 +22,7 @@ public class Constants
 
     #region Tags and Layers
     public static readonly string TAG_BOSS = "Boss";
+    public static readonly string TAG_HERO = "Hero";
     #endregion
 
     #region Scenes

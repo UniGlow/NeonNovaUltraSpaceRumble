@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 114424577701179020}
   m_Layer: 0
   m_Name: Boss
-  m_TagString: Boss
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -82,7 +82,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1735896002571996}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.49, y: 0, z: 0.6}
+  m_LocalPosition: {x: 7.74, y: 0, z: 0.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4134548616055882}
@@ -187,8 +187,19 @@ MonoBehaviour:
   movementSpeed: 10
   rotateSpeed: 500
   playerNumber: 2
+  attackDamagePerShot: 10
+  attackProjectileSpeed: 20
+  attackProjectileLifeTime: 1
+  attackCooldown: 0.2
+  abilityDamagePerShot: 20
+  numberOfProjectiles: 20
+  abilityProjectileSpeed: 10
+  abilityProjectileLifeTime: 1
+  abilityCooldown: 3
   weaknessColor: 2
   strengthColor: 2
+  projectilePrefab: {fileID: 1693907411783006, guid: 0f758c9824c38e64e8607ba9dc4c8d64,
+    type: 2}
 --- !u!212 &212300853209604042
 SpriteRenderer:
   m_ObjectHideFlags: 1

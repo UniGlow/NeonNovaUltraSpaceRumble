@@ -7,11 +7,10 @@ using UnityEngine;
 /// </summary>
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Collider))]
-public class Projectile : SubscribedBehaviour {
+public class BossProjectile : SubscribedBehaviour {
 
     #region Variable Declarations
-    [SerializeField] private float lifeTime = 10f;
-
+    public float lifeTime = 1f;
     public int damage = 10;
     #endregion
 
@@ -23,8 +22,8 @@ public class Projectile : SubscribedBehaviour {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (other.tag.Contains(Constants.TAG_BOSS)) {
-            BossHealth.Instance.TakeDamage(damage);
+        if (other.tag.Contains(Constants.TAG_HERO)) {
+            HeroHealth.Instance.TakeDamage(damage);
             Destroy(gameObject);
         }
     }

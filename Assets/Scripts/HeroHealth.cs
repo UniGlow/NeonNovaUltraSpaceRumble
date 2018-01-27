@@ -35,7 +35,7 @@ public class HeroHealth : Health {
     }
 
     override protected void Update() {
-        base.Start();
+        base.Update();
     }
     #endregion
 

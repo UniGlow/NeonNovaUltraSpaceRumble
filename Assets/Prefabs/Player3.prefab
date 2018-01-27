@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 65987508491506354}
   m_Layer: 0
   m_Name: Mesh
-  m_TagString: Untagged
+  m_TagString: Hero
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 114791692740715860}
   m_Layer: 0
   m_Name: Player3
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -154,7 +154,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1387495489766994}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 8}
+  m_LocalPosition: {x: -7.75, y: 0, z: 8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4020993058360412}
@@ -264,7 +264,7 @@ MonoBehaviour:
   defendCooldown: 3
   speedBoost: 0.5
   playerColor: 0
-  ability: 2
+  ability: 0
   projectilePrefab: {fileID: 1693907411783006, guid: c023009a9133c5b4da7f7564326be655,
     type: 2}
   shieldBubble: {fileID: 1648518588618014}
