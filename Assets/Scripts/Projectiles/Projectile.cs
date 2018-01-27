@@ -5,9 +5,7 @@ using UnityEngine;
 /// <summary>
 /// 
 /// </summary>
-[RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(Collider))]
-public class BossProjectile : SubscribedBehaviour {
+public class Projectile : SubscribedBehaviour {
 
     #region Variable Declarations
     public float lifeTime = 1f;
@@ -17,16 +15,24 @@ public class BossProjectile : SubscribedBehaviour {
 
 
     #region Unity Event Functions
-    private void Start() {
+    virtual protected void Start() {
         StartCoroutine(DestroyObject());
     }
 
-    private void OnTriggerEnter(Collider other) {
-        if (other.tag.Contains(Constants.TAG_HERO)) {
-            HeroHealth.Instance.TakeDamage(damage);
+    virtual protected void OnTriggerEnter(Collider other) {
+        if (other.tag.Contains(Constants.TAG_WALL)) {
             Destroy(gameObject);
         }
     }
+
+    private void Update() {
+		
+	}
+    #endregion
+
+
+
+    #region Private Functions
     #endregion
 
 

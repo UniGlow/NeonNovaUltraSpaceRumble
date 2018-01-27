@@ -23,6 +23,7 @@ public class Constants
     #region Tags and Layers
     public static readonly string TAG_BOSS = "Boss";
     public static readonly string TAG_HERO = "Hero";
+    public static readonly string TAG_WALL = "Wall";
     #endregion
 
     #region Scenes
