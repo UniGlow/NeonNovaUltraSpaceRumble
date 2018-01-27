@@ -5,19 +5,9 @@ using UnityEngine;
 /// <summary>
 /// 
 /// </summary>
-public class HeroHealth : SubscribedBehaviour {
+public class HeroHealth : Health {
 
     #region Variable Declarations
-    [SerializeField] int maxHealth = 1000;
-    [SerializeField] Gradient hpColor;
-
-    [Header("Object References")]
-    [SerializeField]
-    GameObject healthbarForeground;
-
-    private int currentHealth;
-    private float originalHealthbarScale;
-
     public static HeroHealth Instance;
     #endregion
 
@@ -40,28 +30,20 @@ public class HeroHealth : SubscribedBehaviour {
         }
     }
 
-    private void Start() {
-        currentHealth = maxHealth;
-        originalHealthbarScale = healthbarForeground.transform.localScale.x;
+    override protected void Start() {
+        base.Start();
     }
 
-    private void Update() {
-
+    override protected void Update() {
+        base.Start();
     }
     #endregion
 
 
 
     #region Public Functions
-    public void TakeDamage(int damage) {
-        currentHealth -= damage;
-
-        // Set new color of the healthbar
-        healthbarForeground.GetComponent<UnityEngine.UI.Image>().color = hpColor.Evaluate((float)currentHealth / maxHealth);
-
-        // Rescale the green part of the healthbar
-        Vector3 newScale = new Vector3(((float)currentHealth / maxHealth) * originalHealthbarScale, healthbarForeground.transform.localScale.y, healthbarForeground.transform.localScale.z);
-        healthbarForeground.transform.localScale = newScale;
+    override public void TakeDamage(int damage) {
+        base.TakeDamage(damage);
     }
     #endregion
 }

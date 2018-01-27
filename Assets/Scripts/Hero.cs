@@ -62,19 +62,16 @@ public class Hero : Player {
 
     #region Private Functions
     private void HandleAbilities() {
-        if (ability == Ability.Opfer) {
-            Run();
-        }
-        else if (Input.GetButton(Constants.INPUT_ABILITY + playerNumber) && cooldown) {
-            if (ability == Ability.Damage) {
+        if (cooldown) {
+            if (ability == Ability.Opfer) {
+                Run();
+            }
+            else if (ability == Ability.Damage && Input.GetButton(Constants.INPUT_ABILITY + playerNumber)) {
                 Attack();
-                StartCoroutine(ResetAttackCooldown());
             }
-            else if (ability == Ability.Tank) {
+            else if (ability == Ability.Tank && Input.GetButtonDown(Constants.INPUT_ABILITY + playerNumber)) {
                 Defend();
-                StartCoroutine(ResetDefendCooldown());
             }
-            cooldown = false;
         }
     }
 
@@ -82,10 +79,14 @@ public class Hero : Player {
         GameObject projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
         projectile.GetComponent<Projectile>().damage = damagePerShot;
         projectile.GetComponent<Rigidbody>().velocity = transform.forward * projectileSpeed;
+        cooldown = false;
+        StartCoroutine(ResetAttackCooldown());
     }
 
     private void Defend() {
         shieldBubble.SetActive(true);
+        cooldown = false;
+        StartCoroutine(ResetDefendCooldown());
     }
 
     private void Run() {

@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4075863414949648}
   - component: {fileID: 135415805010952218}
   m_Layer: 0
-  m_Name: ShieldBubble (1)
+  m_Name: ShieldBubble
   m_TagString: Shield
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -267,7 +267,7 @@ MonoBehaviour:
   ability: 2
   projectilePrefab: {fileID: 1693907411783006, guid: c023009a9133c5b4da7f7564326be655,
     type: 2}
-  shieldBubble: {fileID: 0}
+  shieldBubble: {fileID: 1648518588618014}
 --- !u!135 &135415805010952218
 SphereCollider:
   m_ObjectHideFlags: 1
