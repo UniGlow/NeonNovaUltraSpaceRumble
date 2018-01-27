@@ -246,12 +246,12 @@ Prefab:
     - target: {fileID: 224131533213275328, guid: a082a6dd5a2d5524c8bdc9771effb635,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 150
+      value: 528
       objectReference: {fileID: 0}
     - target: {fileID: 224131533213275328, guid: a082a6dd5a2d5524c8bdc9771effb635,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 84.5
+      value: 297
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a082a6dd5a2d5524c8bdc9771effb635, type: 2}
@@ -274,14 +274,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 10
   rotateSpeed: 1000
+  playerNumber: 0
+  damagePerShot: 10
   attackCooldown: 0.2
   projectileSpeed: 10
   defendCooldown: 3
   speedBoost: 1.5
   playerColor: 0
   ability: 0
-  playerNumber: 0
   projectilePrefab: {fileID: 0}
+  shieldBubble: {fileID: 0}
 --- !u!1001 &639456515
 Prefab:
   m_ObjectHideFlags: 0
@@ -388,6 +390,65 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!1001 &775507066
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 69d53cd0ba6cc194f96dcd3cdb4363e6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 69d53cd0ba6cc194f96dcd3cdb4363e6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 69d53cd0ba6cc194f96dcd3cdb4363e6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 69d53cd0ba6cc194f96dcd3cdb4363e6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 69d53cd0ba6cc194f96dcd3cdb4363e6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 69d53cd0ba6cc194f96dcd3cdb4363e6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 69d53cd0ba6cc194f96dcd3cdb4363e6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 69d53cd0ba6cc194f96dcd3cdb4363e6, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 69d53cd0ba6cc194f96dcd3cdb4363e6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 932c01fcc01097a479b7794df05f4952, type: 2}
+    - target: {fileID: 400000, guid: 69d53cd0ba6cc194f96dcd3cdb4363e6, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.6006448
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 69d53cd0ba6cc194f96dcd3cdb4363e6, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.6006451
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 69d53cd0ba6cc194f96dcd3cdb4363e6, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.6006451
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: 69d53cd0ba6cc194f96dcd3cdb4363e6, type: 3}
+  m_ParentPrefab: {fileID: 100100000, guid: 69d53cd0ba6cc194f96dcd3cdb4363e6, type: 3}
+  m_IsPrefabParent: 0
 --- !u!1001 &892879792
 Prefab:
   m_ObjectHideFlags: 0
@@ -463,14 +524,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 10
   rotateSpeed: 1000
+  playerNumber: 0
+  damagePerShot: 10
   attackCooldown: 0.2
   projectileSpeed: 10
   defendCooldown: 3
   speedBoost: 1.5
   playerColor: 1
   ability: 0
-  playerNumber: 0
   projectilePrefab: {fileID: 0}
+  shieldBubble: {fileID: 0}
 --- !u!1001 &946791006
 Prefab:
   m_ObjectHideFlags: 0
