@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4436101278887036}
   - component: {fileID: 108402420617977504}
   m_Layer: 0
-  m_Name: LGHT Damage
+  m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
