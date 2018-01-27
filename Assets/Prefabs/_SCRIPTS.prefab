@@ -129,8 +129,7 @@ MonoBehaviour:
   - {fileID: 21300054, guid: cf7b38ec134eb49be8918c0504aeb76c, type: 3}
   - {fileID: 21300056, guid: cf7b38ec134eb49be8918c0504aeb76c, type: 3}
   - {fileID: 21300058, guid: cf7b38ec134eb49be8918c0504aeb76c, type: 3}
-  healthIndicators:
-  - {fileID: 0}
+  healthIndicators: []
 --- !u!114 &114332039601200462
 MonoBehaviour:
   m_ObjectHideFlags: 1

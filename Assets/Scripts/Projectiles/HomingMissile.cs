@@ -17,6 +17,7 @@ public class HomingMissile : SubscribedBehaviour {
     Transform target;
     Rigidbody rb;
     NavMeshAgent agent;
+    bool agentPaused = false;
 	#endregion
 	
 	
@@ -42,8 +43,18 @@ public class HomingMissile : SubscribedBehaviour {
     }
 
     private void Update() {
-        agent.SetDestination(target.position);
-        agent.Move(transform.forward * speed);
+        if (!agentPaused) {
+            agent.SetDestination(target.position);
+            agent.Move(transform.forward * speed);
+        }
+    }
+    #endregion
+
+
+
+    #region Custom Event Functions
+    protected override void OnLevelCompleted() {
+        PauseMissile(true);
     }
     #endregion
 
@@ -57,6 +68,10 @@ public class HomingMissile : SubscribedBehaviour {
                 target = hero.transform;
             }
         }
+    }
+
+    public void PauseMissile(bool pause) {
+        agentPaused = pause;
     }
     #endregion
 

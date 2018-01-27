@@ -56,7 +56,7 @@ public class HeroHealth : Health {
 
         // Update Healthbars
         foreach (SpriteRenderer spriteRend in healthIndicators) {
-            spriteRend.sprite = healthbarSprites[Mathf.CeilToInt(((float)currentHealth / (float)maxHealth) * healthbarSprites.Length)];
+            spriteRend.sprite = healthbarSprites[Mathf.FloorToInt(((float)currentHealth / (float)maxHealth) * healthbarSprites.Length)];
         }
 
         // Dead?

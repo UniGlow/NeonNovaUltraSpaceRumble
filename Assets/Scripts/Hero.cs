@@ -17,6 +17,7 @@ public class Hero : Player {
 
     [Header("Tank")]
     [SerializeField] float defendCooldown = 3f;
+    [SerializeField] float defendDuration = 2f;
 
     [Header("Opfer")]
     [Tooltip("Proportional to base movement speed")]
@@ -88,6 +89,7 @@ public class Hero : Player {
     private void Defend() {
         wobbleBobble.SetActive(true);
         cooldown = false;
+        StartCoroutine(DefendDuration());
         StartCoroutine(ResetDefendCooldown());
     }
 
@@ -107,8 +109,12 @@ public class Hero : Player {
 
     IEnumerator ResetDefendCooldown() {
         yield return new WaitForSecondsRealtime(defendCooldown);
-        wobbleBobble.SetActive(false);
         cooldown = true;
+    }
+
+    IEnumerator DefendDuration() {
+        yield return new WaitForSecondsRealtime(defendDuration);
+        wobbleBobble.SetActive(false);
     }
     #endregion
 }

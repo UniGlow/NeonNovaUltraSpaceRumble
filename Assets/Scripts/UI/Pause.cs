@@ -40,18 +40,27 @@ public class Pause : SubscribedBehaviour {
 
     public void PauseGame() {
         Time.timeScale = 0;
+
         Rumble.Instance.StopAllRumble();
+
+        GameObject.FindObjectOfType<HomingMissile>().PauseMissile(true);
+
         pauseMenu.SetActive(true);
         eventSystem.SetSelectedGameObject(resumeButton);
+
         gameIsPaused = true;
     }
 
     public void ResumeGame() {
         Time.timeScale = 1f;
+
+        GameObject.FindObjectOfType<HomingMissile>().PauseMissile(false);
+
         pauseMenu.SetActive(false);
         optionsMenu.SetActive(false);
         mainMenu.SetActive(true);
         eventSystem.SetSelectedGameObject(null);
+
         gameIsPaused = false;
     }
 }

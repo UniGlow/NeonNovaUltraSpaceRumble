@@ -50,7 +50,7 @@ public class BossHealth : Health {
         base.TakeDamage(damage);
 
         // Update Healthbar
-        healthIndicator.sprite = healthbarSprites[Mathf.CeilToInt(((float)currentHealth / (float)maxHealth) * healthbarSprites.Length)];
+        healthIndicator.sprite = healthbarSprites[Mathf.FloorToInt(((float)currentHealth / (float)maxHealth) * healthbarSprites.Length)];
 
         // Dead?
         if (currentHealth <= 0) {

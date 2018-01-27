@@ -195,7 +195,7 @@ MeshCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1377968037358198}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 498dae0bc1d2d574caf8d03fb2201892, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -214,16 +214,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08507544b66cae248bcc8be028923f51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 10
+  movementSpeed: 15
   rotateSpeed: 500
   playerNumber: 4
   attackDamagePerShot: 10
-  attackProjectileSpeed: 20
+  attackProjectileSpeed: 30
   attackProjectileLifeTime: 1
   attackCooldown: 0.2
   abilityDamagePerShot: 20
   numberOfProjectiles: 20
-  abilityProjectileSpeed: 10
+  abilityProjectileSpeed: 20
   abilityProjectileLifeTime: 1
   abilityCooldown: 3
   weaknessColor: 2
