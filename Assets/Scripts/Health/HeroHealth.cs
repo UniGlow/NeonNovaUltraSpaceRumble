@@ -10,6 +10,13 @@ public class HeroHealth : Health {
     #region Variable Declarations
     public static HeroHealth Instance;
 
+    [Header("Sound")]
+    [SerializeField]
+    AudioClip bossWinSound;
+    [Range(0, 1)]
+    [SerializeField]
+    float bossWinSoundVolume = 1f;
+
     [Header("Object References")]
     [SerializeField] SpriteRenderer[] healthIndicators;
 
@@ -61,7 +68,9 @@ public class HeroHealth : Health {
 
         // Dead?
         if (currentHealth <= 0) {
-            print("Boss wins!");
+            audioSource.clip = bossWinSound;
+            audioSource.volume = bossWinSoundVolume;
+            audioSource.PlayDelayed(0.7f);
         }
     }
     #endregion

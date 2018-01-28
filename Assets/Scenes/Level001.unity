@@ -1085,6 +1085,16 @@ Prefab:
       propertyPath: maxHealth
       value: 1000
       objectReference: {fileID: 0}
+    - target: {fileID: 114629895528832284, guid: c960190ecc1261249afa261cb260fe2f,
+        type: 2}
+      propertyPath: heroWinSoundVolume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114596482777396196, guid: c960190ecc1261249afa261cb260fe2f,
+        type: 2}
+      propertyPath: bossWinSoundVolume
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c960190ecc1261249afa261cb260fe2f, type: 2}
   m_IsPrefabParent: 0

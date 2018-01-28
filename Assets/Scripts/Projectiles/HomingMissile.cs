@@ -7,12 +7,20 @@ using UnityEngine.AI;
 /// 
 /// </summary>
 [RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(AudioSource))]
 public class HomingMissile : SubscribedBehaviour {
 
     #region Variable Declarations
     [SerializeField] float speed = 10f;
     [SerializeField] float rotateSpeed = 200f;
     [SerializeField] int damage = 100;
+
+    [Header("Sound")]
+    [SerializeField]
+    AudioClip hitSound;
+    [Range(0, 1)]
+    [SerializeField]
+    float hitSoundVolume = 1f;
 
     [Header("Object References")]
     [SerializeField] GameObject hitPSHeroes;
@@ -21,6 +29,7 @@ public class HomingMissile : SubscribedBehaviour {
     Transform target;
     Rigidbody rb;
     NavMeshAgent agent;
+    AudioSource audioSource;
     bool agentPaused = false;
 	#endregion
 	
@@ -30,6 +39,7 @@ public class HomingMissile : SubscribedBehaviour {
 	private void Start() {
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
+        audioSource = GetComponent<AudioSource>();
         AcquireNewTarget();
 	}
 
@@ -38,10 +48,14 @@ public class HomingMissile : SubscribedBehaviour {
             HeroHealth.Instance.TakeDamage(damage);
             other.transform.parent.GetComponent<Transmission>().EndTransmission();
 
+            audioSource.PlayOneShot(hitSound, hitSoundVolume);
+
             Instantiate(hitPSHeroes, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
         }
         else if (other.tag.Contains(Constants.TAG_BOSS)) {
             BossHealth.Instance.TakeDamage(damage);
+
+            audioSource.PlayOneShot(hitSound, hitSoundVolume);
 
             Instantiate(hitPSBoss, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
         }

@@ -10,6 +10,13 @@ public class BossHealth : Health {
     #region Variable Declarations
     [SerializeField] SpriteRenderer healthIndicator;
 
+    [Header("Sound")]
+    [SerializeField]
+    AudioClip heroWinSound;
+    [Range(0, 1)]
+    [SerializeField]
+    float heroWinSoundVolume = 1f;
+
     public static BossHealth Instance;
     #endregion
 
@@ -55,7 +62,10 @@ public class BossHealth : Health {
         // Dead?
         if (currentHealth <= 0) {
             healthIndicator.enabled = false;
-            print("Heroes win!");
+
+            audioSource.clip = heroWinSound;
+            audioSource.volume = heroWinSoundVolume;
+            audioSource.PlayDelayed(0.7f);
         }
     }
 	#endregion

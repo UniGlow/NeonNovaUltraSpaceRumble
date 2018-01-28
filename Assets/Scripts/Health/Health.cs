@@ -5,6 +5,7 @@ using UnityEngine;
 /// <summary>
 /// 
 /// </summary>
+[RequireComponent(typeof(AudioSource))]
 public class Health : SubscribedBehaviour {
 
     #region Variable Declarations
@@ -15,6 +16,7 @@ public class Health : SubscribedBehaviour {
     [SerializeField] protected Sprite[] healthbarSprites;
 
     protected int currentHealth;
+    protected AudioSource audioSource;
     #endregion
 
 
@@ -22,6 +24,7 @@ public class Health : SubscribedBehaviour {
     #region Unity Event Functions
     virtual protected void Start() {
         currentHealth = maxHealth;
+        audioSource = GetComponent<AudioSource>();
     }
 
     virtual protected void Update() {

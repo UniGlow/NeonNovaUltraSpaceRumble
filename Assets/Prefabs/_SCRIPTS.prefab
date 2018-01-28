@@ -161,6 +161,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorSwitchInterval: 15
   critDamageMultiplier: 2
+  colorChangeSound: {fileID: 8300000, guid: cb3b90f02c52c49418a9a3fd50874d2b, type: 3}
+  colorChangeSoundVolume: 1
   greenPlayerColor: {r: 0, g: 1, b: 0.006896496, a: 1}
   redPlayerColor: {r: 0.7058824, g: 0.039215688, b: 0.039215688, a: 1}
   bluePlayerColor: {r: 0.29525304, g: 0.31309, b: 0.9338235, a: 1}
@@ -190,5 +192,5 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d698eeb913fb48d4a9592cfed788df2d, type: 3}
   - {fileID: 8300000, guid: 5a2d9b22fe4429a47b9dbae3f4720b5b, type: 3}
   backgroundTracksVolumes: 0100000001000000
-  levelEnd: {fileID: 0}
+  levelEnd: {fileID: 8300000, guid: f8139e7be195b47a7a1b53e20a35e244, type: 3}
   levelEndVolume: 1

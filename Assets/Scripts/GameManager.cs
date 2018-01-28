@@ -14,6 +14,11 @@ public class GameManager : SubscribedBehaviour {
     [SerializeField] float critDamageMultiplier = 2f;
     public float CritDamageMultiplier { get { return critDamageMultiplier; } }
 
+    [Header("Sound")]
+    [SerializeField] AudioClip colorChangeSound;
+    [Range(0, 1)]
+    [SerializeField] float colorChangeSoundVolume = 1f;
+
     [Header("References")]
     [SerializeField] Color greenPlayerColor;
     public Color GreenPlayerColor { get { return greenPlayerColor; } }
@@ -25,6 +30,8 @@ public class GameManager : SubscribedBehaviour {
 
     private float passedTime;
     private Boss boss;
+    AudioSource audioSource;
+    bool colorChangeSoundPlayed;
 
     public static GameManager Instance;
     #endregion
@@ -55,6 +62,7 @@ public class GameManager : SubscribedBehaviour {
 
     private void Start() {
         boss = GameObject.FindObjectOfType<Boss>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update() {
@@ -116,10 +124,15 @@ public class GameManager : SubscribedBehaviour {
 
     void HandleColorSwitch() {
         if (SceneManager.GetActiveScene().name.Contains("Level")) {
+            if (passedTime >= colorSwitchInterval - 0.5f && !colorChangeSoundPlayed) {
+                audioSource.PlayOneShot(colorChangeSound, colorChangeSoundVolume);
+                colorChangeSoundPlayed = true;
+            }
             // Set new Boss color
             if (passedTime >= colorSwitchInterval) {
                 ChangeBossColor();
                 passedTime = 0f;
+                colorChangeSoundPlayed = false;
             }
         }
     }
