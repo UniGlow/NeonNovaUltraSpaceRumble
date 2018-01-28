@@ -11,25 +11,6 @@ public class FadeOutScreen : SubscribedBehaviour {
 
     bool fading = false;
 
-    public static FadeOutScreen Instance;
-
-    void OnEnable() {
-        //Check if instance already exists
-        if (Instance == null)
-
-            //if not, set instance to this
-            Instance = this;
-
-        //If instance already exists and it's not this:
-        else if (Instance != this) {
-
-            //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of an AudioManager.
-            Debug.LogError("There can only be one AudioManager instantiated. Destroying this Instance...");
-            Destroy(this);
-        }
-    }
-
-
 
     /// <summary>
     /// Fades in the screen from the image on this GameObject.

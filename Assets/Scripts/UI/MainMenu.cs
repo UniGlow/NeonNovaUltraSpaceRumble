@@ -10,22 +10,48 @@ public class MainMenu : SubscribedBehaviour {
 
     #region Variable Declarations
     [SerializeField] GameObject playButton;
+    [SerializeField] GameObject howToPlayOne;
+    [SerializeField] GameObject howToPlayTwo;
+
+    int howToPlay;
+    EventSystem eventSystem;
+    AudioSource audioSource;
 	#endregion
 	
 	
 	
 	#region Unity Event Functions
 	private void Start() {
-        GameObject.FindObjectOfType<EventSystem>().SetSelectedGameObject(playButton);
+        audioSource = GetComponent<AudioSource>();
+        eventSystem = GameObject.FindObjectOfType<EventSystem>();
+        eventSystem.SetSelectedGameObject(playButton);
 	}
-	
-	private void Update() {
-		
-	}
-	#endregion
-	
-	
-	
-	#region Private Functions
-	#endregion
+
+    private void Update() {
+        if (howToPlay == 1) {
+            eventSystem.SetSelectedGameObject(null);
+            howToPlayOne.SetActive(true);
+            howToPlay = 2;
+        } else if (howToPlay == 2 && Input.GetButtonDown(Constants.INPUT_SUBMIT)) {
+            howToPlayOne.SetActive(false);
+            howToPlayTwo.SetActive(true);
+            audioSource.Play();
+            howToPlay = 3;
+        }
+        else if (howToPlay == 3 && Input.GetButtonDown(Constants.INPUT_SUBMIT)) {
+            howToPlayTwo.SetActive(false);
+            eventSystem.SetSelectedGameObject(playButton);
+            audioSource.Play();
+            howToPlay = 0;
+        }
+    }
+    #endregion
+
+
+
+    #region Public Functions
+    public void SetHowToPlay(int status) {
+        howToPlay = status;
+    }
+    #endregion
 }
