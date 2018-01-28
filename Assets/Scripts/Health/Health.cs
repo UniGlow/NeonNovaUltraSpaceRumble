@@ -40,8 +40,9 @@ public class Health : SubscribedBehaviour {
 
         if (currentHealth <= 0) {
             currentHealth = 0;
-            Time.timeScale = 0;
             GameEvents.StartLevelCompleted();
+            GameManager.Instance.NextLevel();
+            Time.timeScale = 0.0f;
         }
     }
     #endregion

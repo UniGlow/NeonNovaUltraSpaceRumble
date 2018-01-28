@@ -17,16 +17,33 @@ public class AudioManager : SubscribedBehaviour {
     [SerializeField] float levelEndVolume = 1f;
 
     AudioSource src;
-	#endregion
-	
-	
-	
-	#region Unity Event Functions
-	private void Start() {
+
+    public static AudioManager Instance;
+    #endregion
+
+
+
+    #region Unity Event Functions
+    void Awake() {
+        //Check if instance already exists
+        if (Instance == null)
+
+            //if not, set instance to this
+            Instance = this;
+
+        //If instance already exists and it's not this:
+        else if (Instance != this) {
+
+            //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of an AudioManager.
+            Debug.Log("There can only be one GameManager instantiated. Destroying this Instance...");
+            Destroy(this);
+        }
+    }
+
+    private void Start() {
         src = GetComponent<AudioSource>();
 
-        src.PlayOneShot(GetbackgroundTrack("Track01Intro"), GetbackgroundTrackVolume("Track01Intro"));
-        StartCoroutine(StartAudioLoop());
+        StartBackgroundTrack();
 	}
 	
 	private void Update() {
@@ -39,6 +56,13 @@ public class AudioManager : SubscribedBehaviour {
     protected override void OnLevelCompleted() {
         src.Stop();
         src.PlayOneShot(levelEnd, levelEndVolume);
+    }
+
+
+
+    public void StartBackgroundTrack() {
+        src.PlayOneShot(GetbackgroundTrack("Track01Intro"), GetbackgroundTrackVolume("Track01Intro"));
+        StartCoroutine(StartAudioLoop());
     }
 
 

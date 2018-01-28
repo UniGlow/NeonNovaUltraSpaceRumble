@@ -13,6 +13,7 @@ public class GameManager : SubscribedBehaviour {
     [SerializeField] float colorSwitchInterval = 10f;
     [SerializeField] float critDamageMultiplier = 2f;
     public float CritDamageMultiplier { get { return critDamageMultiplier; } }
+    [SerializeField] float delayAtLevelEnd = 12f;
 
     [Header("Sound")]
     [SerializeField] AudioClip colorChangeSound;
@@ -88,6 +89,11 @@ public class GameManager : SubscribedBehaviour {
 
 
     #region Public Functions    
+    public void NextLevel() {
+        print("calling coroutine");
+        StartCoroutine(StartNextLevel());
+    }
+
     /// <summary>
     /// Loads the next scene in build index
     /// </summary>
@@ -124,6 +130,7 @@ public class GameManager : SubscribedBehaviour {
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode) {
         passedTime = 0f;
         boss = GameObject.FindObjectOfType<Boss>();
+        AudioManager.Instance.StartBackgroundTrack();
     }
 
     void HandleColorSwitch() {
@@ -199,4 +206,12 @@ public class GameManager : SubscribedBehaviour {
         }
     }
     #endregion
+
+
+
+    IEnumerator StartNextLevel() {
+        yield return new WaitForSecondsRealtime(delayAtLevelEnd);
+        LoadNextScene();
+        Time.timeScale = 1;
+    }
 }
