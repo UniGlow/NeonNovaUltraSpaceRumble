@@ -36,7 +36,7 @@ public class MultipleTargetCamera : SubscribedBehaviour {
         Zoom();
 	}
 
-    private void OnDrawGizmos() {
+    private void OnDrawGizmosSelected() {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(GetCenterPoint(), 1f);
     }
