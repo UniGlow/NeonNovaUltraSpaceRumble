@@ -111,7 +111,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1735896002571996}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.74, y: 0, z: 0.6}
+  m_LocalPosition: {x: 14.08, y: 0, z: 0.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4042691140480942}
@@ -147,7 +147,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 9b4c5c2fc84786744a7f43a25955d08c, type: 2}
+  - {fileID: 2100000, guid: 966f269b5a0b25f4485446ac000d0ef7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -216,7 +216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 15
   rotateSpeed: 500
-  playerNumber: 4
+  playerNumber: 3
   attackDamagePerShot: 10
   attackProjectileSpeed: 30
   attackProjectileLifeTime: 1
@@ -227,9 +227,16 @@ MonoBehaviour:
   abilityProjectileLifeTime: 1
   abilityCooldown: 3
   weaknessColor: 2
-  strengthColor: 2
+  strengthColor: 1
   projectilePrefab: {fileID: 1693907411783006, guid: 0f758c9824c38e64e8607ba9dc4c8d64,
     type: 2}
+  bossMeshRenderer: {fileID: 23755656095924074}
+  greenBossMat: {fileID: 2100000, guid: 966f269b5a0b25f4485446ac000d0ef7, type: 2}
+  redBossMat: {fileID: 2100000, guid: 7d68be63867edc147a22fe6137b42316, type: 2}
+  blueBossMat: {fileID: 2100000, guid: b9952fe678988874f98372d9edd2afff, type: 2}
+  greenBossColor: {r: 0, g: 1, b: 0.006896496, a: 1}
+  redBossColor: {r: 0.7058824, g: 0.039215688, b: 0.039215688, a: 1}
+  blueBossColor: {r: 0.29525304, g: 0.31309, b: 0.9338235, a: 1}
 --- !u!212 &212300853209604042
 SpriteRenderer:
   m_ObjectHideFlags: 1

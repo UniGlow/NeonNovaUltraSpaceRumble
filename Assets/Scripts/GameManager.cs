@@ -9,6 +9,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : SubscribedBehaviour {
 
     #region Variable Declarations
+
+
     public static GameManager Instance;
     #endregion
 

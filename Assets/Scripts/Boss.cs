@@ -29,15 +29,30 @@ public class Boss : Player {
 
     [Header("References")]
     [SerializeField] GameObject projectilePrefab;
+    [SerializeField] Renderer bossMeshRenderer;
+    [SerializeField] Material greenBossMat;
+    [SerializeField] Material redBossMat;
+    [SerializeField] Material blueBossMat;
+    [SerializeField] Color greenBossColor;
+    [SerializeField] Color redBossColor;
+    [SerializeField] Color blueBossColor;
 
     private bool attackCooldownB = true;
     private bool abilityCooldownB = true;
+    private Color activeStrengthColor;
     #endregion
 
 
 
     #region Unity Event Functions
-    // Update is called once per frame
+    protected override void Start() {
+        base.Start();
+
+        if (strengthColor == PlayerColor.Blue) activeStrengthColor = blueBossColor;
+        else if (strengthColor == PlayerColor.Green) activeStrengthColor = greenBossColor;
+        else if (strengthColor == PlayerColor.Red) activeStrengthColor = redBossColor;
+    }
+
     override protected void Update() {
         base.Update();
 
@@ -64,7 +79,21 @@ public class Boss : Player {
 
 
     #region Public Funtcions
+    public void SetWeaknessColor(PlayerColor playerColor) {
+        weaknessColor = playerColor;
 
+        if (weaknessColor == PlayerColor.Blue) bossMeshRenderer.material = blueBossMat;
+        else if (weaknessColor == PlayerColor.Green) bossMeshRenderer.material = greenBossMat;
+        else if (weaknessColor == PlayerColor.Red) bossMeshRenderer.material = redBossMat;
+    }
+
+    public void SetStrengthColor(PlayerColor playerColor) {
+        strengthColor = playerColor;
+
+        if (strengthColor == PlayerColor.Blue) activeStrengthColor = blueBossColor;
+        else if (strengthColor == PlayerColor.Green) activeStrengthColor = greenBossColor;
+        else if (strengthColor == PlayerColor.Red) activeStrengthColor = redBossColor;
+    }
     #endregion
 
 
@@ -76,6 +105,7 @@ public class Boss : Player {
             projectile.GetComponent<BossProjectile>().damage = attackDamagePerShot;
             projectile.GetComponent<BossProjectile>().lifeTime = attackProjectileLifeTime;
             projectile.GetComponent<Rigidbody>().velocity = transform.forward * attackProjectileSpeed;
+            projectile.GetComponent<Renderer>().material.SetColor("_TintColor", activeStrengthColor);
             
             attackCooldownB = false;
             StartCoroutine(ResetAttackCooldown());
@@ -96,6 +126,7 @@ public class Boss : Player {
                 projectile.GetComponent<BossProjectile>().damage = abilityDamagePerShot;
                 projectile.GetComponent<BossProjectile>().lifeTime = abilityProjectileLifeTime;
                 projectile.GetComponent<Rigidbody>().velocity = (projectile.transform.position - transform.position) * abilityProjectileSpeed;
+                projectile.GetComponent<Renderer>().material.SetColor("_TintColor", activeStrengthColor);
             }
             
             abilityCooldownB = false;
