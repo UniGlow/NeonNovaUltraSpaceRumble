@@ -5,6 +5,8 @@ using UnityEngine;
 /// <summary>
 /// 
 /// </summary>
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(AudioSource))]
 public class Player : SubscribedBehaviour {
 
     #region Variable Declarations
@@ -29,6 +31,7 @@ public class Player : SubscribedBehaviour {
 
     // Component References
     protected new Rigidbody rigidbody;
+    protected AudioSource audioSource;
     #endregion
 
 
@@ -37,6 +40,7 @@ public class Player : SubscribedBehaviour {
     // Use this for initialization
     protected virtual void Start() {
         rigidbody = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     protected virtual void FixedUpdate() {

@@ -5,7 +5,6 @@ using UnityEngine;
 /// <summary>
 /// Handles everything related to the movement of Haru, our playable Character
 /// </summary>
-[RequireComponent(typeof(Rigidbody))]
 public class Hero : Player {
 
     #region Variable Declarations
@@ -27,6 +26,14 @@ public class Hero : Player {
     [SerializeField] PlayerColor playerColor;
     public PlayerColor PlayerColor { get { return playerColor; } }
     public Ability ability;
+
+    [Header("Sound")]
+    [SerializeField] AudioClip wobbleBobbleSound;
+    [Range(0, 1)]
+    [SerializeField] float wobbleBobbleVolume = 1f;
+    [SerializeField] AudioClip attackSound;
+    [Range(0, 1)]
+    [SerializeField] float attackSoundVolume = 1f;
 
     [Header("References")]
     [SerializeField] GameObject projectilePrefab;
@@ -130,6 +137,9 @@ public class Hero : Player {
         projectile.GetComponent<HeroProjectile>().damage = damagePerShot;
         projectile.GetComponent<HeroProjectile>().playerColor = playerColor;
         projectile.GetComponent<Rigidbody>().velocity = transform.forward * projectileSpeed;
+
+        audioSource.PlayOneShot(attackSound, attackSoundVolume);
+
         cooldown = false;
         StartCoroutine(ResetAttackCooldown());
     }
@@ -138,6 +148,7 @@ public class Hero : Player {
         wobbleBobble.SetActive(true);
         cooldown = false;
         cooldownIndicator.sprite = defendCooldownSprites[0];
+        audioSource.PlayOneShot(wobbleBobbleSound, wobbleBobbleVolume);
         resetDefendCoroutine = StartCoroutine(ResetDefend());
     }
 

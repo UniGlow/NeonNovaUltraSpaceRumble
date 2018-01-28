@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Audio/349509__jsc2011__electronic-intro-120bpm-in-5-4.flac.meta
 guid: 16bb03ab5e8f5134380cba34071521ba
 timeCreated: 1517138941
+=======
+guid: 332fe93cd3e409a4d8cf098402879332
+timeCreated: 1517138126
+>>>>>>> 189be8c0a3b134398031f574745d9dbf24ee85b0:Assets/Audio/349509__jsc2011__electronic-intro-120bpm-in-5-4.flac.meta
 licenseType: Free
 DefaultImporter:
   externalObjects: {}
