@@ -164,7 +164,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1573548182032810}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 9.94, y: 0.5, z: 11.16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4364361989329078}
@@ -351,6 +351,9 @@ MonoBehaviour:
   speed: 0.1
   rotateSpeed: 5
   damage: 50
+  hitPSHeroes: {fileID: 1086934119878164, guid: 9943029a31d4e3a44bf6d6676eecb198,
+    type: 2}
+  hitPSBoss: {fileID: 1086934119878164, guid: 9943029a31d4e3a44bf6d6676eecb198, type: 2}
 --- !u!135 &135057080856952782
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -361,7 +364,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.8
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &195328395692007618
 NavMeshAgent:

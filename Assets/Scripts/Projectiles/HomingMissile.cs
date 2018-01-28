@@ -14,6 +14,10 @@ public class HomingMissile : SubscribedBehaviour {
     [SerializeField] float rotateSpeed = 200f;
     [SerializeField] int damage = 100;
 
+    [Header("Object References")]
+    [SerializeField] GameObject hitPSHeroes;
+    [SerializeField] GameObject hitPSBoss;
+
     Transform target;
     Rigidbody rb;
     NavMeshAgent agent;
@@ -33,9 +37,13 @@ public class HomingMissile : SubscribedBehaviour {
         if (other.tag.Contains(Constants.TAG_HERO)) {
             HeroHealth.Instance.TakeDamage(damage);
             other.transform.parent.GetComponent<Transmission>().EndTransmission();
+
+            Instantiate(hitPSHeroes, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
         }
         else if (other.tag.Contains(Constants.TAG_BOSS)) {
             BossHealth.Instance.TakeDamage(damage);
+
+            Instantiate(hitPSBoss, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
         }
         else if (other.tag.Contains(Constants.TAG_WALL)) {
 

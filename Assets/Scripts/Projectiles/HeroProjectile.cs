@@ -8,7 +8,7 @@ using UnityEngine;
 public class HeroProjectile : Projectile {
 
     #region Variable Declarations
-
+    [SerializeField] GameObject hitPS;
     #endregion
 
 
@@ -19,6 +19,9 @@ public class HeroProjectile : Projectile {
 
         if (other.tag.Contains(Constants.TAG_BOSS)) {
             BossHealth.Instance.TakeDamage(damage);
+
+            Instantiate(hitPS, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
+
             Destroy(gameObject);
         }
     }
