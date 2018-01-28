@@ -19,7 +19,7 @@ public class HeroProjectile : Projectile {
         base.OnTriggerEnter(other);
 
         if (other.tag.Contains(Constants.TAG_BOSS)) {
-            if (playerColor == other.GetComponent<Boss>().WeaknessColor) {
+            if (playerColor == other.transform.parent.GetComponent<Boss>().WeaknessColor) {
                 BossHealth.Instance.TakeDamage(Mathf.RoundToInt(damage * GameManager.Instance.CritDamageMultiplier));
                 Instantiate(critHitPS, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
             }
