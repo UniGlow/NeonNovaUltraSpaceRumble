@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2ea1e843cf8dfa49963cccfa5f6a640, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorSwitchInterval: 10
+  colorSwitchInterval: 15
   critDamageMultiplier: 2
   greenPlayerColor: {r: 0, g: 1, b: 0.006896496, a: 1}
   redPlayerColor: {r: 0.7058824, g: 0.039215688, b: 0.039215688, a: 1}
