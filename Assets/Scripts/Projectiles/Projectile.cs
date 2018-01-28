@@ -10,6 +10,7 @@ public class Projectile : SubscribedBehaviour {
     #region Variable Declarations
     public float lifeTime = 1f;
     public int damage = 10;
+    public PlayerColor playerColor;
     #endregion
 
 

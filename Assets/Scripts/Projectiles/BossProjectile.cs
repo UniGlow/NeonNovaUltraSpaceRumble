@@ -9,6 +9,7 @@ public class BossProjectile : Projectile {
 
     #region Variable Declarations
     [SerializeField] GameObject hitPS;
+    [SerializeField] GameObject critHitPS;
     #endregion
 
 
@@ -21,10 +22,17 @@ public class BossProjectile : Projectile {
             Destroy(gameObject);
         }
         if (other.tag.Contains(Constants.TAG_HERO)) {
-            HeroHealth.Instance.TakeDamage(damage);
+            if (playerColor == other.transform.parent.GetComponent<Hero>().PlayerColor) {
+                HeroHealth.Instance.TakeDamage(Mathf.RoundToInt(damage * GameManager.Instance.CritDamageMultiplier));
+                Instantiate(critHitPS, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
+            }
+            else {
+                HeroHealth.Instance.TakeDamage(damage);
+                Instantiate(hitPS, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
+            }
+
             other.transform.parent.GetComponent<Transmission>().EndTransmission();
 
-            Instantiate(hitPS, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
 
             Destroy(gameObject);
         }

@@ -11,6 +11,8 @@ public class GameManager : SubscribedBehaviour {
     #region Variable Declarations
     [Header("Game Properties")]
     [SerializeField] float colorSwitchInterval = 10f;
+    [SerializeField] float critDamageMultiplier = 2f;
+    public float CritDamageMultiplier { get { return critDamageMultiplier; } }
 
     private float passedTime;
     private Boss boss;

@@ -25,6 +25,7 @@ public class Hero : Player {
 
     [Header("Properties")]
     [SerializeField] PlayerColor playerColor;
+    public PlayerColor PlayerColor { get { return playerColor; } }
     public Ability ability;
 
     [Header("References")]
@@ -82,6 +83,7 @@ public class Hero : Player {
     private void Attack() {
         GameObject projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
         projectile.GetComponent<HeroProjectile>().damage = damagePerShot;
+        projectile.GetComponent<HeroProjectile>().playerColor = playerColor;
         projectile.GetComponent<Rigidbody>().velocity = transform.forward * projectileSpeed;
         cooldown = false;
         StartCoroutine(ResetAttackCooldown());

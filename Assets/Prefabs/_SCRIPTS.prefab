@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colorSwitchInterval: 10
+  critDamageMultiplier: 2
 --- !u!114 &114608841911343774
 MonoBehaviour:
   m_ObjectHideFlags: 1

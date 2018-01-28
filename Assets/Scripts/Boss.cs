@@ -105,6 +105,7 @@ public class Boss : Player {
         if (Input.GetButton(Constants.INPUT_ABILITY + playerNumber) && attackCooldownB) {
             GameObject projectile = Instantiate(projectilePrefab, transform.position + transform.forward * 1.9f + Vector3.up * 0.5f, transform.rotation);
             projectile.GetComponent<BossProjectile>().damage = attackDamagePerShot;
+            projectile.GetComponent<BossProjectile>().playerColor = strengthColor;
             projectile.GetComponent<BossProjectile>().lifeTime = attackProjectileLifeTime;
             projectile.GetComponent<Rigidbody>().velocity = transform.forward * attackProjectileSpeed;
             projectile.GetComponent<Renderer>().material.SetColor("_TintColor", activeStrengthColor);
@@ -126,6 +127,7 @@ public class Boss : Player {
 
                 GameObject projectile = Instantiate(projectilePrefab, pos + transform.position, Quaternion.identity);
                 projectile.GetComponent<BossProjectile>().damage = abilityDamagePerShot;
+                projectile.GetComponent<BossProjectile>().playerColor = strengthColor;
                 projectile.GetComponent<BossProjectile>().lifeTime = abilityProjectileLifeTime;
                 projectile.GetComponent<Rigidbody>().velocity = (projectile.transform.position - transform.position) * abilityProjectileSpeed;
                 projectile.GetComponent<Renderer>().material.SetColor("_TintColor", activeStrengthColor);

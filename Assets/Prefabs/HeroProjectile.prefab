@@ -237,7 +237,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeTime: 1
   damage: 10
+  playerColor: 0
   hitPS: {fileID: 1266277570911844, guid: c5de1fd06c95fba43bf702afb9b3ffab, type: 2}
+  critHitPS: {fileID: 1266277570911844, guid: c5de1fd06c95fba43bf702afb9b3ffab, type: 2}
 --- !u!135 &135843095408614802
 SphereCollider:
   m_ObjectHideFlags: 1
