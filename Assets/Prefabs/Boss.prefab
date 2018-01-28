@@ -228,6 +228,10 @@ MonoBehaviour:
   abilityCooldown: 3
   weaknessColor: 2
   strengthColor: 1
+  abilitySound: {fileID: 8300000, guid: ddbdc3544101111438a9b6c3b546a294, type: 3}
+  abilitySoundVolume: 1
+  attackSound: {fileID: 8300000, guid: cf3ba19d968b8e249b2a4b68126fb355, type: 3}
+  attackSoundVolume: 1
   projectilePrefab: {fileID: 1693907411783006, guid: 0f758c9824c38e64e8607ba9dc4c8d64,
     type: 2}
   bossMeshRenderer: {fileID: 23755656095924074}

@@ -37,6 +37,7 @@ public class AudioManager : SubscribedBehaviour {
 
 
     protected override void OnLevelCompleted() {
+        src.Stop();
         src.PlayOneShot(levelEnd, levelEndVolume);
     }
 
@@ -65,7 +66,8 @@ public class AudioManager : SubscribedBehaviour {
 
 
     IEnumerator StartAudioLoop() {
-        for (float i = 0; i < src.clip.length + 3f; i+=Time.deltaTime) {
+        yield return null;
+        for (float i = 0; i < 3f; i+=Time.deltaTime) {
             yield return null;
             if (!src.isPlaying) {
                 src.clip = GetbackgroundTrack("Track01Loop");

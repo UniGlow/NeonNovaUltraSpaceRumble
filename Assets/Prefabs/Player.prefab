@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 54387879163051624}
   - component: {fileID: 114360600958716434}
   - component: {fileID: 114644863178948232}
+  - component: {fileID: 82443329634492120}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -399,6 +400,87 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!82 &82443329634492120
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1742559250600126}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 243254621242404290, guid: e213e6dc1e1471a4189369ba1ec91b45,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114360600958716434
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -421,6 +503,10 @@ MonoBehaviour:
   speedBoost: 0.5
   playerColor: 2
   ability: 2
+  wobbleBobbleSound: {fileID: 8300000, guid: 9bf8565727fa20047bfa416674b33661, type: 3}
+  wobbleBobbleVolume: 1
+  attackSound: {fileID: 8300000, guid: 9a5792dc479bb5c47878c1c076adf5d0, type: 3}
+  attackSoundVolume: 1
   projectilePrefab: {fileID: 1693907411783006, guid: c023009a9133c5b4da7f7564326be655,
     type: 2}
   wobbleBobble: {fileID: 1521786441716086}
@@ -457,6 +543,8 @@ MonoBehaviour:
   transmissionRange: 13
   transmissionDuration: 0.5
   transmissionCooldown: 1
+  transmissionSound: {fileID: 8300000, guid: 99a9562a9c5874546a152e7ded477cb5, type: 3}
+  transmissionSoundVolume: 1
   transmissionLineRenderer: {fileID: 120313195406292594}
   transmissionPS: {fileID: 198963605972144674}
 --- !u!114 &114662132021031198

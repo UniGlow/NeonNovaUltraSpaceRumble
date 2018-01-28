@@ -5,7 +5,6 @@ using UnityEngine;
 /// <summary>
 /// Handles everything related to the movement of Haru, our playable Character
 /// </summary>
-[RequireComponent(typeof(Rigidbody))]
 public class Boss : Player {
 
     #region Variable Declarations
@@ -28,6 +27,17 @@ public class Boss : Player {
     public PlayerColor WeaknessColor { get { return weaknessColor; } }
     [SerializeField] PlayerColor strengthColor;
     public PlayerColor StrengthColor { get { return strengthColor; } }
+
+    [Header("Sound")]
+    [SerializeField]
+    AudioClip abilitySound;
+    [Range(0, 1)]
+    [SerializeField]
+    float abilitySoundVolume = 1f;
+    [SerializeField] AudioClip attackSound;
+    [Range(0, 1)]
+    [SerializeField]
+    float attackSoundVolume = 1f;
 
     [Header("References")]
     [SerializeField] GameObject projectilePrefab;
@@ -105,7 +115,9 @@ public class Boss : Player {
             projectile.GetComponent<BossProjectile>().lifeTime = attackProjectileLifeTime;
             projectile.GetComponent<Rigidbody>().velocity = transform.forward * attackProjectileSpeed;
             projectile.GetComponent<Renderer>().material.SetColor("_TintColor", activeStrengthColor);
-            
+
+            audioSource.PlayOneShot(attackSound, attackSoundVolume);
+
             attackCooldownB = false;
             StartCoroutine(ResetAttackCooldown());
         }
@@ -128,7 +140,9 @@ public class Boss : Player {
                 projectile.GetComponent<Rigidbody>().velocity = (projectile.transform.position - transform.position) * abilityProjectileSpeed;
                 projectile.GetComponent<Renderer>().material.SetColor("_TintColor", activeStrengthColor);
             }
-            
+
+            audioSource.PlayOneShot(abilitySound, abilitySoundVolume);
+
             abilityCooldownB = false;
             StartCoroutine(ResetAbilityCooldown());
         }
