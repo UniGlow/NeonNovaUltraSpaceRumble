@@ -31,8 +31,19 @@ public class Hero : Player {
     [Header("References")]
     [SerializeField] GameObject projectilePrefab;
     [SerializeField] GameObject wobbleBobble;
+    [SerializeField] SpriteRenderer healthIndicator;
     [SerializeField] SpriteRenderer cooldownIndicator;
+    public SpriteRenderer CooldownIndicator { get { return cooldownIndicator; } }
     [SerializeField] Sprite[] defendCooldownSprites;
+    public Sprite TankSprite { get { return defendCooldownSprites[defendCooldownSprites.Length - 1]; } }
+    [SerializeField] Sprite damageSprite;
+    public Sprite DamageSprite { get { return damageSprite; } }
+    [SerializeField] Sprite opferSprite;
+    public Sprite OpferSprite { get { return opferSprite; } }
+    [SerializeField] Renderer playerMeshRenderer;
+    [SerializeField] Material greenPlayerMat;
+    [SerializeField] Material redPlayerMat;
+    [SerializeField] Material bluePlayerMat;
 
     private bool cooldown = true;
 
@@ -42,6 +53,32 @@ public class Hero : Player {
 
 
     #region Unity Event Functions
+    protected override void Start() {
+        base.Start();
+
+        // Set the correct Ability Sprite
+        if (ability == Ability.Damage) cooldownIndicator.sprite = DamageSprite;
+        else if (ability == Ability.Opfer) cooldownIndicator.sprite = OpferSprite;
+        else if (ability == Ability.Tank) cooldownIndicator.sprite = TankSprite;
+
+        // Set the correct colors
+        if (playerColor == PlayerColor.Blue) {
+            playerMeshRenderer.material = bluePlayerMat;
+            cooldownIndicator.color = GameManager.Instance.BluePlayerColor;
+            healthIndicator.color = GameManager.Instance.BluePlayerColor;
+        }
+        else if (playerColor == PlayerColor.Green) {
+            playerMeshRenderer.material = greenPlayerMat;
+            cooldownIndicator.color = GameManager.Instance.GreenPlayerColor;
+            healthIndicator.color = GameManager.Instance.GreenPlayerColor;
+        }
+        else if (playerColor == PlayerColor.Red) {
+            playerMeshRenderer.material = redPlayerMat;
+            cooldownIndicator.color = GameManager.Instance.RedPlayerColor;
+            healthIndicator.color = GameManager.Instance.RedPlayerColor;
+        }
+    }
+
     override protected void Update() {
         base.Update();
 

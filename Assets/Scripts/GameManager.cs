@@ -14,6 +14,15 @@ public class GameManager : SubscribedBehaviour {
     [SerializeField] float critDamageMultiplier = 2f;
     public float CritDamageMultiplier { get { return critDamageMultiplier; } }
 
+    [Header("References")]
+    [SerializeField] Color greenPlayerColor;
+    public Color GreenPlayerColor { get { return greenPlayerColor; } }
+    [SerializeField] Color redPlayerColor;
+    public Color RedPlayerColor { get { return redPlayerColor; } }
+    [SerializeField] Color bluePlayerColor;
+    public Color BluePlayerColor { get { return bluePlayerColor; } }
+
+
     private float passedTime;
     private Boss boss;
 

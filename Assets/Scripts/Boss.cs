@@ -35,9 +35,6 @@ public class Boss : Player {
     [SerializeField] Material greenBossMat;
     [SerializeField] Material redBossMat;
     [SerializeField] Material blueBossMat;
-    [SerializeField] Color greenBossColor;
-    [SerializeField] Color redBossColor;
-    [SerializeField] Color blueBossColor;
 
     private bool attackCooldownB = true;
     private bool abilityCooldownB = true;
@@ -50,9 +47,8 @@ public class Boss : Player {
     protected override void Start() {
         base.Start();
 
-        if (strengthColor == PlayerColor.Blue) activeStrengthColor = blueBossColor;
-        else if (strengthColor == PlayerColor.Green) activeStrengthColor = greenBossColor;
-        else if (strengthColor == PlayerColor.Red) activeStrengthColor = redBossColor;
+        SetStrengthColor(strengthColor);
+        SetWeaknessColor(weaknessColor);
     }
 
     override protected void Update() {
@@ -92,9 +88,9 @@ public class Boss : Player {
     public void SetStrengthColor(PlayerColor playerColor) {
         strengthColor = playerColor;
 
-        if (strengthColor == PlayerColor.Blue) activeStrengthColor = blueBossColor;
-        else if (strengthColor == PlayerColor.Green) activeStrengthColor = greenBossColor;
-        else if (strengthColor == PlayerColor.Red) activeStrengthColor = redBossColor;
+        if (strengthColor == PlayerColor.Blue) activeStrengthColor = GameManager.Instance.BluePlayerColor;
+        else if (strengthColor == PlayerColor.Green) activeStrengthColor = GameManager.Instance.GreenPlayerColor;
+        else if (strengthColor == PlayerColor.Red) activeStrengthColor = GameManager.Instance.RedPlayerColor;
     }
     #endregion
 

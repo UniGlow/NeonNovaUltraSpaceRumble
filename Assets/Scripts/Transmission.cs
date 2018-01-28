@@ -102,12 +102,28 @@ public class Transmission : SubscribedBehaviour {
 
         // Successfull transmission: Swap abilities and end transmission
         if (currenTransmissionDuration >= transmissionDuration) {
-            Ability newAbility = receiver.GetComponent<Hero>().ability;
-            receiver.GetComponent<Hero>().ability = hero.ability;
+            Hero otherHero = receiver.GetComponent<Hero>();
+            Ability newAbility = otherHero.ability;
+
+            // Switch abilities
+            otherHero.ability = hero.ability;
             hero.ability = newAbility;
+
+            // Set the new Ability Sprite for this hero
+            if (hero.ability == Ability.Damage) hero.CooldownIndicator.sprite = hero.DamageSprite;
+            else if (hero.ability == Ability.Opfer) hero.CooldownIndicator.sprite = hero.OpferSprite;
+            else if (hero.ability == Ability.Tank) hero.CooldownIndicator.sprite = hero.TankSprite;
+
+            // Set the new Ability Sprite for the other hero
+            if (otherHero.ability == Ability.Damage) otherHero.CooldownIndicator.sprite = otherHero.DamageSprite;
+            else if (otherHero.ability == Ability.Opfer) otherHero.CooldownIndicator.sprite = otherHero.OpferSprite;
+            else if (otherHero.ability == Ability.Tank) otherHero.CooldownIndicator.sprite = otherHero.TankSprite;
+
             homingMissile.AcquireNewTarget();
+
             transmissionPS.Play();
             receiver.GetComponent<Transmission>().transmissionPS.Play();
+
             EndTransmission();
         }
     }

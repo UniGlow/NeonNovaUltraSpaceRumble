@@ -157,6 +157,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorSwitchInterval: 10
   critDamageMultiplier: 2
+  greenPlayerColor: {r: 0, g: 1, b: 0.006896496, a: 1}
+  redPlayerColor: {r: 0.7058824, g: 0.039215688, b: 0.039215688, a: 1}
+  bluePlayerColor: {r: 0.29525304, g: 0.31309, b: 0.9338235, a: 1}
 --- !u!114 &114608841911343774
 MonoBehaviour:
   m_ObjectHideFlags: 1
