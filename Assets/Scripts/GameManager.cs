@@ -9,7 +9,11 @@ using UnityEngine.SceneManagement;
 public class GameManager : SubscribedBehaviour {
 
     #region Variable Declarations
+    [Header("Game Properties")]
+    [SerializeField] float colorSwitchInterval = 10f;
 
+    private float passedTime;
+    private Boss boss;
 
     public static GameManager Instance;
     #endregion
@@ -33,9 +37,19 @@ public class GameManager : SubscribedBehaviour {
             Destroy(this);
         }
     }
-	
-	private void Update() {
-		
+
+    private void Start() {
+        boss = GameObject.FindObjectOfType<Boss>();
+    }
+
+    private void Update() {
+        passedTime += Time.deltaTime;
+
+        // Set new Boss color
+        if (passedTime >= colorSwitchInterval) {
+            ChangeBossColor();
+            passedTime = 0f;
+        }
 	}
     #endregion
 
@@ -43,6 +57,9 @@ public class GameManager : SubscribedBehaviour {
 
     #region Custom Event Functions
     // Every child of SubscribedBehaviour can implement these
+    protected override void OnLevelCompleted() {
+        
+    }
     #endregion
 
 
@@ -77,5 +94,62 @@ public class GameManager : SubscribedBehaviour {
 
 
     #region Private Functions
+    /// <summary>
+    /// Randomly changes one of the boss colors (weakness or strength)
+    /// </summary>
+    void ChangeBossColor() {
+        // Set strength color
+        if (Random.Range(0, 2) == 0) {
+            if (boss.StrengthColor == PlayerColor.Blue) {
+                if (Random.Range(0, 2) == 0) {
+                    boss.SetStrengthColor(PlayerColor.Green);
+                }
+                else {
+                    boss.SetStrengthColor(PlayerColor.Red);
+                }
+            } else if (boss.StrengthColor == PlayerColor.Green) {
+                if (Random.Range(0, 2) == 0) {
+                    boss.SetStrengthColor(PlayerColor.Blue);
+                }
+                else {
+                    boss.SetStrengthColor(PlayerColor.Red);
+                }
+            } else if (boss.StrengthColor == PlayerColor.Red) {
+                if (Random.Range(0, 2) == 0) {
+                    boss.SetStrengthColor(PlayerColor.Green);
+                }
+                else {
+                    boss.SetStrengthColor(PlayerColor.Blue);
+                }
+            }
+        }
+        // Or set weakness color
+        else {
+            if (boss.WeaknessColor == PlayerColor.Blue) {
+                if (Random.Range(0, 2) == 0) {
+                    boss.SetWeaknessColor(PlayerColor.Green);
+                }
+                else {
+                    boss.SetWeaknessColor(PlayerColor.Red);
+                }
+            }
+            else if (boss.WeaknessColor == PlayerColor.Green) {
+                if (Random.Range(0, 2) == 0) {
+                    boss.SetWeaknessColor(PlayerColor.Blue);
+                }
+                else {
+                    boss.SetWeaknessColor(PlayerColor.Red);
+                }
+            }
+            else if (boss.WeaknessColor == PlayerColor.Red) {
+                if (Random.Range(0, 2) == 0) {
+                    boss.SetWeaknessColor(PlayerColor.Green);
+                }
+                else {
+                    boss.SetWeaknessColor(PlayerColor.Blue);
+                }
+            }
+        }
+    }
     #endregion
 }

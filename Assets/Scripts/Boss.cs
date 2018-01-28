@@ -25,7 +25,9 @@ public class Boss : Player {
 
     [Header("Properties")]
     [SerializeField] PlayerColor weaknessColor;
+    public PlayerColor WeaknessColor { get { return weaknessColor; } }
     [SerializeField] PlayerColor strengthColor;
+    public PlayerColor StrengthColor { get { return strengthColor; } }
 
     [Header("References")]
     [SerializeField] GameObject projectilePrefab;

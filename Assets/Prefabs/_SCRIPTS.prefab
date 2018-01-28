@@ -129,7 +129,10 @@ MonoBehaviour:
   - {fileID: 21300054, guid: cf7b38ec134eb49be8918c0504aeb76c, type: 3}
   - {fileID: 21300056, guid: cf7b38ec134eb49be8918c0504aeb76c, type: 3}
   - {fileID: 21300058, guid: cf7b38ec134eb49be8918c0504aeb76c, type: 3}
-  healthIndicators: []
+  healthIndicators:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &114332039601200462
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -152,6 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2ea1e843cf8dfa49963cccfa5f6a640, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colorSwitchInterval: 10
 --- !u!114 &114608841911343774
 MonoBehaviour:
   m_ObjectHideFlags: 1
