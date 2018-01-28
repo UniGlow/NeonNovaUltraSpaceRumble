@@ -420,10 +420,22 @@ MonoBehaviour:
   defendDuration: 2
   speedBoost: 0.5
   playerColor: 1
-  ability: 1
+  ability: 0
   projectilePrefab: {fileID: 1693907411783006, guid: c023009a9133c5b4da7f7564326be655,
     type: 2}
   wobbleBobble: {fileID: 1419263289314662}
+  cooldownIndicator: {fileID: 212403810160557952}
+  defendCooldownSprites:
+  - {fileID: 21300114, guid: cf7b38ec134eb49be8918c0504aeb76c, type: 3}
+  - {fileID: 21300060, guid: cf7b38ec134eb49be8918c0504aeb76c, type: 3}
+  - {fileID: 21300062, guid: cf7b38ec134eb49be8918c0504aeb76c, type: 3}
+  - {fileID: 21300064, guid: cf7b38ec134eb49be8918c0504aeb76c, type: 3}
+  - {fileID: 21300066, guid: cf7b38ec134eb49be8918c0504aeb76c, type: 3}
+  - {fileID: 21300068, guid: cf7b38ec134eb49be8918c0504aeb76c, type: 3}
+  - {fileID: 21300070, guid: cf7b38ec134eb49be8918c0504aeb76c, type: 3}
+  - {fileID: 21300072, guid: cf7b38ec134eb49be8918c0504aeb76c, type: 3}
+  - {fileID: 21300074, guid: cf7b38ec134eb49be8918c0504aeb76c, type: 3}
+  - {fileID: 21300076, guid: cf7b38ec134eb49be8918c0504aeb76c, type: 3}
 --- !u!114 &114510656585329636
 MonoBehaviour:
   m_ObjectHideFlags: 1

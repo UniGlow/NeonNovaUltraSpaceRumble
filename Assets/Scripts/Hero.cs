@@ -30,6 +30,8 @@ public class Hero : Player {
     [Header("References")]
     [SerializeField] GameObject projectilePrefab;
     [SerializeField] GameObject wobbleBobble;
+    [SerializeField] SpriteRenderer cooldownIndicator;
+    [SerializeField] Sprite[] defendCooldownSprites;
 
     private bool cooldown = true;
 
@@ -37,9 +39,8 @@ public class Hero : Player {
     #endregion
 
 
-    
+
     #region Unity Event Functions
-    // Update is called once per frame
     override protected void Update() {
         base.Update();
 
@@ -89,8 +90,8 @@ public class Hero : Player {
     private void Defend() {
         wobbleBobble.SetActive(true);
         cooldown = false;
-        StartCoroutine(DefendDuration());
-        StartCoroutine(ResetDefendCooldown());
+        cooldownIndicator.sprite = defendCooldownSprites[0];
+        StartCoroutine(ResetDefend());
     }
 
     private void Run() {
@@ -107,14 +108,19 @@ public class Hero : Player {
         cooldown = true;
     }
 
-    IEnumerator ResetDefendCooldown() {
-        yield return new WaitForSecondsRealtime(defendCooldown);
-        cooldown = true;
-    }
-
-    IEnumerator DefendDuration() {
+    IEnumerator ResetDefend() {
+        // Wait for defend duration and turn of wobbleBobble
         yield return new WaitForSecondsRealtime(defendDuration);
         wobbleBobble.SetActive(false);
+
+        // Start Cooldown and update CooldownIndicator
+        for (float i = 0; i < defendCooldown; i += Time.deltaTime) {
+            yield return null;
+            cooldownIndicator.sprite = defendCooldownSprites[Mathf.FloorToInt((i / defendCooldown) * defendCooldownSprites.Length)];
+        }
+
+        // Reset Cooldown
+        cooldown = true;
     }
     #endregion
 }
