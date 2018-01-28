@@ -65,7 +65,7 @@ public class Transmission : SubscribedBehaviour {
     public void EndTransmission() {
         receiver = null;
         currenTransmissionDuration = 0f;
-        hero.SetMovable(true);
+        //hero.SetMovable(true);
         receiverFound = false;
         transmissionCooldownB = false;
         transmissionLineRenderer.gameObject.SetActive(false);
@@ -80,7 +80,7 @@ public class Transmission : SubscribedBehaviour {
         if (Physics.Raycast(transform.position, transform.forward, out hitInfo, transmissionRange, 1 << 8)) {
             Debug.DrawLine(transform.position, hitInfo.point, Color.green);
             receiver = hitInfo.transform.gameObject;
-            hero.SetMovable(false);
+            //hero.SetMovable(false);
             return true;
         }
         else {
