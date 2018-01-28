@@ -13,6 +13,13 @@ public class Transmission : SubscribedBehaviour {
     [SerializeField] float transmissionDuration = 3f;
     [SerializeField] float transmissionCooldown = 1f;
 
+    [Header("Sound")]
+    [SerializeField]
+    AudioClip transmissionSound;
+    [Range(0, 1)]
+    [SerializeField]
+    float transmissionSoundVolume = 1f;
+
     [Header("References")]
     [SerializeField] LineRenderer transmissionLineRenderer;
     [SerializeField] ParticleSystem transmissionPS;
@@ -23,6 +30,7 @@ public class Transmission : SubscribedBehaviour {
     float currenTransmissionDuration;
     bool transmissionCooldownB = true;
     HomingMissile homingMissile;
+    AudioSource audioSource;
 	#endregion
 	
 	
@@ -31,6 +39,7 @@ public class Transmission : SubscribedBehaviour {
 	private void Start() {
         hero = GetComponent<Hero>();
         homingMissile = GameObject.FindObjectOfType<HomingMissile>();
+        audioSource = GetComponent<AudioSource>();
 	}
 	
 	private void Update() {        
@@ -123,6 +132,8 @@ public class Transmission : SubscribedBehaviour {
             if (otherHero.ability == Ability.Damage) otherHero.CooldownIndicator.sprite = otherHero.DamageSprite;
             else if (otherHero.ability == Ability.Opfer) otherHero.CooldownIndicator.sprite = otherHero.OpferSprite;
             else if (otherHero.ability == Ability.Tank) otherHero.CooldownIndicator.sprite = otherHero.TankSprite;
+
+            audioSource.PlayOneShot(transmissionSound, transmissionSoundVolume);
 
             homingMissile.AcquireNewTarget();
 
