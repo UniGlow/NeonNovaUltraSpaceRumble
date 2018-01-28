@@ -12,6 +12,7 @@ public class TitleScreen : SubscribedBehaviour {
     [SerializeField] int numberOfWords = 5;
     [SerializeField] float delayBetweenWords = 1f;
     [SerializeField] float fadeInTime = 0.6f;
+    [SerializeField] float delayAfterCompletion = 3f;
 
     [Space]
     [SerializeField] List<TextMeshProUGUI> textFields;
@@ -21,6 +22,7 @@ public class TitleScreen : SubscribedBehaviour {
     float timer;
     int currentWord;
     Vector3 targetScale;
+    bool nextSceneLoaded;
 	#endregion
 	
 	
@@ -31,36 +33,39 @@ public class TitleScreen : SubscribedBehaviour {
 	}
 	
 	private void Update() {
-        if (currentWord < numberOfWords) {
-            timer += Time.deltaTime;
+        timer += Time.deltaTime;
 
-            if (timer >= delayBetweenWords) {
+        if (timer >= delayBetweenWords * delayAfterCompletion && currentWord >= numberOfWords && !nextSceneLoaded) {
+            GameManager.Instance.LoadNextScene();
+            nextSceneLoaded = true;
+        }
 
-                int rand = Random.Range(0, words.Count);
+        if (timer >= delayBetweenWords && currentWord < numberOfWords) {
 
-                // Ultra mustn't stand at the last spot
-                if (currentWord == numberOfWords - 2 && words.Contains("Ultra")) {
-                    rand = words.FindIndex(x => x == "Ultra");
-                }
+            int rand = Random.Range(0, words.Count);
 
-                // Activate textField
-                textFields[currentWord].transform.localScale = Vector3.zero;
-                textFields[currentWord].gameObject.SetActive(true);
-
-                // Set random word
-                textFields[currentWord].text = words[rand];
-                words.RemoveAt(rand);
-                
-                // Set random color
-                textFields[currentWord].fontMaterial.SetColor("_OutlineColor", colors[rand]);
-                textFields[currentWord].fontMaterial.SetColor("_GlowColor", colors[Random.Range(0,colors.Count)]);
-                colors.RemoveAt(rand);
-
-                // Tween it in
-                LeanTween.scale(textFields[currentWord].gameObject, targetScale, fadeInTime).setEase(LeanTweenType.easeOutBounce);
-                currentWord++;
-                timer = 0;
+            // Ultra mustn't stand at the last spot
+            if (currentWord == numberOfWords - 2 && words.Contains("Ultra")) {
+                rand = words.FindIndex(x => x == "Ultra");
             }
+
+            // Activate textField
+            textFields[currentWord].transform.localScale = Vector3.zero;
+            textFields[currentWord].gameObject.SetActive(true);
+
+            // Set random word
+            textFields[currentWord].text = words[rand];
+            words.RemoveAt(rand);
+                
+            // Set random color
+            textFields[currentWord].fontMaterial.SetColor("_OutlineColor", colors[rand]);
+            textFields[currentWord].fontMaterial.SetColor("_GlowColor", colors[Random.Range(0,colors.Count)]);
+            colors.RemoveAt(rand);
+
+            // Tween it in
+            LeanTween.scale(textFields[currentWord].gameObject, targetScale, fadeInTime).setEase(LeanTweenType.easeOutBounce);
+            currentWord++;
+            timer = 0;
         }
 	}
 	#endregion

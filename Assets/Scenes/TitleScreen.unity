@@ -345,6 +345,137 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 281958610}
+--- !u!1001 &348049735
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4337183692543796, guid: c74db29e4432b04408ef57b00d406ffd, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337183692543796, guid: c74db29e4432b04408ef57b00d406ffd, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337183692543796, guid: c74db29e4432b04408ef57b00d406ffd, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337183692543796, guid: c74db29e4432b04408ef57b00d406ffd, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337183692543796, guid: c74db29e4432b04408ef57b00d406ffd, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337183692543796, guid: c74db29e4432b04408ef57b00d406ffd, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337183692543796, guid: c74db29e4432b04408ef57b00d406ffd, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337183692543796, guid: c74db29e4432b04408ef57b00d406ffd, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114485969230535650, guid: c74db29e4432b04408ef57b00d406ffd,
+        type: 2}
+      propertyPath: InMenu
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114485969230535650, guid: c74db29e4432b04408ef57b00d406ffd,
+        type: 2}
+      propertyPath: inMenu
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114097331483697454, guid: c74db29e4432b04408ef57b00d406ffd,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114293964549712818, guid: c74db29e4432b04408ef57b00d406ffd,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114870123457348354, guid: c74db29e4432b04408ef57b00d406ffd,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114332039601200462, guid: c74db29e4432b04408ef57b00d406ffd,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114608841911343774, guid: c74db29e4432b04408ef57b00d406ffd,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114599229708516914, guid: c74db29e4432b04408ef57b00d406ffd,
+        type: 2}
+      propertyPath: colorSwitchInterval
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1136556033050532, guid: c74db29e4432b04408ef57b00d406ffd, type: 2}
+      propertyPath: m_Name
+      value: LEVEL_SCRIPTS
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114485969230535650, guid: c74db29e4432b04408ef57b00d406ffd, type: 2}
+    - {fileID: 0}
+    - {fileID: 114293964549712818, guid: c74db29e4432b04408ef57b00d406ffd, type: 2}
+    - {fileID: 114870123457348354, guid: c74db29e4432b04408ef57b00d406ffd, type: 2}
+    - {fileID: 114332039601200462, guid: c74db29e4432b04408ef57b00d406ffd, type: 2}
+    - {fileID: 114608841911343774, guid: c74db29e4432b04408ef57b00d406ffd, type: 2}
+    - {fileID: 114599229708516914, guid: c74db29e4432b04408ef57b00d406ffd, type: 2}
+    - {fileID: 114097331483697454, guid: c74db29e4432b04408ef57b00d406ffd, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: c74db29e4432b04408ef57b00d406ffd, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1 &348049736 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1136556033050532, guid: c74db29e4432b04408ef57b00d406ffd,
+    type: 2}
+  m_PrefabInternal: {fileID: 348049735}
+--- !u!114 &348049737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 348049736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e05256d415654bc48add0b6c0a2b3c83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfWords: 5
+  delayBetweenWords: 1
+  fadeInTime: 0.6
+  textFields:
+  - {fileID: 539552823}
+  - {fileID: 281958612}
+  - {fileID: 1253538113}
+  - {fileID: 1457874621}
+  - {fileID: 974955383}
+  words:
+  - Neon
+  - Nova
+  - Ultra
+  - Space
+  - Rumble
+  colors:
+  - {r: 0.11724138, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0.5586207, b: 0, a: 1}
+  - {r: 0, g: 1, b: 0.9172416, a: 1}
+  - {r: 0, g: 0.21379304, b: 1, a: 1}
+  - {r: 0.7793112, g: 0, b: 1, a: 1}
 --- !u!1 &539552821
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,88 +672,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114485969230535650, guid: c74db29e4432b04408ef57b00d406ffd,
-        type: 2}
-      propertyPath: InMenu
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114485969230535650, guid: c74db29e4432b04408ef57b00d406ffd,
-        type: 2}
-      propertyPath: inMenu
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114097331483697454, guid: c74db29e4432b04408ef57b00d406ffd,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114293964549712818, guid: c74db29e4432b04408ef57b00d406ffd,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114870123457348354, guid: c74db29e4432b04408ef57b00d406ffd,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114332039601200462, guid: c74db29e4432b04408ef57b00d406ffd,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114608841911343774, guid: c74db29e4432b04408ef57b00d406ffd,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114599229708516914, guid: c74db29e4432b04408ef57b00d406ffd,
-        type: 2}
-      propertyPath: colorSwitchInterval
-      value: 1e+9
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114485969230535650, guid: c74db29e4432b04408ef57b00d406ffd, type: 2}
-    - {fileID: 0}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c74db29e4432b04408ef57b00d406ffd, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &706337665 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1136556033050532, guid: c74db29e4432b04408ef57b00d406ffd,
-    type: 2}
-  m_PrefabInternal: {fileID: 706337664}
---- !u!114 &706337666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 706337665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e05256d415654bc48add0b6c0a2b3c83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  numberOfWords: 5
-  delayBetweenWords: 1
-  fadeInTime: 0.6
-  textFields:
-  - {fileID: 539552823}
-  - {fileID: 281958612}
-  - {fileID: 1253538113}
-  - {fileID: 1457874621}
-  - {fileID: 974955383}
-  words:
-  - Neon
-  - Nova
-  - Ultra
-  - Space
-  - Rumble
-  colors:
-  - {r: 0.11724138, g: 1, b: 0, a: 1}
-  - {r: 1, g: 0.5586207, b: 0, a: 1}
-  - {r: 0, g: 1, b: 0.9172416, a: 1}
-  - {r: 0, g: 0.21379304, b: 1, a: 1}
-  - {r: 0.7793112, g: 0, b: 1, a: 1}
 --- !u!1 &974955381
 GameObject:
   m_ObjectHideFlags: 0

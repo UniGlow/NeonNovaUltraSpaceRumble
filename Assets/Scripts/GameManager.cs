@@ -32,6 +32,10 @@ public class GameManager : SubscribedBehaviour {
 
 
     #region Unity Event Functions
+    private void OnEnable() {
+        SceneManager.sceneLoaded += OnLevelFinishedLoading;
+    }
+
     //Awake is always called before any Start functions
     void Awake() {
         //Check if instance already exists
@@ -56,12 +60,12 @@ public class GameManager : SubscribedBehaviour {
     private void Update() {
         passedTime += Time.deltaTime;
 
-        // Set new Boss color
-        if (passedTime >= colorSwitchInterval) {
-            ChangeBossColor();
-            passedTime = 0f;
-        }
+        HandleColorSwitch();
 	}
+
+    private void OnDisable() {
+        SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+    }
     #endregion
 
 
@@ -105,6 +109,21 @@ public class GameManager : SubscribedBehaviour {
 
 
     #region Private Functions
+    void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode) {
+        passedTime = 0f;
+        boss = GameObject.FindObjectOfType<Boss>();
+    }
+
+    void HandleColorSwitch() {
+        if (SceneManager.GetActiveScene().name.Contains("Level")) {
+            // Set new Boss color
+            if (passedTime >= colorSwitchInterval) {
+                ChangeBossColor();
+                passedTime = 0f;
+            }
+        }
+    }
+
     /// <summary>
     /// Randomly changes one of the boss colors (weakness or strength)
     /// </summary>
