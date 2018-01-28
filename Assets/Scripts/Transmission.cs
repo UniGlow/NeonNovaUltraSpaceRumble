@@ -36,18 +36,19 @@ public class Transmission : SubscribedBehaviour {
 	private void Update() {        
 
         // Start targeting mode -> activate LineRenderer
-        if (transmissionCooldownB && Input.GetButtonDown(Constants.INPUT_TRANSMIT + hero.PlayerNumber)) {
-            UpdateLineRenderer();
-            transmissionLineRenderer.gameObject.SetActive(true);
-        }
+        //if (transmissionCooldownB && Input.GetButtonDown(Constants.INPUT_TRANSMIT + hero.PlayerNumber)) {
+        //    UpdateLineRenderer();
+        //    transmissionLineRenderer.gameObject.SetActive(true);
+        //}
         // End transmission if button is lifted
-        else if (Input.GetButtonUp(Constants.INPUT_TRANSMIT + hero.PlayerNumber)) {
+        if (Input.GetButtonUp(Constants.INPUT_TRANSMIT + hero.PlayerNumber)) {
             EndTransmission();
         }
 
         // Look for a receiver
         if (!receiverFound && transmissionCooldownB && Input.GetButton(Constants.INPUT_TRANSMIT + hero.PlayerNumber)) {
             UpdateLineRenderer();
+            transmissionLineRenderer.gameObject.SetActive(true);
             receiverFound = FindReceiver();
         }
         // Continue the transmission when a receiver is found
@@ -77,14 +78,14 @@ public class Transmission : SubscribedBehaviour {
     #region Private Functions
     bool FindReceiver() {
         RaycastHit hitInfo;
-        if (Physics.Raycast(transform.position, transform.forward, out hitInfo, transmissionRange, 1 << 8)) {
-            Debug.DrawLine(transform.position, hitInfo.point, Color.green);
+        if (Physics.Raycast(transform.position + Vector3.up * 0.5f, transform.forward, out hitInfo, transmissionRange, 1 << 8)) {
+            Debug.DrawLine(transform.position + Vector3.up * 0.5f, hitInfo.point, Color.green);
             receiver = hitInfo.transform.gameObject;
             //hero.SetMovable(false);
             return true;
         }
         else {
-            Debug.DrawRay(transform.position, transform.forward * transmissionRange, Color.red);
+            Debug.DrawRay(transform.position + Vector3.up * 0.5f, transform.forward * transmissionRange, Color.red);
             return false;
         }
 
@@ -104,6 +105,10 @@ public class Transmission : SubscribedBehaviour {
         if (currenTransmissionDuration >= transmissionDuration) {
             Hero otherHero = receiver.GetComponent<Hero>();
             Ability newAbility = otherHero.ability;
+
+            // Cancel defend cooldown, if one of the abilities was Tank
+            if (hero.ability == Ability.Tank) hero.CancelDefendReset();
+            else if (otherHero.ability == Ability.Tank) otherHero.CancelDefendReset();
 
             // Switch abilities
             otherHero.ability = hero.ability;
@@ -130,12 +135,12 @@ public class Transmission : SubscribedBehaviour {
 
     void UpdateLineRenderer() {
         if (receiver == null) {
-            transmissionLineRenderer.SetPosition(0, transform.position);
-            transmissionLineRenderer.SetPosition(1, transform.position + transform.forward * transmissionRange);
+            transmissionLineRenderer.SetPosition(0, transform.position + Vector3.up * 0.5f);
+            transmissionLineRenderer.SetPosition(1, transform.position + Vector3.up * 0.5f + transform.forward * transmissionRange);
         }
         else {
-            transmissionLineRenderer.SetPosition(0, transform.position);
-            transmissionLineRenderer.SetPosition(1, receiver.transform.position);
+            transmissionLineRenderer.SetPosition(0, transform.position + Vector3.up * 0.5f);
+            transmissionLineRenderer.SetPosition(1, receiver.transform.position + Vector3.up * 0.5f);
         }
     }
     #endregion

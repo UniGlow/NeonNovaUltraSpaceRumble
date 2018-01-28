@@ -46,6 +46,7 @@ public class Hero : Player {
     [SerializeField] Material bluePlayerMat;
 
     private bool cooldown = true;
+    private Coroutine resetDefendCoroutine;
 
     public int PlayerNumber { get { return playerNumber; } }
     #endregion
@@ -97,7 +98,14 @@ public class Hero : Player {
 
 
     #region Public Funtcions
-
+    /// <summary>
+    /// Cancels the ResetDefend Coroutine. Gets called when a transmission happens during reset of the defend ability.
+    /// </summary>
+    public void CancelDefendReset() {
+        if (resetDefendCoroutine != null) StopCoroutine(resetDefendCoroutine);
+        wobbleBobble.SetActive(false);
+        cooldown = true;
+    }
     #endregion
 
 
@@ -130,7 +138,7 @@ public class Hero : Player {
         wobbleBobble.SetActive(true);
         cooldown = false;
         cooldownIndicator.sprite = defendCooldownSprites[0];
-        StartCoroutine(ResetDefend());
+        resetDefendCoroutine = StartCoroutine(ResetDefend());
     }
 
     private void Run() {
@@ -160,6 +168,7 @@ public class Hero : Player {
 
         // Reset Cooldown
         cooldown = true;
+        resetDefendCoroutine = null;
     }
     #endregion
 }
