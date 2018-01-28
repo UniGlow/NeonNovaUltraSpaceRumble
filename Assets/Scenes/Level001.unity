@@ -508,6 +508,21 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114366613420287042, guid: a082a6dd5a2d5524c8bdc9771effb635,
+        type: 2}
+      propertyPath: m_havePropertiesChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114366613420287042, guid: a082a6dd5a2d5524c8bdc9771effb635,
+        type: 2}
+      propertyPath: m_isInputParsingRequired
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224451818561913760, guid: a082a6dd5a2d5524c8bdc9771effb635,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -460.1
+      objectReference: {fileID: 0}
     - target: {fileID: 224131533213275328, guid: a082a6dd5a2d5524c8bdc9771effb635,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -518,19 +533,29 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: 288.5
       objectReference: {fileID: 0}
-    - target: {fileID: 224451818561913760, guid: a082a6dd5a2d5524c8bdc9771effb635,
-        type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -460.1
-      objectReference: {fileID: 0}
     - target: {fileID: 224097042383167238, guid: a082a6dd5a2d5524c8bdc9771effb635,
         type: 2}
       propertyPath: m_LocalPosition.x
       value: 460.1
       objectReference: {fileID: 0}
+    - target: {fileID: 1305377952927320, guid: a082a6dd5a2d5524c8bdc9771effb635, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114366613420287042, guid: a082a6dd5a2d5524c8bdc9771effb635,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a082a6dd5a2d5524c8bdc9771effb635, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &183687134 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114366613420287042, guid: a082a6dd5a2d5524c8bdc9771effb635,
+    type: 2}
+  m_PrefabInternal: {fileID: 183687133}
+  m_Script: {fileID: 1453722849, guid: 89f0137620f6af44b9ba852b4190e64e, type: 3}
 --- !u!1 &198363303
 GameObject:
   m_ObjectHideFlags: 0
@@ -1095,6 +1120,16 @@ Prefab:
       propertyPath: bossWinSoundVolume
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114596482777396196, guid: c960190ecc1261249afa261cb260fe2f,
+        type: 2}
+      propertyPath: winText
+      value: 
+      objectReference: {fileID: 183687134}
+    - target: {fileID: 114629895528832284, guid: c960190ecc1261249afa261cb260fe2f,
+        type: 2}
+      propertyPath: winText
+      value: 
+      objectReference: {fileID: 183687134}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c960190ecc1261249afa261cb260fe2f, type: 2}
   m_IsPrefabParent: 0

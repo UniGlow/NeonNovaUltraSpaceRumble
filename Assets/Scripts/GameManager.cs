@@ -90,7 +90,6 @@ public class GameManager : SubscribedBehaviour {
 
     #region Public Functions    
     public void NextLevel() {
-        print("calling coroutine");
         StartCoroutine(StartNextLevel());
     }
 

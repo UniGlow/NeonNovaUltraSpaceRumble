@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 /// <summary>
 /// 
@@ -11,6 +12,9 @@ public class Health : SubscribedBehaviour {
     #region Variable Declarations
     [SerializeField] protected int maxHealth = 1000;
     [SerializeField] protected Gradient hpColor;
+
+    [SerializeField] protected TextMeshProUGUI winText;
+    [SerializeField] protected float fadeInTime = 2f;
 
     [Header("Object References")]
     [SerializeField] protected Sprite[] healthbarSprites;

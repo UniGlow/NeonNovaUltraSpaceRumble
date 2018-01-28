@@ -71,6 +71,9 @@ public class HeroHealth : Health {
             audioSource.clip = bossWinSound;
             audioSource.volume = bossWinSoundVolume;
             audioSource.PlayDelayed(0.7f);
+
+            winText.text = "Boss Wins !";
+            winText.gameObject.SetActive(true);
         }
     }
     #endregion

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 /// <summary>
 /// 
@@ -62,6 +63,9 @@ public class BossHealth : Health {
         // Dead?
         if (currentHealth <= 0) {
             healthIndicator.enabled = false;
+
+            winText.text = "Heroes Win !";
+            winText.gameObject.SetActive(true);
 
             audioSource.clip = heroWinSound;
             audioSource.volume = heroWinSoundVolume;
