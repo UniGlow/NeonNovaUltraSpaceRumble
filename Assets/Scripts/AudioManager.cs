@@ -11,7 +11,7 @@ public class AudioManager : SubscribedBehaviour {
     #region Variable Declarations
     [SerializeField] AudioClip[] backgroundTracks;
     [Range(0,1)]
-    [SerializeField] int[] backgroundTracksVolumes;
+    [SerializeField] float[] backgroundTracksVolumes;
     [SerializeField] AudioClip levelEnd;
     [Range(0,1)]
     [SerializeField] float levelEndVolume = 1f;
@@ -74,6 +74,7 @@ public class AudioManager : SubscribedBehaviour {
                 src.loop = true;
                 src.volume = GetbackgroundTrackVolume("Track01Loop");
                 src.Play();
+                break;
             }
         }
     }

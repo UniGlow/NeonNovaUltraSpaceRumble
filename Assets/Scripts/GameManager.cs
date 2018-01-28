@@ -101,6 +101,10 @@ public class GameManager : SubscribedBehaviour {
         }
     }
 
+    public void LoadLevel(string name) {
+        SceneManager.LoadScene(name);
+    }
+
     /// <summary>
     /// Quits the application or exits play mode when in editor
     /// </summary>

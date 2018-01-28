@@ -518,15 +518,15 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: 300.5
       objectReference: {fileID: 0}
-    - target: {fileID: 224097042383167238, guid: a082a6dd5a2d5524c8bdc9771effb635,
-        type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 460.1
-      objectReference: {fileID: 0}
     - target: {fileID: 224451818561913760, guid: a082a6dd5a2d5524c8bdc9771effb635,
         type: 2}
       propertyPath: m_LocalPosition.x
       value: -460.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224097042383167238, guid: a082a6dd5a2d5524c8bdc9771effb635,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 460.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a082a6dd5a2d5524c8bdc9771effb635, type: 2}
@@ -1613,16 +1613,6 @@ Prefab:
     - target: {fileID: 4260685427587770, guid: b1e1569e895ceee48869b355039c0cbf, type: 2}
       propertyPath: m_RootOrder
       value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 114424577701179020, guid: b1e1569e895ceee48869b355039c0cbf,
-        type: 2}
-      propertyPath: strengthColor
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114424577701179020, guid: b1e1569e895ceee48869b355039c0cbf,
-        type: 2}
-      propertyPath: playerNumber
-      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b1e1569e895ceee48869b355039c0cbf, type: 2}

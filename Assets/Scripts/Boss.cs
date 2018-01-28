@@ -140,7 +140,7 @@ public class Boss : Player {
                 projectile.GetComponent<Rigidbody>().velocity = (projectile.transform.position - transform.position) * abilityProjectileSpeed;
                 projectile.GetComponent<Renderer>().material.SetColor("_TintColor", activeStrengthColor);
             }
-
+            
             audioSource.PlayOneShot(abilitySound, abilitySoundVolume);
 
             abilityCooldownB = false;

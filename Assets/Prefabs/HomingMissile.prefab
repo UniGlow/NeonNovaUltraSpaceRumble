@@ -434,7 +434,7 @@ MonoBehaviour:
   rotateSpeed: 5
   damage: 50
   hitSound: {fileID: 8300000, guid: 216323fd8e2633844a437d87bf28a085, type: 3}
-  hitSoundVolume: 1
+  hitSoundVolume: 0.6
   hitPSHeroes: {fileID: 1086934119878164, guid: 9943029a31d4e3a44bf6d6676eecb198,
     type: 2}
   hitPSBoss: {fileID: 1086934119878164, guid: 9943029a31d4e3a44bf6d6676eecb198, type: 2}

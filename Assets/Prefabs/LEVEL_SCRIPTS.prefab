@@ -197,7 +197,7 @@ MonoBehaviour:
   - {fileID: 21300056, guid: cf7b38ec134eb49be8918c0504aeb76c, type: 3}
   - {fileID: 21300058, guid: cf7b38ec134eb49be8918c0504aeb76c, type: 3}
   bossWinSound: {fileID: 8300000, guid: 611ebf4824b8a93428647e38958f1b6c, type: 3}
-  bossWinSoundVolume: 1
+  bossWinSoundVolume: 0.8
   healthIndicators:
   - {fileID: 0}
   - {fileID: 0}
@@ -277,4 +277,4 @@ MonoBehaviour:
   - {fileID: 21300058, guid: cf7b38ec134eb49be8918c0504aeb76c, type: 3}
   healthIndicator: {fileID: 0}
   heroWinSound: {fileID: 8300000, guid: 2dc646915323a9840bfcee7e29d3b9d0, type: 3}
-  heroWinSoundVolume: 1
+  heroWinSoundVolume: 0.8

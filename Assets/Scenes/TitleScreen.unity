@@ -437,6 +437,7 @@ Prefab:
     - {fileID: 114608841911343774, guid: c74db29e4432b04408ef57b00d406ffd, type: 2}
     - {fileID: 114599229708516914, guid: c74db29e4432b04408ef57b00d406ffd, type: 2}
     - {fileID: 114097331483697454, guid: c74db29e4432b04408ef57b00d406ffd, type: 2}
+    - {fileID: 114724152049828894, guid: c74db29e4432b04408ef57b00d406ffd, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: c74db29e4432b04408ef57b00d406ffd, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &348049736 stripped
@@ -458,6 +459,7 @@ MonoBehaviour:
   numberOfWords: 5
   delayBetweenWords: 1
   fadeInTime: 0.6
+  delayAfterCompletion: 3
   textFields:
   - {fileID: 539552823}
   - {fileID: 281958612}

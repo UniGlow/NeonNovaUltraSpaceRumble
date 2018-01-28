@@ -1182,6 +1182,16 @@ Prefab:
       propertyPath: maxHealth
       value: 1000
       objectReference: {fileID: 0}
+    - target: {fileID: 114629895528832284, guid: c960190ecc1261249afa261cb260fe2f,
+        type: 2}
+      propertyPath: heroWinSoundVolume
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114596482777396196, guid: c960190ecc1261249afa261cb260fe2f,
+        type: 2}
+      propertyPath: bossWinSoundVolume
+      value: 0.8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c960190ecc1261249afa261cb260fe2f, type: 2}
   m_IsPrefabParent: 0
@@ -1407,6 +1417,11 @@ Prefab:
     - target: {fileID: 4337183692543796, guid: c74db29e4432b04408ef57b00d406ffd, type: 2}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114724152049828894, guid: c74db29e4432b04408ef57b00d406ffd,
+        type: 2}
+      propertyPath: backgroundTracksVolumes.Array.data[0]
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c74db29e4432b04408ef57b00d406ffd, type: 2}
