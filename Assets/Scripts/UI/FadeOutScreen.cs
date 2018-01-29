@@ -7,7 +7,8 @@ using UnityEngine.UI;
 /// This class offers public functions to fade the screen in and out from and to an image.
 /// </summary>
 [RequireComponent(typeof(Image))]
-public class FadeOutScreen : SubscribedBehaviour {
+public class FadeOutScreen : MonoBehaviour
+{
 
     bool fading = false;
 

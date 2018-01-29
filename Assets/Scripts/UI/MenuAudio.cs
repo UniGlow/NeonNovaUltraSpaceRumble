@@ -6,7 +6,8 @@ using UnityEngine;
 /// 
 /// </summary>
 [RequireComponent(typeof(AudioSource))]
-public class MenuAudio : SubscribedBehaviour {
+public class MenuAudio : MonoBehaviour
+{
 
     #region Variable Declarations
     [SerializeField] AudioClip confirm;

@@ -75,7 +75,7 @@ public class HomingMissile : SubscribedBehaviour {
 
 
     #region Custom Event Functions
-    protected override void OnLevelCompleted() {
+    override protected void OnLevelCompleted(string winner) {
         PauseMissile(true);
     }
     #endregion

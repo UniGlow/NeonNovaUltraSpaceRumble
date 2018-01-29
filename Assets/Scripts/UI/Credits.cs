@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// 
 /// </summary>
-public class Credits : SubscribedBehaviour {
+public class Credits : MonoBehaviour {
 	
 	#region Variable Declarations
 	#endregion

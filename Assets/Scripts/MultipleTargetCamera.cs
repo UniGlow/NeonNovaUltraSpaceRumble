@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// 
 /// </summary>
-public class MultipleTargetCamera : SubscribedBehaviour {
+public class MultipleTargetCamera : MonoBehaviour {
 
     #region Variable Declarations
 

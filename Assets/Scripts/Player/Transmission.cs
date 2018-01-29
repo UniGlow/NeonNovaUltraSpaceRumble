@@ -6,7 +6,7 @@ using UnityEngine;
 /// 
 /// </summary>
 [RequireComponent(typeof(Hero))]
-public class Transmission : SubscribedBehaviour {
+public class Transmission : MonoBehaviour {
 
     #region Variable Declarations
     [SerializeField] float transmissionRange = 5f;

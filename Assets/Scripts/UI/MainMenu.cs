@@ -6,9 +6,10 @@ using UnityEngine.EventSystems;
 /// <summary>
 /// 
 /// </summary>
-public class MainMenu : SubscribedBehaviour {
+public class MainMenu : MonoBehaviour
+{
 
-    #region Variable Declarations
+#region Variable Declarations
     [SerializeField] GameObject playButton;
     [SerializeField] GameObject howToPlayOne;
     [SerializeField] GameObject howToPlayTwo;

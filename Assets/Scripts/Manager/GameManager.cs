@@ -14,6 +14,7 @@ public class GameManager : SubscribedBehaviour {
     [SerializeField] float critDamageMultiplier = 2f;
     public float CritDamageMultiplier { get { return critDamageMultiplier; } }
     [SerializeField] float delayAtLevelEnd = 12f;
+    [SerializeField] float delayForActionStart = 3f;
 
     [Header("Sound")]
     [SerializeField] AudioClip colorChangeSound;
@@ -40,7 +41,10 @@ public class GameManager : SubscribedBehaviour {
 
 
     #region Unity Event Functions
-    private void OnEnable() {
+    override protected void OnEnable()
+    {
+        base.OnEnable();
+
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
     }
 
@@ -72,7 +76,10 @@ public class GameManager : SubscribedBehaviour {
         HandleColorSwitch();
 	}
 
-    private void OnDisable() {
+    override protected void OnDisable()
+    {
+        base.OnDisable();
+
         SceneManager.sceneLoaded -= OnLevelFinishedLoading;
     }
     #endregion
@@ -81,18 +88,15 @@ public class GameManager : SubscribedBehaviour {
 
     #region Custom Event Functions
     // Every child of SubscribedBehaviour can implement these
-    protected override void OnLevelCompleted() {
-        
+    override protected void OnLevelCompleted(string winner) {
+        StartCoroutine(LoadNextLevel());
+        Time.timeScale = 0.0f;
     }
     #endregion
 
 
 
-    #region Public Functions    
-    public void NextLevel() {
-        StartCoroutine(StartNextLevel());
-    }
-
+    #region Public Functions
     /// <summary>
     /// Loads the next scene in build index
     /// </summary>
@@ -129,7 +133,7 @@ public class GameManager : SubscribedBehaviour {
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode) {
         passedTime = 0f;
         boss = GameObject.FindObjectOfType<Boss>();
-        AudioManager.Instance.StartBackgroundTrack();
+        StartCoroutine(StartTheAction());
     }
 
     void HandleColorSwitch() {
@@ -208,9 +212,14 @@ public class GameManager : SubscribedBehaviour {
 
 
 
-    IEnumerator StartNextLevel() {
+    IEnumerator LoadNextLevel() {
         yield return new WaitForSecondsRealtime(delayAtLevelEnd);
         LoadNextScene();
         Time.timeScale = 1;
+    }
+
+    IEnumerator StartTheAction() {
+        yield return new WaitForSecondsRealtime(delayForActionStart);
+        GameEvents.StartLevelStarted();
     }
 }

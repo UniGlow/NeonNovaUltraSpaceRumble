@@ -6,8 +6,7 @@ using TMPro;
 /// <summary>
 /// 
 /// </summary>
-[RequireComponent(typeof(AudioSource))]
-public class Health : SubscribedBehaviour {
+public class Health : MonoBehaviour {
 
     #region Variable Declarations
     [SerializeField] protected int maxHealth = 1000;
@@ -20,7 +19,6 @@ public class Health : SubscribedBehaviour {
     [SerializeField] protected Sprite[] healthbarSprites;
 
     protected int currentHealth;
-    protected AudioSource audioSource;
     #endregion
 
 
@@ -28,7 +26,6 @@ public class Health : SubscribedBehaviour {
     #region Unity Event Functions
     virtual protected void Start() {
         currentHealth = maxHealth;
-        audioSource = GetComponent<AudioSource>();
     }
 
     virtual protected void Update() {
@@ -44,9 +41,6 @@ public class Health : SubscribedBehaviour {
 
         if (currentHealth <= 0) {
             currentHealth = 0;
-            GameEvents.StartLevelCompleted();
-            GameManager.Instance.NextLevel();
-            Time.timeScale = 0.0f;
         }
     }
     #endregion

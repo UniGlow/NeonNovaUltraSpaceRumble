@@ -96,14 +96,6 @@ public class Hero : Player {
 
 
 
-    #region Custom Event Functions
-    protected override void OnLevelCompleted() {
-        
-    }
-    #endregion
-
-
-
     #region Public Funtcions
     /// <summary>
     /// Cancels the ResetDefend Coroutine. Gets called when a transmission happens during reset of the defend ability.

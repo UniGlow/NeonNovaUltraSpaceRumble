@@ -78,14 +78,6 @@ public class Boss : Player {
 
 
 
-    #region Custom Event Functions
-    protected override void OnLevelCompleted() {
-
-    }
-    #endregion
-
-
-
     #region Public Funtcions
     public void SetWeaknessColor(PlayerColor playerColor) {
         weaknessColor = playerColor;

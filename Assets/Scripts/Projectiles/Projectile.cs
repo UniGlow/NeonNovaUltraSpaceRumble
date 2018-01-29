@@ -5,7 +5,8 @@ using UnityEngine;
 /// <summary>
 /// 
 /// </summary>
-public class Projectile : SubscribedBehaviour {
+public class Projectile : MonoBehaviour
+{
 
     #region Variable Declarations
     public float lifeTime = 1f;

@@ -4,12 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// 
+/// Switches the color of an image on the same GameObject recording to the defined color Gradient.
 /// </summary>
-public class Rainbow : SubscribedBehaviour {
+[RequireComponent(typeof(Image))]
+public class Rainbow : MonoBehaviour
+{
 
     #region Variable Declarations
     [SerializeField] Gradient colors;
+    [Tooltip("Time it takes to go trhough all colors of the defined color gradient.")]
     [SerializeField] float fadeTime = 2f;
 
     float timer;

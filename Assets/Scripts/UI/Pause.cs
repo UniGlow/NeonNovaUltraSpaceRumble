@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Pause : SubscribedBehaviour {
+public class Pause : MonoBehaviour
+{
 
     GameObject pauseMenu,
                mainMenu,

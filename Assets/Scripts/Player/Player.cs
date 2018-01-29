@@ -7,7 +7,8 @@ using UnityEngine;
 /// </summary>
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(AudioSource))]
-public class Player : SubscribedBehaviour {
+public class Player : MonoBehaviour
+{
 
     #region Variable Declarations
     // Variables that should be visible in Inspector

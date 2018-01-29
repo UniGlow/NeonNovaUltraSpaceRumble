@@ -7,7 +7,8 @@ using UnityEngine.Audio;
 /// <summary>
 /// 
 /// </summary>
-public class OptionsMenu : SubscribedBehaviour {
+public class OptionsMenu : MonoBehaviour
+{
 
     #region Variable Declarations
     [SerializeField] TMPro.TMP_Dropdown resolutionDropdown;

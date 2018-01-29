@@ -9,13 +9,15 @@ using UnityEngine;
 abstract public class SubscribedBehaviour : MonoBehaviour {
 
     // Subscribing to all custom game events
-    private void OnEnable() {
+    protected virtual void OnEnable() {
         GameEvents.LevelCompleted += OnLevelCompleted;
+        GameEvents.LevelStarted += OnLevelStarted;
     }
 
     // Unsubscribing from all custom game events
-    private void OnDisable() {
+    protected virtual void OnDisable() {
         GameEvents.LevelCompleted -= OnLevelCompleted;
+        GameEvents.LevelStarted -= OnLevelStarted;
     }
 
 
@@ -23,5 +25,6 @@ abstract public class SubscribedBehaviour : MonoBehaviour {
     /* Virtual functions for every custom game event
      * If overriden, these functions will be called in the inheriting classes when events are triggered
      */
-    virtual protected void OnLevelCompleted() { }
+    protected virtual void OnLevelCompleted(string winner) { }
+    protected virtual void OnLevelStarted() { }
 }

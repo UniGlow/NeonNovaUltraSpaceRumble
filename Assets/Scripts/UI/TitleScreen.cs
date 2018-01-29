@@ -6,7 +6,8 @@ using TMPro;
 /// <summary>
 /// 
 /// </summary>
-public class TitleScreen : SubscribedBehaviour {
+public class TitleScreen : MonoBehaviour
+{
 
     #region Variable Declarations
     [SerializeField] int numberOfWords = 5;

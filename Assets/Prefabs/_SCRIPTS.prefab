@@ -161,6 +161,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorSwitchInterval: 15
   critDamageMultiplier: 2
+  delayAtLevelEnd: 9
+  delayForActionStart: 0
   colorChangeSound: {fileID: 8300000, guid: cb3b90f02c52c49418a9a3fd50874d2b, type: 3}
   colorChangeSoundVolume: 0.8
   greenPlayerColor: {r: 0, g: 1, b: 0.006896496, a: 1}
@@ -196,3 +198,7 @@ MonoBehaviour:
   - 0.8
   levelEnd: {fileID: 8300000, guid: f8139e7be195b47a7a1b53e20a35e244, type: 3}
   levelEndVolume: 0.8
+  bossWinSound: {fileID: 8300000, guid: 611ebf4824b8a93428647e38958f1b6c, type: 3}
+  bossWinSoundVolume: 0.8
+  heroesWinSound: {fileID: 8300000, guid: 2dc646915323a9840bfcee7e29d3b9d0, type: 3}
+  heroesWinSoundVolume: 0.8

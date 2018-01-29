@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// Provides a Debug Mode Menu
 /// </summary>
-public class DebugMode : SubscribedBehaviour {
+public class DebugMode : MonoBehaviour
+{
 
     public static DebugMode Instance;
 
