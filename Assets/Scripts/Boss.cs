@@ -108,7 +108,7 @@ public class Boss : Player {
 
     #region Private Functions
     private void Attack() {
-        if (Input.GetButton(Constants.INPUT_ABILITY + playerNumber) && attackCooldownB) {
+        if (attackCooldownB) {
             GameObject projectile = Instantiate(projectilePrefab, transform.position + transform.forward * 1.9f + Vector3.up * 0.5f, transform.rotation);
             projectile.GetComponent<BossProjectile>().damage = attackDamagePerShot;
             projectile.GetComponent<BossProjectile>().playerColor = strengthColor;
@@ -124,7 +124,7 @@ public class Boss : Player {
     }
 
     private void Ability() {
-        if (Input.GetButtonDown(Constants.INPUT_TRANSMIT + playerNumber) && abilityCooldownB) {
+        if (abilityCooldownB) {
 
             for (int i = 0; i < numberOfProjectiles; ++i) {
                 float factor = (i / (float)numberOfProjectiles) * Mathf.PI * 2f;

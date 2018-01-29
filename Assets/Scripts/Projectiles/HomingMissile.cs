@@ -51,6 +51,7 @@ public class HomingMissile : SubscribedBehaviour {
             audioSource.PlayOneShot(hitSound, hitSoundVolume);
 
             Instantiate(hitPSHeroes, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
+            StartCoroutine(Break(9));
         }
         else if (other.tag.Contains(Constants.TAG_BOSS)) {
             BossHealth.Instance.TakeDamage(damage);
@@ -107,5 +108,14 @@ public class HomingMissile : SubscribedBehaviour {
         rb.angularVelocity = rotateAmount * rotateSpeed;
 
         rb.velocity = transform.forward * speed;
+    }
+
+
+
+    IEnumerator Break(int frames) {
+        for (int i = 0; i < frames; i++) {
+            yield return null;
+        }
+        Debug.Break();
     }
 }

@@ -123,10 +123,10 @@ public class Hero : Player {
             if (ability == Ability.Opfer) {
                 Run();
             }
-            else if (ability == Ability.Damage && Input.GetButton(Constants.INPUT_ABILITY + playerNumber)) {
+            else if (ability == Ability.Damage) {
                 Attack();
             }
-            else if (ability == Ability.Tank && Input.GetButtonDown(Constants.INPUT_ABILITY + playerNumber)) {
+            else if (ability == Ability.Tank) {
                 Defend();
             }
         }
