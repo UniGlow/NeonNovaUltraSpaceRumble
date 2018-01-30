@@ -228,7 +228,7 @@ public class GameManager : SubscribedBehaviour {
     }
 
     void SetupAICharacters() {
-        if (Input.GetJoystickNames().Length == 1)
+        if (Input.GetJoystickNames().Length == 1 || Input.GetJoystickNames().Length == 0)
         {
             GameObject[] heroes = GameObject.FindGameObjectsWithTag(Constants.TAG_HERO);
             GameObject damage = new GameObject();
