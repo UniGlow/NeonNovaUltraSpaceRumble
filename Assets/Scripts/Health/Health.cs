@@ -10,6 +10,7 @@ public class Health : MonoBehaviour {
 
     #region Variable Declarations
     [SerializeField] protected int maxHealth = 1000;
+    public int MaxHealth { get { return maxHealth; } set { maxHealth = value; } }
     [SerializeField] protected Gradient hpColor;
 
     [SerializeField] protected TextMeshProUGUI winText;

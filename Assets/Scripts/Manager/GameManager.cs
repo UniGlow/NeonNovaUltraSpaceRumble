@@ -69,6 +69,11 @@ public class GameManager : SubscribedBehaviour {
     private void Start() {
         boss = GameObject.FindObjectOfType<Boss>();
         audioSource = GetComponent<AudioSource>();
+
+        #if !UNITY_EDITOR
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        #endif
     }
 
     private void Update() {
@@ -265,8 +270,9 @@ public class GameManager : SubscribedBehaviour {
             cameraRig.targets[1] = tankAI.transform;
             cameraRig.targets[2] = opferAI.transform;
 
-            // Set boss playerNumber
+            // Set boss playerNumber and health
             boss.PlayerNumber = 1;
+            levelScrpits.GetComponent<BossHealth>().MaxHealth = 1700;
         }
         else {
             // Do nothing for a 4 player game (scene is setup for this)

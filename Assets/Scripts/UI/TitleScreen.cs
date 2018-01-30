@@ -31,7 +31,7 @@ public class TitleScreen : MonoBehaviour
 	#region Unity Event Functions
 	private void Start() {
         targetScale = textFields[0].transform.localScale;
-        AudioManager.Instance.StartBackgroundTrack();
+        StartCoroutine(StartAudioNextFrame());
 	}
 	
 	private void Update() {
@@ -70,10 +70,18 @@ public class TitleScreen : MonoBehaviour
             timer = 0;
         }
 	}
-	#endregion
-	
-	
-	
-	#region Private Functions
-	#endregion
+    #endregion
+
+
+
+    #region Private Functions
+    #endregion
+
+
+
+    IEnumerator StartAudioNextFrame()
+    {
+        yield return null;
+        AudioManager.Instance.StartBackgroundTrack();
+    }
 }

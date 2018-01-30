@@ -14,7 +14,7 @@ public class Credits : MonoBehaviour {
 	
 	#region Unity Event Functions
 	private void Start() {
-        AudioManager.Instance.StartBackgroundTrack();
+        StartCoroutine(StartAudioNextFrame());
 	}
 	
 	private void Update() {
@@ -22,10 +22,18 @@ public class Credits : MonoBehaviour {
             GameManager.Instance.LoadLevel("MainMenu");
         }
 	}
-	#endregion
-	
-	
-	
-	#region Private Functions
-	#endregion
+    #endregion
+
+
+
+    #region Private Functions
+    #endregion
+
+
+
+    IEnumerator StartAudioNextFrame()
+    {
+        yield return null;
+        AudioManager.Instance.StartBackgroundTrack();
+    }
 }

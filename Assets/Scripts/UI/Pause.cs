@@ -64,4 +64,8 @@ public class Pause : MonoBehaviour
 
         gameIsPaused = false;
     }
+
+    public void ReturnToMainMenu() {
+        GameManager.Instance.LoadLevel("MainMenu");
+    }
 }

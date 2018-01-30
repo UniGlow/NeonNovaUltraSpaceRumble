@@ -194,7 +194,6 @@ public class HeroAI : Hero {
     }
 
     private void SetTankDestination() {
-        print("test");
         Vector3 nearDamage = damage.position + (transform.position - damage.position).normalized * tankTargetDistance;
         SetDestination(nearDamage + (transform.position - nearDamage) * tankFollowSpeed);
     }
