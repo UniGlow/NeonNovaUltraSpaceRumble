@@ -66,6 +66,8 @@ public class HomingMissile : SubscribedBehaviour {
 
     private void Update() {
         if (!agentPaused) {
+            if (target == null) AcquireNewTarget();
+
             agent.SetDestination(target.position);
             agent.Move(transform.forward * speed);
         }

@@ -10,50 +10,54 @@ public class Hero : Player {
     #region Variable Declarations
     // Variables that should be visible in Inspector
     [Header("Damage")]
-    [SerializeField] int damagePerShot = 10;
-    [SerializeField] float attackCooldown = 0.2f;
-    [SerializeField] float projectileSpeed = 10f;
+    [SerializeField] protected int damagePerShot = 10;
+    [SerializeField] protected float attackCooldown = 0.2f;
+    [SerializeField] protected float projectileSpeed = 10f;
 
     [Header("Tank")]
-    [SerializeField] float defendCooldown = 3f;
-    [SerializeField] float defendDuration = 2f;
+    [SerializeField] protected float defendCooldown = 3f;
+    [SerializeField] protected float defendDuration = 2f;
 
     [Header("Opfer")]
     [Tooltip("Proportional to base movement speed")]
-    [SerializeField] float speedBoost = 0.5f;
+    [SerializeField] protected float speedBoost = 0.5f;
 
     [Header("Properties")]
-    [SerializeField] PlayerColor playerColor;
-    public PlayerColor PlayerColor { get { return playerColor; } }
+    [SerializeField] protected PlayerColor playerColor;
+    public PlayerColor PlayerColor { get { return playerColor; } set { playerColor = value; } }
     public Ability ability;
 
     [Header("Sound")]
-    [SerializeField] AudioClip wobbleBobbleSound;
+    [SerializeField]
+    protected AudioClip wobbleBobbleSound;
     [Range(0, 1)]
-    [SerializeField] float wobbleBobbleVolume = 1f;
-    [SerializeField] AudioClip attackSound;
+    [SerializeField]
+    protected float wobbleBobbleVolume = 1f;
+    [SerializeField] protected AudioClip attackSound;
     [Range(0, 1)]
-    [SerializeField] float attackSoundVolume = 1f;
+    [SerializeField]
+    protected float attackSoundVolume = 1f;
 
     [Header("References")]
-    [SerializeField] GameObject projectilePrefab;
-    [SerializeField] GameObject wobbleBobble;
-    [SerializeField] SpriteRenderer healthIndicator;
-    [SerializeField] SpriteRenderer cooldownIndicator;
+    [SerializeField]
+    protected GameObject projectilePrefab;
+    [SerializeField] protected GameObject wobbleBobble;
+    public SpriteRenderer healthIndicator;
+    [SerializeField] protected SpriteRenderer cooldownIndicator;
     public SpriteRenderer CooldownIndicator { get { return cooldownIndicator; } }
-    [SerializeField] Sprite[] defendCooldownSprites;
+    [SerializeField] protected Sprite[] defendCooldownSprites;
     public Sprite TankSprite { get { return defendCooldownSprites[defendCooldownSprites.Length - 1]; } }
-    [SerializeField] Sprite damageSprite;
+    [SerializeField] protected Sprite damageSprite;
     public Sprite DamageSprite { get { return damageSprite; } }
-    [SerializeField] Sprite opferSprite;
+    [SerializeField] protected Sprite opferSprite;
     public Sprite OpferSprite { get { return opferSprite; } }
-    [SerializeField] Renderer playerMeshRenderer;
-    [SerializeField] Material greenPlayerMat;
-    [SerializeField] Material redPlayerMat;
-    [SerializeField] Material bluePlayerMat;
+    [SerializeField] protected Renderer playerMeshRenderer;
+    [SerializeField] protected Material greenPlayerMat;
+    [SerializeField] protected Material redPlayerMat;
+    [SerializeField] protected Material bluePlayerMat;
 
-    private bool cooldown = true;
-    private Coroutine resetDefendCoroutine;
+    protected bool cooldown = true;
+    protected Coroutine resetDefendCoroutine;
 
     public int PlayerNumber { get { return playerNumber; } }
     #endregion
@@ -61,7 +65,7 @@ public class Hero : Player {
 
 
     #region Unity Event Functions
-    protected override void Start() {
+    override protected void Start() {
         base.Start();
 
         // Set the correct Ability Sprite

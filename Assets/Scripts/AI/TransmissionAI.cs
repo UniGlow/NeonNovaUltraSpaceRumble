@@ -6,64 +6,44 @@ using UnityEngine;
 /// 
 /// </summary>
 [RequireComponent(typeof(Hero))]
-public class Transmission : MonoBehaviour {
+public class TransmissionAI : Transmission
+{
 
     #region Variable Declarations
-    [SerializeField] protected float transmissionRange = 5f;
-    [SerializeField] protected float transmissionDuration = 3f;
-    [SerializeField] protected float transmissionCooldown = 1f;
+    
+    #endregion
 
-    [Header("Sound")]
-    [SerializeField]
-    protected AudioClip transmissionSound;
-    [Range(0, 1)]
-    [SerializeField]
-    protected float transmissionSoundVolume = 1f;
 
-    [Header("References")]
-    [SerializeField] protected LineRenderer transmissionLineRenderer;
-    [SerializeField] protected ParticleSystem transmissionPS;
-    public ParticleSystem TransmissionPS { get { return transmissionPS; } }
 
-    protected Hero hero;
-    protected GameObject receiver;
-    protected bool receiverFound = false;
-    protected float currenTransmissionDuration;
-    protected bool transmissionCooldownB = true;
-    protected HomingMissile homingMissile;
-    protected AudioSource audioSource;
-	#endregion
-	
-	
-	
-	#region Unity Event Functions
-	virtual protected void Start()
+    #region Unity Event Functions
+    override protected void Start()
     {
-        hero = GetComponent<Hero>();
-        homingMissile = GameObject.FindObjectOfType<HomingMissile>();
-        audioSource = GetComponent<AudioSource>();
-	}
-	
-	virtual protected void Update()
-    {        
+        base.Start();
+
+        
+    }
+
+    override protected void Update()
+    {
         // End transmission if button is lifted
-        if (Input.GetButtonUp(Constants.INPUT_TRANSMIT + hero.PlayerNumber)) {
+        if (Input.GetButtonUp(Constants.INPUT_TRANSMIT + 1))
+        {
             EndTransmission();
         }
 
         // Look for a receiver
-        if (!receiverFound && transmissionCooldownB && Input.GetButton(Constants.INPUT_TRANSMIT + hero.PlayerNumber)) {
+        if (!receiverFound && transmissionCooldownB && Input.GetButton(Constants.INPUT_TRANSMIT + 1))
+        {
             UpdateLineRenderer();
             transmissionLineRenderer.gameObject.SetActive(true);
             receiverFound = FindReceiver();
         }
         // Continue the transmission when a receiver is found
-        else if (receiverFound && Input.GetButton(Constants.INPUT_TRANSMIT + hero.PlayerNumber)) {
+        else if (receiverFound && Input.GetButton(Constants.INPUT_TRANSMIT + 1))
+        {
             UpdateLineRenderer();
             Transmit();
         }
-
-        
     }
     #endregion
 
@@ -86,13 +66,15 @@ public class Transmission : MonoBehaviour {
     bool FindReceiver()
     {
         RaycastHit hitInfo;
-        if (Physics.Raycast(transform.position + Vector3.up * 0.5f, transform.forward, out hitInfo, transmissionRange, 1 << 8)) {
+        if (Physics.Raycast(transform.position + Vector3.up * 0.5f, transform.forward, out hitInfo, transmissionRange, 1 << 8))
+        {
             Debug.DrawLine(transform.position + Vector3.up * 0.5f, hitInfo.point, Color.green);
             receiver = hitInfo.transform.gameObject;
             //hero.SetMovable(false);
             return true;
         }
-        else {
+        else
+        {
             Debug.DrawRay(transform.position + Vector3.up * 0.5f, transform.forward * transmissionRange, Color.red);
             return false;
         }
@@ -102,7 +84,8 @@ public class Transmission : MonoBehaviour {
     void Transmit()
     {
         // End transmission if out of range
-        if ((transform.position - receiver.transform.position).magnitude > transmissionRange) {
+        if ((transform.position - receiver.transform.position).magnitude > transmissionRange)
+        {
             EndTransmission();
             return;
         }
@@ -111,7 +94,8 @@ public class Transmission : MonoBehaviour {
         Debug.DrawLine(transform.position, receiver.transform.position, Color.green);
 
         // Successfull transmission: Swap abilities and end transmission
-        if (currenTransmissionDuration >= transmissionDuration) {
+        if (currenTransmissionDuration >= transmissionDuration)
+        {
             Hero otherHero = receiver.GetComponent<Hero>();
             Ability newAbility = otherHero.ability;
 
@@ -138,29 +122,10 @@ public class Transmission : MonoBehaviour {
             homingMissile.AcquireNewTarget();
 
             transmissionPS.Play();
-            receiver.GetComponent<Transmission>().transmissionPS.Play();
+            receiver.GetComponent<Transmission>().TransmissionPS.Play();
 
             EndTransmission();
         }
     }
-
-    protected void UpdateLineRenderer() {
-        if (receiver == null) {
-            transmissionLineRenderer.SetPosition(0, transform.position + Vector3.up * 0.5f);
-            transmissionLineRenderer.SetPosition(1, transform.position + Vector3.up * 0.5f + transform.forward * transmissionRange);
-        }
-        else {
-            transmissionLineRenderer.SetPosition(0, transform.position + Vector3.up * 0.5f);
-            transmissionLineRenderer.SetPosition(1, receiver.transform.position + Vector3.up * 0.5f);
-        }
-    }
     #endregion
-
-
-
-    protected IEnumerator ResetTransmissionCooldown()
-    {
-        yield return new WaitForSecondsRealtime(transmissionCooldown);
-        transmissionCooldownB = true;
-    }
 }

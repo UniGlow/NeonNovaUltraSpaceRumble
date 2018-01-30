@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4134548616055882}
   - component: {fileID: 212300853209604042}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: HealthIndicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 33688045286394100}
   - component: {fileID: 23755656095924074}
   - component: {fileID: 64927319622939540}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Boss_Mesh
   m_TagString: Boss
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4042691140480942}
   - component: {fileID: 212530305700027776}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: IndicatorArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 54132770966574978}
   - component: {fileID: 114424577701179020}
   - component: {fileID: 82736236401359494}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,7 +185,7 @@ Rigidbody:
   m_Mass: 100
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 116

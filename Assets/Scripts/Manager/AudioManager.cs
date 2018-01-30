@@ -66,10 +66,10 @@ public class AudioManager : SubscribedBehaviour {
 
     protected override void OnLevelStarted()
     {
-        if (!(audioSource.clip == backgroundTracks[1] && audioSource.isPlaying && SceneManager.GetActiveScene().name != "Level001"))
-        {
+        //if (!(audioSource.clip == backgroundTracks[1] && audioSource.isPlaying && SceneManager.GetActiveScene().name != "Level001"))
+        //{
             StartBackgroundTrack();
-        }
+        //}
     }
     #endregion
 
@@ -90,6 +90,10 @@ public class AudioManager : SubscribedBehaviour {
         audioSource.loop = false;
         audioSource.Play();
         StartCoroutine(StartAudioLoop());
+    }
+
+    public void StopPlaying() {
+        audioSource.Stop();
     }
     #endregion
 

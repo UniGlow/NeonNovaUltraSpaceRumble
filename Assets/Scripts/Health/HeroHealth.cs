@@ -11,7 +11,7 @@ public class HeroHealth : Health {
     public static HeroHealth Instance;
 
     [Header("Object References")]
-    [SerializeField] SpriteRenderer[] healthIndicators;
+    public SpriteRenderer[] healthIndicators;
 
     private float originalHealthbarScale;
     #endregion

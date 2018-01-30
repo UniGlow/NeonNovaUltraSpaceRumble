@@ -28,6 +28,7 @@ public class GameManager : SubscribedBehaviour {
     public Color RedPlayerColor { get { return redPlayerColor; } }
     [SerializeField] Color bluePlayerColor;
     public Color BluePlayerColor { get { return bluePlayerColor; } }
+    [SerializeField] GameObject heroAIPrefab;
 
 
     private float passedTime;
@@ -92,6 +93,11 @@ public class GameManager : SubscribedBehaviour {
         StartCoroutine(LoadNextLevel());
         Time.timeScale = 0.0f;
     }
+
+    protected override void OnLevelStarted()
+    {
+        passedTime = 0f;
+    }
     #endregion
 
 
@@ -131,9 +137,14 @@ public class GameManager : SubscribedBehaviour {
 
     #region Private Functions
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode) {
-        passedTime = 0f;
         boss = GameObject.FindObjectOfType<Boss>();
-        StartCoroutine(StartTheAction());
+
+        if (SceneManager.GetActiveScene().name.Contains("Level"))
+        {
+            SetupAICharacters();
+            
+            StartCoroutine(StartTheAction());
+        }
     }
 
     void HandleColorSwitch() {
@@ -206,6 +217,57 @@ public class GameManager : SubscribedBehaviour {
                     boss.SetWeaknessColor(PlayerColor.Blue);
                 }
             }
+        }
+    }
+
+    void SetupAICharacters() {
+        if (Input.GetJoystickNames().Length == 1)
+        {
+            GameObject[] heroes = GameObject.FindGameObjectsWithTag(Constants.TAG_HERO);
+            GameObject damage = new GameObject();
+            GameObject tank = new GameObject();
+            GameObject opfer = new GameObject();
+            foreach (GameObject go in heroes)
+            {
+                if (go.transform.parent.GetComponent<Hero>() == null) continue;
+                if (go.transform.parent.GetComponent<Hero>().ability == Ability.Damage) damage = go;
+                if (go.transform.parent.GetComponent<Hero>().ability == Ability.Tank) tank = go;
+                if (go.transform.parent.GetComponent<Hero>().ability == Ability.Opfer) opfer = go;
+            }
+
+            // Replace Heroes with AIs
+            HeroAI damageAI = GameObject.Instantiate(heroAIPrefab, damage.transform.position, damage.transform.rotation).GetComponent<HeroAI>();
+            damageAI.ability = Ability.Damage;
+            damageAI.PlayerColor = damage.transform.parent.GetComponent<Hero>().PlayerColor;
+            Destroy(damage.transform.parent.gameObject);
+
+            HeroAI tankAI = GameObject.Instantiate(heroAIPrefab, tank.transform.position, tank.transform.rotation).GetComponent<HeroAI>();
+            tankAI.ability = Ability.Tank;
+            tankAI.PlayerColor = tank.transform.parent.GetComponent<Hero>().PlayerColor;
+            Destroy(tank.transform.parent.gameObject);
+
+            HeroAI opferAI = GameObject.Instantiate(heroAIPrefab, opfer.transform.position, opfer.transform.rotation).GetComponent<HeroAI>();
+            opferAI.ability = Ability.Opfer;
+            opferAI.PlayerColor = opfer.transform.parent.GetComponent<Hero>().PlayerColor;
+            Destroy(opfer.transform.parent.gameObject);
+
+            // Set AI HealthIndicators
+            GameObject levelScrpits = GameObject.Find("_LEVEL_SCRIPTS");
+            levelScrpits.GetComponent<HeroHealth>().healthIndicators[0] = damageAI.healthIndicator;
+            levelScrpits.GetComponent<HeroHealth>().healthIndicators[1] = tankAI.healthIndicator;
+            levelScrpits.GetComponent<HeroHealth>().healthIndicators[2] = opferAI.healthIndicator;
+
+            // Set camera targets
+            MultipleTargetCamera cameraRig = Camera.main.transform.parent.GetComponent<MultipleTargetCamera>();
+            cameraRig.targets[0] = damageAI.transform;
+            cameraRig.targets[1] = tankAI.transform;
+            cameraRig.targets[2] = opferAI.transform;
+
+            // Set boss playerNumber
+            boss.PlayerNumber = 1;
+        }
+        else {
+            // Do nothing for a 4 player game (scene is setup for this)
         }
     }
     #endregion

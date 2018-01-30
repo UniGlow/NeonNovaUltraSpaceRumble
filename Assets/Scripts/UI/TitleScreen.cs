@@ -31,6 +31,7 @@ public class TitleScreen : MonoBehaviour
 	#region Unity Event Functions
 	private void Start() {
         targetScale = textFields[0].transform.localScale;
+        AudioManager.Instance.StartBackgroundTrack();
 	}
 	
 	private void Update() {

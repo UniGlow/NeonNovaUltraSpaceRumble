@@ -14,7 +14,7 @@ public class Credits : MonoBehaviour {
 	
 	#region Unity Event Functions
 	private void Start() {
-		
+        
 	}
 	
 	private void Update() {

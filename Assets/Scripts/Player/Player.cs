@@ -20,8 +20,13 @@ public class Player : MonoBehaviour
 
     [Header("Properties")]
     [Range(1, 4)]
-    [SerializeField]
     protected int playerNumber;
+    public int PlayerNumber { get { return playerNumber; }
+        set {
+            if (value >= 0 && value <= 4) playerNumber = value;
+            else Debug.LogWarning("Trying to access playerNumber out of range. PlayerNumber = " + value);
+        }
+    }
 
     // Movement Variables
     protected float horizontalInput;

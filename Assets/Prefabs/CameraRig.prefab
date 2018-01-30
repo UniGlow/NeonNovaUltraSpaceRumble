@@ -269,8 +269,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  smoothTime: 0.1
-  minZoom: 50
+  smoothTime: 0.2
+  minZoom: 55
   maxZoom: 20
   maxDistance: 70
 --- !u!114 &114841171022811928

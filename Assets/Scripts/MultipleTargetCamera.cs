@@ -9,7 +9,7 @@ public class MultipleTargetCamera : MonoBehaviour {
 
     #region Variable Declarations
 
-    [SerializeField] List<Transform> targets;
+    public List<Transform> targets;
 
     [SerializeField] float smoothTime = 0.5f;
     [SerializeField] float minZoom = 40f;

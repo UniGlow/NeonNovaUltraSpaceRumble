@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 public class MainMenu : MonoBehaviour
 {
 
-#region Variable Declarations
+    #region Variable Declarations
     [SerializeField] GameObject playButton;
     [SerializeField] GameObject howToPlayOne;
     [SerializeField] GameObject howToPlayTwo;
@@ -45,6 +45,11 @@ public class MainMenu : MonoBehaviour
             audioSource.Play();
             howToPlay = 0;
         }
+    }
+
+    private void OnDisable()
+    {
+        AudioManager.Instance.StopPlaying();
     }
     #endregion
 
