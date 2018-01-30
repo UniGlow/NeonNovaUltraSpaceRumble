@@ -274,6 +274,69 @@ public class GameManager : SubscribedBehaviour {
             boss.PlayerNumber = 1;
             levelScrpits.GetComponent<BossHealth>().MaxHealth = 1700;
         }
+        else if(Input.GetJoystickNames().Length == 2)
+        {
+            GameObject[] heroes = GameObject.FindGameObjectsWithTag(Constants.TAG_HERO);
+            GameObject tank = new GameObject();
+            GameObject opfer = new GameObject();
+            foreach (GameObject go in heroes)
+            {
+                if (go.transform.parent.GetComponent<Hero>() == null) continue;
+                if (go.transform.parent.GetComponent<Hero>().ability == Ability.Tank) tank = go;
+                if (go.transform.parent.GetComponent<Hero>().ability == Ability.Opfer) opfer = go;
+            }
+
+            HeroAI tankAI = GameObject.Instantiate(heroAIPrefab, tank.transform.position, tank.transform.rotation).GetComponent<HeroAI>();
+            tankAI.ability = Ability.Tank;
+            tankAI.PlayerColor = tank.transform.parent.GetComponent<Hero>().PlayerColor;
+            Destroy(tank.transform.parent.gameObject);
+
+            HeroAI opferAI = GameObject.Instantiate(heroAIPrefab, opfer.transform.position, opfer.transform.rotation).GetComponent<HeroAI>();
+            opferAI.ability = Ability.Opfer;
+            opferAI.PlayerColor = opfer.transform.parent.GetComponent<Hero>().PlayerColor;
+            Destroy(opfer.transform.parent.gameObject);
+
+            // Set AI HealthIndicators
+            GameObject levelScrpits = GameObject.Find("_LEVEL_SCRIPTS");
+            levelScrpits.GetComponent<HeroHealth>().healthIndicators[1] = tankAI.healthIndicator;
+            levelScrpits.GetComponent<HeroHealth>().healthIndicators[2] = opferAI.healthIndicator;
+
+            // Set camera targets
+            MultipleTargetCamera cameraRig = Camera.main.transform.parent.GetComponent<MultipleTargetCamera>();
+            cameraRig.targets[1] = tankAI.transform;
+            cameraRig.targets[2] = opferAI.transform;
+
+            // Set boss playerNumber and health
+            boss.PlayerNumber = 1;
+            levelScrpits.GetComponent<BossHealth>().MaxHealth = 1000;
+        }
+        else if (Input.GetJoystickNames().Length == 3)
+        {
+            GameObject[] heroes = GameObject.FindGameObjectsWithTag(Constants.TAG_HERO);
+            GameObject opfer = new GameObject();
+            foreach (GameObject go in heroes)
+            {
+                if (go.transform.parent.GetComponent<Hero>() == null) continue;
+                if (go.transform.parent.GetComponent<Hero>().ability == Ability.Opfer) opfer = go;
+            }
+
+            HeroAI opferAI = GameObject.Instantiate(heroAIPrefab, opfer.transform.position, opfer.transform.rotation).GetComponent<HeroAI>();
+            opferAI.ability = Ability.Opfer;
+            opferAI.PlayerColor = opfer.transform.parent.GetComponent<Hero>().PlayerColor;
+            Destroy(opfer.transform.parent.gameObject);
+
+            // Set AI HealthIndicators
+            GameObject levelScrpits = GameObject.Find("_LEVEL_SCRIPTS");
+            levelScrpits.GetComponent<HeroHealth>().healthIndicators[2] = opferAI.healthIndicator;
+
+            // Set camera targets
+            MultipleTargetCamera cameraRig = Camera.main.transform.parent.GetComponent<MultipleTargetCamera>();
+            cameraRig.targets[2] = opferAI.transform;
+
+            // Set boss playerNumber and health
+            boss.PlayerNumber = 1;
+            levelScrpits.GetComponent<BossHealth>().MaxHealth = 1000;
+        }
         else {
             // Do nothing for a 4 player game (scene is setup for this)
         }
