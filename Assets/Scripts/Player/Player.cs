@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(AudioSource))]
-public class Player : MonoBehaviour
+public class Player : SubscribedBehaviour
 {
 
     #region Variable Declarations
@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
 
     [Header("Properties")]
     [Range(1, 4)]
-    protected int playerNumber;
+    [SerializeField] protected int playerNumber;
     public int PlayerNumber { get { return playerNumber; }
         set {
             if (value >= 0 && value <= 4) playerNumber = value;
@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
     protected float verticalInput;
     protected float horizontalLookInput;
     protected float verticalLookInput;
-    protected bool movable = true;
+    protected bool active = true;
 
     // Component References
     protected new Rigidbody rigidbody;
@@ -47,16 +47,22 @@ public class Player : MonoBehaviour
     protected virtual void Start() {
         rigidbody = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
+
+        SetMovable(false);
     }
 
     protected virtual void FixedUpdate() {
-        MoveCharacter();
-        RotateCharacter();
+        if (active)
+        {
+            MoveCharacter();
+            RotateCharacter();
+        }
     }
 
     // Update is called once per frame
     protected virtual void Update() {
-        if (movable) {
+        if (active)
+        {
             horizontalInput = Input.GetAxis(Constants.INPUT_HORIZONTAL + playerNumber) * movementSpeed;
             verticalInput = Input.GetAxis(Constants.INPUT_VERTICAL + playerNumber) * movementSpeed;
             horizontalLookInput = Input.GetAxis(Constants.INPUT_LOOK_HORIZONTAL + playerNumber) * movementSpeed;
@@ -67,16 +73,35 @@ public class Player : MonoBehaviour
 
 
 
+    #region Custom Event Functions
+    protected override void OnLevelStarted()
+    {
+        SetMovable(true);
+    }
+    #endregion
+
+
+
     #region Public Funtcions
     /// <summary>
     /// Sets if the character is allowed to move or not and stops his current movement
     /// </summary>
     /// <param name="movable">Character allowed to move?</param>
-    public void SetMovable(bool movable) {
-        this.movable = movable;
-        if (!movable) {
+    public void SetMovable(bool active) {
+        this.active = active;
+
+        if (!active) {
             horizontalInput = 0;
             verticalInput = 0;
+        }
+
+        try
+        {
+            GetComponent<Transmission>().enabled = active;
+        }
+        catch (System.NullReferenceException)
+        {
+
         }
     }
     #endregion

@@ -80,14 +80,20 @@ public class HeroAI : Hero {
 
     new private void FixedUpdate()
     {
-        CalculateMovement();
-        HandleAbilities();
+        if (active)
+        {
+            CalculateMovement();
+            HandleAbilities();
+        }
     }
 
     new private void Update()
     {
-        randomnessTimer += Time.deltaTime;
-        if(cooldown) shieldDelayTimer += Time.deltaTime;
+        if (active)
+        {
+            randomnessTimer += Time.deltaTime;
+            if (cooldown) shieldDelayTimer += Time.deltaTime;
+        }
     }
 
     private void OnDrawGizmosSelected()
@@ -188,6 +194,7 @@ public class HeroAI : Hero {
     }
 
     private void SetTankDestination() {
+        print("test");
         Vector3 nearDamage = damage.position + (transform.position - damage.position).normalized * tankTargetDistance;
         SetDestination(nearDamage + (transform.position - nearDamage) * tankFollowSpeed);
     }

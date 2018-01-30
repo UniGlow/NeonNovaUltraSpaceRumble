@@ -14,7 +14,7 @@ public class Credits : MonoBehaviour {
 	
 	#region Unity Event Functions
 	private void Start() {
-        
+        AudioManager.Instance.StartBackgroundTrack();
 	}
 	
 	private void Update() {

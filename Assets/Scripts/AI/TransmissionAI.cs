@@ -25,35 +25,34 @@ public class TransmissionAI : Transmission
 
     override protected void Update()
     {
-        // End transmission if button is lifted
-        if (Input.GetButtonUp(Constants.INPUT_TRANSMIT + 1))
-        {
-            EndTransmission();
-        }
+        //// End transmission if button is lifted
+        //if (Input.GetButtonUp(Constants.INPUT_TRANSMIT + 1))
+        //{
+        //    EndTransmission();
+        //}
 
-        // Look for a receiver
-        if (!receiverFound && transmissionCooldownB && Input.GetButton(Constants.INPUT_TRANSMIT + 1))
-        {
-            UpdateLineRenderer();
-            transmissionLineRenderer.gameObject.SetActive(true);
-            receiverFound = FindReceiver();
-        }
-        // Continue the transmission when a receiver is found
-        else if (receiverFound && Input.GetButton(Constants.INPUT_TRANSMIT + 1))
-        {
-            UpdateLineRenderer();
-            Transmit();
-        }
+        //// Look for a receiver
+        //if (!receiverFound && transmissionCooldownB && Input.GetButton(Constants.INPUT_TRANSMIT + 1))
+        //{
+        //    UpdateLineRenderer();
+        //    transmissionLineRenderer.gameObject.SetActive(true);
+        //    receiverFound = FindReceiver();
+        //}
+        //// Continue the transmission when a receiver is found
+        //else if (receiverFound && Input.GetButton(Constants.INPUT_TRANSMIT + 1))
+        //{
+        //    UpdateLineRenderer();
+        //    Transmit();
+        //}
     }
     #endregion
 
 
 
-    public void EndTransmission()
+    new public void EndTransmission()
     {
         receiver = null;
         currenTransmissionDuration = 0f;
-        //hero.SetMovable(true);
         receiverFound = false;
         transmissionCooldownB = false;
         transmissionLineRenderer.gameObject.SetActive(false);

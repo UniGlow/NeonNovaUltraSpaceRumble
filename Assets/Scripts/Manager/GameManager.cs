@@ -141,7 +141,9 @@ public class GameManager : SubscribedBehaviour {
 
         if (SceneManager.GetActiveScene().name.Contains("Level"))
         {
+            GameObject.FindGameObjectWithTag(Constants.TAG_HOMING_MISSILE).GetComponent<HomingMissile>().PauseMissile(true);
             SetupAICharacters();
+            StartCoroutine(StartAudioNextFrame());
             
             StartCoroutine(StartTheAction());
         }
@@ -283,5 +285,10 @@ public class GameManager : SubscribedBehaviour {
     IEnumerator StartTheAction() {
         yield return new WaitForSecondsRealtime(delayForActionStart);
         GameEvents.StartLevelStarted();
+    }
+
+    IEnumerator StartAudioNextFrame() {
+        yield return null;
+        AudioManager.Instance.StartBackgroundTrack();
     }
 }

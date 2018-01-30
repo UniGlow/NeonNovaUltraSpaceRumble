@@ -23,8 +23,8 @@ GameObject:
   - component: {fileID: 114599229708516914}
   - component: {fileID: 114608841911343774}
   - component: {fileID: 114332039601200462}
-  - component: {fileID: 82899805016581398}
   - component: {fileID: 114724152049828894}
+  - component: {fileID: 82899805016581398}
   m_Layer: 0
   m_Name: _SCRIPTS
   m_TagString: Untagged
@@ -162,7 +162,7 @@ MonoBehaviour:
   colorSwitchInterval: 15
   critDamageMultiplier: 2
   delayAtLevelEnd: 9
-  delayForActionStart: 0
+  delayForActionStart: 1.9
   colorChangeSound: {fileID: 8300000, guid: cb3b90f02c52c49418a9a3fd50874d2b, type: 3}
   colorChangeSoundVolume: 0.8
   greenPlayerColor: {r: 0, g: 1, b: 0.006896496, a: 1}

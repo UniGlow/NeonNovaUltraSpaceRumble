@@ -64,15 +64,16 @@ public class Boss : Player {
     override protected void Update() {
         base.Update();
 
-        if (movable) {
+        if (active)
+        {
             horizontalInput = Input.GetAxis(Constants.INPUT_HORIZONTAL + playerNumber) * movementSpeed;
             verticalInput = Input.GetAxis(Constants.INPUT_VERTICAL + playerNumber) * movementSpeed;
             horizontalLookInput = Input.GetAxis(Constants.INPUT_LOOK_HORIZONTAL + playerNumber) * movementSpeed;
             verticalLookInput = Input.GetAxis(Constants.INPUT_LOOK_VERTICAL + playerNumber) * movementSpeed;
-        }
 
-        Attack();
-        Ability();
+            Attack();
+            Ability();
+        }
     }
     #endregion
 

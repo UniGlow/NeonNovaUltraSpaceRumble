@@ -80,6 +80,11 @@ public class HomingMissile : SubscribedBehaviour {
     override protected void OnLevelCompleted(string winner) {
         PauseMissile(true);
     }
+
+    protected override void OnLevelStarted()
+    {
+        PauseMissile(false);
+    }
     #endregion
 
 

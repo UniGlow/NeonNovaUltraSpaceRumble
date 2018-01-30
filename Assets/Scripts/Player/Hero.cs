@@ -58,8 +58,6 @@ public class Hero : Player {
 
     protected bool cooldown = true;
     protected Coroutine resetDefendCoroutine;
-
-    public int PlayerNumber { get { return playerNumber; } }
     #endregion
 
 
@@ -94,7 +92,10 @@ public class Hero : Player {
     override protected void Update() {
         base.Update();
 
-        HandleAbilities();
+        if (active)
+        {
+            HandleAbilities();
+        }
     }
     #endregion
 
