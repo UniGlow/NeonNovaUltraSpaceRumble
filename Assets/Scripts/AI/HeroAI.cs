@@ -272,29 +272,4 @@ public class HeroAI : Hero {
         agent.speed = normalAgentSpeed * (speedBoost + 1);
     }
     #endregion
-
-
-
-    #region Coroutines
-    IEnumerator ResetAttackCooldown() {
-        yield return new WaitForSecondsRealtime(attackCooldown);
-        cooldown = true;
-    }
-
-    IEnumerator ResetDefend() {
-        // Wait for defend duration and turn of wobbleBobble
-        yield return new WaitForSecondsRealtime(defendDuration);
-        wobbleBobble.SetActive(false);
-
-        // Start Cooldown and update CooldownIndicator
-        for (float i = 0; i < defendCooldown; i += Time.deltaTime) {
-            yield return null;
-            cooldownIndicator.sprite = defendCooldownSprites[Mathf.FloorToInt((i / defendCooldown) * defendCooldownSprites.Length)];
-        }
-
-        // Reset Cooldown
-        cooldown = true;
-        resetDefendCoroutine = null;
-    }
-    #endregion
 }

@@ -10,7 +10,7 @@ public class BossHealth : Health {
 
     #region Variable Declarations
     [SerializeField] SpriteRenderer healthIndicator;
-    public SpriteRenderer HealthIndicator { get; set; }
+    public SpriteRenderer HealthIndicator { get { return healthIndicator; } set { healthIndicator = value; } }
 
     public static BossHealth Instance;
     #endregion

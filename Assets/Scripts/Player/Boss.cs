@@ -10,45 +10,46 @@ public class Boss : Player {
     #region Variable Declarations
     // Variables that should be visible in Inspector
     [Header("Attack")]
-    [SerializeField] int attackDamagePerShot = 10;
-    [SerializeField] float attackProjectileSpeed = 20f;
-    [SerializeField] float attackProjectileLifeTime = 1f;
-    [SerializeField] float attackCooldown = 0.2f;
+    [SerializeField] protected int attackDamagePerShot = 10;
+    [SerializeField] protected float attackProjectileSpeed = 20f;
+    [SerializeField] protected float attackProjectileLifeTime = 1f;
+    [SerializeField] protected float attackCooldown = 0.2f;
 
     [Header("Ability")]
-    [SerializeField] int abilityDamagePerShot = 10;
-    [SerializeField] int numberOfProjectiles = 20;
-    [SerializeField] float abilityProjectileSpeed = 20f;
-    [SerializeField] float abilityProjectileLifeTime = 1f;
-    [SerializeField] float abilityCooldown = 3f;
+    [SerializeField] protected int abilityDamagePerShot = 10;
+    [SerializeField] protected int numberOfProjectiles = 20;
+    [SerializeField] protected float abilityProjectileSpeed = 20f;
+    [SerializeField] protected float abilityProjectileLifeTime = 1f;
+    [SerializeField] protected float abilityCooldown = 3f;
 
     [Header("Properties")]
-    [SerializeField] PlayerColor weaknessColor;
+    [SerializeField] protected PlayerColor weaknessColor;
     public PlayerColor WeaknessColor { get { return weaknessColor; } }
-    [SerializeField] PlayerColor strengthColor;
+    [SerializeField] protected PlayerColor strengthColor;
     public PlayerColor StrengthColor { get { return strengthColor; } }
 
     [Header("Sound")]
     [SerializeField]
-    AudioClip abilitySound;
+    protected AudioClip abilitySound;
     [Range(0, 1)]
     [SerializeField]
-    float abilitySoundVolume = 1f;
-    [SerializeField] AudioClip attackSound;
+    protected float abilitySoundVolume = 1f;
+    [SerializeField] protected AudioClip attackSound;
     [Range(0, 1)]
     [SerializeField]
-    float attackSoundVolume = 1f;
+    protected float attackSoundVolume = 1f;
 
     [Header("References")]
-    [SerializeField] GameObject projectilePrefab;
-    [SerializeField] Renderer bossMeshRenderer;
-    [SerializeField] Material greenBossMat;
-    [SerializeField] Material redBossMat;
-    [SerializeField] Material blueBossMat;
+    [SerializeField] protected GameObject projectilePrefab;
+    [SerializeField] protected Renderer bossMeshRenderer;
+    public SpriteRenderer healthIndicator;
+    [SerializeField] protected Material greenBossMat;
+    [SerializeField] protected Material redBossMat;
+    [SerializeField] protected Material blueBossMat;
 
-    private bool attackCooldownB = true;
-    private bool abilityCooldownB = true;
-    private Color activeStrengthColor;
+    protected bool attackCooldownB = true;
+    protected bool abilityCooldownB = true;
+    protected Color activeStrengthColor;
     #endregion
 
 
@@ -145,12 +146,12 @@ public class Boss : Player {
 
 
     #region Coroutines
-    IEnumerator ResetAttackCooldown() {
+    protected IEnumerator ResetAttackCooldown() {
         yield return new WaitForSecondsRealtime(attackCooldown);
         attackCooldownB = true;
     }
 
-    IEnumerator ResetAbilityCooldown() {
+    protected IEnumerator ResetAbilityCooldown() {
         yield return new WaitForSecondsRealtime(abilityCooldown);
         abilityCooldownB = true;
     }
