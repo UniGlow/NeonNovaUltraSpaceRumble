@@ -441,11 +441,6 @@ Transform:
   m_Father: {fileID: 450362975}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 90, y: 118.6, z: 0}
---- !u!1 &169743884 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1395429671390198, guid: a082a6dd5a2d5524c8bdc9771effb635,
-    type: 2}
-  m_PrefabInternal: {fileID: 183687133}
 --- !u!1001 &178620757
 Prefab:
   m_ObjectHideFlags: 0
@@ -616,6 +611,10 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: 310.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1305377952927320, guid: a082a6dd5a2d5524c8bdc9771effb635, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a082a6dd5a2d5524c8bdc9771effb635, type: 2}
   m_IsPrefabParent: 0
@@ -740,11 +739,6 @@ Transform:
   m_Father: {fileID: 450362975}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 90, y: -341.7, z: 0}
---- !u!1 &257141552 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1462436307837200, guid: a082a6dd5a2d5524c8bdc9771effb635,
-    type: 2}
-  m_PrefabInternal: {fileID: 183687133}
 --- !u!1001 &315704103
 Prefab:
   m_ObjectHideFlags: 0
@@ -1838,11 +1832,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114293964549712818, guid: c74db29e4432b04408ef57b00d406ffd,
-        type: 2}
-      propertyPath: healthIndicators.Array.size
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 4337183692543796, guid: c74db29e4432b04408ef57b00d406ffd, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1875,36 +1864,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114870123457348354, guid: c74db29e4432b04408ef57b00d406ffd,
-        type: 2}
-      propertyPath: healthbarForeground
-      value: 
-      objectReference: {fileID: 169743884}
-    - target: {fileID: 114293964549712818, guid: c74db29e4432b04408ef57b00d406ffd,
-        type: 2}
-      propertyPath: healthbarForeground
-      value: 
-      objectReference: {fileID: 257141552}
-    - target: {fileID: 114293964549712818, guid: c74db29e4432b04408ef57b00d406ffd,
-        type: 2}
-      propertyPath: healthIndicators.Array.data[0]
-      value: 
-      objectReference: {fileID: 315704104}
-    - target: {fileID: 114293964549712818, guid: c74db29e4432b04408ef57b00d406ffd,
-        type: 2}
-      propertyPath: healthIndicators.Array.data[1]
-      value: 
-      objectReference: {fileID: 851270068}
-    - target: {fileID: 114293964549712818, guid: c74db29e4432b04408ef57b00d406ffd,
-        type: 2}
-      propertyPath: healthIndicators.Array.data[2]
-      value: 
-      objectReference: {fileID: 1149403439}
-    - target: {fileID: 114870123457348354, guid: c74db29e4432b04408ef57b00d406ffd,
-        type: 2}
-      propertyPath: healthIndicator
-      value: 
-      objectReference: {fileID: 101958926}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c74db29e4432b04408ef57b00d406ffd, type: 2}
   m_IsPrefabParent: 0

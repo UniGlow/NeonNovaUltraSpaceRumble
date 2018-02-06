@@ -14,6 +14,7 @@ public class Health : MonoBehaviour {
     [SerializeField] protected Gradient hpColor;
 
     [SerializeField] protected TextMeshProUGUI winText;
+    public TextMeshProUGUI WinText { get { return winText; } }
     [SerializeField] protected float fadeInTime = 2f;
 
     [Header("Object References")]
