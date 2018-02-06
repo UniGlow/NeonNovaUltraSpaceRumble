@@ -300,7 +300,7 @@ MonoBehaviour:
   rotateSpeed: 500
   playerNumber: 4
   attackDamagePerShot: 10
-  attackProjectileSpeed: 30
+  attackProjectileSpeed: 40
   attackProjectileLifeTime: 1
   attackCooldown: 0.2
   abilityDamagePerShot: 20

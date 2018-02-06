@@ -301,10 +301,10 @@ MonoBehaviour:
   rotateSpeed: 1000
   playerNumber: 0
   attackDamagePerShot: 10
-  attackProjectileSpeed: 20
+  attackProjectileSpeed: 40
   attackProjectileLifeTime: 1
   attackCooldown: 0.2
-  abilityDamagePerShot: 10
+  abilityDamagePerShot: 20
   numberOfProjectiles: 20
   abilityProjectileSpeed: 20
   abilityProjectileLifeTime: 1
@@ -323,7 +323,6 @@ MonoBehaviour:
   redBossMat: {fileID: 2100000, guid: 7d68be63867edc147a22fe6137b42316, type: 2}
   blueBossMat: {fileID: 2100000, guid: b9952fe678988874f98372d9edd2afff, type: 2}
   repathingDistance: 5
-  randomness: 5
   cornerPeek: 0.5
 --- !u!195 &195969845727586126
 NavMeshAgent:

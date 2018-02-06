@@ -497,7 +497,7 @@ MonoBehaviour:
   playerNumber: 1
   damagePerShot: 20
   attackCooldown: 0.15
-  projectileSpeed: 35
+  projectileSpeed: 40
   defendCooldown: 3
   defendDuration: 2
   speedBoost: 0.5
