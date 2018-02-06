@@ -195,16 +195,19 @@ public class HeroAI : Hero {
 
     private void SetTankDestination() {
         Vector3 nearDamage = damage.position + (transform.position - damage.position).normalized * tankTargetDistance;
-        SetDestination(nearDamage + (transform.position - nearDamage) * tankFollowSpeed);
+        if (!SetDestination(nearDamage + (transform.position - nearDamage) * tankFollowSpeed))
+        {
+            SetDestination(damage.position);
+        }
     }
 
-    private void SetDestination(Vector3 destination) {
+    private bool SetDestination(Vector3 destination) {
         Vector3 start = transform.position + agent.velocity * (repathingDistance / agent.speed);
 
         NavMeshPath path = new NavMeshPath();
         NavMesh.CalculatePath(start, destination, agent.areaMask, path);
 
-        agent.SetPath(path);
+        return agent.SetPath(path);
     }
 
     private Vector3 GetRandomMiddle()

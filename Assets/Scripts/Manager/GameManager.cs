@@ -232,7 +232,6 @@ public class GameManager : SubscribedBehaviour {
     {
         // Get references
         GameObject boss = GameObject.FindGameObjectWithTag(Constants.TAG_BOSS);
-        print(boss.name);
 
         GameObject[] heroes = GameObject.FindGameObjectsWithTag(Constants.TAG_HERO);
         GameObject damage = new GameObject();
