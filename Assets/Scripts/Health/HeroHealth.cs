@@ -64,7 +64,10 @@ public class HeroHealth : Health {
         {
             GameEvents.StartLevelCompleted("Boss");
 
+            Vector3 originalScale = winText.transform.localScale;
+            winText.transform.localScale = Vector3.zero;
             winText.text = "Boss Wins !";
+            LeanTween.scale(winText.gameObject, originalScale, 0.7f).setEase(LeanTweenType.easeOutBounce).setIgnoreTimeScale(true).setDelay(1f);
             winText.gameObject.SetActive(true);
         }
     }

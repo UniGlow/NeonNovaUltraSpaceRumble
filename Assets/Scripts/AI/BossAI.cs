@@ -14,7 +14,6 @@ public class BossAI : Boss
     [Header("AI Parameters")]
     [SerializeField]
     float repathingDistance = 5f;
-    [SerializeField] float randomness = 5f;
     [Range(0, 1)]
     [SerializeField]
     float cornerPeek = 0.2f;
