@@ -86,7 +86,11 @@ public class Transmission : MonoBehaviour {
     bool FindReceiver()
     {
         RaycastHit hitInfo;
-        if (Physics.Raycast(transform.position + Vector3.up * 0.5f, transform.forward, out hitInfo, transmissionRange, 1 << 8)) {
+        // Send 3 rays for a casual aiming
+        if (Physics.Raycast(transform.position + Vector3.up * 0.5f, transform.forward, out hitInfo, transmissionRange, 1 << 8)
+            || Physics.Raycast(transform.position + Vector3.up * 0.5f + Vector3.right * 0.3f, transform.forward, out hitInfo, transmissionRange, 1 << 8)
+            || Physics.Raycast(transform.position + Vector3.up * 0.5f - Vector3.right * 0.3f, transform.forward, out hitInfo, transmissionRange, 1 << 8))
+        {
             Debug.DrawLine(transform.position + Vector3.up * 0.5f, hitInfo.point, Color.green);
             receiver = hitInfo.transform.gameObject;
             //hero.SetMovable(false);
