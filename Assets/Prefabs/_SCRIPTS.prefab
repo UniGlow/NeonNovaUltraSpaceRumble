@@ -196,7 +196,9 @@ MonoBehaviour:
   backgroundTracks:
   - {fileID: 8300000, guid: 34d3d2d3ffc4a9949aaf65f9ee1c3a7b, type: 3}
   - {fileID: 8300000, guid: 5a2d9b22fe4429a47b9dbae3f4720b5b, type: 3}
+  - {fileID: 8300000, guid: 92c424edadbb6e64f8ac6e2e5e412d0e, type: 3}
   backgroundTracksVolumes:
+  - 0.8
   - 0.8
   - 0.8
   levelEnd: {fileID: 8300000, guid: f8139e7be195b47a7a1b53e20a35e244, type: 3}

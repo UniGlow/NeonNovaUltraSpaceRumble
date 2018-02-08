@@ -82,6 +82,15 @@ public class AudioManager : SubscribedBehaviour {
     }
 
     public void StartBackgroundTrack() {
+        audioSource.clip = GetbackgroundTrack("Track01Intro");
+        audioSource.volume = GetbackgroundTrackVolume("Track01Intro");
+        audioSource.loop = false;
+        audioSource.Play();
+        StartCoroutine(StartAudioLoop());
+    }
+
+    public void StartBackgroundTrackPitched()
+    {
         audioSource.clip = GetbackgroundTrack("Track01IntroPitched");
         audioSource.volume = GetbackgroundTrackVolume("Track01IntroPitched");
         audioSource.loop = false;
@@ -126,12 +135,6 @@ public class AudioManager : SubscribedBehaviour {
                 audioSource.loop = true;
                 audioSource.volume = GetbackgroundTrackVolume("Track01Loop");
                 audioSource.Play();
-                break;
-            }
-
-            // If track should change for any reasons
-            if (audioSource.clip != GetbackgroundTrack("Track01IntroPitched"))
-            {
                 break;
             }
         }

@@ -73,7 +73,6 @@ public class GameManager : SubscribedBehaviour {
     private void Start() {
         boss = GameObject.FindObjectOfType<Boss>();
         audioSource = GetComponent<AudioSource>();
-        winText = GameObject.FindObjectOfType<HeroHealth>().WinText;
 
 #if !UNITY_EDITOR
         Cursor.lockState = CursorLockMode.Locked;
@@ -355,7 +354,7 @@ public class GameManager : SubscribedBehaviour {
         yield return new WaitForSecondsRealtime(delayForActionStart / 4f);
 
         winText.gameObject.SetActive(true);
-        AudioManager.Instance.StartBackgroundTrack();
+        AudioManager.Instance.StartBackgroundTrackPitched();
 
         Vector3 originalScale = winText.transform.localScale;
         winText.transform.localScale = Vector3.zero;
