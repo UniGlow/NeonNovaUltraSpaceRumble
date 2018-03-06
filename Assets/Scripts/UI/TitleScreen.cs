@@ -10,10 +10,12 @@ public class TitleScreen : MonoBehaviour
 {
 
     #region Variable Declarations
+    [Space]
     [SerializeField] int numberOfWords = 5;
     [SerializeField] float delayBetweenWords = 1f;
     [SerializeField] float fadeInTime = 0.6f;
     [SerializeField] float delayAfterCompletion = 3f;
+    [SerializeField] bool screenshotMode;
 
     [Space]
     [SerializeField] List<TextMeshProUGUI> textFields;
@@ -44,7 +46,9 @@ public class TitleScreen : MonoBehaviour
 
         if (timer >= delayBetweenWords && currentWord < numberOfWords) {
 
-            int rand = Random.Range(0, words.Count);
+            int rand;
+            if (!screenshotMode) rand = Random.Range(0, words.Count);
+            else rand = 0;
 
             // Ultra mustn't stand at the last spot
             if (currentWord == numberOfWords - 2 && words.Contains("Ultra")) {
@@ -61,7 +65,8 @@ public class TitleScreen : MonoBehaviour
                 
             // Set random color
             textFields[currentWord].fontMaterial.SetColor("_OutlineColor", colors[rand]);
-            textFields[currentWord].fontMaterial.SetColor("_GlowColor", colors[Random.Range(0,colors.Count)]);
+            if (!screenshotMode) textFields[currentWord].fontMaterial.SetColor("_GlowColor", colors[Random.Range(0,colors.Count)]);
+            else textFields[currentWord].fontMaterial.SetColor("_GlowColor", colors[0]);
             colors.RemoveAt(rand);
 
             // Tween it in
