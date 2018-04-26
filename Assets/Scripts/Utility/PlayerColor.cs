@@ -1,8 +1,9 @@
 ﻿/// <summary>
 /// 
 /// </summary>
-public enum PlayerColor : int {
-	Red,
+public enum PlayerColor : int
+{
+    Green,
     Blue,
-    Green
+    Red
 }
