@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114724152049828894}
   - component: {fileID: 82899805016581398}
   m_Layer: 0
-  m_Name: _SCRIPTS
+  m_Name: _PERSISTENT_SCRIPTS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
