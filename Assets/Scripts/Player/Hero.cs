@@ -159,13 +159,13 @@ public class Hero : Player {
 
     #region Coroutines
     protected IEnumerator ResetAttackCooldown() {
-        yield return new WaitForSecondsRealtime(attackCooldown);
+        yield return new WaitForSeconds(attackCooldown);
         cooldown = true;
     }
 
     protected IEnumerator ResetDefend() {
         // Wait for defend duration and turn of wobbleBobble
-        yield return new WaitForSecondsRealtime(defendDuration);
+        yield return new WaitForSeconds(defendDuration);
         wobbleBobble.SetActive(false);
 
         // Start Cooldown and update CooldownIndicator
