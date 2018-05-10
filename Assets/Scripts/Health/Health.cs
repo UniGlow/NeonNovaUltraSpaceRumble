@@ -11,6 +11,7 @@ public class Health : MonoBehaviour {
     #region Variable Declarations
     [SerializeField] protected int maxHealth = 1000;
     public int MaxHealth { get { return maxHealth; } set { maxHealth = value; } }
+    [SerializeField] protected bool endlessHealth;
     [SerializeField] protected Gradient hpColor;
 
     [SerializeField] protected TextMeshProUGUI winText;
@@ -38,7 +39,10 @@ public class Health : MonoBehaviour {
 
 
     #region Public Functions
-    virtual public void TakeDamage(int damage) {
+    virtual public void TakeDamage(int damage)
+    {
+        if (endlessHealth) return;
+
         currentHealth -= damage;
 
         if (currentHealth <= 0) {

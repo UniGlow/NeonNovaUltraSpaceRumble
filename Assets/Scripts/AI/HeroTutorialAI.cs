@@ -7,29 +7,19 @@ using UnityEngine.AI;
 /// Handles everything related to the movement of Haru, our playable Character
 /// </summary>
 [RequireComponent(typeof(NavMeshAgent))]
-public class HeroAI : Hero {
+public class HeroTutorialAI : Hero
+{
 
     #region Variable Declarations
     [Header("AI Parameters")]
     [SerializeField] float repathingDistance = 5f;
-    [SerializeField] float randomness = 5f;
     [SerializeField] float shieldDelay = 2f;
-    [Range(0,1)]
-    [SerializeField] float tankFollowSpeed = 0.5f;
-    [Range(0,5)]
-    [SerializeField] float tankTargetDistance = 1.5f;
-    [Range(0,1)]
-    [SerializeField] float damageCornerPeek = 0.2f;
     [SerializeField] LayerMask attackRayMask;
 
     NavMeshAgent agent;
     Transform boss;
-    Transform damage;
     List<Transform> corners = new List<Transform>();
-    List<Transform> middleTargets = new List<Transform>();
-    List<Transform> allAITargets = new List<Transform>();
     int currentlyTargetedCorner;
-    float randomnessTimer;
     float shieldDelayTimer;
     float normalAgentSpeed;
     #endregion
@@ -37,38 +27,19 @@ public class HeroAI : Hero {
 
 
     #region Unity Event Functions
-    override protected void Start() {
+    override protected void Start()
+    {
         base.Start();
-        
+
         // Get references
         agent = GetComponent<NavMeshAgent>();
-        boss = GameManager.Instance.Boss.transform;
-
-        GameObject[] friends = GameObject.FindGameObjectsWithTag(Constants.TAG_HERO);
-        foreach (GameObject go in friends)
-        {
-            if (go.transform.parent.GetComponent<Hero>() == null) continue;
-            if (go.transform.parent.GetComponent<Hero>().ability == Ability.Damage) damage = go.transform;
-            //if (go.transform.parent.GetComponent<Hero>().ability == Ability.Tank) tank = go.transform;
-            //if (go.transform.parent.GetComponent<Hero>().ability == Ability.Opfer) opfer = go.transform;
-        }
+        //homingMissile = GameObject.FindGameObjectWithTag(Constants.TAG_HOMING_MISSILE).transform;
+        boss = GameObject.FindGameObjectWithTag(Constants.TAG_BOSS).transform.parent;
 
         GameObject[] cornersGO = GameObject.FindGameObjectsWithTag(Constants.TAG_AI_CORNER);
         foreach (GameObject go in cornersGO)
         {
             corners.Add(go.transform);
-        }
-
-        GameObject[] middleTargetsGO = GameObject.FindGameObjectsWithTag(Constants.TAG_AI_MIDDLE);
-        foreach (GameObject go in middleTargetsGO)
-        {
-            middleTargets.Add(go.transform);
-        }
-        
-        for (int i = 0; i < corners.Count + middleTargets.Count; i++)
-        {
-            if (i < corners.Count) allAITargets.Add(corners[i].transform);
-            else allAITargets.Add(middleTargets[i - corners.Count].transform);
         }
 
         normalAgentSpeed = agent.speed;
@@ -87,7 +58,6 @@ public class HeroAI : Hero {
     {
         if (active)
         {
-            randomnessTimer += Time.deltaTime;
             if (cooldown) shieldDelayTimer += Time.deltaTime;
         }
     }
@@ -121,29 +91,18 @@ public class HeroAI : Hero {
     {
         if (ability == Ability.Opfer)
         {
-            if (agent.destination == transform.position) SetDestination(GetRandomTarget());
+            if (agent.destination == transform.position) SetDestination(GetNextCorner());
 
             if (agent.remainingDistance < repathingDistance)
             {
-                if (randomnessTimer >= randomness)
-                {
-                    SetDestination(GetRandomMiddle());
-                    randomnessTimer = 0;
-                }
-                else SetDestination(GetNextCorner());
+                SetDestination(GetNextCorner());
             }
         }
+
         else if (ability == Ability.Damage)
         {
-            // Move
-            SetDamageDestination();
-
             // Rotate
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(boss.position - transform.position, Vector3.up), Time.deltaTime * rotateSpeed);
-        }
-        else if (ability == Ability.Tank)
-        {
-            SetTankDestination();
         }
     }
 
@@ -176,28 +135,8 @@ public class HeroAI : Hero {
     }
 
     #region AI Methods
-    private void SetDamageDestination()
+    private bool SetDestination(Vector3 destination)
     {
-        // Calculate path to boss
-        NavMeshPath path = new NavMeshPath();
-        NavMesh.CalculatePath(transform.position, boss.position, agent.areaMask, path);
-        if (agent.destination == transform.position && path.corners.Length > 2)
-        {
-            Vector3 destination = path.corners[path.corners.Length - 2] + (boss.position - path.corners[path.corners.Length - 2]) * damageCornerPeek;
-            SetDestination(destination);
-        }
-
-    }
-
-    private void SetTankDestination() {
-        Vector3 nearDamage = damage.position + (transform.position - damage.position).normalized * tankTargetDistance;
-        if (!SetDestination(nearDamage + (transform.position - nearDamage) * tankFollowSpeed))
-        {
-            SetDestination(damage.position);
-        }
-    }
-
-    private bool SetDestination(Vector3 destination) {
         Vector3 start = transform.position + agent.velocity * (repathingDistance / agent.speed);
 
         NavMeshPath path = new NavMeshPath();
@@ -206,20 +145,12 @@ public class HeroAI : Hero {
         return agent.SetPath(path);
     }
 
-    private Vector3 GetRandomMiddle()
-    {
-        return middleTargets[Random.Range(0, middleTargets.Count)].position;
-    }
-
-    private Vector3 GetRandomTarget() {
-        return allAITargets[Random.Range(0, allAITargets.Count)].position;
-    }
-
     /// <summary>
     /// Returns the position of the closest corner of the level and (0,0,0) if no corner is found.
     /// </summary>
     /// <returns></returns>
-    private Vector3 GetClosestCorner() {
+    private Vector3 GetClosestCorner()
+    {
         float closestDistance = 100f;
         Vector3 closestCorner = Vector3.zero;
         for (int i = 0; i < corners.Count; i++)
@@ -233,12 +164,14 @@ public class HeroAI : Hero {
         return closestCorner;
     }
 
-    private Vector3 GetNextCorner() {
+    private Vector3 GetNextCorner()
+    {
         if (currentlyTargetedCorner < corners.Count - 1)
         {
             currentlyTargetedCorner++;
             return corners[currentlyTargetedCorner].position;
-        } else
+        }
+        else
         {
             currentlyTargetedCorner = 0;
             return corners[currentlyTargetedCorner].position;
@@ -246,7 +179,8 @@ public class HeroAI : Hero {
     }
     #endregion
 
-    private void Attack() {
+    private void Attack()
+    {
         GameObject projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
         projectile.GetComponent<HeroProjectile>().damage = damagePerShot;
         projectile.GetComponent<HeroProjectile>().playerColor = playerColor;
@@ -258,7 +192,8 @@ public class HeroAI : Hero {
         StartCoroutine(ResetAttackCooldown());
     }
 
-    private void Defend() {
+    private void Defend()
+    {
         wobbleBobble.SetActive(true);
         cooldown = false;
         cooldownIndicator.sprite = defendCooldownSprites[0];
@@ -266,7 +201,8 @@ public class HeroAI : Hero {
         resetDefendCoroutine = StartCoroutine(ResetDefend());
     }
 
-    private void Run() {
+    private void Run()
+    {
         agent.speed = normalAgentSpeed * (speedBoost + 1);
         agent.speed = normalAgentSpeed * (speedBoost + 1);
     }

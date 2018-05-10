@@ -36,6 +36,7 @@ public class GameManager : SubscribedBehaviour {
 
     private float passedTime;
     private Boss boss;
+    public Boss Boss { get { return boss; } }
     AudioSource audioSource;
     bool colorChangeSoundPlayed;
     TextMeshProUGUI winText;
@@ -150,11 +151,19 @@ public class GameManager : SubscribedBehaviour {
 
         if (SceneManager.GetActiveScene().name.Contains("Level"))
         {
+
             winText = GameObject.FindObjectOfType<HeroHealth>().WinText;
             GameObject.FindGameObjectWithTag(Constants.TAG_HOMING_MISSILE).GetComponent<HomingMissile>().PauseMissile(true);
-            SetupAICharacters();
-            
-            StartCoroutine(StartTheAction());
+
+            if (SceneManager.GetActiveScene().name.Contains("Tutorial"))
+            {
+                StartCoroutine(StartTheTutorial());
+            }
+            else
+            {
+                SetupAICharacters();
+                StartCoroutine(StartTheAction());
+            }
         }
     }
 
@@ -376,6 +385,16 @@ public class GameManager : SubscribedBehaviour {
         yield return new WaitForSecondsRealtime(delayForActionStart / 4f);
 
         winText.gameObject.SetActive(false);
+        GameEvents.StartLevelStarted();
+    }
+
+    IEnumerator StartTheTutorial()
+    {
+
+        yield return new WaitForSecondsRealtime(delayForActionStart / 4f);
+        
+        AudioManager.Instance.StartTutorialTrack();
+        
         GameEvents.StartLevelStarted();
     }
 }

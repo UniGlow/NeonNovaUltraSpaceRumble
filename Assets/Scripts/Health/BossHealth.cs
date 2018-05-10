@@ -48,7 +48,10 @@ public class BossHealth : Health {
 
 
     #region Public Functions
-    override public void TakeDamage(int damage) {
+    override public void TakeDamage(int damage)
+    {
+        if (endlessHealth) return;
+
         base.TakeDamage(damage);
 
         // Update Healthbar

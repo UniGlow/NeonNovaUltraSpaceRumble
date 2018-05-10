@@ -22,7 +22,9 @@ public class Constants
 
     #region Tags and Layers
     public static readonly string TAG_BOSS = "Boss";
+    public static readonly string TAG_BOSS_DUMMY = "BossDummy";
     public static readonly string TAG_HERO = "Hero";
+    public static readonly string TAG_HERO_DUMMY = "HeroDummy";
     public static readonly string TAG_WALL = "Wall";
     public static readonly string TAG_SHIELD = "Shield";
     public static readonly string TAG_HOMING_MISSILE = "HomingMissile";

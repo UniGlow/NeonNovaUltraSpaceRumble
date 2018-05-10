@@ -51,7 +51,10 @@ public class HeroHealth : Health {
 
 
     #region Public Functions
-    override public void TakeDamage(int damage) {
+    override public void TakeDamage(int damage)
+    {
+        if (endlessHealth) return;
+
         base.TakeDamage(damage);
 
         // Update Healthbars

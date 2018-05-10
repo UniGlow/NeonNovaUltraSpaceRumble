@@ -15,13 +15,15 @@ public class BossProjectile : Projectile {
 
 
     #region Unity Event Functions
-    override protected void OnTriggerEnter(Collider other) {
+    override protected void OnTriggerEnter(Collider other)
+    {
         base.OnTriggerEnter(other);
 
         if (other.tag.Contains(Constants.TAG_SHIELD)) {
             Destroy(gameObject);
         }
-        if (other.tag.Contains(Constants.TAG_HERO)) {
+
+        if (other.tag == Constants.TAG_HERO) {
             if (playerColor == other.transform.parent.GetComponent<Hero>().PlayerColor) {
                 HeroHealth.Instance.TakeDamage(Mathf.RoundToInt(damage * GameManager.Instance.CritDamageMultiplier));
                 Instantiate(critHitPS, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
@@ -33,6 +35,22 @@ public class BossProjectile : Projectile {
 
             other.transform.parent.GetComponent<Transmission>().EndTransmission();
 
+
+            Destroy(gameObject);
+        }
+
+        if (other.tag == Constants.TAG_HERO_DUMMY)
+        {
+            if (playerColor == other.transform.parent.GetComponent<HeroTutorialAI>().PlayerColor)
+            {
+                HeroHealth.Instance.TakeDamage(Mathf.RoundToInt(damage * GameManager.Instance.CritDamageMultiplier));
+                Instantiate(critHitPS, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
+            }
+            else
+            {
+                HeroHealth.Instance.TakeDamage(damage);
+                Instantiate(hitPS, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
+            }
 
             Destroy(gameObject);
         }

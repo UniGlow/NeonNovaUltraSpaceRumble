@@ -164,9 +164,9 @@ MonoBehaviour:
   delayAtLevelEnd: 9
   colorChangeSound: {fileID: 8300000, guid: cb3b90f02c52c49418a9a3fd50874d2b, type: 3}
   colorChangeSoundVolume: 0.8
-  greenPlayerColor: {r: 0, g: 1, b: 0.006896496, a: 1}
+  greenPlayerColor: {r: 0, g: 1, b: 0.0069999998, a: 1}
   redPlayerColor: {r: 0.7058824, g: 0.039215688, b: 0.039215688, a: 1}
-  bluePlayerColor: {r: 0.29525304, g: 0.31309, b: 0.9338235, a: 1}
+  bluePlayerColor: {r: 0.29411766, g: 0.3137255, b: 0.93333334, a: 1}
   heroAIPrefab: {fileID: 1742559250600126, guid: 925e3a17bcf7ee843a48b6cbe697aab6,
     type: 2}
   bossAIPrefab: {fileID: 1566906718194532, guid: 8c475107a1ba5c54695c67a9aba025ba,
@@ -197,10 +197,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 34d3d2d3ffc4a9949aaf65f9ee1c3a7b, type: 3}
   - {fileID: 8300000, guid: 5a2d9b22fe4429a47b9dbae3f4720b5b, type: 3}
   - {fileID: 8300000, guid: 92c424edadbb6e64f8ac6e2e5e412d0e, type: 3}
+  - {fileID: 8300000, guid: 517a7f662b68aa948bfcc9d6c1aad687, type: 3}
   backgroundTracksVolumes:
   - 0.8
   - 0.8
   - 0.8
+  - 0.5
   levelEnd: {fileID: 8300000, guid: f8139e7be195b47a7a1b53e20a35e244, type: 3}
   levelEndVolume: 0.8
   bossWinSound: {fileID: 8300000, guid: 611ebf4824b8a93428647e38958f1b6c, type: 3}

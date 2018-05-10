@@ -81,6 +81,14 @@ public class AudioManager : SubscribedBehaviour {
         StartCoroutine(PlayWinSoundDelayed(winner));
     }
 
+    public void StartTutorialTrack()
+    {
+        audioSource.clip = GetbackgroundTrack("ElectronicIntro");
+        audioSource.volume = GetbackgroundTrackVolume("ElectronicIntro");
+        audioSource.loop = true;
+        audioSource.Play();
+    }
+
     public void StartBackgroundTrack() {
         audioSource.clip = GetbackgroundTrack("Track01Intro");
         audioSource.volume = GetbackgroundTrackVolume("Track01Intro");

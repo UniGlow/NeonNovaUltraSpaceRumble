@@ -8,7 +8,7 @@ using UnityEngine.AI;
 /// </summary>
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(AudioSource))]
-public class HomingMissile : SubscribedBehaviour {
+public class HomingMissileTutorial : SubscribedBehaviour {
 
     #region Variable Declarations
     [SerializeField] float speed = 10f;
@@ -45,16 +45,15 @@ public class HomingMissile : SubscribedBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag.Contains(Constants.TAG_HERO)) {
+        if (other.tag.Contains(Constants.TAG_HERO_DUMMY)) {
             HeroHealth.Instance.TakeDamage(damage);
-            other.transform.parent.GetComponent<Transmission>().EndTransmission();
 
             audioSource.PlayOneShot(hitSound, hitSoundVolume);
 
             Instantiate(hitPSHeroes, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
         }
 
-        else if (other.tag.Contains(Constants.TAG_BOSS)) {
+        else if (other.tag.Contains(Constants.TAG_BOSS_DUMMY)) {
             BossHealth.Instance.TakeDamage(damage);
 
             audioSource.PlayOneShot(hitSound, hitSoundVolume);
@@ -93,9 +92,9 @@ public class HomingMissile : SubscribedBehaviour {
     #region Public Functions
     public void AcquireNewTarget()
     {
-        Hero[] heroes = GameObject.FindObjectsOfType<Hero>();
+        Hero[] heroes = GameObject.FindObjectsOfType<HeroTutorialAI>();
         foreach (Hero hero in heroes) {
-            if (hero.ability == Ability.Opfer && hero.GetType() != typeof(HeroTutorialAI)) {
+            if (hero.ability == Ability.Opfer) {
                 target = hero.transform;
             }
         }

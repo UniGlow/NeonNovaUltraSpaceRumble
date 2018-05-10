@@ -18,12 +18,29 @@ public class HeroProjectile : Projectile {
     override protected void OnTriggerEnter(Collider other) {
         base.OnTriggerEnter(other);
 
-        if (other.tag.Contains(Constants.TAG_BOSS)) {
+        if (other.tag == Constants.TAG_BOSS) {
             if (playerColor == other.transform.parent.GetComponent<Boss>().WeaknessColor) {
                 BossHealth.Instance.TakeDamage(Mathf.RoundToInt(damage * GameManager.Instance.CritDamageMultiplier));
                 Instantiate(critHitPS, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
             }
             else {
+                BossHealth.Instance.TakeDamage(damage);
+                Instantiate(hitPS, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
+            }
+
+
+            Destroy(gameObject);
+        }
+
+        else if (other.tag == Constants.TAG_BOSS_DUMMY)
+        {
+            if (playerColor == other.transform.parent.GetComponent<BossTutorialAI>().WeaknessColor)
+            {
+                BossHealth.Instance.TakeDamage(Mathf.RoundToInt(damage * GameManager.Instance.CritDamageMultiplier));
+                Instantiate(critHitPS, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
+            }
+            else
+            {
                 BossHealth.Instance.TakeDamage(damage);
                 Instantiate(hitPS, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
             }

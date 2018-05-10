@@ -11,6 +11,8 @@ TagManager:
   - HomingMissile
   - Corner
   - AIMiddle
+  - BossDummy
+  - HeroDummy
   layers:
   - Default
   - TransparentFX
