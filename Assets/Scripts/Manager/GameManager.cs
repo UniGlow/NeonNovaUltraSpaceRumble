@@ -40,6 +40,8 @@ public class GameManager : SubscribedBehaviour {
     AudioSource audioSource;
     bool colorChangeSoundPlayed;
     TextMeshProUGUI winText;
+    int playerCount;
+    public int PlayerCount { get { return playerCount; } }
 
     public static GameManager Instance;
     #endregion
@@ -74,6 +76,8 @@ public class GameManager : SubscribedBehaviour {
     private void Start() {
         boss = GameObject.FindObjectOfType<Boss>();
         audioSource = GetComponent<AudioSource>();
+
+        playerCount = Input.GetJoystickNames().Length;
 
 #if !UNITY_EDITOR
         Cursor.lockState = CursorLockMode.Locked;
@@ -242,6 +246,8 @@ public class GameManager : SubscribedBehaviour {
 
     void SetupAICharacters()
     {
+        playerCount = Input.GetJoystickNames().Length;
+
         // Get references
         GameObject boss = GameObject.FindGameObjectWithTag(Constants.TAG_BOSS);
 
@@ -257,7 +263,7 @@ public class GameManager : SubscribedBehaviour {
             if (go.transform.parent.GetComponent<Hero>().ability == Ability.Opfer) opfer = go;
         }
 
-        if (Input.GetJoystickNames().Length == 1 || Input.GetJoystickNames().Length == 0)
+        if (playerCount == 1 || playerCount == 0)
         {
 
             // Replace Heroes with AIs
@@ -292,7 +298,7 @@ public class GameManager : SubscribedBehaviour {
             boss.transform.parent.GetComponent<Player>().PlayerNumber = 1;
             levelScrpits.GetComponent<BossHealth>().MaxHealth = 1500;
         }
-        else if(Input.GetJoystickNames().Length == 2)
+        else if(playerCount == 2)
         {
             // Replace damage hero with AI
             HeroAI opferAI = GameObject.Instantiate(heroAIPrefab, opfer.transform.position, opfer.transform.rotation).GetComponent<HeroAI>();
@@ -322,7 +328,7 @@ public class GameManager : SubscribedBehaviour {
             tank.transform.parent.GetComponent<Player>().PlayerNumber = 2;
             levelScrpits.GetComponent<BossHealth>().MaxHealth = 1000;
         }
-        else if (Input.GetJoystickNames().Length == 3)
+        else if (playerCount == 3)
         {
             // Replace Boss with AI
             BossAI bossAI = GameObject.Instantiate(bossAIPrefab, boss.transform.position, boss.transform.rotation).GetComponent<BossAI>();

@@ -12,7 +12,6 @@ public class HomingMissileTutorial : SubscribedBehaviour {
 
     #region Variable Declarations
     [SerializeField] float speed = 10f;
-    [SerializeField] float rotateSpeed = 200f;
     [SerializeField] int damage = 100;
 
     [Header("Sound")]
@@ -27,7 +26,6 @@ public class HomingMissileTutorial : SubscribedBehaviour {
     [SerializeField] GameObject hitPSBoss;
 
     Transform target;
-    Rigidbody rb;
     NavMeshAgent agent;
     AudioSource audioSource;
     bool agentPaused = false;
@@ -37,7 +35,6 @@ public class HomingMissileTutorial : SubscribedBehaviour {
 	
 	#region Unity Event Functions
 	private void Start() {
-        rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
         audioSource = GetComponent<AudioSource>();
         AcquireNewTarget();

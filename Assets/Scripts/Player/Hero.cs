@@ -130,7 +130,7 @@ public class Hero : Player {
     }
 
     private void Attack() {
-        GameObject projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
+        GameObject projectile = Instantiate(projectilePrefab, transform.position + Vector3.up * 0.5f, transform.rotation);
         projectile.GetComponent<HeroProjectile>().damage = damagePerShot;
         projectile.GetComponent<HeroProjectile>().playerColor = playerColor;
         projectile.GetComponent<Rigidbody>().velocity = transform.forward * projectileSpeed;

@@ -431,7 +431,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.1
-  rotateSpeed: 5
   damage: 50
   hitSound: {fileID: 8300000, guid: 216323fd8e2633844a437d87bf28a085, type: 3}
   hitSoundVolume: 0.6

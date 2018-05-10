@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 4319091654165712}
   - component: {fileID: 33579886399969120}
   - component: {fileID: 23460712893591694}
-  - component: {fileID: 65314944488077738}
+  - component: {fileID: 135812279585746382}
   m_Layer: 8
   m_Name: Mesh
   m_TagString: HeroDummy
@@ -388,18 +388,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
---- !u!65 &65314944488077738
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1629323274910430}
-  m_Material: {fileID: 13400000, guid: 498dae0bc1d2d574caf8d03fb2201892, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &82369903388854626
 AudioSource:
   m_ObjectHideFlags: 1
@@ -658,6 +646,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.18
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &135812279585746382
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1629323274910430}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!195 &195134263843539680
 NavMeshAgent:
   m_ObjectHideFlags: 1
