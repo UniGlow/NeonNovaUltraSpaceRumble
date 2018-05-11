@@ -15,6 +15,8 @@ public class HeroTutorialTextUpdater : MonoBehaviour
 
     TextMeshPro textMesh;
     Hero hero;
+    Quaternion startRotation;
+    Vector3 startOffset;
 	#endregion
 	
 	
@@ -24,22 +26,56 @@ public class HeroTutorialTextUpdater : MonoBehaviour
 	{
         textMesh = GetComponent<TextMeshPro>();
         hero = transform.parent.GetComponent<Hero>();
+        startRotation = transform.rotation;
+        startOffset = transform.position - hero.transform.position;
 
         if (hero.ability == Ability.Damage) UpdateText("Damage");
         else if (hero.ability == Ability.Tank) UpdateText("Tank");
         else if (hero.ability == Ability.Opfer) UpdateText("Opfer");
     }
 	
-	private void Update () 
+	private void FixedUpdate () 
 	{
-		
+        transform.position = hero.transform.position + startOffset;
+        transform.rotation = startRotation;
 	}
-	#endregion
-	
-	
-	
-	#region Public Functions
-	public void UpdateText(string title)
+
+    private void Update()
+    {
+        // Fade out text while moving to reduce clutter on screen
+        //if (rigidbody.velocity.magnitude != 0f && !LeanTween.isTweening(tweenID) && textMesh.color.a != alphaWhileMoving)
+        //{
+        //    if (coroutine == null) coroutine = StartCoroutine(Wait(blendDelay, () =>
+        //    {
+        //        tweenID = LeanTween.value(gameObject, startColor.a, alphaWhileMoving, blendDuration).setEase(LeanTweenType.easeInOutQuad).setOnUpdate((float value) =>
+        //        {
+        //            Color newColor = startColor;
+        //            newColor.a = value;
+        //            textMesh.color = newColor;
+        //        }).id;
+        //    }));
+        //}
+        //else if (rigidbody.velocity.magnitude == 0f && !LeanTween.isTweening(tweenID) && textMesh.color.a != startColor.a)
+        //{
+        //    if (coroutine == null) coroutine = StartCoroutine(Wait(blendDelay, () =>
+        //    {
+        //        tweenID = LeanTween.value(gameObject, alphaWhileMoving, startColor.a, blendDuration).setEase(LeanTweenType.easeInOutQuad).setOnUpdate((float value) =>
+        //        {
+        //            Color newColor = startColor;
+        //            newColor.a = value;
+        //            textMesh.color = newColor;
+        //        }).id;
+        //    }));
+        //}
+
+        //newAlpha.a = Mathf.Lerp(alphaWhileMoving, startColor.a, Mathf.Max((10f - rigidbody.velocity.magnitude) / 10f, 0f));
+    }
+    #endregion
+
+
+
+    #region Public Functions
+    public void UpdateText(string title)
     {
         for (int i = 0; i < textCollection.messages.Length; i++)
         {
@@ -53,7 +89,7 @@ public class HeroTutorialTextUpdater : MonoBehaviour
 	
 	
 	
-	#region Private Functions
+	#region Coroutines
 	
 	#endregion
 }

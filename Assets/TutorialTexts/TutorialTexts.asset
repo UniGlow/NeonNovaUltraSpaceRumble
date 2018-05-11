@@ -13,13 +13,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   messages:
   - title: Damage
-    body: "You are the Damage Dealer. Use Right Shoulder Button to shoot. \nAim at
-      the boss!"
+    body: 'You are the Damage Dealer.
+
+      Aim at the boss!'
   - title: Tank
-    body: "You are the Tank. Use Right Shoulder Button to cast a shield. \nProtect
-      your allies!"
+    body: "You are the Tank. \nCast a shield and protect your allies!"
   - title: Opfer
-    body: "You are the Opfer. Poor you. \nKeep the homing missile off yourself and
-      your allies!"
+    body: 'You are the Opfer. Poor you...
+
+      Better start running!'
   - title: Switch
     body: You can switch abilities with an ally by pressing the Left Shoulder Button.

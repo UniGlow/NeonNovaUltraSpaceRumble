@@ -496,7 +496,7 @@ MonoBehaviour:
   rotateSpeed: 1000
   playerNumber: 0
   damagePerShot: 15
-  attackCooldown: 0.15
+  attackCooldown: 1
   projectileSpeed: 40
   defendCooldown: 3
   defendDuration: 2
@@ -530,7 +530,7 @@ MonoBehaviour:
   redPlayerMat: {fileID: 2100000, guid: e8c28d97f12645643bcafd02933841a7, type: 2}
   bluePlayerMat: {fileID: 2100000, guid: c0c8a51b3e7494746a5eca2615bb40c9, type: 2}
   repathingDistance: 6
-  shieldDelay: 2
+  shieldDelay: 3
   attackRayMask:
     serializedVersion: 2
     m_Bits: 512

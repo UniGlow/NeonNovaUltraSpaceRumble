@@ -30,6 +30,7 @@ public class TutorialLevel : MonoBehaviour
         }
         if (ready == playerConfirms.Length)
         {
+            AudioManager.Instance.StopPlaying();
             StartCoroutine(Wait(1f, () => { GameManager.Instance.LoadNextScene(); }));
         }
 
