@@ -42,7 +42,7 @@ public class HeroAI : Hero {
         
         // Get references
         agent = GetComponent<NavMeshAgent>();
-        boss = GameManager.Instance.Boss.transform;
+        if (GameManager.Instance.Boss) boss = GameManager.Instance.Boss.transform;
 
         GameObject[] friends = GameObject.FindGameObjectsWithTag(Constants.TAG_HERO);
         foreach (GameObject go in friends)

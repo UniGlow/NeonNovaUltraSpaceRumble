@@ -169,6 +169,12 @@ public class GameManager : SubscribedBehaviour {
                 StartCoroutine(StartTheAction());
             }
         }
+
+        else if (SceneManager.GetActiveScene().name.Contains("Credit"))
+        {
+            GameObject.FindGameObjectWithTag(Constants.TAG_HOMING_MISSILE).GetComponent<HomingMissile>().PauseMissile(true);
+            StartCoroutine(StartTheCredits());
+        }
     }
 
     void HandleColorSwitch() {
@@ -401,6 +407,16 @@ public class GameManager : SubscribedBehaviour {
         
         AudioManager.Instance.StartTutorialTrack();
         
+        GameEvents.StartLevelStarted();
+    }
+
+    IEnumerator StartTheCredits()
+    {
+
+        yield return new WaitForSecondsRealtime(delayForActionStart / 4f);
+
+        AudioManager.Instance.StartBackgroundTrack();
+
         GameEvents.StartLevelStarted();
     }
 }
