@@ -24,6 +24,7 @@ public class AudioManager : SubscribedBehaviour {
     [SerializeField] float heroesWinSoundVolume = 1f;
 
     AudioSource audioSource;
+    AudioSource audioSourceSFX;
 
     public static AudioManager Instance;
     #endregion
@@ -49,6 +50,7 @@ public class AudioManager : SubscribedBehaviour {
 
     private void Start() {
         audioSource = GetComponent<AudioSource>();
+        audioSourceSFX = transform.GetChild(0).GetComponent<AudioSource>();
 	}
 	
 	private void Update() {
@@ -124,6 +126,11 @@ public class AudioManager : SubscribedBehaviour {
         audioSource.clip = null;
         audioSource.volume = 1f;
         audioSource.loop = false;
+    }
+
+    public void PlayClip(AudioClip clip, float volume)
+    {
+        audioSourceSFX.PlayOneShot(clip, volume);
     }
     #endregion
 

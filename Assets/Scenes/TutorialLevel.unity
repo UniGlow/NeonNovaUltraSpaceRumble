@@ -1674,6 +1674,7 @@ MonoBehaviour:
   playerReadyUpdater: {fileID: 221853975}
   masterMixer: {fileID: 24100000, guid: e213e6dc1e1471a4189369ba1ec91b45, type: 2}
   backgroundTrack: {fileID: 11400000, guid: dc118b1a3d2f334428767bcd546f7dac, type: 2}
+  sfxVolumeDamp: 0.2
 --- !u!1 &535912227
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,6 +15,8 @@ public class TutorialLevel : MonoBehaviour
     [SerializeField] PlayerReadyUpdater playerReadyUpdater;
     [SerializeField] AudioMixer masterMixer;
     [SerializeField] MusicTrack backgroundTrack;
+    [Range(0f,2f)]
+    [SerializeField] float sfxVolumeDamp = 0.1f;
 
     bool[] playerConfirms;
     float idleTimer;
@@ -34,6 +36,7 @@ public class TutorialLevel : MonoBehaviour
         masterMixer.GetFloat(Constants.MIXER_MUSIC_VOLUME, out originalMusicVolume);
         homingMissile = GameObject.FindObjectOfType<HomingMissile>();
 
+        masterMixer.SetFloat(Constants.MIXER_SFX_VOLUME, originalSFXVolume * (1 + sfxVolumeDamp));
         StartCoroutine(Wait(0.1f, () => { AudioManager.Instance.StartTrack(backgroundTrack); }));
     }
 	
@@ -48,7 +51,14 @@ public class TutorialLevel : MonoBehaviour
         if (ready == playerConfirms.Length)
         {
             AudioManager.Instance.StopPlaying();
-            StartCoroutine(Wait(1f, () => { GameManager.Instance.LoadNextScene(); }));
+            StartCoroutine(Wait(1f, () => {
+                // Fade in audio
+                float currentSFXVolume;
+                masterMixer.GetFloat(Constants.MIXER_SFX_VOLUME, out currentSFXVolume);
+                FadeAudio(Constants.MIXER_SFX_VOLUME, currentSFXVolume, originalSFXVolume, 1f);
+
+                GameManager.Instance.LoadNextScene();
+            }));
         }
 
         // Check Inputs to ready up
@@ -90,7 +100,7 @@ public class TutorialLevel : MonoBehaviour
             // Fade in audio
             float currentSFXVolume;
             masterMixer.GetFloat(Constants.MIXER_SFX_VOLUME, out currentSFXVolume);
-            FadeAudio(Constants.MIXER_SFX_VOLUME, currentSFXVolume, originalSFXVolume, 1f);
+            FadeAudio(Constants.MIXER_SFX_VOLUME, currentSFXVolume, originalSFXVolume * (1 + sfxVolumeDamp), 1f);
             float currentMusicVolume;
             masterMixer.GetFloat(Constants.MIXER_MUSIC_VOLUME, out currentMusicVolume);
             FadeAudio(Constants.MIXER_MUSIC_VOLUME, currentMusicVolume, originalMusicVolume, 1f);
@@ -104,7 +114,7 @@ public class TutorialLevel : MonoBehaviour
         if (idleTimer >= timeTillIdle && !idleState)
         {
             // Fade out audio
-            FadeAudio(Constants.MIXER_SFX_VOLUME, originalSFXVolume, -80f, 3f);
+            FadeAudio(Constants.MIXER_SFX_VOLUME, originalSFXVolume * (1 + sfxVolumeDamp), -80f, 3f);
             FadeAudio(Constants.MIXER_MUSIC_VOLUME, originalMusicVolume, -7f, 3f);
 
             homingMissile.enableCameraShake = false;
