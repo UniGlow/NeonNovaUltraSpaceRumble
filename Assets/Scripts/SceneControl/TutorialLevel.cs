@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 /// <summary>
 /// 
@@ -14,6 +15,7 @@ public class TutorialLevel : MonoBehaviour
     [SerializeField] PlayerReadyUpdater playerReadyUpdater;
     [SerializeField] AudioMixer masterMixer;
     [SerializeField] MusicTrack backgroundTrack;
+
     bool[] playerConfirms;
     float idleTimer;
     float originalSFXVolume;
@@ -81,20 +83,17 @@ public class TutorialLevel : MonoBehaviour
     #region Private Functions
     void UpdateIdleState()
     {
-        if (Input.anyKey)
+        if (Input.anyKey && idleState)
         {
             if (LeanTween.isTweening(gameObject)) LeanTween.cancel(gameObject);
 
+            // Fade in audio
             float currentSFXVolume;
             masterMixer.GetFloat(Constants.MIXER_SFX_VOLUME, out currentSFXVolume);
-            LeanTween.value(gameObject, currentSFXVolume, originalSFXVolume, 1f).setEase(LeanTweenType.easeInOutQuad).setOnUpdate((float value) => {
-                masterMixer.SetFloat(Constants.MIXER_SFX_VOLUME, value);
-            });
+            FadeAudio(Constants.MIXER_SFX_VOLUME, currentSFXVolume, originalSFXVolume, 1f);
             float currentMusicVolume;
             masterMixer.GetFloat(Constants.MIXER_MUSIC_VOLUME, out currentMusicVolume);
-            LeanTween.value(gameObject, currentMusicVolume, originalMusicVolume, 1f).setEase(LeanTweenType.easeInOutQuad).setOnUpdate((float value) => {
-                masterMixer.SetFloat(Constants.MIXER_MUSIC_VOLUME, value);
-            });
+            FadeAudio(Constants.MIXER_MUSIC_VOLUME, currentMusicVolume, originalMusicVolume, 1f);
 
             homingMissile.enableCameraShake = true;
 
@@ -104,17 +103,23 @@ public class TutorialLevel : MonoBehaviour
 
         if (idleTimer >= timeTillIdle && !idleState)
         {
-            LeanTween.value(gameObject, originalSFXVolume, -80f, 3f).setEase(LeanTweenType.easeInOutQuad).setOnUpdate((float value) => {
-                masterMixer.SetFloat(Constants.MIXER_SFX_VOLUME, value);
-            });
-            LeanTween.value(gameObject, originalMusicVolume, -7f, 3f).setEase(LeanTweenType.easeInOutQuad).setOnUpdate((float value) => {
-                masterMixer.SetFloat(Constants.MIXER_MUSIC_VOLUME, value);
-            });
+            // Fade out audio
+            FadeAudio(Constants.MIXER_SFX_VOLUME, originalSFXVolume, -80f, 3f);
+            FadeAudio(Constants.MIXER_MUSIC_VOLUME, originalMusicVolume, -7f, 3f);
+
             homingMissile.enableCameraShake = false;
+
             idleState = true;
         }
 
         idleTimer += Time.deltaTime;
+    }
+
+    void FadeAudio(string mixerGroup, float from, float to, float duration)
+    {
+        LeanTween.value(gameObject, from, to, duration).setEase(LeanTweenType.easeInOutQuad).setOnUpdate((float value) => {
+            masterMixer.SetFloat(mixerGroup, value);
+        });
     }
     #endregion
 
