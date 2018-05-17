@@ -34,14 +34,11 @@ public class HeroTutorialTextUpdater : MonoBehaviour
         else if (hero.ability == Ability.Opfer) UpdateText("Opfer");
     }
 	
-	private void FixedUpdate () 
+	private void Update () 
 	{
         transform.position = hero.transform.position + startOffset;
         transform.rotation = startRotation;
-	}
 
-    private void Update()
-    {
         // Fade out text while moving to reduce clutter on screen
         //if (rigidbody.velocity.magnitude != 0f && !LeanTween.isTweening(tweenID) && textMesh.color.a != alphaWhileMoving)
         //{
