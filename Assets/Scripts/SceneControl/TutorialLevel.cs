@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Audio;
 
 /// <summary>
 /// 
@@ -8,8 +9,16 @@ public class TutorialLevel : MonoBehaviour
 {
 
     #region Variable Declaration
+    [Space]
+    [SerializeField] float timeTillIdle = 5f;
     [SerializeField] PlayerReadyUpdater playerReadyUpdater;
+    [SerializeField] AudioMixer masterMixer;
     bool[] playerConfirms;
+    float idleTimer;
+    float originalSFXVolume;
+    float originalMusicVolume;
+    bool idleState;
+    HomingMissile homingMissile;
 	#endregion
 	
 	
@@ -18,6 +27,9 @@ public class TutorialLevel : MonoBehaviour
 	private void Start () 
 	{
         playerConfirms = new bool[GameManager.Instance.PlayerCount];
+        masterMixer.GetFloat(Constants.MIXER_SFX_VOLUME, out originalSFXVolume);
+        masterMixer.GetFloat(Constants.MIXER_MUSIC_VOLUME, out originalMusicVolume);
+        homingMissile = GameObject.FindObjectOfType<HomingMissile>();
 	}
 	
 	private void Update () 
@@ -55,6 +67,51 @@ public class TutorialLevel : MonoBehaviour
             playerConfirms[3] = !playerConfirms[3];
             playerReadyUpdater.UpdateState(3, playerConfirms[3]);
         }
+
+        // Check and update Idle State of the game
+        UpdateIdleState();
+    }
+    #endregion
+
+
+
+    #region Private Functions
+    void UpdateIdleState()
+    {
+        if (Input.anyKey)
+        {
+            if (LeanTween.isTweening(gameObject)) LeanTween.cancel(gameObject);
+
+            float currentSFXVolume;
+            masterMixer.GetFloat(Constants.MIXER_SFX_VOLUME, out currentSFXVolume);
+            LeanTween.value(gameObject, currentSFXVolume, originalSFXVolume, 1f).setEase(LeanTweenType.easeInOutQuad).setOnUpdate((float value) => {
+                masterMixer.SetFloat(Constants.MIXER_SFX_VOLUME, value);
+            });
+            float currentMusicVolume;
+            masterMixer.GetFloat(Constants.MIXER_MUSIC_VOLUME, out currentMusicVolume);
+            LeanTween.value(gameObject, currentMusicVolume, originalMusicVolume, 1f).setEase(LeanTweenType.easeInOutQuad).setOnUpdate((float value) => {
+                masterMixer.SetFloat(Constants.MIXER_MUSIC_VOLUME, value);
+            });
+
+            homingMissile.enableCameraShake = true;
+
+            idleTimer = 0f;
+            idleState = false;
+        }
+
+        if (idleTimer >= timeTillIdle && !idleState)
+        {
+            LeanTween.value(gameObject, originalSFXVolume, -80f, 3f).setEase(LeanTweenType.easeInOutQuad).setOnUpdate((float value) => {
+                masterMixer.SetFloat(Constants.MIXER_SFX_VOLUME, value);
+            });
+            LeanTween.value(gameObject, originalMusicVolume, -7f, 3f).setEase(LeanTweenType.easeInOutQuad).setOnUpdate((float value) => {
+                masterMixer.SetFloat(Constants.MIXER_MUSIC_VOLUME, value);
+            });
+            homingMissile.enableCameraShake = false;
+            idleState = true;
+        }
+
+        idleTimer += Time.deltaTime;
     }
     #endregion
 

@@ -40,10 +40,11 @@ public class Boss : Player {
     protected float attackSoundVolume = 1f;
 
     [Header("Camera Shake")]
-    [SerializeField] float magnitude = 1f;
-    [SerializeField] float roughness = 10f;
-    [SerializeField] float fadeIn = 0.1f;
-    [SerializeField] float fadeOut = 0.8f;
+    [SerializeField] public bool enableCameraShake = true;
+    [SerializeField] protected float magnitude = 1f;
+    [SerializeField] protected float roughness = 10f;
+    [SerializeField] protected float fadeIn = 0.1f;
+    [SerializeField] protected float fadeOut = 0.8f;
 
     [Header("References")]
     [SerializeField] protected GameObject projectilePrefab;
@@ -143,7 +144,7 @@ public class Boss : Player {
             
             audioSource.PlayOneShot(abilitySound, abilitySoundVolume);
 
-            EZCameraShake.CameraShaker.Instance.ShakeOnce(magnitude, roughness, fadeIn, fadeOut);
+            if (enableCameraShake) EZCameraShake.CameraShaker.Instance.ShakeOnce(magnitude, roughness, fadeIn, fadeOut);
 
             abilityCooldownB = false;
             StartCoroutine(ResetAbilityCooldown());

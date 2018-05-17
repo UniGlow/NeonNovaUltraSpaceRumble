@@ -135,7 +135,7 @@ public class AudioManager : SubscribedBehaviour {
 
 
     IEnumerator StartAudioLoop(MusicTrack track) {
-        for (float i = 0; i < audioSource.clip.length + 0.5f; i+=Time.deltaTime) {
+        for (float i = 0; i < track.intro.length + 0.5f; i+=Time.deltaTime) {
             yield return null;
             if (!audioSource.isPlaying) {
                 audioSource.clip = track.loop;

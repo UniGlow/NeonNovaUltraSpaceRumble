@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DefaultPosInfluence: {x: 0.15, y: 0.15, z: 0.15}
-  DefaultRotInfluence: {x: 1, y: 1, z: 1}
+  DefaultRotInfluence: {x: 0.3, y: 0.3, z: 1}
 --- !u!124 &124989963690370136
 Behaviour:
   m_ObjectHideFlags: 1
