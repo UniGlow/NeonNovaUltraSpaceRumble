@@ -21,6 +21,12 @@ public class HomingMissile : SubscribedBehaviour {
     [SerializeField]
     float hitSoundVolume = 1f;
 
+    [Header("Camera Shake")]
+    [SerializeField] float magnitude = 5f;
+    [SerializeField] float roughness = 10f;
+    [SerializeField] float fadeIn = 0.1f;
+    [SerializeField] float fadeOut = 0.8f;
+
     [Header("Object References")]
     [SerializeField] GameObject hitPSHeroes;
     [SerializeField] GameObject hitPSBoss;
@@ -49,6 +55,8 @@ public class HomingMissile : SubscribedBehaviour {
             audioSource.PlayOneShot(hitSound, hitSoundVolume);
 
             Instantiate(hitPSHeroes, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
+
+            EZCameraShake.CameraShaker.Instance.ShakeOnce(magnitude, roughness, fadeIn, fadeOut);
         }
 
         else if (other.tag.Contains(Constants.TAG_BOSS)) {
@@ -57,6 +65,8 @@ public class HomingMissile : SubscribedBehaviour {
             audioSource.PlayOneShot(hitSound, hitSoundVolume);
 
             Instantiate(hitPSBoss, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
+
+            EZCameraShake.CameraShaker.Instance.ShakeOnce(magnitude, roughness, fadeIn, fadeOut);
         }
     }
 

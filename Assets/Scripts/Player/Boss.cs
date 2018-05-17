@@ -39,6 +39,12 @@ public class Boss : Player {
     [SerializeField]
     protected float attackSoundVolume = 1f;
 
+    [Header("Camera Shake")]
+    [SerializeField] float magnitude = 1f;
+    [SerializeField] float roughness = 10f;
+    [SerializeField] float fadeIn = 0.1f;
+    [SerializeField] float fadeOut = 0.8f;
+
     [Header("References")]
     [SerializeField] protected GameObject projectilePrefab;
     [SerializeField] protected Renderer bossMeshRenderer;
@@ -136,6 +142,8 @@ public class Boss : Player {
             }
             
             audioSource.PlayOneShot(abilitySound, abilitySoundVolume);
+
+            EZCameraShake.CameraShaker.Instance.ShakeOnce(magnitude, roughness, fadeIn, fadeOut);
 
             abilityCooldownB = false;
             StartCoroutine(ResetAbilityCooldown());

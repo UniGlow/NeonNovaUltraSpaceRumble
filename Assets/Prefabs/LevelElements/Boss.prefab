@@ -314,6 +314,10 @@ MonoBehaviour:
   abilitySoundVolume: 1
   attackSound: {fileID: 8300000, guid: cf3ba19d968b8e249b2a4b68126fb355, type: 3}
   attackSoundVolume: 0.8
+  magnitude: 1
+  roughness: 10
+  fadeIn: 0.1
+  fadeOut: 1
   projectilePrefab: {fileID: 1693907411783006, guid: 0f758c9824c38e64e8607ba9dc4c8d64,
     type: 2}
   bossMeshRenderer: {fileID: 23755656095924074}

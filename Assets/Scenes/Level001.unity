@@ -989,6 +989,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114474593516083838, guid: 76bd8de65fb91184eb9e880374bb4dfa,
+        type: 2}
+      propertyPath: roughness
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114474593516083838, guid: 76bd8de65fb91184eb9e880374bb4dfa,
+        type: 2}
+      propertyPath: fadeOut
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114474593516083838, guid: 76bd8de65fb91184eb9e880374bb4dfa,
+        type: 2}
+      propertyPath: magnitude
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 76bd8de65fb91184eb9e880374bb4dfa, type: 2}
   m_IsPrefabParent: 0
@@ -1967,6 +1982,11 @@ Prefab:
     - target: {fileID: 4260685427587770, guid: b1e1569e895ceee48869b355039c0cbf, type: 2}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114424577701179020, guid: b1e1569e895ceee48869b355039c0cbf,
+        type: 2}
+      propertyPath: fadeOut
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b1e1569e895ceee48869b355039c0cbf, type: 2}
