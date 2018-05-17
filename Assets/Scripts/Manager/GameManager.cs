@@ -375,7 +375,7 @@ public class GameManager : SubscribedBehaviour {
         yield return new WaitForSecondsRealtime(delayForActionStart / 4f);
 
         winText.gameObject.SetActive(true);
-        AudioManager.Instance.StartBackgroundTrackPitched();
+        AudioManager.Instance.StartRandomTrack();
 
         Vector3 originalScale = winText.transform.localScale;
         winText.transform.localScale = Vector3.zero;
@@ -415,7 +415,7 @@ public class GameManager : SubscribedBehaviour {
 
         yield return new WaitForSecondsRealtime(delayForActionStart / 4f);
 
-        AudioManager.Instance.StartBackgroundTrack();
+        AudioManager.Instance.StartRandomTrack();
 
         GameEvents.StartLevelStarted();
     }

@@ -193,16 +193,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a7dcc38c73674e47a85116d9bb6f260, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundTracks:
-  - {fileID: 8300000, guid: 34d3d2d3ffc4a9949aaf65f9ee1c3a7b, type: 3}
-  - {fileID: 8300000, guid: 5a2d9b22fe4429a47b9dbae3f4720b5b, type: 3}
-  - {fileID: 8300000, guid: 92c424edadbb6e64f8ac6e2e5e412d0e, type: 3}
-  - {fileID: 8300000, guid: 517a7f662b68aa948bfcc9d6c1aad687, type: 3}
-  backgroundTracksVolumes:
-  - 0.8
-  - 0.8
-  - 0.8
-  - 0.5
+  musicTracks:
+  - {fileID: 11400000, guid: dc118b1a3d2f334428767bcd546f7dac, type: 2}
+  - {fileID: 11400000, guid: 200b072a36f49c54cb988e75e003ae4a, type: 2}
+  - {fileID: 11400000, guid: ef1baf16c61b67a4aaea8b515fa61cf9, type: 2}
+  - {fileID: 11400000, guid: 55d2cad03fa76ce4f92b6bd0f1cab1d3, type: 2}
   levelEnd: {fileID: 8300000, guid: f8139e7be195b47a7a1b53e20a35e244, type: 3}
   levelEndVolume: 0.8
   bossWinSound: {fileID: 8300000, guid: 611ebf4824b8a93428647e38958f1b6c, type: 3}

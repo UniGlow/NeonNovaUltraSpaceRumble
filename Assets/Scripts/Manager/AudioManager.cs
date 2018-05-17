@@ -10,9 +10,9 @@ using UnityEngine.SceneManagement;
 public class AudioManager : SubscribedBehaviour {
 
     #region Variable Declarations
-    [SerializeField] AudioClip[] backgroundTracks;
-    [Range(0,1)]
-    [SerializeField] float[] backgroundTracksVolumes;
+    [SerializeField] List<MusicTrack> musicTracks = new List<MusicTrack>();
+
+    [Space]
     [SerializeField] AudioClip levelEnd;
     [Range(0,1)]
     [SerializeField] float levelEndVolume = 1f;
@@ -81,67 +81,65 @@ public class AudioManager : SubscribedBehaviour {
         StartCoroutine(PlayWinSoundDelayed(winner));
     }
 
+    public void StartTrack(string name)
+    {
+        MusicTrack track = GetTrack(name);
+        audioSource.clip = track.intro;
+        audioSource.volume = track.volume;
+        audioSource.loop = false;
+        audioSource.Play();
+        StartCoroutine(StartAudioLoop(track));
+    }
+
     public void StartTutorialTrack()
     {
-        audioSource.clip = GetbackgroundTrack("ElectronicIntro");
-        audioSource.volume = GetbackgroundTrackVolume("ElectronicIntro");
-        audioSource.loop = true;
-        audioSource.Play();
-    }
-
-    public void StartBackgroundTrack() {
-        audioSource.clip = GetbackgroundTrack("Track01Intro");
-        audioSource.volume = GetbackgroundTrackVolume("Track01Intro");
+        MusicTrack track = GetTrack("TutorialTrack");
+        audioSource.clip = track.intro;
+        audioSource.volume = track.volume;
         audioSource.loop = false;
         audioSource.Play();
-        StartCoroutine(StartAudioLoop());
+        StartCoroutine(StartAudioLoop(track));
     }
 
-    public void StartBackgroundTrackPitched()
-    {
-        audioSource.clip = GetbackgroundTrack("Track01IntroPitched");
-        audioSource.volume = GetbackgroundTrackVolume("Track01IntroPitched");
+    public void StartRandomTrack() {
+        // Exclude the Tutorial Track
+        MusicTrack track = musicTracks[Random.Range(1, musicTracks.Count)];
+        audioSource.clip = track.intro;
+        audioSource.volume = track.volume;
         audioSource.loop = false;
         audioSource.Play();
-        StartCoroutine(StartAudioLoop());
+        StartCoroutine(StartAudioLoop(track));
     }
 
     public void StopPlaying() {
         audioSource.Stop();
+        audioSource.clip = null;
+        audioSource.volume = 1f;
+        audioSource.loop = false;
     }
     #endregion
 
 
 
     #region Private Functions
-    AudioClip GetbackgroundTrack(string name) {
-        foreach (AudioClip clip in backgroundTracks) {
-            if (clip.name == name) {
-                return clip;
-            }
+    MusicTrack GetTrack(string name)
+    {
+        foreach (MusicTrack track in musicTracks)
+        {
+            if (track.name == name) return track;
         }
         return null;
-    }
-
-    float GetbackgroundTrackVolume(string name) {
-        for (int i = 0; i < backgroundTracks.Length; i++) {
-            if (backgroundTracks[i].name == name) {
-                return backgroundTracksVolumes[i];
-            }
-        }
-        return 1f;
     }
     #endregion
 
 
 
-    IEnumerator StartAudioLoop() {
+    IEnumerator StartAudioLoop(MusicTrack track) {
         for (float i = 0; i < audioSource.clip.length + 0.5f; i+=Time.deltaTime) {
             yield return null;
             if (!audioSource.isPlaying) {
-                audioSource.clip = GetbackgroundTrack("Track01Loop");
+                audioSource.clip = track.loop;
                 audioSource.loop = true;
-                audioSource.volume = GetbackgroundTrackVolume("Track01Loop");
                 audioSource.Play();
                 break;
             }

@@ -87,6 +87,6 @@ public class TitleScreen : MonoBehaviour
     IEnumerator StartAudioNextFrame()
     {
         yield return null;
-        AudioManager.Instance.StartBackgroundTrack();
+        AudioManager.Instance.StartTrack("OriginalTrack");
     }
 }

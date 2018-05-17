@@ -34,6 +34,6 @@ public class Credits : MonoBehaviour {
     IEnumerator StartAudioNextFrame()
     {
         yield return null;
-        AudioManager.Instance.StartBackgroundTrack();
+        AudioManager.Instance.StartTrack("OriginalTrack");
     }
 }

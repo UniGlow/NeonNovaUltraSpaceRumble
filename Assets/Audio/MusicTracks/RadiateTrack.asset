@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 702bca38c2671034eac931bc893b2a6f, type: 3}
+  m_Name: RadiateTrack
+  m_EditorClassIdentifier: 
+  intro: {fileID: 8300000, guid: f6cd064966867bf4283009dc0292e913, type: 3}
+  loop: {fileID: 8300000, guid: 8d7fce204046c95478e5d8111602ebb5, type: 3}
+  volume: 0.46
+  artist: ElementD & Chordinatez
+  title: Radiate (feat. Mees Van Den Berg) [NCS Release]
