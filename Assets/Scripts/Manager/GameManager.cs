@@ -405,8 +405,6 @@ public class GameManager : SubscribedBehaviour {
 
         yield return new WaitForSecondsRealtime(delayForActionStart / 4f);
         
-        AudioManager.Instance.StartTutorialTrack();
-        
         GameEvents.StartLevelStarted();
     }
 
@@ -414,8 +412,6 @@ public class GameManager : SubscribedBehaviour {
     {
 
         yield return new WaitForSecondsRealtime(delayForActionStart / 4f);
-
-        AudioManager.Instance.StartRandomTrack();
 
         GameEvents.StartLevelStarted();
     }

@@ -996,6 +996,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef1f151fd1fa9a14ebec35537ab3e2c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backgroundTrack: {fileID: 11400000, guid: 27d65f21b0fb9294cb21a92346fdb487, type: 2}
 --- !u!1 &534836202
 GameObject:
   m_ObjectHideFlags: 0
@@ -1238,16 +1239,21 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4351300061492424, guid: 925e3a17bcf7ee843a48b6cbe697aab6, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1742559250600126, guid: 925e3a17bcf7ee843a48b6cbe697aab6, type: 2}
       propertyPath: m_Name
-      value: HeroAI (2)
+      value: HeroAI
       objectReference: {fileID: 0}
     - target: {fileID: 114808124267496032, guid: 925e3a17bcf7ee843a48b6cbe697aab6,
         type: 2}
       propertyPath: playerNumber
-      value: 1
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114808124267496032, guid: 925e3a17bcf7ee843a48b6cbe697aab6,
+        type: 2}
+      propertyPath: playerColor
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 925e3a17bcf7ee843a48b6cbe697aab6, type: 2}
@@ -1432,9 +1438,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1567276205}
-  - {fileID: 349593297}
   - {fileID: 542975924}
+  - {fileID: 349593297}
+  - {fileID: 1567276205}
   - {fileID: 1095618272}
   - {fileID: 1044657654}
   m_Father: {fileID: 0}
@@ -1822,12 +1828,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4351300061492424, guid: 925e3a17bcf7ee843a48b6cbe697aab6, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114808124267496032, guid: 925e3a17bcf7ee843a48b6cbe697aab6,
         type: 2}
       propertyPath: playerColor
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114808124267496032, guid: 925e3a17bcf7ee843a48b6cbe697aab6,
         type: 2}
@@ -1842,6 +1848,10 @@ Prefab:
     - target: {fileID: 1742559250600126, guid: 925e3a17bcf7ee843a48b6cbe697aab6, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1742559250600126, guid: 925e3a17bcf7ee843a48b6cbe697aab6, type: 2}
+      propertyPath: m_Name
+      value: HeroAI (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 925e3a17bcf7ee843a48b6cbe697aab6, type: 2}

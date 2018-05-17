@@ -91,6 +91,15 @@ public class AudioManager : SubscribedBehaviour {
         StartCoroutine(StartAudioLoop(track));
     }
 
+    public void StartTrack(MusicTrack track)
+    {
+        audioSource.clip = track.intro;
+        audioSource.volume = track.volume;
+        audioSource.loop = false;
+        audioSource.Play();
+        StartCoroutine(StartAudioLoop(track));
+    }
+
     public void StartTutorialTrack()
     {
         MusicTrack track = GetTrack("TutorialTrack");
@@ -102,8 +111,7 @@ public class AudioManager : SubscribedBehaviour {
     }
 
     public void StartRandomTrack() {
-        // Exclude the Tutorial Track
-        MusicTrack track = musicTracks[Random.Range(1, musicTracks.Count)];
+        MusicTrack track = musicTracks[Random.Range(0, musicTracks.Count)];
         audioSource.clip = track.intro;
         audioSource.volume = track.volume;
         audioSource.loop = false;

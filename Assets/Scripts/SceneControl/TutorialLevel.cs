@@ -13,6 +13,7 @@ public class TutorialLevel : MonoBehaviour
     [SerializeField] float timeTillIdle = 5f;
     [SerializeField] PlayerReadyUpdater playerReadyUpdater;
     [SerializeField] AudioMixer masterMixer;
+    [SerializeField] MusicTrack backgroundTrack;
     bool[] playerConfirms;
     float idleTimer;
     float originalSFXVolume;
@@ -30,7 +31,9 @@ public class TutorialLevel : MonoBehaviour
         masterMixer.GetFloat(Constants.MIXER_SFX_VOLUME, out originalSFXVolume);
         masterMixer.GetFloat(Constants.MIXER_MUSIC_VOLUME, out originalMusicVolume);
         homingMissile = GameObject.FindObjectOfType<HomingMissile>();
-	}
+
+        StartCoroutine(Wait(0.1f, () => { AudioManager.Instance.StartTrack(backgroundTrack); }));
+    }
 	
 	private void Update () 
 	{

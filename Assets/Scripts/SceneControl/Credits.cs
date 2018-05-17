@@ -6,8 +6,9 @@ using UnityEngine;
 /// 
 /// </summary>
 public class Credits : MonoBehaviour {
-	
-	#region Variable Declarations
+
+    #region Variable Declarations
+    [SerializeField] MusicTrack backgroundTrack;
 	#endregion
 	
 	
@@ -26,14 +27,9 @@ public class Credits : MonoBehaviour {
 
 
 
-    #region Private Functions
-    #endregion
-
-
-
     IEnumerator StartAudioNextFrame()
     {
         yield return null;
-        AudioManager.Instance.StartTrack("OriginalTrack");
+        AudioManager.Instance.StartTrack(backgroundTrack);
     }
 }
