@@ -274,6 +274,10 @@ MonoBehaviour:
   delayAtLevelEnd: 9
   colorChangeSound: {fileID: 8300000, guid: cb3b90f02c52c49418a9a3fd50874d2b, type: 3}
   colorChangeSoundVolume: 1
+  setupAI: 1
+  bossHealthSolo: 1500
+  bossHealthDuo: 1000
+  bossHealthTriple: 1000
   greenPlayerColor: {r: 0, g: 1, b: 0.0069999998, a: 1}
   redPlayerColor: {r: 0.7058824, g: 0.039215688, b: 0.039215688, a: 1}
   bluePlayerColor: {r: 0.29411766, g: 0.3137255, b: 0.93333334, a: 1}

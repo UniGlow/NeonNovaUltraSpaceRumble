@@ -23,6 +23,12 @@ public class GameManager : SubscribedBehaviour {
     [Range(0, 1)]
     [SerializeField] float colorChangeSoundVolume = 1f;
 
+    [Header("AI Adjustments")]
+    [SerializeField] bool setupAI = true;
+    [SerializeField] int bossHealthSolo = 1500;
+    [SerializeField] int bossHealthDuo = 1000;
+    [SerializeField] int bossHealthTriple = 1000;
+
     [Header("References")]
     [SerializeField] Color greenPlayerColor;
     public Color GreenPlayerColor { get { return greenPlayerColor; } }
@@ -179,7 +185,7 @@ public class GameManager : SubscribedBehaviour {
             }
             else
             {
-                SetupAICharacters();
+                if (setupAI) SetupAICharacters();
                 StartCoroutine(StartTheAction());
             }
         }
@@ -317,7 +323,7 @@ public class GameManager : SubscribedBehaviour {
 
             // Set boss playerNumber and health
             boss.transform.parent.GetComponent<Player>().PlayerNumber = 1;
-            levelScrpits.GetComponent<BossHealth>().MaxHealth = 1500;
+            levelScrpits.GetComponent<BossHealth>().MaxHealth = bossHealthSolo;
         }
         else if(playerCount == 2)
         {
@@ -347,7 +353,7 @@ public class GameManager : SubscribedBehaviour {
             // Set tank and opfer playerNumber and health
             damage.transform.parent.GetComponent<Player>().PlayerNumber = 1;
             tank.transform.parent.GetComponent<Player>().PlayerNumber = 2;
-            levelScrpits.GetComponent<BossHealth>().MaxHealth = 1000;
+            levelScrpits.GetComponent<BossHealth>().MaxHealth = bossHealthDuo;
         }
         else if (playerCount == 3)
         {
@@ -369,7 +375,7 @@ public class GameManager : SubscribedBehaviour {
             damage.transform.parent.GetComponent<Player>().PlayerNumber = 1;
             tank.transform.parent.GetComponent<Player>().PlayerNumber = 2;
             opfer.transform.parent.GetComponent<Player>().PlayerNumber = 3;
-            levelScrpits.GetComponent<BossHealth>().MaxHealth = 1000;
+            levelScrpits.GetComponent<BossHealth>().MaxHealth = bossHealthTriple;
         }
         else {
             // Do nothing for a 4 player game (scene is already set up for this)
