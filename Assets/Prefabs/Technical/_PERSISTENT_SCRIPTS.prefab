@@ -309,6 +309,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ef1baf16c61b67a4aaea8b515fa61cf9, type: 2}
   - {fileID: 11400000, guid: 55d2cad03fa76ce4f92b6bd0f1cab1d3, type: 2}
   - {fileID: 11400000, guid: ad5efa830d7605d4ea38ea2f21945802, type: 2}
+  - {fileID: 11400000, guid: d8d042d8cb1147342837b8ad5297c9b5, type: 2}
   levelEnd: {fileID: 8300000, guid: f8139e7be195b47a7a1b53e20a35e244, type: 3}
   levelEndVolume: 0.8
   bossWinSound: {fileID: 8300000, guid: 611ebf4824b8a93428647e38958f1b6c, type: 3}

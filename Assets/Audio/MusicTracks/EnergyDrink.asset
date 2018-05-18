@@ -13,6 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   intro: {fileID: 8300000, guid: 8a7fccf7446d56847b8d4cfa3c0c9c1f, type: 3}
   loop: {fileID: 8300000, guid: 4619718b28919804997cef96a6de956a, type: 3}
-  volume: 0.46
+  volume: 0.4
   artist: Virtual Riot
   title: Energy Drink

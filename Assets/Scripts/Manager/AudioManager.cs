@@ -113,7 +113,8 @@ public class AudioManager : SubscribedBehaviour {
     }
 
     public void StartRandomTrack() {
-        MusicTrack track = musicTracks[Random.Range(0, musicTracks.Count)];
+        //MusicTrack track = musicTracks[Random.Range(0, musicTracks.Count)];
+        MusicTrack track = musicTracks[4];
         audioSource.clip = track.intro;
         audioSource.volume = track.volume;
         audioSource.loop = false;

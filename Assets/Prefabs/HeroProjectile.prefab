@@ -240,10 +240,10 @@ MonoBehaviour:
   playerColor: 0
   hitPS: {fileID: 1266277570911844, guid: c5de1fd06c95fba43bf702afb9b3ffab, type: 2}
   hitSound: {fileID: 8300000, guid: f9c552e41395b87478bce17eb4f5543c, type: 3}
-  hitVolume: 0.45
+  hitVolume: 0.55
   critHitPS: {fileID: 1806756733474018, guid: 983a87c5c43d694489cef4d5ef512700, type: 2}
   critHitSound: {fileID: 8300000, guid: 322ac929f0575464997e112573a77e84, type: 3}
-  critHitVolume: 0.7
+  critHitVolume: 0.85
 --- !u!135 &135843095408614802
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   intro: {fileID: 8300000, guid: f6cd064966867bf4283009dc0292e913, type: 3}
   loop: {fileID: 8300000, guid: 8d7fce204046c95478e5d8111602ebb5, type: 3}
-  volume: 0.46
+  volume: 0.4
   artist: ElementD & Chordinatez
   title: Radiate (feat. Mees Van Den Berg) [NCS Release]

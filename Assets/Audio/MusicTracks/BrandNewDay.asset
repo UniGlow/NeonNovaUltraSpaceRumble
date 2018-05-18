@@ -13,6 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   intro: {fileID: 8300000, guid: 974ae204c841a5041b425dd32ee41832, type: 3}
   loop: {fileID: 8300000, guid: 1da1569b129c1d2429d3e06ff434aa48, type: 3}
-  volume: 0.8
+  volume: 0.42
   artist: Headphonesvocal
   title: Brand New Day
