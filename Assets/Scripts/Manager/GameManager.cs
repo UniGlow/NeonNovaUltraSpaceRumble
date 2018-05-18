@@ -287,18 +287,9 @@ public class GameManager : SubscribedBehaviour {
             BossHealth.Instance.WinningPointLead = Mathf.RoundToInt(BossHealth.Instance.WinningPointLead * (1 - intensifyAmount));
             HeroHealth.Instance.WinningPointLead = Mathf.RoundToInt(HeroHealth.Instance.WinningPointLead * (1 - intensifyAmount));
 
-            // Close the damage gaps to keep the healthbar seemingly unchanged
-            int damageDif = BossHealth.Instance.CurrentDamage - HeroHealth.Instance.CurrentDamage;
-            // Heroes winning
-            if (damageDif >= 0)
-            {
-                HeroHealth.Instance.CurrentDamage = Mathf.RoundToInt(HeroHealth.Instance.CurrentDamage + Mathf.Abs(damageDif) * (1 - intensifyAmount));
-            }
-            // Boss winning
-            else
-            {
-                BossHealth.Instance.CurrentDamage = Mathf.RoundToInt(BossHealth.Instance.CurrentDamage + Mathf.Abs(damageDif) * (1 - intensifyAmount));
-            }
+            // Close the damage gap to keep the healthbar seemingly unchanged
+            HeroHealth.Instance.CurrentDamage = Mathf.RoundToInt(HeroHealth.Instance.CurrentDamage * (1 - intensifyAmount));
+            BossHealth.Instance.CurrentDamage = Mathf.RoundToInt(BossHealth.Instance.CurrentDamage * (1 - intensifyAmount));
 
             intensifyTimer = 0f;
         }
