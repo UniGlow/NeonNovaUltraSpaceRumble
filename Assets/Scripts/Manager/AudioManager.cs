@@ -166,19 +166,10 @@ public class AudioManager : SubscribedBehaviour {
 
 
     IEnumerator StartAudioLoop(MusicTrack track) {
-        for (float i = 0; i < track.intro.length + 0.1f; i+=Time.deltaTime) {
+        for (float i = 0; i < track.intro.length; i+=Time.deltaTime) {
             yield return null;
-            if (!audioSource.isPlaying) {
-                audioSource.clip = track.loop;
-                audioSource.loop = true;
-                audioSource.Play();
-                startingTrack = false;
-                yield break;
-            }
         }
-
-        Debug.LogError("Track \"" + track + "\" couldn't start his loop. track.intro.length: " + track.intro.length + " audioSource.isPlaying: " + audioSource.isPlaying + "\n"
-            + "Starting track manually.");
+        
         audioSource.clip = track.loop;
         audioSource.loop = true;
         startingTrack = false;
