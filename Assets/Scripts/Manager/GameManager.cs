@@ -151,6 +151,11 @@ public class GameManager : SubscribedBehaviour {
     {
         passedTime = 0f;
     }
+
+    public string GetActiveSceneName()
+    {
+        return SceneManager.GetActiveScene().name;
+    }
     #endregion
 
 

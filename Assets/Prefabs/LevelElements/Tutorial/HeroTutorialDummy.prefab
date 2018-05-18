@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4957054544257888}
   - component: {fileID: 212462768959968862}
   - component: {fileID: 114972714218037082}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CooldownIndicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4719389722291414}
   - component: {fileID: 212967763964373050}
   - component: {fileID: 114727560876593820}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HealthIndicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 114936576474581026}
   - component: {fileID: 82369903388854626}
   - component: {fileID: 195134263843539680}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HeroTutorialDummy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4285017008038012}
   - component: {fileID: 120821287316168324}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: TransmisisonLineRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 33579886399969120}
   - component: {fileID: 23460712893591694}
   - component: {fileID: 135812279585746382}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Mesh
   m_TagString: HeroDummy
   m_Icon: {fileID: 0}
@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 33846965679143852}
   - component: {fileID: 23935278533078712}
   - component: {fileID: 135570054820581202}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: WobbleBobble
   m_TagString: Shield
   m_Icon: {fileID: 0}
@@ -159,7 +159,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4254679643099226}
   - component: {fileID: 212546136063414988}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: IndicatorArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

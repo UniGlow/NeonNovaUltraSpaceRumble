@@ -17,7 +17,7 @@ public abstract class TutorialTextUpdater : MonoBehaviour
     protected Player player;
     protected Quaternion startRotation;
     protected Vector3 startOffset;
-    protected static int colorChanges;
+    public static int colorChanges = 0;
     #endregion
 
 
@@ -32,6 +32,12 @@ public abstract class TutorialTextUpdater : MonoBehaviour
 
         InheritedStart();
     }
+
+    void Update()
+    {
+        transform.position = player.transform.position + startOffset;
+        transform.rotation = startRotation;
+    }
     #endregion
 
 
@@ -43,6 +49,11 @@ public abstract class TutorialTextUpdater : MonoBehaviour
         if (i == -1) colorChanges++;
         else colorChanges = i;
 
+        UpdateTexts();
+    }
+
+    public static void UpdateTexts()
+    {
         // Inform all TutorialTextUpdater in scene
         TutorialTextUpdater[] textUpdaters = GameObject.FindObjectsOfType<TutorialTextUpdater>();
         foreach (TutorialTextUpdater updater in textUpdaters)
@@ -57,6 +68,12 @@ public abstract class TutorialTextUpdater : MonoBehaviour
     #region Protected Functions
     protected void ChangeTextTo(string title)
     {
+        if (title == "")
+        {
+            textMesh.text = "";
+            return;
+        }
+
         for (int i = 0; i < textCollection.messages.Length; i++)
         {
             if (textCollection.messages[i].title == title)

@@ -140,6 +140,7 @@ public class Transmission : MonoBehaviour {
             audioSource.PlayOneShot(transmissionSound, transmissionSoundVolume);
 
             homingMissile.AcquireNewTarget();
+            if (GameManager.Instance.GetActiveSceneName().Contains("Tutorial")) TutorialTextUpdater.UpdateTexts();
 
             transmissionPS.Play();
             receiver.GetComponent<Transmission>().transmissionPS.Play();

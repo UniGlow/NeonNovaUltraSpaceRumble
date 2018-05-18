@@ -23,7 +23,6 @@ public class TutorialLevel : MonoBehaviour
     float originalSFXVolume;
     float originalMusicVolume;
     bool idleState;
-    HomingMissile homingMissile;
 	#endregion
 	
 	
@@ -34,7 +33,6 @@ public class TutorialLevel : MonoBehaviour
         playerConfirms = new bool[GameManager.Instance.PlayerCount];
         masterMixer.GetFloat(Constants.MIXER_SFX_VOLUME, out originalSFXVolume);
         masterMixer.GetFloat(Constants.MIXER_MUSIC_VOLUME, out originalMusicVolume);
-        homingMissile = GameObject.FindObjectOfType<HomingMissile>();
 
         masterMixer.SetFloat(Constants.MIXER_SFX_VOLUME, originalSFXVolume * (1 + sfxVolumeDamp));
         StartCoroutine(Wait(0.1f, () => { AudioManager.Instance.StartTrack(backgroundTrack); }));
@@ -108,8 +106,6 @@ public class TutorialLevel : MonoBehaviour
             masterMixer.GetFloat(Constants.MIXER_MUSIC_VOLUME, out currentMusicVolume);
             FadeAudio(Constants.MIXER_MUSIC_VOLUME, currentMusicVolume, originalMusicVolume, 1f);
 
-            homingMissile.enableCameraShake = true;
-
             // Reset all TutorialTexts
             ResetTexts();
 
@@ -123,12 +119,11 @@ public class TutorialLevel : MonoBehaviour
             FadeAudio(Constants.MIXER_SFX_VOLUME, originalSFXVolume * (1 + sfxVolumeDamp), -80f, 3f);
             FadeAudio(Constants.MIXER_MUSIC_VOLUME, originalMusicVolume, -7f, 3f);
 
-            homingMissile.enableCameraShake = false;
-
             idleState = true;
         }
 
-        if (!Input.anyKey) idleTimer += Time.deltaTime;
+        if (Input.anyKey) idleTimer = 0f;
+        else idleTimer += Time.deltaTime;
     }
 
     void FadeAudio(string mixerGroup, float from, float to, float duration)

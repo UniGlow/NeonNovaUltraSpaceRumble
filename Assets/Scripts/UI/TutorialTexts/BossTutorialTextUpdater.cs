@@ -17,13 +17,8 @@ public class BossTutorialTextUpdater : TutorialTextUpdater
     #region Unity Event Functions
     protected override void InheritedStart()
     {
-        ChangeTextTo("StrengthColor");
+        UpdateText();
     }
-
-    private void Update () 
-	{
-		
-	}
     #endregion
 
 
@@ -31,7 +26,9 @@ public class BossTutorialTextUpdater : TutorialTextUpdater
     #region Protected Functions
     protected override void UpdateText()
     {
-        
+        if (colorChanges <= 1) ChangeTextTo("");
+        else if (colorChanges >= 2 && colorChanges % 2 == 0) ChangeTextTo("WeaknessColor");
+        else if (colorChanges >= 3 && colorChanges % 2 == 1) ChangeTextTo("StrengthColor");
     }
     #endregion
 

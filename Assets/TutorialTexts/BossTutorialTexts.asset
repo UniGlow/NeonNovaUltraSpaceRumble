@@ -17,4 +17,6 @@ MonoBehaviour:
 
       You deal double damage to the Hero with that color!'
   - title: WeaknessColor
-    body: 
+    body: 'Your body color changes periodically.
+
+      You receive double damage from the Hero with your color!'
