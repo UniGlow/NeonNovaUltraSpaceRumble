@@ -10,28 +10,33 @@ public class Health : MonoBehaviour {
 
     #region Variable Declarations
     [SerializeField] protected int maxHealth = 1000;
-    public int MaxHealth { get { return maxHealth; } set { maxHealth = value; } }
     [SerializeField] protected bool endlessHealth;
-    [SerializeField] protected Gradient hpColor;
 
     [SerializeField] protected TextMeshProUGUI winText;
-    public TextMeshProUGUI WinText { get { return winText; } }
     [SerializeField] protected float fadeInTime = 2f;
 
     [Header("Object References")]
     [SerializeField] protected Sprite[] healthbarSprites;
 
     protected int currentHealth;
+    protected HealthbarUpdater healthbarUpdater;
+
+    public int MaxHealth { get { return maxHealth; } set { maxHealth = value; } }
+    public TextMeshProUGUI WinText { get { return winText; } }
+    public int CurrentHealth { get { return currentHealth; } }
     #endregion
 
 
 
     #region Unity Event Functions
-    virtual protected void Start() {
+    virtual protected void Start()
+    {
+        healthbarUpdater = GameObject.FindObjectOfType<HealthbarUpdater>();
         currentHealth = maxHealth;
     }
 
-    virtual protected void Update() {
+    virtual protected void Update()
+    {
 
     }
     #endregion
@@ -48,6 +53,8 @@ public class Health : MonoBehaviour {
         if (currentHealth <= 0) {
             currentHealth = 0;
         }
+
+        healthbarUpdater.UpdateHealthbar(HeroHealth.Instance.CurrentHealth, BossHealth.Instance.CurrentHealth);
     }
     #endregion
 }

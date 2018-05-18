@@ -9,10 +9,11 @@ using TMPro;
 public class BossHealth : Health {
 
     #region Variable Declarations
-    [SerializeField] SpriteRenderer healthIndicator;
-    public SpriteRenderer HealthIndicator { get { return healthIndicator; } set { healthIndicator = value; } }
-
     public static BossHealth Instance;
+
+    [SerializeField] SpriteRenderer healthIndicator;
+
+    public SpriteRenderer HealthIndicator { get { return healthIndicator; } set { healthIndicator = value; } }
     #endregion
 
 
@@ -29,7 +30,7 @@ public class BossHealth : Health {
         else if (Instance != this) {
 
             //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of an AudioManager.
-            Debug.Log("There can only be one GameManager instantiated. Destroying this Instance...");
+            Debug.Log("There can only be one BossHealth instantiated. Destroying this Instance...");
             Destroy(this);
         }
     }

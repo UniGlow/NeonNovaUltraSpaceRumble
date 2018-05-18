@@ -30,7 +30,7 @@ public class HeroHealth : Health {
         else if (Instance != this) {
 
             //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of an AudioManager.
-            Debug.Log("There can only be one GameManager instantiated. Destroying this Instance...");
+            Debug.Log("There can only be one HeroHealth instantiated. Destroying this Instance...");
             Destroy(this);
         }
     }
