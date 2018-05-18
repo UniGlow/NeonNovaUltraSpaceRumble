@@ -14,5 +14,5 @@ MonoBehaviour:
   intro: {fileID: 8300000, guid: 34d3d2d3ffc4a9949aaf65f9ee1c3a7b, type: 3}
   loop: {fileID: 8300000, guid: 5a2d9b22fe4429a47b9dbae3f4720b5b, type: 3}
   volume: 0.8
-  artist: 
-  title: 
+  artist: Timbre
+  title: Xythe Flight

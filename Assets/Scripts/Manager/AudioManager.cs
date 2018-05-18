@@ -119,6 +119,8 @@ public class AudioManager : SubscribedBehaviour {
         audioSource.loop = false;
         audioSource.Play();
         StartCoroutine(StartAudioLoop(track));
+
+        GameObject.FindObjectOfType<SongTextUpdater>().ShowSongTitle(track.artist, track.title);
     }
 
     public void StopPlaying() {
