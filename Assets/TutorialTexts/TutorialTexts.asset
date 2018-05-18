@@ -24,3 +24,5 @@ MonoBehaviour:
       Better start running!'
   - title: Switch
     body: You can switch abilities with an ally by pressing the Left Shoulder Button.
+  - title: GetHim
+    body: Go get him!

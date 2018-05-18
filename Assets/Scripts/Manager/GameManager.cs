@@ -12,6 +12,7 @@ public class GameManager : SubscribedBehaviour {
     #region Variable Declarations
     [Header("Game Properties")]
     [SerializeField] float colorSwitchInterval = 10f;
+    public float ColorSwitchInterval { get { return colorSwitchInterval; } set { colorSwitchInterval = value; } }
     [SerializeField] float critDamageMultiplier = 2f;
     public float CritDamageMultiplier { get { return critDamageMultiplier; } }
     [SerializeField] float delayAtLevelEnd = 12f;
@@ -186,6 +187,14 @@ public class GameManager : SubscribedBehaviour {
             // Set new Boss color
             if (passedTime >= colorSwitchInterval) {
                 ChangeBossColor();
+                if (SceneManager.GetActiveScene().name.Contains("Tutorial"))
+                {
+                    TutorialTextUpdater[] textUpdaters = GameObject.FindObjectsOfType<TutorialTextUpdater>();
+                    foreach (TutorialTextUpdater updater in textUpdaters)
+                    {
+                        updater.BossColorChanged();
+                    }
+                }
                 passedTime = 0f;
                 colorChangeSoundPlayed = false;
             }

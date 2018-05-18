@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 33496558042606622}
   - component: {fileID: 23404290271430598}
   - component: {fileID: 222373980487069940}
-  - component: {fileID: 114812218862664968}
+  - component: {fileID: 114100654707012722}
   - component: {fileID: 114399889726550842}
   m_Layer: 5
   m_Name: TextMeshPro
@@ -347,6 +347,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &114100654707012722
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1422948709608120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a696ea965862cd04cb722acd7acc6aa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textCollection: {fileID: 11400000, guid: b1b4d27332aaa334ca4b778d683e070f, type: 2}
 --- !u!114 &114399889726550842
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -501,18 +513,6 @@ MonoBehaviour:
   greenBossMat: {fileID: 2100000, guid: 966f269b5a0b25f4485446ac000d0ef7, type: 2}
   redBossMat: {fileID: 2100000, guid: 7d68be63867edc147a22fe6137b42316, type: 2}
   blueBossMat: {fileID: 2100000, guid: b9952fe678988874f98372d9edd2afff, type: 2}
---- !u!114 &114812218862664968
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1422948709608120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a346dfdf202fba49ae0816e70c3fe1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textCollection: {fileID: 11400000, guid: aaa137ae12c5ada4fb47eab3636bb882, type: 2}
 --- !u!212 &212300853209604042
 SpriteRenderer:
   m_ObjectHideFlags: 1

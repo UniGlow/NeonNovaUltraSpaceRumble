@@ -122,7 +122,7 @@ public class TutorialLevel : MonoBehaviour
             idleState = true;
         }
 
-        idleTimer += Time.deltaTime;
+        if (!Input.anyKey) idleTimer += Time.deltaTime;
     }
 
     void FadeAudio(string mixerGroup, float from, float to, float duration)
