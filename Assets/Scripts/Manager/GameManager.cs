@@ -146,6 +146,11 @@ public class GameManager : SubscribedBehaviour {
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
     }
+
+    public void ResetPassedTimeForColorChange()
+    {
+        passedTime = 0f;
+    }
     #endregion
 
 
@@ -187,14 +192,7 @@ public class GameManager : SubscribedBehaviour {
             // Set new Boss color
             if (passedTime >= colorSwitchInterval) {
                 ChangeBossColor();
-                if (SceneManager.GetActiveScene().name.Contains("Tutorial"))
-                {
-                    TutorialTextUpdater[] textUpdaters = GameObject.FindObjectsOfType<TutorialTextUpdater>();
-                    foreach (TutorialTextUpdater updater in textUpdaters)
-                    {
-                        updater.BossColorChanged();
-                    }
-                }
+                if (SceneManager.GetActiveScene().name.Contains("Tutorial")) TutorialTextUpdater.BossColorChange();
                 passedTime = 0f;
                 colorChangeSoundPlayed = false;
             }

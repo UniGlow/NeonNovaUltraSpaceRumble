@@ -10,7 +10,6 @@ public class HeroTutorialTextUpdater : TutorialTextUpdater
 {
 
     #region Variable Declarations
-    int colorChanges;
     Hero hero;
     #endregion
 
@@ -21,9 +20,9 @@ public class HeroTutorialTextUpdater : TutorialTextUpdater
     {
         hero = player.GetComponent<Hero>();
 
-        if (hero.ability == Ability.Damage) UpdateText("Damage");
-        else if (hero.ability == Ability.Tank) UpdateText("Tank");
-        else if (hero.ability == Ability.Opfer) UpdateText("Opfer");
+        if (hero.ability == Ability.Damage) ChangeTextTo("Damage");
+        else if (hero.ability == Ability.Tank) ChangeTextTo("Tank");
+        else if (hero.ability == Ability.Opfer) ChangeTextTo("Opfer");
     }
 
     private void Update()
@@ -35,20 +34,36 @@ public class HeroTutorialTextUpdater : TutorialTextUpdater
 
 
 
-    #region Public Functions
-    public override void BossColorChanged()
+    #region Protected Functions
+    protected override void UpdateText()
     {
-        colorChanges++;
-
-        if (colorChanges == 1)
+        switch (colorChanges)
         {
-            UpdateText("Switch");
-        }
-        else if (colorChanges >= 2)
-        {
-            if (GameManager.Instance.Boss.WeaknessColor == PlayerColor.Blue && hero.PlayerColor == PlayerColor.Blue) UpdateText("GetHim");
-            else if (GameManager.Instance.Boss.WeaknessColor == PlayerColor.Green && hero.PlayerColor == PlayerColor.Green) UpdateText("GetHim");
-            else if (GameManager.Instance.Boss.WeaknessColor == PlayerColor.Red && hero.PlayerColor == PlayerColor.Red) UpdateText("GetHim");
+            case 0:
+                if (hero.ability == Ability.Damage) ChangeTextTo("Damage");
+                else if (hero.ability == Ability.Tank) ChangeTextTo("Tank");
+                else if (hero.ability == Ability.Opfer) ChangeTextTo("Opfer");
+                break;
+            case 1:
+                ChangeTextTo("Switch");
+                break;
+            default:
+                // If same color as Boss
+                if (GameManager.Instance.Boss.WeaknessColor == PlayerColor.Blue && hero.PlayerColor == PlayerColor.Blue
+                    || GameManager.Instance.Boss.WeaknessColor == PlayerColor.Green && hero.PlayerColor == PlayerColor.Green
+                    || GameManager.Instance.Boss.WeaknessColor == PlayerColor.Red && hero.PlayerColor == PlayerColor.Red)
+                {
+                    if (hero.ability == Ability.Damage) ChangeTextTo("DealDamage");
+                    else ChangeTextTo("GetDamage");
+                }
+                // Not Boss color
+                else
+                {
+                    if (hero.ability == Ability.Damage) ChangeTextTo("PassDamage");
+                    else if (hero.ability == Ability.Tank) ChangeTextTo("Tank");
+                    else if (hero.ability == Ability.Opfer) ChangeTextTo("Opfer");
+                }
+                break;
         }
     }
     #endregion

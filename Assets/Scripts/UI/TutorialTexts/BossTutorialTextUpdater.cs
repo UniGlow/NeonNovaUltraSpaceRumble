@@ -17,7 +17,7 @@ public class BossTutorialTextUpdater : TutorialTextUpdater
     #region Unity Event Functions
     protected override void InheritedStart()
     {
-        UpdateText("StrengthColor");
+        ChangeTextTo("StrengthColor");
     }
 
     private void Update () 
@@ -28,8 +28,8 @@ public class BossTutorialTextUpdater : TutorialTextUpdater
 
 
 
-    #region Public Functions
-    public override void BossColorChanged()
+    #region Protected Functions
+    protected override void UpdateText()
     {
         
     }

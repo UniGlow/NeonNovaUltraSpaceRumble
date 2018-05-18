@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b048ae1d576f12241b3688161bf7882f, type: 3}
+  m_Name: HeroTutorialTexts
+  m_EditorClassIdentifier: 
+  messages:
+  - title: Damage
+    body: 'You are the Damage Dealer.
+
+      Aim for the boss!'
+  - title: Tank
+    body: "You are the Tank. \nCast a shield to protect your allies!"
+  - title: Opfer
+    body: 'You are the Opfer. Poor you...
+
+      Better start running!'
+  - title: Switch
+    body: You can switch abilities with an ally by holding the Left Shoulder Button.
+  - title: BossWeakness
+    body: The Boss changes color from time to time. He receives double damage from
+      the color he has!
+  - title: DealDamage
+    body: 'The Boss is weak against your color!
+
+      Get him good!'
+  - title: GetDamage
+    body: 'The Boss is weak against your color!
+
+      Get the damage ability from your allies.'
+  - title: PassDamage
+    body: 'The Boss is weak against another color!
+
+      Pass your ability to the ally having the boss color.'

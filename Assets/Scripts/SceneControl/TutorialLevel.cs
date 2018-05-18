@@ -83,6 +83,9 @@ public class TutorialLevel : MonoBehaviour
             playerReadyUpdater.UpdateState(3, playerConfirms[3]);
         }
 
+        // Reset Texts on (Back) Button
+        if (Input.GetButtonDown(Constants.INPUT_DEBUGMODE)) ResetTexts();
+
         // Check and update Idle State of the game
         UpdateIdleState();
     }
@@ -107,6 +110,9 @@ public class TutorialLevel : MonoBehaviour
 
             homingMissile.enableCameraShake = true;
 
+            // Reset all TutorialTexts
+            ResetTexts();
+
             idleTimer = 0f;
             idleState = false;
         }
@@ -130,6 +136,12 @@ public class TutorialLevel : MonoBehaviour
         LeanTween.value(gameObject, from, to, duration).setEase(LeanTweenType.easeInOutQuad).setOnUpdate((float value) => {
             masterMixer.SetFloat(mixerGroup, value);
         });
+    }
+
+    void ResetTexts()
+    {
+        TutorialTextUpdater.BossColorChange(0);
+        GameManager.Instance.ResetPassedTimeForColorChange();
     }
     #endregion
 

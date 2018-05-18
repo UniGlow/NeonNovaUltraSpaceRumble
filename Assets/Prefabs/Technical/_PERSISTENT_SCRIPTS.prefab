@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4337183692543796}
   - component: {fileID: 114097331483697454}
   - component: {fileID: 114599229708516914}
-  - component: {fileID: 114608841911343774}
   - component: {fileID: 114332039601200462}
   - component: {fileID: 114724152049828894}
   - component: {fileID: 82899805016581398}
@@ -282,17 +281,6 @@ MonoBehaviour:
     type: 2}
   bossAIPrefab: {fileID: 1566906718194532, guid: 8c475107a1ba5c54695c67a9aba025ba,
     type: 2}
---- !u!114 &114608841911343774
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1136556033050532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aeaba798f6e2b1e46bc1395c3d22fe4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114724152049828894
 MonoBehaviour:
   m_ObjectHideFlags: 1

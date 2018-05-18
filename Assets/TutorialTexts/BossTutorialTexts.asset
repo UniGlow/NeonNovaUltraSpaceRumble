@@ -13,4 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   messages:
   - title: StrengthColor
+    body: 'Your shots have a different color every level.
+
+      You deal double damage to the Hero with that color!'
+  - title: WeaknessColor
     body: 
