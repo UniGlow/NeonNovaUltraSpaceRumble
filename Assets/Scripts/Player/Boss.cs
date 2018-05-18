@@ -27,6 +27,7 @@ public class Boss : Player {
     public PlayerColor WeaknessColor { get { return weaknessColor; } }
     [SerializeField] protected PlayerColor strengthColor;
     public PlayerColor StrengthColor { get { return strengthColor; } }
+    [SerializeField] float materialGlowOnSwitch = 3f;
 
     [Header("Sound")]
     [SerializeField]
@@ -88,15 +89,24 @@ public class Boss : Player {
 
 
     #region Public Funtcions
-    public void SetWeaknessColor(PlayerColor playerColor) {
+    public void SetWeaknessColor(PlayerColor playerColor)
+    {
         weaknessColor = playerColor;
 
         if (weaknessColor == PlayerColor.Blue) bossMeshRenderer.material = blueBossMat;
         else if (weaknessColor == PlayerColor.Green) bossMeshRenderer.material = greenBossMat;
         else if (weaknessColor == PlayerColor.Red) bossMeshRenderer.material = redBossMat;
+
+        Color newColor = bossMeshRenderer.material.color;
+        LeanTween.value(gameObject, bossMeshRenderer.material.color, bossMeshRenderer.material.color * materialGlowOnSwitch, 0.3f).setEaseInOutQuad().setLoopPingPong(1).setOnUpdate((Color value) =>
+        {
+            newColor = value;
+            bossMeshRenderer.material.color = newColor;
+        });
     }
 
-    public void SetStrengthColor(PlayerColor playerColor) {
+    public void SetStrengthColor(PlayerColor playerColor)
+    {
         strengthColor = playerColor;
 
         if (strengthColor == PlayerColor.Blue) activeStrengthColor = GameManager.Instance.BluePlayerColor;
