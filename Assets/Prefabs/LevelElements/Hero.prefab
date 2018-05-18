@@ -592,7 +592,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transmissionRange: 16
   transmissionDuration: 0.5
-  transmissionCooldown: 1
+  transmissionCooldown: 0.5
   transmissionSound: {fileID: 8300000, guid: 99a9562a9c5874546a152e7ded477cb5, type: 3}
   transmissionSoundVolume: 0.8
   transmissionLineRenderer: {fileID: 120313195406292594}
