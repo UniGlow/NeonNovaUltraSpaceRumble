@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 33170228428681286}
   - component: {fileID: 23009700766749820}
   - component: {fileID: 135035528115435666}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: WobbleBobble
   m_TagString: Shield
   m_Icon: {fileID: 0}
@@ -654,7 +654,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1521786441716086}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1.18

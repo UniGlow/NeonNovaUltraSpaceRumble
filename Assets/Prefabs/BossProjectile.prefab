@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4114927465813384}
   - component: {fileID: 96020439122713096}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BossMissileTRAIL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 23102060696140402}
   - component: {fileID: 54035799017248802}
   - component: {fileID: 114536464605641586}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BossProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}

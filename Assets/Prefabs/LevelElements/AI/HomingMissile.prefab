@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4209058358308108}
   - component: {fileID: 198654107289634342}
   - component: {fileID: 199613566119936920}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Electricity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4179323923863910}
   - component: {fileID: 198475825618857002}
   - component: {fileID: 199930231942266558}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Energy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4998107770932856}
   - component: {fileID: 198567016799768978}
   - component: {fileID: 199177980460787258}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Shine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 195328395692007618}
   - component: {fileID: 135057080856952782}
   - component: {fileID: 82123228787605642}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: HomingMissile
   m_TagString: HomingMissile
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 4364361989329078}
   - component: {fileID: 198632082052552476}
   - component: {fileID: 199371631270117586}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Orb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 4612987031776972}
   - component: {fileID: 198642335884399730}
   - component: {fileID: 199040651042765022}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Shine (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4472085190097254}
   - component: {fileID: 96401214189602430}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -434,6 +434,11 @@ MonoBehaviour:
   damage: 50
   hitSound: {fileID: 8300000, guid: 216323fd8e2633844a437d87bf28a085, type: 3}
   hitSoundVolume: 0.6
+  enableCameraShake: 1
+  magnitude: 5
+  roughness: 10
+  fadeIn: 0.1
+  fadeOut: 0.8
   hitPSHeroes: {fileID: 1086934119878164, guid: 9943029a31d4e3a44bf6d6676eecb198,
     type: 2}
   hitPSBoss: {fileID: 1086934119878164, guid: 9943029a31d4e3a44bf6d6676eecb198, type: 2}

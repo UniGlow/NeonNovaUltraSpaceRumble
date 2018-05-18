@@ -4342,7 +4342,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroHealthbar: {fileID: 224780069150096802}
   bossHealthbar: {fileID: 224289368073176956}
-  middleImage: {fileID: 114202279647826544}
+  middleImage: {fileID: 224428909162057584}
+  winBoss: {fileID: 21300000, guid: 46d6393e746f0431f87007375a6ecb40, type: 3}
+  winHeroes: {fileID: 21300000, guid: 84d40b48f58b2423eabe8d75a429824f, type: 3}
 --- !u!114 &114794456069536226
 MonoBehaviour:
   m_ObjectHideFlags: 1
