@@ -270,8 +270,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2ea1e843cf8dfa49963cccfa5f6a640, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorSwitchInterval: 15
-  critDamageMultiplier: 2
+  colorSwitchInterval: 12
+  critDamageMultiplier: 2.5
   delayAtLevelEnd: 9
   colorChangeSound: {fileID: 8300000, guid: cb3b90f02c52c49418a9a3fd50874d2b, type: 3}
   colorChangeSoundVolume: 0.8

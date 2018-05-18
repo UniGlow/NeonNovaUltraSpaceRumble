@@ -300,7 +300,7 @@ MonoBehaviour:
   rotateSpeed: 500
   playerNumber: 4
   attackDamagePerShot: 10
-  attackProjectileSpeed: 40
+  attackProjectileSpeed: 50
   attackProjectileLifeTime: 1
   attackCooldown: 0.2
   abilityDamagePerShot: 20
@@ -310,10 +310,12 @@ MonoBehaviour:
   abilityCooldown: 3
   weaknessColor: 2
   strengthColor: 0
+  materialGlowOnSwitch: 2
   abilitySound: {fileID: 8300000, guid: ddbdc3544101111438a9b6c3b546a294, type: 3}
   abilitySoundVolume: 1
   attackSound: {fileID: 8300000, guid: cf3ba19d968b8e249b2a4b68126fb355, type: 3}
   attackSoundVolume: 0.8
+  enableCameraShake: 1
   magnitude: 1
   roughness: 10
   fadeIn: 0.1

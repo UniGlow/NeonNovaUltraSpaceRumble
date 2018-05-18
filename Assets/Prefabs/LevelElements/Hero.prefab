@@ -547,7 +547,7 @@ MonoBehaviour:
   playerNumber: 1
   damagePerShot: 20
   attackCooldown: 0.15
-  projectileSpeed: 40
+  projectileSpeed: 50
   defendCooldown: 3
   defendDuration: 2
   speedBoost: 0.5
@@ -855,8 +855,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Radius: 1.2
+  m_Center: {x: 0, y: 0.6, z: 0}
 --- !u!198 &198289280151744390
 ParticleSystem:
   m_ObjectHideFlags: 1
