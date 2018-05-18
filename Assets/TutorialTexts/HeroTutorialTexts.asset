@@ -38,4 +38,4 @@ MonoBehaviour:
   - title: PassDamage
     body: 'The Boss is weak against another color!
 
-      Pass your ability to the ally having the boss color.'
+      Pass your ability to the ally with the boss color.'

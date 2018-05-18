@@ -25,6 +25,7 @@ public class AudioManager : SubscribedBehaviour {
 
     AudioSource audioSource;
     AudioSource audioSourceSFX;
+    bool startingTrack;
 
     public static AudioManager Instance;
     #endregion
@@ -85,6 +86,9 @@ public class AudioManager : SubscribedBehaviour {
 
     public void StartTrack(string name)
     {
+        if (startingTrack) return;
+        startingTrack = true;
+
         MusicTrack track = GetTrack(name);
         audioSource.clip = track.intro;
         audioSource.volume = track.volume;
@@ -95,6 +99,9 @@ public class AudioManager : SubscribedBehaviour {
 
     public void StartTrack(MusicTrack track)
     {
+        if (startingTrack) return;
+        startingTrack = true;
+
         audioSource.clip = track.intro;
         audioSource.volume = track.volume;
         audioSource.loop = false;
@@ -104,6 +111,9 @@ public class AudioManager : SubscribedBehaviour {
 
     public void StartTutorialTrack()
     {
+        if (startingTrack) return;
+        startingTrack = true;
+
         MusicTrack track = GetTrack("TutorialTrack");
         audioSource.clip = track.intro;
         audioSource.volume = track.volume;
@@ -112,7 +122,11 @@ public class AudioManager : SubscribedBehaviour {
         StartCoroutine(StartAudioLoop(track));
     }
 
-    public void StartRandomTrack() {
+    public void StartRandomTrack()
+    {
+        if (startingTrack) return;
+        startingTrack = true;
+
         MusicTrack track = musicTracks[Random.Range(0, musicTracks.Count)];
         audioSource.clip = track.intro;
         audioSource.volume = track.volume;
@@ -158,6 +172,7 @@ public class AudioManager : SubscribedBehaviour {
                 audioSource.clip = track.loop;
                 audioSource.loop = true;
                 audioSource.Play();
+                startingTrack = false;
                 yield break;
             }
         }
@@ -166,6 +181,7 @@ public class AudioManager : SubscribedBehaviour {
             + "Starting track manually.");
         audioSource.clip = track.loop;
         audioSource.loop = true;
+        startingTrack = false;
         audioSource.Play();
     }
 
