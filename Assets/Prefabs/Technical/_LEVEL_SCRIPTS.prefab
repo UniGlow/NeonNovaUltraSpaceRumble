@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc37e2d9ab1189e438c2a42b038e1d5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winningPointLead: 300
+  winningPointLead: 500
   endlessHealth: 0
   winText: {fileID: 0}
   fadeInTime: 2
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f302a3b54f0da0f48886b44ec635434b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winningPointLead: 300
+  winningPointLead: 500
   endlessHealth: 0
   winText: {fileID: 0}
   fadeInTime: 2

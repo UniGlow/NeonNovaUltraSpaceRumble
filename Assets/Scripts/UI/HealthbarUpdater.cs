@@ -10,6 +10,12 @@ public class HealthbarUpdater : MonoBehaviour
 {
 
     #region Variable Declarations
+    [Space]
+    [Range(1f, 2f)]
+    [SerializeField] float punchAmountOnHit = 1.2f;
+    [SerializeField] float punchDuration = 0.3f;
+
+    [Header("References")]
     [SerializeField] RectTransform heroHealthbar;
     [SerializeField] RectTransform bossHealthbar;
     [SerializeField] RectTransform middleImage;
@@ -64,6 +70,7 @@ public class HealthbarUpdater : MonoBehaviour
 
         Vector2 newImagePosition = new Vector2(heroHealthbar.sizeDelta.x - neutralWidth, middleImage.anchoredPosition.y);
         middleImage.anchoredPosition = newImagePosition;
+        LeanTween.scale(middleImage, middleImage.localScale * punchAmountOnHit, punchDuration).setEasePunch();
     }
 	#endregion
 	

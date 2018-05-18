@@ -29,11 +29,7 @@ public class Health : MonoBehaviour {
     virtual protected void Start()
     {
         healthbarUpdater = GameObject.FindObjectOfType<HealthbarUpdater>();
-    }
-
-    virtual protected void Update()
-    {
-
+        currentDamage = 0;
     }
     #endregion
 

@@ -30,10 +30,6 @@ public class BossHealth : Health {
             Destroy(this);
         }
     }
-	
-	override protected void Update() {
-        base.Update();
-	}
     #endregion
 
 
@@ -46,13 +42,13 @@ public class BossHealth : Health {
         base.TakeDamage(damage);
 
         // Won?
-        if (HeroHealth.Instance.CurrentDamage >= currentDamage + winningPointLead)
+        if (currentDamage >= HeroHealth.Instance.CurrentDamage + HeroHealth.Instance.WinningPointLead)
         {
-            GameEvents.StartLevelCompleted("Boss");
+            GameEvents.StartLevelCompleted("Heroes");
 
             Vector3 originalScale = winText.transform.localScale;
             winText.transform.localScale = Vector3.zero;
-            winText.text = "Boss Wins !";
+            winText.text = "Heroes Win !";
             LeanTween.scale(winText.gameObject, originalScale, 0.7f).setEase(LeanTweenType.easeOutBounce).setIgnoreTimeScale(true).setDelay(1f);
             winText.gameObject.SetActive(true);
         }
