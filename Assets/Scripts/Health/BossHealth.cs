@@ -10,10 +10,6 @@ public class BossHealth : Health {
 
     #region Variable Declarations
     public static BossHealth Instance;
-
-    [SerializeField] SpriteRenderer healthIndicator;
-
-    public SpriteRenderer HealthIndicator { get { return healthIndicator; } set { healthIndicator = value; } }
     #endregion
 
 
@@ -34,12 +30,6 @@ public class BossHealth : Health {
             Destroy(this);
         }
     }
-
-    override protected void Start() {
-        base.Start();
-
-        healthIndicator.sprite = healthbarSprites[healthbarSprites.Length-1];
-	}
 	
 	override protected void Update() {
         base.Update();
@@ -55,18 +45,14 @@ public class BossHealth : Health {
 
         base.TakeDamage(damage);
 
-        // Update Healthbar
-        healthIndicator.sprite = healthbarSprites[Mathf.FloorToInt(((float)currentHealth / (float)maxHealth) * healthbarSprites.Length)];
-
-        // Dead?
-        if (currentHealth <= 0) {
-            healthIndicator.enabled = false;
-
-            GameEvents.StartLevelCompleted("Heroes");
+        // Won?
+        if (HeroHealth.Instance.CurrentDamage >= currentDamage + winningPointLead)
+        {
+            GameEvents.StartLevelCompleted("Boss");
 
             Vector3 originalScale = winText.transform.localScale;
             winText.transform.localScale = Vector3.zero;
-            winText.text = "Heroes Win !";
+            winText.text = "Boss Wins !";
             LeanTween.scale(winText.gameObject, originalScale, 0.7f).setEase(LeanTweenType.easeOutBounce).setIgnoreTimeScale(true).setDelay(1f);
             winText.gameObject.SetActive(true);
         }

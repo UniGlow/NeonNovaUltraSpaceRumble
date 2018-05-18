@@ -9,11 +9,6 @@ public class HeroHealth : Health {
 
     #region Variable Declarations
     public static HeroHealth Instance;
-
-    [Header("Object References")]
-    public SpriteRenderer[] healthIndicators;
-
-    private float originalHealthbarScale;
     #endregion
 
 
@@ -35,14 +30,6 @@ public class HeroHealth : Health {
         }
     }
 
-    override protected void Start() {
-        base.Start();
-
-        foreach (SpriteRenderer spriteRend in healthIndicators) {
-            spriteRend.sprite = healthbarSprites[healthbarSprites.Length - 1];
-        }
-    }
-
     override protected void Update() {
         base.Update();
     }
@@ -57,19 +44,14 @@ public class HeroHealth : Health {
 
         base.TakeDamage(damage);
 
-        // Update Healthbars
-        foreach (SpriteRenderer spriteRend in healthIndicators) {
-            spriteRend.sprite = healthbarSprites[Mathf.FloorToInt(((float)currentHealth / (float)maxHealth) * healthbarSprites.Length)];
-        }
-
-        // Dead?
-        if (currentHealth <= 0)
+        // Won?
+        if (BossHealth.Instance.CurrentDamage >= currentDamage + winningPointLead)
         {
-            GameEvents.StartLevelCompleted("Boss");
+            GameEvents.StartLevelCompleted("Heroes");
 
             Vector3 originalScale = winText.transform.localScale;
             winText.transform.localScale = Vector3.zero;
-            winText.text = "Boss Wins !";
+            winText.text = "Heroes Win !";
             LeanTween.scale(winText.gameObject, originalScale, 0.7f).setEase(LeanTweenType.easeOutBounce).setIgnoreTimeScale(true).setDelay(1f);
             winText.gameObject.SetActive(true);
         }

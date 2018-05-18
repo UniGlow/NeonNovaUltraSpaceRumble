@@ -25,9 +25,9 @@ public class GameManager : SubscribedBehaviour {
 
     [Header("AI Adjustments")]
     [SerializeField] bool setupAI = true;
-    [SerializeField] int bossHealthSolo = 1500;
-    [SerializeField] int bossHealthDuo = 1000;
-    [SerializeField] int bossHealthTriple = 1000;
+    [SerializeField] int bossWinningSolo = 500;
+    [SerializeField] int bossWinningDuo = 500;
+    [SerializeField] int bossWinningTriple = 500;
 
     [Header("References")]
     [SerializeField] Color greenPlayerColor;
@@ -309,12 +309,6 @@ public class GameManager : SubscribedBehaviour {
             opferAI.PlayerColor = opfer.transform.parent.GetComponent<Hero>().PlayerColor;
             Destroy(opfer.transform.parent.gameObject);
 
-            // Set AI HealthIndicators
-            GameObject levelScrpits = GameObject.Find("_LEVEL_SCRIPTS");
-            levelScrpits.GetComponent<HeroHealth>().healthIndicators[2] = damageAI.healthIndicator;
-            levelScrpits.GetComponent<HeroHealth>().healthIndicators[1] = tankAI.healthIndicator;
-            levelScrpits.GetComponent<HeroHealth>().healthIndicators[0] = opferAI.healthIndicator;
-
             // Set camera targets
             MultipleTargetCamera cameraRig = Camera.main.transform.parent.GetComponent<MultipleTargetCamera>();
             cameraRig.targets[2] = damageAI.transform;
@@ -323,7 +317,7 @@ public class GameManager : SubscribedBehaviour {
 
             // Set boss playerNumber and health
             boss.transform.parent.GetComponent<Player>().PlayerNumber = 1;
-            levelScrpits.GetComponent<BossHealth>().MaxHealth = bossHealthSolo;
+            BossHealth.Instance.WinningPointLead = bossWinningSolo;
         }
         else if(playerCount == 2)
         {
@@ -340,11 +334,6 @@ public class GameManager : SubscribedBehaviour {
             bossAI.SetWeaknessColor(boss.transform.parent.GetComponent<Boss>().WeaknessColor);
             Destroy(boss.transform.parent.gameObject);
 
-            // Set AI HealthIndicators
-            GameObject levelScrpits = GameObject.Find("_LEVEL_SCRIPTS");
-            levelScrpits.GetComponent<HeroHealth>().healthIndicators[0] = opferAI.healthIndicator;
-            levelScrpits.GetComponent<BossHealth>().HealthIndicator = bossAI.healthIndicator;
-
             // Set camera targets
             MultipleTargetCamera cameraRig = Camera.main.transform.parent.GetComponent<MultipleTargetCamera>();
             cameraRig.targets[0] = opferAI.transform;
@@ -353,7 +342,7 @@ public class GameManager : SubscribedBehaviour {
             // Set tank and opfer playerNumber and health
             damage.transform.parent.GetComponent<Player>().PlayerNumber = 1;
             tank.transform.parent.GetComponent<Player>().PlayerNumber = 2;
-            levelScrpits.GetComponent<BossHealth>().MaxHealth = bossHealthDuo;
+            BossHealth.Instance.WinningPointLead = bossWinningDuo;
         }
         else if (playerCount == 3)
         {
@@ -363,10 +352,6 @@ public class GameManager : SubscribedBehaviour {
             bossAI.SetWeaknessColor(boss.transform.parent.GetComponent<Boss>().WeaknessColor);
             Destroy(boss.transform.parent.gameObject);
 
-            // Set AI HealthIndicators
-            GameObject levelScrpits = GameObject.Find("_LEVEL_SCRIPTS");
-            levelScrpits.GetComponent<BossHealth>().HealthIndicator = bossAI.healthIndicator;
-
             // Set camera targets
             MultipleTargetCamera cameraRig = Camera.main.transform.parent.GetComponent<MultipleTargetCamera>();
             cameraRig.targets[3] = bossAI.transform;
@@ -375,7 +360,7 @@ public class GameManager : SubscribedBehaviour {
             damage.transform.parent.GetComponent<Player>().PlayerNumber = 1;
             tank.transform.parent.GetComponent<Player>().PlayerNumber = 2;
             opfer.transform.parent.GetComponent<Player>().PlayerNumber = 3;
-            levelScrpits.GetComponent<BossHealth>().MaxHealth = bossHealthTriple;
+            BossHealth.Instance.WinningPointLead = bossWinningTriple;
         }
         else {
             // Do nothing for a 4 player game (scene is already set up for this)

@@ -9,21 +9,18 @@ using TMPro;
 public class Health : MonoBehaviour {
 
     #region Variable Declarations
-    [SerializeField] protected int maxHealth = 1000;
+    [SerializeField] protected int winningPointLead = 500;
     [SerializeField] protected bool endlessHealth;
 
     [SerializeField] protected TextMeshProUGUI winText;
     [SerializeField] protected float fadeInTime = 2f;
 
-    [Header("Object References")]
-    [SerializeField] protected Sprite[] healthbarSprites;
-
-    protected int currentHealth;
+    protected int currentDamage;
     protected HealthbarUpdater healthbarUpdater;
-
-    public int MaxHealth { get { return maxHealth; } set { maxHealth = value; } }
+    
+    public int WinningPointLead { get { return winningPointLead; } set { winningPointLead = value; } }
     public TextMeshProUGUI WinText { get { return winText; } }
-    public int CurrentHealth { get { return currentHealth; } }
+    public int CurrentDamage { get { return currentDamage; } }
     #endregion
 
 
@@ -32,7 +29,6 @@ public class Health : MonoBehaviour {
     virtual protected void Start()
     {
         healthbarUpdater = GameObject.FindObjectOfType<HealthbarUpdater>();
-        currentHealth = maxHealth;
     }
 
     virtual protected void Update()
@@ -48,13 +44,9 @@ public class Health : MonoBehaviour {
     {
         if (endlessHealth) return;
 
-        currentHealth -= damage;
+        currentDamage += damage;
 
-        if (currentHealth <= 0) {
-            currentHealth = 0;
-        }
-
-        healthbarUpdater.UpdateHealthbar(HeroHealth.Instance.CurrentHealth, BossHealth.Instance.CurrentHealth);
+        healthbarUpdater.UpdateHealthbar(HeroHealth.Instance.CurrentDamage, BossHealth.Instance.CurrentDamage);
     }
     #endregion
 }
