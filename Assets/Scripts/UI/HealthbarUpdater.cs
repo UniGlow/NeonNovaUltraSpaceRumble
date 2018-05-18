@@ -26,8 +26,6 @@ public class HealthbarUpdater : MonoBehaviour
 
     float neutralWidth;
     float totalWidth;
-    float winningPointLeadHeroes;
-    float winningPointLeadBoss;
 	#endregion
 	
 	
@@ -37,8 +35,6 @@ public class HealthbarUpdater : MonoBehaviour
 	{
         neutralWidth = heroHealthbar.sizeDelta.x;
         totalWidth = neutralWidth * 2;
-        winningPointLeadHeroes = HeroHealth.Instance.WinningPointLead;
-        winningPointLeadBoss = BossHealth.Instance.WinningPointLead;
     }
 	#endregion
 	
@@ -50,7 +46,7 @@ public class HealthbarUpdater : MonoBehaviour
         // Heroes winning
         if (bossDamage >= heroDamage)
         {
-            heroHealthbar.sizeDelta = new Vector2(((bossDamage - heroDamage) / winningPointLeadHeroes) * neutralWidth + neutralWidth, heroHealthbar.sizeDelta.y);
+            heroHealthbar.sizeDelta = new Vector2(((bossDamage - heroDamage) / HeroHealth.Instance.WinningPointLead) * neutralWidth + neutralWidth, heroHealthbar.sizeDelta.y);
             if (heroHealthbar.sizeDelta.x > totalWidth) heroHealthbar.sizeDelta = new Vector2(totalWidth, heroHealthbar.sizeDelta.y);
 
             bossHealthbar.sizeDelta = new Vector3(totalWidth - heroHealthbar.sizeDelta.x, bossHealthbar.sizeDelta.y);
@@ -60,7 +56,7 @@ public class HealthbarUpdater : MonoBehaviour
         // Boss winning
         else
         {
-            bossHealthbar.sizeDelta = new Vector2(((heroDamage - bossDamage) / winningPointLeadBoss) * neutralWidth + neutralWidth, bossHealthbar.sizeDelta.y);
+            bossHealthbar.sizeDelta = new Vector2(((heroDamage - bossDamage) / BossHealth.Instance.WinningPointLead) * neutralWidth + neutralWidth, bossHealthbar.sizeDelta.y);
             if (bossHealthbar.sizeDelta.x > totalWidth) bossHealthbar.sizeDelta = new Vector2(totalWidth, bossHealthbar.sizeDelta.y);
 
             heroHealthbar.sizeDelta = new Vector2(totalWidth - bossHealthbar.sizeDelta.x, heroHealthbar.sizeDelta.y);

@@ -15,8 +15,10 @@ public class GameManager : SubscribedBehaviour {
     public float ColorSwitchInterval { get { return colorSwitchInterval; } set { colorSwitchInterval = value; } }
     [SerializeField] float critDamageMultiplier = 2f;
     public float CritDamageMultiplier { get { return critDamageMultiplier; } }
+    [SerializeField] protected float intensifyTime = 60;
+    [Range(0f, 0.9f)]
+    [SerializeField] protected float intensifyAmount = 0.3f;
     [SerializeField] float delayAtLevelEnd = 12f;
-    float delayForActionStart = 4f;
 
     [Header("Sound")]
     [SerializeField] AudioClip colorChangeSound;
@@ -41,7 +43,8 @@ public class GameManager : SubscribedBehaviour {
 
 
 
-    private float passedTime;
+    private float colorChangeTimer;
+    float delayForActionStart = 4f;
     private Boss boss;
     public Boss Boss { get { return boss; } }
     AudioSource audioSource;
@@ -49,6 +52,7 @@ public class GameManager : SubscribedBehaviour {
     TextMeshProUGUI winText;
     int playerCount;
     public int PlayerCount { get { return playerCount; } }
+    float intensifyTimer;
 
     public static GameManager Instance;
     #endregion
@@ -96,10 +100,13 @@ public class GameManager : SubscribedBehaviour {
     {
         if (Input.GetButtonDown(Constants.INPUT_DEBUGMODE) && !SceneManager.GetActiveScene().name.Contains("Tutorial")) GameEvents.StartLevelCompleted("Heroes");
 
-        passedTime += Time.deltaTime;
+        colorChangeTimer += Time.deltaTime;
+        intensifyTimer += Time.deltaTime;
 
         HandleColorSwitch();
-	}
+
+        HandleIntensify();
+    }
 
     override protected void OnDisable()
     {
@@ -120,7 +127,8 @@ public class GameManager : SubscribedBehaviour {
 
     protected override void OnLevelStarted()
     {
-        passedTime = 0f;
+        colorChangeTimer = 0f;
+        intensifyTimer = 0f;
     }
     #endregion
 
@@ -158,7 +166,7 @@ public class GameManager : SubscribedBehaviour {
 
     public void ResetPassedTimeForColorChange()
     {
-        passedTime = 0f;
+        colorChangeTimer = 0f;
     }
 
     public string GetActiveSceneName()
@@ -199,15 +207,15 @@ public class GameManager : SubscribedBehaviour {
 
     void HandleColorSwitch() {
         if (SceneManager.GetActiveScene().name.Contains("Level")) {
-            if (passedTime >= colorSwitchInterval - 0.5f && !colorChangeSoundPlayed) {
+            if (colorChangeTimer >= colorSwitchInterval - 0.5f && !colorChangeSoundPlayed) {
                 audioSource.PlayOneShot(colorChangeSound, colorChangeSoundVolume);
                 colorChangeSoundPlayed = true;
             }
             // Set new Boss color
-            if (passedTime >= colorSwitchInterval) {
+            if (colorChangeTimer >= colorSwitchInterval) {
                 ChangeBossColor();
                 if (SceneManager.GetActiveScene().name.Contains("Tutorial")) TutorialTextUpdater.BossColorChange();
-                passedTime = 0f;
+                colorChangeTimer = 0f;
                 colorChangeSoundPlayed = false;
             }
         }
@@ -269,6 +277,31 @@ public class GameManager : SubscribedBehaviour {
                 }
             }
         //}
+    }
+
+    void HandleIntensify()
+    {
+        if (intensifyTimer >= intensifyTime)
+        {
+            // Set new winningPointLeads
+            BossHealth.Instance.WinningPointLead = Mathf.RoundToInt(BossHealth.Instance.WinningPointLead * (1 - intensifyAmount));
+            HeroHealth.Instance.WinningPointLead = Mathf.RoundToInt(HeroHealth.Instance.WinningPointLead * (1 - intensifyAmount));
+
+            // Close the damage gaps to keep the healthbar seemingly unchanged
+            int damageDif = BossHealth.Instance.CurrentDamage - HeroHealth.Instance.CurrentDamage;
+            // Heroes winning
+            if (damageDif >= 0)
+            {
+                HeroHealth.Instance.CurrentDamage = Mathf.RoundToInt(HeroHealth.Instance.CurrentDamage + Mathf.Abs(damageDif) * (1 - intensifyAmount));
+            }
+            // Boss winning
+            else
+            {
+                BossHealth.Instance.CurrentDamage = Mathf.RoundToInt(BossHealth.Instance.CurrentDamage + Mathf.Abs(damageDif) * (1 - intensifyAmount));
+            }
+
+            intensifyTimer = 0f;
+        }
     }
 
     void SetupAICharacters()

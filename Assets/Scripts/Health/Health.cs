@@ -17,10 +17,11 @@ public class Health : MonoBehaviour {
 
     protected int currentDamage;
     protected HealthbarUpdater healthbarUpdater;
+    protected float timer;
     
     public int WinningPointLead { get { return winningPointLead; } set { winningPointLead = value; } }
     public TextMeshProUGUI WinText { get { return winText; } }
-    public int CurrentDamage { get { return currentDamage; } }
+    public int CurrentDamage { get { return currentDamage; } set { currentDamage = value; } }
     #endregion
 
 

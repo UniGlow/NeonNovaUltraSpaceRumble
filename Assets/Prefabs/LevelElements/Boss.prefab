@@ -488,7 +488,7 @@ MonoBehaviour:
   attackDamagePerShot: 10
   attackProjectileSpeed: 50
   attackProjectileLifeTime: 1
-  attackCooldown: 0.2
+  attackCooldown: 0.18
   abilityDamagePerShot: 20
   numberOfProjectiles: 20
   abilityProjectileSpeed: 20
