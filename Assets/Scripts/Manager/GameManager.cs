@@ -197,32 +197,32 @@ public class GameManager : SubscribedBehaviour {
     /// </summary>
     void ChangeBossColor() {
         // Set strength color
-        if (Random.Range(0, 2) == 0) {
-            if (boss.StrengthColor == PlayerColor.Blue) {
-                if (Random.Range(0, 2) == 0) {
-                    boss.SetStrengthColor(PlayerColor.Green);
-                }
-                else {
-                    boss.SetStrengthColor(PlayerColor.Red);
-                }
-            } else if (boss.StrengthColor == PlayerColor.Green) {
-                if (Random.Range(0, 2) == 0) {
-                    boss.SetStrengthColor(PlayerColor.Blue);
-                }
-                else {
-                    boss.SetStrengthColor(PlayerColor.Red);
-                }
-            } else if (boss.StrengthColor == PlayerColor.Red) {
-                if (Random.Range(0, 2) == 0) {
-                    boss.SetStrengthColor(PlayerColor.Green);
-                }
-                else {
-                    boss.SetStrengthColor(PlayerColor.Blue);
-                }
-            }
-        }
-        // Or set weakness color
-        else {
+        //if (Random.Range(0, 2) == 0) {
+        //    if (boss.StrengthColor == PlayerColor.Blue) {
+        //        if (Random.Range(0, 2) == 0) {
+        //            boss.SetStrengthColor(PlayerColor.Green);
+        //        }
+        //        else {
+        //            boss.SetStrengthColor(PlayerColor.Red);
+        //        }
+        //    } else if (boss.StrengthColor == PlayerColor.Green) {
+        //        if (Random.Range(0, 2) == 0) {
+        //            boss.SetStrengthColor(PlayerColor.Blue);
+        //        }
+        //        else {
+        //            boss.SetStrengthColor(PlayerColor.Red);
+        //        }
+        //    } else if (boss.StrengthColor == PlayerColor.Red) {
+        //        if (Random.Range(0, 2) == 0) {
+        //            boss.SetStrengthColor(PlayerColor.Green);
+        //        }
+        //        else {
+        //            boss.SetStrengthColor(PlayerColor.Blue);
+        //        }
+        //    }
+        //}
+        //// Or set weakness color
+        //else {
             if (boss.WeaknessColor == PlayerColor.Blue) {
                 if (Random.Range(0, 2) == 0) {
                     boss.SetWeaknessColor(PlayerColor.Green);
@@ -247,7 +247,7 @@ public class GameManager : SubscribedBehaviour {
                     boss.SetWeaknessColor(PlayerColor.Blue);
                 }
             }
-        }
+        //}
     }
 
     void SetupAICharacters()
