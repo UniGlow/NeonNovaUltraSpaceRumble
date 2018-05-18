@@ -44,7 +44,7 @@ public class AudioManager : SubscribedBehaviour {
 
             //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of an AudioManager.
             Debug.Log("There can only be one AudioManager instantiated. Destroying this Instance...");
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 
@@ -152,15 +152,17 @@ public class AudioManager : SubscribedBehaviour {
 
 
     IEnumerator StartAudioLoop(MusicTrack track) {
-        for (float i = 0; i < track.intro.length + 0.5f; i+=Time.deltaTime) {
+        for (float i = 0; i < track.intro.length + 1f; i+=Time.deltaTime) {
             yield return null;
             if (!audioSource.isPlaying) {
                 audioSource.clip = track.loop;
                 audioSource.loop = true;
                 audioSource.Play();
-                break;
+                yield break;
             }
         }
+
+        Debug.LogError("Track \"" + track + "\" couldn't start his loop. track.intro.length: " + track.intro.length + " audioSource.isPlaying: " + audioSource.isPlaying);
     }
 
     IEnumerator PlayWinSoundDelayed(string winner) {

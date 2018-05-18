@@ -86,7 +86,10 @@ public class GameManager : SubscribedBehaviour {
 #endif
     }
 
-    private void Update() {
+    private void Update()
+    {
+        if (Input.GetButtonDown(Constants.INPUT_DEBUGMODE) && !SceneManager.GetActiveScene().name.Contains("Tutorial")) GameEvents.StartLevelCompleted("Heroes");
+
         passedTime += Time.deltaTime;
 
         HandleColorSwitch();
