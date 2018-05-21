@@ -18,6 +18,7 @@ public class Constants
     public static readonly string INPUT_ESCAPE = "Escape";
     public static readonly string INPUT_SUBMIT = "Submit";
     public static readonly string INPUT_CANCEL = "Cancel";
+    public static readonly string INPUT_RESET = "Reset";
     #endregion
 
     #region Tags and Layers

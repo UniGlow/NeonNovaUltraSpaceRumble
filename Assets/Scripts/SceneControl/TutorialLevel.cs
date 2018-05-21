@@ -82,7 +82,7 @@ public class TutorialLevel : MonoBehaviour
         }
 
         // Reset Texts on (Back) Button
-        if (Input.GetButtonDown(Constants.INPUT_DEBUGMODE)) ResetTexts();
+        if (Input.GetButtonDown(Constants.INPUT_RESET)) ResetTexts();
 
         // Check and update Idle State of the game
         UpdateIdleState();

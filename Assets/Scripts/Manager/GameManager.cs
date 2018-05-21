@@ -14,11 +14,15 @@ public class GameManager : SubscribedBehaviour {
     [SerializeField] float colorSwitchInterval = 10f;
     public float ColorSwitchInterval { get { return colorSwitchInterval; } set { colorSwitchInterval = value; } }
     [SerializeField] float critDamageMultiplier = 2f;
-    public float CritDamageMultiplier { get { return critDamageMultiplier; } }
-    [SerializeField] protected float intensifyTime = 60;
+    public float CritDamageMultiplier { get { return critDamageMultiplier; } set { critDamageMultiplier = value; } }
+    [SerializeField] public float intensifyTime = 60;
     [Range(0f, 0.9f)]
-    [SerializeField] protected float intensifyAmount = 0.3f;
+    [SerializeField] public float intensifyAmount = 0.3f;
     [SerializeField] float delayAtLevelEnd = 12f;
+    [Space]
+    [SerializeField] bool overrideLevelPointLimits;
+    [SerializeField] public int heroesWinningPointLead = 500;
+    [SerializeField] public int bossWinningPointLead = 500;
 
     [Header("Sound")]
     [SerializeField] AudioClip colorChangeSound;
@@ -98,8 +102,6 @@ public class GameManager : SubscribedBehaviour {
 
     private void Update()
     {
-        if (Input.GetButtonDown(Constants.INPUT_DEBUGMODE) && !SceneManager.GetActiveScene().name.Contains("Tutorial")) GameEvents.StartLevelCompleted("Heroes");
-
         colorChangeTimer += Time.deltaTime;
         intensifyTimer += Time.deltaTime;
 
@@ -194,6 +196,7 @@ public class GameManager : SubscribedBehaviour {
             else
             {
                 if (setupAI) SetupAICharacters();
+                if (overrideLevelPointLimits) OverrideLevelPointLimits();
                 StartCoroutine(StartTheAction());
             }
         }
@@ -293,6 +296,12 @@ public class GameManager : SubscribedBehaviour {
 
             intensifyTimer = 0f;
         }
+    }
+
+    void OverrideLevelPointLimits()
+    {
+        HeroHealth.Instance.WinningPointLead = heroesWinningPointLead;
+        BossHealth.Instance.WinningPointLead = bossWinningPointLead;
     }
 
     void SetupAICharacters()
