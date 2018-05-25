@@ -320,6 +320,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicTracks:
+  - {fileID: 11400000, guid: dc118b1a3d2f334428767bcd546f7dac, type: 2}
+  - {fileID: 11400000, guid: 27d65f21b0fb9294cb21a92346fdb487, type: 2}
   - {fileID: 11400000, guid: 200b072a36f49c54cb988e75e003ae4a, type: 2}
   - {fileID: 11400000, guid: ef1baf16c61b67a4aaea8b515fa61cf9, type: 2}
   - {fileID: 11400000, guid: 55d2cad03fa76ce4f92b6bd0f1cab1d3, type: 2}

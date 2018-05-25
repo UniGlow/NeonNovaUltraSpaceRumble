@@ -127,7 +127,8 @@ public class AudioManager : SubscribedBehaviour {
         if (startingTrack) return;
         startingTrack = true;
 
-        MusicTrack track = musicTracks[Random.Range(0, musicTracks.Count)];
+        // Ignore OriginalTrack and TutorialTrack
+        MusicTrack track = musicTracks[Random.Range(2, musicTracks.Count)];
         audioSource.clip = track.intro;
         audioSource.volume = track.volume;
         audioSource.loop = false;
