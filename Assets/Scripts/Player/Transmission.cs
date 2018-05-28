@@ -144,6 +144,7 @@ public class Transmission : MonoBehaviour {
 
             transmissionPS.Play();
             receiver.GetComponent<Transmission>().transmissionPS.Play();
+            receiver.GetComponent<Transmission>().EndTransmission();
 
             EndTransmission();
         }
