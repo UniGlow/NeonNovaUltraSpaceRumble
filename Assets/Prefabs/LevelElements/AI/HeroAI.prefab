@@ -568,7 +568,7 @@ MonoBehaviour:
   damageCornerPeek: 0.2
   attackRayMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 513
 --- !u!120 &120313195406292594
 LineRenderer:
   m_ObjectHideFlags: 1

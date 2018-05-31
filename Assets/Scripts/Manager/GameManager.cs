@@ -187,7 +187,7 @@ public class GameManager : SubscribedBehaviour {
         {
 
             winText = GameObject.FindObjectOfType<HeroHealth>().WinText;
-            GameObject.FindGameObjectWithTag(Constants.TAG_HOMING_MISSILE).GetComponent<HomingMissile>().PauseMissile(true);
+            //GameObject.FindGameObjectWithTag(Constants.TAG_HOMING_MISSILE).GetComponent<HomingMissile>().PauseMissile(true);
 
             if (SceneManager.GetActiveScene().name.Contains("Tutorial"))
             {
@@ -332,21 +332,21 @@ public class GameManager : SubscribedBehaviour {
             damageAI.PlayerColor = damage.transform.parent.GetComponent<Hero>().PlayerColor;
             Destroy(damage.transform.parent.gameObject);
 
-            HeroAI tankAI = GameObject.Instantiate(heroAIPrefab, tank.transform.position, tank.transform.rotation).GetComponent<HeroAI>();
-            tankAI.ability = Ability.Tank;
-            tankAI.PlayerColor = tank.transform.parent.GetComponent<Hero>().PlayerColor;
-            Destroy(tank.transform.parent.gameObject);
+            //HeroAI tankAI = GameObject.Instantiate(heroAIPrefab, tank.transform.position, tank.transform.rotation).GetComponent<HeroAI>();
+            //tankAI.ability = Ability.Tank;
+            //tankAI.PlayerColor = tank.transform.parent.GetComponent<Hero>().PlayerColor;
+            //Destroy(tank.transform.parent.gameObject);
 
-            HeroAI opferAI = GameObject.Instantiate(heroAIPrefab, opfer.transform.position, opfer.transform.rotation).GetComponent<HeroAI>();
-            opferAI.ability = Ability.Opfer;
-            opferAI.PlayerColor = opfer.transform.parent.GetComponent<Hero>().PlayerColor;
-            Destroy(opfer.transform.parent.gameObject);
+            //HeroAI opferAI = GameObject.Instantiate(heroAIPrefab, opfer.transform.position, opfer.transform.rotation).GetComponent<HeroAI>();
+            //opferAI.ability = Ability.Opfer;
+            //opferAI.PlayerColor = opfer.transform.parent.GetComponent<Hero>().PlayerColor;
+            //Destroy(opfer.transform.parent.gameObject);
 
             // Set camera targets
             MultipleTargetCamera cameraRig = Camera.main.transform.parent.GetComponent<MultipleTargetCamera>();
-            cameraRig.targets[2] = damageAI.transform;
-            cameraRig.targets[1] = tankAI.transform;
-            cameraRig.targets[0] = opferAI.transform;
+            cameraRig.targets[0] = damageAI.transform;
+            //cameraRig.targets[1] = tankAI.transform;
+            //cameraRig.targets[0] = opferAI.transform;
 
             // Set boss playerNumber and health
             boss.transform.parent.GetComponent<Player>().PlayerNumber = 1;
