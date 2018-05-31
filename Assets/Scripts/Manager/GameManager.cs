@@ -309,8 +309,6 @@ public class GameManager : SubscribedBehaviour {
         playerCount = Input.GetJoystickNames().Length;
 
         // Get references
-        GameObject boss = GameObject.FindGameObjectWithTag(Constants.TAG_BOSS);
-
         GameObject[] heroes = GameObject.FindGameObjectsWithTag(Constants.TAG_HERO);
         GameObject damage = new GameObject();
         GameObject tank = new GameObject();
@@ -349,7 +347,7 @@ public class GameManager : SubscribedBehaviour {
             cameraRig.targets[0] = opferAI.transform;
 
             // Set boss playerNumber and health
-            boss.transform.parent.GetComponent<Player>().PlayerNumber = 1;
+            boss.PlayerNumber = 1;
             BossHealth.Instance.WinningPointLead = bossWinningSolo;
         }
         else if(playerCount == 2)
@@ -363,9 +361,9 @@ public class GameManager : SubscribedBehaviour {
 
             // Replace Boss with AI
             BossAI bossAI = GameObject.Instantiate(bossAIPrefab, boss.transform.position, boss.transform.rotation).GetComponent<BossAI>();
-            bossAI.SetStrengthColor(boss.transform.parent.GetComponent<Boss>().StrengthColor);
-            bossAI.SetWeaknessColor(boss.transform.parent.GetComponent<Boss>().WeaknessColor);
-            Destroy(boss.transform.parent.gameObject);
+            bossAI.SetStrengthColor(boss.StrengthColor);
+            bossAI.SetWeaknessColor(boss.WeaknessColor);
+            Destroy(boss.gameObject);
 
             // Set camera targets
             MultipleTargetCamera cameraRig = Camera.main.transform.parent.GetComponent<MultipleTargetCamera>();
@@ -381,9 +379,9 @@ public class GameManager : SubscribedBehaviour {
         {
             // Replace Boss with AI
             BossAI bossAI = GameObject.Instantiate(bossAIPrefab, boss.transform.position, boss.transform.rotation).GetComponent<BossAI>();
-            bossAI.SetStrengthColor(boss.transform.parent.GetComponent<Boss>().StrengthColor);
-            bossAI.SetWeaknessColor(boss.transform.parent.GetComponent<Boss>().WeaknessColor);
-            Destroy(boss.transform.parent.gameObject);
+            bossAI.SetStrengthColor(boss.StrengthColor);
+            bossAI.SetWeaknessColor(boss.WeaknessColor);
+            Destroy(boss.gameObject);
 
             // Set camera targets
             MultipleTargetCamera cameraRig = Camera.main.transform.parent.GetComponent<MultipleTargetCamera>();

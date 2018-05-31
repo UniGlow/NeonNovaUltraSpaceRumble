@@ -44,14 +44,16 @@ public class HeroAI : Hero {
         agent = GetComponent<NavMeshAgent>();
         if (GameManager.Instance.Boss) boss = GameManager.Instance.Boss.transform;
 
-        GameObject[] friends = GameObject.FindGameObjectsWithTag(Constants.TAG_HERO);
-        foreach (GameObject go in friends)
+        StartCoroutine(Wait(1, () => 
         {
-            if (go.transform.parent.GetComponent<Hero>() == null) continue;
-            if (go.transform.parent.GetComponent<Hero>().ability == Ability.Damage) damage = go.transform;
-            //if (go.transform.parent.GetComponent<Hero>().ability == Ability.Tank) tank = go.transform;
-            //if (go.transform.parent.GetComponent<Hero>().ability == Ability.Opfer) opfer = go.transform;
-        }
+            Hero[] friends = GameObject.FindObjectsOfType<Hero>();
+            foreach (Hero hero in friends)
+            {
+                if (hero.ability == Ability.Damage) damage = hero.transform;
+                //if (go.transform.parent.GetComponent<Hero>().ability == Ability.Tank) tank = go.transform;
+                //if (go.transform.parent.GetComponent<Hero>().ability == Ability.Opfer) opfer = go.transform;
+            }
+        }));
 
         GameObject[] cornersGO = GameObject.FindGameObjectsWithTag(Constants.TAG_AI_CORNER);
         foreach (GameObject go in cornersGO)
@@ -272,6 +274,20 @@ public class HeroAI : Hero {
     private void Run() {
         agent.speed = normalAgentSpeed * (speedBoost + 1);
         agent.speed = normalAgentSpeed * (speedBoost + 1);
+    }
+    #endregion
+
+
+
+    #region Corouintes
+    IEnumerator Wait (int frames, System.Action onComplete)
+    {
+        for (int i = 0; i < frames; i++)
+        {
+            yield return null;
+        }
+
+        onComplete.Invoke();
     }
     #endregion
 }
