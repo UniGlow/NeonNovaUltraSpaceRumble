@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 195969845727586126}
   m_Layer: 9
   m_Name: BossAI
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -311,10 +311,16 @@ MonoBehaviour:
   abilityCooldown: 3
   weaknessColor: 0
   strengthColor: 0
+  materialGlowOnSwitch: 3
   abilitySound: {fileID: 8300000, guid: ddbdc3544101111438a9b6c3b546a294, type: 3}
   abilitySoundVolume: 1
   attackSound: {fileID: 8300000, guid: cf3ba19d968b8e249b2a4b68126fb355, type: 3}
   attackSoundVolume: 1
+  enableCameraShake: 1
+  magnitude: 1
+  roughness: 10
+  fadeIn: 0.1
+  fadeOut: 0.8
   projectilePrefab: {fileID: 1693907411783006, guid: 0f758c9824c38e64e8607ba9dc4c8d64,
     type: 2}
   bossMeshRenderer: {fileID: 23088180500308686}
