@@ -158,11 +158,14 @@ public class HeroAI : Hero {
             Ray ray = new Ray(transform.position + Vector3.up * 0.5f, transform.forward);
             RaycastHit hitInfo;
 
-            Debug.DrawRay(ray.origin, ray.direction * 70f, Color.red);
-            if (Physics.Raycast(ray, out hitInfo, 70f, attackRayMask)/* && hitInfo.transform == boss*/)
+            if (Physics.Raycast(ray, out hitInfo, 70f, attackRayMask) && hitInfo.transform.tag == Constants.TAG_BOSS)
             {
-                Debug.DrawRay(ray.origin, hitInfo.point, Color.green);
+                Debug.DrawRay(ray.origin, hitInfo.point - ray.origin, Color.green);
                 Attack();
+            }
+            else
+            {
+                Debug.DrawRay(ray.origin, ray.direction * 70f, Color.red);
             }
         }
         else if (ability == Ability.Tank)
