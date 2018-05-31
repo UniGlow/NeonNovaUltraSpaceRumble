@@ -55,6 +55,16 @@ public class DebugMode : MonoBehaviour
         // Switch the Games Debug Mode On/Off
         if (Input.GetButtonDown(Constants.INPUT_DEBUGMODE)) {
             debugMode = !debugMode;
+            if (debugMode)
+            {
+                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.visible = true;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
         }
     }
 
