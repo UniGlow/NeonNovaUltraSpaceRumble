@@ -365,6 +365,41 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: 310.5
       objectReference: {fileID: 0}
+    - target: {fileID: 224415774031711472, guid: a082a6dd5a2d5524c8bdc9771effb635,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 550
+      objectReference: {fileID: 0}
+    - target: {fileID: 224117252796150038, guid: a082a6dd5a2d5524c8bdc9771effb635,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 575
+      objectReference: {fileID: 0}
+    - target: {fileID: 224668594548658886, guid: a082a6dd5a2d5524c8bdc9771effb635,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 224780069150096802, guid: a082a6dd5a2d5524c8bdc9771effb635,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -250
+      objectReference: {fileID: 0}
+    - target: {fileID: 224289368073176956, guid: a082a6dd5a2d5524c8bdc9771effb635,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 224117252796150038, guid: a082a6dd5a2d5524c8bdc9771effb635,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224668594548658886, guid: a082a6dd5a2d5524c8bdc9771effb635,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a082a6dd5a2d5524c8bdc9771effb635, type: 2}
   m_IsPrefabParent: 0
@@ -969,7 +1004,7 @@ GameObject:
   m_Name: Cylinder002
   m_TagString: Wall
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &563381316
@@ -1203,6 +1238,10 @@ Prefab:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 8ca1e519d6a79a74e891ed0c69c54870, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8ca1e519d6a79a74e891ed0c69c54870, type: 3}
   m_IsPrefabParent: 0
@@ -1377,7 +1416,7 @@ GameObject:
   m_Name: Cylinder001
   m_TagString: Wall
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1003704832
@@ -1621,6 +1660,10 @@ Prefab:
     - target: {fileID: 100000, guid: bba51838468aa304fa86b119f91512c4, type: 3}
       propertyPath: m_Name
       value: crescent_l
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: bba51838468aa304fa86b119f91512c4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9500000, guid: bba51838468aa304fa86b119f91512c4, type: 3}
@@ -2060,6 +2103,10 @@ Prefab:
     - target: {fileID: 100006, guid: 8ca1e519d6a79a74e891ed0c69c54870, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 8ca1e519d6a79a74e891ed0c69c54870, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8ca1e519d6a79a74e891ed0c69c54870, type: 3}

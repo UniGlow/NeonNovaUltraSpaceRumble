@@ -249,7 +249,8 @@ Prefab:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 135812279585746382, guid: 687c292199eacb148b9b94aee9e2cfe5, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 687c292199eacb148b9b94aee9e2cfe5, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &87320189 stripped
@@ -272,7 +273,7 @@ GameObject:
   m_Name: Wall004
   m_TagString: Wall
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!23 &150408301
@@ -945,7 +946,7 @@ GameObject:
   m_Name: Wall008
   m_TagString: Wall
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!23 &348367375
@@ -2257,7 +2258,7 @@ GameObject:
   m_Name: Wall002
   m_TagString: Wall
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!23 &767869161
@@ -2351,7 +2352,7 @@ GameObject:
   m_Name: Wall002 (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &873858717
@@ -4757,7 +4758,7 @@ GameObject:
   m_Name: Wall006
   m_TagString: Wall
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!23 &2104469918
