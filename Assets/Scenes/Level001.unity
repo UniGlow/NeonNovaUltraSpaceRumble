@@ -881,6 +881,19 @@ Prefab:
       propertyPath: magnitude
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1573548182032810, guid: 76bd8de65fb91184eb9e880374bb4dfa, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114474593516083838, guid: 76bd8de65fb91184eb9e880374bb4dfa,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1654721966035120, guid: 76bd8de65fb91184eb9e880374bb4dfa, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 76bd8de65fb91184eb9e880374bb4dfa, type: 2}
   m_IsPrefabParent: 0
@@ -1534,7 +1547,12 @@ Prefab:
     - target: {fileID: 20299908489427122, guid: 2d1d66f95b252b6458df80a5e38d35d1,
         type: 2}
       propertyPath: far clip plane
-      value: 46.22
+      value: 46
+      objectReference: {fileID: 0}
+    - target: {fileID: 20016080238216692, guid: 2d1d66f95b252b6458df80a5e38d35d1,
+        type: 2}
+      propertyPath: far clip plane
+      value: 46
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2d1d66f95b252b6458df80a5e38d35d1, type: 2}

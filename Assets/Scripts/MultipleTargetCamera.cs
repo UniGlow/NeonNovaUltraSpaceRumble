@@ -39,6 +39,7 @@ public class MultipleTargetCamera : MonoBehaviour {
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(GetCenterPoint(), 1f);
+        Gizmos.DrawWireCube(GetCenterPoint(), new Vector3(GetGreatestDistance(), 0f, GetGreatestDistance() * (1 / Camera.main.aspect)));
     }
     #endregion
 
