@@ -485,7 +485,7 @@ MonoBehaviour:
   transmissionDuration: 3
   transmissionCooldown: 1
   transmissionSound: {fileID: 8300000, guid: 99a9562a9c5874546a152e7ded477cb5, type: 3}
-  transmissionSoundVolume: 0.8
+  transmissionSoundVolume: 1
   transmissionLineRenderer: {fileID: 120313195406292594}
   transmissionPS: {fileID: 198963605972144674}
 --- !u!114 &114662132021031198
@@ -535,9 +535,9 @@ MonoBehaviour:
   playerColor: 2
   ability: 2
   wobbleBobbleSound: {fileID: 8300000, guid: 9bf8565727fa20047bfa416674b33661, type: 3}
-  wobbleBobbleVolume: 0.8
+  wobbleBobbleVolume: 0.9
   attackSound: {fileID: 8300000, guid: 9a5792dc479bb5c47878c1c076adf5d0, type: 3}
-  attackSoundVolume: 0.8
+  attackSoundVolume: 0.6
   projectilePrefab: {fileID: 1693907411783006, guid: c023009a9133c5b4da7f7564326be655,
     type: 2}
   wobbleBobble: {fileID: 1521786441716086}

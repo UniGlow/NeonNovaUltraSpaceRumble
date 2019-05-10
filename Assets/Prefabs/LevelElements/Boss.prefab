@@ -314,7 +314,7 @@ MonoBehaviour:
   abilitySound: {fileID: 8300000, guid: ddbdc3544101111438a9b6c3b546a294, type: 3}
   abilitySoundVolume: 1
   attackSound: {fileID: 8300000, guid: cf3ba19d968b8e249b2a4b68126fb355, type: 3}
-  attackSoundVolume: 0.8
+  attackSoundVolume: 0.75
   enableCameraShake: 1
   magnitude: 1
   roughness: 10

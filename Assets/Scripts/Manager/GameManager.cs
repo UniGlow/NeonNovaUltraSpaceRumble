@@ -28,6 +28,7 @@ public class GameManager : SubscribedBehaviour {
     [SerializeField] AudioClip colorChangeSound;
     [Range(0, 1)]
     [SerializeField] float colorChangeSoundVolume = 1f;
+    [SerializeField] AudioSource colorChangeAudioSource = null;
 
     [Header("AI Adjustments")]
     [SerializeField] bool setupAI = true;
@@ -211,7 +212,7 @@ public class GameManager : SubscribedBehaviour {
     void HandleColorSwitch() {
         if (SceneManager.GetActiveScene().name.Contains("Level")) {
             if (colorChangeTimer >= colorSwitchInterval - 0.5f && !colorChangeSoundPlayed) {
-                audioSource.PlayOneShot(colorChangeSound, colorChangeSoundVolume);
+                colorChangeAudioSource.PlayOneShot(colorChangeSound, colorChangeSoundVolume);
                 colorChangeSoundPlayed = true;
             }
             // Set new Boss color
@@ -284,7 +285,7 @@ public class GameManager : SubscribedBehaviour {
 
     void HandleIntensify()
     {
-        if (intensifyTimer >= intensifyTime)
+        if (intensifyTimer >= intensifyTime && BossHealth.Instance && HeroHealth.Instance)
         {
             // Set new winningPointLeads
             BossHealth.Instance.WinningPointLead = Mathf.RoundToInt(BossHealth.Instance.WinningPointLead * (1 - intensifyAmount));
