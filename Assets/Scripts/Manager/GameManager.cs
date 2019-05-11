@@ -15,14 +15,14 @@ public class GameManager : SubscribedBehaviour {
     public float ColorSwitchInterval { get { return colorSwitchInterval; } set { colorSwitchInterval = value; } }
     [SerializeField] float critDamageMultiplier = 2f;
     public float CritDamageMultiplier { get { return critDamageMultiplier; } set { critDamageMultiplier = value; } }
-    [SerializeField] public float intensifyTime = 60;
+    public float intensifyTime = 60;
     [Range(0f, 0.9f)]
-    [SerializeField] public float intensifyAmount = 0.3f;
+    public float intensifyAmount = 0.3f;
     [SerializeField] float delayAtLevelEnd = 12f;
     [Space]
     [SerializeField] bool overrideLevelPointLimits;
-    [SerializeField] public int heroesWinningPointLead = 500;
-    [SerializeField] public int bossWinningPointLead = 500;
+    public int heroesWinningPointLead = 500;
+    public int bossWinningPointLead = 500;
 
     [Header("Sound")]
     [SerializeField] AudioClip colorChangeSound;
@@ -32,9 +32,9 @@ public class GameManager : SubscribedBehaviour {
 
     [Header("AI Adjustments")]
     [SerializeField] bool setupAI = true;
-    [SerializeField] int bossWinningSolo = 500;
-    [SerializeField] int bossWinningDuo = 500;
-    [SerializeField] int bossWinningTriple = 500;
+    public int bossWinningSolo = 500;
+    public int bossWinningDuo = 500;
+    public int bossWinningTriple = 500;
 
     [Header("References")]
     [SerializeField] Color greenPlayerColor;
@@ -52,7 +52,6 @@ public class GameManager : SubscribedBehaviour {
     float delayForActionStart = 4f;
     private Boss boss;
     public Boss Boss { get { return boss; } }
-    AudioSource audioSource;
     bool colorChangeSoundPlayed;
     TextMeshProUGUI winText;
     int playerCount;
@@ -91,7 +90,6 @@ public class GameManager : SubscribedBehaviour {
 
     private void Start() {
         boss = GameObject.FindObjectOfType<Boss>();
-        audioSource = GetComponent<AudioSource>();
 
         playerCount = Input.GetJoystickNames().Length;
 
@@ -196,8 +194,8 @@ public class GameManager : SubscribedBehaviour {
             }
             else
             {
-                if (setupAI) SetupAICharacters();
                 if (overrideLevelPointLimits) OverrideLevelPointLimits();
+                if (setupAI) SetupAICharacters();
                 StartCoroutine(StartTheAction());
             }
         }
@@ -311,9 +309,9 @@ public class GameManager : SubscribedBehaviour {
 
         // Get references
         GameObject[] heroes = GameObject.FindGameObjectsWithTag(Constants.TAG_HERO);
-        GameObject damage = new GameObject();
-        GameObject tank = new GameObject();
-        GameObject opfer = new GameObject();
+        GameObject damage = null;
+        GameObject tank = null;
+        GameObject opfer = null;
         foreach (GameObject go in heroes)
         {
             if (go.transform.parent.GetComponent<Hero>() == null) continue;
@@ -343,15 +341,18 @@ public class GameManager : SubscribedBehaviour {
 
             // Set camera targets
             MultipleTargetCamera cameraRig = Camera.main.transform.parent.GetComponent<MultipleTargetCamera>();
-            cameraRig.targets[2] = damageAI.transform;
-            cameraRig.targets[1] = tankAI.transform;
-            cameraRig.targets[0] = opferAI.transform;
+            cameraRig.SetCameraTargetsNextFrame(new List<Transform>()
+            {
+                damageAI.transform,
+                tankAI.transform,
+                opferAI.transform
+            });
 
             // Set boss playerNumber and health
             boss.PlayerNumber = 1;
             BossHealth.Instance.WinningPointLead = bossWinningSolo;
         }
-        else if(playerCount == 2)
+        else if (playerCount == 2)
         {
             // Replace damage hero with AI
             HeroAI opferAI = GameObject.Instantiate(heroAIPrefab, opfer.transform.position, opfer.transform.rotation).GetComponent<HeroAI>();
@@ -366,15 +367,22 @@ public class GameManager : SubscribedBehaviour {
             bossAI.SetWeaknessColor(boss.WeaknessColor);
             Destroy(boss.gameObject);
 
-            // Set camera targets
-            MultipleTargetCamera cameraRig = Camera.main.transform.parent.GetComponent<MultipleTargetCamera>();
-            cameraRig.targets[0] = opferAI.transform;
-            cameraRig.targets[3] = bossAI.transform;
 
             // Set tank and opfer playerNumber and health
             damage.transform.parent.GetComponent<Player>().PlayerNumber = 1;
             tank.transform.parent.GetComponent<Player>().PlayerNumber = 2;
             BossHealth.Instance.WinningPointLead = bossWinningDuo;
+
+            // Set camera targets
+            MultipleTargetCamera cameraRig = Camera.main.transform.parent.GetComponent<MultipleTargetCamera>();
+            cameraRig.SetCameraTargetsNextFrame(new List<Transform>()
+            {
+                opferAI.transform,
+                bossAI.transform
+            });
+
+            // Link references in bossAI
+            bossAI.SetHeroReferencesNextFrame();
         }
         else if (playerCount == 3)
         {
@@ -386,13 +394,19 @@ public class GameManager : SubscribedBehaviour {
 
             // Set camera targets
             MultipleTargetCamera cameraRig = Camera.main.transform.parent.GetComponent<MultipleTargetCamera>();
-            cameraRig.targets[3] = bossAI.transform;
+            cameraRig.SetCameraTargetsNextFrame(new List<Transform>()
+            {
+                bossAI.transform
+            });
 
             // Set hero playerNumbers and health
             damage.transform.parent.GetComponent<Player>().PlayerNumber = 1;
             tank.transform.parent.GetComponent<Player>().PlayerNumber = 2;
             opfer.transform.parent.GetComponent<Player>().PlayerNumber = 3;
             BossHealth.Instance.WinningPointLead = bossWinningTriple;
+
+            // Link references in bossAI
+            bossAI.SetHeroReferencesNextFrame();
         }
         else {
             // Do nothing for a 4 player game (scene is already set up for this)

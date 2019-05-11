@@ -44,6 +44,25 @@ public class MultipleTargetCamera : MonoBehaviour {
 
 
 
+    #region Public Functions
+    public void SetCameraTargetsNextFrame(List<Transform> targets)
+    {
+        StartCoroutine(Wait(1, () =>
+        {
+            for (int i = 0; i < this.targets.Count; i++)
+            {
+                if (this.targets[i] == null)
+                {
+                    this.targets[i] = targets[0];
+                    targets.RemoveAt(0);
+                }
+            }
+        }));
+    }
+    #endregion
+
+
+
     #region Private Functions
     void Move() {
         Vector3 centerPoint = GetCenterPoint();
@@ -85,5 +104,16 @@ public class MultipleTargetCamera : MonoBehaviour {
             return bounds.center;
         }
     }
-	#endregion
+    #endregion
+
+
+
+    #region Coroutines
+    IEnumerator Wait(int frames, System.Action onComplete)
+    {
+        yield return null;
+
+        onComplete.Invoke();
+    }
+    #endregion
 }

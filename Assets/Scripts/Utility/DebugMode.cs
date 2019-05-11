@@ -17,6 +17,9 @@ public class DebugMode : MonoBehaviour
     [HideInInspector] public string intensifyAmount;
     [HideInInspector] public string heroesWinningPointLead;
     [HideInInspector] public string bossWinningPointLead;
+    [HideInInspector] public string bossWinningSolo;
+    [HideInInspector] public string bossWinningDuo;
+    [HideInInspector] public string bossWinningTriple;
 
     private bool debugMode = false;
 
@@ -49,6 +52,9 @@ public class DebugMode : MonoBehaviour
         intensifyAmount = GameManager.Instance.intensifyAmount.ToString();
         heroesWinningPointLead = GameManager.Instance.heroesWinningPointLead.ToString();
         bossWinningPointLead = GameManager.Instance.bossWinningPointLead.ToString();
+        bossWinningSolo = GameManager.Instance.bossWinningSolo.ToString();
+        bossWinningDuo = GameManager.Instance.bossWinningDuo.ToString();
+        bossWinningTriple = GameManager.Instance.bossWinningTriple.ToString();
     }
 
     private void Update () {
@@ -109,6 +115,9 @@ public class DebugMode : MonoBehaviour
             double newIntensifyAmount;
             int newHeroesPoints;
             int newBossPoints;
+            int newBossPointsSolo;
+            int newBossPointsDuo;
+            int newBossPointsTriple;
 
             GUILayout.BeginVertical("box");
             GUILayout.Label("Balancing Parameters");
@@ -149,6 +158,30 @@ public class DebugMode : MonoBehaviour
             GUILayout.Label("Boss Winning Point Lead");
             bossWinningPointLead = GUILayout.TextField(bossWinningPointLead);
             if (System.Int32.TryParse(bossWinningPointLead, out newBossPoints)) GameManager.Instance.bossWinningPointLead = newBossPoints;
+            GUILayout.EndHorizontal();
+
+            GUILayout.EndVertical();
+
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("AI Tweaks (take effect on next level load)");
+            GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Boss Winning Solo");
+            bossWinningSolo = GUILayout.TextField(bossWinningSolo);
+            if (System.Int32.TryParse(bossWinningSolo, out newBossPointsSolo)) GameManager.Instance.bossWinningSolo = newBossPointsSolo;
+            GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Boss Winning Duo");
+            bossWinningDuo = GUILayout.TextField(bossWinningDuo);
+            if (System.Int32.TryParse(bossWinningDuo, out newBossPointsDuo)) GameManager.Instance.bossWinningDuo = newBossPointsDuo;
+            GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Boss Winning Triple");
+            bossWinningTriple = GUILayout.TextField(bossWinningTriple);
+            if (System.Int32.TryParse(bossWinningTriple, out newBossPointsTriple)) GameManager.Instance.bossWinningTriple = newBossPointsTriple;
             GUILayout.EndHorizontal();
 
             GUILayout.EndVertical();

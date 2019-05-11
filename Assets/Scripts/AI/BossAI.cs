@@ -38,15 +38,6 @@ public class BossAI : Boss
         // Get references
         agent = GetComponent<NavMeshAgent>();
 
-        GameObject[] heroes = GameObject.FindGameObjectsWithTag(Constants.TAG_HERO);
-        foreach (GameObject go in heroes)
-        {
-            if (go.transform.parent.GetComponent<Hero>() == null) continue;
-            if (go.transform.parent.GetComponent<Hero>().PlayerColor == PlayerColor.Red) redHero = go.transform;
-            if (go.transform.parent.GetComponent<Hero>().PlayerColor == PlayerColor.Blue) blueHero = go.transform;
-            if (go.transform.parent.GetComponent<Hero>().PlayerColor == PlayerColor.Green) greenHero = go.transform;
-        }
-
         GameObject[] cornersGO = GameObject.FindGameObjectsWithTag(Constants.TAG_AI_CORNER);
         foreach (GameObject go in cornersGO)
         {
@@ -102,7 +93,20 @@ public class BossAI : Boss
 
 
     #region Public Functions
-
+    public void SetHeroReferencesNextFrame()
+    {
+        StartCoroutine(Wait(1, () =>
+        {
+            Hero[] heroes = GameObject.FindObjectsOfType<Hero>();
+            foreach (Hero hero in heroes)
+            {
+                if (hero == null) continue;
+                if (hero.PlayerColor == PlayerColor.Red) redHero = hero.transform;
+                if (hero.PlayerColor == PlayerColor.Blue) blueHero = hero.transform;
+                if (hero.PlayerColor == PlayerColor.Green) greenHero = hero.transform;
+            }
+        }));
+    }
     #endregion
 
 
@@ -221,6 +225,17 @@ public class BossAI : Boss
             abilityCooldownB = false;
             StartCoroutine(ResetAbilityCooldown());
         }
+    }
+    #endregion
+
+
+
+    #region Coroutines
+    IEnumerator Wait (int frames, System.Action onComplete)
+    {
+        yield return null;
+
+        onComplete.Invoke();
     }
     #endregion
 }

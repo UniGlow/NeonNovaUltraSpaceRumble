@@ -364,9 +364,9 @@ MonoBehaviour:
   colorChangeSoundVolume: 1
   colorChangeAudioSource: {fileID: 82249825244062562}
   setupAI: 1
-  bossWinningSolo: 500
-  bossWinningDuo: 500
-  bossWinningTriple: 500
+  bossWinningSolo: 400
+  bossWinningDuo: 700
+  bossWinningTriple: 700
   greenPlayerColor: {r: 0, g: 1, b: 0.0069999998, a: 1}
   redPlayerColor: {r: 0.7058824, g: 0.039215688, b: 0.039215688, a: 1}
   bluePlayerColor: {r: 0.29411766, g: 0.3137255, b: 0.93333334, a: 1}
@@ -391,6 +391,9 @@ MonoBehaviour:
   intensifyAmount: 
   heroesWinningPointLead: 
   bossWinningPointLead: 
+  bossWinningSolo: 
+  bossWinningDuo: 
+  bossWinningTriple: 
 --- !u!114 &114724152049828894
 MonoBehaviour:
   m_ObjectHideFlags: 1
