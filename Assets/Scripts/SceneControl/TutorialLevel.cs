@@ -56,10 +56,8 @@ public class TutorialLevel : MonoBehaviour
         {
             AudioManager.Instance.StopPlaying();
             StartCoroutine(Wait(1f, () => {
-                // Fade in audio
-                float currentSFXVolume;
-                masterMixer.GetFloat(Constants.MIXER_SFX_VOLUME, out currentSFXVolume);
-                FadeAudio(Constants.MIXER_SFX_VOLUME, currentSFXVolume, originalSFXVolume, 1f);
+                // Rstore SFX audio level
+                masterMixer.SetFloat(Constants.MIXER_SFX_VOLUME, originalSFXVolume);
 
                 GameManager.Instance.LoadNextScene();
             }));
