@@ -51,7 +51,6 @@ public class HomingMissile : SubscribedBehaviour {
     {
         if (other.tag.Contains(Constants.TAG_HERO)) {
             HeroHealth.Instance.TakeDamage(damage);
-            other.transform.parent.GetComponent<Transmission>().EndTransmission();
 
             audioSource.PlayOneShot(hitSound, hitSoundVolume);
 

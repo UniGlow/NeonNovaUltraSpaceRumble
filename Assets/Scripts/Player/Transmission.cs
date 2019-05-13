@@ -73,7 +73,6 @@ public class Transmission : MonoBehaviour {
     {
         receiver = null;
         currenTransmissionDuration = 0f;
-        //hero.SetMovable(true);
         receiverFound = false;
         transmissionCooldownB = false;
         transmissionLineRenderer.gameObject.SetActive(false);
@@ -93,7 +92,6 @@ public class Transmission : MonoBehaviour {
         {
             Debug.DrawLine(transform.position + Vector3.up * 0.5f, hitInfo.point, Color.green);
             receiver = hitInfo.transform.gameObject;
-            //hero.SetMovable(false);
             return true;
         }
         else {

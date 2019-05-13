@@ -41,9 +41,6 @@ public class BossProjectile : Projectile {
                 AudioManager.Instance.PlayClip(hitSound, hitVolume);
             }
 
-            other.transform.parent.GetComponent<Transmission>().EndTransmission();
-
-
             Destroy(gameObject);
         }
 
