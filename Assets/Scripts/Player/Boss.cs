@@ -58,6 +58,7 @@ public class Boss : Player {
     protected bool attackCooldownB = true;
     protected bool abilityCooldownB = true;
     protected Color activeStrengthColor;
+    protected float abilityAxisInputPrevFrame;
     #endregion
 
 
@@ -83,6 +84,8 @@ public class Boss : Player {
             Attack();
             Ability();
         }
+
+        abilityAxisInputPrevFrame = Input.GetAxis(Constants.INPUT_TRANSMIT_AXIS + playerNumber);
     }
     #endregion
 
@@ -119,7 +122,7 @@ public class Boss : Player {
 
     #region Private Functions
     private void Attack() {
-        if (Input.GetButton(Constants.INPUT_ABILITY + playerNumber) && attackCooldownB) {
+        if (AttackButtonsPressed() && attackCooldownB) {
             GameObject projectile = Instantiate(projectilePrefab, transform.position + transform.forward * 1.9f + Vector3.up * 0.5f, transform.rotation);
             projectile.GetComponent<BossProjectile>().damage = attackDamagePerShot;
             projectile.GetComponent<BossProjectile>().playerColor = strengthColor;
@@ -135,7 +138,7 @@ public class Boss : Player {
     }
 
     private void Ability() {
-        if (Input.GetButtonDown(Constants.INPUT_TRANSMIT + playerNumber) && abilityCooldownB) {
+        if (AbilityButtonsDown() && abilityCooldownB) {
 
             for (int i = 0; i < numberOfProjectiles; ++i) {
                 float factor = (i / (float)numberOfProjectiles) * Mathf.PI * 2f;
@@ -159,6 +162,28 @@ public class Boss : Player {
             abilityCooldownB = false;
             StartCoroutine(ResetAbilityCooldown());
         }
+    }
+
+    private bool AttackButtonsPressed()
+    {
+        if (Input.GetButton(Constants.INPUT_ABILITY + playerNumber)) return true;
+
+        else if (Input.GetAxis(Constants.INPUT_ABILITY_AXIS + playerNumber) > 0) return true;
+
+        return false;
+    }
+
+    private bool AbilityButtonsDown()
+    {
+        if (Input.GetButtonDown(Constants.INPUT_TRANSMIT + playerNumber)) return true;
+
+        else if (Input.GetAxis(Constants.INPUT_TRANSMIT_AXIS + playerNumber) > 0 &&
+            abilityAxisInputPrevFrame == 0)
+        {
+            return true;
+        }
+
+        return false;
     }
     #endregion
 

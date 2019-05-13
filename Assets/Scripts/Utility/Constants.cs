@@ -13,7 +13,9 @@ public class Constants
     public static readonly string INPUT_LOOK_HORIZONTAL = "LookHorizontal";
     public static readonly string INPUT_LOOK_VERTICAL = "LookVertical";
     public static readonly string INPUT_ABILITY = "Ability";
+    public static readonly string INPUT_ABILITY_AXIS = "AbilityAxis";
     public static readonly string INPUT_TRANSMIT = "Transmit";
+    public static readonly string INPUT_TRANSMIT_AXIS = "TransmitAxis";
     public static readonly string INPUT_DEBUGMODE = "DebugMode";
     public static readonly string INPUT_ESCAPE = "Escape";
     public static readonly string INPUT_SUBMIT = "Submit";

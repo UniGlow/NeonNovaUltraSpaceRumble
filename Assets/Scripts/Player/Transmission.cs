@@ -32,6 +32,7 @@ public class Transmission : MonoBehaviour {
     protected bool transmissionCooldownB = true;
     protected HomingMissile homingMissile;
     protected AudioSource audioSource;
+    protected float transmissionAxisInputPrevFrame;
 	#endregion
 	
 	
@@ -47,23 +48,24 @@ public class Transmission : MonoBehaviour {
 	virtual protected void Update()
     {        
         // End transmission if button is lifted
-        if (Input.GetButtonUp(Constants.INPUT_TRANSMIT + hero.PlayerNumber)) {
+        if (TransmissionButtonsUp()) {
             EndTransmission();
         }
 
         // Look for a receiver
-        if (!receiverFound && transmissionCooldownB && Input.GetButton(Constants.INPUT_TRANSMIT + hero.PlayerNumber)) {
+        if (!receiverFound && transmissionCooldownB && TransmissionButtonsPressed()) {
             UpdateLineRenderer();
             transmissionLineRenderer.gameObject.SetActive(true);
             receiverFound = FindReceiver();
         }
         // Continue the transmission when a receiver is found
-        else if (receiverFound && Input.GetButton(Constants.INPUT_TRANSMIT + hero.PlayerNumber)) {
+        else if (receiverFound && TransmissionButtonsPressed()) {
             UpdateLineRenderer();
             Transmit();
         }
 
-        
+
+        transmissionAxisInputPrevFrame = Input.GetAxis(Constants.INPUT_TRANSMIT_AXIS + hero.PlayerNumber);
     }
     #endregion
 
@@ -157,6 +159,31 @@ public class Transmission : MonoBehaviour {
             transmissionLineRenderer.SetPosition(0, transform.position + Vector3.up * 0.5f);
             transmissionLineRenderer.SetPosition(1, receiver.transform.position + Vector3.up * 0.5f);
         }
+    }
+
+    protected bool TransmissionButtonsUp()
+    {
+        if (Input.GetButtonUp(Constants.INPUT_TRANSMIT + hero.PlayerNumber) &&
+            Input.GetAxis(Constants.INPUT_TRANSMIT_AXIS + hero.PlayerNumber) == 0)
+        {
+            return true;
+        }
+        else if (Input.GetAxis(Constants.INPUT_TRANSMIT_AXIS + hero.PlayerNumber) == 0 &&
+            Input.GetAxis(Constants.INPUT_TRANSMIT_AXIS + hero.PlayerNumber) != transmissionAxisInputPrevFrame)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    protected bool TransmissionButtonsPressed()
+    {
+        if (Input.GetButton(Constants.INPUT_TRANSMIT + hero.PlayerNumber)) return true;
+
+        else if (Input.GetAxis(Constants.INPUT_TRANSMIT_AXIS + hero.PlayerNumber) > 0) return true;
+
+        return false;
     }
     #endregion
 

@@ -120,13 +120,22 @@ public class Hero : Player {
             if (ability == Ability.Opfer) {
                 Run();
             }
-            else if (ability == Ability.Damage && Input.GetButton(Constants.INPUT_ABILITY + playerNumber)) {
+            else if (ability == Ability.Damage && AbilityButtonsDown()) {
                 Attack();
             }
-            else if (ability == Ability.Tank && Input.GetButtonDown(Constants.INPUT_ABILITY + playerNumber)) {
+            else if (ability == Ability.Tank && AbilityButtonsDown()) {
                 Defend();
             }
         }
+    }
+
+    private bool AbilityButtonsDown()
+    {
+        if (Input.GetButton(Constants.INPUT_ABILITY + playerNumber)) return true;
+
+        else if (Input.GetAxis(Constants.INPUT_ABILITY_AXIS + playerNumber) > 0) return true;
+
+        return false;
     }
 
     private void Attack() {
