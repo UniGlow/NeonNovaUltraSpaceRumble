@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
@@ -18,7 +19,7 @@ public class TutorialLevel : MonoBehaviour
     [Range(0f,2f)]
     [SerializeField] float sfxVolumeDamp = 0.1f;
 
-    bool[] playerConfirms;
+    List<bool> playerConfirms = new List<bool>();
     float idleTimer;
     float originalSFXVolume;
     float originalMusicVolume;
@@ -30,7 +31,7 @@ public class TutorialLevel : MonoBehaviour
 	#region Unity Event Functions
 	private void Start () 
 	{
-        playerConfirms = new bool[GameManager.Instance.PlayerCount];
+        UpdatePlayerConfirmsList();
         masterMixer.GetFloat(Constants.MIXER_SFX_VOLUME, out originalSFXVolume);
         masterMixer.GetFloat(Constants.MIXER_MUSIC_VOLUME, out originalMusicVolume);
 
@@ -40,13 +41,18 @@ public class TutorialLevel : MonoBehaviour
 	
 	private void Update () 
 	{
+        // Update player count
+        GameManager.Instance.UpdatePlayerCount();
+        UpdatePlayerConfirmsList();
+        playerReadyUpdater.UpdateUIElements(GameManager.Instance.PlayerCount);
+
         // Load next scene if all players are ready
         int ready = 0;
-        for (int i = 0; i < playerConfirms.Length; i++)
+        for (int i = 0; i < playerConfirms.Count; i++)
         {
             if (playerConfirms[i] == true) ready++;
         }
-        if (ready == playerConfirms.Length)
+        if (ready == playerConfirms.Count)
         {
             AudioManager.Instance.StopPlaying();
             StartCoroutine(Wait(1f, () => {
@@ -137,6 +143,20 @@ public class TutorialLevel : MonoBehaviour
     {
         TutorialTextUpdater.BossColorChange(0);
         GameManager.Instance.ResetPassedTimeForColorChange();
+    }
+
+    void UpdatePlayerConfirmsList()
+    {
+        if (playerConfirms.Count == GameManager.Instance.PlayerCount)
+        {
+            return;
+        }
+
+        playerConfirms.Clear();
+        for (int i = 0; i < GameManager.Instance.PlayerCount; i++)
+        {
+            playerConfirms.Add(false);
+        }
     }
     #endregion
 

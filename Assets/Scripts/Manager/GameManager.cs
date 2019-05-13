@@ -91,7 +91,7 @@ public class GameManager : SubscribedBehaviour {
     private void Start() {
         boss = GameObject.FindObjectOfType<Boss>();
 
-        playerCount = Input.GetJoystickNames().Length;
+        UpdatePlayerCount();
 
 #if !UNITY_EDITOR
         Cursor.lockState = CursorLockMode.Locked;
@@ -173,6 +173,19 @@ public class GameManager : SubscribedBehaviour {
     public string GetActiveSceneName()
     {
         return SceneManager.GetActiveScene().name;
+    }
+
+    public void UpdatePlayerCount()
+    {
+        playerCount = 0;
+        string[] joystickNames = Input.GetJoystickNames();
+        foreach (string name in joystickNames)
+        {
+            if (name != "")
+            {
+                playerCount++;
+            }
+        }
     }
     #endregion
 
@@ -305,7 +318,8 @@ public class GameManager : SubscribedBehaviour {
 
     void SetupAICharacters()
     {
-        playerCount = Input.GetJoystickNames().Length;
+        // Update player count
+        UpdatePlayerCount();
 
         // Get references
         GameObject[] heroes = GameObject.FindGameObjectsWithTag(Constants.TAG_HERO);
@@ -454,6 +468,7 @@ public class GameManager : SubscribedBehaviour {
 
     IEnumerator StartTheTutorial()
     {
+        UpdatePlayerCount();
 
         yield return new WaitForSecondsRealtime(delayForActionStart / 4f);
         

@@ -18,6 +18,7 @@ public class PlayerReadyUpdater : MonoBehaviour
     [SerializeField] Color notReadyColor;
 
     ReadyState[] readyStates;
+    int playerCount;
 	#endregion
 	
 	
@@ -35,10 +36,7 @@ public class PlayerReadyUpdater : MonoBehaviour
             };
         }
 
-        for (int i = GameManager.Instance.PlayerCount; i < readyStates.Length; i++)
-        {
-            readyStates[i].parent.SetActive(false);
-        }
+        
 	}
 	#endregion
 	
@@ -56,6 +54,29 @@ public class PlayerReadyUpdater : MonoBehaviour
         {
             readyStates[playerNumber].readyText.text = "PRESS A TO READY UP";
             readyStates[playerNumber].readyText.color = notReadyColor;
+        }
+    }
+
+    public void UpdateUIElements(int playerCount)
+    {
+        if (playerCount == this.playerCount)
+        {
+            return;
+        }
+
+        this.playerCount = playerCount;
+        for (int i = 0; i < readyStates.Length; i++)
+        {
+            UpdateState(i, false);
+            readyStates[i].parent.SetActive(false);
+        }
+
+        for (int i = 0; i < readyStates.Length; i++)
+        {
+            if (playerCount > i)
+            {
+                readyStates[i].parent.SetActive(true);
+            }
         }
     }
 	#endregion
