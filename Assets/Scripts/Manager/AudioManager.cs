@@ -143,6 +143,8 @@ public class AudioManager : SubscribedBehaviour {
         audioSource.clip = null;
         audioSource.volume = 1f;
         audioSource.loop = false;
+        StopAllCoroutines();
+        startingTrack = false;
     }
 
     public void PlayClip(AudioClip clip, float volume)
