@@ -177,11 +177,11 @@ public class Boss : Player {
     {
         if (Input.GetButtonDown(Constants.INPUT_TRANSMIT + playerNumber)) return true;
 
-        else if (Input.GetAxis(Constants.INPUT_TRANSMIT_AXIS + playerNumber) > 0 &&
-            abilityAxisInputPrevFrame == 0)
-        {
-            return true;
-        }
+        //else if (Input.GetAxis(Constants.INPUT_TRANSMIT_AXIS + playerNumber) > 0 &&
+        //    abilityAxisInputPrevFrame == 0)
+        //{
+        //    return true;
+        //}
 
         return false;
     }
