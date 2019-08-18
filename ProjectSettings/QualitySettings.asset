@@ -4,36 +4,8 @@
 QualitySettings:
   m_ObjectHideFlags: 0
   serializedVersion: 5
-  m_CurrentQuality: 5
+  m_CurrentQuality: 2
   m_QualitySettings:
-  - serializedVersion: 2
-    name: Fastest
-    pixelLightCount: 0
-    shadows: 0
-    shadowResolution: 0
-    shadowProjection: 1
-    shadowCascades: 1
-    shadowDistance: 15
-    shadowNearPlaneOffset: 2
-    shadowCascade2Split: 0.33333334
-    shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
-    shadowmaskMode: 0
-    blendWeights: 1
-    textureQuality: 1
-    anisotropicTextures: 0
-    antiAliasing: 0
-    softParticles: 0
-    softVegetation: 0
-    realtimeReflectionProbes: 0
-    billboardsFaceCameraPosition: 0
-    vSyncCount: 0
-    lodBias: 0.3
-    maximumLODLevel: 0
-    particleRaycastBudget: 4
-    asyncUploadTimeSlice: 2
-    asyncUploadBufferSize: 4
-    resolutionScalingFixedDPIFactor: 1
-    excludedTargetPlatforms: []
   - serializedVersion: 2
     name: Fast
     pixelLightCount: 0
@@ -63,37 +35,9 @@ QualitySettings:
     resolutionScalingFixedDPIFactor: 1
     excludedTargetPlatforms: []
   - serializedVersion: 2
-    name: Simple
-    pixelLightCount: 1
-    shadows: 1
-    shadowResolution: 0
-    shadowProjection: 1
-    shadowCascades: 1
-    shadowDistance: 20
-    shadowNearPlaneOffset: 2
-    shadowCascade2Split: 0.33333334
-    shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
-    shadowmaskMode: 0
-    blendWeights: 2
-    textureQuality: 0
-    anisotropicTextures: 1
-    antiAliasing: 0
-    softParticles: 0
-    softVegetation: 0
-    realtimeReflectionProbes: 0
-    billboardsFaceCameraPosition: 0
-    vSyncCount: 1
-    lodBias: 0.7
-    maximumLODLevel: 0
-    particleRaycastBudget: 64
-    asyncUploadTimeSlice: 2
-    asyncUploadBufferSize: 4
-    resolutionScalingFixedDPIFactor: 1
-    excludedTargetPlatforms: []
-  - serializedVersion: 2
-    name: Good
+    name: Optimal 30
     pixelLightCount: 2
-    shadows: 2
+    shadows: 0
     shadowResolution: 1
     shadowProjection: 1
     shadowCascades: 2
@@ -108,9 +52,9 @@ QualitySettings:
     antiAliasing: 0
     softParticles: 0
     softVegetation: 1
-    realtimeReflectionProbes: 1
-    billboardsFaceCameraPosition: 1
-    vSyncCount: 1
+    realtimeReflectionProbes: 0
+    billboardsFaceCameraPosition: 0
+    vSyncCount: 2
     lodBias: 1
     maximumLODLevel: 0
     particleRaycastBudget: 256
@@ -119,9 +63,9 @@ QualitySettings:
     resolutionScalingFixedDPIFactor: 1
     excludedTargetPlatforms: []
   - serializedVersion: 2
-    name: Beautiful
+    name: Optimal 60
     pixelLightCount: 3
-    shadows: 2
+    shadows: 0
     shadowResolution: 2
     shadowProjection: 1
     shadowCascades: 2
@@ -130,18 +74,18 @@ QualitySettings:
     shadowCascade2Split: 0.33333334
     shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
     shadowmaskMode: 1
-    blendWeights: 4
+    blendWeights: 2
     textureQuality: 0
-    anisotropicTextures: 2
+    anisotropicTextures: 1
     antiAliasing: 2
-    softParticles: 1
+    softParticles: 0
     softVegetation: 1
-    realtimeReflectionProbes: 1
-    billboardsFaceCameraPosition: 1
+    realtimeReflectionProbes: 0
+    billboardsFaceCameraPosition: 0
     vSyncCount: 1
-    lodBias: 1.5
+    lodBias: 1
     maximumLODLevel: 0
-    particleRaycastBudget: 1024
+    particleRaycastBudget: 256
     asyncUploadTimeSlice: 2
     asyncUploadBufferSize: 4
     resolutionScalingFixedDPIFactor: 1
@@ -175,20 +119,20 @@ QualitySettings:
     resolutionScalingFixedDPIFactor: 1
     excludedTargetPlatforms: []
   m_PerPlatformDefaultQuality:
-    Android: 2
-    Nintendo 3DS: 5
-    PS3: 5
-    PS4: 5
-    PSM: 5
-    PSP2: 2
-    Samsung TV: 2
-    Standalone: 5
-    Tizen: 2
-    Web: 5
-    WebGL: 3
-    WiiU: 5
-    Windows Store Apps: 5
-    XBOX360: 5
-    XboxOne: 5
-    iPhone: 2
-    tvOS: 5
+    Android: 1
+    Nintendo 3DS: 3
+    PS3: 3
+    PS4: 3
+    PSM: 3
+    PSP2: 0
+    Samsung TV: 0
+    Standalone: 2
+    Tizen: 0
+    Web: 3
+    WebGL: 1
+    WiiU: 3
+    Windows Store Apps: 1
+    XBOX360: 3
+    XboxOne: 3
+    iPhone: 0
+    tvOS: 3
