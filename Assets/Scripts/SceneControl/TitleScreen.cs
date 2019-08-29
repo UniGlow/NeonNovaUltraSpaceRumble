@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using DG.Tweening;
 
 /// <summary>
 /// 
@@ -70,7 +71,7 @@ public class TitleScreen : MonoBehaviour
             colors.RemoveAt(rand);
 
             // Tween it in
-            LeanTween.scale(textFields[currentWord].gameObject, targetScale, fadeInTime).setEase(LeanTweenType.easeOutBounce);
+            textFields[currentWord].transform.DOScale(targetScale, fadeInTime).SetEase(Ease.OutBounce);
             currentWord++;
             timer = 0;
         }

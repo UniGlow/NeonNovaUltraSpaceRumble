@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using DG.Tweening;
 
 /// <summary>
 /// 
@@ -100,15 +101,11 @@ public class TutorialLevel : MonoBehaviour
     {
         if (Input.anyKey && idleState)
         {
-            if (LeanTween.isTweening(gameObject)) LeanTween.cancel(gameObject);
+            if (DOTween.IsTweening(this)) DOTween.Kill(this);
 
             // Fade in audio
-            float currentSFXVolume;
-            masterMixer.GetFloat(Constants.MIXER_SFX_VOLUME, out currentSFXVolume);
-            FadeAudio(Constants.MIXER_SFX_VOLUME, currentSFXVolume, originalSFXVolume * (1 + sfxVolumeDamp), 1f);
-            float currentMusicVolume;
-            masterMixer.GetFloat(Constants.MIXER_MUSIC_VOLUME, out currentMusicVolume);
-            FadeAudio(Constants.MIXER_MUSIC_VOLUME, currentMusicVolume, originalMusicVolume, 1f);
+            FadeAudio(Constants.MIXER_SFX_VOLUME, originalSFXVolume * (1 + sfxVolumeDamp), 1f);
+            FadeAudio(Constants.MIXER_MUSIC_VOLUME, originalMusicVolume, 1f);
 
             // Reset all TutorialTexts
             ResetTexts();
@@ -120,8 +117,8 @@ public class TutorialLevel : MonoBehaviour
         if (idleTimer >= timeTillIdle && !idleState)
         {
             // Fade out audio
-            FadeAudio(Constants.MIXER_SFX_VOLUME, originalSFXVolume * (1 + sfxVolumeDamp), -80f, 3f);
-            FadeAudio(Constants.MIXER_MUSIC_VOLUME, originalMusicVolume, -7f, 3f);
+            FadeAudio(Constants.MIXER_SFX_VOLUME, -80f, 3f);
+            FadeAudio(Constants.MIXER_MUSIC_VOLUME, -7f, 3f);
 
             idleState = true;
         }
@@ -130,11 +127,9 @@ public class TutorialLevel : MonoBehaviour
         else idleTimer += Time.deltaTime;
     }
 
-    void FadeAudio(string mixerGroup, float from, float to, float duration)
+    void FadeAudio(string mixerGroup, float to, float duration)
     {
-        LeanTween.value(gameObject, from, to, duration).setEase(LeanTweenType.easeInOutQuad).setOnUpdate((float value) => {
-            masterMixer.SetFloat(mixerGroup, value);
-        });
+        masterMixer.DOSetFloat(mixerGroup, to, duration).SetEase(Ease.InOutQuad).SetId(this);
     }
 
     void ResetTexts()

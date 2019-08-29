@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 /// <summary>
 /// 
@@ -11,7 +12,7 @@ public class HealthbarUpdater : MonoBehaviour
 
     #region Variable Declarations
     [Space]
-    [Range(1f, 2f)]
+    [Range(0f, 2f)]
     [SerializeField] float punchAmountOnHit = 1.2f;
     [SerializeField] float punchDuration = 0.3f;
 
@@ -66,7 +67,8 @@ public class HealthbarUpdater : MonoBehaviour
 
         Vector2 newImagePosition = new Vector2(heroHealthbar.sizeDelta.x - neutralWidth, middleImage.anchoredPosition.y);
         middleImage.anchoredPosition = newImagePosition;
-        if (!LeanTween.isTweening(middleImage)) LeanTween.scale(middleImage, middleImage.localScale * punchAmountOnHit, punchDuration).setEasePunch();
+        if (!DOTween.IsTweening(middleImage)) middleImage.DOPunchScale(middleImage.localScale * punchAmountOnHit, punchDuration);
+        //if (!LeanTween.isTweening(middleImage)) LeanTween.scale(middleImage, middleImage.localScale * punchAmountOnHit, punchDuration).setEasePunch();
     }
 	#endregion
 	

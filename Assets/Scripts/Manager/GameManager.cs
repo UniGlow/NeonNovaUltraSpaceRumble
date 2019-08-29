@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using DG.Tweening;
 
 /// <summary>
 /// Manages the overall flow of the game and scene loading. This class is a singleton and won't be destroyed when loading a new scene.
@@ -446,19 +447,19 @@ public class GameManager : SubscribedBehaviour {
         Vector3 originalScale = winText.transform.localScale;
         winText.transform.localScale = Vector3.zero;
         winText.text = "3";
-        LeanTween.scale(winText.gameObject, originalScale, 0.7f).setEase(LeanTweenType.easeOutBounce).setIgnoreTimeScale(true);
+        winText.transform.DOScale(originalScale, .7f).SetEase(Ease.OutBounce).SetUpdate(true);
 
         yield return new WaitForSecondsRealtime(delayForActionStart / 4f);
         
         winText.transform.localScale = Vector3.zero;
         winText.text = "2";
-        LeanTween.scale(winText.gameObject, originalScale, 0.7f).setEase(LeanTweenType.easeOutBounce).setIgnoreTimeScale(true);
+        winText.transform.DOScale(originalScale, .7f).SetEase(Ease.OutBounce).SetUpdate(true);
 
         yield return new WaitForSecondsRealtime(delayForActionStart / 4f);
         
         winText.transform.localScale = Vector3.zero;
         winText.text = "1";
-        LeanTween.scale(winText.gameObject, originalScale, 0.7f).setEase(LeanTweenType.easeOutBounce).setIgnoreTimeScale(true);
+        winText.transform.DOScale(originalScale, .7f).SetEase(Ease.OutBounce).SetUpdate(true);
 
         yield return new WaitForSecondsRealtime(delayForActionStart / 4f);
 

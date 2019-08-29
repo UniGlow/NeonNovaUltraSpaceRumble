@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 /// <summary>
 /// Handles everything related to the movement of Haru, our playable Character
@@ -101,11 +102,8 @@ public class Boss : Player {
         else if (weaknessColor == PlayerColor.Red) bossMeshRenderer.material = redBossMat;
 
         Color newColor = bossMeshRenderer.material.color;
-        LeanTween.value(gameObject, bossMeshRenderer.material.color, bossMeshRenderer.material.color * materialGlowOnSwitch, 0.3f).setEaseInOutQuad().setLoopPingPong(1).setOnUpdate((Color value) =>
-        {
-            newColor = value;
-            bossMeshRenderer.material.color = newColor;
-        });
+
+        bossMeshRenderer.material.DOColor(bossMeshRenderer.material.color * materialGlowOnSwitch, 0.6f).SetLoops(2, LoopType.Yoyo).SetEase(Ease.InOutQuad);
     }
 
     public void SetStrengthColor(PlayerColor playerColor)

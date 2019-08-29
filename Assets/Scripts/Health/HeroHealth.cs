@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 /// <summary>
 /// 
@@ -48,7 +49,7 @@ public class HeroHealth : Health {
             Vector3 originalScale = Vector3.one;
             winText.transform.localScale = Vector3.zero;
             winText.text = "Boss Wins !";
-            LeanTween.scale(winText.gameObject, originalScale, 0.7f).setEase(LeanTweenType.easeOutBounce).setIgnoreTimeScale(true).setDelay(1f);
+            winText.transform.DOScale(originalScale, 0.7f).SetEase(Ease.OutBounce).SetUpdate(true).SetDelay(1f);
             winText.gameObject.SetActive(true);
         }
     }
