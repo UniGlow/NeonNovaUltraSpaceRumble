@@ -163,13 +163,7 @@ public class Transmission : MonoBehaviour {
 
     protected bool TransmissionButtonsUp()
     {
-        if (Input.GetButtonUp(Constants.INPUT_TRANSMIT + hero.PlayerNumber) &&
-            Input.GetAxis(Constants.INPUT_TRANSMIT_AXIS + hero.PlayerNumber) == 0)
-        {
-            return true;
-        }
-        else if (Input.GetAxis(Constants.INPUT_TRANSMIT_AXIS + hero.PlayerNumber) == 0 &&
-            Input.GetAxis(Constants.INPUT_TRANSMIT_AXIS + hero.PlayerNumber) != transmissionAxisInputPrevFrame)
+        if (Input.GetButtonUp(Constants.INPUT_TRANSMIT + hero.PlayerNumber))
         {
             return true;
         }
@@ -180,8 +174,6 @@ public class Transmission : MonoBehaviour {
     protected bool TransmissionButtonsPressed()
     {
         if (Input.GetButton(Constants.INPUT_TRANSMIT + hero.PlayerNumber)) return true;
-
-        else if (Input.GetAxis(Constants.INPUT_TRANSMIT_AXIS + hero.PlayerNumber) > 0) return true;
 
         return false;
     }

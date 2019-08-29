@@ -168,8 +168,6 @@ public class Boss : Player {
     {
         if (Input.GetButton(Constants.INPUT_ABILITY + playerNumber)) return true;
 
-        else if (Input.GetAxis(Constants.INPUT_ABILITY_AXIS + playerNumber) > 0) return true;
-
         return false;
     }
 
