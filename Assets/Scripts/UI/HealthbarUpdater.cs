@@ -68,7 +68,6 @@ public class HealthbarUpdater : MonoBehaviour
         Vector2 newImagePosition = new Vector2(heroHealthbar.sizeDelta.x - neutralWidth, middleImage.anchoredPosition.y);
         middleImage.anchoredPosition = newImagePosition;
         if (!DOTween.IsTweening(middleImage)) middleImage.DOPunchScale(middleImage.localScale * punchAmountOnHit, punchDuration);
-        //if (!LeanTween.isTweening(middleImage)) LeanTween.scale(middleImage, middleImage.localScale * punchAmountOnHit, punchDuration).setEasePunch();
     }
 	#endregion
 	

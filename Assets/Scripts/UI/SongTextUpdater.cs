@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using DG.Tweening;
 
 /// <summary>
 /// 
@@ -54,21 +55,9 @@ public class SongTextUpdater : MonoBehaviour
         spacingText.enabled = true;
 
         // Fade in alpha
-        LeanTween.value(0f, targetColor.a, fadeDuration).setEaseInOutQuad().setOnUpdate((float value) =>
-        {
-            newColor.a = value;
-            titleText.color = newColor;
-            spacingText.color = newColor;
-            artistText.color = newColor;
-        }).setOnComplete(() => {
-            LeanTween.value(targetColor.a, 0f, fadeDuration).setDelay(displayDuration).setEaseInOutQuad().setOnUpdate((float value) =>
-            {
-                newColor.a = value;
-                titleText.color = newColor;
-                spacingText.color = newColor;
-                artistText.color = newColor;
-            });
-        });
+        DOTween.ToAlpha(() => titleText.color, x => titleText.color = x, targetColor.a, fadeDuration).OnComplete(() => { DOTween.ToAlpha(() => titleText.color, x => titleText.color = x, 0f, fadeDuration).SetDelay(displayDuration); });
+        DOTween.ToAlpha(() => spacingText.color, x => spacingText.color = x, targetColor.a, fadeDuration).OnComplete(() => { DOTween.ToAlpha(() => spacingText.color, x => spacingText.color = x, 0f, fadeDuration).SetDelay(displayDuration); });
+        DOTween.ToAlpha(() => artistText.color, x => artistText.color = x, targetColor.a, fadeDuration).OnComplete(() => { DOTween.ToAlpha(() => artistText.color, x => artistText.color = x, 0f, fadeDuration).SetDelay(displayDuration); });
     }
 	#endregion
 	

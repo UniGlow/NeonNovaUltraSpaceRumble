@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public static class ExtensionMethods {
 
@@ -46,8 +47,10 @@ public static class ExtensionMethods {
         float originalVolume = source.volume;
         source.volume = 0f;
         source.Play();
-        LeanTween.value(source.gameObject, (float f) => { source.volume = f; }, 0f, originalVolume, fadeInTime)
-                 .setEase(LeanTweenType.easeInOutQuad);
+
+        source.DOFade(originalVolume, fadeInTime).SetEase(Ease.InOutQuad);
+        /*LeanTween.value(source.gameObject, (float f) => { source.volume = f; }, 0f, originalVolume, fadeInTime)
+                 .setEase(LeanTweenType.easeInOutQuad);*/
     }
 
     /// <summary>
@@ -56,12 +59,17 @@ public static class ExtensionMethods {
     /// <param name="fadeOutTime">Length of the Fade-Out in seconds</param>
     public static void Stop(this AudioSource source, float fadeOutTime) {
         float originalVolume = source.volume;
+        source.DOFade(0f, fadeOutTime).SetEase(Ease.InOutQuad).OnComplete(() => {
+            source.Stop();
+            source.volume = originalVolume;
+        });
+        /*
         LeanTween.value(source.gameObject, (float f) => { source.volume = f; }, originalVolume, 0f, fadeOutTime)
                  .setEase(LeanTweenType.easeInOutQuad)
                  .setOnComplete(() => {
                      source.Stop();
                      source.volume = originalVolume;
-                 });
+                 });*/
     }
 
     /// <summary>
@@ -72,15 +80,11 @@ public static class ExtensionMethods {
     public static void CrossFade(this AudioSource thisSource, AudioSource otherSource, float fadingTime) {
         float originalVolumeThis = thisSource.volume;
         float originalVolumeOther = otherSource.volume;
-        LeanTween.value(thisSource.gameObject, (float f) => { thisSource.volume = f; }, originalVolumeThis, 0f, fadingTime)
-                 .setEase(LeanTweenType.easeInOutQuad)
-                 .setOnComplete(() => {
-                     thisSource.Stop();
-                     thisSource.volume = originalVolumeThis;
-                 });
-        LeanTween.value(otherSource.gameObject, (float f) => { otherSource.volume = f; }, 0f, originalVolumeOther, fadingTime)
-                 .setEase(LeanTweenType.easeInOutQuad);
+
+        thisSource.DOFade(0f, fadingTime).SetEase(Ease.InOutQuad).OnComplete(() => { thisSource.Stop(); thisSource.volume = originalVolumeThis; });
+        otherSource.volume = 0f;
         otherSource.Play();
+        otherSource.DOFade(originalVolumeOther, fadingTime).SetEase(Ease.InOutQuad);
     }
     #endregion
 
