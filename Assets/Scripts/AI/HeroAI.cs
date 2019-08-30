@@ -37,11 +37,14 @@ public class HeroAI : Hero {
 
 
     #region Unity Event Functions
+    private void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+    }
     override protected void Start() {
         base.Start();
         
         // Get references
-        agent = GetComponent<NavMeshAgent>();
         if (GameManager.Instance.Boss) boss = GameManager.Instance.Boss.transform;
 
         StartCoroutine(Wait(1, () => 
@@ -113,7 +116,12 @@ public class HeroAI : Hero {
 
 
     #region Public Funtcions
+    public override void SetMovable(bool active)
+    {
+        base.SetMovable(active);
 
+        agent.isStopped = !active;
+    }
     #endregion
 
 

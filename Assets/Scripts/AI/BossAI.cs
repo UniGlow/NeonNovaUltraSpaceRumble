@@ -31,12 +31,14 @@ public class BossAI : Boss
 
 
     #region Unity Event Functions
+    private void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+    }
+
     override protected void Start()
     {
         base.Start();
-
-        // Get references
-        agent = GetComponent<NavMeshAgent>();
 
         GameObject[] cornersGO = GameObject.FindGameObjectsWithTag(Constants.TAG_AI_CORNER);
         foreach (GameObject go in cornersGO)
@@ -106,6 +108,13 @@ public class BossAI : Boss
                 if (hero.PlayerColor == PlayerColor.Green) greenHero = hero.transform;
             }
         }));
+    }
+
+    public override void SetMovable(bool active)
+    {
+        base.SetMovable(active);
+
+        agent.isStopped = !active;
     }
     #endregion
 

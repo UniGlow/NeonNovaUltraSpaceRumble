@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(AudioSource))]
-public class Player : SubscribedBehaviour
+public class Player : MonoBehaviour
 {
 
     #region Variable Declarations
@@ -73,21 +73,12 @@ public class Player : SubscribedBehaviour
 
 
 
-    #region Custom Event Functions
-    protected override void OnLevelStarted()
-    {
-        SetMovable(true);
-    }
-    #endregion
-
-
-
     #region Public Funtcions
     /// <summary>
     /// Sets if the character is allowed to move or not and stops his current movement
     /// </summary>
     /// <param name="movable">Character allowed to move?</param>
-    public void SetMovable(bool active) {
+    public virtual void SetMovable(bool active) {
         this.active = active;
 
         if (!active) {

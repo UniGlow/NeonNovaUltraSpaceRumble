@@ -7,7 +7,8 @@ using DG.Tweening;
 /// <summary>
 /// 
 /// </summary>
-public class BossHealth : Health {
+public class BossHealth : Health
+{
 
     #region Variable Declarations
     public static BossHealth Instance;
@@ -16,7 +17,8 @@ public class BossHealth : Health {
 
 
     #region Unity Event Functions
-    void Awake() {
+    void Awake()
+    {
         //Check if instance already exists
         if (Instance == null)
 
@@ -24,7 +26,8 @@ public class BossHealth : Health {
             Instance = this;
 
         //If instance already exists and it's not this:
-        else if (Instance != this) {
+        else if (Instance != this)
+        {
 
             //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of an AudioManager.
             Debug.Log("There can only be one BossHealth instantiated. Destroying this Instance...");
@@ -45,7 +48,7 @@ public class BossHealth : Health {
         // Won?
         if (currentDamage >= HeroHealth.Instance.CurrentDamage + HeroHealth.Instance.WinningPointLead)
         {
-            GameEvents.StartLevelCompleted("Heroes");
+            RaiseLevelCompleted("Heroes");
 
             Vector3 originalScale = Vector3.one;
             winText.transform.localScale = Vector3.zero;
@@ -54,5 +57,14 @@ public class BossHealth : Health {
             winText.gameObject.SetActive(true);
         }
     }
-	#endregion
+    #endregion
+
+
+
+    #region Private Functions
+    void RaiseLevelCompleted(string winner)
+    {
+        levelCompletedEvent.Raise(this, winner);
+    }
+    #endregion
 }

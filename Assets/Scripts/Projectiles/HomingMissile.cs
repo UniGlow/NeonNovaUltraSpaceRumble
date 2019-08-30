@@ -8,7 +8,8 @@ using UnityEngine.AI;
 /// </summary>
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(AudioSource))]
-public class HomingMissile : SubscribedBehaviour {
+public class HomingMissile : MonoBehaviour
+{
 
     #region Variable Declarations
     [SerializeField] float speed = 10f;
@@ -41,15 +42,21 @@ public class HomingMissile : SubscribedBehaviour {
 	
 	
 	#region Unity Event Functions
-	private void Start() {
+    private void Awake()
+    {
         agent = GetComponent<NavMeshAgent>();
         audioSource = GetComponent<AudioSource>();
+    }
+
+	private void Start()
+    {
         AcquireNewTarget();
 	}
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag.Contains(Constants.TAG_HERO)) {
+        if (other.tag.Contains(Constants.TAG_HERO))
+        {
             HeroHealth.Instance.TakeDamage(damage);
 
             audioSource.PlayOneShot(hitSound, hitSoundVolume);
@@ -59,7 +66,8 @@ public class HomingMissile : SubscribedBehaviour {
             if (enableCameraShake) EZCameraShake.CameraShaker.Instance.ShakeOnce(magnitude, roughness, fadeIn, fadeOut);
         }
 
-        else if (other.tag.Contains(Constants.TAG_BOSS)) {
+        else if (other.tag.Contains(Constants.TAG_BOSS))
+        {
             BossHealth.Instance.TakeDamage(damage);
 
             audioSource.PlayOneShot(hitSound, hitSoundVolume);
@@ -72,26 +80,13 @@ public class HomingMissile : SubscribedBehaviour {
 
     private void Update()
     {
-        if (!agentPaused) {
+        if (!agentPaused)
+        {
             if (target == null) AcquireNewTarget();
 
             agent.SetDestination(target.position);
             agent.Move(transform.forward * speed);
         }
-    }
-    #endregion
-
-
-
-    #region Custom Event Functions
-    override protected void OnLevelCompleted(string winner)
-    {
-        PauseMissile(true);
-    }
-
-    protected override void OnLevelStarted()
-    {
-        PauseMissile(false);
     }
     #endregion
 
@@ -110,6 +105,7 @@ public class HomingMissile : SubscribedBehaviour {
 
     public void PauseMissile(bool pause)
     {
+        agent.isStopped = pause;
         agentPaused = pause;
     }
     #endregion

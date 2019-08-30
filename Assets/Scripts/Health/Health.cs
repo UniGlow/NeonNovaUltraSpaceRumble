@@ -6,7 +6,8 @@ using TMPro;
 /// <summary>
 /// 
 /// </summary>
-public class Health : MonoBehaviour {
+public class Health : MonoBehaviour
+{
 
     #region Variable Declarations
     [SerializeField] protected int winningPointLead = 500;
@@ -14,6 +15,8 @@ public class Health : MonoBehaviour {
 
     [SerializeField] protected TextMeshProUGUI winText;
     [SerializeField] protected float fadeInTime = 2f;
+
+    [SerializeField] protected GameEvent levelCompletedEvent = null;
 
     protected int currentDamage;
     protected HealthbarUpdater healthbarUpdater;

@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// 
 /// </summary>
-[CreateAssetMenu(fileName = "MusicTrack", menuName = "NNUSR/NewMusicTrack")]
+[CreateAssetMenu(fileName = "New Music Track", menuName = "Scriptable Objects/Music Track")]
 public class MusicTrack : ScriptableObject 
 {
     public AudioClip intro;
