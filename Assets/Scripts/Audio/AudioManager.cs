@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 /// 
 /// </summary>
 [RequireComponent(typeof(AudioSource))]
-public class AudioManager : SubscribedBehaviour
+public class AudioManager : MonoBehaviour
 {
 
     #region Variable Declarations

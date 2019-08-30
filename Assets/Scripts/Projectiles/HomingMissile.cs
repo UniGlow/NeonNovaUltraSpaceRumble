@@ -8,7 +8,8 @@ using UnityEngine.AI;
 /// </summary>
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(AudioSource))]
-public class HomingMissile : SubscribedBehaviour {
+public class HomingMissile : MonoBehaviour
+{
 
     #region Variable Declarations
     [SerializeField] float speed = 10f;
@@ -54,7 +55,8 @@ public class HomingMissile : SubscribedBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag.Contains(Constants.TAG_HERO)) {
+        if (other.tag.Contains(Constants.TAG_HERO))
+        {
             HeroHealth.Instance.TakeDamage(damage);
 
             audioSource.PlayOneShot(hitSound, hitSoundVolume);
@@ -64,7 +66,8 @@ public class HomingMissile : SubscribedBehaviour {
             if (enableCameraShake) EZCameraShake.CameraShaker.Instance.ShakeOnce(magnitude, roughness, fadeIn, fadeOut);
         }
 
-        else if (other.tag.Contains(Constants.TAG_BOSS)) {
+        else if (other.tag.Contains(Constants.TAG_BOSS))
+        {
             BossHealth.Instance.TakeDamage(damage);
 
             audioSource.PlayOneShot(hitSound, hitSoundVolume);
@@ -77,7 +80,8 @@ public class HomingMissile : SubscribedBehaviour {
 
     private void Update()
     {
-        if (!agentPaused) {
+        if (!agentPaused)
+        {
             if (target == null) AcquireNewTarget();
 
             agent.SetDestination(target.position);

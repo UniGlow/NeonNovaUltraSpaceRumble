@@ -8,7 +8,7 @@ using DG.Tweening;
 /// <summary>
 /// Manages the overall flow of the game and scene loading. This class is a singleton and won't be destroyed when loading a new scene.
 /// </summary>
-public class GameManager : SubscribedBehaviour
+public class GameManager : MonoBehaviour
 {
 
     #region Variable Declarations
@@ -67,10 +67,8 @@ public class GameManager : SubscribedBehaviour
 
 
     #region Unity Event Functions
-    override protected void OnEnable()
+    protected void OnEnable()
     {
-        base.OnEnable();
-
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
     }
 
@@ -112,10 +110,8 @@ public class GameManager : SubscribedBehaviour
         HandleIntensify();
     }
 
-    override protected void OnDisable()
+    private void OnDisable()
     {
-        base.OnDisable();
-
         SceneManager.sceneLoaded -= OnLevelFinishedLoading;
     }
     #endregion

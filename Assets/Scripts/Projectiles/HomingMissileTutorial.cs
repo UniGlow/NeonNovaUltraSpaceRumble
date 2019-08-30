@@ -8,7 +8,7 @@ using UnityEngine.AI;
 /// </summary>
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(AudioSource))]
-public class HomingMissileTutorial : SubscribedBehaviour
+public class HomingMissileTutorial : MonoBehaviour
 {
 
     #region Variable Declarations
