@@ -240,7 +240,7 @@ public class GameEventPropertyDrawer : PropertyDrawer
     private bool CheckEventTypes(SerializedProperty prop)
     {
         GameEvent _event = (GameEvent)prop.objectReferenceValue;
-        MethodInfo[] methods = prop.serializedObject.targetObject.GetType().GetMethods(BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.NonPublic | BindingFlags.Public);
+        MethodInfo[] methods = prop.serializedObject.targetObject.GetType().GetMethods(BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.FlattenHierarchy);
         MethodInfo targetMethod = null;
         string targetMethodName = "Raise" + ((GameEvent)prop.objectReferenceValue).name;
         //Debug.Log("Searching for: " + targetMethodName + " | " + methods.Length + " Methods to search");
