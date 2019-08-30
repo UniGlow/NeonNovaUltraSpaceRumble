@@ -47,6 +47,7 @@ public class GameManager : SubscribedBehaviour
     public Color BluePlayerColor { get { return bluePlayerColor; } }
     [SerializeField] GameObject heroAIPrefab;
     [SerializeField] GameObject bossAIPrefab;
+    [SerializeField] GameEvent levelStartedEvent = null;
 
 
 
@@ -190,7 +191,8 @@ public class GameManager : SubscribedBehaviour
 
 
     #region Private Functions
-    void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode) {
+    void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+    {
         boss = GameObject.FindObjectOfType<Boss>();
 
         if (SceneManager.GetActiveScene().name.Contains("Level"))
@@ -378,6 +380,7 @@ public class GameManager : SubscribedBehaviour
             bossAI.SetStrengthColor(boss.StrengthColor);
             bossAI.SetWeaknessColor(boss.WeaknessColor);
             Destroy(boss.gameObject);
+            boss = bossAI;
 
 
             // Set tank and opfer playerNumber and health
@@ -403,6 +406,7 @@ public class GameManager : SubscribedBehaviour
             bossAI.SetStrengthColor(boss.StrengthColor);
             bossAI.SetWeaknessColor(boss.WeaknessColor);
             Destroy(boss.gameObject);
+            boss = bossAI;
 
             // Set camera targets
             MultipleTargetCamera cameraRig = Camera.main.transform.parent.GetComponent<MultipleTargetCamera>();
@@ -423,6 +427,11 @@ public class GameManager : SubscribedBehaviour
         else {
             // Do nothing for a 4 player game (scene is already set up for this)
         }
+    }
+
+    void RaiseLevelStarted()
+    {
+        levelStartedEvent.Raise(this);
     }
     #endregion
 
@@ -462,7 +471,7 @@ public class GameManager : SubscribedBehaviour
         yield return new WaitForSecondsRealtime(delayForActionStart / 4f);
 
         winText.gameObject.SetActive(false);
-        GameEvents.StartLevelStarted();
+        RaiseLevelStarted();
     }
 
     IEnumerator StartTheTutorial()
@@ -470,8 +479,8 @@ public class GameManager : SubscribedBehaviour
         UpdatePlayerCount();
 
         yield return new WaitForSecondsRealtime(delayForActionStart / 4f);
-        
-        GameEvents.StartLevelStarted();
+
+        RaiseLevelStarted();
     }
 
     IEnumerator StartTheCredits()
@@ -479,7 +488,7 @@ public class GameManager : SubscribedBehaviour
 
         yield return new WaitForSecondsRealtime(delayForActionStart / 4f);
 
-        GameEvents.StartLevelStarted();
+        RaiseLevelStarted();
     }
     #endregion
 }

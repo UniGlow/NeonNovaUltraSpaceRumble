@@ -41,9 +41,14 @@ public class HomingMissile : SubscribedBehaviour {
 	
 	
 	#region Unity Event Functions
-	private void Start() {
+    private void Awake()
+    {
         agent = GetComponent<NavMeshAgent>();
         audioSource = GetComponent<AudioSource>();
+    }
+
+	private void Start()
+    {
         AcquireNewTarget();
 	}
 
@@ -83,15 +88,6 @@ public class HomingMissile : SubscribedBehaviour {
 
 
 
-    #region Custom Event Functions
-    protected override void OnLevelStarted()
-    {
-        PauseMissile(false);
-    }
-    #endregion
-
-
-
     #region Public Functions
     public void AcquireNewTarget()
     {
@@ -105,6 +101,7 @@ public class HomingMissile : SubscribedBehaviour {
 
     public void PauseMissile(bool pause)
     {
+        agent.isStopped = pause;
         agentPaused = pause;
     }
     #endregion

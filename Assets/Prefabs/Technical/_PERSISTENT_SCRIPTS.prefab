@@ -26,8 +26,9 @@ GameObject:
   - component: {fileID: 114724152049828894}
   - component: {fileID: 82899805016581398}
   - component: {fileID: 82249825244062562}
-  - component: {fileID: 114818958610397038}
   - component: {fileID: 114806652132120226}
+  - component: {fileID: 114818958610397038}
+  - component: {fileID: 114774338545418308}
   m_Layer: 0
   m_Name: _PERSISTENT_SCRIPTS
   m_TagString: Untagged
@@ -376,6 +377,7 @@ MonoBehaviour:
     type: 2}
   bossAIPrefab: {fileID: 1566906718194532, guid: 8c475107a1ba5c54695c67a9aba025ba,
     type: 2}
+  levelStartedEvent: {fileID: 11400000, guid: a93bef75cc487ef48b9411ec84a74c73, type: 2}
 --- !u!114 &114614392492591870
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -421,6 +423,31 @@ MonoBehaviour:
   bossWinSoundVolume: 0.8
   heroesWinSound: {fileID: 8300000, guid: 2dc646915323a9840bfcee7e29d3b9d0, type: 3}
   heroesWinSoundVolume: 0.8
+--- !u!114 &114774338545418308
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1136556033050532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 447d59970781ce142a63ea883b30c2b1, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  linkedMethods:
+  - component: {fileID: 114724152049828894}
+    methodID: 0
+    methodName: PlayWinSequence
+    chosenID: 1
+    methodNames: []
+    gameObject: {fileID: 1136556033050532}
+  ignoreEventParameters: 0
 --- !u!114 &114806652132120226
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -469,10 +496,10 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   linkedMethods:
-  - component: {fileID: 114724152049828894}
-    methodID: 0
-    methodName: PlayWinSequence
-    chosenID: 1
+  - component: {fileID: 114599229708516914}
+    methodID: 15
+    methodName: LoadNextLevel
+    chosenID: 2
     methodNames: []
     gameObject: {fileID: 1136556033050532}
   ignoreEventParameters: 0

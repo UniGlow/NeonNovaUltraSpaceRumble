@@ -10,18 +10,12 @@ abstract public class SubscribedBehaviour : MonoBehaviour {
 
     // Subscribing to all custom game events
     protected virtual void OnEnable() {
-        GameEvents.LevelStarted += OnLevelStarted;
+
     }
 
     // Unsubscribing from all custom game events
     protected virtual void OnDisable() {
-        GameEvents.LevelStarted -= OnLevelStarted;
+
     }
 
-
-
-    /* Virtual functions for every custom game event
-     * If overriden, these functions will be called in the inheriting classes when events are triggered
-     */
-    protected virtual void OnLevelStarted() { }
 }

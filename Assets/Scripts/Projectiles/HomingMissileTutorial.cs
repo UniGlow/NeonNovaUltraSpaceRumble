@@ -77,15 +77,6 @@ public class HomingMissileTutorial : SubscribedBehaviour
 
 
 
-    #region Custom Event Functions
-    protected override void OnLevelStarted()
-    {
-        PauseMissile(false);
-    }
-    #endregion
-
-
-
     #region Public Functions
     public void AcquireNewTarget()
     {
