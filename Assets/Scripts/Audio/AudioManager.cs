@@ -7,9 +7,12 @@ using UnityEngine.SceneManagement;
 /// 
 /// </summary>
 [RequireComponent(typeof(AudioSource))]
-public class AudioManager : SubscribedBehaviour {
+public class AudioManager : SubscribedBehaviour
+{
 
     #region Variable Declarations
+    public static AudioManager Instance;
+
     [SerializeField] List<MusicTrack> musicTracks = new List<MusicTrack>();
 
     [Space]
@@ -26,14 +29,13 @@ public class AudioManager : SubscribedBehaviour {
     AudioSource audioSource;
     AudioSource audioSourceSFX;
     bool startingTrack;
-
-    public static AudioManager Instance;
     #endregion
 
 
 
     #region Unity Event Functions
-    void Awake() {
+    void Awake()
+    {
         //Check if instance already exists
         if (Instance == null)
 
@@ -41,7 +43,8 @@ public class AudioManager : SubscribedBehaviour {
             Instance = this;
 
         //If instance already exists and it's not this:
-        else if (Instance != this) {
+        else if (Instance != this)
+        {
 
             //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of an AudioManager.
             Debug.Log("There can only be one AudioManager instantiated. Destroying this Instance...");
@@ -49,28 +52,16 @@ public class AudioManager : SubscribedBehaviour {
         }
     }
 
-    private void Start() {
+    private void Start()
+    {
         audioSource = GetComponent<AudioSource>();
         audioSourceSFX = transform.GetChild(0).GetComponent<AudioSource>();
 	}
 	
-	private void Update() {
+	private void Update()
+    {
 		
 	}
-    #endregion
-
-
-
-    #region Custom Event Functions
-    override protected void OnLevelCompleted(string winner)
-    {
-        PlayWinSequence(winner);
-    }
-
-    protected override void OnLevelStarted()
-    {
-        
-    }
     #endregion
 
 
@@ -168,8 +159,10 @@ public class AudioManager : SubscribedBehaviour {
 
 
 
-    IEnumerator StartAudioLoop(MusicTrack track) {
-        for (float i = 0; i < track.intro.length; i+=Time.deltaTime) {
+    IEnumerator StartAudioLoop(MusicTrack track)
+    {
+        for (float i = 0; i < track.intro.length; i+=Time.deltaTime)
+        {
             yield return null;
         }
         
@@ -179,7 +172,8 @@ public class AudioManager : SubscribedBehaviour {
         audioSource.Play();
     }
 
-    IEnumerator PlayWinSoundDelayed(string winner) {
+    IEnumerator PlayWinSoundDelayed(string winner)
+    {
         yield return new WaitForSecondsRealtime(levelEnd.length);
 
         audioSource.loop = false;

@@ -8,7 +8,8 @@ using DG.Tweening;
 /// <summary>
 /// Manages the overall flow of the game and scene loading. This class is a singleton and won't be destroyed when loading a new scene.
 /// </summary>
-public class GameManager : SubscribedBehaviour {
+public class GameManager : SubscribedBehaviour
+{
 
     #region Variable Declarations
     [Header("Game Properties")]
@@ -120,22 +121,6 @@ public class GameManager : SubscribedBehaviour {
 
 
 
-    #region Custom Event Functions
-    // Every child of SubscribedBehaviour can implement these
-    override protected void OnLevelCompleted(string winner) {
-        StartCoroutine(LoadNextLevel());
-        Time.timeScale = 0.0f;
-    }
-
-    protected override void OnLevelStarted()
-    {
-        colorChangeTimer = 0f;
-        intensifyTimer = 0f;
-    }
-    #endregion
-
-
-
     #region Public Functions
     /// <summary>
     /// Loads the next scene in build index
@@ -187,6 +172,18 @@ public class GameManager : SubscribedBehaviour {
                 playerCount++;
             }
         }
+    }
+
+    public void LoadNextLevel(string winner)
+    {
+        StartCoroutine(LoadNextLevel());
+        Time.timeScale = 0.0f;
+    }
+
+    public void ResetTimer()
+    {
+        colorChangeTimer = 0f;
+        intensifyTimer = 0f;
     }
     #endregion
 
@@ -431,6 +428,7 @@ public class GameManager : SubscribedBehaviour {
 
 
 
+    #region Coroutines
     IEnumerator LoadNextLevel() {
         yield return new WaitForSecondsRealtime(delayAtLevelEnd);
         LoadNextScene();
@@ -483,4 +481,5 @@ public class GameManager : SubscribedBehaviour {
 
         GameEvents.StartLevelStarted();
     }
+    #endregion
 }

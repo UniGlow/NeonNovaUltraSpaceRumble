@@ -56,6 +56,8 @@ MonoBehaviour:
   endlessHealth: 0
   winText: {fileID: 0}
   fadeInTime: 2
+  levelCompletedEvent: {fileID: 11400000, guid: 447d59970781ce142a63ea883b30c2b1,
+    type: 2}
 --- !u!114 &114629895528832284
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -71,3 +73,5 @@ MonoBehaviour:
   endlessHealth: 0
   winText: {fileID: 0}
   fadeInTime: 2
+  levelCompletedEvent: {fileID: 11400000, guid: 447d59970781ce142a63ea883b30c2b1,
+    type: 2}

@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// 
 /// </summary>
-[CreateAssetMenu(fileName = "NewTextCollection", menuName = "NNUSR/TextCollection")]
+[CreateAssetMenu(fileName = "New Text Collection", menuName = "Scriptable Objects/Text Collection")]
 public class TextCollection : ScriptableObject 
 {
     [System.Serializable]

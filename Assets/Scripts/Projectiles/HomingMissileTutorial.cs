@@ -8,7 +8,8 @@ using UnityEngine.AI;
 /// </summary>
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(AudioSource))]
-public class HomingMissileTutorial : SubscribedBehaviour {
+public class HomingMissileTutorial : SubscribedBehaviour
+{
 
     #region Variable Declarations
     [SerializeField] float speed = 10f;
@@ -34,7 +35,8 @@ public class HomingMissileTutorial : SubscribedBehaviour {
 	
 	
 	#region Unity Event Functions
-	private void Start() {
+	private void Start()
+    {
         agent = GetComponent<NavMeshAgent>();
         audioSource = GetComponent<AudioSource>();
         AcquireNewTarget();
@@ -42,7 +44,8 @@ public class HomingMissileTutorial : SubscribedBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag.Contains(Constants.TAG_HERO_DUMMY)) {
+        if (other.tag.Contains(Constants.TAG_HERO_DUMMY))
+        {
             HeroHealth.Instance.TakeDamage(damage);
 
             audioSource.PlayOneShot(hitSound, hitSoundVolume);
@@ -50,7 +53,8 @@ public class HomingMissileTutorial : SubscribedBehaviour {
             Instantiate(hitPSHeroes, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
         }
 
-        else if (other.tag.Contains(Constants.TAG_BOSS_DUMMY)) {
+        else if (other.tag.Contains(Constants.TAG_BOSS_DUMMY))
+        {
             BossHealth.Instance.TakeDamage(damage);
 
             audioSource.PlayOneShot(hitSound, hitSoundVolume);
@@ -61,7 +65,8 @@ public class HomingMissileTutorial : SubscribedBehaviour {
 
     private void Update()
     {
-        if (!agentPaused) {
+        if (!agentPaused)
+        {
             if (target == null) AcquireNewTarget();
 
             agent.SetDestination(target.position);
@@ -73,11 +78,6 @@ public class HomingMissileTutorial : SubscribedBehaviour {
 
 
     #region Custom Event Functions
-    override protected void OnLevelCompleted(string winner)
-    {
-        PauseMissile(true);
-    }
-
     protected override void OnLevelStarted()
     {
         PauseMissile(false);
