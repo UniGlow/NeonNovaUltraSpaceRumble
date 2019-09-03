@@ -363,6 +363,7 @@ MonoBehaviour:
   overrideLevelPointLimits: 1
   heroesWinningPointLead: 600
   bossWinningPointLead: 600
+  countdownDuration: 4
   colorChangeSound: {fileID: 8300000, guid: cb3b90f02c52c49418a9a3fd50874d2b, type: 3}
   colorChangeSoundVolume: 1
   colorChangeAudioSource: {fileID: 82249825244062562}
@@ -378,6 +379,8 @@ MonoBehaviour:
   bossAIPrefab: {fileID: 1566906718194532, guid: 8c475107a1ba5c54695c67a9aba025ba,
     type: 2}
   levelStartedEvent: {fileID: 11400000, guid: a93bef75cc487ef48b9411ec84a74c73, type: 2}
+  countdownStartedEvent: {fileID: 11400000, guid: dd95ddef2760add43a73ce45d743f5e5,
+    type: 2}
 --- !u!114 &114614392492591870
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -423,6 +426,8 @@ MonoBehaviour:
   bossWinSoundVolume: 0.8
   heroesWinSound: {fileID: 8300000, guid: 2dc646915323a9840bfcee7e29d3b9d0, type: 3}
   heroesWinSoundVolume: 0.8
+  audioSourceMusic: {fileID: 82899805016581398}
+  audioSourceSFX: {fileID: 82249825244062562}
 --- !u!114 &114774338545418308
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -492,14 +497,25 @@ MonoBehaviour:
   gameEvent: {fileID: 11400000, guid: 447d59970781ce142a63ea883b30c2b1, type: 2}
   response:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114599229708516914}
+        m_MethodName: LoadNextLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   linkedMethods:
   - component: {fileID: 114599229708516914}
-    methodID: 15
-    methodName: LoadNextLevel
-    chosenID: 2
+    methodID: -1
+    methodName: 
+    chosenID: -1
     methodNames: []
     gameObject: {fileID: 1136556033050532}
-  ignoreEventParameters: 0
+  ignoreEventParameters: 1

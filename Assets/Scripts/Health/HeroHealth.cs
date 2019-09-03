@@ -47,17 +47,17 @@ public class HeroHealth : Health
         // Dead?
         if (currentDamage >= BossHealth.Instance.CurrentDamage + BossHealth.Instance.WinningPointLead)
         {
-            RaiseLevelCompleted("Boss");
-
+            RaiseLevelCompleted(Faction.Boss);
+            /*
             Vector3 originalScale = Vector3.one;
             winText.transform.localScale = Vector3.zero;
             winText.text = "Boss Wins !";
             winText.transform.DOScale(originalScale, 0.7f).SetEase(Ease.OutBounce).SetUpdate(true).SetDelay(1f);
-            winText.gameObject.SetActive(true);
+            winText.gameObject.SetActive(true);*/
         }
     }
 
-    void RaiseLevelCompleted(string winner)
+    void RaiseLevelCompleted(Faction winner)
     {
         levelCompletedEvent.Raise(this, winner);
     }

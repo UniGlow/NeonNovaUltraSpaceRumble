@@ -48,13 +48,14 @@ public class BossHealth : Health
         // Won?
         if (currentDamage >= HeroHealth.Instance.CurrentDamage + HeroHealth.Instance.WinningPointLead)
         {
-            RaiseLevelCompleted("Heroes");
+            RaiseLevelCompleted(Faction.Heros);
 
+            /*
             Vector3 originalScale = Vector3.one;
             winText.transform.localScale = Vector3.zero;
             winText.text = "Heroes Win !";
             winText.transform.DOScale(originalScale, 0.7f).SetEase(Ease.OutBounce).SetUpdate(true).SetDelay(1f);
-            winText.gameObject.SetActive(true);
+            winText.gameObject.SetActive(true);*/
         }
     }
     #endregion
@@ -62,7 +63,7 @@ public class BossHealth : Health
 
 
     #region Private Functions
-    void RaiseLevelCompleted(string winner)
+    void RaiseLevelCompleted(Faction winner)
     {
         levelCompletedEvent.Raise(this, winner);
     }

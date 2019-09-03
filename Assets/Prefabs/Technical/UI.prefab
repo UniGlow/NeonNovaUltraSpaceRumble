@@ -332,12 +332,12 @@ GameObject:
   - component: {fileID: 114366613420287042}
   - component: {fileID: 114830794619304404}
   m_Layer: 5
-  m_Name: WinText
+  m_Name: Central PopUp Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1308658729538234
 GameObject:
   m_ObjectHideFlags: 1
@@ -1028,6 +1028,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1745411428629268
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 224605334246441930}
+  - component: {fileID: 222001664015297784}
+  - component: {fileID: 114431960158114504}
+  - component: {fileID: 114109828624156822}
+  - component: {fileID: 114742929196558536}
+  m_Layer: 5
+  m_Name: Central PopUp Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1761124873904636
 GameObject:
   m_ObjectHideFlags: 1
@@ -1651,6 +1670,31 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &114109828624156822
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1745411428629268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 447d59970781ce142a63ea883b30c2b1, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  linkedMethods:
+  - component: {fileID: 114431960158114504}
+    methodID: 0
+    methodName: WinTextPopUp
+    chosenID: 1
+    methodNames: []
+    gameObject: {fileID: 1745411428629268}
+  ignoreEventParameters: 0
 --- !u!114 &114113345575906416
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2854,6 +2898,22 @@ MonoBehaviour:
   m_Script: {fileID: -907550668, guid: 89f0137620f6af44b9ba852b4190e64e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114431960158114504
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1745411428629268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f61d26868c22794da216b24afdc9787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 114366613420287042}
+  maxSize: 1
+  popUpAnimationDuration: 0.7
+  bossWinText: Boss wins!
+  herosWinText: Heros win!
 --- !u!114 &114441969563052286
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4203,6 +4263,31 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114742929196558536
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1745411428629268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: dd95ddef2760add43a73ce45d743f5e5, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  linkedMethods:
+  - component: {fileID: 114431960158114504}
+    methodID: 1
+    methodName: StartCountdown
+    chosenID: 1
+    methodNames: []
+    gameObject: {fileID: 1745411428629268}
+  ignoreEventParameters: 0
 --- !u!114 &114748288301170940
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5893,6 +5978,12 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &222001664015297784
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1745411428629268}
 --- !u!222 &222004929007778282
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -6476,7 +6567,7 @@ RectTransform:
   m_Children:
   - {fileID: 224593487324576222}
   - {fileID: 224511599549275022}
-  - {fileID: 224181162233957392}
+  - {fileID: 224605334246441930}
   - {fileID: 224897874771766840}
   m_Father: {fileID: 224681336992314674}
   m_RootOrder: 0
@@ -6551,8 +6642,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 224131533213275328}
-  m_RootOrder: 2
+  m_Father: {fileID: 224605334246441930}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7179,6 +7270,25 @@ RectTransform:
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &224605334246441930
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1745411428629268}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 224181162233957392}
+  m_Father: {fileID: 224131533213275328}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224631942021879286
 RectTransform:

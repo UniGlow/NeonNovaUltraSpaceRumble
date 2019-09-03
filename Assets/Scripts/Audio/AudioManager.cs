@@ -25,9 +25,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioClip heroesWinSound;
     [Range(0, 1)]
     [SerializeField] float heroesWinSoundVolume = 1f;
+    [SerializeField] AudioSource audioSourceMusic = null;
+    [SerializeField] AudioSource audioSourceSFX = null;
 
-    AudioSource audioSource;
-    AudioSource audioSourceSFX;
     bool startingTrack;
     #endregion
 
@@ -54,7 +54,7 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        audioSourceMusic = GetComponent<AudioSource>();
         audioSourceSFX = transform.GetChild(0).GetComponent<AudioSource>();
 	}
 	
@@ -67,10 +67,10 @@ public class AudioManager : MonoBehaviour
 
 
     #region Public Functions
-    public void PlayWinSequence(string winner)
+    public void PlayWinSequence(Faction winner)
     {
-        audioSource.Stop();
-        audioSource.PlayOneShot(levelEnd, levelEndVolume);
+        audioSourceMusic.Stop();
+        audioSourceMusic.PlayOneShot(levelEnd, levelEndVolume);
 
         StartCoroutine(PlayWinSoundDelayed(winner));
     }
@@ -81,10 +81,10 @@ public class AudioManager : MonoBehaviour
         startingTrack = true;
 
         MusicTrack track = GetTrack(name);
-        audioSource.clip = track.intro;
-        audioSource.volume = track.volume;
-        audioSource.loop = false;
-        audioSource.Play();
+        audioSourceMusic.clip = track.intro;
+        audioSourceMusic.volume = track.volume;
+        audioSourceMusic.loop = false;
+        audioSourceMusic.Play();
         StartCoroutine(StartAudioLoop(track));
     }
 
@@ -93,10 +93,10 @@ public class AudioManager : MonoBehaviour
         if (startingTrack) return;
         startingTrack = true;
 
-        audioSource.clip = track.intro;
-        audioSource.volume = track.volume;
-        audioSource.loop = false;
-        audioSource.Play();
+        audioSourceMusic.clip = track.intro;
+        audioSourceMusic.volume = track.volume;
+        audioSourceMusic.loop = false;
+        audioSourceMusic.Play();
         StartCoroutine(StartAudioLoop(track));
     }
 
@@ -106,10 +106,10 @@ public class AudioManager : MonoBehaviour
         startingTrack = true;
 
         MusicTrack track = GetTrack("TutorialTrack");
-        audioSource.clip = track.intro;
-        audioSource.volume = track.volume;
-        audioSource.loop = false;
-        audioSource.Play();
+        audioSourceMusic.clip = track.intro;
+        audioSourceMusic.volume = track.volume;
+        audioSourceMusic.loop = false;
+        audioSourceMusic.Play();
         StartCoroutine(StartAudioLoop(track));
     }
 
@@ -120,20 +120,20 @@ public class AudioManager : MonoBehaviour
 
         // Ignore OriginalTrack and TutorialTrack
         MusicTrack track = musicTracks[Random.Range(2, musicTracks.Count)];
-        audioSource.clip = track.intro;
-        audioSource.volume = track.volume;
-        audioSource.loop = false;
-        audioSource.Play();
+        audioSourceMusic.clip = track.intro;
+        audioSourceMusic.volume = track.volume;
+        audioSourceMusic.loop = false;
+        audioSourceMusic.Play();
         StartCoroutine(StartAudioLoop(track));
 
         GameObject.FindObjectOfType<SongTextUpdater>().ShowSongTitle(track.artist, track.title);
     }
 
     public void StopPlaying() {
-        audioSource.Stop();
-        audioSource.clip = null;
-        audioSource.volume = 1f;
-        audioSource.loop = false;
+        audioSourceMusic.Stop();
+        audioSourceMusic.clip = null;
+        audioSourceMusic.volume = 1f;
+        audioSourceMusic.loop = false;
         StopAllCoroutines();
         startingTrack = false;
     }
@@ -166,28 +166,28 @@ public class AudioManager : MonoBehaviour
             yield return null;
         }
         
-        audioSource.clip = track.loop;
-        audioSource.loop = true;
+        audioSourceMusic.clip = track.loop;
+        audioSourceMusic.loop = true;
         startingTrack = false;
-        audioSource.Play();
+        audioSourceMusic.Play();
     }
 
-    IEnumerator PlayWinSoundDelayed(string winner)
+    IEnumerator PlayWinSoundDelayed(Faction winner)
     {
         yield return new WaitForSecondsRealtime(levelEnd.length);
 
-        audioSource.loop = false;
-        if (winner == "Heroes")
+        audioSourceMusic.loop = false;
+        if (winner == Faction.Heros)
         {
-            audioSource.clip = heroesWinSound;
-            audioSource.volume = heroesWinSoundVolume;
+            audioSourceMusic.clip = heroesWinSound;
+            audioSourceMusic.volume = heroesWinSoundVolume;
         }
-        else if (winner == "Boss")
+        else if (winner == Faction.Boss)
         {
-            audioSource.clip = bossWinSound;
-            audioSource.volume = bossWinSoundVolume;
+            audioSourceMusic.clip = bossWinSound;
+            audioSourceMusic.volume = bossWinSoundVolume;
         }
 
-        audioSource.Play();
+        audioSourceMusic.Play();
     }
 }

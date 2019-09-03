@@ -13,9 +13,6 @@ public class Health : MonoBehaviour
     [SerializeField] protected int winningPointLead = 500;
     [SerializeField] protected bool endlessHealth;
 
-    [SerializeField] protected TextMeshProUGUI winText;
-    [SerializeField] protected float fadeInTime = 2f;
-
     [SerializeField] protected GameEvent levelCompletedEvent = null;
 
     protected int currentDamage;
@@ -23,7 +20,6 @@ public class Health : MonoBehaviour
     protected float timer;
     
     public int WinningPointLead { get { return winningPointLead; } set { winningPointLead = value; } }
-    public TextMeshProUGUI WinText { get { return winText; } }
     public int CurrentDamage { get { return currentDamage; } set { currentDamage = value; } }
     #endregion
 

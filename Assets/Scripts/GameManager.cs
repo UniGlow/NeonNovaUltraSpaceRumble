@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] bool overrideLevelPointLimits;
     public int heroesWinningPointLead = 500;
     public int bossWinningPointLead = 500;
+    [Space]
+    [SerializeField] float countdownDuration = 4f;
 
     [Header("Sound")]
     [SerializeField] AudioClip colorChangeSound;
@@ -48,6 +50,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject heroAIPrefab;
     [SerializeField] GameObject bossAIPrefab;
     [SerializeField] GameEvent levelStartedEvent = null;
+    [SerializeField] GameEvent countdownStartedEvent = null;
 
 
 
@@ -56,7 +59,6 @@ public class GameManager : MonoBehaviour
     private Boss boss;
     public Boss Boss { get { return boss; } }
     bool colorChangeSoundPlayed;
-    TextMeshProUGUI winText;
     int playerCount;
     public int PlayerCount { get { return playerCount; } }
     float intensifyTimer;
@@ -171,9 +173,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void LoadNextLevel(string winner)
+    public void LoadNextLevel()
     {
-        StartCoroutine(LoadNextLevel());
+        StartCoroutine(LoadNextLevelCoroutine());
         Time.timeScale = 0.0f;
     }
 
@@ -193,8 +195,7 @@ public class GameManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name.Contains("Level"))
         {
-
-            winText = GameObject.FindObjectOfType<HeroHealth>().WinText;
+            
             GameObject.FindGameObjectWithTag(Constants.TAG_HOMING_MISSILE).GetComponent<HomingMissile>().PauseMissile(true);
 
             if (SceneManager.GetActiveScene().name.Contains("Tutorial"))
@@ -429,12 +430,17 @@ public class GameManager : MonoBehaviour
     {
         levelStartedEvent.Raise(this);
     }
+
+    void RaiseCountdownStarted(float duration)
+    {
+        countdownStartedEvent.Raise(this, duration);
+    }
     #endregion
 
 
 
     #region Coroutines
-    IEnumerator LoadNextLevel() {
+    IEnumerator LoadNextLevelCoroutine() {
         yield return new WaitForSecondsRealtime(delayAtLevelEnd);
         LoadNextScene();
         Time.timeScale = 1;
@@ -442,10 +448,13 @@ public class GameManager : MonoBehaviour
 
     IEnumerator StartTheAction() {
 
+        yield return new WaitForSecondsRealtime(countdownDuration / 4f);
+        RaiseCountdownStarted(countdownDuration/4f*3f);
+        AudioManager.Instance.StartRandomTrack();
+        /*
         yield return new WaitForSecondsRealtime(delayForActionStart / 4f);
 
         winText.gameObject.SetActive(true);
-        AudioManager.Instance.StartRandomTrack();
 
         Vector3 originalScale = winText.transform.localScale;
         winText.transform.localScale = Vector3.zero;
@@ -464,9 +473,10 @@ public class GameManager : MonoBehaviour
         winText.text = "1";
         winText.transform.DOScale(originalScale, .7f).SetEase(Ease.OutBounce).SetUpdate(true);
 
-        yield return new WaitForSecondsRealtime(delayForActionStart / 4f);
+        
 
-        winText.gameObject.SetActive(false);
+        winText.gameObject.SetActive(false);*/
+        yield return new WaitForSecondsRealtime(countdownDuration);
         RaiseLevelStarted();
     }
 
