@@ -166,6 +166,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -201,6 +202,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -252,10 +254,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  smoothTime: 0.2
+  smoothTime: 0.1
   minZoom: 55
   maxZoom: 20
-  maxDistance: 70
+  maxDistance: 60
 --- !u!114 &114841171022811928
 MonoBehaviour:
   m_ObjectHideFlags: 1
