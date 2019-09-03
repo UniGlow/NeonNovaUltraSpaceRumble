@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject heroAIPrefab;
     [SerializeField] GameObject bossAIPrefab;
     [SerializeField] GameEvent levelStartedEvent = null;
-    [SerializeField] GameEvent countdownStartedEvent = null;
+    [SerializeField] GameEvent levelLoadedEvent = null;
 
 
 
@@ -431,9 +431,9 @@ public class GameManager : MonoBehaviour
         levelStartedEvent.Raise(this);
     }
 
-    void RaiseCountdownStarted(float duration)
+    void RaiseLevelLoaded(float duration)
     {
-        countdownStartedEvent.Raise(this, duration);
+        levelLoadedEvent.Raise(this, duration);
     }
     #endregion
 
@@ -449,7 +449,7 @@ public class GameManager : MonoBehaviour
     IEnumerator StartTheAction() {
 
         yield return new WaitForSecondsRealtime(countdownDuration / 4f);
-        RaiseCountdownStarted(countdownDuration/4f*3f);
+        RaiseLevelLoaded(countdownDuration/4f*3f);
         AudioManager.Instance.StartRandomTrack();
         /*
         yield return new WaitForSecondsRealtime(delayForActionStart / 4f);

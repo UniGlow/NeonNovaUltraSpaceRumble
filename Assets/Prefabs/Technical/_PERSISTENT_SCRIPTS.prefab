@@ -379,8 +379,7 @@ MonoBehaviour:
   bossAIPrefab: {fileID: 1566906718194532, guid: 8c475107a1ba5c54695c67a9aba025ba,
     type: 2}
   levelStartedEvent: {fileID: 11400000, guid: a93bef75cc487ef48b9411ec84a74c73, type: 2}
-  countdownStartedEvent: {fileID: 11400000, guid: dd95ddef2760add43a73ce45d743f5e5,
-    type: 2}
+  levelLoadedEvent: {fileID: 11400000, guid: dd95ddef2760add43a73ce45d743f5e5, type: 2}
 --- !u!114 &114614392492591870
 MonoBehaviour:
   m_ObjectHideFlags: 1
