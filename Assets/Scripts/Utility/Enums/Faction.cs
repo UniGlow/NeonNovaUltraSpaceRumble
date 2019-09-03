@@ -2,7 +2,8 @@
 /// 
 /// </summary>
 
-public enum Faction {
-    Heros,
+public enum Faction
+{
+    Heroes,
     Boss
 }

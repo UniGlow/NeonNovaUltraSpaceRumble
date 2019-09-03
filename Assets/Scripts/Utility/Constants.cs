@@ -33,6 +33,7 @@ public class Constants
     public static readonly string TAG_HOMING_MISSILE = "HomingMissile";
     public static readonly string TAG_AI_CORNER = "Corner";
     public static readonly string TAG_AI_MIDDLE = "AIMiddle";
+    public static readonly string TAG_SPAWN_POINT = "SpawnPoint";
     #endregion
 
     #region Scenes

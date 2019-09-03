@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     protected float rotateSpeed = 1000;
 
     [Header("Properties")]
+    protected PlayerConfig playerConfig;
+    public PlayerConfig PlayerConfig { get { return playerConfig; } set { playerConfig = value; } }
     [Range(1, 4)]
     [SerializeField] protected int playerNumber;
     public int PlayerNumber { get { return playerNumber; }

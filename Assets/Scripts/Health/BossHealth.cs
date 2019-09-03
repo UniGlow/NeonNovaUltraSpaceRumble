@@ -48,7 +48,7 @@ public class BossHealth : Health
         // Won?
         if (currentDamage >= HeroHealth.Instance.CurrentDamage + HeroHealth.Instance.WinningPointLead)
         {
-            RaiseLevelCompleted(Faction.Heros);
+            RaiseLevelCompleted(Faction.Heroes);
 
             /*
             Vector3 originalScale = Vector3.one;
