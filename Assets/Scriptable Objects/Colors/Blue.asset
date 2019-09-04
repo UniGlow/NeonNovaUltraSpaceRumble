@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2069b9d105202164cb9720118d2b71b7, type: 3}
   m_Name: Blue
   m_EditorClassIdentifier: 
-  playerMaterial: {fileID: 2100000, guid: e8c28d97f12645643bcafd02933841a7, type: 2}
+  heroMaterial: {fileID: 2100000, guid: c0c8a51b3e7494746a5eca2615bb40c9, type: 2}
   bossProjectileColor: {r: 0.29411766, g: 0.3137255, b: 0.93333334, a: 1}
   bossMaterial: {fileID: 2100000, guid: b9952fe678988874f98372d9edd2afff, type: 2}
   uiElementColor: {r: 0.29411766, g: 0.3137255, b: 0.93333334, a: 1}
