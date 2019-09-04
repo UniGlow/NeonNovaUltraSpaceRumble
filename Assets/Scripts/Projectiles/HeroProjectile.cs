@@ -5,7 +5,8 @@ using UnityEngine;
 /// <summary>
 /// 
 /// </summary>
-public class HeroProjectile : Projectile {
+public class HeroProjectile : Projectile
+{
 
     #region Variable Declarations
     [SerializeField] GameObject hitPS;
@@ -21,16 +22,20 @@ public class HeroProjectile : Projectile {
 
 
     #region Unity Event Functions
-    override protected void OnTriggerEnter(Collider other) {
+    override protected void OnTriggerEnter(Collider other)
+    {
         base.OnTriggerEnter(other);
 
-        if (other.tag == Constants.TAG_BOSS) {
-            if (playerColor == other.transform.parent.GetComponent<Boss>().WeaknessColor) {
+        if (other.tag == Constants.TAG_BOSS)
+        {
+            if (playerColor == other.transform.parent.GetComponent<Boss>().PlayerConfig.ColorConfig)
+            {
                 BossHealth.Instance.TakeDamage(Mathf.RoundToInt(damage * GameManager.Instance.CritDamageMultiplier));
                 Instantiate(critHitPS, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
                 AudioManager.Instance.PlayClip(critHitSound, critHitVolume);
             }
-            else {
+            else
+            {
                 BossHealth.Instance.TakeDamage(damage);
                 Instantiate(hitPS, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
                 AudioManager.Instance.PlayClip(hitSound, hitVolume);

@@ -16,19 +16,16 @@ public class HeroTutorialTextUpdater : TutorialTextUpdater
 
 
     #region Unity Event Functions
-    protected override void InheritedStart()
-    {
-        hero = player.GetComponent<Hero>();
-
-        UpdateText();
-    }
+    
     #endregion
 
 
 
     #region Protected Functions
-    protected override void UpdateText()
+    protected override void UpdateText(PlayerConfig bossConfig)
     {
+        hero = player.GetComponent<Hero>();
+
         if (colorChanges <= 1)
         {
             if (hero.ability == Ability.Damage) ChangeTextTo("Damage");
@@ -42,9 +39,7 @@ public class HeroTutorialTextUpdater : TutorialTextUpdater
         else
         {
             // If same color as Boss
-            if (GameManager.Instance.Boss.WeaknessColor == PlayerColor.Blue && hero.PlayerColor == PlayerColor.Blue
-                || GameManager.Instance.Boss.WeaknessColor == PlayerColor.Green && hero.PlayerColor == PlayerColor.Green
-                || GameManager.Instance.Boss.WeaknessColor == PlayerColor.Red && hero.PlayerColor == PlayerColor.Red)
+            if (bossConfig.ColorConfig == hero.PlayerConfig.ColorConfig)
             {
                 if (hero.ability == Ability.Damage) ChangeTextTo("DealDamage");
                 else ChangeTextTo("GetDamage");

@@ -8,7 +8,7 @@ using DG.Tweening;
 /// <summary>
 /// 
 /// </summary>
-public class TutorialLevel : MonoBehaviour 
+public class SirAlfredLobby : MonoBehaviour 
 {
 
     #region Variable Declaration
@@ -20,19 +20,33 @@ public class TutorialLevel : MonoBehaviour
     [Range(0f,2f)]
     [SerializeField] float sfxVolumeDamp = 0.1f;
 
+    [Header("Player Configs")]
+    [SerializeField] PlayerConfig hero1PlayerConfig = null;
+    [SerializeField] PlayerConfig hero2PlayerConfig = null;
+    [SerializeField] PlayerConfig hero3PlayerConfig = null;
+    [SerializeField] PlayerConfig bossPlayerConfig = null;
+
+    [Header("Color Set")]
+    [SerializeField] ColorSet colorSet = null;
+
+    [Header("Ability Set")]
+    [SerializeField] Ability2 damageAbility = null;
+    [SerializeField] Ability2 tankAbility = null;
+    [SerializeField] Ability2 victimAbility = null;
+
     List<bool> playerConfirms = new List<bool>();
     float idleTimer;
     float originalSFXVolume;
     float originalMusicVolume;
     bool idleState;
-	#endregion
-	
-	
-	
-	#region Unity Event Functions
-	private void Start () 
+    int playerCount;
+    #endregion
+
+
+
+    #region Unity Event Functions
+    private void Start () 
 	{
-        UpdatePlayerConfirmsList();
         masterMixer.GetFloat(Constants.MIXER_SFX_VOLUME, out originalSFXVolume);
         masterMixer.GetFloat(Constants.MIXER_MUSIC_VOLUME, out originalMusicVolume);
 
@@ -40,12 +54,12 @@ public class TutorialLevel : MonoBehaviour
         StartCoroutine(Wait(0.1f, () => { AudioManager.Instance.StartTrack(backgroundTrack); }));
     }
 	
-	private void Update () 
-	{
+	private void Update ()
+    {
         // Update player count
-        GameManager.Instance.UpdatePlayerCount();
+        UpdatePlayerCount();
         UpdatePlayerConfirmsList();
-        playerReadyUpdater.UpdateUIElements(GameManager.Instance.PlayerCount);
+        playerReadyUpdater.UpdateUIElements(playerCount);
 
         // Load next scene if all players are ready
         int ready = 0;
@@ -86,11 +100,82 @@ public class TutorialLevel : MonoBehaviour
             playerReadyUpdater.UpdateState(3, playerConfirms[3]);
         }
 
-        // Reset Texts on (Back) Button
-        if (Input.GetButtonDown(Constants.INPUT_RESET)) ResetTexts();
-
         // Check and update Idle State of the game
         UpdateIdleState();
+    }
+
+    public void UpdatePlayerCount()
+    {
+        playerCount = 0;
+        string[] joystickNames = Input.GetJoystickNames();
+        foreach (string name in joystickNames)
+        {
+            if (name != "")
+            {
+                playerCount++;
+            }
+        }
+    }
+    #endregion
+
+
+
+    #region Public Functions
+    public void Initialize()
+    {
+        // Update player count
+        UpdatePlayerCount();
+
+        // Set playerNumbers depending on amount of human players
+        switch (playerCount)
+        {
+            case 1:
+                bossPlayerConfig.Initialize(1, Faction.Boss, colorSet.GetRandomColor(), false);
+                hero1PlayerConfig.Initialize(2, Faction.Heroes, colorSet.color1, true);
+                hero1PlayerConfig.ability = damageAbility;
+                hero2PlayerConfig.Initialize(3, Faction.Heroes, colorSet.color2, true);
+                hero2PlayerConfig.ability = tankAbility;
+                hero3PlayerConfig.Initialize(4, Faction.Heroes, colorSet.color3, true);
+                hero3PlayerConfig.ability = victimAbility;
+                break;
+
+            case 2:
+                hero1PlayerConfig.Initialize(1, Faction.Heroes, colorSet.color1, false);
+                hero1PlayerConfig.ability = damageAbility;
+                hero2PlayerConfig.Initialize(2, Faction.Heroes, colorSet.color2, false);
+                hero2PlayerConfig.ability = tankAbility;
+                hero3PlayerConfig.Initialize(3, Faction.Heroes, colorSet.color3, true);
+                hero3PlayerConfig.ability = victimAbility;
+                bossPlayerConfig.Initialize(4, Faction.Boss, colorSet.GetRandomColor(), true);
+                break;
+
+            case 3:
+                hero1PlayerConfig.Initialize(1, Faction.Heroes, colorSet.color1, false);
+                hero1PlayerConfig.ability = damageAbility;
+                hero2PlayerConfig.Initialize(2, Faction.Heroes, colorSet.color2, false);
+                hero2PlayerConfig.ability = tankAbility;
+                hero3PlayerConfig.Initialize(3, Faction.Heroes, colorSet.color3, false);
+                hero3PlayerConfig.ability = victimAbility;
+                bossPlayerConfig.Initialize(4, Faction.Boss, colorSet.GetRandomColor(), true);
+                break;
+
+            case 4:
+                bossPlayerConfig.Initialize(1, Faction.Boss, colorSet.GetRandomColor(), false);
+                hero1PlayerConfig.Initialize(2, Faction.Heroes, colorSet.color1, false);
+                hero1PlayerConfig.ability = damageAbility;
+                hero2PlayerConfig.Initialize(3, Faction.Heroes, colorSet.color2, false);
+                hero2PlayerConfig.ability = tankAbility;
+                hero3PlayerConfig.Initialize(4, Faction.Heroes, colorSet.color3, false);
+                hero3PlayerConfig.ability = victimAbility;
+                break;
+
+            default:
+                break;
+        }
+
+        GameManager.Instance.activeColorSet = colorSet;
+
+        UpdatePlayerConfirmsList();
     }
     #endregion
 
@@ -106,9 +191,6 @@ public class TutorialLevel : MonoBehaviour
             // Fade in audio
             FadeAudio(Constants.MIXER_SFX_VOLUME, originalSFXVolume * (1 + sfxVolumeDamp), 1f);
             FadeAudio(Constants.MIXER_MUSIC_VOLUME, originalMusicVolume, 1f);
-
-            // Reset all TutorialTexts
-            ResetTexts();
 
             idleTimer = 0f;
             idleState = false;
@@ -132,21 +214,15 @@ public class TutorialLevel : MonoBehaviour
         masterMixer.DOSetFloat(mixerGroup, to, duration).SetEase(Ease.InOutQuad).SetId(this);
     }
 
-    void ResetTexts()
-    {
-        TutorialTextUpdater.BossColorChange(0);
-        GameManager.Instance.ResetPassedTimeForColorChange();
-    }
-
     void UpdatePlayerConfirmsList()
     {
-        if (playerConfirms.Count == GameManager.Instance.PlayerCount)
+        if (playerConfirms.Count == playerCount)
         {
             return;
         }
 
         playerConfirms.Clear();
-        for (int i = 0; i < GameManager.Instance.PlayerCount; i++)
+        for (int i = 0; i < playerCount; i++)
         {
             playerConfirms.Add(false);
         }

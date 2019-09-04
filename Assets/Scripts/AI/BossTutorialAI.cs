@@ -10,41 +10,26 @@ public class BossTutorialAI : MonoBehaviour
 
     #region Variable Declarations
     [SerializeField] MeshRenderer meshRenderer;
-    [SerializeField] protected Material greenBossMat;
-    [SerializeField] protected Material redBossMat;
-    [SerializeField] protected Material blueBossMat;
 
     Boss boss;
-    PlayerColor weaknessColor;
-    PlayerColor strengthColor;
+    PlayerColor2 weaknessColor;
 
-    public PlayerColor WeaknessColor { get { return weaknessColor; } }
-    public PlayerColor StrengthColor { get { return strengthColor; } }
+    public PlayerColor2 WeaknessColor { get { return weaknessColor; } }
+    #endregion
+
+
+    
+    #region Unity Event Functions
+
     #endregion
 
 
 
-    #region Unity Event Functions
-    private void Start()
+    #region Public Functions
+    public void ChangeColor(PlayerConfig bossConfig)
     {
-        boss = GameManager.Instance.Boss;
-        weaknessColor = boss.WeaknessColor;
+        weaknessColor = bossConfig.ColorConfig;
         SetMaterialColor();
-        strengthColor = boss.StrengthColor;
-    }
-
-    private void Update()
-    {
-        if (weaknessColor != boss.WeaknessColor)
-        {
-            weaknessColor = boss.WeaknessColor;
-            SetMaterialColor();
-        }
-
-        if (strengthColor != boss.StrengthColor)
-        {
-            strengthColor = boss.StrengthColor;
-        }
     }
     #endregion
 
@@ -53,9 +38,7 @@ public class BossTutorialAI : MonoBehaviour
     #region Private Functions
     void SetMaterialColor()
     {
-        if (weaknessColor == PlayerColor.Green) meshRenderer.material = greenBossMat;
-        if (weaknessColor == PlayerColor.Blue) meshRenderer.material = blueBossMat;
-        if (weaknessColor == PlayerColor.Red) meshRenderer.material = redBossMat;
+        meshRenderer.material = weaknessColor.bossMaterial;
     }
     #endregion
 }

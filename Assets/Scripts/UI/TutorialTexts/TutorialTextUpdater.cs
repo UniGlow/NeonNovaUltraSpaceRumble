@@ -12,9 +12,11 @@ public abstract class TutorialTextUpdater : MonoBehaviour
 
     #region Variable Declarations
     [SerializeField] protected TextCollection textCollection;
+    [Range(1, 4)]
+    [SerializeField] protected int playerToFollow;
 
     protected TextMeshPro textMesh;
-    protected Player player;
+    protected Transform player;
     protected Quaternion startRotation;
     protected Vector3 startOffset;
     public static int colorChanges = 0;
@@ -26,39 +28,63 @@ public abstract class TutorialTextUpdater : MonoBehaviour
     void Start()
     {
         textMesh = GetComponent<TextMeshPro>();
-        player = transform.parent.GetComponent<Player>();
-        startRotation = transform.rotation;
-        startOffset = transform.position - player.transform.position;
 
         InheritedStart();
     }
 
     void Update()
     {
-        transform.position = player.transform.position + startOffset;
-        transform.rotation = startRotation;
+        if (player != null)
+        {
+            transform.position = player.position + startOffset;
+            transform.rotation = startRotation;
+        }
     }
     #endregion
 
 
 
     #region Public Functions
-    public static void BossColorChange(int i = -1)
+    public void Initialize(PlayerConfig hero1, PlayerConfig hero2, PlayerConfig hero3, PlayerConfig boss)
+    {
+        switch (playerToFollow)
+        {
+            case 1:
+                player = hero1.playerTransform;
+                break;
+            case 2:
+                player = hero2.playerTransform;
+                break;
+            case 3:
+                player = hero3.playerTransform;
+                break;
+            case 4:
+                player = boss.playerTransform;
+                break;
+            default:
+                break;
+        }
+
+        startRotation = transform.rotation;
+        startOffset = transform.position - player.transform.position;
+    }
+
+    public static void BossColorChange(PlayerConfig bossConfig, int i = -1)
     {
         // Update static variable
         if (i == -1) colorChanges++;
         else colorChanges = i;
 
-        UpdateTexts();
+        UpdateTexts(bossConfig);
     }
 
-    public static void UpdateTexts()
+    public static void UpdateTexts(PlayerConfig bossConfig)
     {
         // Inform all TutorialTextUpdater in scene
         TutorialTextUpdater[] textUpdaters = GameObject.FindObjectsOfType<TutorialTextUpdater>();
         foreach (TutorialTextUpdater updater in textUpdaters)
         {
-            updater.UpdateText();
+            updater.UpdateText(bossConfig);
         }
     }
     #endregion
@@ -84,6 +110,6 @@ public abstract class TutorialTextUpdater : MonoBehaviour
     }
 
     protected virtual void InheritedStart() { }
-    protected abstract void UpdateText();
+    protected abstract void UpdateText(PlayerConfig bossConfig);
     #endregion
 }

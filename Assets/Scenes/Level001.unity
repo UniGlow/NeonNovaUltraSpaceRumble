@@ -1249,7 +1249,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1396936127111438, guid: 6261e8944cc23a24ca00a279d5f9351d, type: 2}
       propertyPath: m_Name
-      value: 2 PlayerSpawnPoint
+      value: Hero2SpawnPoint
       objectReference: {fileID: 0}
     - target: {fileID: 114756739398773348, guid: 6261e8944cc23a24ca00a279d5f9351d,
         type: 2}
@@ -1305,7 +1305,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1396936127111438, guid: 6261e8944cc23a24ca00a279d5f9351d, type: 2}
       propertyPath: m_Name
-      value: 1 PlayerSpawnPoint
+      value: Hero1SpawnPoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6261e8944cc23a24ca00a279d5f9351d, type: 2}
@@ -1951,7 +1951,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1396936127111438, guid: 6261e8944cc23a24ca00a279d5f9351d, type: 2}
       propertyPath: m_Name
-      value: 3 PlayerSpawnPoint
+      value: Hero3SpawnPoint
       objectReference: {fileID: 0}
     - target: {fileID: 114756739398773348, guid: 6261e8944cc23a24ca00a279d5f9351d,
         type: 2}

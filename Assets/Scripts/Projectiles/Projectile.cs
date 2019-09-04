@@ -11,7 +11,7 @@ public class Projectile : MonoBehaviour
     #region Variable Declarations
     public float lifeTime = 1f;
     public int damage = 10;
-    public PlayerColor playerColor;
+    public PlayerColor2 playerColor;
     #endregion
 
 

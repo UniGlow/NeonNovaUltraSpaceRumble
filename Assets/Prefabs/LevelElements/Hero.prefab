@@ -527,7 +527,6 @@ MonoBehaviour:
   defendCooldown: 3
   defendDuration: 2
   speedBoost: 0.5
-  playerColor: 0
   ability: 0
   wobbleBobbleSound: {fileID: 8300000, guid: 9bf8565727fa20047bfa416674b33661, type: 3}
   wobbleBobbleVolume: 0.9
@@ -603,6 +602,8 @@ MonoBehaviour:
   transmissionSoundVolume: 1
   transmissionLineRenderer: {fileID: 120313195406292594}
   transmissionPS: {fileID: 198963605972144674}
+  abilitiesChangedEvent: {fileID: 11400000, guid: a3637ea13dc4b674895931910892b2e2,
+    type: 2}
 --- !u!114 &114662132021031198
 MonoBehaviour:
   m_ObjectHideFlags: 1

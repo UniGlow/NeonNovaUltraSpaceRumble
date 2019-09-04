@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// 
 /// </summary>
-public class PlayerManager : MonoBehaviour 
+public class TutorialPlayerManager : MonoBehaviour 
 {
 
     #region Variable Declarations

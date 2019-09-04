@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
 
     [Header("Properties")]
     protected PlayerConfig playerConfig;
-    public PlayerConfig PlayerConfig { get { return playerConfig; } set { playerConfig = value; } }
+    public PlayerConfig PlayerConfig { get { return playerConfig; } }
     [Range(1, 4)]
     [SerializeField] protected int playerNumber;
     public int PlayerNumber { get { return playerNumber; }

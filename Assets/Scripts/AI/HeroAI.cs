@@ -7,7 +7,8 @@ using UnityEngine.AI;
 /// Handles everything related to the movement of Haru, our playable Character
 /// </summary>
 [RequireComponent(typeof(NavMeshAgent))]
-public class HeroAI : Hero {
+public class HeroAI : Hero
+{
 
     #region Variable Declarations
     [Header("AI Parameters")]
@@ -262,7 +263,7 @@ public class HeroAI : Hero {
     private void Attack() {
         GameObject projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
         projectile.GetComponent<HeroProjectile>().damage = damagePerShot;
-        projectile.GetComponent<HeroProjectile>().playerColor = playerColor;
+        projectile.GetComponent<HeroProjectile>().playerColor = PlayerConfig.ColorConfig;
         projectile.GetComponent<Rigidbody>().velocity = transform.forward * projectileSpeed;
 
         audioSource.PlayOneShot(attackSound, attackSoundVolume);

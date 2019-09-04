@@ -12,8 +12,8 @@ public class PlayerColor2 : ScriptableObject
 
     #region Variable Declarations
     // Serialized Fields
-    public Material playerMaterial;
-    public Material projectileMaterial;
+    public Material heroMaterial;
+    public Color bossProjectileColor;
     public Material bossMaterial;
     public Color uiElementColor;
 	// Private

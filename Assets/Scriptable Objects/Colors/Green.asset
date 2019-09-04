@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2069b9d105202164cb9720118d2b71b7, type: 3}
+  m_Name: Green
+  m_EditorClassIdentifier: 
+  playerMaterial: {fileID: 2100000, guid: 8fdde485bd8110a42888399b61198142, type: 2}
+  bossProjectileColor: {r: 0, g: 1, b: 0.0069999998, a: 1}
+  bossMaterial: {fileID: 2100000, guid: 966f269b5a0b25f4485446ac000d0ef7, type: 2}
+  uiElementColor: {r: 0, g: 1, b: 0.0069999998, a: 1}

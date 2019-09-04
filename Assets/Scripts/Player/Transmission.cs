@@ -6,7 +6,8 @@ using UnityEngine;
 /// 
 /// </summary>
 [RequireComponent(typeof(Hero))]
-public class Transmission : MonoBehaviour {
+public class Transmission : MonoBehaviour
+{
 
     #region Variable Declarations
     [SerializeField] protected float transmissionRange = 5f;
@@ -23,6 +24,7 @@ public class Transmission : MonoBehaviour {
     [Header("References")]
     [SerializeField] protected LineRenderer transmissionLineRenderer;
     [SerializeField] protected ParticleSystem transmissionPS;
+    [SerializeField] protected GameEvent abilitiesChangedEvent = null;
     public ParticleSystem TransmissionPS { get { return transmissionPS; } }
 
     protected Hero hero;
@@ -48,18 +50,21 @@ public class Transmission : MonoBehaviour {
 	virtual protected void Update()
     {        
         // End transmission if button is lifted
-        if (TransmissionButtonsUp()) {
+        if (TransmissionButtonsUp())
+        {
             EndTransmission();
         }
 
         // Look for a receiver
-        if (!receiverFound && transmissionCooldownB && TransmissionButtonsPressed()) {
+        if (!receiverFound && transmissionCooldownB && TransmissionButtonsPressed())
+        {
             UpdateLineRenderer();
             transmissionLineRenderer.gameObject.SetActive(true);
             receiverFound = FindReceiver();
         }
         // Continue the transmission when a receiver is found
-        else if (receiverFound && TransmissionButtonsPressed()) {
+        else if (receiverFound && TransmissionButtonsPressed())
+        {
             UpdateLineRenderer();
             Transmit();
         }
@@ -96,7 +101,8 @@ public class Transmission : MonoBehaviour {
             receiver = hitInfo.transform.gameObject;
             return true;
         }
-        else {
+        else
+        {
             Debug.DrawRay(transform.position + Vector3.up * 0.5f, transform.forward * transmissionRange, Color.red);
             return false;
         }
@@ -106,7 +112,8 @@ public class Transmission : MonoBehaviour {
     void Transmit()
     {
         // End transmission if out of range
-        if ((transform.position - receiver.transform.position).magnitude > transmissionRange) {
+        if ((transform.position - receiver.transform.position).magnitude > transmissionRange)
+        {
             EndTransmission();
             return;
         }
@@ -115,7 +122,8 @@ public class Transmission : MonoBehaviour {
         Debug.DrawLine(transform.position, receiver.transform.position, Color.green);
 
         // Successfull transmission: Swap abilities and end transmission
-        if (currenTransmissionDuration >= transmissionDuration) {
+        if (currenTransmissionDuration >= transmissionDuration)
+        {
             Hero otherHero = receiver.GetComponent<Hero>();
             Ability newAbility = otherHero.ability;
 
@@ -140,7 +148,7 @@ public class Transmission : MonoBehaviour {
             audioSource.PlayOneShot(transmissionSound, transmissionSoundVolume);
 
             homingMissile.AcquireNewTarget();
-            if (GameManager.Instance.GetActiveSceneName().Contains("Tutorial")) TutorialTextUpdater.UpdateTexts();
+            if (GameManager.Instance.GetActiveSceneName().Contains("Tutorial")) RaiseAbilitiesChanged(hero.PlayerConfig, otherHero.PlayerConfig);
 
             transmissionPS.Play();
             receiver.GetComponent<Transmission>().transmissionPS.Play();
@@ -150,12 +158,15 @@ public class Transmission : MonoBehaviour {
         }
     }
 
-    protected void UpdateLineRenderer() {
-        if (receiver == null) {
+    protected void UpdateLineRenderer()
+    {
+        if (receiver == null)
+        {
             transmissionLineRenderer.SetPosition(0, transform.position + Vector3.up * 0.5f);
             transmissionLineRenderer.SetPosition(1, transform.position + Vector3.up * 0.5f + transform.forward * transmissionRange);
         }
-        else {
+        else
+        {
             transmissionLineRenderer.SetPosition(0, transform.position + Vector3.up * 0.5f);
             transmissionLineRenderer.SetPosition(1, receiver.transform.position + Vector3.up * 0.5f);
         }
@@ -176,6 +187,15 @@ public class Transmission : MonoBehaviour {
         if (Input.GetButton(Constants.INPUT_TRANSMIT + hero.PlayerNumber)) return true;
 
         return false;
+    }
+    #endregion
+
+
+
+    #region GameEvent Raiser
+    void RaiseAbilitiesChanged(PlayerConfig hero1Config, PlayerConfig hero2Config)
+    {
+        abilitiesChangedEvent.Raise(this, hero1Config, hero2Config);
     }
     #endregion
 

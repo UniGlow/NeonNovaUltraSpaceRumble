@@ -12,9 +12,9 @@ public class GameManager : MonoBehaviour
 {
 
     #region Variable Declarations
+    public static GameManager Instance;
+
     [Header("Game Properties")]
-    [SerializeField] float colorSwitchInterval = 10f;
-    public float ColorSwitchInterval { get { return colorSwitchInterval; } set { colorSwitchInterval = value; } }
     [SerializeField] float critDamageMultiplier = 2f;
     public float CritDamageMultiplier { get { return critDamageMultiplier; } set { critDamageMultiplier = value; } }
     public float intensifyTime = 60;
@@ -25,17 +25,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] bool overrideLevelPointLimits;
     public int heroesWinningPointLead = 500;
     public int bossWinningPointLead = 500;
-    [Space]
-    [SerializeField] float countdownDuration = 4f;
-
-    [Header("Sound")]
-    [SerializeField] AudioClip colorChangeSound;
-    [Range(0, 1)]
-    [SerializeField] float colorChangeSoundVolume = 1f;
-    [SerializeField] AudioSource colorChangeAudioSource = null;
 
     [Header("AI Adjustments")]
-    [SerializeField] bool setupAI = true;
     public int bossWinningSolo = 500;
     public int bossWinningDuo = 500;
     public int bossWinningTriple = 500;
@@ -47,23 +38,18 @@ public class GameManager : MonoBehaviour
     public Color RedPlayerColor { get { return redPlayerColor; } }
     [SerializeField] Color bluePlayerColor;
     public Color BluePlayerColor { get { return bluePlayerColor; } }
-    [SerializeField] GameObject heroAIPrefab;
-    [SerializeField] GameObject bossAIPrefab;
     [SerializeField] GameEvent levelStartedEvent = null;
     [SerializeField] GameEvent levelLoadedEvent = null;
 
+    // TODO: Verlagern in SO "GameSettings"
+    [HideInInspector] public ColorSet activeColorSet = null;
 
 
-    private float colorChangeTimer;
-    float delayForActionStart = 4f;
+
     private Boss boss;
     public Boss Boss { get { return boss; } }
-    bool colorChangeSoundPlayed;
-    int playerCount;
-    public int PlayerCount { get { return playerCount; } }
     float intensifyTimer;
-
-    public static GameManager Instance;
+    readonly float countdownDuration = 4f;
     #endregion
 
 
@@ -94,8 +80,6 @@ public class GameManager : MonoBehaviour
     private void Start() {
         boss = GameObject.FindObjectOfType<Boss>();
 
-        UpdatePlayerCount();
-
 #if !UNITY_EDITOR
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -104,10 +88,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        colorChangeTimer += Time.deltaTime;
         intensifyTimer += Time.deltaTime;
-
-        HandleColorSwitch();
 
         HandleIntensify();
     }
@@ -150,27 +131,9 @@ public class GameManager : MonoBehaviour
 #endif
     }
 
-    public void ResetPassedTimeForColorChange()
-    {
-        colorChangeTimer = 0f;
-    }
-
     public string GetActiveSceneName()
     {
         return SceneManager.GetActiveScene().name;
-    }
-
-    public void UpdatePlayerCount()
-    {
-        playerCount = 0;
-        string[] joystickNames = Input.GetJoystickNames();
-        foreach (string name in joystickNames)
-        {
-            if (name != "")
-            {
-                playerCount++;
-            }
-        }
     }
 
     public void LoadNextLevel()
@@ -181,7 +144,6 @@ public class GameManager : MonoBehaviour
 
     public void ResetTimer()
     {
-        colorChangeTimer = 0f;
         intensifyTimer = 0f;
     }
     #endregion
@@ -198,14 +160,13 @@ public class GameManager : MonoBehaviour
             
             GameObject.FindGameObjectWithTag(Constants.TAG_HOMING_MISSILE).GetComponent<HomingMissile>().PauseMissile(true);
 
-            if (SceneManager.GetActiveScene().name.Contains("Tutorial"))
+            if (SceneManager.GetActiveScene().name.Contains("Lobby"))
             {
                 StartCoroutine(StartTheTutorial());
             }
             else
             {
                 if (overrideLevelPointLimits) OverrideLevelPointLimits();
-                if (setupAI) SetupAICharacters();
                 StartCoroutine(StartTheAction());
             }
         }
@@ -215,80 +176,6 @@ public class GameManager : MonoBehaviour
             GameObject.FindGameObjectWithTag(Constants.TAG_HOMING_MISSILE).GetComponent<HomingMissile>().PauseMissile(true);
             StartCoroutine(StartTheCredits());
         }
-    }
-
-    void HandleColorSwitch() {
-        if (SceneManager.GetActiveScene().name.Contains("Level")) {
-            if (colorChangeTimer >= colorSwitchInterval - 0.5f && !colorChangeSoundPlayed) {
-                colorChangeAudioSource.PlayOneShot(colorChangeSound, colorChangeSoundVolume);
-                colorChangeSoundPlayed = true;
-            }
-            // Set new Boss color
-            if (colorChangeTimer >= colorSwitchInterval) {
-                ChangeBossColor();
-                if (SceneManager.GetActiveScene().name.Contains("Tutorial")) TutorialTextUpdater.BossColorChange();
-                colorChangeTimer = 0f;
-                colorChangeSoundPlayed = false;
-            }
-        }
-    }
-
-    /// <summary>
-    /// Randomly changes one of the boss colors (weakness or strength)
-    /// </summary>
-    void ChangeBossColor() {
-        // Set strength color
-        //if (Random.Range(0, 2) == 0) {
-        //    if (boss.StrengthColor == PlayerColor.Blue) {
-        //        if (Random.Range(0, 2) == 0) {
-        //            boss.SetStrengthColor(PlayerColor.Green);
-        //        }
-        //        else {
-        //            boss.SetStrengthColor(PlayerColor.Red);
-        //        }
-        //    } else if (boss.StrengthColor == PlayerColor.Green) {
-        //        if (Random.Range(0, 2) == 0) {
-        //            boss.SetStrengthColor(PlayerColor.Blue);
-        //        }
-        //        else {
-        //            boss.SetStrengthColor(PlayerColor.Red);
-        //        }
-        //    } else if (boss.StrengthColor == PlayerColor.Red) {
-        //        if (Random.Range(0, 2) == 0) {
-        //            boss.SetStrengthColor(PlayerColor.Green);
-        //        }
-        //        else {
-        //            boss.SetStrengthColor(PlayerColor.Blue);
-        //        }
-        //    }
-        //}
-        //// Or set weakness color
-        //else {
-            if (boss.WeaknessColor == PlayerColor.Blue) {
-                if (Random.Range(0, 2) == 0) {
-                    boss.SetWeaknessColor(PlayerColor.Green);
-                }
-                else {
-                    boss.SetWeaknessColor(PlayerColor.Red);
-                }
-            }
-            else if (boss.WeaknessColor == PlayerColor.Green) {
-                if (Random.Range(0, 2) == 0) {
-                    boss.SetWeaknessColor(PlayerColor.Blue);
-                }
-                else {
-                    boss.SetWeaknessColor(PlayerColor.Red);
-                }
-            }
-            else if (boss.WeaknessColor == PlayerColor.Red) {
-                if (Random.Range(0, 2) == 0) {
-                    boss.SetWeaknessColor(PlayerColor.Green);
-                }
-                else {
-                    boss.SetWeaknessColor(PlayerColor.Blue);
-                }
-            }
-        //}
     }
 
     void HandleIntensify()
@@ -313,119 +200,6 @@ public class GameManager : MonoBehaviour
         BossHealth.Instance.WinningPointLead = bossWinningPointLead;
     }
 
-    void SetupAICharacters()
-    {
-        // Update player count
-        UpdatePlayerCount();
-
-        // Get references
-        GameObject[] heroes = GameObject.FindGameObjectsWithTag(Constants.TAG_HERO);
-        GameObject damage = null;
-        GameObject tank = null;
-        GameObject opfer = null;
-        foreach (GameObject go in heroes)
-        {
-            if (go.transform.parent.GetComponent<Hero>() == null) continue;
-            if (go.transform.parent.GetComponent<Hero>().ability == Ability.Damage) damage = go;
-            if (go.transform.parent.GetComponent<Hero>().ability == Ability.Tank) tank = go;
-            if (go.transform.parent.GetComponent<Hero>().ability == Ability.Opfer) opfer = go;
-        }
-
-        if (playerCount == 1 || playerCount == 0)
-        {
-
-            // Replace Heroes with AIs
-            HeroAI damageAI = GameObject.Instantiate(heroAIPrefab, damage.transform.position, damage.transform.rotation).GetComponent<HeroAI>();
-            damageAI.ability = Ability.Damage;
-            damageAI.PlayerColor = damage.transform.parent.GetComponent<Hero>().PlayerColor;
-            Destroy(damage.transform.parent.gameObject);
-
-            HeroAI tankAI = GameObject.Instantiate(heroAIPrefab, tank.transform.position, tank.transform.rotation).GetComponent<HeroAI>();
-            tankAI.ability = Ability.Tank;
-            tankAI.PlayerColor = tank.transform.parent.GetComponent<Hero>().PlayerColor;
-            Destroy(tank.transform.parent.gameObject);
-
-            HeroAI opferAI = GameObject.Instantiate(heroAIPrefab, opfer.transform.position, opfer.transform.rotation).GetComponent<HeroAI>();
-            opferAI.ability = Ability.Opfer;
-            opferAI.PlayerColor = opfer.transform.parent.GetComponent<Hero>().PlayerColor;
-            Destroy(opfer.transform.parent.gameObject);
-
-            // Set camera targets
-            MultipleTargetCamera cameraRig = Camera.main.transform.parent.GetComponent<MultipleTargetCamera>();
-            cameraRig.SetCameraTargetsNextFrame(new List<Transform>()
-            {
-                damageAI.transform,
-                tankAI.transform,
-                opferAI.transform
-            });
-
-            // Set boss playerNumber and health
-            boss.PlayerNumber = 1;
-            BossHealth.Instance.WinningPointLead = bossWinningSolo;
-        }
-        else if (playerCount == 2)
-        {
-            // Replace damage hero with AI
-            HeroAI opferAI = GameObject.Instantiate(heroAIPrefab, opfer.transform.position, opfer.transform.rotation).GetComponent<HeroAI>();
-            opferAI.ability = Ability.Opfer;
-            opferAI.PlayerColor = opfer.transform.parent.GetComponent<Hero>().PlayerColor;
-            Destroy(opfer.transform.parent.gameObject);
-
-
-            // Replace Boss with AI
-            BossAI bossAI = GameObject.Instantiate(bossAIPrefab, boss.transform.position, boss.transform.rotation).GetComponent<BossAI>();
-            bossAI.SetStrengthColor(boss.StrengthColor);
-            bossAI.SetWeaknessColor(boss.WeaknessColor);
-            Destroy(boss.gameObject);
-            boss = bossAI;
-
-
-            // Set tank and opfer playerNumber and health
-            damage.transform.parent.GetComponent<Player>().PlayerNumber = 1;
-            tank.transform.parent.GetComponent<Player>().PlayerNumber = 2;
-            BossHealth.Instance.WinningPointLead = bossWinningDuo;
-
-            // Set camera targets
-            MultipleTargetCamera cameraRig = Camera.main.transform.parent.GetComponent<MultipleTargetCamera>();
-            cameraRig.SetCameraTargetsNextFrame(new List<Transform>()
-            {
-                opferAI.transform,
-                bossAI.transform
-            });
-
-            // Link references in bossAI
-            bossAI.SetHeroReferencesNextFrame();
-        }
-        else if (playerCount == 3)
-        {
-            // Replace Boss with AI
-            BossAI bossAI = GameObject.Instantiate(bossAIPrefab, boss.transform.position, boss.transform.rotation).GetComponent<BossAI>();
-            bossAI.SetStrengthColor(boss.StrengthColor);
-            bossAI.SetWeaknessColor(boss.WeaknessColor);
-            Destroy(boss.gameObject);
-            boss = bossAI;
-
-            // Set camera targets
-            MultipleTargetCamera cameraRig = Camera.main.transform.parent.GetComponent<MultipleTargetCamera>();
-            cameraRig.SetCameraTargetsNextFrame(new List<Transform>()
-            {
-                bossAI.transform
-            });
-
-            // Set hero playerNumbers and health
-            damage.transform.parent.GetComponent<Player>().PlayerNumber = 1;
-            tank.transform.parent.GetComponent<Player>().PlayerNumber = 2;
-            opfer.transform.parent.GetComponent<Player>().PlayerNumber = 3;
-            BossHealth.Instance.WinningPointLead = bossWinningTriple;
-
-            // Link references in bossAI
-            bossAI.SetHeroReferencesNextFrame();
-        }
-        else {
-            // Do nothing for a 4 player game (scene is already set up for this)
-        }
-    }
-
     void RaiseLevelStarted()
     {
         levelStartedEvent.Raise(this);
@@ -440,51 +214,32 @@ public class GameManager : MonoBehaviour
 
 
     #region Coroutines
-    IEnumerator LoadNextLevelCoroutine() {
+    IEnumerator LoadNextLevelCoroutine()
+    {
         yield return new WaitForSecondsRealtime(delayAtLevelEnd);
         LoadNextScene();
         Time.timeScale = 1;
     }
 
-    IEnumerator StartTheAction() {
-
-        yield return new WaitForSecondsRealtime(countdownDuration / 4f);
-        RaiseLevelLoaded(countdownDuration/4f*3f);
+    IEnumerator StartTheAction()
+    {
+        RaiseLevelLoaded(countdownDuration);
         AudioManager.Instance.StartRandomTrack();
-        /*
-        yield return new WaitForSecondsRealtime(delayForActionStart / 4f);
 
-        winText.gameObject.SetActive(true);
-
-        Vector3 originalScale = winText.transform.localScale;
-        winText.transform.localScale = Vector3.zero;
-        winText.text = "3";
-        winText.transform.DOScale(originalScale, .7f).SetEase(Ease.OutBounce).SetUpdate(true);
-
-        yield return new WaitForSecondsRealtime(delayForActionStart / 4f);
-        
-        winText.transform.localScale = Vector3.zero;
-        winText.text = "2";
-        winText.transform.DOScale(originalScale, .7f).SetEase(Ease.OutBounce).SetUpdate(true);
-
-        yield return new WaitForSecondsRealtime(delayForActionStart / 4f);
-        
-        winText.transform.localScale = Vector3.zero;
-        winText.text = "1";
-        winText.transform.DOScale(originalScale, .7f).SetEase(Ease.OutBounce).SetUpdate(true);
-
-        
-
-        winText.gameObject.SetActive(false);*/
         yield return new WaitForSecondsRealtime(countdownDuration);
+
         RaiseLevelStarted();
     }
 
     IEnumerator StartTheTutorial()
     {
-        UpdatePlayerCount();
+        //TODO: Alfred starten
+        GameObject.FindObjectOfType<SirAlfredLobby>().Initialize();
 
-        yield return new WaitForSecondsRealtime(delayForActionStart / 4f);
+
+        RaiseLevelLoaded(countdownDuration / 4f);
+
+        yield return new WaitForSecondsRealtime(countdownDuration / 4f);
 
         RaiseLevelStarted();
     }
@@ -492,7 +247,7 @@ public class GameManager : MonoBehaviour
     IEnumerator StartTheCredits()
     {
 
-        yield return new WaitForSecondsRealtime(delayForActionStart / 4f);
+        yield return new WaitForSecondsRealtime(countdownDuration / 4f);
 
         RaiseLevelStarted();
     }

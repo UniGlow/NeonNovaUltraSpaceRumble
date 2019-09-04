@@ -15,7 +15,8 @@ public class PlayerConfig : ScriptableObject
     private int playerNumber;
     private Faction faction;
     private PlayerColor2 colorConfig;
-    //TODO: public Ability ability; //bleibt Public, da es sich ändern kann
+    //bleibt Public, da es sich ändern kann
+    public Ability2 ability;
     private bool aiControlled;
     public Transform playerTransform;
 	// Private
@@ -27,7 +28,19 @@ public class PlayerConfig : ScriptableObject
 	#region Public Properties
 	public int PlayerNumber { get { return playerNumber; } }
     public Faction Faction { get { return faction; } }
-    public PlayerColor2 ColorConfig { get { return colorConfig; } }
+    public PlayerColor2 ColorConfig
+    {
+        get
+        {
+            return colorConfig;
+        }
+
+        set
+        {
+            if (faction == Faction.Boss) colorConfig = value;
+            else Debug.LogError("Tried to set colorConfig of a hero", this);
+        }
+    }
     public bool AIControlled { get { return aiControlled; } }
 	#endregion
 	

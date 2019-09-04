@@ -5,7 +5,8 @@ using UnityEngine;
 /// <summary>
 /// Handles everything related to the movement of Haru, our playable Character
 /// </summary>
-public class Hero : Player {
+public class Hero : Player
+{
 
     #region Variable Declarations
     // Variables that should be visible in Inspector
@@ -23,8 +24,6 @@ public class Hero : Player {
     [SerializeField] protected float speedBoost = 0.5f;
 
     [Header("Properties")]
-    [SerializeField] protected PlayerColor playerColor;
-    public PlayerColor PlayerColor { get { return playerColor; } set { playerColor = value; } }
     public Ability ability;
 
     [Header("Sound")]
@@ -63,33 +62,13 @@ public class Hero : Player {
 
 
     #region Unity Event Functions
-    override protected void Start() {
+    override protected void Start()
+    {
         base.Start();
-
-        // Set the correct Ability Sprite
-        if (ability == Ability.Damage) cooldownIndicator.sprite = DamageSprite;
-        else if (ability == Ability.Opfer) cooldownIndicator.sprite = OpferSprite;
-        else if (ability == Ability.Tank) cooldownIndicator.sprite = TankSprite;
-
-        // Set the correct colors
-        if (playerColor == PlayerColor.Blue) {
-            playerMeshRenderer.material = bluePlayerMat;
-            cooldownIndicator.color = GameManager.Instance.BluePlayerColor;
-            healthIndicator.color = GameManager.Instance.BluePlayerColor;
-        }
-        else if (playerColor == PlayerColor.Green) {
-            playerMeshRenderer.material = greenPlayerMat;
-            cooldownIndicator.color = GameManager.Instance.GreenPlayerColor;
-            healthIndicator.color = GameManager.Instance.GreenPlayerColor;
-        }
-        else if (playerColor == PlayerColor.Red) {
-            playerMeshRenderer.material = redPlayerMat;
-            cooldownIndicator.color = GameManager.Instance.RedPlayerColor;
-            healthIndicator.color = GameManager.Instance.RedPlayerColor;
-        }
     }
 
-    override protected void Update() {
+    override protected void Update()
+    {
         base.Update();
 
         if (active)
@@ -105,25 +84,40 @@ public class Hero : Player {
     /// <summary>
     /// Cancels the ResetDefend Coroutine. Gets called when a transmission happens during reset of the defend ability.
     /// </summary>
-    public void CancelDefendReset() {
+    public void CancelDefendReset()
+    {
         if (resetDefendCoroutine != null) StopCoroutine(resetDefendCoroutine);
         wobbleBobble.SetActive(false);
         cooldown = true;
+    }
+
+    public void SetPlayerConfig(PlayerConfig playerConfig)
+    {
+        this.playerConfig = playerConfig;
+
+        // Set color
+        playerMeshRenderer.material = playerConfig.ColorConfig.heroMaterial;
+        cooldownIndicator.color = playerConfig.ColorConfig.uiElementColor;
+        healthIndicator.color = playerConfig.ColorConfig.uiElementColor;
     }
     #endregion
 
 
 
     #region Private Functions
-    private void HandleAbilities() {
+    private void HandleAbilities()
+    {
         if (cooldown) {
-            if (ability == Ability.Opfer) {
+            if (ability == Ability.Opfer)
+            {
                 Run();
             }
-            else if (ability == Ability.Damage && AbilityButtonsDown()) {
+            else if (ability == Ability.Damage && AbilityButtonsDown())
+            {
                 Attack();
             }
-            else if (ability == Ability.Tank && AbilityButtonsDown()) {
+            else if (ability == Ability.Tank && AbilityButtonsDown())
+            {
                 Defend();
             }
         }
@@ -136,10 +130,11 @@ public class Hero : Player {
         return false;
     }
 
-    private void Attack() {
+    private void Attack()
+    {
         GameObject projectile = Instantiate(projectilePrefab, transform.position + Vector3.up * 0.5f, transform.rotation);
         projectile.GetComponent<HeroProjectile>().damage = damagePerShot;
-        projectile.GetComponent<HeroProjectile>().playerColor = playerColor;
+        projectile.GetComponent<HeroProjectile>().playerColor = PlayerConfig.ColorConfig;
         projectile.GetComponent<Rigidbody>().velocity = transform.forward * projectileSpeed;
 
         audioSource.PlayOneShot(attackSound, attackSoundVolume);
@@ -148,7 +143,8 @@ public class Hero : Player {
         StartCoroutine(ResetAttackCooldown());
     }
 
-    private void Defend() {
+    private void Defend()
+    {
         wobbleBobble.SetActive(true);
         cooldown = false;
         cooldownIndicator.sprite = defendCooldownSprites[0];
@@ -156,7 +152,8 @@ public class Hero : Player {
         resetDefendCoroutine = StartCoroutine(ResetDefend());
     }
 
-    private void Run() {
+    private void Run()
+    {
         horizontalInput *= (speedBoost + 1);
         verticalInput *= (speedBoost + 1);
     }
@@ -165,18 +162,21 @@ public class Hero : Player {
 
 
     #region Coroutines
-    protected IEnumerator ResetAttackCooldown() {
+    protected IEnumerator ResetAttackCooldown()
+    {
         yield return new WaitForSeconds(attackCooldown);
         cooldown = true;
     }
 
-    protected IEnumerator ResetDefend() {
+    protected IEnumerator ResetDefend()
+    {
         // Wait for defend duration and turn of wobbleBobble
         yield return new WaitForSeconds(defendDuration);
         wobbleBobble.SetActive(false);
 
         // Start Cooldown and update CooldownIndicator
-        for (float i = 0; i < defendCooldown; i += Time.deltaTime) {
+        for (float i = 0; i < defendCooldown; i += Time.deltaTime)
+        {
             yield return null;
             cooldownIndicator.sprite = defendCooldownSprites[Mathf.FloorToInt((i / defendCooldown) * defendCooldownSprites.Length)];
         }

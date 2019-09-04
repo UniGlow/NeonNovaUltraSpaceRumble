@@ -183,7 +183,7 @@ public class HeroTutorialAI : Hero
     {
         GameObject projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
         projectile.GetComponent<HeroProjectile>().damage = damagePerShot;
-        projectile.GetComponent<HeroProjectile>().playerColor = playerColor;
+        projectile.GetComponent<HeroProjectile>().playerColor = PlayerConfig.ColorConfig;
         projectile.GetComponent<Rigidbody>().velocity = transform.forward * projectileSpeed;
 
         audioSource.PlayOneShot(attackSound, attackSoundVolume);

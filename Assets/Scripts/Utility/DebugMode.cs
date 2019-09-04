@@ -46,7 +46,6 @@ public class DebugMode : MonoBehaviour
 
     private void Start()
     {
-        colorSwitchInterval = GameManager.Instance.ColorSwitchInterval.ToString();
         critDamageMultiplier = GameManager.Instance.CritDamageMultiplier.ToString();
         intensifyTime = GameManager.Instance.intensifyTime.ToString();
         intensifyAmount = GameManager.Instance.intensifyAmount.ToString();
@@ -109,7 +108,6 @@ public class DebugMode : MonoBehaviour
             GUILayout.EndVertical();
 
             // Balancing Parameters
-            int newColorSwitchInterval;
             double newCritDamageMultiplier;
             int newIntensifyTime;
             double newIntensifyAmount;
@@ -121,12 +119,14 @@ public class DebugMode : MonoBehaviour
 
             GUILayout.BeginVertical("box");
             GUILayout.Label("Balancing Parameters");
-
+            /*
+             * TODO: Neu integrieren, sobald Game Settings SO existiert
             GUILayout.BeginHorizontal();
             GUILayout.Label("Color Switch Interval");
             colorSwitchInterval = GUILayout.TextField(colorSwitchInterval);
             if (System.Int32.TryParse(colorSwitchInterval, out newColorSwitchInterval)) GameManager.Instance.ColorSwitchInterval = newColorSwitchInterval;
             GUILayout.EndHorizontal();
+            */
 
             GUILayout.BeginHorizontal();
             GUILayout.Label("Crit Damage Multiplier");

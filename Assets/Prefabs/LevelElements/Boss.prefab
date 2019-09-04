@@ -370,13 +370,14 @@ MonoBehaviour:
   abilityProjectileSpeed: 20
   abilityProjectileLifeTime: 1
   abilityCooldown: 3
-  weaknessColor: 2
-  strengthColor: 1
   materialGlowOnSwitch: 2
+  colorSwitchInterval: 10
   abilitySound: {fileID: 8300000, guid: ddbdc3544101111438a9b6c3b546a294, type: 3}
   abilitySoundVolume: 1
   attackSound: {fileID: 8300000, guid: cf3ba19d968b8e249b2a4b68126fb355, type: 3}
   attackSoundVolume: 0.75
+  colorChangeSound: {fileID: 8300000, guid: cb3b90f02c52c49418a9a3fd50874d2b, type: 3}
+  colorChangeSoundVolume: 1
   enableCameraShake: 1
   magnitude: 1
   roughness: 10
@@ -386,9 +387,8 @@ MonoBehaviour:
     type: 2}
   bossMeshRenderer: {fileID: 23755656095924074}
   healthIndicator: {fileID: 212300853209604042}
-  greenBossMat: {fileID: 2100000, guid: 966f269b5a0b25f4485446ac000d0ef7, type: 2}
-  redBossMat: {fileID: 2100000, guid: 7d68be63867edc147a22fe6137b42316, type: 2}
-  blueBossMat: {fileID: 2100000, guid: b9952fe678988874f98372d9edd2afff, type: 2}
+  bossColorChangedEvent: {fileID: 11400000, guid: 5cb0235c1fda1e64dae1cfd14392faef,
+    type: 2}
 --- !u!212 &212300853209604042
 SpriteRenderer:
   m_ObjectHideFlags: 1

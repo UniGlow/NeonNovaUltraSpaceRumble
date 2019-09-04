@@ -5,7 +5,8 @@ using UnityEngine;
 /// <summary>
 /// 
 /// </summary>
-public class BossProjectile : Projectile {
+public class BossProjectile : Projectile
+{
 
     #region Variable Declarations
     [SerializeField] GameObject hitPS;
@@ -25,17 +26,21 @@ public class BossProjectile : Projectile {
     {
         base.OnTriggerEnter(other);
 
-        if (other.tag.Contains(Constants.TAG_SHIELD)) {
+        if (other.tag.Contains(Constants.TAG_SHIELD))
+        {
             Destroy(gameObject);
         }
 
-        if (other.tag == Constants.TAG_HERO) {
-            if (playerColor == other.transform.parent.GetComponent<Hero>().PlayerColor) {
+        if (other.tag == Constants.TAG_HERO)
+        {
+            if (playerColor == other.transform.parent.GetComponent<Hero>().PlayerConfig.ColorConfig)
+            {
                 HeroHealth.Instance.TakeDamage(Mathf.RoundToInt(damage * GameManager.Instance.CritDamageMultiplier));
                 Instantiate(critHitPS, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
                 AudioManager.Instance.PlayClip(critHitSound, critHitVolume);
             }
-            else {
+            else
+            {
                 HeroHealth.Instance.TakeDamage(damage);
                 Instantiate(hitPS, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
                 AudioManager.Instance.PlayClip(hitSound, hitVolume);
@@ -46,7 +51,7 @@ public class BossProjectile : Projectile {
 
         if (other.tag == Constants.TAG_HERO_DUMMY)
         {
-            if (playerColor == other.transform.parent.GetComponent<HeroTutorialAI>().PlayerColor)
+            if (playerColor == other.transform.parent.GetComponent<HeroTutorialAI>().PlayerConfig.ColorConfig)
             {
                 HeroHealth.Instance.TakeDamage(Mathf.RoundToInt(damage * GameManager.Instance.CritDamageMultiplier));
                 Instantiate(critHitPS, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
