@@ -36,6 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4868657538597488}
   - component: {fileID: 114295717314955092}
+  - component: {fileID: 114963303541091248}
   m_Layer: 0
   m_Name: CameraRig
   m_TagString: Untagged
@@ -254,7 +255,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  smoothTime: 0.1
+  smoothTime: 0.2
   minZoom: 55
   maxZoom: 20
   maxDistance: 60
@@ -271,6 +272,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DefaultPosInfluence: {x: 0.15, y: 0.15, z: 0.15}
   DefaultRotInfluence: {x: 0.3, y: 0.3, z: 1}
+--- !u!114 &114963303541091248
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1762329191500642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 1dcba030088afea41a808b9b310c1669, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  linkedMethods:
+  - component: {fileID: 114295717314955092}
+    methodID: 0
+    methodName: SetCameraTargets
+    chosenID: 1
+    methodNames: []
+    gameObject: {fileID: 1762329191500642}
+  ignoreEventParameters: 0
 --- !u!124 &124989963690370136
 Behaviour:
   m_ObjectHideFlags: 1

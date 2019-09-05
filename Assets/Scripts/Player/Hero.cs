@@ -51,9 +51,6 @@ public class Hero : Player
     [SerializeField] protected Sprite opferSprite;
     public Sprite OpferSprite { get { return opferSprite; } }
     [SerializeField] protected Renderer playerMeshRenderer;
-    [SerializeField] protected Material greenPlayerMat;
-    [SerializeField] protected Material redPlayerMat;
-    [SerializeField] protected Material bluePlayerMat;
 
     protected bool cooldown = true;
     protected Coroutine resetDefendCoroutine;
@@ -95,10 +92,33 @@ public class Hero : Player
     {
         this.playerConfig = playerConfig;
 
-        // Set color
+        // Set colors
         playerMeshRenderer.material = playerConfig.ColorConfig.heroMaterial;
         cooldownIndicator.color = playerConfig.ColorConfig.uiElementColor;
         healthIndicator.color = playerConfig.ColorConfig.uiElementColor;
+
+        // TODO
+        //SetAbility(playerConfig.ability);
+    }
+
+    public void SetAbility(Ability ability)
+    {
+        this.ability = ability;
+
+        switch (ability)
+        {
+            case Ability.Damage:
+                cooldownIndicator.sprite = DamageSprite;
+                break;
+            case Ability.Tank:
+                cooldownIndicator.sprite = TankSprite;
+                break;
+            case Ability.Opfer:
+                cooldownIndicator.sprite = opferSprite;
+                break;
+            default:
+                break;
+        }
     }
     #endregion
 
@@ -125,7 +145,7 @@ public class Hero : Player
 
     private bool AbilityButtonsDown()
     {
-        if (Input.GetButton(Constants.INPUT_ABILITY + playerNumber)) return true;
+        if (Input.GetButton(Constants.INPUT_ABILITY + playerConfig.PlayerNumber)) return true;
 
         return false;
     }

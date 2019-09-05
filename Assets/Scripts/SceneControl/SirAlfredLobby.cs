@@ -40,6 +40,7 @@ public class SirAlfredLobby : MonoBehaviour
     float originalMusicVolume;
     bool idleState;
     int playerCount;
+    bool sceneLoadTriggered = false;
     #endregion
 
 
@@ -67,8 +68,9 @@ public class SirAlfredLobby : MonoBehaviour
         {
             if (playerConfirms[i] == true) ready++;
         }
-        if (ready == playerConfirms.Count)
+        if (!sceneLoadTriggered && ready == playerConfirms.Count && playerConfirms.Count != 0)
         {
+            sceneLoadTriggered = true;
             AudioManager.Instance.StopPlaying();
             StartCoroutine(Wait(1f, () => {
                 // Rstore SFX audio level

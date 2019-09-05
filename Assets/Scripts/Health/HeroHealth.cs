@@ -43,23 +43,26 @@ public class HeroHealth : Health
         if (endlessHealth) return;
 
         base.TakeDamage(damage);
+        RaiseDamageTaken(Faction.Heroes, damage);
 
         // Dead?
         if (currentDamage >= BossHealth.Instance.CurrentDamage + BossHealth.Instance.WinningPointLead)
         {
             RaiseLevelCompleted(Faction.Boss);
-            /*
-            Vector3 originalScale = Vector3.one;
-            winText.transform.localScale = Vector3.zero;
-            winText.text = "Boss Wins !";
-            winText.transform.DOScale(originalScale, 0.7f).SetEase(Ease.OutBounce).SetUpdate(true).SetDelay(1f);
-            winText.gameObject.SetActive(true);*/
         }
     }
+    #endregion
 
+
+
+    #region GameEvent Raiser
     void RaiseLevelCompleted(Faction winner)
     {
         levelCompletedEvent.Raise(this, winner);
+    }
+    void RaiseDamageTaken(Faction faction, int amount)
+    {
+        damageTakenEvent.Raise(this, faction, amount);
     }
     #endregion
 }

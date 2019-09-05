@@ -79,52 +79,5 @@ public class TransmissionAI : Transmission
         }
 
     }
-
-    void Transmit()
-    {
-        // End transmission if out of range
-        if ((transform.position - receiver.transform.position).magnitude > transmissionRange)
-        {
-            EndTransmission();
-            return;
-        }
-
-        currenTransmissionDuration += Time.deltaTime;
-        Debug.DrawLine(transform.position, receiver.transform.position, Color.green);
-
-        // Successfull transmission: Swap abilities and end transmission
-        if (currenTransmissionDuration >= transmissionDuration)
-        {
-            Hero otherHero = receiver.GetComponent<Hero>();
-            Ability newAbility = otherHero.ability;
-
-            // Cancel defend cooldown, if one of the abilities was Tank
-            if (hero.ability == Ability.Tank) hero.CancelDefendReset();
-            else if (otherHero.ability == Ability.Tank) otherHero.CancelDefendReset();
-
-            // Switch abilities
-            otherHero.ability = hero.ability;
-            hero.ability = newAbility;
-
-            // Set the new Ability Sprite for this hero
-            if (hero.ability == Ability.Damage) hero.CooldownIndicator.sprite = hero.DamageSprite;
-            else if (hero.ability == Ability.Opfer) hero.CooldownIndicator.sprite = hero.OpferSprite;
-            else if (hero.ability == Ability.Tank) hero.CooldownIndicator.sprite = hero.TankSprite;
-
-            // Set the new Ability Sprite for the other hero
-            if (otherHero.ability == Ability.Damage) otherHero.CooldownIndicator.sprite = otherHero.DamageSprite;
-            else if (otherHero.ability == Ability.Opfer) otherHero.CooldownIndicator.sprite = otherHero.OpferSprite;
-            else if (otherHero.ability == Ability.Tank) otherHero.CooldownIndicator.sprite = otherHero.TankSprite;
-
-            audioSource.PlayOneShot(transmissionSound, transmissionSoundVolume);
-
-            homingMissile.AcquireNewTarget();
-
-            transmissionPS.Play();
-            receiver.GetComponent<Transmission>().TransmissionPS.Play();
-
-            EndTransmission();
-        }
-    }
     #endregion
 }

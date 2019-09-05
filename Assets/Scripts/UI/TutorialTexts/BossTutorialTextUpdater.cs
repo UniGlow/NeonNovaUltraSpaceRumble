@@ -21,7 +21,7 @@ public class BossTutorialTextUpdater : TutorialTextUpdater
 
 
     #region Protected Functions
-    protected override void UpdateText(PlayerConfig bossConfig)
+    public override void UpdateText(PlayerConfig bossConfig)
     {
         if (colorChanges <= 1) ChangeTextTo("");
         else if (colorChanges >= 2 && colorChanges % 2 == 0) ChangeTextTo("WeaknessColor");

@@ -32,12 +32,6 @@ public class GameManager : MonoBehaviour
     public int bossWinningTriple = 500;
 
     [Header("References")]
-    [SerializeField] Color greenPlayerColor;
-    public Color GreenPlayerColor { get { return greenPlayerColor; } }
-    [SerializeField] Color redPlayerColor;
-    public Color RedPlayerColor { get { return redPlayerColor; } }
-    [SerializeField] Color bluePlayerColor;
-    public Color BluePlayerColor { get { return bluePlayerColor; } }
     [SerializeField] GameEvent levelStartedEvent = null;
     [SerializeField] GameEvent levelLoadedEvent = null;
 
@@ -105,24 +99,29 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Loads the next scene in build index
     /// </summary>
-    public void LoadNextScene() {
+    public void LoadNextScene()
+    {
         int activeScene = SceneManager.GetActiveScene().buildIndex;
-        if (activeScene + 1 < SceneManager.sceneCountInBuildSettings) {
+        if (activeScene + 1 < SceneManager.sceneCountInBuildSettings)
+        {
             SceneManager.LoadScene(activeScene + 1);
         }
-        else {
+        else
+        {
             Debug.LogError("No more levels in build index to be loaded");
         }
     }
 
-    public void LoadLevel(string name) {
+    public void LoadLevel(string name)
+    {
         SceneManager.LoadScene(name);
     }
 
     /// <summary>
     /// Quits the application or exits play mode when in editor
     /// </summary>
-    public void ExitGame() {
+    public void ExitGame()
+    {
         Debug.Log("Exiting the game");
         Application.Quit();
 
@@ -157,9 +156,6 @@ public class GameManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name.Contains("Level"))
         {
-            
-            GameObject.FindGameObjectWithTag(Constants.TAG_HOMING_MISSILE).GetComponent<HomingMissile>().PauseMissile(true);
-
             if (SceneManager.GetActiveScene().name.Contains("Lobby"))
             {
                 StartCoroutine(StartTheTutorial());

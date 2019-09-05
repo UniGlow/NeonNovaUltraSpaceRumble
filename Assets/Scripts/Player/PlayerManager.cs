@@ -139,6 +139,8 @@ public class PlayerManager : MonoBehaviour
             default:
                 break;
         }
+
+        RaisePlayersSpawned(hero1PlayerConfig, hero2PlayerConfig, hero3PlayerConfig, bossPlayerConfig);
     }
 	#endregion
 	

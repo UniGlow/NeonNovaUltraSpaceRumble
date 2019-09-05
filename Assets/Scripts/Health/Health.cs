@@ -14,6 +14,7 @@ public class Health : MonoBehaviour
     [SerializeField] protected bool endlessHealth;
 
     [SerializeField] protected GameEvent levelCompletedEvent = null;
+    [SerializeField] protected GameEvent damageTakenEvent = null;
 
     protected int currentDamage;
     protected HealthbarUpdater healthbarUpdater;
@@ -41,8 +42,6 @@ public class Health : MonoBehaviour
         if (endlessHealth) return;
 
         currentDamage += damage;
-
-        healthbarUpdater.UpdateHealthbar(HeroHealth.Instance.CurrentDamage, BossHealth.Instance.CurrentDamage);
     }
     #endregion
 }

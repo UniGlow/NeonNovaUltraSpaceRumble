@@ -18,9 +18,7 @@ public class TutorialPlayerManager : MonoBehaviour
     
     [Header("Prefabs")]
     [SerializeField] private GameObject heroPrefab = null;
-    [SerializeField] private GameObject heroAIPrefab = null;
     [SerializeField] private GameObject bossPrefab = null;
-    [SerializeField] private GameObject bossAIPrefab = null;
 
     [Header("GameEvents")]
     [SerializeField] private GameEvent playersSpawnedEvent = null;
@@ -65,13 +63,8 @@ public class TutorialPlayerManager : MonoBehaviour
             {
                 if (go.GetComponent<SpawnPoint>().objectToSpawn == SpawnPoint.SpawnObject.Hero1)
                 {
-                    if (hero1PlayerConfig.AIControlled)
-                        player1Transform = Instantiate(heroAIPrefab, go.transform.position, go.transform.rotation).transform;
-                    else
-                    {
-                        player1Transform = Instantiate(heroPrefab, go.transform.position, go.transform.rotation).transform;
-                        humanPlayerCount++;
-                    }
+                    player1Transform = Instantiate(heroPrefab, go.transform.position, go.transform.rotation).transform;
+                    humanPlayerCount++;
 
                     player1 = player1Transform.GetComponent<Hero>();
                     player1.SetPlayerConfig(hero1PlayerConfig);
@@ -80,13 +73,8 @@ public class TutorialPlayerManager : MonoBehaviour
 
                 else if (go.GetComponent<SpawnPoint>().objectToSpawn == SpawnPoint.SpawnObject.Hero2)
                 {
-                    if (hero2PlayerConfig.AIControlled)
-                        player2Transform = Instantiate(heroAIPrefab, go.transform.position, go.transform.rotation).transform;
-                    else
-                    {
-                        player2Transform = Instantiate(heroPrefab, go.transform.position, go.transform.rotation).transform;
-                        humanPlayerCount++;
-                    }
+                    player2Transform = Instantiate(heroPrefab, go.transform.position, go.transform.rotation).transform;
+                    humanPlayerCount++;
 
                     player2 = player2Transform.GetComponent<Hero>();
                     player2.SetPlayerConfig(hero2PlayerConfig);
@@ -95,13 +83,8 @@ public class TutorialPlayerManager : MonoBehaviour
 
                 else if (go.GetComponent<SpawnPoint>().objectToSpawn == SpawnPoint.SpawnObject.Hero3)
                 {
-                    if (hero3PlayerConfig.AIControlled)
-                        player3Transform = Instantiate(heroAIPrefab, go.transform.position, go.transform.rotation).transform;
-                    else
-                    {
-                        player3Transform = Instantiate(heroPrefab, go.transform.position, go.transform.rotation).transform;
-                        humanPlayerCount++;
-                    }
+                    player3Transform = Instantiate(heroPrefab, go.transform.position, go.transform.rotation).transform;
+                    humanPlayerCount++;
 
                     player3 = player3Transform.GetComponent<Hero>();
                     player3.SetPlayerConfig(hero3PlayerConfig);
@@ -110,13 +93,8 @@ public class TutorialPlayerManager : MonoBehaviour
 
                 else if (go.GetComponent<SpawnPoint>().objectToSpawn == SpawnPoint.SpawnObject.Boss)
                 {
-                    if (bossPlayerConfig.AIControlled)
-                        bossTransform = Instantiate(bossAIPrefab, go.transform.position, go.transform.rotation).transform;
-                    else
-                    {
-                        bossTransform = Instantiate(bossPrefab, go.transform.position, go.transform.rotation).transform;
-                        humanPlayerCount++;
-                    }
+                    bossTransform = Instantiate(bossPrefab, go.transform.position, go.transform.rotation).transform;
+                    humanPlayerCount++;
 
                     boss = bossTransform.GetComponent<Boss>();
                     boss.SetPlayerConfig(bossPlayerConfig, GameManager.Instance.activeColorSet);
@@ -139,6 +117,8 @@ public class TutorialPlayerManager : MonoBehaviour
             default:
                 break;
         }
+
+        RaisePlayersSpawned(hero1PlayerConfig, hero2PlayerConfig, hero3PlayerConfig, bossPlayerConfig);
     }
 	#endregion
 	

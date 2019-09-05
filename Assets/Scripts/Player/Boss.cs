@@ -58,7 +58,6 @@ public class Boss : Player
 
     protected bool attackCooldownB = true;
     protected bool abilityCooldownB = true;
-    protected float abilityAxisInputPrevFrame;
 
     // Color Settings
     protected PlayerColor2 strengthColor;
@@ -81,17 +80,10 @@ public class Boss : Player
         {
             colorChangeTimer += Time.deltaTime;
 
-            horizontalInput = Input.GetAxis(Constants.INPUT_HORIZONTAL + playerNumber) * movementSpeed;
-            verticalInput = Input.GetAxis(Constants.INPUT_VERTICAL + playerNumber) * movementSpeed;
-            horizontalLookInput = Input.GetAxis(Constants.INPUT_LOOK_HORIZONTAL + playerNumber) * movementSpeed;
-            verticalLookInput = Input.GetAxis(Constants.INPUT_LOOK_VERTICAL + playerNumber) * movementSpeed;
-
             Attack();
             Ability();
             HandleColorSwitch();
         }
-
-        abilityAxisInputPrevFrame = Input.GetAxis(Constants.INPUT_TRANSMIT_AXIS + playerNumber);
     }
     #endregion
 
@@ -112,7 +104,7 @@ public class Boss : Player
         // Set color
         bossMeshRenderer.material = playerConfig.ColorConfig.heroMaterial;
 
-        SetStrengthColor(strengthColor);
+        SetStrengthColor(colorSet.GetRandomColor());
         SetWeaknessColor(playerConfig.ColorConfig);
 
         RaiseBossColorChanged(playerConfig);
@@ -167,20 +159,14 @@ public class Boss : Player
 
     private bool AttackButtonsPressed()
     {
-        if (Input.GetButton(Constants.INPUT_ABILITY + playerNumber)) return true;
+        if (Input.GetButton(Constants.INPUT_ABILITY + playerConfig.PlayerNumber)) return true;
 
         return false;
     }
 
     private bool AbilityButtonsDown()
     {
-        if (Input.GetButtonDown(Constants.INPUT_TRANSMIT + playerNumber)) return true;
-
-        //else if (Input.GetAxis(Constants.INPUT_TRANSMIT_AXIS + playerNumber) > 0 &&
-        //    abilityAxisInputPrevFrame == 0)
-        //{
-        //    return true;
-        //}
+        if (Input.GetButtonDown(Constants.INPUT_TRANSMIT + playerConfig.PlayerNumber)) return true;
 
         return false;
     }

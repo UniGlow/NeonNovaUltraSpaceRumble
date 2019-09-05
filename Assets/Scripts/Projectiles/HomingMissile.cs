@@ -47,12 +47,7 @@ public class HomingMissile : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         audioSource = GetComponent<AudioSource>();
     }
-
-	private void Start()
-    {
-        AcquireNewTarget();
-	}
-
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag.Contains(Constants.TAG_HERO))
@@ -82,7 +77,11 @@ public class HomingMissile : MonoBehaviour
     {
         if (!agentPaused)
         {
-            if (target == null) AcquireNewTarget();
+            if (target == null)
+            {
+                Debug.LogError("Homing Missile has no target set", this);
+                return;
+            }
 
             agent.SetDestination(target.position);
             agent.Move(transform.forward * speed);
@@ -93,14 +92,19 @@ public class HomingMissile : MonoBehaviour
 
 
     #region Public Functions
-    public void AcquireNewTarget()
+    public void AcquireNewTarget(PlayerConfig hero1, PlayerConfig hero2)
     {
-        Hero[] heroes = GameObject.FindObjectsOfType<Hero>();
-        foreach (Hero hero in heroes) {
-            if (hero.ability == Ability.Opfer && hero.GetType() != typeof(HeroTutorialAI)) {
-                target = hero.transform;
-            }
-        }
+        // TODO: String compare ersetzen mit neuer Ability Architektur
+        if (hero1.ability.name == "Victim") target = hero1.playerTransform;
+        else if (hero2.ability.name == "Victim") target = hero2.playerTransform;
+    }
+
+    public void AcquireNewTarget(PlayerConfig hero1, PlayerConfig hero2, PlayerConfig hero3, PlayerConfig boss)
+    {
+        // TODO: String compare ersetzen mit neuer Ability Architektur
+        if (hero1.ability.name == "Victim") target = hero1.playerTransform;
+        else if (hero2.ability.name == "Victim") target = hero2.playerTransform;
+        else if (hero3.ability.name == "Victim") target = hero3.playerTransform;
     }
 
     public void PauseMissile(bool pause)

@@ -22,7 +22,7 @@ public class HeroTutorialTextUpdater : TutorialTextUpdater
 
 
     #region Protected Functions
-    protected override void UpdateText(PlayerConfig bossConfig)
+    public override void UpdateText(PlayerConfig bossConfig)
     {
         hero = player.GetComponent<Hero>();
 

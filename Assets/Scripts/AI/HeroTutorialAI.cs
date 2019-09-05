@@ -15,6 +15,9 @@ public class HeroTutorialAI : Hero
     [SerializeField] float repathingDistance = 5f;
     [SerializeField] float shieldDelay = 2f;
     [SerializeField] LayerMask attackRayMask;
+    [SerializeField] PlayerConfig tutorialPlayerConfig = null;
+    public PlayerConfig TutorialPlayerConfig { get { return tutorialPlayerConfig; } }
+
 
     NavMeshAgent agent;
     Transform boss;

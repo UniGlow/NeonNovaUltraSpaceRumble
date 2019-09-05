@@ -70,7 +70,7 @@ public class Transmission : MonoBehaviour
         }
 
 
-        transmissionAxisInputPrevFrame = Input.GetAxis(Constants.INPUT_TRANSMIT_AXIS + hero.PlayerNumber);
+        transmissionAxisInputPrevFrame = Input.GetAxis(Constants.INPUT_TRANSMIT_AXIS + hero.PlayerConfig.PlayerNumber);
     }
     #endregion
 
@@ -109,7 +109,7 @@ public class Transmission : MonoBehaviour
 
     }
 
-    void Transmit()
+    protected void Transmit()
     {
         // End transmission if out of range
         if ((transform.position - receiver.transform.position).magnitude > transmissionRange)
@@ -132,23 +132,12 @@ public class Transmission : MonoBehaviour
             else if (otherHero.ability == Ability.Tank) otherHero.CancelDefendReset();
 
             // Switch abilities
-            otherHero.ability = hero.ability;
-            hero.ability = newAbility;
-
-            // Set the new Ability Sprite for this hero
-            if (hero.ability == Ability.Damage) hero.CooldownIndicator.sprite = hero.DamageSprite;
-            else if (hero.ability == Ability.Opfer) hero.CooldownIndicator.sprite = hero.OpferSprite;
-            else if (hero.ability == Ability.Tank) hero.CooldownIndicator.sprite = hero.TankSprite;
-
-            // Set the new Ability Sprite for the other hero
-            if (otherHero.ability == Ability.Damage) otherHero.CooldownIndicator.sprite = otherHero.DamageSprite;
-            else if (otherHero.ability == Ability.Opfer) otherHero.CooldownIndicator.sprite = otherHero.OpferSprite;
-            else if (otherHero.ability == Ability.Tank) otherHero.CooldownIndicator.sprite = otherHero.TankSprite;
+            otherHero.SetAbility(hero.ability);
+            hero.SetAbility(newAbility);
 
             audioSource.PlayOneShot(transmissionSound, transmissionSoundVolume);
 
-            homingMissile.AcquireNewTarget();
-            if (GameManager.Instance.GetActiveSceneName().Contains("Tutorial")) RaiseAbilitiesChanged(hero.PlayerConfig, otherHero.PlayerConfig);
+            RaiseAbilitiesChanged(hero.PlayerConfig, otherHero.PlayerConfig);
 
             transmissionPS.Play();
             receiver.GetComponent<Transmission>().transmissionPS.Play();
@@ -174,7 +163,7 @@ public class Transmission : MonoBehaviour
 
     protected bool TransmissionButtonsUp()
     {
-        if (Input.GetButtonUp(Constants.INPUT_TRANSMIT + hero.PlayerNumber))
+        if (Input.GetButtonUp(Constants.INPUT_TRANSMIT + hero.PlayerConfig.PlayerNumber))
         {
             return true;
         }
@@ -184,7 +173,7 @@ public class Transmission : MonoBehaviour
 
     protected bool TransmissionButtonsPressed()
     {
-        if (Input.GetButton(Constants.INPUT_TRANSMIT + hero.PlayerNumber)) return true;
+        if (Input.GetButton(Constants.INPUT_TRANSMIT + hero.PlayerConfig.PlayerNumber)) return true;
 
         return false;
     }

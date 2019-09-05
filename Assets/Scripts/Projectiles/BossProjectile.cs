@@ -51,7 +51,7 @@ public class BossProjectile : Projectile
 
         if (other.tag == Constants.TAG_HERO_DUMMY)
         {
-            if (playerColor == other.transform.parent.GetComponent<HeroTutorialAI>().PlayerConfig.ColorConfig)
+            if (playerColor == other.transform.parent.GetComponent<HeroTutorialAI>().TutorialPlayerConfig.ColorConfig)
             {
                 HeroHealth.Instance.TakeDamage(Mathf.RoundToInt(damage * GameManager.Instance.CritDamageMultiplier));
                 Instantiate(critHitPS, other.ClosestPointOnBounds(transform.position), Quaternion.identity);

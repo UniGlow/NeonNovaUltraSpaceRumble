@@ -110,6 +110,6 @@ public abstract class TutorialTextUpdater : MonoBehaviour
     }
 
     protected virtual void InheritedStart() { }
-    protected abstract void UpdateText(PlayerConfig bossConfig);
+    public abstract void UpdateText(PlayerConfig bossConfig);
     #endregion
 }
