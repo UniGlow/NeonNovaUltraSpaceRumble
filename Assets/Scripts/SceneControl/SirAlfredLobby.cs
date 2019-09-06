@@ -12,7 +12,10 @@ public class SirAlfredLobby : MonoBehaviour
 {
 
     #region Variable Declaration
-    [Space]
+    [Header("Game Settings")]
+    [SerializeField] GameSettings settings;
+
+    [Header("miscellaneous")]
     [SerializeField] float timeTillIdle = 5f;
     [SerializeField] PlayerReadyUpdater playerReadyUpdater;
     [SerializeField] AudioMixer masterMixer;
