@@ -12,6 +12,7 @@ public class Projectile : MonoBehaviour
     public float lifeTime = 1f;
     public int damage = 10;
     public PlayerColor2 playerColor;
+    [SerializeField] protected Points points = null;
     #endregion
 
 
@@ -21,8 +22,10 @@ public class Projectile : MonoBehaviour
         StartCoroutine(DestroyObject());
     }
 
-    virtual protected void OnTriggerEnter(Collider other) {
-        if (other.tag.Contains(Constants.TAG_WALL)) {
+    virtual protected void OnTriggerEnter(Collider other)
+    {
+        if (other.tag.Contains(Constants.TAG_WALL))
+        {
             Destroy(gameObject);
         }
     }

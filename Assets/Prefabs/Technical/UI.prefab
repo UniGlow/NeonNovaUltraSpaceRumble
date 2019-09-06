@@ -4630,6 +4630,7 @@ MonoBehaviour:
   middleImage: {fileID: 224428909162057584}
   winBoss: {fileID: 21300000, guid: 46d6393e746f0431f87007375a6ecb40, type: 3}
   winHeroes: {fileID: 21300000, guid: 84d40b48f58b2423eabe8d75a429824f, type: 3}
+  points: {fileID: 11400000, guid: 5be3ffe199c802f45a47f0dbbedb0be5, type: 2}
 --- !u!114 &114794456069536226
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -23,17 +23,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] float delayAtLevelEnd = 12f;
     [Space]
     [SerializeField] bool overrideLevelPointLimits;
-    public int heroesWinningPointLead = 500;
-    public int bossWinningPointLead = 500;
+    public int winningPointLead = 500;
 
     [Header("AI Adjustments")]
-    public int bossWinningSolo = 500;
-    public int bossWinningDuo = 500;
-    public int bossWinningTriple = 500;
+    public int pointsToWinSolo = 500;
+    public int pointsToWinDuo = 500;
+    public int pointsToWinTriple = 500;
 
     [Header("References")]
     [SerializeField] GameEvent levelStartedEvent = null;
     [SerializeField] GameEvent levelLoadedEvent = null;
+    [SerializeField] Points points = null;
 
     // TODO: Verlagern in SO "GameSettings"
     [HideInInspector] public ColorSet activeColorSet = null;
@@ -176,15 +176,10 @@ public class GameManager : MonoBehaviour
 
     void HandleIntensify()
     {
-        if (intensifyTimer >= intensifyTime && BossHealth.Instance && HeroHealth.Instance)
+        if (intensifyTimer >= intensifyTime)
         {
-            // Set new winningPointLeads
-            BossHealth.Instance.WinningPointLead = Mathf.RoundToInt(BossHealth.Instance.WinningPointLead * (1 - intensifyAmount));
-            HeroHealth.Instance.WinningPointLead = Mathf.RoundToInt(HeroHealth.Instance.WinningPointLead * (1 - intensifyAmount));
-
-            // Close the damage gap to keep the healthbar seemingly unchanged
-            HeroHealth.Instance.CurrentDamage = Mathf.RoundToInt(HeroHealth.Instance.CurrentDamage * (1 - intensifyAmount));
-            BossHealth.Instance.CurrentDamage = Mathf.RoundToInt(BossHealth.Instance.CurrentDamage * (1 - intensifyAmount));
+            // Set new pointLeadToWin
+            points.PointLeadToWin = Mathf.RoundToInt(points.PointLeadToWin * (1 - intensifyAmount));
 
             intensifyTimer = 0f;
         }
@@ -192,8 +187,7 @@ public class GameManager : MonoBehaviour
 
     void OverrideLevelPointLimits()
     {
-        HeroHealth.Instance.WinningPointLead = heroesWinningPointLead;
-        BossHealth.Instance.WinningPointLead = bossWinningPointLead;
+        points.PointLeadToWin = winningPointLead;
     }
 
     void RaiseLevelStarted()
@@ -220,9 +214,13 @@ public class GameManager : MonoBehaviour
     IEnumerator StartTheAction()
     {
         RaiseLevelLoaded(countdownDuration);
+        points.ResetPoints(false);
+
+        yield return new WaitForSecondsRealtime(countdownDuration * (1f / 4f));
+
         AudioManager.Instance.StartRandomTrack();
 
-        yield return new WaitForSecondsRealtime(countdownDuration);
+        yield return new WaitForSecondsRealtime(countdownDuration * (3f / 4f));
 
         RaiseLevelStarted();
     }
@@ -242,8 +240,9 @@ public class GameManager : MonoBehaviour
 
     IEnumerator StartTheCredits()
     {
+        points.ResetPoints(true);
 
-        yield return new WaitForSecondsRealtime(countdownDuration / 4f);
+        yield return new WaitForSecondsRealtime(countdownDuration * (3f / 4f));
 
         RaiseLevelStarted();
     }

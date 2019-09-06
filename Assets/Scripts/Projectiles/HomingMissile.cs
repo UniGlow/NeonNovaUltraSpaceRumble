@@ -12,6 +12,7 @@ public class HomingMissile : MonoBehaviour
 {
 
     #region Variable Declarations
+    [Header("Stats")]
     [SerializeField] float speed = 10f;
     [SerializeField] int damage = 100;
 
@@ -29,9 +30,12 @@ public class HomingMissile : MonoBehaviour
     [SerializeField] float fadeIn = 0.1f;
     [SerializeField] float fadeOut = 0.8f;
 
-    [Header("Object References")]
+    [Header("Particle Systems")]
     [SerializeField] GameObject hitPSHeroes;
     [SerializeField] GameObject hitPSBoss;
+
+    [Header("References")]
+    [SerializeField] Points points = null;
 
     Transform target;
     NavMeshAgent agent;
@@ -52,7 +56,7 @@ public class HomingMissile : MonoBehaviour
     {
         if (other.tag.Contains(Constants.TAG_HERO))
         {
-            HeroHealth.Instance.TakeDamage(damage);
+            points.ScorePoints(Faction.Boss, damage);
 
             audioSource.PlayOneShot(hitSound, hitSoundVolume);
 
@@ -63,7 +67,7 @@ public class HomingMissile : MonoBehaviour
 
         else if (other.tag.Contains(Constants.TAG_BOSS))
         {
-            BossHealth.Instance.TakeDamage(damage);
+            points.ScorePoints(Faction.Heroes, damage);
 
             audioSource.PlayOneShot(hitSound, hitSoundVolume);
 

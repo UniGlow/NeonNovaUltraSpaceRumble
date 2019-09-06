@@ -30,32 +30,13 @@ public class HeroProjectile : Projectile
         {
             if (playerColor == other.transform.parent.GetComponent<Boss>().PlayerConfig.ColorConfig)
             {
-                BossHealth.Instance.TakeDamage(Mathf.RoundToInt(damage * GameManager.Instance.CritDamageMultiplier));
+                points.ScorePoints(Faction.Heroes, Mathf.RoundToInt(damage * GameManager.Instance.CritDamageMultiplier));
                 Instantiate(critHitPS, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
                 AudioManager.Instance.PlayClip(critHitSound, critHitVolume);
             }
             else
             {
-                BossHealth.Instance.TakeDamage(damage);
-                Instantiate(hitPS, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
-                AudioManager.Instance.PlayClip(hitSound, hitVolume);
-            }
-
-
-            Destroy(gameObject);
-        }
-
-        else if (other.tag == Constants.TAG_BOSS_DUMMY)
-        {
-            if (playerColor == other.transform.parent.GetComponent<BossTutorialAI>().WeaknessColor)
-            {
-                BossHealth.Instance.TakeDamage(Mathf.RoundToInt(damage * GameManager.Instance.CritDamageMultiplier));
-                Instantiate(critHitPS, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
-                AudioManager.Instance.PlayClip(critHitSound, critHitVolume);
-            }
-            else
-            {
-                BossHealth.Instance.TakeDamage(damage);
+                points.ScorePoints(Faction.Heroes, damage);
                 Instantiate(hitPS, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
                 AudioManager.Instance.PlayClip(hitSound, hitVolume);
             }

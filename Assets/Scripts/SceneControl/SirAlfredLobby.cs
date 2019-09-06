@@ -15,13 +15,14 @@ public class SirAlfredLobby : MonoBehaviour
     [Header("Game Settings")]
     [SerializeField] GameSettings settings;
 
-    [Header("miscellaneous")]
+    [Header("Miscellaneous")]
     [SerializeField] float timeTillIdle = 5f;
     [SerializeField] PlayerReadyUpdater playerReadyUpdater;
     [SerializeField] AudioMixer masterMixer;
     [SerializeField] MusicTrack backgroundTrack;
     [Range(0f,2f)]
     [SerializeField] float sfxVolumeDamp = 0.1f;
+    [SerializeField] Points points = null;
 
     [Header("Player Configs")]
     [SerializeField] PlayerConfig hero1PlayerConfig = null;
@@ -179,6 +180,7 @@ public class SirAlfredLobby : MonoBehaviour
         }
 
         GameManager.Instance.activeColorSet = colorSet;
+        points.ResetPoints(true);
 
         UpdatePlayerConfirmsList();
     }

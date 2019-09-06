@@ -16,14 +16,15 @@ public class HealthbarUpdater : MonoBehaviour
     [SerializeField] float punchAmountOnHit = 1.2f;
     [SerializeField] float punchDuration = 0.3f;
 
-    [Header("References")]
+    [Header("References in Prefab")]
     [SerializeField] RectTransform heroHealthbar;
     [SerializeField] RectTransform bossHealthbar;
     [SerializeField] RectTransform middleImage;
 
-    [Space]
+    [Header("General References")]
     [SerializeField] Sprite winBoss;
     [SerializeField] Sprite winHeroes;
+    [SerializeField] Points points = null;
 
     float neutralWidth;
     float totalWidth;
@@ -42,12 +43,14 @@ public class HealthbarUpdater : MonoBehaviour
 	
 	
 	#region Public Functions
-	public void UpdateHealthbar(Faction faction, int damage)
+	public void UpdateHealthbar(Faction leadingFaction, int pointLead)
     {
+        float percentageToVictory = ((float)pointLead / (float)points.PointLeadToWin);
+
         // Heroes winning
-        if (faction == Faction.Boss)
+        if (leadingFaction == Faction.Heroes)
         {
-            heroHealthbar.sizeDelta = new Vector2((damage / HeroHealth.Instance.WinningPointLead) * neutralWidth + neutralWidth, heroHealthbar.sizeDelta.y);
+            heroHealthbar.sizeDelta = new Vector2(percentageToVictory * neutralWidth + neutralWidth, heroHealthbar.sizeDelta.y);
             if (heroHealthbar.sizeDelta.x > totalWidth) heroHealthbar.sizeDelta = new Vector2(totalWidth, heroHealthbar.sizeDelta.y);
 
             bossHealthbar.sizeDelta = new Vector3(totalWidth - heroHealthbar.sizeDelta.x, bossHealthbar.sizeDelta.y);
@@ -57,7 +60,7 @@ public class HealthbarUpdater : MonoBehaviour
         // Boss winning
         else
         {
-            bossHealthbar.sizeDelta = new Vector2((damage / BossHealth.Instance.WinningPointLead) * neutralWidth + neutralWidth, bossHealthbar.sizeDelta.y);
+            bossHealthbar.sizeDelta = new Vector2(percentageToVictory * neutralWidth + neutralWidth, bossHealthbar.sizeDelta.y);
             if (bossHealthbar.sizeDelta.x > totalWidth) bossHealthbar.sizeDelta = new Vector2(totalWidth, bossHealthbar.sizeDelta.y);
 
             heroHealthbar.sizeDelta = new Vector2(totalWidth - bossHealthbar.sizeDelta.x, heroHealthbar.sizeDelta.y);

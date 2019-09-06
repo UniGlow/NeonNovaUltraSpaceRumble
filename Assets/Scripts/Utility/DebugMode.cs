@@ -15,11 +15,10 @@ public class DebugMode : MonoBehaviour
     [HideInInspector] public string critDamageMultiplier;
     [HideInInspector] public string intensifyTime;
     [HideInInspector] public string intensifyAmount;
-    [HideInInspector] public string heroesWinningPointLead;
-    [HideInInspector] public string bossWinningPointLead;
-    [HideInInspector] public string bossWinningSolo;
-    [HideInInspector] public string bossWinningDuo;
-    [HideInInspector] public string bossWinningTriple;
+    [HideInInspector] public string pointLeadToWin;
+    [HideInInspector] public string pointLeadToWinSolo;
+    [HideInInspector] public string pointLeadToWinDuo;
+    [HideInInspector] public string pointLeadToWinTriple;
 
     private bool debugMode = false;
 
@@ -49,11 +48,10 @@ public class DebugMode : MonoBehaviour
         critDamageMultiplier = GameManager.Instance.CritDamageMultiplier.ToString();
         intensifyTime = GameManager.Instance.intensifyTime.ToString();
         intensifyAmount = GameManager.Instance.intensifyAmount.ToString();
-        heroesWinningPointLead = GameManager.Instance.heroesWinningPointLead.ToString();
-        bossWinningPointLead = GameManager.Instance.bossWinningPointLead.ToString();
-        bossWinningSolo = GameManager.Instance.bossWinningSolo.ToString();
-        bossWinningDuo = GameManager.Instance.bossWinningDuo.ToString();
-        bossWinningTriple = GameManager.Instance.bossWinningTriple.ToString();
+        pointLeadToWin = GameManager.Instance.winningPointLead.ToString();
+        pointLeadToWinSolo = GameManager.Instance.pointsToWinSolo.ToString();
+        pointLeadToWinDuo = GameManager.Instance.pointsToWinDuo.ToString();
+        pointLeadToWinTriple = GameManager.Instance.pointsToWinTriple.ToString();
     }
 
     private void Update () {
@@ -112,7 +110,6 @@ public class DebugMode : MonoBehaviour
             int newIntensifyTime;
             double newIntensifyAmount;
             int newHeroesPoints;
-            int newBossPoints;
             int newBossPointsSolo;
             int newBossPointsDuo;
             int newBossPointsTriple;
@@ -149,15 +146,9 @@ public class DebugMode : MonoBehaviour
             GUILayout.Space(10);
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Heroes Winning Point Lead");
-            heroesWinningPointLead = GUILayout.TextField(heroesWinningPointLead);
-            if (System.Int32.TryParse(heroesWinningPointLead, out newHeroesPoints)) GameManager.Instance.heroesWinningPointLead = newHeroesPoints;
-            GUILayout.EndHorizontal();
-
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("Boss Winning Point Lead");
-            bossWinningPointLead = GUILayout.TextField(bossWinningPointLead);
-            if (System.Int32.TryParse(bossWinningPointLead, out newBossPoints)) GameManager.Instance.bossWinningPointLead = newBossPoints;
+            GUILayout.Label("Point Lead to Win");
+            pointLeadToWin = GUILayout.TextField(pointLeadToWin);
+            if (System.Int32.TryParse(pointLeadToWin, out newHeroesPoints)) GameManager.Instance.winningPointLead = newHeroesPoints;
             GUILayout.EndHorizontal();
 
             GUILayout.EndVertical();
@@ -167,21 +158,21 @@ public class DebugMode : MonoBehaviour
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Boss Winning Solo");
-            bossWinningSolo = GUILayout.TextField(bossWinningSolo);
-            if (System.Int32.TryParse(bossWinningSolo, out newBossPointsSolo)) GameManager.Instance.bossWinningSolo = newBossPointsSolo;
+            GUILayout.Label("Point Lead to Win Solo");
+            pointLeadToWinSolo = GUILayout.TextField(pointLeadToWinSolo);
+            if (System.Int32.TryParse(pointLeadToWinSolo, out newBossPointsSolo)) GameManager.Instance.pointsToWinSolo = newBossPointsSolo;
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Boss Winning Duo");
-            bossWinningDuo = GUILayout.TextField(bossWinningDuo);
-            if (System.Int32.TryParse(bossWinningDuo, out newBossPointsDuo)) GameManager.Instance.bossWinningDuo = newBossPointsDuo;
+            GUILayout.Label("Point Lead to Win Duo");
+            pointLeadToWinDuo = GUILayout.TextField(pointLeadToWinDuo);
+            if (System.Int32.TryParse(pointLeadToWinDuo, out newBossPointsDuo)) GameManager.Instance.pointsToWinDuo = newBossPointsDuo;
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Boss Winning Triple");
-            bossWinningTriple = GUILayout.TextField(bossWinningTriple);
-            if (System.Int32.TryParse(bossWinningTriple, out newBossPointsTriple)) GameManager.Instance.bossWinningTriple = newBossPointsTriple;
+            GUILayout.Label("Point Lead to Win Triple");
+            pointLeadToWinTriple = GUILayout.TextField(pointLeadToWinTriple);
+            if (System.Int32.TryParse(pointLeadToWinTriple, out newBossPointsTriple)) GameManager.Instance.pointsToWinTriple = newBossPointsTriple;
             GUILayout.EndHorizontal();
 
             GUILayout.EndVertical();

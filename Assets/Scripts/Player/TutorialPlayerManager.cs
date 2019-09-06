@@ -23,6 +23,9 @@ public class TutorialPlayerManager : MonoBehaviour
     [Header("GameEvents")]
     [SerializeField] private GameEvent playersSpawnedEvent = null;
 
+    [Header("References")]
+    [SerializeField] private Points points = null;
+
     // Private
     // PlayerTransforms
     private Transform player1Transform = null;
@@ -106,13 +109,13 @@ public class TutorialPlayerManager : MonoBehaviour
         switch (humanPlayerCount)
         {
             case 1:
-                BossHealth.Instance.WinningPointLead = GameManager.Instance.bossWinningSolo;
+                points.PointLeadToWin = GameManager.Instance.pointsToWinSolo;
                 break;
             case 2:
-                BossHealth.Instance.WinningPointLead = GameManager.Instance.bossWinningDuo;
+                points.PointLeadToWin = GameManager.Instance.pointsToWinDuo;
                 break;
             case 3:
-                BossHealth.Instance.WinningPointLead = GameManager.Instance.bossWinningTriple;
+                points.PointLeadToWin = GameManager.Instance.pointsToWinTriple;
                 break;
             default:
                 break;

@@ -237,7 +237,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeTime: 1
   damage: 10
-  playerColor: 0
+  playerColor: {fileID: 0}
+  points: {fileID: 11400000, guid: 5be3ffe199c802f45a47f0dbbedb0be5, type: 2}
   hitPS: {fileID: 1113126380561728, guid: 6b5a189e22f83e04fb1ef820e88eb9cb, type: 2}
   hitSound: {fileID: 8300000, guid: f9c552e41395b87478bce17eb4f5543c, type: 3}
   hitVolume: 1

@@ -2997,11 +2997,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97789860a68897f489879925cd6603bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settings: {fileID: 0}
   timeTillIdle: 15
   playerReadyUpdater: {fileID: 221853975}
   masterMixer: {fileID: 24100000, guid: e213e6dc1e1471a4189369ba1ec91b45, type: 2}
   backgroundTrack: {fileID: 11400000, guid: dc118b1a3d2f334428767bcd546f7dac, type: 2}
   sfxVolumeDamp: 0.2
+  points: {fileID: 11400000, guid: 5be3ffe199c802f45a47f0dbbedb0be5, type: 2}
   hero1PlayerConfig: {fileID: 11400000, guid: 0d24b38cff3ab7645a78e798c43bbfd7, type: 2}
   hero2PlayerConfig: {fileID: 11400000, guid: d6c98b3edc55ae84cb27c6305d3154cd, type: 2}
   hero3PlayerConfig: {fileID: 11400000, guid: d4656183e05243d4bab4bc739760ed99, type: 2}
@@ -3022,7 +3024,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1694788681}
-  - {fileID: 2078017416}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4014,11 +4015,6 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4288537379583940, guid: 76bd8de65fb91184eb9e880374bb4dfa, type: 2}
       propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114474593516083838, guid: 76bd8de65fb91184eb9e880374bb4dfa,
-        type: 2}
-      propertyPath: enableCameraShake
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -10217,6 +10213,7 @@ MonoBehaviour:
   bossPrefab: {fileID: 1735896002571996, guid: b1e1569e895ceee48869b355039c0cbf, type: 2}
   playersSpawnedEvent: {fileID: 11400000, guid: 1dcba030088afea41a808b9b310c1669,
     type: 2}
+  points: {fileID: 11400000, guid: 5be3ffe199c802f45a47f0dbbedb0be5, type: 2}
 --- !u!1 &1760293240
 GameObject:
   m_ObjectHideFlags: 0
@@ -10951,6 +10948,7 @@ MonoBehaviour:
   middleImage: {fileID: 1914516362}
   winBoss: {fileID: 21300000, guid: 46d6393e746f0431f87007375a6ecb40, type: 3}
   winHeroes: {fileID: 21300000, guid: 84d40b48f58b2423eabe8d75a429824f, type: 3}
+  points: {fileID: 0}
 --- !u!1 &1898434334
 GameObject:
   m_ObjectHideFlags: 0
@@ -11638,72 +11636,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2070795630}
---- !u!1 &2078017415
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1130991620231482, guid: c960190ecc1261249afa261cb260fe2f,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 2078017416}
-  - component: {fileID: 2078017418}
-  - component: {fileID: 2078017417}
-  m_Layer: 0
-  m_Name: HealthManagement
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2078017416
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4846554777067848, guid: c960190ecc1261249afa261cb260fe2f,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2078017415}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 483622205}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2078017417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114298469829946370, guid: c960190ecc1261249afa261cb260fe2f,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2078017415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f302a3b54f0da0f48886b44ec635434b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  winningPointLead: 600
-  endlessHealth: 1
-  levelCompletedEvent: {fileID: 11400000, guid: 447d59970781ce142a63ea883b30c2b1,
-    type: 2}
-  damageTakenEvent: {fileID: 11400000, guid: c4a3331b53b10d9408bdf30d9d041dfe, type: 2}
---- !u!114 &2078017418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114662753670605044, guid: c960190ecc1261249afa261cb260fe2f,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2078017415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc37e2d9ab1189e438c2a42b038e1d5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  winningPointLead: 600
-  endlessHealth: 1
-  levelCompletedEvent: {fileID: 11400000, guid: 447d59970781ce142a63ea883b30c2b1,
-    type: 2}
-  damageTakenEvent: {fileID: 11400000, guid: c4a3331b53b10d9408bdf30d9d041dfe, type: 2}
 --- !u!1 &2082530150
 GameObject:
   m_ObjectHideFlags: 0
