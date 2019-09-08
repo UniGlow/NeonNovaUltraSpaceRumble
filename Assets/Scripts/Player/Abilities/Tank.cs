@@ -29,13 +29,17 @@ public class Tank : Ability2
 
 
     #region Public Functions
-    public override void Update(float deltaTime, bool abilityButtonPressed)
+    public override void Tick(float deltaTime, bool abilityButtonPressed)
     {
         if (!shieldActive)
         {
-            base.Update(deltaTime, abilityButtonPressed);
+            base.Tick(deltaTime, abilityButtonPressed);
             // Update CooldownIndicator
-            hero.CooldownIndicator.sprite = hero.DefendCooldownSprites[Mathf.Clamp(Mathf.FloorToInt((cooldownTimer / cooldown) * hero.DefendCooldownSprites.Length), 0, hero.DefendCooldownSprites.Length)];
+            hero.CooldownIndicator.sprite = hero.DefendCooldownSprites[
+                Mathf.Clamp(
+                    Mathf.FloorToInt((cooldownTimer / cooldown) * hero.DefendCooldownSprites.Length), 
+                        0, 
+                        hero.DefendCooldownSprites.Length - 1)];
         }
         else
         {

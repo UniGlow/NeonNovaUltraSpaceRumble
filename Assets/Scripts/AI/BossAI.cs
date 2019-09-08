@@ -29,15 +29,15 @@ public class BossAI : Boss
 
 
     #region Unity Event Functions
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         agent = GetComponent<NavMeshAgent>();
     }
 
-    override protected void Start()
+    private void Start()
     {
-        base.Start();
-
         GameObject[] cornersGO = GameObject.FindGameObjectsWithTag(Constants.TAG_AI_CORNER);
         foreach (GameObject go in cornersGO)
         {

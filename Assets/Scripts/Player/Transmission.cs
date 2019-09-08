@@ -125,10 +125,10 @@ public class Transmission : MonoBehaviour
         if (currentTransmissionDuration >= transmissionDuration)
         {
             Hero otherHero = receiver.GetComponent<Hero>();
-            Ability2 newAbility = otherHero.Ability;
+            Ability2 newAbility = otherHero.PlayerConfig.ability;
 
             // Switch abilities
-            otherHero.SetAbility(hero.Ability);
+            otherHero.SetAbility(hero.PlayerConfig.ability);
             hero.SetAbility(newAbility);
 
             audioSource.PlayOneShot(transmissionSound, transmissionSoundVolume);

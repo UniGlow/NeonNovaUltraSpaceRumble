@@ -10,9 +10,6 @@ public class Hero : Player
 
     #region Variable Declarations
     // Variables that should be visible in Inspector
-    [Header("Properties")]
-    [SerializeField] protected Ability2 ability;
-
     [Header("References")]
     [SerializeField] protected GameObject wobbleBobble;
     public SpriteRenderer healthIndicator;
@@ -35,28 +32,22 @@ public class Hero : Player
     public Sprite OpferSprite { get { return opferSprite; } }
     public AudioSource AudioSource { get { return audioSource; } }
     public Rigidbody Rigidbody { get { return rigidbody; } }
-    public Ability2 Ability { get { return ability; } }
     #endregion
 
 
 
     #region Unity Event Functions
-    override protected void Start()
-    {
-        base.Start();
-    }
-
     override protected void Update()
     {
         base.Update();
 
         if (active)
         {
-            ability.Update(Time.deltaTime, AbilityButtonsDown());
+            playerConfig.ability.Tick(Time.deltaTime, AbilityButtonsDown());
 
             // Apply class-dependant movement speed modifier
-            horizontalMovement *= ability.SpeedBoost;
-            verticalMovement *= ability.SpeedBoost;
+            horizontalMovement *= (1 + playerConfig.ability.SpeedBoost);
+            verticalMovement *= (1 + playerConfig.ability.SpeedBoost);
         }
     }
     #endregion
@@ -80,14 +71,14 @@ public class Hero : Player
     public void SetAbility(Ability2 ability)
     {
         // Cancel shield, if current ability is Tank class
-        if (this.ability.Class == Ability2.AbilityClass.Tank)
+        if (PlayerConfig.ability.Binded && playerConfig.ability.Class == Ability2.AbilityClass.Tank)
         {
-            Tank tankAbility = this.ability as Tank;
+            Tank tankAbility = this.playerConfig.ability as Tank;
             tankAbility.DeactivateShield();
         }
 
         // Set new ability
-        this.ability = ability;
+        this.playerConfig.ability = ability;
         ability.BindTo(this);
 
         // Update class sprites

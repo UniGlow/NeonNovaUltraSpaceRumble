@@ -39,12 +39,10 @@ public class Player : MonoBehaviour
 
     #region Unity Event Functions
     // Use this for initialization
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
-
-        SetMovable(false);
     }
 
     protected virtual void FixedUpdate()

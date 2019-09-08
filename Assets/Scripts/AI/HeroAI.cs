@@ -31,21 +31,21 @@ public class HeroAI : Hero
     List<Transform> allAITargets = new List<Transform>();
     int currentlyTargetedCorner;
     float randomnessTimer;
-    float shieldDelayTimer;
     float normalAgentSpeed;
     #endregion
 
 
 
     #region Unity Event Functions
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         agent = GetComponent<NavMeshAgent>();
     }
-    override protected void Start()
-    {
-        base.Start();
-        
+
+    private void Start()
+    {        
         // Get references
         if (GameManager.Instance.Boss) boss = GameManager.Instance.Boss.transform;
 
@@ -54,7 +54,7 @@ public class HeroAI : Hero
             Hero[] friends = GameObject.FindObjectsOfType<Hero>();
             foreach (Hero hero in friends)
             {
-                if (hero.ability.Class == Ability2.AbilityClass.Damage) damage = hero.transform;
+                if (hero.PlayerConfig.ability.Class == Ability2.AbilityClass.Damage) damage = hero.transform;
             }
         }));
 
@@ -84,7 +84,6 @@ public class HeroAI : Hero
         if (active)
         {
             CalculateMovement();
-            HandleAbilities();
         }
     }
 
@@ -93,7 +92,12 @@ public class HeroAI : Hero
         if (active)
         {
             randomnessTimer += Time.deltaTime;
-            if (cooldownTimer) shieldDelayTimer += Time.deltaTime;
+
+            playerConfig.ability.Tick(Time.deltaTime, CheckTriggerConditions());
+
+            // Apply class-dependant movement speed modifier
+            agent.speed = normalAgentSpeed * (playerConfig.ability.SpeedBoost + 1);
+            agent.speed = normalAgentSpeed * (playerConfig.ability.SpeedBoost + 1);
         }
     }
 
@@ -129,7 +133,7 @@ public class HeroAI : Hero
     #region Private Functions
     private void CalculateMovement()
     {
-        if (ability == Ability.Opfer)
+        if (playerConfig.ability.Class == Ability2.AbilityClass.Victim)
         {
             if (agent.destination == transform.position) SetDestination(GetRandomTarget());
 
@@ -143,27 +147,26 @@ public class HeroAI : Hero
                 else SetDestination(GetNextCorner());
             }
         }
-        else if (ability == Ability.Damage)
+        else if (playerConfig.ability.Class == Ability2.AbilityClass.Damage)
         {
             // Move
             SetDamageDestination();
 
             // Rotate
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(boss.position - transform.position, Vector3.up), Time.deltaTime * rotateSpeed);
+            transform.rotation = Quaternion.RotateTowards(
+                transform.rotation, 
+                Quaternion.LookRotation(boss.position - transform.position, Vector3.up), 
+                Time.deltaTime * characterStats.rotationSpeed);
         }
-        else if (ability == Ability.Tank)
+        else if (playerConfig.ability.Class == Ability2.AbilityClass.Tank)
         {
             SetTankDestination();
         }
     }
 
-    private void HandleAbilities()
+    private bool CheckTriggerConditions()
     {
-        if (ability == Ability.Opfer)
-        {
-            Run();
-        }
-        else if (ability == Ability.Damage && cooldownTimer)
+        if (playerConfig.ability.Class == Ability2.AbilityClass.Damage)
         {
             Ray ray = new Ray(transform.position + Vector3.up * 0.5f, transform.forward);
             RaycastHit hitInfo;
@@ -171,21 +174,22 @@ public class HeroAI : Hero
             if (Physics.Raycast(ray, out hitInfo, 70f, attackRayMask) && hitInfo.transform.tag == Constants.TAG_BOSS)
             {
                 Debug.DrawRay(ray.origin, hitInfo.point - ray.origin, Color.green);
-                Attack();
+                return true;
             }
             else
             {
                 Debug.DrawRay(ray.origin, ray.direction * 70f, Color.red);
             }
         }
-        else if (ability == Ability.Tank)
+        else if (playerConfig.ability.Class == Ability2.AbilityClass.Tank)
         {
-            if (shieldDelayTimer >= shieldDelay)
+            if (playerConfig.ability.CooldownTimer >= playerConfig.ability.Cooldown + shieldDelay)
             {
-                Defend();
-                shieldDelayTimer = 0;
+                return true;
             }
         }
+
+        return false;
     }
 
     #region AI Methods
@@ -258,33 +262,7 @@ public class HeroAI : Hero
         }
     }
     #endregion
-
-    private void Attack() {
-        GameObject projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
-        projectile.GetComponent<HeroProjectile>().damage = damagePerShot;
-        projectile.GetComponent<HeroProjectile>().playerColor = PlayerConfig.ColorConfig;
-        projectile.GetComponent<Rigidbody>().velocity = transform.forward * projectileSpeed;
-
-        audioSource.PlayOneShot(attackSound, attackSoundVolume);
-
-        cooldownTimer = false;
-        StartCoroutine(ResetAttackCooldown());
-    }
-
-    private void Defend() {
-        wobbleBobble.SetActive(true);
-        cooldownTimer = false;
-        cooldownIndicator.sprite = defendCooldownSprites[0];
-        audioSource.PlayOneShot(wobbleBobbleSound, wobbleBobbleVolume);
-        resetDefendCoroutine = StartCoroutine(ResetDefend());
-    }
-
-    private void Run() {
-        agent.speed = normalAgentSpeed * (speedBoost + 1);
-        agent.speed = normalAgentSpeed * (speedBoost + 1);
-    }
     #endregion
-
 
 
     #region Corouintes

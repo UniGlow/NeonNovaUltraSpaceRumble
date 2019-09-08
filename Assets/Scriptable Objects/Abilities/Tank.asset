@@ -11,4 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af2b580508271634dbdd00b275cd9f67, type: 3}
   m_Name: Tank
   m_EditorClassIdentifier: 
-  characterStats: {fileID: 0}
+  abilityClass: 1
+  cooldown: 3
+  speedBoost: 0
+  soundClip: {fileID: 8300000, guid: 9bf8565727fa20047bfa416674b33661, type: 3}
+  volume: 0.9
+  shieldDuration: 2

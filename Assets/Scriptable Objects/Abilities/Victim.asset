@@ -11,5 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0959116c5e735034487e497acba5b23d, type: 3}
   m_Name: Victim
   m_EditorClassIdentifier: 
-  characterStats: {fileID: 0}
-  speedModifier: 1.5
+  abilityClass: 2
+  cooldown: 0
+  speedBoost: 0.5
+  soundClip: {fileID: 0}
+  volume: 1

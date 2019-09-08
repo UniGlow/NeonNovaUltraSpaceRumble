@@ -33,21 +33,38 @@ public abstract class Ability2 : ScriptableObject
     protected float cooldownTimer = 0f;
     protected AudioSource audioSource = null;
     protected Rigidbody rigidbody = null;
+    protected bool binded = false;
     #endregion
 
 
 
     #region Public Properties
     public float Cooldown { get { return cooldown; } }
+    public float CooldownTimer { get { return cooldownTimer; } }
     public AbilityClass Class { get { return abilityClass; } }
     public float SpeedBoost { get { return speedBoost; } }
+    public bool Binded { get { return binded; } }
     #endregion
 
 
+
+    #region Unity Event Functions
+    private void OnEnable()
+    {
+        this.hero = null;
+        audioSource = null;
+        rigidbody = null;
+        binded = false;
+    }
+    #endregion
+
+
+
+    #region Public Functions
     /// <summary>
     /// This needs to be called every Update from the hero
     /// </summary>
-    public virtual void Update(float deltaTime, bool abilityButtonPressed)
+    public virtual void Tick(float deltaTime, bool abilityButtonPressed)
     {
         cooldownTimer += deltaTime;
 
@@ -58,12 +75,12 @@ public abstract class Ability2 : ScriptableObject
         }
     }
 
-    #region Public Functions
     public virtual void BindTo(Hero hero)
     {
         this.hero = hero;
         audioSource = hero.AudioSource;
         rigidbody = hero.Rigidbody;
+        binded = true;
     }
 
     public abstract void TriggerAbility();
