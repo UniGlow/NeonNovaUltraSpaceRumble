@@ -72,6 +72,7 @@ GameObject:
   - component: {fileID: 54132770966574978}
   - component: {fileID: 114424577701179020}
   - component: {fileID: 82736236401359494}
+  - component: {fileID: 114885786476605274}
   - component: {fileID: 114100144520551264}
   - component: {fileID: 114107425455667868}
   m_Layer: 9
@@ -358,8 +359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08507544b66cae248bcc8be028923f51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 15
-  rotateSpeed: 500
+  characterStats: {fileID: 11400000, guid: 9eab235bee7a65c4e8d326fd50253853, type: 2}
   attackDamagePerShot: 10
   attackProjectileSpeed: 50
   attackProjectileLifeTime: 1
@@ -388,6 +388,36 @@ MonoBehaviour:
   bossColorChangedEvent: {fileID: 11400000, guid: 5cb0235c1fda1e64dae1cfd14392faef,
     type: 2}
   gameSettings: {fileID: 11400000, guid: 4cbf2bb18122f9d4c92c9dbd86d8b7fa, type: 2}
+--- !u!114 &114885786476605274
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1735896002571996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: dd95ddef2760add43a73ce45d743f5e5, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114424577701179020}
+        m_MethodName: SetMovable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  linkedMethods: []
+  ignoreEventParameters: 1
 --- !u!212 &212300853209604042
 SpriteRenderer:
   m_ObjectHideFlags: 1

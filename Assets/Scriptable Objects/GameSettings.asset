@@ -15,8 +15,8 @@ MonoBehaviour:
   intensifyTime: 24
   intensifyAmount: 0.1
   overrideLevelPointLimits: 1
-  heroesWinningPointLead: 600
-  bossWinningPointLead: 600
+  winningPointLead: 600
+  bossColorSwitchInterval: 15
   bossWinningSolo: 400
   bossWinningDuo: 700
   bossWinningTriple: 700

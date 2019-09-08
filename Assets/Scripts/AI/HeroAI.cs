@@ -45,10 +45,7 @@ public class HeroAI : Hero
     }
 
     private void Start()
-    {        
-        // Get references
-        if (GameManager.Instance.Boss) boss = GameManager.Instance.Boss.transform;
-
+    {
         StartCoroutine(Wait(1, () => 
         {
             Hero[] friends = GameObject.FindObjectsOfType<Hero>();
@@ -125,6 +122,11 @@ public class HeroAI : Hero
         base.SetMovable(active);
 
         agent.isStopped = !active;
+    }
+
+    public void SetReferences(PlayerConfig hero1, PlayerConfig hero2, PlayerConfig hero3, PlayerConfig boss)
+    {
+        this.boss = boss.playerTransform;
     }
     #endregion
 
@@ -206,7 +208,8 @@ public class HeroAI : Hero
 
     }
 
-    private void SetTankDestination() {
+    private void SetTankDestination()
+    {
         Vector3 nearDamage = damage.position + (transform.position - damage.position).normalized * tankTargetDistance;
         if (!SetDestination(nearDamage + (transform.position - nearDamage) * tankFollowSpeed))
         {
@@ -214,7 +217,8 @@ public class HeroAI : Hero
         }
     }
 
-    private bool SetDestination(Vector3 destination) {
+    private bool SetDestination(Vector3 destination)
+    {
         Vector3 start = transform.position + agent.velocity * (repathingDistance / agent.speed);
 
         NavMeshPath path = new NavMeshPath();
@@ -236,7 +240,8 @@ public class HeroAI : Hero
     /// Returns the position of the closest corner of the level and (0,0,0) if no corner is found.
     /// </summary>
     /// <returns></returns>
-    private Vector3 GetClosestCorner() {
+    private Vector3 GetClosestCorner()
+    {
         float closestDistance = 100f;
         Vector3 closestCorner = Vector3.zero;
         for (int i = 0; i < corners.Count; i++)
@@ -250,7 +255,8 @@ public class HeroAI : Hero
         return closestCorner;
     }
 
-    private Vector3 GetNextCorner() {
+    private Vector3 GetNextCorner()
+    {
         if (currentlyTargetedCorner < corners.Count - 1)
         {
             currentlyTargetedCorner++;

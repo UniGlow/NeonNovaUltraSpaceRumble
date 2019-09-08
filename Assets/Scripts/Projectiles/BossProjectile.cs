@@ -54,7 +54,7 @@ public class BossProjectile : Projectile
 
 
     #region Public Functions
-    public override void Initialize(int damage, PlayerColor2 color, Vector3 velocity, float lifeTime = 1)
+    public override void Initialize(int damage, PlayerColor color, Vector3 velocity, float lifeTime = 1)
     {
         base.Initialize(damage, color, velocity, lifeTime);
 

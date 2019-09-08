@@ -26,10 +26,6 @@ public class GameManager : MonoBehaviour
     // TODO: Verlagern in SO "GameSettings"
     [HideInInspector] public ColorSet activeColorSet = null;
 
-
-
-    private Boss boss;
-    public Boss Boss { get { return boss; } }
     float intensifyTimer;
     readonly float countdownDuration = 4f;
     #endregion
@@ -59,9 +55,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Start() {
-        boss = GameObject.FindObjectOfType<Boss>();
-
+    private void Start()
+    {
 #if !UNITY_EDITOR
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -140,8 +135,6 @@ public class GameManager : MonoBehaviour
     #region Private Functions
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
-        boss = GameObject.FindObjectOfType<Boss>();
-
         if (SceneManager.GetActiveScene().name.Contains("Level"))
         {
             if (SceneManager.GetActiveScene().name.Contains("Lobby"))

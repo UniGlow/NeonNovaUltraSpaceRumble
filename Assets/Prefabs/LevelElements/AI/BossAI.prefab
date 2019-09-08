@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 54503069925387504}
   - component: {fileID: 82235478939710240}
   - component: {fileID: 195969845727586126}
+  - component: {fileID: 114730868472375740}
   - component: {fileID: 114906929546918614}
   - component: {fileID: 114713615049238174}
   m_Layer: 9
@@ -324,6 +325,36 @@ MonoBehaviour:
     methodNames: []
     gameObject: {fileID: 0}
   ignoreEventParameters: 1
+--- !u!114 &114730868472375740
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1566906718194532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: dd95ddef2760add43a73ce45d743f5e5, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114935472681219652}
+        m_MethodName: SetMovable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  linkedMethods: []
+  ignoreEventParameters: 1
 --- !u!114 &114906929546918614
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -365,8 +396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c4412e89fcc8a74aa16c0a580f8b915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 10
-  rotateSpeed: 1000
+  characterStats: {fileID: 11400000, guid: 9eab235bee7a65c4e8d326fd50253853, type: 2}
   attackDamagePerShot: 10
   attackProjectileSpeed: 40
   attackProjectileLifeTime: 1

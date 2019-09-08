@@ -17,7 +17,7 @@ public class Projectile : MonoBehaviour
     // Private Variables
     protected float lifeTime = 1f;
     protected int damage = 10;
-    protected PlayerColor2 playerColor;
+    protected PlayerColor playerColor;
     protected new Rigidbody rigidbody = null;
     #endregion
 
@@ -46,7 +46,7 @@ public class Projectile : MonoBehaviour
 
 
     #region Public Functions
-    public virtual void Initialize(int damage, PlayerColor2 color, Vector3 velocity, float lifeTime = 1f)
+    public virtual void Initialize(int damage, PlayerColor color, Vector3 velocity, float lifeTime = 1f)
     {
         playerColor = color;
         this.damage = damage;

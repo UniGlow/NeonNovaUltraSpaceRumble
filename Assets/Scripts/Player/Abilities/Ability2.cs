@@ -43,7 +43,21 @@ public abstract class Ability2 : ScriptableObject
     public float CooldownTimer { get { return cooldownTimer; } }
     public AbilityClass Class { get { return abilityClass; } }
     public float SpeedBoost { get { return speedBoost; } }
-    public bool Binded { get { return binded; } }
+    public bool Binded
+    {
+        get
+        {
+            if (binded && hero != null)
+                return true;
+            else if (binded)
+            {
+                BindTo(null);
+                return false;
+            }
+            else
+                return false;
+        }
+    }
     #endregion
 
 
@@ -78,9 +92,19 @@ public abstract class Ability2 : ScriptableObject
     public virtual void BindTo(Hero hero)
     {
         this.hero = hero;
-        audioSource = hero.AudioSource;
-        rigidbody = hero.Rigidbody;
-        binded = true;
+
+        if (hero != null)
+        {
+            audioSource = hero.AudioSource;
+            rigidbody = hero.Rigidbody;
+            binded = true;
+        }
+        else
+        {
+            audioSource = null;
+            rigidbody = null;
+            binded = false;
+        }
     }
 
     public abstract void TriggerAbility();
