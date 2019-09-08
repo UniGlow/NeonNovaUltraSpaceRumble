@@ -63,6 +63,7 @@ public class DebugMode : MonoBehaviour
             debugMode = !debugMode;
             if (debugMode)
             {
+                Cursor.lockState = CursorLockMode.None;
                 Cursor.lockState = CursorLockMode.Confined;
                 Cursor.visible = true;
             }

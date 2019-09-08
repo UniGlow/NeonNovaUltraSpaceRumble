@@ -608,8 +608,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de8fdcffe6808f04d9c1426d12ba3a2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transmissionRange: 16
-  transmissionDuration: 0.5
+  transmissionRange: 14
+  transmissionDuration: 0.1
   transmissionCooldown: 0.5
   transmissionSound: {fileID: 8300000, guid: 99a9562a9c5874546a152e7ded477cb5, type: 3}
   transmissionSoundVolume: 1

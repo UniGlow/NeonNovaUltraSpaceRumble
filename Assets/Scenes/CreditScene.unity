@@ -1221,6 +1221,12 @@ Prefab:
       propertyPath: playerColor
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114808124267496032, guid: 925e3a17bcf7ee843a48b6cbe697aab6,
+        type: 2}
+      propertyPath: ability
+      value: 
+      objectReference: {fileID: 11400000, guid: 0247d2ab78a5bf148811c5c43bcfc496,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 925e3a17bcf7ee843a48b6cbe697aab6, type: 2}
   m_IsPrefabParent: 0
@@ -2390,6 +2396,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114474593516083838, guid: 76bd8de65fb91184eb9e880374bb4dfa,
+        type: 2}
+      propertyPath: fixedTarget
+      value: 
+      objectReference: {fileID: 542975924}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 76bd8de65fb91184eb9e880374bb4dfa, type: 2}
   m_IsPrefabParent: 0

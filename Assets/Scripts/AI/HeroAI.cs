@@ -22,6 +22,8 @@ public class HeroAI : Hero
     [Range(0,1)]
     [SerializeField] float damageCornerPeek = 0.2f;
     [SerializeField] LayerMask attackRayMask;
+    [Tooltip("Can be used to pre-set up AIs in a level if no PlayerConfig will be set through other instances on Play. Only working for Victim.")]
+    [SerializeField] Ability ability = null;
 
     NavMeshAgent agent;
     Transform boss;
@@ -49,6 +51,9 @@ public class HeroAI : Hero
         StartCoroutine(Wait(1, () => 
         {
             Hero[] friends = GameObject.FindObjectsOfType<Hero>();
+            // Break, if not all heroes are instantiated
+            if (friends.Length < 3) return;
+
             foreach (Hero hero in friends)
             {
                 if (hero.PlayerConfig.ability.Class == Ability.AbilityClass.Damage) damage = hero.transform;
@@ -90,11 +95,20 @@ public class HeroAI : Hero
         {
             randomnessTimer += Time.deltaTime;
 
-            playerConfig.ability.Tick(Time.deltaTime, CheckTriggerConditions());
+            if (ability != null) ability.Tick(Time.deltaTime, CheckTriggerConditions());
+            else playerConfig.ability.Tick(Time.deltaTime, CheckTriggerConditions());
 
             // Apply class-dependant movement speed modifier
-            agent.speed = normalAgentSpeed * (playerConfig.ability.SpeedBoost + 1);
-            agent.speed = normalAgentSpeed * (playerConfig.ability.SpeedBoost + 1);
+            if (ability)
+            {
+                agent.speed = normalAgentSpeed * (ability.SpeedBoost + 1);
+                agent.speed = normalAgentSpeed * (ability.SpeedBoost + 1);
+            }
+            else
+            {
+                agent.speed = normalAgentSpeed * (playerConfig.ability.SpeedBoost + 1);
+                agent.speed = normalAgentSpeed * (playerConfig.ability.SpeedBoost + 1);
+            }
         }
     }
 
@@ -135,7 +149,7 @@ public class HeroAI : Hero
     #region Private Functions
     private void CalculateMovement()
     {
-        if (playerConfig.ability.Class == Ability.AbilityClass.Victim)
+        if (IsAbilityClass(Ability.AbilityClass.Victim))
         {
             if (agent.destination == transform.position) SetDestination(GetRandomTarget());
 
@@ -149,7 +163,7 @@ public class HeroAI : Hero
                 else SetDestination(GetNextCorner());
             }
         }
-        else if (playerConfig.ability.Class == Ability.AbilityClass.Damage)
+        else if (IsAbilityClass(Ability.AbilityClass.Damage))
         {
             // Move
             SetDamageDestination();
@@ -160,7 +174,7 @@ public class HeroAI : Hero
                 Quaternion.LookRotation(boss.position - transform.position, Vector3.up), 
                 Time.deltaTime * characterStats.rotationSpeed);
         }
-        else if (playerConfig.ability.Class == Ability.AbilityClass.Tank)
+        else if (IsAbilityClass(Ability.AbilityClass.Tank))
         {
             SetTankDestination();
         }
@@ -168,7 +182,7 @@ public class HeroAI : Hero
 
     private bool CheckTriggerConditions()
     {
-        if (playerConfig.ability.Class == Ability.AbilityClass.Damage)
+        if (IsAbilityClass(Ability.AbilityClass.Damage))
         {
             Ray ray = new Ray(transform.position + Vector3.up * 0.5f, transform.forward);
             RaycastHit hitInfo;
@@ -183,7 +197,7 @@ public class HeroAI : Hero
                 Debug.DrawRay(ray.origin, ray.direction * 70f, Color.red);
             }
         }
-        else if (playerConfig.ability.Class == Ability.AbilityClass.Tank)
+        else if (IsAbilityClass(Ability.AbilityClass.Tank))
         {
             if (playerConfig.ability.CooldownTimer >= playerConfig.ability.Cooldown + shieldDelay)
             {
@@ -266,6 +280,24 @@ public class HeroAI : Hero
             currentlyTargetedCorner = 0;
             return corners[currentlyTargetedCorner].position;
         }
+    }
+
+    private bool IsAbilityClass(Ability.AbilityClass abilityClass) 
+    {
+        try
+        {
+            if (ability.Class == abilityClass)
+                return true;
+        }
+        catch (System.Exception)
+        {
+
+        }
+
+        if (playerConfig.ability.Class == abilityClass)
+            return true;
+
+        return false;
     }
     #endregion
     #endregion

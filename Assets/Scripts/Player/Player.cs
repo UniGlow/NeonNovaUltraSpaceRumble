@@ -63,9 +63,8 @@ public class Player : MonoBehaviour
             horizontalMovement = Input.GetAxis(Constants.INPUT_HORIZONTAL + playerConfig.PlayerNumber) * characterStats.speed;
             verticalMovement = Input.GetAxis(Constants.INPUT_VERTICAL + playerConfig.PlayerNumber) * characterStats.speed;
         }
-
-        horizontalLook = Input.GetAxis(Constants.INPUT_LOOK_HORIZONTAL + playerConfig.PlayerNumber) * characterStats.speed;
-        verticalLook = Input.GetAxis(Constants.INPUT_LOOK_VERTICAL + playerConfig.PlayerNumber) * characterStats.speed;
+            horizontalLook = Input.GetAxis(Constants.INPUT_LOOK_HORIZONTAL + playerConfig.PlayerNumber) * characterStats.speed;
+            verticalLook = Input.GetAxis(Constants.INPUT_LOOK_VERTICAL + playerConfig.PlayerNumber) * characterStats.speed;
     }
     #endregion
 

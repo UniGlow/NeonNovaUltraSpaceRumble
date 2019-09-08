@@ -36,6 +36,8 @@ public class HomingMissile : MonoBehaviour
 
     [Header("References")]
     [SerializeField] Points points = null;
+    [Tooltip("Can be used to set a fixed target in the scene.")]
+    [SerializeField] Transform fixedTarget = null;
 
     Transform target;
     NavMeshAgent agent;
@@ -50,6 +52,11 @@ public class HomingMissile : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         audioSource = GetComponent<AudioSource>();
+    }
+
+    private void Start()
+    {
+        if (fixedTarget) target = fixedTarget;
     }
     
     private void OnTriggerEnter(Collider other)
@@ -98,17 +105,15 @@ public class HomingMissile : MonoBehaviour
     #region Public Functions
     public void AcquireNewTarget(PlayerConfig hero1, PlayerConfig hero2)
     {
-        // TODO: String compare ersetzen mit neuer Ability Architektur
-        if (hero1.ability.name == "Victim") target = hero1.playerTransform;
-        else if (hero2.ability.name == "Victim") target = hero2.playerTransform;
+        if (hero1.ability.Class == Ability.AbilityClass.Victim) target = hero1.playerTransform;
+        else if (hero2.ability.Class == Ability.AbilityClass.Victim) target = hero2.playerTransform;
     }
 
     public void AcquireNewTarget(PlayerConfig hero1, PlayerConfig hero2, PlayerConfig hero3, PlayerConfig boss)
     {
-        // TODO: String compare ersetzen mit neuer Ability Architektur
-        if (hero1.ability.name == "Victim") target = hero1.playerTransform;
-        else if (hero2.ability.name == "Victim") target = hero2.playerTransform;
-        else if (hero3.ability.name == "Victim") target = hero3.playerTransform;
+        if (hero1.ability.Class == Ability.AbilityClass.Victim) target = hero1.playerTransform;
+        else if (hero2.ability.Class == Ability.AbilityClass.Victim) target = hero2.playerTransform;
+        else if (hero3.ability.Class == Ability.AbilityClass.Victim) target = hero3.playerTransform;
     }
 
     public void PauseMissile(bool pause)

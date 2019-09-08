@@ -112,7 +112,7 @@ public class Transmission : MonoBehaviour
     protected void Transmit()
     {
         // End transmission if out of range
-        if ((transform.position - receiver.transform.position).magnitude > transmissionRange)
+        if ((transform.position - receiver.transform.position).magnitude > transmissionRange + 2f)
         {
             EndTransmission();
             return;

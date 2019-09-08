@@ -150,7 +150,6 @@ public class GameManager : MonoBehaviour
 
         else if (SceneManager.GetActiveScene().name.Contains("Credit"))
         {
-            GameObject.FindGameObjectWithTag(Constants.TAG_HOMING_MISSILE).GetComponent<HomingMissile>().PauseMissile(true);
             StartCoroutine(StartTheCredits());
         }
     }
