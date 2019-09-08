@@ -25,6 +25,7 @@ public class TutorialPlayerManager : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private Points points = null;
+    [SerializeField] private GameSettings gameSettings = null;
 
     // Private
     // PlayerTransforms
@@ -59,6 +60,31 @@ public class TutorialPlayerManager : MonoBehaviour
 	#region Public Functions
 	public void InitializePlayers()
     {
+        if(player1 != null)
+        {
+            player1 = null;
+            Destroy(player1Transform.gameObject);
+            player1Transform = null;
+        }
+        if(player2 != null)
+        {
+            player2 = null;
+            Destroy(player2Transform.gameObject);
+            player2Transform = null;
+        }
+        if(player3 != null)
+        {
+            player3 = null;
+            Destroy(player3Transform.gameObject);
+            player3Transform = null;
+        }
+        if(boss != null)
+        {
+            boss = null;
+            Destroy(bossTransform.gameObject);
+            bossTransform = null;
+        }
+
         GameObject[] spawnPointObjects = GameObject.FindGameObjectsWithTag(Constants.TAG_SPAWN_POINT);
         foreach(GameObject go in spawnPointObjects)
         {
@@ -109,13 +135,13 @@ public class TutorialPlayerManager : MonoBehaviour
         switch (humanPlayerCount)
         {
             case 1:
-                points.PointLeadToWin = GameManager.Instance.pointsToWinSolo;
+                points.PointLeadToWin = gameSettings.BossWinningSolo;
                 break;
             case 2:
-                points.PointLeadToWin = GameManager.Instance.pointsToWinDuo;
+                points.PointLeadToWin = gameSettings.BossWinningDuo;
                 break;
             case 3:
-                points.PointLeadToWin = GameManager.Instance.pointsToWinTriple;
+                points.PointLeadToWin = gameSettings.BossWinningTriple;
                 break;
             default:
                 break;

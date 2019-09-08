@@ -9,9 +9,10 @@ public class Projectile : MonoBehaviour
 {
 
     #region Variable Declarations
+    [SerializeField] protected GameSettings gameSettings = null;
     public float lifeTime = 1f;
     public int damage = 10;
-    public PlayerColor2 playerColor;
+    public PlayerColor playerColor;
     [SerializeField] protected Points points = null;
     #endregion
 

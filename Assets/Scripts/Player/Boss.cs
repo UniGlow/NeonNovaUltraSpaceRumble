@@ -26,8 +26,6 @@ public class Boss : Player
 
     [Header("Properties")]
     [SerializeField] float materialGlowOnSwitch = 3f;
-    [SerializeField] float colorSwitchInterval = 10f;
-    public float ColorSwitchInterval { get { return colorSwitchInterval; } set { colorSwitchInterval = value; } }
 
     [Header("Sound")]
     [SerializeField]
@@ -55,13 +53,14 @@ public class Boss : Player
     [SerializeField] protected Renderer bossMeshRenderer;
     public SpriteRenderer healthIndicator;
     [SerializeField] protected GameEvent bossColorChangedEvent = null;
+    [SerializeField] protected GameSettings gameSettings = null;
 
     protected bool attackCooldownB = true;
     protected bool abilityCooldownB = true;
 
     // Color Settings
-    protected PlayerColor2 strengthColor;
-    public PlayerColor2 StrengthColor { get { return strengthColor; } }
+    protected PlayerColor strengthColor;
+    public PlayerColor StrengthColor { get { return strengthColor; } }
     protected ColorSet colorSet = null;
 
     // Color Change
@@ -91,7 +90,7 @@ public class Boss : Player
 
     #region Public Funtcions
 
-    public void SetStrengthColor(PlayerColor2 playerColor)
+    public void SetStrengthColor(PlayerColor playerColor)
     {
         strengthColor = playerColor;
     }
@@ -176,14 +175,14 @@ public class Boss : Player
     /// </summary>
     void ChangeWeaknessColor()
     {
-        PlayerColor2 newWeaknessColor = colorSet.GetRandomColorExcept(playerConfig.ColorConfig);
+        PlayerColor newWeaknessColor = colorSet.GetRandomColorExcept(playerConfig.ColorConfig);
 
         playerConfig.ColorConfig = newWeaknessColor;
 
         SetWeaknessColor(playerConfig.ColorConfig);
     }
 
-    void SetWeaknessColor(PlayerColor2 playerColor)
+    void SetWeaknessColor(PlayerColor playerColor)
     {
         playerConfig.ColorConfig = playerColor;
 
@@ -194,13 +193,13 @@ public class Boss : Player
 
     void HandleColorSwitch()
     {
-        if (colorChangeTimer >= colorSwitchInterval - 0.5f && !colorChangeSoundPlayed)
+        if (colorChangeTimer >= gameSettings.BossColorSwitchInterval - 0.5f && !colorChangeSoundPlayed)
         {
             audioSource.PlayOneShot(colorChangeSound, colorChangeSoundVolume);
             colorChangeSoundPlayed = true;
         }
         // Set new Boss color
-        if (colorChangeTimer >= colorSwitchInterval)
+        if (colorChangeTimer >= gameSettings.BossColorSwitchInterval)
         {
             ChangeWeaknessColor();
 

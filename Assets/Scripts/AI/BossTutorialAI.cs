@@ -12,9 +12,9 @@ public class BossTutorialAI : MonoBehaviour
     [SerializeField] MeshRenderer meshRenderer;
 
     Boss boss;
-    PlayerColor2 weaknessColor;
+    PlayerColor weaknessColor;
 
-    public PlayerColor2 WeaknessColor { get { return weaknessColor; } }
+    public PlayerColor WeaknessColor { get { return weaknessColor; } }
     #endregion
 
 
