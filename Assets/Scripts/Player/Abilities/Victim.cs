@@ -12,7 +12,6 @@ public class Victim : Ability2
 
     #region Variable Declarations
     // Serialized Fields
-    public float speedModifier = 1.5f;
 
     // Private
 
@@ -29,8 +28,7 @@ public class Victim : Ability2
     #region Public Functions
     public override void TriggerAbility()
     {
-        //TODO
-        throw new System.NotImplementedException();
+        // Nothing to do here. Default Victim has no active ability.
     }
     #endregion
 

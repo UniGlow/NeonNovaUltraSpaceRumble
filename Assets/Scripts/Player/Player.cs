@@ -12,26 +12,27 @@ public class Player : MonoBehaviour
 
     #region Variable Declarations
     // Variables that should be visible in Inspector
-    [Header("Movement")]
-    [SerializeField]
-    protected float movementSpeed = 10;
-    [SerializeField]
-    protected float rotateSpeed = 1000;
-
     [Header("Properties")]
-    protected PlayerConfig playerConfig;
-    public PlayerConfig PlayerConfig { get { return playerConfig; } }
+    [SerializeField] protected CharacterStats characterStats = null;
+    protected PlayerConfig playerConfig = null;
 
     // Movement Variables
-    protected float horizontalInput;
-    protected float verticalInput;
-    protected float horizontalLookInput;
-    protected float verticalLookInput;
+    protected float horizontalMovement;
+    protected float verticalMovement;
+    protected float horizontalLook;
+    protected float verticalLook;
     protected bool active = true;
 
     // Component References
     protected new Rigidbody rigidbody;
     protected AudioSource audioSource;
+    #endregion
+
+
+
+    #region Public Properties
+    public PlayerConfig PlayerConfig { get { return playerConfig; } }
+    public CharacterStats CharacterStats { get { return characterStats; } }
     #endregion
 
 
@@ -60,10 +61,10 @@ public class Player : MonoBehaviour
     {
         if (active)
         {
-            horizontalInput = Input.GetAxis(Constants.INPUT_HORIZONTAL + playerConfig.PlayerNumber) * movementSpeed;
-            verticalInput = Input.GetAxis(Constants.INPUT_VERTICAL + playerConfig.PlayerNumber) * movementSpeed;
-            horizontalLookInput = Input.GetAxis(Constants.INPUT_LOOK_HORIZONTAL + playerConfig.PlayerNumber) * movementSpeed;
-            verticalLookInput = Input.GetAxis(Constants.INPUT_LOOK_VERTICAL + playerConfig.PlayerNumber) * movementSpeed;
+            horizontalMovement = Input.GetAxis(Constants.INPUT_HORIZONTAL + playerConfig.PlayerNumber) * characterStats.speed;
+            verticalMovement = Input.GetAxis(Constants.INPUT_VERTICAL + playerConfig.PlayerNumber) * characterStats.speed;
+            horizontalLook = Input.GetAxis(Constants.INPUT_LOOK_HORIZONTAL + playerConfig.PlayerNumber) * characterStats.speed;
+            verticalLook = Input.GetAxis(Constants.INPUT_LOOK_VERTICAL + playerConfig.PlayerNumber) * characterStats.speed;
         }
     }
     #endregion
@@ -81,8 +82,8 @@ public class Player : MonoBehaviour
 
         if (!active)
         {
-            horizontalInput = 0;
-            verticalInput = 0;
+            horizontalMovement = 0;
+            verticalMovement = 0;
         }
 
         try
@@ -105,17 +106,20 @@ public class Player : MonoBehaviour
     private void MoveCharacter()
     {
         Vector3 newVelocity = rigidbody.velocity;
-        newVelocity.x = horizontalInput;
-        newVelocity.z = verticalInput;
+        newVelocity.x = horizontalMovement;
+        newVelocity.z = verticalMovement;
         rigidbody.velocity = newVelocity;
     }
 
     private void RotateCharacter()
     {
-        if (horizontalLookInput != 0 || verticalLookInput != 0)
+        if (horizontalLook != 0 || verticalLook != 0)
         {
-            Vector3 lookDirection = new Vector3(horizontalLookInput, 0f, verticalLookInput);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(lookDirection, Vector3.up), Time.deltaTime * rotateSpeed);
+            Vector3 lookDirection = new Vector3(horizontalLook, 0f, verticalLook);
+            transform.rotation = Quaternion.RotateTowards(
+                transform.rotation, 
+                Quaternion.LookRotation(lookDirection, Vector3.up), 
+                Time.deltaTime * characterStats.rotationSpeed);
         }
     }
     #endregion

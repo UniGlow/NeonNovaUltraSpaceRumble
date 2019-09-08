@@ -52,7 +52,7 @@ public class TransmissionAI : Transmission
     new public void EndTransmission()
     {
         receiver = null;
-        currenTransmissionDuration = 0f;
+        currentTransmissionDuration = 0f;
         receiverFound = false;
         transmissionCooldownB = false;
         transmissionLineRenderer.gameObject.SetActive(false);

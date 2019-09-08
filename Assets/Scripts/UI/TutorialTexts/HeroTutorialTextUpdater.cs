@@ -28,9 +28,9 @@ public class HeroTutorialTextUpdater : TutorialTextUpdater
 
         if (colorChanges <= 1)
         {
-            if (hero.ability == Ability.Damage) ChangeTextTo("Damage");
-            else if (hero.ability == Ability.Tank) ChangeTextTo("Tank");
-            else if (hero.ability == Ability.Opfer) ChangeTextTo("Opfer");
+            if (hero.Ability.Class == Ability2.AbilityClass.Damage) ChangeTextTo("Damage");
+            else if (hero.Ability.Class == Ability2.AbilityClass.Tank) ChangeTextTo("Tank");
+            else if (hero.Ability.Class == Ability2.AbilityClass.Victim) ChangeTextTo("Opfer");
         }
         else if (colorChanges == 2)
         {
@@ -41,15 +41,15 @@ public class HeroTutorialTextUpdater : TutorialTextUpdater
             // If same color as Boss
             if (bossConfig.ColorConfig == hero.PlayerConfig.ColorConfig)
             {
-                if (hero.ability == Ability.Damage) ChangeTextTo("DealDamage");
+                if (hero.Ability.Class == Ability2.AbilityClass.Damage) ChangeTextTo("DealDamage");
                 else ChangeTextTo("GetDamage");
             }
             // Not Boss color
             else
             {
-                if (hero.ability == Ability.Damage) ChangeTextTo("PassDamage");
-                else if (hero.ability == Ability.Tank) ChangeTextTo("Tank");
-                else if (hero.ability == Ability.Opfer) ChangeTextTo("Opfer");
+                if (hero.Ability.Class == Ability2.AbilityClass.Damage) ChangeTextTo("PassDamage");
+                else if (hero.Ability.Class == Ability2.AbilityClass.Tank) ChangeTextTo("Tank");
+                else if (hero.Ability.Class == Ability2.AbilityClass.Victim) ChangeTextTo("Opfer");
             }
         }
     }

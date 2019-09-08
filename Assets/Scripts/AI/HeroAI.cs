@@ -42,7 +42,8 @@ public class HeroAI : Hero
     {
         agent = GetComponent<NavMeshAgent>();
     }
-    override protected void Start() {
+    override protected void Start()
+    {
         base.Start();
         
         // Get references
@@ -53,9 +54,7 @@ public class HeroAI : Hero
             Hero[] friends = GameObject.FindObjectsOfType<Hero>();
             foreach (Hero hero in friends)
             {
-                if (hero.ability == Ability.Damage) damage = hero.transform;
-                //if (go.transform.parent.GetComponent<Hero>().ability == Ability.Tank) tank = go.transform;
-                //if (go.transform.parent.GetComponent<Hero>().ability == Ability.Opfer) opfer = go.transform;
+                if (hero.ability.Class == Ability2.AbilityClass.Damage) damage = hero.transform;
             }
         }));
 
@@ -94,7 +93,7 @@ public class HeroAI : Hero
         if (active)
         {
             randomnessTimer += Time.deltaTime;
-            if (cooldown) shieldDelayTimer += Time.deltaTime;
+            if (cooldownTimer) shieldDelayTimer += Time.deltaTime;
         }
     }
 
@@ -164,7 +163,7 @@ public class HeroAI : Hero
         {
             Run();
         }
-        else if (ability == Ability.Damage && cooldown)
+        else if (ability == Ability.Damage && cooldownTimer)
         {
             Ray ray = new Ray(transform.position + Vector3.up * 0.5f, transform.forward);
             RaycastHit hitInfo;
@@ -268,13 +267,13 @@ public class HeroAI : Hero
 
         audioSource.PlayOneShot(attackSound, attackSoundVolume);
 
-        cooldown = false;
+        cooldownTimer = false;
         StartCoroutine(ResetAttackCooldown());
     }
 
     private void Defend() {
         wobbleBobble.SetActive(true);
-        cooldown = false;
+        cooldownTimer = false;
         cooldownIndicator.sprite = defendCooldownSprites[0];
         audioSource.PlayOneShot(wobbleBobbleSound, wobbleBobbleVolume);
         resetDefendCoroutine = StartCoroutine(ResetDefend());

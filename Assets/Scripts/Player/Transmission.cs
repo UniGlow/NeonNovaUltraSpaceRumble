@@ -30,7 +30,7 @@ public class Transmission : MonoBehaviour
     protected Hero hero;
     protected GameObject receiver;
     protected bool receiverFound = false;
-    protected float currenTransmissionDuration;
+    protected float currentTransmissionDuration;
     protected bool transmissionCooldownB = true;
     protected HomingMissile homingMissile;
     protected AudioSource audioSource;
@@ -79,7 +79,7 @@ public class Transmission : MonoBehaviour
     public void EndTransmission()
     {
         receiver = null;
-        currenTransmissionDuration = 0f;
+        currentTransmissionDuration = 0f;
         receiverFound = false;
         transmissionCooldownB = false;
         transmissionLineRenderer.gameObject.SetActive(false);
@@ -118,21 +118,17 @@ public class Transmission : MonoBehaviour
             return;
         }
 
-        currenTransmissionDuration += Time.deltaTime;
+        currentTransmissionDuration += Time.deltaTime;
         Debug.DrawLine(transform.position, receiver.transform.position, Color.green);
 
         // Successfull transmission: Swap abilities and end transmission
-        if (currenTransmissionDuration >= transmissionDuration)
+        if (currentTransmissionDuration >= transmissionDuration)
         {
             Hero otherHero = receiver.GetComponent<Hero>();
-            Ability newAbility = otherHero.ability;
-
-            // Cancel defend cooldown, if one of the abilities was Tank
-            if (hero.ability == Ability.Tank) hero.CancelDefendReset();
-            else if (otherHero.ability == Ability.Tank) otherHero.CancelDefendReset();
+            Ability2 newAbility = otherHero.Ability;
 
             // Switch abilities
-            otherHero.SetAbility(hero.ability);
+            otherHero.SetAbility(hero.Ability);
             hero.SetAbility(newAbility);
 
             audioSource.PlayOneShot(transmissionSound, transmissionSoundVolume);

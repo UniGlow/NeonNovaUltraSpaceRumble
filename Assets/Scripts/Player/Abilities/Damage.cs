@@ -12,6 +12,12 @@ public class Damage : Ability2
 
     #region Variable Declarations
     // Serialized Fields
+    [Header("Ability Properties")]
+    [SerializeField] int damagePerShot = 10;
+    [SerializeField] float projectileSpeed = 10f;
+
+    [Header("References")]
+    [SerializeField] GameObject projectilePrefab = null;
 
     // Private
 
@@ -28,8 +34,10 @@ public class Damage : Ability2
     #region Public Functions
     public override void TriggerAbility()
     {
-        //TODO
-        throw new System.NotImplementedException();
+        GameObject projectile = Instantiate(projectilePrefab, hero.transform.position + Vector3.up * 0.5f, hero.transform.rotation);
+        projectile.GetComponent<HeroProjectile>().Initialize(damagePerShot, hero.PlayerConfig.ColorConfig, hero.transform.forward * projectileSpeed);
+
+        audioSource.PlayOneShot(soundClip, volume);
     }
     #endregion
 

@@ -125,7 +125,10 @@ public class BossAI : Boss
                 }
 
                 // Rotate
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(playerConfig.playerTransform.position - transform.position, Vector3.up), Time.deltaTime * rotateSpeed);
+                transform.rotation = Quaternion.RotateTowards(
+                    transform.rotation, 
+                    Quaternion.LookRotation(playerConfig.playerTransform.position - transform.position, Vector3.up), 
+                    Time.deltaTime * characterStats.rotationSpeed);
             }
         });
     }
@@ -151,11 +154,11 @@ public class BossAI : Boss
         if (attackCooldownB)
         {
             GameObject projectile = Instantiate(projectilePrefab, transform.position + transform.forward * 1.9f + Vector3.up * 0.5f, transform.rotation);
-            projectile.GetComponent<BossProjectile>().damage = attackDamagePerShot;
-            projectile.GetComponent<BossProjectile>().playerColor = strengthColor;
-            projectile.GetComponent<BossProjectile>().lifeTime = attackProjectileLifeTime;
-            projectile.GetComponent<Rigidbody>().velocity = transform.forward * attackProjectileSpeed;
-            projectile.GetComponent<Renderer>().material.SetColor("_TintColor", strengthColor.bossProjectileColor);
+            projectile.GetComponent<BossProjectile>().Initialize(
+                attackDamagePerShot, 
+                strengthColor, 
+                transform.forward * attackProjectileSpeed, 
+                attackProjectileLifeTime);
 
             audioSource.PlayOneShot(attackSound, attackSoundVolume);
 
@@ -178,11 +181,11 @@ public class BossAI : Boss
                     Mathf.Cos(factor) * 1.9f);
 
                 GameObject projectile = Instantiate(projectilePrefab, pos + transform.position, Quaternion.identity);
-                projectile.GetComponent<BossProjectile>().damage = abilityDamagePerShot;
-                projectile.GetComponent<BossProjectile>().playerColor = strengthColor;
-                projectile.GetComponent<BossProjectile>().lifeTime = abilityProjectileLifeTime;
-                projectile.GetComponent<Rigidbody>().velocity = (projectile.transform.position - transform.position) * abilityProjectileSpeed;
-                projectile.GetComponent<Renderer>().material.SetColor("_TintColor", strengthColor.bossProjectileColor);
+                projectile.GetComponent<BossProjectile>().Initialize(
+                    attackDamagePerShot, 
+                    strengthColor, 
+                    (projectile.transform.position - transform.position) * abilityProjectileSpeed, 
+                    attackProjectileLifeTime);
             }
 
             audioSource.PlayOneShot(abilitySound, abilitySoundVolume);

@@ -10,50 +10,32 @@ public class Hero : Player
 
     #region Variable Declarations
     // Variables that should be visible in Inspector
-    [Header("Damage")]
-    [SerializeField] protected int damagePerShot = 10;
-    [SerializeField] protected float attackCooldown = 0.2f;
-    [SerializeField] protected float projectileSpeed = 10f;
-
-    [Header("Tank")]
-    [SerializeField] protected float defendCooldown = 3f;
-    [SerializeField] protected float defendDuration = 2f;
-
-    [Header("Opfer")]
-    [Tooltip("Proportional to base movement speed")]
-    [SerializeField] protected float speedBoost = 0.5f;
-
     [Header("Properties")]
-    public Ability ability;
-
-    [Header("Sound")]
-    [SerializeField]
-    protected AudioClip wobbleBobbleSound;
-    [Range(0, 1)]
-    [SerializeField]
-    protected float wobbleBobbleVolume = 1f;
-    [SerializeField] protected AudioClip attackSound;
-    [Range(0, 1)]
-    [SerializeField]
-    protected float attackSoundVolume = 1f;
+    [SerializeField] protected Ability2 ability;
 
     [Header("References")]
-    [SerializeField]
-    protected GameObject projectilePrefab;
     [SerializeField] protected GameObject wobbleBobble;
     public SpriteRenderer healthIndicator;
     [SerializeField] protected SpriteRenderer cooldownIndicator;
-    public SpriteRenderer CooldownIndicator { get { return cooldownIndicator; } }
     [SerializeField] protected Sprite[] defendCooldownSprites;
-    public Sprite TankSprite { get { return defendCooldownSprites[defendCooldownSprites.Length - 1]; } }
     [SerializeField] protected Sprite damageSprite;
-    public Sprite DamageSprite { get { return damageSprite; } }
     [SerializeField] protected Sprite opferSprite;
-    public Sprite OpferSprite { get { return opferSprite; } }
     [SerializeField] protected Renderer playerMeshRenderer;
+    #endregion
 
-    protected bool cooldown = true;
-    protected Coroutine resetDefendCoroutine;
+
+
+    #region Public Properties
+    public GameObject WobbleBobble { get { return wobbleBobble; } }
+    public SpriteRenderer CooldownIndicator { get { return cooldownIndicator; } }
+    public Sprite TankSprite { get { return defendCooldownSprites[defendCooldownSprites.Length - 1]; } }
+    public Sprite DefendCooldownSprite { get { return defendCooldownSprites[0]; } }
+    public Sprite[] DefendCooldownSprites { get { return defendCooldownSprites; } }
+    public Sprite DamageSprite { get { return damageSprite; } }
+    public Sprite OpferSprite { get { return opferSprite; } }
+    public AudioSource AudioSource { get { return audioSource; } }
+    public Rigidbody Rigidbody { get { return rigidbody; } }
+    public Ability2 Ability { get { return ability; } }
     #endregion
 
 
@@ -70,7 +52,11 @@ public class Hero : Player
 
         if (active)
         {
-            HandleAbilities();
+            ability.Update(Time.deltaTime, AbilityButtonsDown());
+
+            // Apply class-dependant movement speed modifier
+            horizontalMovement *= ability.SpeedBoost;
+            verticalMovement *= ability.SpeedBoost;
         }
     }
     #endregion
@@ -78,16 +64,6 @@ public class Hero : Player
 
 
     #region Public Funtcions
-    /// <summary>
-    /// Cancels the ResetDefend Coroutine. Gets called when a transmission happens during reset of the defend ability.
-    /// </summary>
-    public void CancelDefendReset()
-    {
-        if (resetDefendCoroutine != null) StopCoroutine(resetDefendCoroutine);
-        wobbleBobble.SetActive(false);
-        cooldown = true;
-    }
-
     public void SetPlayerConfig(PlayerConfig playerConfig)
     {
         this.playerConfig = playerConfig;
@@ -98,22 +74,32 @@ public class Hero : Player
         healthIndicator.color = playerConfig.ColorConfig.uiElementColor;
 
         // TODO
-        //SetAbility(playerConfig.ability);
+        SetAbility(playerConfig.ability);
     }
 
-    public void SetAbility(Ability ability)
+    public void SetAbility(Ability2 ability)
     {
-        this.ability = ability;
-
-        switch (ability)
+        // Cancel shield, if current ability is Tank class
+        if (this.ability.Class == Ability2.AbilityClass.Tank)
         {
-            case Ability.Damage:
+            Tank tankAbility = this.ability as Tank;
+            tankAbility.DeactivateShield();
+        }
+
+        // Set new ability
+        this.ability = ability;
+        ability.BindTo(this);
+
+        // Update class sprites
+        switch (ability.Class)
+        {
+            case Ability2.AbilityClass.Damage:
                 cooldownIndicator.sprite = DamageSprite;
                 break;
-            case Ability.Tank:
+            case Ability2.AbilityClass.Tank:
                 cooldownIndicator.sprite = TankSprite;
                 break;
-            case Ability.Opfer:
+            case Ability2.AbilityClass.Victim:
                 cooldownIndicator.sprite = opferSprite;
                 break;
             default:
@@ -125,85 +111,11 @@ public class Hero : Player
 
 
     #region Private Functions
-    private void HandleAbilities()
-    {
-        if (cooldown) {
-            if (ability == Ability.Opfer)
-            {
-                Run();
-            }
-            else if (ability == Ability.Damage && AbilityButtonsDown())
-            {
-                Attack();
-            }
-            else if (ability == Ability.Tank && AbilityButtonsDown())
-            {
-                Defend();
-            }
-        }
-    }
-
     private bool AbilityButtonsDown()
     {
         if (Input.GetButton(Constants.INPUT_ABILITY + playerConfig.PlayerNumber)) return true;
 
         return false;
-    }
-
-    private void Attack()
-    {
-        GameObject projectile = Instantiate(projectilePrefab, transform.position + Vector3.up * 0.5f, transform.rotation);
-        projectile.GetComponent<HeroProjectile>().damage = damagePerShot;
-        projectile.GetComponent<HeroProjectile>().playerColor = PlayerConfig.ColorConfig;
-        projectile.GetComponent<Rigidbody>().velocity = transform.forward * projectileSpeed;
-
-        audioSource.PlayOneShot(attackSound, attackSoundVolume);
-
-        cooldown = false;
-        StartCoroutine(ResetAttackCooldown());
-    }
-
-    private void Defend()
-    {
-        wobbleBobble.SetActive(true);
-        cooldown = false;
-        cooldownIndicator.sprite = defendCooldownSprites[0];
-        audioSource.PlayOneShot(wobbleBobbleSound, wobbleBobbleVolume);
-        resetDefendCoroutine = StartCoroutine(ResetDefend());
-    }
-
-    private void Run()
-    {
-        horizontalInput *= (speedBoost + 1);
-        verticalInput *= (speedBoost + 1);
-    }
-    #endregion
-
-
-
-    #region Coroutines
-    protected IEnumerator ResetAttackCooldown()
-    {
-        yield return new WaitForSeconds(attackCooldown);
-        cooldown = true;
-    }
-
-    protected IEnumerator ResetDefend()
-    {
-        // Wait for defend duration and turn of wobbleBobble
-        yield return new WaitForSeconds(defendDuration);
-        wobbleBobble.SetActive(false);
-
-        // Start Cooldown and update CooldownIndicator
-        for (float i = 0; i < defendCooldown; i += Time.deltaTime)
-        {
-            yield return null;
-            cooldownIndicator.sprite = defendCooldownSprites[Mathf.FloorToInt((i / defendCooldown) * defendCooldownSprites.Length)];
-        }
-
-        // Reset Cooldown
-        cooldown = true;
-        resetDefendCoroutine = null;
     }
     #endregion
 }

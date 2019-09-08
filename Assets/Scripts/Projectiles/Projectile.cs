@@ -5,20 +5,29 @@ using UnityEngine;
 /// <summary>
 /// 
 /// </summary>
+[RequireComponent(typeof(Rigidbody))]
 public class Projectile : MonoBehaviour
 {
 
     #region Variable Declarations
-    public float lifeTime = 1f;
-    public int damage = 10;
-    public PlayerColor2 playerColor;
     [SerializeField] protected Points points = null;
+
+    protected float lifeTime = 1f;
+    protected int damage = 10;
+    protected PlayerColor2 playerColor;
+    protected new Rigidbody rigidbody = null;
     #endregion
 
 
 
     #region Unity Event Functions
-    virtual protected void Start() {
+    virtual protected void Awake()
+    {
+        rigidbody = GetComponent<Rigidbody>();
+    }
+
+    virtual protected void Start()
+    {
         StartCoroutine(DestroyObject());
     }
 
@@ -29,20 +38,24 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    private void Update() {
-		
-	}
     #endregion
 
 
 
-    #region Private Functions
+    #region Public Functions
+    public virtual void Initialize(int damage, PlayerColor2 color, Vector3 velocity, float lifeTime = 1f)
+    {
+        playerColor = color;
+        this.damage = damage;
+        this.lifeTime = lifeTime;
+        rigidbody.velocity = velocity;
+    }
     #endregion
 
 
 
-    IEnumerator DestroyObject() {
+    IEnumerator DestroyObject()
+    {
         yield return new WaitForSeconds(lifeTime);
         Destroy(gameObject);
     }

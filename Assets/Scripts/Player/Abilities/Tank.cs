@@ -12,9 +12,12 @@ public class Tank : Ability2
 
     #region Variable Declarations
     // Serialized Fields
+    [Header("Ability Properties")]
+    [SerializeField] float shieldDuration = 2f;
 
     // Private
-
+    bool shieldActive = false;
+    float shieldTimer = 0f;
     #endregion
 
 
@@ -26,10 +29,38 @@ public class Tank : Ability2
 
 
     #region Public Functions
+    public override void Update(float deltaTime, bool abilityButtonPressed)
+    {
+        if (!shieldActive)
+        {
+            base.Update(deltaTime, abilityButtonPressed);
+            // Update CooldownIndicator
+            hero.CooldownIndicator.sprite = hero.DefendCooldownSprites[Mathf.Clamp(Mathf.FloorToInt((cooldownTimer / cooldown) * hero.DefendCooldownSprites.Length), 0, hero.DefendCooldownSprites.Length)];
+        }
+        else
+        {
+            shieldTimer += deltaTime;
+
+            if (shieldTimer >= shieldDuration)
+            {
+                DeactivateShield();
+            }
+        }
+    }
+
     public override void TriggerAbility()
     {
-        //TODO
-        throw new System.NotImplementedException();
+        hero.WobbleBobble.SetActive(true);
+        hero.CooldownIndicator.sprite = hero.DefendCooldownSprite;
+        audioSource.PlayOneShot(soundClip, volume);
+
+        shieldActive = true;
+    }
+    public void DeactivateShield()
+    {
+        hero.WobbleBobble.SetActive(false);
+        shieldTimer = 0f;
+        shieldActive = false;
     }
     #endregion
 

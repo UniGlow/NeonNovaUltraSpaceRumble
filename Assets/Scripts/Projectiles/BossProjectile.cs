@@ -50,4 +50,15 @@ public class BossProjectile : Projectile
         }
     }
     #endregion
+
+
+
+    #region Public Functions
+    public override void Initialize(int damage, PlayerColor2 color, Vector3 velocity, float lifeTime = 1)
+    {
+        base.Initialize(damage, color, velocity, lifeTime);
+
+        GetComponent<Renderer>().material.SetColor("_TintColor", color.bossProjectileColor);
+    }
+    #endregion
 }
