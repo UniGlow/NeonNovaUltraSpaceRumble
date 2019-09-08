@@ -14,7 +14,7 @@ public class PlayerConfig : ScriptableObject
     // Serialized Fields
     private int playerNumber;
     private Faction faction;
-    private PlayerColor2 colorConfig;
+    private PlayerColor colorConfig;
     //bleibt Public, da es sich ändern kann
     public Ability2 ability;
     private bool aiControlled;
@@ -28,7 +28,7 @@ public class PlayerConfig : ScriptableObject
 	#region Public Properties
 	public int PlayerNumber { get { return playerNumber; } }
     public Faction Faction { get { return faction; } }
-    public PlayerColor2 ColorConfig
+    public PlayerColor ColorConfig
     {
         get
         {
@@ -54,7 +54,7 @@ public class PlayerConfig : ScriptableObject
     /// <param name="faction">The Players Faction</param>
     /// <param name="colorConfig">The Players Color Configuration</param>
     /// <param name="aiControlled">Set this to True if the AI should control this Player</param>
-	public void Initialize(int playerNumber, Faction faction, PlayerColor2 colorConfig, bool aiControlled)
+	public void Initialize(int playerNumber, Faction faction, PlayerColor colorConfig, bool aiControlled)
     {
         this.playerNumber = playerNumber;
         this.faction = faction;

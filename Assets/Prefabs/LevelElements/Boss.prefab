@@ -360,7 +360,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 15
   rotateSpeed: 500
-  playerNumber: 4
   attackDamagePerShot: 10
   attackProjectileSpeed: 50
   attackProjectileLifeTime: 1
@@ -371,7 +370,6 @@ MonoBehaviour:
   abilityProjectileLifeTime: 1
   abilityCooldown: 3
   materialGlowOnSwitch: 2
-  colorSwitchInterval: 10
   abilitySound: {fileID: 8300000, guid: ddbdc3544101111438a9b6c3b546a294, type: 3}
   abilitySoundVolume: 1
   attackSound: {fileID: 8300000, guid: cf3ba19d968b8e249b2a4b68126fb355, type: 3}
@@ -389,6 +387,7 @@ MonoBehaviour:
   healthIndicator: {fileID: 212300853209604042}
   bossColorChangedEvent: {fileID: 11400000, guid: 5cb0235c1fda1e64dae1cfd14392faef,
     type: 2}
+  gameSettings: {fileID: 11400000, guid: 4cbf2bb18122f9d4c92c9dbd86d8b7fa, type: 2}
 --- !u!212 &212300853209604042
 SpriteRenderer:
   m_ObjectHideFlags: 1

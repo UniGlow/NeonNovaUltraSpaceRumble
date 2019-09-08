@@ -11,6 +11,8 @@ public class DebugMode : MonoBehaviour
 
     public static DebugMode Instance;
 
+    [SerializeField] public GameSettings gameSettings;
+
     [HideInInspector] public string colorSwitchInterval;
     [HideInInspector] public string critDamageMultiplier;
     [HideInInspector] public string intensifyTime;
@@ -45,13 +47,14 @@ public class DebugMode : MonoBehaviour
 
     private void Start()
     {
-        critDamageMultiplier = GameManager.Instance.CritDamageMultiplier.ToString();
-        intensifyTime = GameManager.Instance.intensifyTime.ToString();
-        intensifyAmount = GameManager.Instance.intensifyAmount.ToString();
-        pointLeadToWin = GameManager.Instance.winningPointLead.ToString();
-        pointLeadToWinSolo = GameManager.Instance.pointsToWinSolo.ToString();
-        pointLeadToWinDuo = GameManager.Instance.pointsToWinDuo.ToString();
-        pointLeadToWinTriple = GameManager.Instance.pointsToWinTriple.ToString();
+        critDamageMultiplier = gameSettings.CritDamageMultiplier.ToString();
+        intensifyTime = gameSettings.IntensifyTime.ToString();
+        intensifyAmount = gameSettings.IntensifyAmount.ToString();
+        pointLeadToWin = gameSettings.WinningPointLead.ToString();
+        pointLeadToWinSolo = gameSettings.BossWinningSolo.ToString();
+        pointLeadToWinDuo = gameSettings.BossWinningDuo.ToString();
+        pointLeadToWinTriple = gameSettings.BossWinningTriple.ToString();
+        colorSwitchInterval = gameSettings.BossColorSwitchInterval.ToString();
     }
 
     private void Update () {
@@ -113,34 +116,34 @@ public class DebugMode : MonoBehaviour
             int newBossPointsSolo;
             int newBossPointsDuo;
             int newBossPointsTriple;
+            float newColorSwitchInterval;
 
             GUILayout.BeginVertical("box");
             GUILayout.Label("Balancing Parameters");
-            /*
-             * TODO: Neu integrieren, sobald Game Settings SO existiert
+            
             GUILayout.BeginHorizontal();
             GUILayout.Label("Color Switch Interval");
             colorSwitchInterval = GUILayout.TextField(colorSwitchInterval);
-            if (System.Int32.TryParse(colorSwitchInterval, out newColorSwitchInterval)) GameManager.Instance.ColorSwitchInterval = newColorSwitchInterval;
+            if (System.Single.TryParse(colorSwitchInterval, out newColorSwitchInterval)) gameSettings.BossColorSwitchInterval = newColorSwitchInterval;
             GUILayout.EndHorizontal();
-            */
+            
 
             GUILayout.BeginHorizontal();
             GUILayout.Label("Crit Damage Multiplier");
             critDamageMultiplier = GUILayout.TextField(critDamageMultiplier);
-            if (System.Double.TryParse(critDamageMultiplier, out newCritDamageMultiplier)) GameManager.Instance.CritDamageMultiplier = (float) newCritDamageMultiplier;
+            if (System.Double.TryParse(critDamageMultiplier, out newCritDamageMultiplier)) gameSettings.CritDamageMultiplier = (float) newCritDamageMultiplier;
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
             GUILayout.Label("Intensify Time");
             intensifyTime = GUILayout.TextField(intensifyTime);
-            if (System.Int32.TryParse(intensifyTime, out newIntensifyTime)) GameManager.Instance.intensifyTime = newIntensifyTime;
+            if (System.Int32.TryParse(intensifyTime, out newIntensifyTime)) gameSettings.IntensifyTime = newIntensifyTime;
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
             GUILayout.Label("Intensify Amount");
             intensifyAmount = GUILayout.TextField(intensifyAmount);
-            if (System.Double.TryParse(intensifyAmount, out newIntensifyAmount)) GameManager.Instance.intensifyAmount = (float) newIntensifyAmount;
+            if (System.Double.TryParse(intensifyAmount, out newIntensifyAmount)) gameSettings.IntensifyAmount = (float) newIntensifyAmount;
             GUILayout.EndHorizontal();
 
             GUILayout.Space(10);
@@ -148,7 +151,7 @@ public class DebugMode : MonoBehaviour
             GUILayout.BeginHorizontal();
             GUILayout.Label("Point Lead to Win");
             pointLeadToWin = GUILayout.TextField(pointLeadToWin);
-            if (System.Int32.TryParse(pointLeadToWin, out newHeroesPoints)) GameManager.Instance.winningPointLead = newHeroesPoints;
+            if (System.Int32.TryParse(pointLeadToWin, out newHeroesPoints)) gameSettings.WinningPointLead = newHeroesPoints;
             GUILayout.EndHorizontal();
 
             GUILayout.EndVertical();
@@ -160,19 +163,19 @@ public class DebugMode : MonoBehaviour
             GUILayout.BeginHorizontal();
             GUILayout.Label("Point Lead to Win Solo");
             pointLeadToWinSolo = GUILayout.TextField(pointLeadToWinSolo);
-            if (System.Int32.TryParse(pointLeadToWinSolo, out newBossPointsSolo)) GameManager.Instance.pointsToWinSolo = newBossPointsSolo;
+            if (System.Int32.TryParse(pointLeadToWinSolo, out newBossPointsSolo)) gameSettings.BossWinningSolo = newBossPointsSolo;
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
             GUILayout.Label("Point Lead to Win Duo");
             pointLeadToWinDuo = GUILayout.TextField(pointLeadToWinDuo);
-            if (System.Int32.TryParse(pointLeadToWinDuo, out newBossPointsDuo)) GameManager.Instance.pointsToWinDuo = newBossPointsDuo;
+            if (System.Int32.TryParse(pointLeadToWinDuo, out newBossPointsDuo)) gameSettings.BossWinningDuo = newBossPointsDuo;
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
             GUILayout.Label("Point Lead to Win Triple");
             pointLeadToWinTriple = GUILayout.TextField(pointLeadToWinTriple);
-            if (System.Int32.TryParse(pointLeadToWinTriple, out newBossPointsTriple)) GameManager.Instance.pointsToWinTriple = newBossPointsTriple;
+            if (System.Int32.TryParse(pointLeadToWinTriple, out newBossPointsTriple)) gameSettings.BossWinningTriple = newBossPointsTriple;
             GUILayout.EndHorizontal();
 
             GUILayout.EndVertical();

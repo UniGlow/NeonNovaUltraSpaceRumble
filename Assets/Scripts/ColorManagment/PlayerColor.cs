@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 
 [CreateAssetMenu(menuName = "Scriptable Objects/Color Management/Player Color")]
-public class PlayerColor2 : ScriptableObject 
+public class PlayerColor : ScriptableObject 
 {
 
     #region Variable Declarations

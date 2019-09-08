@@ -12,9 +12,9 @@ public class ColorSet : ScriptableObject
 
     #region Variable Declarations
     // Serialized Fields
-    public PlayerColor2 color1;
-    public PlayerColor2 color2;
-    public PlayerColor2 color3;
+    public PlayerColor color1;
+    public PlayerColor color2;
+    public PlayerColor color3;
 	// Private
 	
 	#endregion
@@ -28,7 +28,7 @@ public class ColorSet : ScriptableObject
 	
 	
 	#region Public Functions
-	public PlayerColor2 GetRandomColor()
+	public PlayerColor GetRandomColor()
     {
         int number = Random.Range(0, 3);
         switch (number)
@@ -44,9 +44,9 @@ public class ColorSet : ScriptableObject
         }
     }
 
-    public PlayerColor2 GetRandomColorExcept(PlayerColor2 playerColor)
+    public PlayerColor GetRandomColorExcept(PlayerColor playerColor)
     {
-        List<PlayerColor2> colors = new List<PlayerColor2>();
+        List<PlayerColor> colors = new List<PlayerColor>();
 
         if (color1 != playerColor) colors.Add(color1);
         if (color2 != playerColor) colors.Add(color2);

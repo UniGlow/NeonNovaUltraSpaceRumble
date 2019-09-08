@@ -30,7 +30,7 @@ public class HeroProjectile : Projectile
         {
             if (playerColor == other.transform.parent.GetComponent<Boss>().PlayerConfig.ColorConfig)
             {
-                points.ScorePoints(Faction.Heroes, Mathf.RoundToInt(damage * GameManager.Instance.CritDamageMultiplier));
+                points.ScorePoints(Faction.Heroes, Mathf.RoundToInt(damage * gameSettings.CritDamageMultiplier));
                 Instantiate(critHitPS, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
                 AudioManager.Instance.PlayClip(critHitSound, critHitVolume);
             }

@@ -15,20 +15,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     [Header("Game Properties")]
-    [SerializeField] float critDamageMultiplier = 2f;
-    public float CritDamageMultiplier { get { return critDamageMultiplier; } set { critDamageMultiplier = value; } }
-    public float intensifyTime = 60;
-    [Range(0f, 0.9f)]
-    public float intensifyAmount = 0.3f;
+    [SerializeField] GameSettings gameSettings = null;
     [SerializeField] float delayAtLevelEnd = 12f;
-    [Space]
-    [SerializeField] bool overrideLevelPointLimits;
-    public int winningPointLead = 500;
-
-    [Header("AI Adjustments")]
-    public int pointsToWinSolo = 500;
-    public int pointsToWinDuo = 500;
-    public int pointsToWinTriple = 500;
 
     [Header("References")]
     [SerializeField] GameEvent levelStartedEvent = null;
@@ -162,7 +150,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                if (overrideLevelPointLimits) OverrideLevelPointLimits();
+                if (gameSettings.OverrideLevelPointLimits) OverrideLevelPointLimits();
                 StartCoroutine(StartTheAction());
             }
         }
@@ -176,10 +164,10 @@ public class GameManager : MonoBehaviour
 
     void HandleIntensify()
     {
-        if (intensifyTimer >= intensifyTime)
+        if (intensifyTimer >= gameSettings.IntensifyTime)
         {
             // Set new pointLeadToWin
-            points.PointLeadToWin = Mathf.RoundToInt(points.PointLeadToWin * (1 - intensifyAmount));
+            points.PointLeadToWin = Mathf.RoundToInt(points.PointLeadToWin * (1 - gameSettings.IntensifyAmount));
 
             intensifyTimer = 0f;
         }
@@ -187,7 +175,7 @@ public class GameManager : MonoBehaviour
 
     void OverrideLevelPointLimits()
     {
-        points.PointLeadToWin = winningPointLead;
+        points.PointLeadToWin = gameSettings.WinningPointLead;
     }
 
     void RaiseLevelStarted()

@@ -355,15 +355,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2ea1e843cf8dfa49963cccfa5f6a640, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  critDamageMultiplier: 2
-  intensifyTime: 24
-  intensifyAmount: 0.1
+  gameSettings: {fileID: 11400000, guid: 4cbf2bb18122f9d4c92c9dbd86d8b7fa, type: 2}
   delayAtLevelEnd: 9
-  overrideLevelPointLimits: 1
-  winningPointLead: 500
-  pointsToWinSolo: 500
-  pointsToWinDuo: 500
-  pointsToWinTriple: 500
   levelStartedEvent: {fileID: 11400000, guid: a93bef75cc487ef48b9411ec84a74c73, type: 2}
   levelLoadedEvent: {fileID: 11400000, guid: dd95ddef2760add43a73ce45d743f5e5, type: 2}
   points: {fileID: 11400000, guid: 5be3ffe199c802f45a47f0dbbedb0be5, type: 2}
@@ -379,6 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeaba798f6e2b1e46bc1395c3d22fe4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameSettings: {fileID: 11400000, guid: 4cbf2bb18122f9d4c92c9dbd86d8b7fa, type: 2}
   colorSwitchInterval: 
   critDamageMultiplier: 
   intensifyTime: 

@@ -10,8 +10,11 @@ public class Projectile : MonoBehaviour
 {
 
     #region Variable Declarations
+    // Serialized Variables
+    [SerializeField] protected GameSettings gameSettings = null;
     [SerializeField] protected Points points = null;
 
+    // Private Variables
     protected float lifeTime = 1f;
     protected int damage = 10;
     protected PlayerColor2 playerColor;
