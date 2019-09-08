@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 410ecf38e99629c47900cbf683162fab, type: 3}
   m_Name: Screen5
   m_EditorClassIdentifier: 
-  backgroundImage: {fileID: 0}
-  tutorialText: {fileID: 0}
-  nextScreen: {fileID: 11400000, guid: 30beda79110564b4287fb57ae32e5e9d, type: 2}
+  backgroundImage: {fileID: 21300000, guid: c2ecb2e7cb39b8b4e8c2d345cf56db72, type: 3}
+  tutorialText: {fileID: 21300000, guid: ef681e29441400b4a8237c60d3099fb2, type: 3}
+  nextScreen: {fileID: 0}

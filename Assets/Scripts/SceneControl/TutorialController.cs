@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// 
@@ -26,6 +27,7 @@ public class TutorialController : MonoBehaviour
     [SerializeField] GameObject player2ReadyPanel = null;
     [SerializeField] GameObject player3ReadyPanel = null;
     [SerializeField] GameObject player4ReadyPanel = null;
+    [SerializeField] GameObject loadingLobbyField = null;
 
     [Header("Resources")]
     [SerializeField] Sprite playerNotReadyImage = null;
@@ -57,6 +59,8 @@ public class TutorialController : MonoBehaviour
 	#region Unity Event Functions
 	private void Start () 
 	{
+        loadingLobbyField.SetActive(false);
+
         activeScreen = firstScreen;
         backgroundImage.sprite = activeScreen.BackgroundImage;
         tutorialText.sprite = activeScreen.TutorialText;
@@ -280,7 +284,8 @@ public class TutorialController : MonoBehaviour
         }
         else
         {
-            //TODO: Scene Change to Next Scene!
+            loadingLobbyField.SetActive(true);
+            SceneManager.LoadScene(Constants.SCENE_LOBBY);
         }
     }
     #endregion
