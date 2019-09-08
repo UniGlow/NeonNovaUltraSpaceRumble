@@ -35,11 +35,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4046094654017518}
+  - component: {fileID: 114536464605641586}
   - component: {fileID: 33046255319744364}
   - component: {fileID: 135843095408614802}
   - component: {fileID: 23102060696140402}
   - component: {fileID: 54035799017248802}
-  - component: {fileID: 114536464605641586}
   m_Layer: 11
   m_Name: Projectile_Boss
   m_TagString: Untagged
@@ -235,9 +235,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e547427c6362994d8256f75cd87a5f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 1
-  damage: 10
-  playerColor: 0
+  gameSettings: {fileID: 11400000, guid: 4cbf2bb18122f9d4c92c9dbd86d8b7fa, type: 2}
+  points: {fileID: 11400000, guid: 5be3ffe199c802f45a47f0dbbedb0be5, type: 2}
   hitPS: {fileID: 1113126380561728, guid: 6b5a189e22f83e04fb1ef820e88eb9cb, type: 2}
   hitSound: {fileID: 8300000, guid: f9c552e41395b87478bce17eb4f5543c, type: 3}
   hitVolume: 1

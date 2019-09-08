@@ -355,31 +355,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2ea1e843cf8dfa49963cccfa5f6a640, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorSwitchInterval: 12
-  critDamageMultiplier: 2
-  intensifyTime: 24
-  intensifyAmount: 0.1
+  gameSettings: {fileID: 11400000, guid: 4cbf2bb18122f9d4c92c9dbd86d8b7fa, type: 2}
   delayAtLevelEnd: 9
-  overrideLevelPointLimits: 1
-  heroesWinningPointLead: 600
-  bossWinningPointLead: 600
-  countdownDuration: 4
-  colorChangeSound: {fileID: 8300000, guid: cb3b90f02c52c49418a9a3fd50874d2b, type: 3}
-  colorChangeSoundVolume: 1
-  colorChangeAudioSource: {fileID: 82249825244062562}
-  setupAI: 1
-  bossWinningSolo: 400
-  bossWinningDuo: 700
-  bossWinningTriple: 700
-  greenPlayerColor: {r: 0, g: 1, b: 0.0069999998, a: 1}
-  redPlayerColor: {r: 0.7058824, g: 0.039215688, b: 0.039215688, a: 1}
-  bluePlayerColor: {r: 0.29411766, g: 0.3137255, b: 0.93333334, a: 1}
-  heroAIPrefab: {fileID: 1742559250600126, guid: 925e3a17bcf7ee843a48b6cbe697aab6,
-    type: 2}
-  bossAIPrefab: {fileID: 1566906718194532, guid: 8c475107a1ba5c54695c67a9aba025ba,
-    type: 2}
   levelStartedEvent: {fileID: 11400000, guid: a93bef75cc487ef48b9411ec84a74c73, type: 2}
   levelLoadedEvent: {fileID: 11400000, guid: dd95ddef2760add43a73ce45d743f5e5, type: 2}
+  points: {fileID: 11400000, guid: 5be3ffe199c802f45a47f0dbbedb0be5, type: 2}
+  activeColorSet: {fileID: 0}
 --- !u!114 &114614392492591870
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -391,15 +372,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeaba798f6e2b1e46bc1395c3d22fe4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameSettings: {fileID: 11400000, guid: 4cbf2bb18122f9d4c92c9dbd86d8b7fa, type: 2}
   colorSwitchInterval: 
   critDamageMultiplier: 
   intensifyTime: 
   intensifyAmount: 
-  heroesWinningPointLead: 
-  bossWinningPointLead: 
-  bossWinningSolo: 
-  bossWinningDuo: 
-  bossWinningTriple: 
+  pointLeadToWin: 
+  pointLeadToWinSolo: 
+  pointLeadToWinDuo: 
+  pointLeadToWinTriple: 
 --- !u!114 &114724152049828894
 MonoBehaviour:
   m_ObjectHideFlags: 1

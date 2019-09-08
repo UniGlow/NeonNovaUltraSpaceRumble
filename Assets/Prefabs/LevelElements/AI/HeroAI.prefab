@@ -127,8 +127,10 @@ GameObject:
   - component: {fileID: 54387879163051624}
   - component: {fileID: 82443329634492120}
   - component: {fileID: 195859284500807272}
+  - component: {fileID: 114227727727347366}
   - component: {fileID: 114845218418286896}
   - component: {fileID: 114699601297447812}
+  - component: {fileID: 114263956079094616}
   m_Layer: 8
   m_Name: HeroAI
   m_TagString: Hero
@@ -472,6 +474,61 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &114227727727347366
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1742559250600126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: dd95ddef2760add43a73ce45d743f5e5, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114808124267496032}
+        m_MethodName: SetMovable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  linkedMethods: []
+  ignoreEventParameters: 1
+--- !u!114 &114263956079094616
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1742559250600126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 1dcba030088afea41a808b9b310c1669, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  linkedMethods:
+  - component: {fileID: 114808124267496032}
+    methodID: 1
+    methodName: SetReferences
+    chosenID: 1
+    methodNames: []
+    gameObject: {fileID: 1742559250600126}
+  ignoreEventParameters: 0
 --- !u!114 &114279159945458776
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -490,6 +547,7 @@ MonoBehaviour:
   transmissionSoundVolume: 1
   transmissionLineRenderer: {fileID: 120313195406292594}
   transmissionPS: {fileID: 198963605972144674}
+  abilitiesChangedEvent: {fileID: 0}
 --- !u!114 &114662132021031198
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -555,23 +613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e0cbbf9e4286ef4f9f8377cff7a15e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 15
-  rotateSpeed: 1000
-  playerNumber: 0
-  damagePerShot: 15
-  attackCooldown: 0.15
-  projectileSpeed: 40
-  defendCooldown: 3
-  defendDuration: 2
-  speedBoost: 0.5
-  playerColor: 2
-  ability: 2
-  wobbleBobbleSound: {fileID: 8300000, guid: 9bf8565727fa20047bfa416674b33661, type: 3}
-  wobbleBobbleVolume: 0.9
-  attackSound: {fileID: 8300000, guid: 9a5792dc479bb5c47878c1c076adf5d0, type: 3}
-  attackSoundVolume: 0.6
-  projectilePrefab: {fileID: 1693907411783006, guid: c023009a9133c5b4da7f7564326be655,
-    type: 2}
+  characterStats: {fileID: 11400000, guid: ea1e0b8a36897574284478c2e13ef73f, type: 2}
   wobbleBobble: {fileID: 1521786441716086}
   healthIndicator: {fileID: 212030959940914510}
   cooldownIndicator: {fileID: 212204402432339422}
@@ -589,9 +631,6 @@ MonoBehaviour:
   damageSprite: {fileID: 21300112, guid: cf7b38ec134eb49be8918c0504aeb76c, type: 3}
   opferSprite: {fileID: 21300094, guid: cf7b38ec134eb49be8918c0504aeb76c, type: 3}
   playerMeshRenderer: {fileID: 23346185351575296}
-  greenPlayerMat: {fileID: 2100000, guid: 8fdde485bd8110a42888399b61198142, type: 2}
-  redPlayerMat: {fileID: 2100000, guid: e8c28d97f12645643bcafd02933841a7, type: 2}
-  bluePlayerMat: {fileID: 2100000, guid: c0c8a51b3e7494746a5eca2615bb40c9, type: 2}
   repathingDistance: 6
   randomness: 10
   shieldDelay: 2

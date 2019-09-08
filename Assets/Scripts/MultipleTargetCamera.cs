@@ -5,7 +5,8 @@ using UnityEngine;
 /// <summary>
 /// 
 /// </summary>
-public class MultipleTargetCamera : MonoBehaviour {
+public class MultipleTargetCamera : MonoBehaviour
+{
 
     #region Variable Declarations
 
@@ -24,19 +25,24 @@ public class MultipleTargetCamera : MonoBehaviour {
 
 
     #region Unity Event Functions
-    private void Start() {
+    private void Start()
+    {
         cams = transform.GetComponentsInChildren<Camera>();
         offset = transform.position;
 	}
 	
-	private void LateUpdate() {
+	private void LateUpdate()
+    {
         if (targets.Count == 0) return;
 
         Move();
         Zoom();
 	}
 
-    private void OnDrawGizmosSelected() {
+    private void OnDrawGizmosSelected()
+    {
+        if (targets.Count == 0) return;
+
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(GetCenterPoint(), 1f);
     }
@@ -45,45 +51,45 @@ public class MultipleTargetCamera : MonoBehaviour {
 
 
     #region Public Functions
-    public void SetCameraTargetsNextFrame(List<Transform> targets)
+    public void SetCameraTargets(PlayerConfig hero1, PlayerConfig hero2, PlayerConfig hero3, PlayerConfig boss)
     {
-        StartCoroutine(Wait(1, () =>
-        {
-            for (int i = 0; i < this.targets.Count; i++)
-            {
-                if (this.targets[i] == null)
-                {
-                    this.targets[i] = targets[0];
-                    targets.RemoveAt(0);
-                }
-            }
-        }));
+        targets.Clear();
+        targets.Add(hero1.playerTransform);
+        targets.Add(hero2.playerTransform);
+        targets.Add(hero3.playerTransform);
+        targets.Add(boss.playerTransform);
     }
     #endregion
 
 
 
     #region Private Functions
-    void Move() {
+    void Move()
+    {
         Vector3 centerPoint = GetCenterPoint();
 
         transform.position = Vector3.SmoothDamp(transform.position, centerPoint + offset, ref velocity, smoothTime);
     }
 
-    void Zoom() {
+    void Zoom()
+    {
         float newZoom = Mathf.Lerp(maxZoom, minZoom, GetGreatestDistance() / maxDistance);
-        foreach (Camera cam in cams) {
+        foreach (Camera cam in cams)
+        {
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, newZoom, Time.deltaTime);
         }
     }
 
-    float GetGreatestDistance() {
+    float GetGreatestDistance()
+    {
         var bounds = new Bounds(targets[0].position, Vector3.zero);
-        for (int i = 0; i < targets.Count; i++) {
+        for (int i = 0; i < targets.Count; i++)
+        {
             bounds.Encapsulate(targets[i].position);
         }
 
-        if (bounds.size.x > (1.778f * bounds.size.z)) {
+        if (bounds.size.x > (1.778f * bounds.size.z))
+        {
             return bounds.size.x;
         }
         else {
@@ -91,29 +97,28 @@ public class MultipleTargetCamera : MonoBehaviour {
         }
     }
 
-    Vector3 GetCenterPoint() {
-        if (targets.Count == 1) {
+    Vector3 GetCenterPoint()
+    {
+        if (targets.Count == 0)
+        {
+            Debug.LogWarning("No targets set for camera.", this);
+            return Vector3.zero;
+        }
+
+        else if (targets.Count == 1)
+        {
             return targets[0].position;
         }
-        else {
+        else
+        {
             var bounds = new Bounds(targets[0].position, Vector3.zero);
-            for (int i = 0; i < targets.Count; i++) {
+            for (int i = 0; i < targets.Count; i++)
+            {
                 bounds.Encapsulate(targets[i].position);
             }
 
             return bounds.center;
         }
-    }
-    #endregion
-
-
-
-    #region Coroutines
-    IEnumerator Wait(int frames, System.Action onComplete)
-    {
-        yield return null;
-
-        onComplete.Invoke();
     }
     #endregion
 }

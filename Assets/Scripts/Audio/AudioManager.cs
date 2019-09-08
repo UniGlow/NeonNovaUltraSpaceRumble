@@ -177,7 +177,7 @@ public class AudioManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(levelEnd.length);
 
         audioSourceMusic.loop = false;
-        if (winner == Faction.Heros)
+        if (winner == Faction.Heroes)
         {
             audioSourceMusic.clip = heroesWinSound;
             audioSourceMusic.volume = heroesWinSoundVolume;

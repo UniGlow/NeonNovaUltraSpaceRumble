@@ -77,6 +77,9 @@ GameObject:
   - component: {fileID: 82123228787605642}
   - component: {fileID: 114236765619599556}
   - component: {fileID: 114896043192605384}
+  - component: {fileID: 114382122769345902}
+  - component: {fileID: 114473088207031930}
+  - component: {fileID: 114981097422904104}
   m_Layer: 11
   m_Name: HomingMissile
   m_TagString: HomingMissile
@@ -167,7 +170,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1573548182032810}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.3499994, y: 0.5, z: 11.16}
+  m_LocalPosition: {x: -24.72, y: 0.5, z: -11.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4364361989329078}
@@ -457,6 +460,56 @@ MonoBehaviour:
     methodNames: []
     gameObject: {fileID: 0}
   ignoreEventParameters: 1
+--- !u!114 &114382122769345902
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1573548182032810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 1dcba030088afea41a808b9b310c1669, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  linkedMethods:
+  - component: {fileID: 114474593516083838}
+    methodID: 1
+    methodName: AcquireNewTarget
+    chosenID: 1
+    methodNames: []
+    gameObject: {fileID: 1573548182032810}
+  ignoreEventParameters: 0
+--- !u!114 &114473088207031930
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1573548182032810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: a3637ea13dc4b674895931910892b2e2, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  linkedMethods:
+  - component: {fileID: 114474593516083838}
+    methodID: 0
+    methodName: AcquireNewTarget
+    chosenID: 1
+    methodNames: []
+    gameObject: {fileID: 1573548182032810}
+  ignoreEventParameters: 0
 --- !u!114 &114474593516083838
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -472,7 +525,7 @@ MonoBehaviour:
   damage: 70
   hitSound: {fileID: 8300000, guid: 216323fd8e2633844a437d87bf28a085, type: 3}
   hitSoundVolume: 0.6
-  enableCameraShake: 1
+  enableCameraShake: 0
   magnitude: 1
   roughness: 10
   fadeIn: 0.1
@@ -480,6 +533,7 @@ MonoBehaviour:
   hitPSHeroes: {fileID: 1086934119878164, guid: 9943029a31d4e3a44bf6d6676eecb198,
     type: 2}
   hitPSBoss: {fileID: 1086934119878164, guid: 9943029a31d4e3a44bf6d6676eecb198, type: 2}
+  points: {fileID: 11400000, guid: 5be3ffe199c802f45a47f0dbbedb0be5, type: 2}
 --- !u!114 &114896043192605384
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -510,6 +564,42 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   linkedMethods: []
   ignoreEventParameters: 0
+--- !u!114 &114981097422904104
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1573548182032810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: dd95ddef2760add43a73ce45d743f5e5, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114474593516083838}
+        m_MethodName: PauseMissile
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  linkedMethods:
+  - component: {fileID: 114474593516083838}
+    methodID: -1
+    methodName: 
+    chosenID: -1
+    methodNames: []
+    gameObject: {fileID: 0}
+  ignoreEventParameters: 1
 --- !u!135 &135057080856952782
 SphereCollider:
   m_ObjectHideFlags: 1

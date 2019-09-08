@@ -13,7 +13,6 @@ public class HomingMissileTutorial : MonoBehaviour
 
     #region Variable Declarations
     [SerializeField] float speed = 10f;
-    [SerializeField] int damage = 100;
 
     [Header("Sound")]
     [SerializeField]
@@ -25,8 +24,8 @@ public class HomingMissileTutorial : MonoBehaviour
     [Header("Object References")]
     [SerializeField] GameObject hitPSHeroes;
     [SerializeField] GameObject hitPSBoss;
+    [SerializeField] Transform target;
 
-    Transform target;
     NavMeshAgent agent;
     AudioSource audioSource;
     bool agentPaused = false;
@@ -39,15 +38,12 @@ public class HomingMissileTutorial : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         audioSource = GetComponent<AudioSource>();
-        AcquireNewTarget();
 	}
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag.Contains(Constants.TAG_HERO_DUMMY))
         {
-            HeroHealth.Instance.TakeDamage(damage);
-
             audioSource.PlayOneShot(hitSound, hitSoundVolume);
 
             Instantiate(hitPSHeroes, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
@@ -55,8 +51,6 @@ public class HomingMissileTutorial : MonoBehaviour
 
         else if (other.tag.Contains(Constants.TAG_BOSS_DUMMY))
         {
-            BossHealth.Instance.TakeDamage(damage);
-
             audioSource.PlayOneShot(hitSound, hitSoundVolume);
 
             Instantiate(hitPSBoss, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
@@ -67,8 +61,6 @@ public class HomingMissileTutorial : MonoBehaviour
     {
         if (!agentPaused)
         {
-            if (target == null) AcquireNewTarget();
-
             agent.SetDestination(target.position);
             agent.Move(transform.forward * speed);
         }
@@ -78,16 +70,6 @@ public class HomingMissileTutorial : MonoBehaviour
 
 
     #region Public Functions
-    public void AcquireNewTarget()
-    {
-        Hero[] heroes = GameObject.FindObjectsOfType<HeroTutorialAI>();
-        foreach (Hero hero in heroes) {
-            if (hero.ability == Ability.Opfer) {
-                target = hero.transform;
-            }
-        }
-    }
-
     public void PauseMissile(bool pause)
     {
         agentPaused = pause;
