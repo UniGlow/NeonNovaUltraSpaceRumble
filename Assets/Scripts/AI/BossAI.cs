@@ -70,6 +70,8 @@ public class BossAI : Boss
     {
         if (active)
         {
+            colorChangeTimer += Time.deltaTime;
+            HandleColorSwitch();
             randomnessTimer += Time.deltaTime;
         }
     }

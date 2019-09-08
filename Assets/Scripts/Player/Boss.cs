@@ -64,7 +64,7 @@ public class Boss : Player
     protected ColorSet colorSet = null;
 
     // Color Change
-    private float colorChangeTimer;
+    protected float colorChangeTimer;
     bool colorChangeSoundPlayed;
     #endregion
 
@@ -191,7 +191,7 @@ public class Boss : Player
         bossMeshRenderer.material.DOColor(bossMeshRenderer.material.color * materialGlowOnSwitch, 0.6f).SetLoops(2, LoopType.Yoyo).SetEase(Ease.InOutQuad);
     }
 
-    void HandleColorSwitch()
+    protected void HandleColorSwitch()
     {
         if (colorChangeTimer >= gameSettings.BossColorSwitchInterval - 0.5f && !colorChangeSoundPlayed)
         {
