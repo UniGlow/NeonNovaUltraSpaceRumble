@@ -125,7 +125,7 @@ public class Transmission : MonoBehaviour
         if (currentTransmissionDuration >= transmissionDuration)
         {
             Hero otherHero = receiver.GetComponent<Hero>();
-            Ability2 newAbility = otherHero.PlayerConfig.ability;
+            Ability newAbility = otherHero.PlayerConfig.ability;
 
             // Switch abilities
             otherHero.SetAbility(hero.PlayerConfig.ability);

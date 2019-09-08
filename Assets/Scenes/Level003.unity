@@ -99,7 +99,7 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 1.5
+    agentRadius: 1.8
     agentHeight: 2
     agentSlope: 36
     agentClimb: 0.4
@@ -107,7 +107,7 @@ NavMeshSettings:
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.5
+    cellSize: 0.59999996
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -1205,10 +1205,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1284144184}
   - {fileID: 744288392}
   - {fileID: 1133197424}
   - {fileID: 1699792635}
+  - {fileID: 1284144184}
   - {fileID: 2055579165}
   m_Father: {fileID: 539745638}
   m_RootOrder: 0

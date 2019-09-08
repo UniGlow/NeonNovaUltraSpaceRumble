@@ -51,7 +51,7 @@ public class HeroAI : Hero
             Hero[] friends = GameObject.FindObjectsOfType<Hero>();
             foreach (Hero hero in friends)
             {
-                if (hero.PlayerConfig.ability.Class == Ability2.AbilityClass.Damage) damage = hero.transform;
+                if (hero.PlayerConfig.ability.Class == Ability.AbilityClass.Damage) damage = hero.transform;
             }
         }));
 
@@ -135,7 +135,7 @@ public class HeroAI : Hero
     #region Private Functions
     private void CalculateMovement()
     {
-        if (playerConfig.ability.Class == Ability2.AbilityClass.Victim)
+        if (playerConfig.ability.Class == Ability.AbilityClass.Victim)
         {
             if (agent.destination == transform.position) SetDestination(GetRandomTarget());
 
@@ -149,7 +149,7 @@ public class HeroAI : Hero
                 else SetDestination(GetNextCorner());
             }
         }
-        else if (playerConfig.ability.Class == Ability2.AbilityClass.Damage)
+        else if (playerConfig.ability.Class == Ability.AbilityClass.Damage)
         {
             // Move
             SetDamageDestination();
@@ -160,7 +160,7 @@ public class HeroAI : Hero
                 Quaternion.LookRotation(boss.position - transform.position, Vector3.up), 
                 Time.deltaTime * characterStats.rotationSpeed);
         }
-        else if (playerConfig.ability.Class == Ability2.AbilityClass.Tank)
+        else if (playerConfig.ability.Class == Ability.AbilityClass.Tank)
         {
             SetTankDestination();
         }
@@ -168,7 +168,7 @@ public class HeroAI : Hero
 
     private bool CheckTriggerConditions()
     {
-        if (playerConfig.ability.Class == Ability2.AbilityClass.Damage)
+        if (playerConfig.ability.Class == Ability.AbilityClass.Damage)
         {
             Ray ray = new Ray(transform.position + Vector3.up * 0.5f, transform.forward);
             RaycastHit hitInfo;
@@ -183,7 +183,7 @@ public class HeroAI : Hero
                 Debug.DrawRay(ray.origin, ray.direction * 70f, Color.red);
             }
         }
-        else if (playerConfig.ability.Class == Ability2.AbilityClass.Tank)
+        else if (playerConfig.ability.Class == Ability.AbilityClass.Tank)
         {
             if (playerConfig.ability.CooldownTimer >= playerConfig.ability.Cooldown + shieldDelay)
             {

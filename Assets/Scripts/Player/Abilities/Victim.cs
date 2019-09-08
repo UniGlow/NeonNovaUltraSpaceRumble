@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 /// 
 [CreateAssetMenu(menuName = "Scriptable Objects/Abilities/Victim")]
-public class Victim : Ability2 
+public class Victim : Ability 
 {
 
     #region Variable Declarations

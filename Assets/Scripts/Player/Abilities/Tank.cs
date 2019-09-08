@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 /// 
 [CreateAssetMenu(menuName = "Scriptable Objects/Abilities/Tank")]
-public class Tank : Ability2
+public class Tank : Ability
 {
 
     #region Variable Declarations

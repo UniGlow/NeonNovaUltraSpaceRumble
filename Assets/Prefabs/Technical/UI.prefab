@@ -2939,7 +2939,7 @@ MonoBehaviour:
   maxSize: 1
   popUpAnimationDuration: 0.7
   bossWinText: Boss wins!
-  herosWinText: Heros win!
+  herosWinText: Heroes win!
 --- !u!114 &114441969563052286
 MonoBehaviour:
   m_ObjectHideFlags: 1

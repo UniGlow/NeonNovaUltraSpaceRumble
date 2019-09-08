@@ -6,7 +6,7 @@ using UnityEngine;
 /// 
 /// </summary>
 
-public abstract class Ability2 : ScriptableObject 
+public abstract class Ability : ScriptableObject 
 {
     public enum AbilityClass
     {

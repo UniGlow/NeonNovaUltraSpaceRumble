@@ -68,10 +68,10 @@ public class Hero : Player
         SetAbility(playerConfig.ability);
     }
 
-    public void SetAbility(Ability2 ability)
+    public void SetAbility(Ability ability)
     {
         // Cancel shield, if current ability is Tank class
-        if (PlayerConfig.ability.Binded && playerConfig.ability.Class == Ability2.AbilityClass.Tank)
+        if (PlayerConfig.ability.Binded && playerConfig.ability.Class == Ability.AbilityClass.Tank)
         {
             Tank tankAbility = this.playerConfig.ability as Tank;
             tankAbility.DeactivateShield();
@@ -84,13 +84,13 @@ public class Hero : Player
         // Update class sprites
         switch (ability.Class)
         {
-            case Ability2.AbilityClass.Damage:
+            case Ability.AbilityClass.Damage:
                 cooldownIndicator.sprite = DamageSprite;
                 break;
-            case Ability2.AbilityClass.Tank:
+            case Ability.AbilityClass.Tank:
                 cooldownIndicator.sprite = TankSprite;
                 break;
-            case Ability2.AbilityClass.Victim:
+            case Ability.AbilityClass.Victim:
                 cooldownIndicator.sprite = opferSprite;
                 break;
             default:

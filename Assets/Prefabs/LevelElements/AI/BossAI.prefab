@@ -427,7 +427,10 @@ MonoBehaviour:
   gameSettings: {fileID: 11400000, guid: 4cbf2bb18122f9d4c92c9dbd86d8b7fa, type: 2}
   repathingDistance: 5
   cornerPeek: 0.5
-  heroConfigs: []
+  heroConfigs:
+  - {fileID: 11400000, guid: 0d24b38cff3ab7645a78e798c43bbfd7, type: 2}
+  - {fileID: 11400000, guid: d6c98b3edc55ae84cb27c6305d3154cd, type: 2}
+  - {fileID: 11400000, guid: d4656183e05243d4bab4bc739760ed99, type: 2}
 --- !u!195 &195969845727586126
 NavMeshAgent:
   m_ObjectHideFlags: 1

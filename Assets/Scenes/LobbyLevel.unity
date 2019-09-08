@@ -99,7 +99,7 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 1.5
+    agentRadius: 1.8
     agentHeight: 1
     agentSlope: 26
     agentClimb: 0.4
@@ -107,13 +107,13 @@ NavMeshSettings:
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.5
+    cellSize: 0.59999996
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 2d48670c4012afb48bd1980ef6d47abd, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 9830438c2dad83f49b4bf3b28d1e7732, type: 2}
 --- !u!1 &3761024
 GameObject:
   m_ObjectHideFlags: 0
@@ -10214,6 +10214,7 @@ MonoBehaviour:
   playersSpawnedEvent: {fileID: 11400000, guid: 1dcba030088afea41a808b9b310c1669,
     type: 2}
   points: {fileID: 11400000, guid: 5be3ffe199c802f45a47f0dbbedb0be5, type: 2}
+  gameSettings: {fileID: 0}
 --- !u!1 &1760293240
 GameObject:
   m_ObjectHideFlags: 0

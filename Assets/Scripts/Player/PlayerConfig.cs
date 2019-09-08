@@ -16,7 +16,7 @@ public class PlayerConfig : ScriptableObject
     private Faction faction;
     private PlayerColor colorConfig;
     //bleibt Public, da es sich ändern kann
-    public Ability2 ability;
+    public Ability ability;
     private bool aiControlled;
     public Transform playerTransform;
 	// Private

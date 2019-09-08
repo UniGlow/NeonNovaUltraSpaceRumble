@@ -34,9 +34,9 @@ public class SirAlfredLobby : MonoBehaviour
     [SerializeField] ColorSet colorSet = null;
 
     [Header("Ability Set")]
-    [SerializeField] Ability2 damageAbility = null;
-    [SerializeField] Ability2 tankAbility = null;
-    [SerializeField] Ability2 victimAbility = null;
+    [SerializeField] Ability damageAbility = null;
+    [SerializeField] Ability tankAbility = null;
+    [SerializeField] Ability victimAbility = null;
 
     List<bool> playerConfirms = new List<bool>();
     float idleTimer;
