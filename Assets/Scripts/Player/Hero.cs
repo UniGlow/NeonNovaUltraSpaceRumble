@@ -71,14 +71,14 @@ public class Hero : Player
     public void SetAbility(Ability ability)
     {
         // Cancel shield, if current ability is Tank class
-        if (PlayerConfig.ability.Binded && playerConfig.ability.Class == Ability.AbilityClass.Tank)
+        if (playerConfig.ability.Binded && playerConfig.ability.Class == Ability.AbilityClass.Tank)
         {
-            Tank tankAbility = this.playerConfig.ability as Tank;
+            Tank tankAbility = playerConfig.ability as Tank;
             tankAbility.DeactivateShield();
         }
 
         // Set new ability
-        this.playerConfig.ability = ability;
+        playerConfig.ability = ability;
         ability.BindTo(this);
 
         // Update class sprites

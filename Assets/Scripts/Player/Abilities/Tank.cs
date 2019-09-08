@@ -64,6 +64,7 @@ public class Tank : Ability
     public void DeactivateShield()
     {
         hero.WobbleBobble.SetActive(false);
+        cooldownTimer = 0f;
         shieldTimer = 0f;
         shieldActive = false;
     }
