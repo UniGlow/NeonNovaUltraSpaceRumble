@@ -7,7 +7,8 @@ using UnityEngine.AI;
 /// Handles everything related to the movement of Haru, our playable Character
 /// </summary>
 [RequireComponent(typeof(NavMeshAgent))]
-public class HeroAI : Hero {
+public class HeroAI : Hero
+{
 
     #region Variable Declarations
     [Header("AI Parameters")]
@@ -21,6 +22,8 @@ public class HeroAI : Hero {
     [Range(0,1)]
     [SerializeField] float damageCornerPeek = 0.2f;
     [SerializeField] LayerMask attackRayMask;
+    [Tooltip("Can be used to pre-set up AIs in a level if no PlayerConfig will be set through other instances on Play. Only working for Victim.")]
+    [SerializeField] Ability ability = null;
 
     NavMeshAgent agent;
     Transform boss;
@@ -30,28 +33,30 @@ public class HeroAI : Hero {
     List<Transform> allAITargets = new List<Transform>();
     int currentlyTargetedCorner;
     float randomnessTimer;
-    float shieldDelayTimer;
     float normalAgentSpeed;
     #endregion
 
 
 
     #region Unity Event Functions
-    override protected void Start() {
-        base.Start();
-        
-        // Get references
-        agent = GetComponent<NavMeshAgent>();
-        if (GameManager.Instance.Boss) boss = GameManager.Instance.Boss.transform;
+    protected override void Awake()
+    {
+        base.Awake();
 
+        agent = GetComponent<NavMeshAgent>();
+    }
+
+    private void Start()
+    {
         StartCoroutine(Wait(1, () => 
         {
             Hero[] friends = GameObject.FindObjectsOfType<Hero>();
+            // Break, if not all heroes are instantiated
+            if (friends.Length < 3) return;
+
             foreach (Hero hero in friends)
             {
-                if (hero.ability == Ability.Damage) damage = hero.transform;
-                //if (go.transform.parent.GetComponent<Hero>().ability == Ability.Tank) tank = go.transform;
-                //if (go.transform.parent.GetComponent<Hero>().ability == Ability.Opfer) opfer = go.transform;
+                if (hero.PlayerConfig.ability.Class == Ability.AbilityClass.Damage) damage = hero.transform;
             }
         }));
 
@@ -81,7 +86,6 @@ public class HeroAI : Hero {
         if (active)
         {
             CalculateMovement();
-            HandleAbilities();
         }
     }
 
@@ -90,7 +94,21 @@ public class HeroAI : Hero {
         if (active)
         {
             randomnessTimer += Time.deltaTime;
-            if (cooldown) shieldDelayTimer += Time.deltaTime;
+
+            if (ability != null) ability.Tick(Time.deltaTime, CheckTriggerConditions());
+            else playerConfig.ability.Tick(Time.deltaTime, CheckTriggerConditions());
+
+            // Apply class-dependant movement speed modifier
+            if (ability)
+            {
+                agent.speed = normalAgentSpeed * (ability.SpeedBoost + 1);
+                agent.speed = normalAgentSpeed * (ability.SpeedBoost + 1);
+            }
+            else
+            {
+                agent.speed = normalAgentSpeed * (playerConfig.ability.SpeedBoost + 1);
+                agent.speed = normalAgentSpeed * (playerConfig.ability.SpeedBoost + 1);
+            }
         }
     }
 
@@ -113,7 +131,17 @@ public class HeroAI : Hero {
 
 
     #region Public Funtcions
+    public override void SetMovable(bool active)
+    {
+        base.SetMovable(active);
 
+        agent.isStopped = !active;
+    }
+
+    public void SetReferences(PlayerConfig hero1, PlayerConfig hero2, PlayerConfig hero3, PlayerConfig boss)
+    {
+        this.boss = boss.playerTransform;
+    }
     #endregion
 
 
@@ -121,7 +149,7 @@ public class HeroAI : Hero {
     #region Private Functions
     private void CalculateMovement()
     {
-        if (ability == Ability.Opfer)
+        if (IsAbilityClass(Ability.AbilityClass.Victim))
         {
             if (agent.destination == transform.position) SetDestination(GetRandomTarget());
 
@@ -135,27 +163,26 @@ public class HeroAI : Hero {
                 else SetDestination(GetNextCorner());
             }
         }
-        else if (ability == Ability.Damage)
+        else if (IsAbilityClass(Ability.AbilityClass.Damage))
         {
             // Move
             SetDamageDestination();
 
             // Rotate
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(boss.position - transform.position, Vector3.up), Time.deltaTime * rotateSpeed);
+            transform.rotation = Quaternion.RotateTowards(
+                transform.rotation, 
+                Quaternion.LookRotation(boss.position - transform.position, Vector3.up), 
+                Time.deltaTime * characterStats.rotationSpeed);
         }
-        else if (ability == Ability.Tank)
+        else if (IsAbilityClass(Ability.AbilityClass.Tank))
         {
             SetTankDestination();
         }
     }
 
-    private void HandleAbilities()
+    private bool CheckTriggerConditions()
     {
-        if (ability == Ability.Opfer)
-        {
-            Run();
-        }
-        else if (ability == Ability.Damage && cooldown)
+        if (IsAbilityClass(Ability.AbilityClass.Damage))
         {
             Ray ray = new Ray(transform.position + Vector3.up * 0.5f, transform.forward);
             RaycastHit hitInfo;
@@ -163,21 +190,22 @@ public class HeroAI : Hero {
             if (Physics.Raycast(ray, out hitInfo, 70f, attackRayMask) && hitInfo.transform.tag == Constants.TAG_BOSS)
             {
                 Debug.DrawRay(ray.origin, hitInfo.point - ray.origin, Color.green);
-                Attack();
+                return true;
             }
             else
             {
                 Debug.DrawRay(ray.origin, ray.direction * 70f, Color.red);
             }
         }
-        else if (ability == Ability.Tank)
+        else if (IsAbilityClass(Ability.AbilityClass.Tank))
         {
-            if (shieldDelayTimer >= shieldDelay)
+            if (playerConfig.ability.CooldownTimer >= playerConfig.ability.Cooldown + shieldDelay)
             {
-                Defend();
-                shieldDelayTimer = 0;
+                return true;
             }
         }
+
+        return false;
     }
 
     #region AI Methods
@@ -194,7 +222,8 @@ public class HeroAI : Hero {
 
     }
 
-    private void SetTankDestination() {
+    private void SetTankDestination()
+    {
         Vector3 nearDamage = damage.position + (transform.position - damage.position).normalized * tankTargetDistance;
         if (!SetDestination(nearDamage + (transform.position - nearDamage) * tankFollowSpeed))
         {
@@ -202,7 +231,8 @@ public class HeroAI : Hero {
         }
     }
 
-    private bool SetDestination(Vector3 destination) {
+    private bool SetDestination(Vector3 destination)
+    {
         Vector3 start = transform.position + agent.velocity * (repathingDistance / agent.speed);
 
         NavMeshPath path = new NavMeshPath();
@@ -224,7 +254,8 @@ public class HeroAI : Hero {
     /// Returns the position of the closest corner of the level and (0,0,0) if no corner is found.
     /// </summary>
     /// <returns></returns>
-    private Vector3 GetClosestCorner() {
+    private Vector3 GetClosestCorner()
+    {
         float closestDistance = 100f;
         Vector3 closestCorner = Vector3.zero;
         for (int i = 0; i < corners.Count; i++)
@@ -238,7 +269,8 @@ public class HeroAI : Hero {
         return closestCorner;
     }
 
-    private Vector3 GetNextCorner() {
+    private Vector3 GetNextCorner()
+    {
         if (currentlyTargetedCorner < corners.Count - 1)
         {
             currentlyTargetedCorner++;
@@ -249,34 +281,26 @@ public class HeroAI : Hero {
             return corners[currentlyTargetedCorner].position;
         }
     }
-    #endregion
 
-    private void Attack() {
-        GameObject projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
-        projectile.GetComponent<HeroProjectile>().damage = damagePerShot;
-        projectile.GetComponent<HeroProjectile>().playerColor = playerColor;
-        projectile.GetComponent<Rigidbody>().velocity = transform.forward * projectileSpeed;
+    private bool IsAbilityClass(Ability.AbilityClass abilityClass) 
+    {
+        try
+        {
+            if (ability.Class == abilityClass)
+                return true;
+        }
+        catch (System.Exception)
+        {
 
-        audioSource.PlayOneShot(attackSound, attackSoundVolume);
+        }
 
-        cooldown = false;
-        StartCoroutine(ResetAttackCooldown());
-    }
+        if (playerConfig.ability.Class == abilityClass)
+            return true;
 
-    private void Defend() {
-        wobbleBobble.SetActive(true);
-        cooldown = false;
-        cooldownIndicator.sprite = defendCooldownSprites[0];
-        audioSource.PlayOneShot(wobbleBobbleSound, wobbleBobbleVolume);
-        resetDefendCoroutine = StartCoroutine(ResetDefend());
-    }
-
-    private void Run() {
-        agent.speed = normalAgentSpeed * (speedBoost + 1);
-        agent.speed = normalAgentSpeed * (speedBoost + 1);
+        return false;
     }
     #endregion
-
+    #endregion
 
 
     #region Corouintes

@@ -57,6 +57,9 @@ GameObject:
   - component: {fileID: 54503069925387504}
   - component: {fileID: 82235478939710240}
   - component: {fileID: 195969845727586126}
+  - component: {fileID: 114730868472375740}
+  - component: {fileID: 114906929546918614}
+  - component: {fileID: 114713615049238174}
   m_Layer: 9
   m_Name: BossAI
   m_TagString: Boss
@@ -200,9 +203,9 @@ MeshCollider:
   m_Material: {fileID: 13400000, guid: 498dae0bc1d2d574caf8d03fb2201892, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Convex: 1
-  m_InflateMesh: 0
+  m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 51a8d996c6cb8c44cb0954778d972cb2, type: 3}
 --- !u!82 &82235478939710240
@@ -286,6 +289,102 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &114713615049238174
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1566906718194532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 447d59970781ce142a63ea883b30c2b1, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114935472681219652}
+        m_MethodName: SetMovable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  linkedMethods:
+  - component: {fileID: 0}
+    methodID: -1
+    methodName: 
+    chosenID: -1
+    methodNames: []
+    gameObject: {fileID: 0}
+  ignoreEventParameters: 1
+--- !u!114 &114730868472375740
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1566906718194532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: dd95ddef2760add43a73ce45d743f5e5, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114935472681219652}
+        m_MethodName: SetMovable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  linkedMethods: []
+  ignoreEventParameters: 1
+--- !u!114 &114906929546918614
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1566906718194532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: a93bef75cc487ef48b9411ec84a74c73, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114935472681219652}
+        m_MethodName: SetMovable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  linkedMethods: []
+  ignoreEventParameters: 0
 --- !u!114 &114935472681219652
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -297,9 +396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c4412e89fcc8a74aa16c0a580f8b915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 10
-  rotateSpeed: 1000
-  playerNumber: 0
+  characterStats: {fileID: 11400000, guid: 9eab235bee7a65c4e8d326fd50253853, type: 2}
   attackDamagePerShot: 10
   attackProjectileSpeed: 40
   attackProjectileLifeTime: 1
@@ -309,13 +406,13 @@ MonoBehaviour:
   abilityProjectileSpeed: 20
   abilityProjectileLifeTime: 1
   abilityCooldown: 3
-  weaknessColor: 0
-  strengthColor: 0
   materialGlowOnSwitch: 3
   abilitySound: {fileID: 8300000, guid: ddbdc3544101111438a9b6c3b546a294, type: 3}
   abilitySoundVolume: 1
   attackSound: {fileID: 8300000, guid: cf3ba19d968b8e249b2a4b68126fb355, type: 3}
   attackSoundVolume: 0.75
+  colorChangeSound: {fileID: 8300000, guid: cb3b90f02c52c49418a9a3fd50874d2b, type: 3}
+  colorChangeSoundVolume: 1
   enableCameraShake: 1
   magnitude: 1
   roughness: 10
@@ -325,11 +422,15 @@ MonoBehaviour:
     type: 2}
   bossMeshRenderer: {fileID: 23088180500308686}
   healthIndicator: {fileID: 212145985802840450}
-  greenBossMat: {fileID: 2100000, guid: 966f269b5a0b25f4485446ac000d0ef7, type: 2}
-  redBossMat: {fileID: 2100000, guid: 7d68be63867edc147a22fe6137b42316, type: 2}
-  blueBossMat: {fileID: 2100000, guid: b9952fe678988874f98372d9edd2afff, type: 2}
+  bossColorChangedEvent: {fileID: 11400000, guid: 5cb0235c1fda1e64dae1cfd14392faef,
+    type: 2}
+  gameSettings: {fileID: 11400000, guid: 4cbf2bb18122f9d4c92c9dbd86d8b7fa, type: 2}
   repathingDistance: 5
   cornerPeek: 0.5
+  heroConfigs:
+  - {fileID: 11400000, guid: 0d24b38cff3ab7645a78e798c43bbfd7, type: 2}
+  - {fileID: 11400000, guid: d6c98b3edc55ae84cb27c6305d3154cd, type: 2}
+  - {fileID: 11400000, guid: d4656183e05243d4bab4bc739760ed99, type: 2}
 --- !u!195 &195969845727586126
 NavMeshAgent:
   m_ObjectHideFlags: 1

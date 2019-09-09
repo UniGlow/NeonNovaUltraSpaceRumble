@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using DG.Tweening;
 
 /// <summary>
 /// 
@@ -28,13 +29,9 @@ public class PulsingTween : MonoBehaviour
 	private void Start () 
 	{
         textMesh = GetComponent<TextMeshProUGUI>();
-        
-        LeanTween.value(gameObject, minAlpha, maxAlpha, duration).setLoopPingPong().setEase(LeanTweenType.easeInOutQuad).setOnUpdate((float value) => {
-            Color newColor = textMesh.color;
-            newColor.a = value;
-            textMesh.color = newColor;
-        });
-        LeanTween.scale(gameObject.GetComponent<RectTransform>(), Vector3.one * scaleTo, duration).setLoopPingPong().setEase(LeanTweenType.easeInOutQuad);
+        textMesh.color = new Color(textMesh.color.r, textMesh.color.g, textMesh.color.b, minAlpha);
+        DOTween.ToAlpha(() => textMesh.color, x => textMesh.color = x, maxAlpha, duration).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
+        gameObject.GetComponent<RectTransform>().DOScale(Vector3.one * scaleTo, duration).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
 	}
 	#endregion
 }

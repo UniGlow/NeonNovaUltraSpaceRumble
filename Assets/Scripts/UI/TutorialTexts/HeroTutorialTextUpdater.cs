@@ -16,24 +16,21 @@ public class HeroTutorialTextUpdater : TutorialTextUpdater
 
 
     #region Unity Event Functions
-    protected override void InheritedStart()
-    {
-        hero = player.GetComponent<Hero>();
-
-        UpdateText();
-    }
+    
     #endregion
 
 
 
     #region Protected Functions
-    protected override void UpdateText()
+    public override void UpdateText(PlayerConfig bossConfig)
     {
+        hero = player.GetComponent<Hero>();
+
         if (colorChanges <= 1)
         {
-            if (hero.ability == Ability.Damage) ChangeTextTo("Damage");
-            else if (hero.ability == Ability.Tank) ChangeTextTo("Tank");
-            else if (hero.ability == Ability.Opfer) ChangeTextTo("Opfer");
+            if (hero.PlayerConfig.ability.Class == Ability.AbilityClass.Damage) ChangeTextTo("Damage");
+            else if (hero.PlayerConfig.ability.Class == Ability.AbilityClass.Tank) ChangeTextTo("Tank");
+            else if (hero.PlayerConfig.ability.Class == Ability.AbilityClass.Victim) ChangeTextTo("Opfer");
         }
         else if (colorChanges == 2)
         {
@@ -42,19 +39,17 @@ public class HeroTutorialTextUpdater : TutorialTextUpdater
         else
         {
             // If same color as Boss
-            if (GameManager.Instance.Boss.WeaknessColor == PlayerColor.Blue && hero.PlayerColor == PlayerColor.Blue
-                || GameManager.Instance.Boss.WeaknessColor == PlayerColor.Green && hero.PlayerColor == PlayerColor.Green
-                || GameManager.Instance.Boss.WeaknessColor == PlayerColor.Red && hero.PlayerColor == PlayerColor.Red)
+            if (bossConfig.ColorConfig == hero.PlayerConfig.ColorConfig)
             {
-                if (hero.ability == Ability.Damage) ChangeTextTo("DealDamage");
+                if (hero.PlayerConfig.ability.Class == Ability.AbilityClass.Damage) ChangeTextTo("DealDamage");
                 else ChangeTextTo("GetDamage");
             }
             // Not Boss color
             else
             {
-                if (hero.ability == Ability.Damage) ChangeTextTo("PassDamage");
-                else if (hero.ability == Ability.Tank) ChangeTextTo("Tank");
-                else if (hero.ability == Ability.Opfer) ChangeTextTo("Opfer");
+                if (hero.PlayerConfig.ability.Class == Ability.AbilityClass.Damage) ChangeTextTo("PassDamage");
+                else if (hero.PlayerConfig.ability.Class == Ability.AbilityClass.Tank) ChangeTextTo("Tank");
+                else if (hero.PlayerConfig.ability.Class == Ability.AbilityClass.Victim) ChangeTextTo("Opfer");
             }
         }
     }

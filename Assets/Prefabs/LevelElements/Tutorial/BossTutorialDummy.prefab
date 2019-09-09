@@ -25,7 +25,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &1796927515464758
 GameObject:
@@ -41,7 +41,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &1855300659327034
 GameObject:
@@ -59,7 +59,7 @@ GameObject:
   m_TagString: BossDummy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &1862838226148950
 GameObject:
@@ -72,12 +72,13 @@ GameObject:
   - component: {fileID: 54062936676954836}
   - component: {fileID: 114258130138065538}
   - component: {fileID: 82913534427823134}
+  - component: {fileID: 114034765609753788}
   m_Layer: 9
   m_Name: BossTutorialDummy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4041316755136740
 Transform:
@@ -199,9 +200,9 @@ MeshCollider:
   m_Material: {fileID: 13400000, guid: 498dae0bc1d2d574caf8d03fb2201892, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Convex: 1
-  m_InflateMesh: 0
+  m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 51a8d996c6cb8c44cb0954778d972cb2, type: 3}
 --- !u!82 &82913534427823134
@@ -285,6 +286,31 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &114034765609753788
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1862838226148950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 5cb0235c1fda1e64dae1cfd14392faef, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  linkedMethods:
+  - component: {fileID: 114258130138065538}
+    methodID: 1
+    methodName: ChangeColor
+    chosenID: 1
+    methodNames: []
+    gameObject: {fileID: 1862838226148950}
+  ignoreEventParameters: 0
 --- !u!114 &114258130138065538
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -297,9 +323,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 23435262470016556}
-  greenBossMat: {fileID: 2100000, guid: 966f269b5a0b25f4485446ac000d0ef7, type: 2}
-  redBossMat: {fileID: 2100000, guid: 7d68be63867edc147a22fe6137b42316, type: 2}
-  blueBossMat: {fileID: 2100000, guid: b9952fe678988874f98372d9edd2afff, type: 2}
 --- !u!212 &212617407059679396
 SpriteRenderer:
   m_ObjectHideFlags: 1

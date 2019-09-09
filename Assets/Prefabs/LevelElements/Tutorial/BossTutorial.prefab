@@ -58,6 +58,7 @@ GameObject:
   - component: {fileID: 222122617606353634}
   - component: {fileID: 114160974578303534}
   - component: {fileID: 114836918268969182}
+  - component: {fileID: 114462520782097360}
   m_Layer: 5
   m_Name: TextMeshPro
   m_TagString: Untagged
@@ -76,6 +77,7 @@ GameObject:
   - component: {fileID: 54794043742492752}
   - component: {fileID: 114865142637485178}
   - component: {fileID: 82559145028306544}
+  - component: {fileID: 114983154902184002}
   m_Layer: 9
   m_Name: BossTutorial
   m_TagString: Untagged
@@ -261,9 +263,9 @@ MeshCollider:
   m_Material: {fileID: 13400000, guid: 498dae0bc1d2d574caf8d03fb2201892, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Convex: 1
-  m_InflateMesh: 0
+  m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 51a8d996c6cb8c44cb0954778d972cb2, type: 3}
 --- !u!82 &82559145028306544
@@ -359,6 +361,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textCollection: {fileID: 11400000, guid: b1b4d27332aaa334ca4b778d683e070f, type: 2}
+--- !u!114 &114462520782097360
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1538280131579060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -907550668, guid: 89f0137620f6af44b9ba852b4190e64e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114836918268969182
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -382,9 +395,11 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 808aa8f1ab804104aa7d0c337a6c1481, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 808aa8f1ab804104aa7d0c337a6c1481, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 0}
   m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
+  m_fontMaterials:
+  - {fileID: 0}
   m_fontColor32:
     serializedVersion: 2
     rgba: 2650800127
@@ -456,7 +471,7 @@ MonoBehaviour:
   m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_spriteAnimator: {fileID: 0}
+  m_spriteAnimator: {fileID: 114462520782097360}
   m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
@@ -513,6 +528,36 @@ MonoBehaviour:
   greenBossMat: {fileID: 2100000, guid: 966f269b5a0b25f4485446ac000d0ef7, type: 2}
   redBossMat: {fileID: 2100000, guid: 7d68be63867edc147a22fe6137b42316, type: 2}
   blueBossMat: {fileID: 2100000, guid: b9952fe678988874f98372d9edd2afff, type: 2}
+--- !u!114 &114983154902184002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1657994876509388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: a93bef75cc487ef48b9411ec84a74c73, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114865142637485178}
+        m_MethodName: SetMovable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  linkedMethods: []
+  ignoreEventParameters: 0
 --- !u!212 &212055019744730586
 SpriteRenderer:
   m_ObjectHideFlags: 1

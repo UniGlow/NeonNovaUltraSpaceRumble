@@ -7,32 +7,20 @@ using UnityEngine;
 /// </summary>
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(AudioSource))]
-public class Player : SubscribedBehaviour
+public class Player : MonoBehaviour
 {
 
     #region Variable Declarations
     // Variables that should be visible in Inspector
-    [Header("Movement")]
-    [SerializeField]
-    protected float movementSpeed = 10;
-    [SerializeField]
-    protected float rotateSpeed = 1000;
-
     [Header("Properties")]
-    [Range(1, 4)]
-    [SerializeField] protected int playerNumber;
-    public int PlayerNumber { get { return playerNumber; }
-        set {
-            if (value >= 0 && value <= 4) playerNumber = value;
-            else Debug.LogWarning("Trying to access playerNumber out of range. PlayerNumber = " + value);
-        }
-    }
+    [SerializeField] protected CharacterStats characterStats = null;
+    protected PlayerConfig playerConfig = null;
 
     // Movement Variables
-    protected float horizontalInput;
-    protected float verticalInput;
-    protected float horizontalLookInput;
-    protected float verticalLookInput;
+    protected float horizontalMovement;
+    protected float verticalMovement;
+    protected float horizontalLook;
+    protected float verticalLook;
     protected bool active = true;
 
     // Component References
@@ -42,41 +30,41 @@ public class Player : SubscribedBehaviour
 
 
 
-    #region Unity Event Functions
-    // Use this for initialization
-    protected virtual void Start() {
-        rigidbody = GetComponent<Rigidbody>();
-        audioSource = GetComponent<AudioSource>();
-
-        SetMovable(false);
-    }
-
-    protected virtual void FixedUpdate() {
-        if (active)
-        {
-            MoveCharacter();
-            RotateCharacter();
-        }
-    }
-
-    // Update is called once per frame
-    protected virtual void Update() {
-        if (active)
-        {
-            horizontalInput = Input.GetAxis(Constants.INPUT_HORIZONTAL + playerNumber) * movementSpeed;
-            verticalInput = Input.GetAxis(Constants.INPUT_VERTICAL + playerNumber) * movementSpeed;
-            horizontalLookInput = Input.GetAxis(Constants.INPUT_LOOK_HORIZONTAL + playerNumber) * movementSpeed;
-            verticalLookInput = Input.GetAxis(Constants.INPUT_LOOK_VERTICAL + playerNumber) * movementSpeed;
-        }
-    }
+    #region Public Properties
+    public PlayerConfig PlayerConfig { get { return playerConfig; } }
+    public CharacterStats CharacterStats { get { return characterStats; } }
     #endregion
 
 
 
-    #region Custom Event Functions
-    protected override void OnLevelStarted()
+    #region Unity Event Functions
+    // Use this for initialization
+    protected virtual void Awake()
     {
-        SetMovable(true);
+        rigidbody = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    protected virtual void FixedUpdate()
+    {
+        if (active)
+        {
+            MoveCharacter();
+        }
+
+        RotateCharacter();
+    }
+
+    // Update is called once per frame
+    protected virtual void Update()
+    {
+        if (active)
+        {
+            horizontalMovement = Input.GetAxis(Constants.INPUT_HORIZONTAL + playerConfig.PlayerNumber) * characterStats.speed;
+            verticalMovement = Input.GetAxis(Constants.INPUT_VERTICAL + playerConfig.PlayerNumber) * characterStats.speed;
+        }
+            horizontalLook = Input.GetAxis(Constants.INPUT_LOOK_HORIZONTAL + playerConfig.PlayerNumber) * characterStats.speed;
+            verticalLook = Input.GetAxis(Constants.INPUT_LOOK_VERTICAL + playerConfig.PlayerNumber) * characterStats.speed;
     }
     #endregion
 
@@ -87,12 +75,14 @@ public class Player : SubscribedBehaviour
     /// Sets if the character is allowed to move or not and stops his current movement
     /// </summary>
     /// <param name="movable">Character allowed to move?</param>
-    public void SetMovable(bool active) {
+    public virtual void SetMovable(bool active)
+    {
         this.active = active;
 
-        if (!active) {
-            horizontalInput = 0;
-            verticalInput = 0;
+        if (!active)
+        {
+            horizontalMovement = 0;
+            verticalMovement = 0;
         }
 
         try
@@ -112,17 +102,23 @@ public class Player : SubscribedBehaviour
     /// <summary>
     /// Sets the velocity of the characters Rigidbody component
     /// </summary>
-    private void MoveCharacter() {
+    private void MoveCharacter()
+    {
         Vector3 newVelocity = rigidbody.velocity;
-        newVelocity.x = horizontalInput;
-        newVelocity.z = verticalInput;
+        newVelocity.x = horizontalMovement;
+        newVelocity.z = verticalMovement;
         rigidbody.velocity = newVelocity;
     }
 
-    private void RotateCharacter() {
-        if (horizontalLookInput != 0 || verticalLookInput != 0) {
-            Vector3 lookDirection = new Vector3(horizontalLookInput, 0f, verticalLookInput);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(lookDirection, Vector3.up), Time.deltaTime * rotateSpeed);
+    private void RotateCharacter()
+    {
+        if (horizontalLook != 0 || verticalLook != 0)
+        {
+            Vector3 lookDirection = new Vector3(horizontalLook, 0f, verticalLook);
+            transform.rotation = Quaternion.RotateTowards(
+                transform.rotation, 
+                Quaternion.LookRotation(lookDirection, Vector3.up), 
+                Time.deltaTime * characterStats.rotationSpeed);
         }
     }
     #endregion

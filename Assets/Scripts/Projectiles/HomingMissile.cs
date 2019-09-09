@@ -8,9 +8,11 @@ using UnityEngine.AI;
 /// </summary>
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(AudioSource))]
-public class HomingMissile : SubscribedBehaviour {
+public class HomingMissile : MonoBehaviour
+{
 
     #region Variable Declarations
+    [Header("Stats")]
     [SerializeField] float speed = 10f;
     [SerializeField] int damage = 100;
 
@@ -28,9 +30,14 @@ public class HomingMissile : SubscribedBehaviour {
     [SerializeField] float fadeIn = 0.1f;
     [SerializeField] float fadeOut = 0.8f;
 
-    [Header("Object References")]
+    [Header("Particle Systems")]
     [SerializeField] GameObject hitPSHeroes;
     [SerializeField] GameObject hitPSBoss;
+
+    [Header("References")]
+    [SerializeField] Points points = null;
+    [Tooltip("Can be used to set a fixed target in the scene.")]
+    [SerializeField] Transform fixedTarget = null;
 
     Transform target;
     NavMeshAgent agent;
@@ -41,16 +48,22 @@ public class HomingMissile : SubscribedBehaviour {
 	
 	
 	#region Unity Event Functions
-	private void Start() {
+    private void Awake()
+    {
         agent = GetComponent<NavMeshAgent>();
         audioSource = GetComponent<AudioSource>();
-        AcquireNewTarget();
-	}
+    }
 
+    private void Start()
+    {
+        if (fixedTarget) target = fixedTarget;
+    }
+    
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag.Contains(Constants.TAG_HERO)) {
-            HeroHealth.Instance.TakeDamage(damage);
+        if (other.tag.Contains(Constants.TAG_HERO))
+        {
+            points.ScorePoints(Faction.Boss, damage);
 
             audioSource.PlayOneShot(hitSound, hitSoundVolume);
 
@@ -59,8 +72,9 @@ public class HomingMissile : SubscribedBehaviour {
             if (enableCameraShake) EZCameraShake.CameraShaker.Instance.ShakeOnce(magnitude, roughness, fadeIn, fadeOut);
         }
 
-        else if (other.tag.Contains(Constants.TAG_BOSS)) {
-            BossHealth.Instance.TakeDamage(damage);
+        else if (other.tag.Contains(Constants.TAG_BOSS))
+        {
+            points.ScorePoints(Faction.Heroes, damage);
 
             audioSource.PlayOneShot(hitSound, hitSoundVolume);
 
@@ -72,8 +86,13 @@ public class HomingMissile : SubscribedBehaviour {
 
     private void Update()
     {
-        if (!agentPaused) {
-            if (target == null) AcquireNewTarget();
+        if (!agentPaused)
+        {
+            if (target == null)
+            {
+                Debug.LogError("Homing Missile has no target set", this);
+                return;
+            }
 
             agent.SetDestination(target.position);
             agent.Move(transform.forward * speed);
@@ -83,33 +102,23 @@ public class HomingMissile : SubscribedBehaviour {
 
 
 
-    #region Custom Event Functions
-    override protected void OnLevelCompleted(string winner)
-    {
-        PauseMissile(true);
-    }
-
-    protected override void OnLevelStarted()
-    {
-        PauseMissile(false);
-    }
-    #endregion
-
-
-
     #region Public Functions
-    public void AcquireNewTarget()
+    public void AcquireNewTarget(PlayerConfig hero1, PlayerConfig hero2)
     {
-        Hero[] heroes = GameObject.FindObjectsOfType<Hero>();
-        foreach (Hero hero in heroes) {
-            if (hero.ability == Ability.Opfer && hero.GetType() != typeof(HeroTutorialAI)) {
-                target = hero.transform;
-            }
-        }
+        if (hero1.ability.Class == Ability.AbilityClass.Victim) target = hero1.playerTransform;
+        else if (hero2.ability.Class == Ability.AbilityClass.Victim) target = hero2.playerTransform;
+    }
+
+    public void AcquireNewTarget(PlayerConfig hero1, PlayerConfig hero2, PlayerConfig hero3, PlayerConfig boss)
+    {
+        if (hero1.ability.Class == Ability.AbilityClass.Victim) target = hero1.playerTransform;
+        else if (hero2.ability.Class == Ability.AbilityClass.Victim) target = hero2.playerTransform;
+        else if (hero3.ability.Class == Ability.AbilityClass.Victim) target = hero3.playerTransform;
     }
 
     public void PauseMissile(bool pause)
     {
+        agent.isStopped = pause;
         agentPaused = pause;
     }
     #endregion

@@ -17,11 +17,9 @@ public class BossAI : Boss
     [Range(0, 1)]
     [SerializeField]
     float cornerPeek = 0.2f;
+    [SerializeField] List<PlayerConfig> heroConfigs = new List<PlayerConfig>();
 
     NavMeshAgent agent;
-    Transform redHero;
-    Transform blueHero;
-    Transform greenHero;
     List<Transform> corners = new List<Transform>();
     List<Transform> middleTargets = new List<Transform>();
     List<Transform> allAITargets = new List<Transform>();
@@ -31,13 +29,15 @@ public class BossAI : Boss
 
 
     #region Unity Event Functions
-    override protected void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
 
-        // Get references
         agent = GetComponent<NavMeshAgent>();
+    }
 
+    private void Start()
+    {
         GameObject[] cornersGO = GameObject.FindGameObjectsWithTag(Constants.TAG_AI_CORNER);
         foreach (GameObject go in cornersGO)
         {
@@ -70,6 +70,8 @@ public class BossAI : Boss
     {
         if (active)
         {
+            colorChangeTimer += Time.deltaTime;
+            HandleColorSwitch();
             randomnessTimer += Time.deltaTime;
         }
     }
@@ -93,19 +95,12 @@ public class BossAI : Boss
 
 
     #region Public Functions
-    public void SetHeroReferencesNextFrame()
+
+    public override void SetMovable(bool active)
     {
-        StartCoroutine(Wait(1, () =>
-        {
-            Hero[] heroes = GameObject.FindObjectsOfType<Hero>();
-            foreach (Hero hero in heroes)
-            {
-                if (hero == null) continue;
-                if (hero.PlayerColor == PlayerColor.Red) redHero = hero.transform;
-                if (hero.PlayerColor == PlayerColor.Blue) blueHero = hero.transform;
-                if (hero.PlayerColor == PlayerColor.Green) greenHero = hero.transform;
-            }
-        }));
+        base.SetMovable(active);
+
+        agent.isStopped = !active;
     }
     #endregion
 
@@ -116,53 +111,28 @@ public class BossAI : Boss
     {
         // Calculate path to strength hero
         NavMeshPath path = new NavMeshPath();
-        switch (strengthColor)
+        
+        heroConfigs.ForEach((PlayerConfig playerConfig) => 
         {
-            case PlayerColor.Red:
-                NavMesh.CalculatePath(transform.position, redHero.position, agent.areaMask, path);
+            if (playerConfig.ColorConfig == strengthColor)
+            {
+                NavMesh.CalculatePath(transform.position, playerConfig.playerTransform.position, agent.areaMask, path);
 
                 // strength hero not in shooting range
                 if (agent.destination == transform.position && path.corners.Length > 2)
                 {
                     // Move
-                    Vector3 destination = path.corners[path.corners.Length - 2] + (redHero.position - path.corners[path.corners.Length - 2]) * cornerPeek;
+                    Vector3 destination = path.corners[path.corners.Length - 2] + (playerConfig.playerTransform.position - path.corners[path.corners.Length - 2]) * cornerPeek;
                     SetDestination(destination);
                 }
 
                 // Rotate
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(redHero.position - transform.position, Vector3.up), Time.deltaTime * rotateSpeed);
-                break;
-
-            case PlayerColor.Blue:
-                NavMesh.CalculatePath(transform.position, blueHero.position, agent.areaMask, path);
-
-                // strength hero not in shooting range
-                if (agent.destination == transform.position && path.corners.Length > 2)
-                {
-                    // Move
-                    Vector3 destination = path.corners[path.corners.Length - 2] + (blueHero.position - path.corners[path.corners.Length - 2]) * cornerPeek;
-                    SetDestination(destination);
-                }
-
-                // Rotate
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(blueHero.position - transform.position, Vector3.up), Time.deltaTime * rotateSpeed);
-                break;
-
-            case PlayerColor.Green:
-                NavMesh.CalculatePath(transform.position, greenHero.position, agent.areaMask, path);
-
-                // strength hero not in shooting range
-                if (agent.destination == transform.position && path.corners.Length > 2)
-                {
-                    // Move
-                    Vector3 destination = path.corners[path.corners.Length - 2] + (greenHero.position - path.corners[path.corners.Length - 2]) * cornerPeek;
-                    SetDestination(destination);
-                }
-
-                // Rotate
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(greenHero.position - transform.position, Vector3.up), Time.deltaTime * rotateSpeed);
-                break;
-        }
+                transform.rotation = Quaternion.RotateTowards(
+                    transform.rotation, 
+                    Quaternion.LookRotation(playerConfig.playerTransform.position - transform.position, Vector3.up), 
+                    Time.deltaTime * characterStats.rotationSpeed);
+            }
+        });
     }
 
     private void HandleAbilities()
@@ -186,11 +156,11 @@ public class BossAI : Boss
         if (attackCooldownB)
         {
             GameObject projectile = Instantiate(projectilePrefab, transform.position + transform.forward * 1.9f + Vector3.up * 0.5f, transform.rotation);
-            projectile.GetComponent<BossProjectile>().damage = attackDamagePerShot;
-            projectile.GetComponent<BossProjectile>().playerColor = strengthColor;
-            projectile.GetComponent<BossProjectile>().lifeTime = attackProjectileLifeTime;
-            projectile.GetComponent<Rigidbody>().velocity = transform.forward * attackProjectileSpeed;
-            projectile.GetComponent<Renderer>().material.SetColor("_TintColor", activeStrengthColor);
+            projectile.GetComponent<BossProjectile>().Initialize(
+                attackDamagePerShot, 
+                strengthColor, 
+                transform.forward * attackProjectileSpeed, 
+                attackProjectileLifeTime);
 
             audioSource.PlayOneShot(attackSound, attackSoundVolume);
 
@@ -213,11 +183,11 @@ public class BossAI : Boss
                     Mathf.Cos(factor) * 1.9f);
 
                 GameObject projectile = Instantiate(projectilePrefab, pos + transform.position, Quaternion.identity);
-                projectile.GetComponent<BossProjectile>().damage = abilityDamagePerShot;
-                projectile.GetComponent<BossProjectile>().playerColor = strengthColor;
-                projectile.GetComponent<BossProjectile>().lifeTime = abilityProjectileLifeTime;
-                projectile.GetComponent<Rigidbody>().velocity = (projectile.transform.position - transform.position) * abilityProjectileSpeed;
-                projectile.GetComponent<Renderer>().material.SetColor("_TintColor", activeStrengthColor);
+                projectile.GetComponent<BossProjectile>().Initialize(
+                    attackDamagePerShot, 
+                    strengthColor, 
+                    (projectile.transform.position - transform.position) * abilityProjectileSpeed, 
+                    attackProjectileLifeTime);
             }
 
             audioSource.PlayOneShot(abilitySound, abilitySoundVolume);
@@ -225,6 +195,15 @@ public class BossAI : Boss
             abilityCooldownB = false;
             StartCoroutine(ResetAbilityCooldown());
         }
+    }
+    #endregion
+
+
+
+    #region GameEvent Raiser
+    protected override void RaiseBossColorChanged(PlayerConfig bossConfig)
+    {
+        bossColorChangedEvent.Raise(this, bossConfig);
     }
     #endregion
 

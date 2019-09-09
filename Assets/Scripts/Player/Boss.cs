@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 /// <summary>
 /// Handles everything related to the movement of Haru, our playable Character
 /// </summary>
-public class Boss : Player {
+public class Boss : Player
+{
 
     #region Variable Declarations
     // Variables that should be visible in Inspector
@@ -23,10 +25,6 @@ public class Boss : Player {
     [SerializeField] protected float abilityCooldown = 3f;
 
     [Header("Properties")]
-    [SerializeField] protected PlayerColor weaknessColor;
-    public PlayerColor WeaknessColor { get { return weaknessColor; } }
-    [SerializeField] protected PlayerColor strengthColor;
-    public PlayerColor StrengthColor { get { return strengthColor; } }
     [SerializeField] float materialGlowOnSwitch = 3f;
 
     [Header("Sound")]
@@ -39,6 +37,9 @@ public class Boss : Player {
     [Range(0, 1)]
     [SerializeField]
     protected float attackSoundVolume = 1f;
+    [SerializeField] AudioClip colorChangeSound;
+    [Range(0, 1)]
+    [SerializeField] float colorChangeSoundVolume = 1f;
 
     [Header("Camera Shake")]
     [SerializeField] public bool enableCameraShake = true;
@@ -51,70 +52,61 @@ public class Boss : Player {
     [SerializeField] protected GameObject projectilePrefab;
     [SerializeField] protected Renderer bossMeshRenderer;
     public SpriteRenderer healthIndicator;
-    [SerializeField] protected Material greenBossMat;
-    [SerializeField] protected Material redBossMat;
-    [SerializeField] protected Material blueBossMat;
+    [SerializeField] protected GameEvent bossColorChangedEvent = null;
+    [SerializeField] protected GameSettings gameSettings = null;
 
     protected bool attackCooldownB = true;
     protected bool abilityCooldownB = true;
-    protected Color activeStrengthColor;
-    protected float abilityAxisInputPrevFrame;
+
+    // Color Settings
+    protected PlayerColor strengthColor;
+    public PlayerColor StrengthColor { get { return strengthColor; } }
+    protected ColorSet colorSet = null;
+
+    // Color Change
+    protected float colorChangeTimer;
+    bool colorChangeSoundPlayed;
     #endregion
 
 
 
     #region Unity Event Functions
-    protected override void Start() {
-        base.Start();
-
-        SetStrengthColor(strengthColor);
-        SetWeaknessColor(weaknessColor);
-    }
-
-    override protected void Update() {
+    override protected void Update()
+    {
         base.Update();
 
         if (active)
         {
-            horizontalInput = Input.GetAxis(Constants.INPUT_HORIZONTAL + playerNumber) * movementSpeed;
-            verticalInput = Input.GetAxis(Constants.INPUT_VERTICAL + playerNumber) * movementSpeed;
-            horizontalLookInput = Input.GetAxis(Constants.INPUT_LOOK_HORIZONTAL + playerNumber) * movementSpeed;
-            verticalLookInput = Input.GetAxis(Constants.INPUT_LOOK_VERTICAL + playerNumber) * movementSpeed;
+            colorChangeTimer += Time.deltaTime;
 
             Attack();
             Ability();
+            HandleColorSwitch();
         }
-
-        abilityAxisInputPrevFrame = Input.GetAxis(Constants.INPUT_TRANSMIT_AXIS + playerNumber);
     }
     #endregion
 
 
 
     #region Public Funtcions
-    public void SetWeaknessColor(PlayerColor playerColor)
-    {
-        weaknessColor = playerColor;
-
-        if (weaknessColor == PlayerColor.Blue) bossMeshRenderer.material = blueBossMat;
-        else if (weaknessColor == PlayerColor.Green) bossMeshRenderer.material = greenBossMat;
-        else if (weaknessColor == PlayerColor.Red) bossMeshRenderer.material = redBossMat;
-
-        Color newColor = bossMeshRenderer.material.color;
-        LeanTween.value(gameObject, bossMeshRenderer.material.color, bossMeshRenderer.material.color * materialGlowOnSwitch, 0.3f).setEaseInOutQuad().setLoopPingPong(1).setOnUpdate((Color value) =>
-        {
-            newColor = value;
-            bossMeshRenderer.material.color = newColor;
-        });
-    }
 
     public void SetStrengthColor(PlayerColor playerColor)
     {
         strengthColor = playerColor;
+    }
 
-        if (strengthColor == PlayerColor.Blue) activeStrengthColor = GameManager.Instance.BluePlayerColor;
-        else if (strengthColor == PlayerColor.Green) activeStrengthColor = GameManager.Instance.GreenPlayerColor;
-        else if (strengthColor == PlayerColor.Red) activeStrengthColor = GameManager.Instance.RedPlayerColor;
+    public void SetPlayerConfig(PlayerConfig playerConfig, ColorSet colorSet)
+    {
+        this.playerConfig = playerConfig;
+        this.colorSet = colorSet;
+
+        // Set color
+        bossMeshRenderer.material = playerConfig.ColorConfig.heroMaterial;
+
+        SetStrengthColor(colorSet.GetRandomColor());
+        SetWeaknessColor(playerConfig.ColorConfig);
+
+        RaiseBossColorChanged(playerConfig);
     }
     #endregion
 
@@ -124,11 +116,11 @@ public class Boss : Player {
     private void Attack() {
         if (AttackButtonsPressed() && attackCooldownB) {
             GameObject projectile = Instantiate(projectilePrefab, transform.position + transform.forward * 1.9f + Vector3.up * 0.5f, transform.rotation);
-            projectile.GetComponent<BossProjectile>().damage = attackDamagePerShot;
-            projectile.GetComponent<BossProjectile>().playerColor = strengthColor;
-            projectile.GetComponent<BossProjectile>().lifeTime = attackProjectileLifeTime;
-            projectile.GetComponent<Rigidbody>().velocity = transform.forward * attackProjectileSpeed;
-            projectile.GetComponent<Renderer>().material.SetColor("_TintColor", activeStrengthColor);
+            projectile.GetComponent<BossProjectile>().Initialize(
+                attackDamagePerShot, 
+                strengthColor, 
+                transform.forward * attackProjectileSpeed, 
+                attackProjectileLifeTime);
 
             audioSource.PlayOneShot(attackSound, attackSoundVolume);
 
@@ -148,11 +140,11 @@ public class Boss : Player {
                     Mathf.Cos(factor) * 1.9f);
 
                 GameObject projectile = Instantiate(projectilePrefab, pos + transform.position, Quaternion.identity);
-                projectile.GetComponent<BossProjectile>().damage = abilityDamagePerShot;
-                projectile.GetComponent<BossProjectile>().playerColor = strengthColor;
-                projectile.GetComponent<BossProjectile>().lifeTime = abilityProjectileLifeTime;
-                projectile.GetComponent<Rigidbody>().velocity = (projectile.transform.position - transform.position) * abilityProjectileSpeed;
-                projectile.GetComponent<Renderer>().material.SetColor("_TintColor", activeStrengthColor);
+                projectile.GetComponent<BossProjectile>().Initialize(
+                attackDamagePerShot,
+                strengthColor,
+                (projectile.transform.position - transform.position) * abilityProjectileSpeed,
+                attackProjectileLifeTime);
             }
             
             audioSource.PlayOneShot(abilitySound, abilitySoundVolume);
@@ -166,31 +158,73 @@ public class Boss : Player {
 
     private bool AttackButtonsPressed()
     {
-        if (Input.GetButton(Constants.INPUT_ABILITY + playerNumber)) return true;
-
-        else if (Input.GetAxis(Constants.INPUT_ABILITY_AXIS + playerNumber) > 0) return true;
+        if (Input.GetButton(Constants.INPUT_ABILITY + playerConfig.PlayerNumber)) return true;
 
         return false;
     }
 
     private bool AbilityButtonsDown()
     {
-        if (Input.GetButtonDown(Constants.INPUT_TRANSMIT + playerNumber)) return true;
-
-        //else if (Input.GetAxis(Constants.INPUT_TRANSMIT_AXIS + playerNumber) > 0 &&
-        //    abilityAxisInputPrevFrame == 0)
-        //{
-        //    return true;
-        //}
+        if (Input.GetButtonDown(Constants.INPUT_TRANSMIT + playerConfig.PlayerNumber)) return true;
 
         return false;
+    }
+
+    /// <summary>
+    /// Randomly changes the boss weakness color
+    /// </summary>
+    void ChangeWeaknessColor()
+    {
+        PlayerColor newWeaknessColor = colorSet.GetRandomColorExcept(playerConfig.ColorConfig);
+
+        playerConfig.ColorConfig = newWeaknessColor;
+
+        SetWeaknessColor(playerConfig.ColorConfig);
+    }
+
+    void SetWeaknessColor(PlayerColor playerColor)
+    {
+        playerConfig.ColorConfig = playerColor;
+
+        bossMeshRenderer.material = playerConfig.ColorConfig.bossMaterial;
+
+        bossMeshRenderer.material.DOColor(bossMeshRenderer.material.color * materialGlowOnSwitch, 0.6f).SetLoops(2, LoopType.Yoyo).SetEase(Ease.InOutQuad);
+    }
+
+    protected void HandleColorSwitch()
+    {
+        if (colorChangeTimer >= gameSettings.BossColorSwitchInterval - 0.5f && !colorChangeSoundPlayed)
+        {
+            audioSource.PlayOneShot(colorChangeSound, colorChangeSoundVolume);
+            colorChangeSoundPlayed = true;
+        }
+        // Set new Boss color
+        if (colorChangeTimer >= gameSettings.BossColorSwitchInterval)
+        {
+            ChangeWeaknessColor();
+
+            RaiseBossColorChanged(playerConfig);
+
+            colorChangeTimer = 0f;
+            colorChangeSoundPlayed = false;
+        }
+    }
+    #endregion
+
+
+
+    #region GameEvent Raiser
+    virtual protected void RaiseBossColorChanged(PlayerConfig bossConfig)
+    {
+        bossColorChangedEvent.Raise(this, bossConfig);
     }
     #endregion
 
 
 
     #region Coroutines
-    protected IEnumerator ResetAttackCooldown() {
+    protected IEnumerator ResetAttackCooldown()
+    {
         yield return new WaitForSecondsRealtime(attackCooldown);
         attackCooldownB = true;
     }

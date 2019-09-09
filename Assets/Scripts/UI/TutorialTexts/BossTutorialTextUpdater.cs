@@ -12,19 +12,16 @@ public class BossTutorialTextUpdater : TutorialTextUpdater
 
     #endregion
 
-
+    
 
     #region Unity Event Functions
-    protected override void InheritedStart()
-    {
-        UpdateText();
-    }
+
     #endregion
 
 
 
     #region Protected Functions
-    protected override void UpdateText()
+    public override void UpdateText(PlayerConfig bossConfig)
     {
         if (colorChanges <= 1) ChangeTextTo("");
         else if (colorChanges >= 2 && colorChanges % 2 == 0) ChangeTextTo("WeaknessColor");
