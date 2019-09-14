@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Rewired;
 
 /// <summary>
 /// 
@@ -34,7 +35,6 @@ public class Transmission : MonoBehaviour
     protected bool transmissionCooldownB = true;
     protected HomingMissile homingMissile;
     protected AudioSource audioSource;
-    protected float transmissionAxisInputPrevFrame;
 	#endregion
 	
 	
@@ -50,27 +50,24 @@ public class Transmission : MonoBehaviour
 	virtual protected void Update()
     {        
         // End transmission if button is lifted
-        if (TransmissionButtonsUp())
+        if (hero.PlayerConfig.Player.GetButtonUp(RewiredConsts.Action.TRANSMIT_ABILITY))
         {
             EndTransmission();
         }
 
         // Look for a receiver
-        if (!receiverFound && transmissionCooldownB && TransmissionButtonsPressed())
+        if (!receiverFound && transmissionCooldownB && hero.PlayerConfig.Player.GetButton(RewiredConsts.Action.TRANSMIT_ABILITY))
         {
             UpdateLineRenderer();
             transmissionLineRenderer.gameObject.SetActive(true);
             receiverFound = FindReceiver();
         }
         // Continue the transmission when a receiver is found
-        else if (receiverFound && TransmissionButtonsPressed())
+        else if (receiverFound && hero.PlayerConfig.Player.GetButton(RewiredConsts.Action.TRANSMIT_ABILITY))
         {
             UpdateLineRenderer();
             Transmit();
         }
-
-
-        transmissionAxisInputPrevFrame = Input.GetAxis(Constants.INPUT_TRANSMIT_AXIS + hero.PlayerConfig.PlayerNumber);
     }
     #endregion
 
@@ -155,23 +152,6 @@ public class Transmission : MonoBehaviour
             transmissionLineRenderer.SetPosition(0, transform.position + Vector3.up * 0.5f);
             transmissionLineRenderer.SetPosition(1, receiver.transform.position + Vector3.up * 0.5f);
         }
-    }
-
-    protected bool TransmissionButtonsUp()
-    {
-        if (Input.GetButtonUp(Constants.INPUT_TRANSMIT + hero.PlayerConfig.PlayerNumber))
-        {
-            return true;
-        }
-
-        return false;
-    }
-
-    protected bool TransmissionButtonsPressed()
-    {
-        if (Input.GetButton(Constants.INPUT_TRANSMIT + hero.PlayerConfig.PlayerNumber)) return true;
-
-        return false;
     }
     #endregion
 

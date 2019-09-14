@@ -3,9 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Rewired;
 
 public class Pause : MonoBehaviour
 {
+    public class PlayerRuleSet
+    {
+        public Player player;
+        public List<ControllerMapLayoutManager.RuleSet> ruleSets = new List<ControllerMapLayoutManager.RuleSet>();
+    }
 
     GameObject pauseMenu,
                mainMenu,
@@ -13,36 +19,55 @@ public class Pause : MonoBehaviour
                resumeButton;
     EventSystem eventSystem;
     bool gameIsPaused;
+    List<PlayerRuleSet> playerRuleSets = new List<PlayerRuleSet>();
+
+
+
     public bool GameIsPaused { get { return gameIsPaused; } }
 
+
+
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
         pauseMenu = transform.Find("PauseMenu").gameObject;
         mainMenu = pauseMenu.transform.Find("MainMenu").gameObject;
         resumeButton = mainMenu.transform.Find("ResumeButton").gameObject;
         optionsMenu = pauseMenu.transform.Find("OptionsMenu").gameObject;
-        eventSystem = transform.parent.Find("EventSystem").GetComponent<EventSystem>();
+        eventSystem = transform.parent.Find("Rewired Event System").GetComponent<EventSystem>();
     }
 
-    private void Update() {
-        if (gameIsPaused && !optionsMenu.activeSelf && Input.GetButtonDown(Constants.INPUT_CANCEL)) {
+    private void Update()
+    {
+        if (gameIsPaused && !optionsMenu.activeSelf && Input.GetButtonDown(Constants.INPUT_CANCEL))
+        {
             resumeButton.GetComponent<Button>().onClick.Invoke();
         }
 
-        if (Input.GetButtonDown(Constants.INPUT_ESCAPE)) {
-            if (gameIsPaused) {
+        if (Input.GetButtonDown(Constants.INPUT_ESCAPE))
+        {
+            if (gameIsPaused)
+            {
                 ResumeGame();
             }
-            else {
+            else
+            {
                 PauseGame();
             }
         }
     }
 
-    public void PauseGame() {
+    public void PauseGame()
+    {
         Time.timeScale = 0;
 
-        Rumble.Instance.StopAllRumble();
+        foreach (Player player in ReInput.players.Players)
+        {
+            playerRuleSets.Add(new PlayerRuleSet { player = player, ruleSets = player.controllers.maps.layoutManager.ruleSets });
+            player.controllers.maps.layoutManager.ruleSets.Clear();
+            player.controllers.maps.layoutManager.ruleSets.Add(ReInput.mapping.GetControllerMapLayoutManagerRuleSetInstance("RuleSetMenu"));
+            player.controllers.maps.layoutManager.Apply();
+        }
 
         GameObject.FindObjectOfType<HomingMissile>().PauseMissile(true);
 
@@ -52,8 +77,16 @@ public class Pause : MonoBehaviour
         gameIsPaused = true;
     }
 
-    public void ResumeGame() {
+    public void ResumeGame()
+    {
         Time.timeScale = 1f;
+
+        foreach (Player player in ReInput.players.Players)
+        {
+            player.controllers.maps.layoutManager.ruleSets.Clear();
+            player.controllers.maps.layoutManager.ruleSets.AddRange(playerRuleSets.Find(x => x.player == player).ruleSets);
+            player.controllers.maps.layoutManager.Apply();
+        }
 
         GameObject.FindObjectOfType<HomingMissile>().PauseMissile(false);
 
@@ -65,7 +98,8 @@ public class Pause : MonoBehaviour
         gameIsPaused = false;
     }
 
-    public void ReturnToMainMenu() {
+    public void ReturnToMainMenu()
+    {
         GameManager.Instance.LoadLevel("MainMenu");
     }
 }

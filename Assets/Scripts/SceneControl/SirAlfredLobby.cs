@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using DG.Tweening;
+using Rewired;
 
 /// <summary>
 /// 
@@ -61,8 +62,6 @@ public class SirAlfredLobby : MonoBehaviour
 	
 	private void Update ()
     {
-        // Update player count
-        UpdatePlayerCount();
         UpdatePlayerConfirmsList();
         playerReadyUpdater.UpdateUIElements(playerCount);
 
@@ -109,19 +108,6 @@ public class SirAlfredLobby : MonoBehaviour
         // Check and update Idle State of the game
         UpdateIdleState();
     }
-
-    public void UpdatePlayerCount()
-    {
-        playerCount = 0;
-        string[] joystickNames = Input.GetJoystickNames();
-        foreach (string name in joystickNames)
-        {
-            if (name != "")
-            {
-                playerCount++;
-            }
-        }
-    }
     #endregion
 
 
@@ -129,50 +115,65 @@ public class SirAlfredLobby : MonoBehaviour
     #region Public Functions
     public void Initialize()
     {
-        // Update player count
         UpdatePlayerCount();
 
         // Set playerNumbers depending on amount of human players
         switch (playerCount)
         {
             case 1:
-                bossPlayerConfig.Initialize(1, Faction.Boss, colorSet.GetRandomColor(), false);
-                hero1PlayerConfig.Initialize(2, Faction.Heroes, colorSet.color1, true);
+                bossPlayerConfig.Initialize(ReInput.players.GetPlayer(0), 0, Faction.Boss, colorSet.GetRandomColor(), false);
+                ReInput.players.GetPlayer(0).isPlaying = true;
+                hero1PlayerConfig.Initialize(ReInput.players.GetPlayer(1), 1, Faction.Heroes, colorSet.color1, true);
                 hero1PlayerConfig.ability = damageAbility;
-                hero2PlayerConfig.Initialize(3, Faction.Heroes, colorSet.color2, true);
+                ReInput.players.GetPlayer(1).isPlaying = false;
+                hero2PlayerConfig.Initialize(ReInput.players.GetPlayer(2), 2, Faction.Heroes, colorSet.color2, true);
                 hero2PlayerConfig.ability = tankAbility;
-                hero3PlayerConfig.Initialize(4, Faction.Heroes, colorSet.color3, true);
+                ReInput.players.GetPlayer(2).isPlaying = false;
+                hero3PlayerConfig.Initialize(ReInput.players.GetPlayer(3), 3, Faction.Heroes, colorSet.color3, true);
                 hero3PlayerConfig.ability = victimAbility;
+                ReInput.players.GetPlayer(3).isPlaying = false;
                 break;
 
             case 2:
-                hero1PlayerConfig.Initialize(1, Faction.Heroes, colorSet.color1, false);
+                hero1PlayerConfig.Initialize(ReInput.players.GetPlayer(0), 0, Faction.Heroes, colorSet.color1, false);
                 hero1PlayerConfig.ability = damageAbility;
-                hero2PlayerConfig.Initialize(2, Faction.Heroes, colorSet.color2, false);
+                ReInput.players.GetPlayer(0).isPlaying = true;
+                hero2PlayerConfig.Initialize(ReInput.players.GetPlayer(1), 1, Faction.Heroes, colorSet.color2, false);
                 hero2PlayerConfig.ability = tankAbility;
-                hero3PlayerConfig.Initialize(3, Faction.Heroes, colorSet.color3, true);
+                ReInput.players.GetPlayer(1).isPlaying = true;
+                hero3PlayerConfig.Initialize(ReInput.players.GetPlayer(2), 2, Faction.Heroes, colorSet.color3, true);
                 hero3PlayerConfig.ability = victimAbility;
-                bossPlayerConfig.Initialize(4, Faction.Boss, colorSet.GetRandomColor(), true);
+                ReInput.players.GetPlayer(2).isPlaying = false;
+                bossPlayerConfig.Initialize(ReInput.players.GetPlayer(3), 3, Faction.Boss, colorSet.GetRandomColor(), true);
+                ReInput.players.GetPlayer(3).isPlaying = false;
                 break;
 
             case 3:
-                hero1PlayerConfig.Initialize(1, Faction.Heroes, colorSet.color1, false);
+                hero1PlayerConfig.Initialize(ReInput.players.GetPlayer(0), 0, Faction.Heroes, colorSet.color1, false);
                 hero1PlayerConfig.ability = damageAbility;
-                hero2PlayerConfig.Initialize(2, Faction.Heroes, colorSet.color2, false);
+                ReInput.players.GetPlayer(0).isPlaying = true;
+                hero2PlayerConfig.Initialize(ReInput.players.GetPlayer(1), 1, Faction.Heroes, colorSet.color2, false);
                 hero2PlayerConfig.ability = tankAbility;
-                hero3PlayerConfig.Initialize(3, Faction.Heroes, colorSet.color3, false);
+                ReInput.players.GetPlayer(1).isPlaying = true;
+                hero3PlayerConfig.Initialize(ReInput.players.GetPlayer(2), 2, Faction.Heroes, colorSet.color3, false);
                 hero3PlayerConfig.ability = victimAbility;
-                bossPlayerConfig.Initialize(4, Faction.Boss, colorSet.GetRandomColor(), true);
+                ReInput.players.GetPlayer(2).isPlaying = true;
+                bossPlayerConfig.Initialize(ReInput.players.GetPlayer(3), 3, Faction.Boss, colorSet.GetRandomColor(), true);
+                ReInput.players.GetPlayer(3).isPlaying = false;
                 break;
 
             case 4:
-                bossPlayerConfig.Initialize(1, Faction.Boss, colorSet.GetRandomColor(), false);
-                hero1PlayerConfig.Initialize(2, Faction.Heroes, colorSet.color1, false);
+                bossPlayerConfig.Initialize(ReInput.players.GetPlayer(0), 0, Faction.Boss, colorSet.GetRandomColor(), false);
+                ReInput.players.GetPlayer(0).isPlaying = true;
+                hero1PlayerConfig.Initialize(ReInput.players.GetPlayer(1), 1, Faction.Heroes, colorSet.color1, false);
                 hero1PlayerConfig.ability = damageAbility;
-                hero2PlayerConfig.Initialize(3, Faction.Heroes, colorSet.color2, false);
+                ReInput.players.GetPlayer(1).isPlaying = true;
+                hero2PlayerConfig.Initialize(ReInput.players.GetPlayer(2), 2, Faction.Heroes, colorSet.color2, false);
                 hero2PlayerConfig.ability = tankAbility;
-                hero3PlayerConfig.Initialize(4, Faction.Heroes, colorSet.color3, false);
+                ReInput.players.GetPlayer(2).isPlaying = true;
+                hero3PlayerConfig.Initialize(ReInput.players.GetPlayer(3), 3, Faction.Heroes, colorSet.color3, false);
                 hero3PlayerConfig.ability = victimAbility;
+                ReInput.players.GetPlayer(3).isPlaying = true;
                 break;
 
             default:
@@ -221,8 +222,20 @@ public class SirAlfredLobby : MonoBehaviour
         masterMixer.DOSetFloat(mixerGroup, to, duration).SetEase(Ease.InOutQuad).SetId(this);
     }
 
+    void UpdatePlayerCount()
+    {
+        playerCount = 0;
+
+        foreach (Player player in ReInput.players.Players)
+        {
+            if (player.isPlaying) playerCount++;
+        }
+    }
+
     void UpdatePlayerConfirmsList()
     {
+        UpdatePlayerCount();
+
         if (playerConfirms.Count == playerCount)
         {
             return;

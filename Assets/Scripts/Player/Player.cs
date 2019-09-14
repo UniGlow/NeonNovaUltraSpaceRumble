@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(AudioSource))]
-public class Player : MonoBehaviour
+public class Character : MonoBehaviour
 {
 
     #region Variable Declarations
@@ -60,11 +60,11 @@ public class Player : MonoBehaviour
     {
         if (active)
         {
-            horizontalMovement = Input.GetAxis(Constants.INPUT_HORIZONTAL + playerConfig.PlayerNumber) * characterStats.speed;
-            verticalMovement = Input.GetAxis(Constants.INPUT_VERTICAL + playerConfig.PlayerNumber) * characterStats.speed;
+            horizontalMovement = playerConfig.Player.GetAxis(RewiredConsts.Action.MOVE_HORIZONTAL) * characterStats.speed;
+            verticalMovement = playerConfig.Player.GetAxis(RewiredConsts.Action.MOVE_VERTICAL) * characterStats.speed;
         }
-            horizontalLook = Input.GetAxis(Constants.INPUT_LOOK_HORIZONTAL + playerConfig.PlayerNumber) * characterStats.speed;
-            verticalLook = Input.GetAxis(Constants.INPUT_LOOK_VERTICAL + playerConfig.PlayerNumber) * characterStats.speed;
+            horizontalLook = playerConfig.Player.GetAxis(RewiredConsts.Action.LOOK_HORIZONTAL) * characterStats.rotationSpeed;
+            verticalLook = playerConfig.Player.GetAxis(RewiredConsts.Action.LOOK_VERTICAL) * characterStats.rotationSpeed;
     }
     #endregion
 
