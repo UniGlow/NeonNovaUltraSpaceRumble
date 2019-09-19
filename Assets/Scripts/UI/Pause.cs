@@ -66,6 +66,6 @@ public class Pause : MonoBehaviour
     }
 
     public void ReturnToMainMenu() {
-        GameManager.Instance.LoadLevel("MainMenu");
+        SceneManager.Instance.LoadLevel("MainMenu");
     }
 }

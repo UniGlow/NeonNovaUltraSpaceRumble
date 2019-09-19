@@ -41,7 +41,7 @@ public class TitleScreen : MonoBehaviour
         timer += Time.deltaTime;
 
         if (timer >= delayBetweenWords * delayAfterCompletion && currentWord >= numberOfWords && !nextSceneLoaded) {
-            GameManager.Instance.LoadNextScene();
+            SceneManager.Instance.LoadNextScene();
             nextSceneLoaded = true;
         }
 

@@ -27,7 +27,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] float heroesWinSoundVolume = 1f;
     [SerializeField] AudioSource audioSourceMusic = null;
     [SerializeField] AudioSource audioSourceSFX = null;
-
+    [Space]
+    [SerializeField] GameEvent songChangedEvent = null;
     bool startingTrack;
     #endregion
 
@@ -126,7 +127,7 @@ public class AudioManager : MonoBehaviour
         audioSourceMusic.Play();
         StartCoroutine(StartAudioLoop(track));
 
-        GameObject.FindObjectOfType<SongTextUpdater>().ShowSongTitle(track.artist, track.title);
+        RaiseSongChanged(track.artist, track.title);
     }
 
     public void StopPlaying() {
@@ -156,6 +157,11 @@ public class AudioManager : MonoBehaviour
         return null;
     }
     #endregion
+
+    void RaiseSongChanged(string artist, string title)
+    {
+        songChangedEvent.Raise(this, artist, title);
+    }
 
 
 

@@ -80,7 +80,7 @@ public class SirAlfredLobby : MonoBehaviour
                 // Rstore SFX audio level
                 masterMixer.SetFloat(Constants.MIXER_SFX_VOLUME, originalSFXVolume);
 
-                GameManager.Instance.LoadNextScene();
+                SceneManager.Instance.LoadNextScene();
             }));
         }
 

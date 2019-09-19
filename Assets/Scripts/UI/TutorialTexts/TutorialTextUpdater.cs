@@ -81,6 +81,7 @@ public abstract class TutorialTextUpdater : MonoBehaviour
     public static void UpdateTexts(PlayerConfig bossConfig)
     {
         // Inform all TutorialTextUpdater in scene
+        // TODO: Falls behalten: Referenz ändern
         TutorialTextUpdater[] textUpdaters = GameObject.FindObjectsOfType<TutorialTextUpdater>();
         foreach (TutorialTextUpdater updater in textUpdaters)
         {

@@ -16,11 +16,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Game Properties")]
     [SerializeField] GameSettings gameSettings = null;
-    [SerializeField] float delayAtLevelEnd = 12f;
 
     [Header("References")]
-    [SerializeField] GameEvent levelStartedEvent = null;
-    [SerializeField] GameEvent levelLoadedEvent = null;
     [SerializeField] Points points = null;
 
     // TODO: Verlagern in SO "GameSettings"
@@ -33,10 +30,6 @@ public class GameManager : MonoBehaviour
 
 
     #region Unity Event Functions
-    protected void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnLevelFinishedLoading;
-    }
 
     //Awake is always called before any Start functions
     void Awake() {
@@ -69,60 +62,12 @@ public class GameManager : MonoBehaviour
 
         HandleIntensify();
     }
-
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnLevelFinishedLoading;
-    }
     #endregion
 
 
 
     #region Public Functions
-    /// <summary>
-    /// Loads the next scene in build index
-    /// </summary>
-    public void LoadNextScene()
-    {
-        int activeScene = SceneManager.GetActiveScene().buildIndex;
-        if (activeScene + 1 < SceneManager.sceneCountInBuildSettings)
-        {
-            SceneManager.LoadScene(activeScene + 1);
-        }
-        else
-        {
-            Debug.LogError("No more levels in build index to be loaded");
-        }
-    }
-
-    public void LoadLevel(string name)
-    {
-        SceneManager.LoadScene(name);
-    }
-
-    /// <summary>
-    /// Quits the application or exits play mode when in editor
-    /// </summary>
-    public void ExitGame()
-    {
-        Debug.Log("Exiting the game");
-        Application.Quit();
-
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
-    }
-
-    public string GetActiveSceneName()
-    {
-        return SceneManager.GetActiveScene().name;
-    }
-
-    public void LoadNextLevel()
-    {
-        StartCoroutine(LoadNextLevelCoroutine());
-        Time.timeScale = 0.0f;
-    }
+    
 
     public void ResetTimer()
     {
@@ -133,27 +78,6 @@ public class GameManager : MonoBehaviour
 
 
     #region Private Functions
-    void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
-    {
-        if (SceneManager.GetActiveScene().name.Contains("Level"))
-        {
-            if (SceneManager.GetActiveScene().name.Contains("Lobby"))
-            {
-                StartCoroutine(StartTheTutorial());
-            }
-            else
-            {
-                if (gameSettings.OverrideLevelPointLimits) OverrideLevelPointLimits();
-                StartCoroutine(StartTheAction());
-            }
-        }
-
-        else if (SceneManager.GetActiveScene().name.Contains("Credit"))
-        {
-            StartCoroutine(StartTheCredits());
-        }
-    }
-
     void HandleIntensify()
     {
         if (intensifyTimer >= gameSettings.IntensifyTime)
@@ -165,66 +89,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void OverrideLevelPointLimits()
+    public void OverrideLevelPointLimits() // Temporal public
     {
         points.PointLeadToWin = gameSettings.WinningPointLead;
     }
 
-    void RaiseLevelStarted()
-    {
-        levelStartedEvent.Raise(this);
-    }
-
-    void RaiseLevelLoaded(float duration)
-    {
-        levelLoadedEvent.Raise(this, duration);
-    }
     #endregion
 
 
 
     #region Coroutines
-    IEnumerator LoadNextLevelCoroutine()
-    {
-        yield return new WaitForSecondsRealtime(delayAtLevelEnd);
-        LoadNextScene();
-        Time.timeScale = 1;
-    }
-
-    IEnumerator StartTheAction()
-    {
-        RaiseLevelLoaded(countdownDuration);
-        points.ResetPoints(false);
-
-        yield return new WaitForSecondsRealtime(countdownDuration * (1f / 4f));
-
-        AudioManager.Instance.StartRandomTrack();
-
-        yield return new WaitForSecondsRealtime(countdownDuration * (3f / 4f));
-
-        RaiseLevelStarted();
-    }
-
-    IEnumerator StartTheTutorial()
-    {
-        //TODO: Alfred starten
-        GameObject.FindObjectOfType<SirAlfredLobby>().Initialize();
-
-
-        RaiseLevelLoaded(countdownDuration / 4f);
-
-        yield return new WaitForSecondsRealtime(countdownDuration / 4f);
-
-        RaiseLevelStarted();
-    }
-
-    IEnumerator StartTheCredits()
-    {
-        points.ResetPoints(true);
-
-        yield return new WaitForSecondsRealtime(countdownDuration * (3f / 4f));
-
-        RaiseLevelStarted();
-    }
+    
     #endregion
 }

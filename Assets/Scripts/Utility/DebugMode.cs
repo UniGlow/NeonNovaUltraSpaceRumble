@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Provides a Debug Mode Menu
@@ -101,11 +100,11 @@ public class DebugMode : MonoBehaviour
             GUILayout.Label("Scene Management:");
             if (GUILayout.Button("Load next scene")) {
                 Debug.Log("Debug Mode: Loading next scene.");
-                GameManager.Instance.LoadNextScene();
+                SceneManager.Instance.LoadNextScene();
             }
             if (GUILayout.Button("Reload scene")) {
                 Debug.Log("Debug Mode: Reloading current scene.");
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                SceneManager.Instance.ReloadLevel();
             }
             GUILayout.EndVertical();
 

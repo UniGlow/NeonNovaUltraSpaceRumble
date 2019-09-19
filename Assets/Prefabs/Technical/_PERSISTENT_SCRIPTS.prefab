@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4337183692543796}
   - component: {fileID: 114097331483697454}
+  - component: {fileID: 114432689249649020}
   - component: {fileID: 114599229708516914}
   - component: {fileID: 114332039601200462}
   - component: {fileID: 114614392492591870}
@@ -344,6 +345,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46f0f6fc4f6279d40951198ca98089d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114432689249649020
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1136556033050532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d7d46c3a841d84e872c4b00b3be70f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levels:
+  - sceneAsset: {fileID: 102900000, guid: 50b3a1d7947ffc345abfefec9e79fbbf, type: 3}
+    scenePath: Assets/Scenes/Level001.unity
+  - sceneAsset: {fileID: 102900000, guid: 04b0dd6c8457b33409cab55a4b0943ed, type: 3}
+    scenePath: Assets/Scenes/Level002.unity
+  - sceneAsset: {fileID: 102900000, guid: 1fb2304501188724f8cfbe7c6f57ba7f, type: 3}
+    scenePath: Assets/Scenes/Level003.unity
+  - sceneAsset: {fileID: 102900000, guid: 949d5dd74b4e0d345935429b373e192b, type: 3}
+    scenePath: Assets/Scenes/Level004.unity
+  - sceneAsset: {fileID: 102900000, guid: bc87a24c10ccdda4e8b6f7a7e0fd9b25, type: 3}
+    scenePath: Assets/Scenes/Level005.unity
+  mainMenu:
+    sceneAsset: {fileID: 102900000, guid: ea52997c431bf204f882253cfe60c29d, type: 3}
+    scenePath: Assets/Scenes/MainMenu.unity
+  lobby:
+    sceneAsset: {fileID: 102900000, guid: 409fc4bbec8102043aa9759a56f2fa4f, type: 3}
+    scenePath: Assets/Scenes/LobbyLevel.unity
+  credits:
+    sceneAsset: {fileID: 102900000, guid: cf8d9fb94f1d7104c8ac2db690fa42ff, type: 3}
+    scenePath: Assets/Scenes/CreditScene.unity
+  title:
+    sceneAsset: {fileID: 102900000, guid: 1ab4a20f5c4fb3f47a4db05c7f8d759b, type: 3}
+    scenePath: Assets/Scenes/TitleScreen.unity
+  tutorial:
+    sceneAsset: {fileID: 102900000, guid: b837dcee6af5f1b448a2bdedb88141d4, type: 3}
+    scenePath: Assets/Scenes/Tutorial.unity
+  levelLoadedEvent: {fileID: 11400000, guid: dd95ddef2760add43a73ce45d743f5e5, type: 2}
+  levelStartedEvent: {fileID: 11400000, guid: a93bef75cc487ef48b9411ec84a74c73, type: 2}
+  delayAtLevelEnd: 12
+  points: {fileID: 11400000, guid: 5be3ffe199c802f45a47f0dbbedb0be5, type: 2}
+  gameSettings: {fileID: 11400000, guid: 4cbf2bb18122f9d4c92c9dbd86d8b7fa, type: 2}
 --- !u!114 &114599229708516914
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -356,9 +399,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameSettings: {fileID: 11400000, guid: 4cbf2bb18122f9d4c92c9dbd86d8b7fa, type: 2}
-  delayAtLevelEnd: 9
-  levelStartedEvent: {fileID: 11400000, guid: a93bef75cc487ef48b9411ec84a74c73, type: 2}
-  levelLoadedEvent: {fileID: 11400000, guid: dd95ddef2760add43a73ce45d743f5e5, type: 2}
   points: {fileID: 11400000, guid: 5be3ffe199c802f45a47f0dbbedb0be5, type: 2}
   activeColorSet: {fileID: 0}
 --- !u!114 &114614392492591870
@@ -408,6 +448,7 @@ MonoBehaviour:
   heroesWinSoundVolume: 0.8
   audioSourceMusic: {fileID: 82899805016581398}
   audioSourceSFX: {fileID: 82249825244062562}
+  songChangedEvent: {fileID: 11400000, guid: f6d8145741eb62847bd38ea32a89ef08, type: 2}
 --- !u!114 &114774338545418308
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -478,7 +519,7 @@ MonoBehaviour:
   response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114599229708516914}
+      - m_Target: {fileID: 114432689249649020}
         m_MethodName: LoadNextLevel
         m_Mode: 1
         m_Arguments:
