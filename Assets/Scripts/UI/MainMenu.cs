@@ -12,8 +12,6 @@ public class MainMenu : MonoBehaviour
     #region Variable Declarations
     [SerializeField] GameObject playButton = null;
     [SerializeField] EventSystem eventSystem = null;
-
-    int howToPlay;
     
     AudioSource audioSource;
 	#endregion
@@ -39,8 +37,6 @@ public class MainMenu : MonoBehaviour
 
 
     #region Public Functions
-    public void SetHowToPlay(int status) {
-        howToPlay = status;
-    }
+
     #endregion
 }

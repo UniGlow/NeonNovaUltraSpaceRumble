@@ -382,6 +382,9 @@ MonoBehaviour:
   tutorial:
     sceneAsset: {fileID: 102900000, guid: b837dcee6af5f1b448a2bdedb88141d4, type: 3}
     scenePath: Assets/Scenes/Tutorial.unity
+  uiScene:
+    sceneAsset: {fileID: 0}
+    scenePath: 
   levelLoadedEvent: {fileID: 11400000, guid: dd95ddef2760add43a73ce45d743f5e5, type: 2}
   levelStartedEvent: {fileID: 11400000, guid: a93bef75cc487ef48b9411ec84a74c73, type: 2}
   delayAtLevelEnd: 12
@@ -400,6 +403,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameSettings: {fileID: 11400000, guid: 4cbf2bb18122f9d4c92c9dbd86d8b7fa, type: 2}
   points: {fileID: 11400000, guid: 5be3ffe199c802f45a47f0dbbedb0be5, type: 2}
+  gamePausedEvent: {fileID: 11400000, guid: 1ea968f9ad57732498b111a663021061, type: 2}
+  gameResumedEvent: {fileID: 11400000, guid: cfef13325ec1499459137fbb9b3d8888, type: 2}
   activeColorSet: {fileID: 0}
 --- !u!114 &114614392492591870
 MonoBehaviour:

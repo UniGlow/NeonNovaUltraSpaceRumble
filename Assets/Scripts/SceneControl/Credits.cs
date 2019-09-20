@@ -20,7 +20,7 @@ public class Credits : MonoBehaviour {
 	
 	private void Update() {
         if (Input.GetButtonDown(Constants.INPUT_ESCAPE) || Input.GetButtonDown(Constants.INPUT_CANCEL)) {
-            SceneManager.Instance.LoadLevel("MainMenu");
+            SceneManager.Instance.LoadMainMenu();
         }
 	}
     #endregion

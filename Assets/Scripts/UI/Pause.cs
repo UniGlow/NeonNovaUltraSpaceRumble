@@ -6,36 +6,18 @@ using UnityEngine.UI;
 
 public class Pause : MonoBehaviour
 {
+    [SerializeField] GameObject pauseMenu;
+    [SerializeField] GameObject mainMenu;
+    [SerializeField] GameObject optionsMenu;
+    [SerializeField] GameObject resumeButton;
+    [SerializeField] EventSystem eventSystem;
 
-    GameObject pauseMenu,
-               mainMenu,
-               optionsMenu,
-               resumeButton;
-    EventSystem eventSystem;
     bool gameIsPaused;
-    public bool GameIsPaused { get { return gameIsPaused; } }
-
-	// Use this for initialization
-	void Start () {
-        pauseMenu = transform.Find("PauseMenu").gameObject;
-        mainMenu = pauseMenu.transform.Find("MainMenu").gameObject;
-        resumeButton = mainMenu.transform.Find("ResumeButton").gameObject;
-        optionsMenu = pauseMenu.transform.Find("OptionsMenu").gameObject;
-        eventSystem = transform.parent.Find("EventSystem").GetComponent<EventSystem>();
-    }
+    
 
     private void Update() {
         if (gameIsPaused && !optionsMenu.activeSelf && Input.GetButtonDown(Constants.INPUT_CANCEL)) {
             resumeButton.GetComponent<Button>().onClick.Invoke();
-        }
-
-        if (Input.GetButtonDown(Constants.INPUT_ESCAPE)) {
-            if (gameIsPaused) {
-                ResumeGame();
-            }
-            else {
-                PauseGame();
-            }
         }
     }
 
@@ -43,8 +25,6 @@ public class Pause : MonoBehaviour
         Time.timeScale = 0;
 
         Rumble.Instance.StopAllRumble();
-
-        GameObject.FindObjectOfType<HomingMissile>().PauseMissile(true);
 
         pauseMenu.SetActive(true);
         eventSystem.SetSelectedGameObject(resumeButton);
@@ -55,8 +35,6 @@ public class Pause : MonoBehaviour
     public void ResumeGame() {
         Time.timeScale = 1f;
 
-        GameObject.FindObjectOfType<HomingMissile>().PauseMissile(false);
-
         pauseMenu.SetActive(false);
         optionsMenu.SetActive(false);
         mainMenu.SetActive(true);
@@ -66,6 +44,6 @@ public class Pause : MonoBehaviour
     }
 
     public void ReturnToMainMenu() {
-        SceneManager.Instance.LoadLevel("MainMenu");
+        SceneManager.Instance.LoadMainMenu();
     }
 }

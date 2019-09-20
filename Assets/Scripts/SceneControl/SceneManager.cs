@@ -19,6 +19,7 @@ public class SceneManager : MonoBehaviour
     [SerializeField] SceneReference credits = null;
     [SerializeField] SceneReference title = null;
     [SerializeField] SceneReference tutorial = null;
+    [SerializeField] SceneReference uiScene = null;
 
     [Header("References")]
     [SerializeField] GameEvent levelLoadedEvent = null;
@@ -122,6 +123,26 @@ public class SceneManager : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
+
+    public void LoadMainMenu()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(mainMenu);
+    }
+
+    public void LoadCredits()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(credits);
+    }
+
+    public void LoadTitleScreen()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(title);
+    }
+
+    public void LoadTutorial()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(tutorial);
+    }
     #endregion
 
 
@@ -131,7 +152,9 @@ public class SceneManager : MonoBehaviour
     {
         foreach(SceneReference sr in levels)
         {
-            if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().path == sr.ScenePath)
+            // TODO: Kommentar entfernen, wenn UI Scene einzeln ist
+            //UnityEngine.SceneManagement.SceneManager.LoadScene(uiScene, UnityEngine.SceneManagement.LoadSceneMode.Additive);
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().path == sr.ScenePath)
             {
                 if (gameSettings.OverrideLevelPointLimits) GameManager.Instance.OverrideLevelPointLimits();
                 StartCoroutine(StartTheAction());
