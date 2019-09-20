@@ -152,10 +152,10 @@ public class SceneManager : MonoBehaviour
     {
         foreach(SceneReference sr in levels)
         {
-            // TODO: Kommentar entfernen, wenn UI Scene einzeln ist
-            //UnityEngine.SceneManagement.SceneManager.LoadScene(uiScene, UnityEngine.SceneManagement.LoadSceneMode.Additive);
             if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().path == sr.ScenePath)
             {
+                // TODO: Kommentar entfernen, wenn UI Scene einzeln ist / !!!!!!!!!!!!!!!! ACHTUNG! NACHFOLGENDE ZEILE LÄSST UNITY BEI PLAY ABSTÜRZEN!!!!!
+                //UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(uiScene, UnityEngine.SceneManagement.LoadSceneMode.Additive);
                 if (gameSettings.OverrideLevelPointLimits) GameManager.Instance.OverrideLevelPointLimits();
                 StartCoroutine(StartTheAction());
             }

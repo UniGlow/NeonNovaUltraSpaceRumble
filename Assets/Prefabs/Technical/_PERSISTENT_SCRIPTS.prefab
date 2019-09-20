@@ -383,8 +383,8 @@ MonoBehaviour:
     sceneAsset: {fileID: 102900000, guid: b837dcee6af5f1b448a2bdedb88141d4, type: 3}
     scenePath: Assets/Scenes/Tutorial.unity
   uiScene:
-    sceneAsset: {fileID: 0}
-    scenePath: 
+    sceneAsset: {fileID: 102900000, guid: fdd8b6d462605b0439d91bf7382d1c18, type: 3}
+    scenePath: Assets/Scenes/UI.unity
   levelLoadedEvent: {fileID: 11400000, guid: dd95ddef2760add43a73ce45d743f5e5, type: 2}
   levelStartedEvent: {fileID: 11400000, guid: a93bef75cc487ef48b9411ec84a74c73, type: 2}
   delayAtLevelEnd: 12
