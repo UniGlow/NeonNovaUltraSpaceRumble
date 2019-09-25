@@ -24,12 +24,8 @@ GameObject:
   - component: {fileID: 114599229708516914}
   - component: {fileID: 114332039601200462}
   - component: {fileID: 114614392492591870}
-  - component: {fileID: 114724152049828894}
-  - component: {fileID: 82899805016581398}
-  - component: {fileID: 82249825244062562}
   - component: {fileID: 114806652132120226}
   - component: {fileID: 114818958610397038}
-  - component: {fileID: 114774338545418308}
   m_Layer: 0
   m_Name: _PERSISTENT_SCRIPTS
   m_TagString: Untagged
@@ -37,9 +33,42 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
---- !u!1 &1923190635615956
+--- !u!1 &1322190018286636
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4325144455642790}
+  - component: {fileID: 82989341837034522}
+  m_Layer: 0
+  m_Name: AudioMusic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1804402235904528
 GameObject:
   m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4004861661574766}
+  - component: {fileID: 114025425383758264}
+  - component: {fileID: 114512588774349416}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1923190635615956
+GameObject:
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
@@ -53,17 +82,45 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4004861661574766
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1804402235904528}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4325144455642790}
+  - {fileID: 4089542366226356}
+  m_Father: {fileID: 4337183692543796}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4089542366226356
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1923190635615956}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4004861661574766}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4325144455642790
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1322190018286636}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4337183692543796}
+  m_Father: {fileID: 4004861661574766}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4337183692543796
@@ -76,7 +133,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4089542366226356}
+  - {fileID: 4004861661574766}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -161,93 +218,12 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!82 &82249825244062562
+--- !u!82 &82989341837034522
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1136556033050532}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 243254621242404290, guid: e213e6dc1e1471a4189369ba1ec91b45,
-    type: 2}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
---- !u!82 &82899805016581398
-AudioSource:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1136556033050532}
+  m_GameObject: {fileID: 1322190018286636}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243302526137120838, guid: e213e6dc1e1471a4189369ba1ec91b45,
@@ -323,6 +299,33 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &114025425383758264
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1804402235904528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a7dcc38c73674e47a85116d9bb6f260, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicTracks:
+  - {fileID: 11400000, guid: d8d042d8cb1147342837b8ad5297c9b5, type: 2}
+  - {fileID: 11400000, guid: ad5efa830d7605d4ea38ea2f21945802, type: 2}
+  - {fileID: 11400000, guid: 55d2cad03fa76ce4f92b6bd0f1cab1d3, type: 2}
+  - {fileID: 11400000, guid: 200b072a36f49c54cb988e75e003ae4a, type: 2}
+  - {fileID: 11400000, guid: ef1baf16c61b67a4aaea8b515fa61cf9, type: 2}
+  tutorialTrack: {fileID: 11400000, guid: dc118b1a3d2f334428767bcd546f7dac, type: 2}
+  levelEnd: {fileID: 8300000, guid: f8139e7be195b47a7a1b53e20a35e244, type: 3}
+  levelEndVolume: 0.8
+  bossWinSound: {fileID: 8300000, guid: 611ebf4824b8a93428647e38958f1b6c, type: 3}
+  bossWinSoundVolume: 0.8
+  heroesWinSound: {fileID: 8300000, guid: 2dc646915323a9840bfcee7e29d3b9d0, type: 3}
+  heroesWinSoundVolume: 0.8
+  audioSourceMusic: {fileID: 82989341837034522}
+  audioSourceSFX: {fileID: 82203532128439068}
+  songChangedEvent: {fileID: 11400000, guid: f6d8145741eb62847bd38ea32a89ef08, type: 2}
 --- !u!114 &114097331483697454
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -390,6 +393,31 @@ MonoBehaviour:
   delayAtLevelEnd: 12
   points: {fileID: 11400000, guid: 5be3ffe199c802f45a47f0dbbedb0be5, type: 2}
   gameSettings: {fileID: 11400000, guid: 4cbf2bb18122f9d4c92c9dbd86d8b7fa, type: 2}
+--- !u!114 &114512588774349416
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1804402235904528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 447d59970781ce142a63ea883b30c2b1, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  linkedMethods:
+  - component: {fileID: 114025425383758264}
+    methodID: 0
+    methodName: PlayWinSequence
+    chosenID: 1
+    methodNames: []
+    gameObject: {fileID: 1804402235904528}
+  ignoreEventParameters: 0
 --- !u!114 &114599229708516914
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -426,59 +454,6 @@ MonoBehaviour:
   pointLeadToWinSolo: 
   pointLeadToWinDuo: 
   pointLeadToWinTriple: 
---- !u!114 &114724152049828894
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1136556033050532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a7dcc38c73674e47a85116d9bb6f260, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  musicTracks:
-  - {fileID: 11400000, guid: dc118b1a3d2f334428767bcd546f7dac, type: 2}
-  - {fileID: 11400000, guid: 27d65f21b0fb9294cb21a92346fdb487, type: 2}
-  - {fileID: 11400000, guid: 200b072a36f49c54cb988e75e003ae4a, type: 2}
-  - {fileID: 11400000, guid: ef1baf16c61b67a4aaea8b515fa61cf9, type: 2}
-  - {fileID: 11400000, guid: 55d2cad03fa76ce4f92b6bd0f1cab1d3, type: 2}
-  - {fileID: 11400000, guid: ad5efa830d7605d4ea38ea2f21945802, type: 2}
-  - {fileID: 11400000, guid: d8d042d8cb1147342837b8ad5297c9b5, type: 2}
-  levelEnd: {fileID: 8300000, guid: f8139e7be195b47a7a1b53e20a35e244, type: 3}
-  levelEndVolume: 0.8
-  bossWinSound: {fileID: 8300000, guid: 611ebf4824b8a93428647e38958f1b6c, type: 3}
-  bossWinSoundVolume: 0.8
-  heroesWinSound: {fileID: 8300000, guid: 2dc646915323a9840bfcee7e29d3b9d0, type: 3}
-  heroesWinSoundVolume: 0.8
-  audioSourceMusic: {fileID: 82899805016581398}
-  audioSourceSFX: {fileID: 82249825244062562}
-  songChangedEvent: {fileID: 11400000, guid: f6d8145741eb62847bd38ea32a89ef08, type: 2}
---- !u!114 &114774338545418308
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1136556033050532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: 447d59970781ce142a63ea883b30c2b1, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  linkedMethods:
-  - component: {fileID: 114724152049828894}
-    methodID: 0
-    methodName: PlayWinSequence
-    chosenID: 1
-    methodNames: []
-    gameObject: {fileID: 1136556033050532}
-  ignoreEventParameters: 0
 --- !u!114 &114806652132120226
 MonoBehaviour:
   m_ObjectHideFlags: 1

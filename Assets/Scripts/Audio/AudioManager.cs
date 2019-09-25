@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// 
 /// </summary>
-[RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour
 {
 
@@ -14,6 +13,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance;
 
     [SerializeField] List<MusicTrack> musicTracks = new List<MusicTrack>();
+    [SerializeField] MusicTrack tutorialTrack = null;
 
     [Space]
     [SerializeField] AudioClip levelEnd;
@@ -52,17 +52,6 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    private void Start()
-    {
-        audioSourceMusic = GetComponent<AudioSource>();
-        audioSourceSFX = transform.GetChild(0).GetComponent<AudioSource>();
-	}
-	
-	private void Update()
-    {
-		
-	}
     #endregion
 
 
@@ -106,12 +95,11 @@ public class AudioManager : MonoBehaviour
         if (startingTrack) return;
         startingTrack = true;
 
-        MusicTrack track = GetTrack("TutorialTrack");
-        audioSourceMusic.clip = track.intro;
-        audioSourceMusic.volume = track.volume;
+        audioSourceMusic.clip = tutorialTrack.intro;
+        audioSourceMusic.volume = tutorialTrack.volume;
         audioSourceMusic.loop = false;
         audioSourceMusic.Play();
-        StartCoroutine(StartAudioLoop(track));
+        StartCoroutine(StartAudioLoop(tutorialTrack));
     }
 
     public void StartRandomTrack()
@@ -119,8 +107,7 @@ public class AudioManager : MonoBehaviour
         if (startingTrack) return;
         startingTrack = true;
 
-        // Ignore OriginalTrack and TutorialTrack
-        MusicTrack track = musicTracks[Random.Range(2, musicTracks.Count)];
+        MusicTrack track = musicTracks[Random.Range(0, musicTracks.Count)];
         audioSourceMusic.clip = track.intro;
         audioSourceMusic.volume = track.volume;
         audioSourceMusic.loop = false;
