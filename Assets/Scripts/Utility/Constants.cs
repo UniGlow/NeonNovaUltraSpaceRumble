@@ -37,9 +37,9 @@ public class Constants
     #endregion
 
     #region Scenes
-    public static readonly string SCENE_OPTIONS = "OptionsMenu";
-    public static readonly string SCENE_MAIN_MENU = "MainMenu";
-    public static readonly string SCENE_LOBBY = "LobbyLevel";
+    public static readonly string SCENE_UI_LEVEL = "UILevel";
+    public static readonly string SCENE_UI_LOBBY = "UILobby";
+    public static readonly string SCENE_UI_CREDITS = "UICredits";
     #endregion
 
     #region Sounds
