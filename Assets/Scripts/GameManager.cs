@@ -1,12 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using TMPro;
-using DG.Tweening;
 
 /// <summary>
-/// Manages the overall flow of the game and scene loading. This class is a singleton and won't be destroyed when loading a new scene.
+/// Manages the overall flow of the game. This class is a singleton and won't be destroyed when loading a new scene.
 /// </summary>
 public class GameManager : MonoBehaviour
 {
@@ -14,18 +11,13 @@ public class GameManager : MonoBehaviour
     #region Variable Declarations
     public static GameManager Instance;
 
-    [Header("Game Properties")]
-    [SerializeField] GameSettings gameSettings = null;
-
     [Header("References")]
-    [SerializeField] Points points = null;
     [SerializeField] GameEvent gamePausedEvent = null;
     [SerializeField] GameEvent gameResumedEvent = null;
 
     // TODO: Verlagern in SO "GameSettings"
     [HideInInspector] public ColorSet activeColorSet = null;
 
-    float intensifyTimer;
     bool gameIsPaused = false;
     #endregion
 
@@ -72,43 +64,19 @@ public class GameManager : MonoBehaviour
                 RaiseGamePaused();
             }
         }
-
-        intensifyTimer += Time.deltaTime;
-
-        HandleIntensify();
     }
     #endregion
 
 
 
     #region Public Functions
-    
 
-    public void ResetTimer()
-    {
-        intensifyTimer = 0f;
-    }
     #endregion
 
 
 
     #region Private Functions
-    void HandleIntensify()
-    {
-        if (intensifyTimer >= gameSettings.IntensifyTime)
-        {
-            // Set new pointLeadToWin
-            points.PointLeadToWin = Mathf.RoundToInt(points.PointLeadToWin * (1 - gameSettings.IntensifyAmount));
-
-            intensifyTimer = 0f;
-        }
-    }
-
-    public void OverrideLevelPointLimits() // Temporal public
-    {
-        points.PointLeadToWin = gameSettings.WinningPointLead;
-    }
-
+    
     #endregion
 
 

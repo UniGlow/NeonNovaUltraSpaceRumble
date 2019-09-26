@@ -7,7 +7,7 @@ using DG.Tweening;
 /// <summary>
 /// 
 /// </summary>
-public class TitleScreen : MonoBehaviour
+public class TitleScreenManager : MonoBehaviour
 {
 
     #region Variable Declarations
@@ -32,27 +32,32 @@ public class TitleScreen : MonoBehaviour
 	
 	
 	#region Unity Event Functions
-	private void Start() {
+	private void Start()
+    {
         targetScale = textFields[0].transform.localScale;
         StartCoroutine(StartAudioNextFrame());
 	}
 	
-	private void Update() {
+	private void Update()
+    {
         timer += Time.deltaTime;
 
-        if (timer >= delayBetweenWords * delayAfterCompletion && currentWord >= numberOfWords && !nextSceneLoaded) {
+        if (timer >= delayBetweenWords * delayAfterCompletion && currentWord >= numberOfWords && !nextSceneLoaded)
+        {
             SceneManager.Instance.LoadNextScene();
             nextSceneLoaded = true;
         }
 
-        if (timer >= delayBetweenWords && currentWord < numberOfWords) {
+        if (timer >= delayBetweenWords && currentWord < numberOfWords)
+        {
 
             int rand;
             if (!screenshotMode) rand = Random.Range(0, words.Count);
             else rand = 0;
 
             // Ultra mustn't stand at the last spot
-            if (currentWord == numberOfWords - 2 && words.Contains("Ultra")) {
+            if (currentWord == numberOfWords - 2 && words.Contains("Ultra"))
+            {
                 rand = words.FindIndex(x => x == "Ultra");
             }
 
@@ -88,6 +93,6 @@ public class TitleScreen : MonoBehaviour
     IEnumerator StartAudioNextFrame()
     {
         yield return null;
-        AudioManager.Instance.StartTrack("OriginalTrack");
+        AudioManager.Instance.StartTitleTrack();
     }
 }

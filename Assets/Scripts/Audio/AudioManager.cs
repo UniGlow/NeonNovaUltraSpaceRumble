@@ -14,6 +14,7 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] List<MusicTrack> musicTracks = new List<MusicTrack>();
     [SerializeField] MusicTrack tutorialTrack = null;
+    [SerializeField] MusicTrack titleTrack = null;
 
     [Space]
     [SerializeField] AudioClip levelEnd;
@@ -90,6 +91,18 @@ public class AudioManager : MonoBehaviour
         StartCoroutine(StartAudioLoop(track));
     }
 
+    public void StartTitleTrack()
+    {
+        if (startingTrack) return;
+        startingTrack = true;
+
+        audioSourceMusic.clip = titleTrack.intro;
+        audioSourceMusic.volume = titleTrack.volume;
+        audioSourceMusic.loop = false;
+        audioSourceMusic.Play();
+        StartCoroutine(StartAudioLoop(titleTrack));
+    }
+
     public void StartTutorialTrack()
     {
         if (startingTrack) return;
@@ -117,7 +130,8 @@ public class AudioManager : MonoBehaviour
         RaiseSongChanged(track.artist, track.title);
     }
 
-    public void StopPlaying() {
+    public void StopPlaying()
+    {
         audioSourceMusic.Stop();
         audioSourceMusic.clip = null;
         audioSourceMusic.volume = 1f;
