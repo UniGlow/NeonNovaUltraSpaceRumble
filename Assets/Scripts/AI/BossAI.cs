@@ -24,6 +24,8 @@ public class BossAI : Boss
     List<Transform> middleTargets = new List<Transform>();
     List<Transform> allAITargets = new List<Transform>();
     float randomnessTimer;
+
+    float cooldownTimer = 0f;
     #endregion
 
 
@@ -70,6 +72,22 @@ public class BossAI : Boss
     {
         if (active)
         {
+            // Ability Cooldown
+            if (!abilityCooldownB)
+            {
+                if (cooldownTimer >= abilityCooldown)
+                {
+                    cooldownTimer = abilityCooldown;
+                    abilityCooldownB = true;
+                    cooldownIndicator.fillAmount = 1f;
+                }
+                else
+                {
+                    cooldownTimer += Time.deltaTime;
+                    cooldownIndicator.fillAmount = cooldownTimer / abilityCooldown;
+                }
+            }
+
             colorChangeTimer += Time.deltaTime;
             HandleColorSwitch();
             randomnessTimer += Time.deltaTime;
@@ -193,7 +211,7 @@ public class BossAI : Boss
             audioSource.PlayOneShot(abilitySound, abilitySoundVolume);
 
             abilityCooldownB = false;
-            StartCoroutine(ResetAbilityCooldown());
+            cooldownTimer = 0f;
         }
     }
     #endregion
