@@ -19,10 +19,6 @@ public class SceneManager : MonoBehaviour
     [SerializeField] SceneReference title = null;
     [SerializeField] SceneReference tutorial = null;
 
-    [Header("References")]
-    [SerializeField] GameEvent levelLoadedEvent = null;
-    [SerializeField] GameEvent levelStartedEvent = null;
-
     [Header("Properties")]
     [SerializeField] float delayAtLevelEnd = 12f;
 
@@ -77,11 +73,6 @@ public class SceneManager : MonoBehaviour
         }
     }
 
-    public void LoadLevel(string name)
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(name);
-    }
-
     /// <summary>
     /// Quits the application or exits play mode when in editor
     /// </summary>
@@ -93,11 +84,6 @@ public class SceneManager : MonoBehaviour
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
-    }
-
-    public string GetActiveSceneName()
-    {
-        return UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
     }
 
     public void LoadNextLevel()
@@ -141,21 +127,6 @@ public class SceneManager : MonoBehaviour
 
     #region Private Functions
 
-    #endregion
-
-
-
-    #region GameEvent Raiser
-
-    void RaiseLevelStarted()
-    {
-        levelStartedEvent.Raise(this);
-    }
-
-    void RaiseLevelLoaded(float duration)
-    {
-        levelLoadedEvent.Raise(this, duration);
-    }
     #endregion
 
 
