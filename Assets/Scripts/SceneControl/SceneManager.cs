@@ -13,15 +13,11 @@ public class SceneManager : MonoBehaviour
     public static SceneManager Instance;
 
     [Header("Scenes")]
-    [SerializeField] List<SceneReference> levels = null;
     [SerializeField] SceneReference mainMenu = null;
     [SerializeField] SceneReference lobby = null;
     [SerializeField] SceneReference credits = null;
     [SerializeField] SceneReference title = null;
     [SerializeField] SceneReference tutorial = null;
-    [SerializeField] SceneReference uiLevel = null;
-    [SerializeField] SceneReference uiLobby = null;
-    [SerializeField] SceneReference uiCredits = null;
 
     [Header("References")]
     [SerializeField] GameEvent levelLoadedEvent = null;
@@ -29,10 +25,9 @@ public class SceneManager : MonoBehaviour
 
     [Header("Properties")]
     [SerializeField] float delayAtLevelEnd = 12f;
-    [SerializeField] Points points = null; // Temporal!
-    [SerializeField] GameSettings gameSettings = null;
+
     // Private
-    float countdownDuration = 4f;
+
     #endregion
 
 
@@ -44,11 +39,6 @@ public class SceneManager : MonoBehaviour
 
 
     #region Unity Event Functions
-    protected void OnEnable()
-    {
-        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnLevelFinishedLoading;
-    }
-
     void Awake()
     {
         //Check if instance already exists
@@ -65,11 +55,6 @@ public class SceneManager : MonoBehaviour
             Debug.Log("There can only be one SceneManager instantiated. Destroying this Instance...");
             Destroy(this);
         }
-    }
-
-    private void OnDisable()
-    {
-        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnLevelFinishedLoading;
     }
     #endregion
 
@@ -155,32 +140,7 @@ public class SceneManager : MonoBehaviour
 
 
     #region Private Functions
-    void OnLevelFinishedLoading(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
-    {
-        foreach(SceneReference sr in levels)
-        {
-            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().path == sr.ScenePath)
-            {
-                // TODO: Kommentar entfernen, wenn Unity Update auf 2019 abgeschlossen
-                //UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(uiLevel, UnityEngine.SceneManagement.LoadSceneMode.Additive);
-                if (gameSettings.OverrideLevelPointLimits) GameManager.Instance.OverrideLevelPointLimits();
-                StartCoroutine(StartTheAction());
-            }
-        }
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().path == lobby.ScenePath)
-        {
-            StartCoroutine(StartTheTutorial());
-            // TODO: Kommentar entfernen, wenn Unity Update auf 2019 abgeschlossen
-            //UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(uiLobby, UnityEngine.SceneManagement.LoadSceneMode.Additive);
-        }
 
-        else if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().path == credits.ScenePath)
-        {
-            StartCoroutine(StartTheCredits());
-            // TODO: Kommentar entfernen, wenn Unity Update auf 2019 abgeschlossen
-            //UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(uiCredits, UnityEngine.SceneManagement.LoadSceneMode.Additive);
-        }
-    }
     #endregion
 
 
@@ -206,41 +166,6 @@ public class SceneManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(delayAtLevelEnd);
         LoadNextScene();
         Time.timeScale = 1;
-    }
-
-    IEnumerator StartTheAction()
-    {
-        RaiseLevelLoaded(countdownDuration);
-        points.ResetPoints(false);
-
-        yield return new WaitForSecondsRealtime(countdownDuration * (1f / 4f));
-
-        AudioManager.Instance.StartRandomTrack();
-
-        yield return new WaitForSecondsRealtime(countdownDuration * (3f / 4f));
-
-        RaiseLevelStarted();
-    }
-
-    IEnumerator StartTheTutorial()
-    {
-        GameObject.FindObjectOfType<SirAlfredLobby>().Initialize();
-
-
-        RaiseLevelLoaded(countdownDuration / 4f);
-
-        yield return new WaitForSecondsRealtime(countdownDuration / 4f);
-
-        RaiseLevelStarted();
-    }
-
-    IEnumerator StartTheCredits()
-    {
-        points.ResetPoints(true);
-
-        yield return new WaitForSecondsRealtime(countdownDuration * (3f / 4f));
-
-        RaiseLevelStarted();
     }
     #endregion
 }

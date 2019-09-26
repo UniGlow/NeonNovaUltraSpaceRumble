@@ -288,14 +288,13 @@ public class HeroAI : Hero
         {
             if (ability.Class == abilityClass)
                 return true;
+            if (playerConfig.ability.Class == abilityClass)
+                return true;
         }
-        catch (System.Exception)
+        catch (System.NullReferenceException)
         {
 
         }
-
-        if (playerConfig.ability.Class == abilityClass)
-            return true;
 
         return false;
     }

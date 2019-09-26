@@ -371,7 +371,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 348049736}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e05256d415654bc48add0b6c0a2b3c83, type: 3}
+  m_Script: {fileID: 11500000, guid: 78733527048d9d744a40763cccdba821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfWords: 5
@@ -392,11 +392,11 @@ MonoBehaviour:
   - Space
   - Rumble
   colors:
-  - {r: 0.11724138, g: 1, b: 0, a: 1}
-  - {r: 1, g: 0.5586207, b: 0, a: 1}
-  - {r: 0, g: 1, b: 0.9172416, a: 1}
-  - {r: 0, g: 0.21379304, b: 1, a: 1}
-  - {r: 0.7793112, g: 0, b: 1, a: 1}
+  - {r: 0.11764707, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0.5568628, b: 0, a: 1}
+  - {r: 0, g: 1, b: 0.9176471, a: 1}
+  - {r: 0, g: 0.21568629, b: 1, a: 1}
+  - {r: 0.7803922, g: 0, b: 1, a: 1}
 --- !u!4 &348049738
 Transform:
   m_ObjectHideFlags: 0
