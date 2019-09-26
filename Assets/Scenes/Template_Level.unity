@@ -932,7 +932,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1690773440578928, guid: c960190ecc1261249afa261cb260fe2f, type: 2}
       propertyPath: m_Name
-      value: LEVEL_MANAGER
+      value: GAMEPLAY_SCRIPTS
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c960190ecc1261249afa261cb260fe2f, type: 2}
