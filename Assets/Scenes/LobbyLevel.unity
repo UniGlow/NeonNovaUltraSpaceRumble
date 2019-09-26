@@ -2997,7 +2997,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97789860a68897f489879925cd6603bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings: {fileID: 0}
+  levelLoadedEvent: {fileID: 11400000, guid: dd95ddef2760add43a73ce45d743f5e5, type: 2}
+  levelStartedEvent: {fileID: 11400000, guid: a93bef75cc487ef48b9411ec84a74c73, type: 2}
+  timeTillLevelStart: 1
   timeTillIdle: 15
   playerReadyUpdater: {fileID: 221853975}
   masterMixer: {fileID: 24100000, guid: e213e6dc1e1471a4189369ba1ec91b45, type: 2}
@@ -6342,6 +6344,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   confirm: {fileID: 8300000, guid: c23fc62dc0e0a9145b3197a0ac5a23a1, type: 3}
   confirmVolume: 1
+  audioSource: {fileID: 0}
 --- !u!114 &1107186110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6354,6 +6357,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88f948b203bd901418d5a2aad04309f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 0}
+  mainMenu: {fileID: 0}
+  optionsMenu: {fileID: 0}
+  resumeButton: {fileID: 0}
+  eventSystem: {fileID: 0}
 --- !u!82 &1107186111
 AudioSource:
   m_ObjectHideFlags: 0

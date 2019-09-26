@@ -12,21 +12,15 @@ public class MainMenu : MonoBehaviour
     #region Variable Declarations
     [SerializeField] GameObject playButton = null;
     [SerializeField] EventSystem eventSystem = null;
-    
-    AudioSource audioSource;
 	#endregion
 	
 	
 	
 	#region Unity Event Functions
-	private void Start() {
-        audioSource = GetComponent<AudioSource>();
+	private void Start()
+    {
         eventSystem.SetSelectedGameObject(playButton);
 	}
-
-    private void Update() {
-        
-    }
 
     private void OnDisable()
     {
