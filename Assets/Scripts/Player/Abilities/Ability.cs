@@ -22,6 +22,7 @@ public abstract class Ability : ScriptableObject
     [SerializeField] protected float cooldown = 0.2f;
     [Tooltip("Percentual movement speed modifier. Proportional to base movement speed")]
     [SerializeField] protected float speedBoost = 0f;
+    [SerializeField] protected Mesh mesh = null;
 
     [Header("Sound")]
     [SerializeField] protected AudioClip soundClip = null;
@@ -58,6 +59,7 @@ public abstract class Ability : ScriptableObject
                 return false;
         }
     }
+    public Mesh Mesh { get { return mesh; } }
     #endregion
 
 
@@ -80,7 +82,10 @@ public abstract class Ability : ScriptableObject
     /// </summary>
     public virtual void Tick(float deltaTime, bool abilityButtonPressed)
     {
-        cooldownTimer += deltaTime;
+        if (cooldownTimer >= cooldown)
+            cooldownTimer = cooldown;
+        else
+            cooldownTimer += deltaTime;
 
         if (abilityButtonPressed && cooldownTimer >= cooldown)
         {

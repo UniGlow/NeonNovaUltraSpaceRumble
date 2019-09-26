@@ -34,12 +34,6 @@ public class Tank : Ability
         if (!shieldActive)
         {
             base.Tick(deltaTime, abilityButtonPressed);
-            // Update CooldownIndicator
-            hero.CooldownIndicator.sprite = hero.DefendCooldownSprites[
-                Mathf.Clamp(
-                    Mathf.FloorToInt((cooldownTimer / cooldown) * hero.DefendCooldownSprites.Length), 
-                        0, 
-                        hero.DefendCooldownSprites.Length - 1)];
         }
         else
         {
@@ -55,7 +49,6 @@ public class Tank : Ability
     public override void TriggerAbility()
     {
         hero.WobbleBobble.SetActive(true);
-        hero.CooldownIndicator.sprite = hero.DefendCooldownSprite;
         audioSource.PlayOneShot(soundClip, volume);
 
         shieldActive = true;
