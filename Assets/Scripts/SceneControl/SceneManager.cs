@@ -167,28 +167,5 @@ public class SceneManager : MonoBehaviour
         LoadNextScene();
         Time.timeScale = 1;
     }
-
-    //IEnumerator StartTheAction()
-    //{
-    //    RaiseLevelLoaded(countdownDuration);
-    //    points.ResetPoints(false);
-
-    //    yield return new WaitForSecondsRealtime(countdownDuration * (1f / 4f));
-
-    //    AudioManager.Instance.StartRandomTrack();
-
-    //    yield return new WaitForSecondsRealtime(countdownDuration * (3f / 4f));
-
-    //    RaiseLevelStarted();
-    //}
-
-    //IEnumerator StartTheCredits()
-    //{
-    //    points.ResetPoints(true);
-
-    //    yield return new WaitForSecondsRealtime(countdownDuration * (3f / 4f));
-
-    //    RaiseLevelStarted();
-    //}
     #endregion
 }

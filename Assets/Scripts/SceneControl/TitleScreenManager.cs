@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// 
 /// </summary>
-public class TitleScreenManager : MonoBehaviour
+public class TitleScreenManager : LevelManager
 {
 
     #region Variable Declarations

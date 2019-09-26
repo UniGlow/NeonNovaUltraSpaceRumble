@@ -60,17 +60,20 @@ public class GameplayManager : LevelManager
     #region Inherited Functions
     protected override void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
-        throw new System.NotImplementedException();
+        RaiseLevelLoaded(4f);
+        points.ResetPoints(false);
+
+        StartCoroutine(InitializeLevel());
     }
 
     protected override void RaiseLevelLoaded(float levelStartDelay)
     {
-        throw new System.NotImplementedException();
+        base.RaiseLevelLoaded(levelStartDelay);
     }
 
     protected override void RaiseLevelStarted()
     {
-        throw new System.NotImplementedException();
+        base.RaiseLevelStarted();
     }
     #endregion
 
@@ -98,7 +101,16 @@ public class GameplayManager : LevelManager
 
 
     #region Coroutines
+    IEnumerator InitializeLevel()
+    {
+        yield return new WaitForSeconds(1f);
 
+        AudioManager.Instance.StartRandomTrack();
+
+        yield return new WaitForSeconds(3f);
+
+        RaiseLevelStarted();
+    }
     #endregion
 }
 

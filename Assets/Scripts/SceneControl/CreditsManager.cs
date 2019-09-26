@@ -17,12 +17,15 @@ public class CreditsManager : LevelManager
 	
 	
 	#region Unity Event Functions
-	private void Start() {
+	private void Start()
+    {
         StartCoroutine(StartAudioNextFrame());
 	}
 	
-	private void Update() {
-        if (Input.GetButtonDown(Constants.INPUT_ESCAPE) || Input.GetButtonDown(Constants.INPUT_CANCEL)) {
+	private void Update()
+    {
+        if (Input.GetButtonDown(Constants.INPUT_ESCAPE) || Input.GetButtonDown(Constants.INPUT_CANCEL))
+        {
             SceneManager.Instance.LoadMainMenu();
         }
 	}
@@ -40,12 +43,12 @@ public class CreditsManager : LevelManager
 
     protected override void RaiseLevelLoaded(float levelStartDelay)
     {
-        throw new System.NotImplementedException();
+        base.RaiseLevelLoaded(levelStartDelay);
     }
 
     protected override void RaiseLevelStarted()
     {
-        throw new System.NotImplementedException();
+        base.RaiseLevelStarted();
     }
     #endregion
 

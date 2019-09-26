@@ -4,7 +4,7 @@ using UnityEngine;
 
 /// <summary>
 /// Parent class for every LevelManager in the game.
-/// A LevelManager takes care of the flow of a specific type of level (Intro, Credits, Menu, gameplay, ...)
+/// A LevelManager takes care of the flow of a specific type of level (Intro, Credits, Menu, gameplay, ...)m
 /// </summary>
 public abstract class LevelManager : MonoBehaviour 
 {
@@ -51,11 +51,17 @@ public abstract class LevelManager : MonoBehaviour
 
 
     #region Protected Functions
-    protected abstract void OnLevelFinishedLoading(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode);
+    protected virtual void OnLevelFinishedLoading(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode) { }
 
-    protected abstract void RaiseLevelLoaded(float levelStartDelay);
+    protected virtual void RaiseLevelLoaded(float levelStartDelay)
+    {
+        levelLoadedEvent.Raise(this, levelStartDelay);
+    }
 
-    protected abstract void RaiseLevelStarted();
+    protected virtual void RaiseLevelStarted()
+    {
+        levelStartedEvent.Raise(this);
+    }
 
     protected virtual void InheritedOnEnable() { }
 

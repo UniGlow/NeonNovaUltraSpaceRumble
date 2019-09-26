@@ -199,12 +199,12 @@ public class SirAlfredLobby : LevelManager
 
     protected override void RaiseLevelLoaded(float levelStartDelay)
     {
-        levelLoadedEvent.Raise(this, levelStartDelay);
+        base.RaiseLevelLoaded(levelStartDelay);
     }
 
     protected override void RaiseLevelStarted()
     {
-        levelStartedEvent.Raise(this);
+        base.RaiseLevelStarted();
     }
     #endregion
 
