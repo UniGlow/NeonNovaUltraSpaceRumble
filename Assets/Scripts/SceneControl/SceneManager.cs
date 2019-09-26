@@ -19,7 +19,9 @@ public class SceneManager : MonoBehaviour
     [SerializeField] SceneReference credits = null;
     [SerializeField] SceneReference title = null;
     [SerializeField] SceneReference tutorial = null;
-    [SerializeField] SceneReference uiScene = null;
+    [SerializeField] SceneReference uiLevel = null;
+    [SerializeField] SceneReference uiLobby = null;
+    [SerializeField] SceneReference uiCredits = null;
 
     [Header("References")]
     [SerializeField] GameEvent levelLoadedEvent = null;
@@ -143,6 +145,11 @@ public class SceneManager : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(tutorial);
     }
+
+    public void LoadLobby()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(lobby);
+    }
     #endregion
 
 
@@ -154,8 +161,8 @@ public class SceneManager : MonoBehaviour
         {
             if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().path == sr.ScenePath)
             {
-                // TODO: Kommentar entfernen, wenn UI Scene einzeln ist / !!!!!!!!!!!!!!!! ACHTUNG! NACHFOLGENDE ZEILE LÄSST UNITY BEI PLAY ABSTÜRZEN!!!!!
-                //UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(uiScene, UnityEngine.SceneManagement.LoadSceneMode.Additive);
+                // TODO: Kommentar entfernen, wenn Unity Update auf 2019 abgeschlossen
+                //UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(uiLevel, UnityEngine.SceneManagement.LoadSceneMode.Additive);
                 if (gameSettings.OverrideLevelPointLimits) GameManager.Instance.OverrideLevelPointLimits();
                 StartCoroutine(StartTheAction());
             }
@@ -163,11 +170,15 @@ public class SceneManager : MonoBehaviour
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().path == lobby.ScenePath)
         {
             StartCoroutine(StartTheTutorial());
+            // TODO: Kommentar entfernen, wenn Unity Update auf 2019 abgeschlossen
+            //UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(uiLobby, UnityEngine.SceneManagement.LoadSceneMode.Additive);
         }
 
         else if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().path == credits.ScenePath)
         {
             StartCoroutine(StartTheCredits());
+            // TODO: Kommentar entfernen, wenn Unity Update auf 2019 abgeschlossen
+            //UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(uiCredits, UnityEngine.SceneManagement.LoadSceneMode.Additive);
         }
     }
     #endregion

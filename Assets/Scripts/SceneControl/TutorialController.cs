@@ -284,7 +284,7 @@ public class TutorialController : MonoBehaviour
         else
         {
             loadingLobbyField.SetActive(true);
-            SceneManager.Instance.LoadLevel(Constants.SCENE_LOBBY);
+            SceneManager.Instance.LoadLobby();
         }
     }
     #endregion
