@@ -26,7 +26,8 @@ public class DebugMode : MonoBehaviour
 
 
     //Awake is always called before any Start functions
-    private void Awake() {
+    private void Awake()
+    {
         //Check if instance already exists
         if (Instance == null)
 
@@ -39,9 +40,6 @@ public class DebugMode : MonoBehaviour
             Debug.Log("There can only be one DebugMode instantiated. Destroying this Instance...");
             Destroy(gameObject);
         }
-
-        //Sets this to not be destroyed when reloading scene
-        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
@@ -56,9 +54,11 @@ public class DebugMode : MonoBehaviour
         colorSwitchInterval = gameSettings.BossColorSwitchInterval.ToString();
     }
 
-    private void Update () {
+    private void Update ()
+    {
         // Switch the Games Debug Mode On/Off
-        if (Input.GetButtonDown(Constants.INPUT_DEBUGMODE)) {
+        if (Input.GetButtonDown(Constants.INPUT_DEBUGMODE))
+        {
             debugMode = !debugMode;
             if (debugMode)
             {
@@ -83,8 +83,10 @@ public class DebugMode : MonoBehaviour
 
 
     // Draws the GUI for the Debug Mode and declares it's functionality
-    private void OnGUI() {
-        if (debugMode) {
+    private void OnGUI()
+    {
+        if (debugMode)
+        {
             // Setup of the box and title
             GUILayout.BeginVertical("box", GUILayout.Width(Screen.width * 0.2f));
 
@@ -98,11 +100,13 @@ public class DebugMode : MonoBehaviour
             // Button for loading the next scene by buildIndex
             GUILayout.BeginVertical("box");
             GUILayout.Label("Scene Management:");
-            if (GUILayout.Button("Load next scene")) {
+            if (GUILayout.Button("Load next scene"))
+            {
                 Debug.Log("Debug Mode: Loading next scene.");
                 SceneManager.Instance.LoadNextScene();
             }
-            if (GUILayout.Button("Reload scene")) {
+            if (GUILayout.Button("Reload scene"))
+            {
                 Debug.Log("Debug Mode: Reloading current scene.");
                 SceneManager.Instance.ReloadLevel();
             }

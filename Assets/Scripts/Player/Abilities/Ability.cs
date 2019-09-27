@@ -28,6 +28,8 @@ public abstract class Ability : ScriptableObject
     [SerializeField] protected AudioClip soundClip = null;
     [Range(0, 1)]
     [SerializeField] protected float volume = 1f;
+
+    [Header("Cooldown")]
     [SerializeField] protected bool cooldownVisualized = false;
     [SerializeField] protected float cooldownRingScale = 1f;
 

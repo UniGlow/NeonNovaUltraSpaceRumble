@@ -17,4 +17,6 @@ MonoBehaviour:
   mesh: {fileID: 4300000, guid: eeedf6b3e6a52b040bc8b36f72d05e85, type: 3}
   soundClip: {fileID: 8300000, guid: 9bf8565727fa20047bfa416674b33661, type: 3}
   volume: 0.9
+  cooldownVisualized: 1
+  cooldownRingScale: 1.2
   shieldDuration: 2

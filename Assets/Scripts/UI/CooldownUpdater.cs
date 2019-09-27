@@ -28,18 +28,15 @@ public class CooldownUpdater : MonoBehaviour
 	#region Unity Event Functions
 	private void Update () 
 	{
-        if (hero.PlayerConfig.ability.CooldownVisualized)
+        if (hero.PlayerConfig.ability.CooldownVisualized && hero.PlayerConfig.ability.Cooldown != 0)
         {
-            if (hero.PlayerConfig.ability.Cooldown != 0)
+            if (hero.PlayerConfig.ability.CooldownTimer == 0)
             {
-                if (hero.PlayerConfig.ability.CooldownTimer == 0)
-                {
-                    indicator.fillAmount = 0;
-                }
-                else
-                {
-                    indicator.fillAmount = hero.PlayerConfig.ability.CooldownTimer / hero.PlayerConfig.ability.Cooldown;
-                }
+                indicator.fillAmount = 0;
+            }
+            else
+            {
+                indicator.fillAmount = hero.PlayerConfig.ability.CooldownTimer / hero.PlayerConfig.ability.Cooldown;
             }
         }
 	}
@@ -53,6 +50,14 @@ public class CooldownUpdater : MonoBehaviour
         float x = hero.PlayerConfig.ability.CooldownRingScale;
         Vector3 newScale = new Vector3(x, x, x);
         transform.localScale = newScale;
+    }
+
+    public void ResetRing()
+    {
+        if (!hero.PlayerConfig.ability.CooldownVisualized)
+        {
+            indicator.fillAmount = 1f;
+        }
     }
 	#endregion
 	

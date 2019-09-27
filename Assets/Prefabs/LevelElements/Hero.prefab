@@ -150,6 +150,7 @@ GameObject:
   - component: {fileID: 114155210415509488}
   - component: {fileID: 114205687288266750}
   - component: {fileID: 114164625669429402}
+  - component: {fileID: 114862108264434394}
   - component: {fileID: 114144855543551810}
   m_Layer: 8
   m_Name: Image
@@ -732,6 +733,42 @@ MonoBehaviour:
   transmissionPS: {fileID: 198963605972144674}
   abilitiesChangedEvent: {fileID: 11400000, guid: a3637ea13dc4b674895931910892b2e2,
     type: 2}
+--- !u!114 &114862108264434394
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1822431474430526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: a3637ea13dc4b674895931910892b2e2, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114205687288266750}
+        m_MethodName: ResetRing
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  linkedMethods:
+  - component: {fileID: 114205687288266750}
+    methodID: -1
+    methodName: 
+    chosenID: -1
+    methodNames: []
+    gameObject: {fileID: 0}
+  ignoreEventParameters: 1
 --- !u!120 &120313195406292594
 LineRenderer:
   m_ObjectHideFlags: 1
