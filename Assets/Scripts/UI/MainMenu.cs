@@ -31,6 +31,14 @@ public class MainMenu : MonoBehaviour
 
 
     #region Public Functions
+    public void LoadFirstLevel()
+    {
+        SceneManager.Instance.LoadNextScene();
+    }
 
+    public void LoadTutorial()
+    {
+        SceneManager.Instance.LoadTutorial();
+    }
     #endregion
 }
