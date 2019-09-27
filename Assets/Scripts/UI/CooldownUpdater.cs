@@ -28,7 +28,7 @@ public class CooldownUpdater : MonoBehaviour
 	#region Unity Event Functions
 	private void Update () 
 	{
-        if (hero.PlayerConfig.ability.CooldownVisualized && hero.PlayerConfig.ability.Cooldown != 0)
+        if (hero.PlayerConfig && hero.PlayerConfig.ability.CooldownVisualized && hero.PlayerConfig.ability.Cooldown != 0)
         {
             if (hero.PlayerConfig.ability.CooldownTimer == 0)
             {

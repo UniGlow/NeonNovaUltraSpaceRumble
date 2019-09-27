@@ -11,14 +11,8 @@ public class GameManager : MonoBehaviour
     #region Variable Declarations
     public static GameManager Instance;
 
-    [Header("References")]
-    [SerializeField] GameEvent gamePausedEvent = null;
-    [SerializeField] GameEvent gameResumedEvent = null;
-
     // TODO: Verlagern in SO "GameSettings"
     [HideInInspector] public ColorSet activeColorSet = null;
-
-    bool gameIsPaused = false;
     #endregion
 
 
@@ -49,22 +43,6 @@ public class GameManager : MonoBehaviour
         Cursor.visible = false;
 #endif
     }
-
-    private void Update()
-    {
-        //Game Pause
-        if (Input.GetButtonDown(Constants.INPUT_ESCAPE))
-        {
-            if (gameIsPaused)
-            {
-                RaiseGameResumed();
-            }
-            else
-            {
-                RaiseGamePaused();
-            }
-        }
-    }
     #endregion
 
 
@@ -82,15 +60,7 @@ public class GameManager : MonoBehaviour
 
 
     #region GameEvent Raiser
-    private void RaiseGamePaused()
-    {
-        gamePausedEvent.Raise(this);
-    }
 
-    private void RaiseGameResumed()
-    {
-        gameResumedEvent.Raise(this);
-    }
     #endregion
 
 

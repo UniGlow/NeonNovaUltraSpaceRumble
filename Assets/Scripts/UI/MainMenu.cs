@@ -40,5 +40,15 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.Instance.LoadTutorial();
     }
+
+    public void LoadCredits()
+    {
+        SceneManager.Instance.LoadCredits();
+    }
+
+    public void ExitGame()
+    {
+        SceneManager.Instance.ExitGame();
+    }
     #endregion
 }

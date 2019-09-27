@@ -138,7 +138,7 @@ Transform:
   m_GameObject: {fileID: 1377968037358198}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 2.2540162, y: 2.0215275, z: 2.254014}
+  m_LocalScale: {x: 1.2777841, y: 1.2777839, z: 1.2777839}
   m_Children: []
   m_Father: {fileID: 4260685427587770}
   m_RootOrder: 1
@@ -183,7 +183,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1377968037358198}
-  m_Mesh: {fileID: 4300000, guid: 51a8d996c6cb8c44cb0954778d972cb2, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 8c2611dbae74d834eb066aa9b336a93f, type: 3}
 --- !u!54 &54132770966574978
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -212,7 +212,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: 51a8d996c6cb8c44cb0954778d972cb2, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 8c2611dbae74d834eb066aa9b336a93f, type: 3}
 --- !u!82 &82736236401359494
 AudioSource:
   m_ObjectHideFlags: 1
@@ -566,7 +566,7 @@ RectTransform:
   m_GameObject: {fileID: 1502636953176876}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.97, y: 0.97, z: 0.97}
   m_Children: []
   m_Father: {fileID: 224988713563434486}
   m_RootOrder: 0
@@ -583,8 +583,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1301445356763670}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.15}
+  m_LocalScale: {x: 0.9168216, y: 0.91682166, z: 0.91682166}
   m_Children:
   - {fileID: 224417304917833172}
   m_Father: {fileID: 4260685427587770}
@@ -592,6 +592,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 4.8}
+  m_AnchoredPosition: {x: 0, y: 5.8}
   m_SizeDelta: {x: 4, y: 4}
   m_Pivot: {x: 0.5, y: 0.5}

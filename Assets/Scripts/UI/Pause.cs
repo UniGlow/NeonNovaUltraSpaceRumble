@@ -12,27 +12,47 @@ public class Pause : MonoBehaviour
     [SerializeField] GameObject resumeButton;
     [SerializeField] EventSystem eventSystem;
 
+    [Header("References")]
+    [SerializeField] GameEvent gamePausedEvent = null;
+    [SerializeField] GameEvent gameResumedEvent = null;
+
     bool gameIsPaused;
     
 
-    private void Update() {
-        if (gameIsPaused && !optionsMenu.activeSelf && Input.GetButtonDown(Constants.INPUT_CANCEL)) {
+    private void Update()
+    {
+        if (Input.GetButtonDown(Constants.INPUT_ESCAPE))
+        {
+            if (gameIsPaused)
+            {
+                ResumeGame();
+            }
+            else
+            {
+                PauseGame();
+            }
+        }
+
+        if (gameIsPaused && !optionsMenu.activeSelf && Input.GetButtonDown(Constants.INPUT_CANCEL))
+        {
             resumeButton.GetComponent<Button>().onClick.Invoke();
         }
     }
 
-    public void PauseGame() {
+    public void PauseGame()
+    {
         Time.timeScale = 0;
-
-        Rumble.Instance.StopAllRumble();
 
         pauseMenu.SetActive(true);
         eventSystem.SetSelectedGameObject(resumeButton);
 
         gameIsPaused = true;
+
+        RaiseGamePaused();
     }
 
-    public void ResumeGame() {
+    public void ResumeGame()
+    {
         Time.timeScale = 1f;
 
         pauseMenu.SetActive(false);
@@ -41,9 +61,27 @@ public class Pause : MonoBehaviour
         eventSystem.SetSelectedGameObject(null);
 
         gameIsPaused = false;
+
+        RaiseGameResumed();
     }
 
-    public void ReturnToMainMenu() {
+    public void ReturnToMainMenu()
+    {
         SceneManager.Instance.LoadMainMenu();
+    }
+
+    public void ExitGame()
+    {
+        SceneManager.Instance.ExitGame();
+    }
+
+    private void RaiseGamePaused()
+    {
+        gamePausedEvent.Raise(this);
+    }
+
+    private void RaiseGameResumed()
+    {
+        gameResumedEvent.Raise(this);
     }
 }

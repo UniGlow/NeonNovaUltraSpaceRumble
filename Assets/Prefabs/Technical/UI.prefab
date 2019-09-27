@@ -903,8 +903,6 @@ GameObject:
   - component: {fileID: 114569798786935004}
   - component: {fileID: 114668855252941382}
   - component: {fileID: 82448129764759406}
-  - component: {fileID: 114458674575218938}
-  - component: {fileID: 114071483194304920}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1612,36 +1610,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: TMPro.TMP_Dropdown+DropdownEvent, TextMeshPro-2017.2-1.0.56-Runtime,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
---- !u!114 &114071483194304920
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1663700951134734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: cfef13325ec1499459137fbb9b3d8888, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114569798786935004}
-        m_MethodName: ResumeGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  linkedMethods: []
-  ignoreEventParameters: 0
 --- !u!114 &114094835010441088
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3288,36 +3256,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114458674575218938
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1663700951134734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: 1ea968f9ad57732498b111a663021061, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114569798786935004}
-        m_MethodName: PauseGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  linkedMethods: []
-  ignoreEventParameters: 0
 --- !u!114 &114473124057180950
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3471,8 +3409,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114432689249649020, guid: c74db29e4432b04408ef57b00d406ffd,
-          type: 2}
+      - m_Target: {fileID: 114569798786935004}
         m_MethodName: ExitGame
         m_Mode: 1
         m_Arguments:
@@ -4015,6 +3952,8 @@ MonoBehaviour:
   optionsMenu: {fileID: 1331388225108046}
   resumeButton: {fileID: 1254411420054504}
   eventSystem: {fileID: 114591207476375806}
+  gamePausedEvent: {fileID: 11400000, guid: 1ea968f9ad57732498b111a663021061, type: 2}
+  gameResumedEvent: {fileID: 11400000, guid: cfef13325ec1499459137fbb9b3d8888, type: 2}
 --- !u!114 &114570938085139490
 MonoBehaviour:
   m_ObjectHideFlags: 1

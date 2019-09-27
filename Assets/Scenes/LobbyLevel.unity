@@ -6021,8 +6021,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114432689249649020, guid: c74db29e4432b04408ef57b00d406ffd,
-          type: 2}
+      - m_Target: {fileID: 1107186110}
         m_MethodName: ExitGame
         m_Mode: 1
         m_Arguments:
@@ -6382,7 +6381,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   confirm: {fileID: 8300000, guid: c23fc62dc0e0a9145b3197a0ac5a23a1, type: 3}
   confirmVolume: 1
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 1107186111}
 --- !u!114 &1107186110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6395,11 +6394,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88f948b203bd901418d5a2aad04309f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseMenu: {fileID: 0}
-  mainMenu: {fileID: 0}
-  optionsMenu: {fileID: 0}
-  resumeButton: {fileID: 0}
-  eventSystem: {fileID: 0}
+  pauseMenu: {fileID: 470928955}
+  mainMenu: {fileID: 1046182541}
+  optionsMenu: {fileID: 782639671}
+  resumeButton: {fileID: 1367866540}
+  eventSystem: {fileID: 1760293244}
+  gamePausedEvent: {fileID: 11400000, guid: 1ea968f9ad57732498b111a663021061, type: 2}
+  gameResumedEvent: {fileID: 11400000, guid: cfef13325ec1499459137fbb9b3d8888, type: 2}
 --- !u!82 &1107186111
 AudioSource:
   m_ObjectHideFlags: 0

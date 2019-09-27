@@ -24,8 +24,6 @@ public class BossAI : Boss
     List<Transform> middleTargets = new List<Transform>();
     List<Transform> allAITargets = new List<Transform>();
     float randomnessTimer;
-
-    float cooldownTimer = 0f;
     #endregion
 
 

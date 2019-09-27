@@ -495,8 +495,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2ea1e843cf8dfa49963cccfa5f6a640, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gamePausedEvent: {fileID: 11400000, guid: 1ea968f9ad57732498b111a663021061, type: 2}
-  gameResumedEvent: {fileID: 11400000, guid: cfef13325ec1499459137fbb9b3d8888, type: 2}
   activeColorSet: {fileID: 0}
 --- !u!114 &114972387587253454
 MonoBehaviour:
@@ -524,7 +522,7 @@ MonoBehaviour:
   tutorial:
     sceneAsset: {fileID: 102900000, guid: b837dcee6af5f1b448a2bdedb88141d4, type: 3}
     scenePath: Assets/Scenes/Tutorial.unity
-  delayAtLevelEnd: 12
+  delayAtLevelEnd: 9
 --- !u!114 &114997380415338942
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 114869992998677828}
   - component: {fileID: 114551303034818714}
   - component: {fileID: 114577401761797150}
+  - component: {fileID: 114368438074658802}
   - component: {fileID: 114658714563021212}
   m_Layer: 8
   m_Name: Image
@@ -196,7 +197,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1521786441716086}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.103, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4.2999997, y: 4.2999997, z: 4.2999997}
   m_Children: []
   m_Father: {fileID: 4351300061492424}
@@ -209,7 +210,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1147061026126020}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.397, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4351300061492424}
@@ -222,7 +223,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1439832083209482}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.13999987, y: -0.153, z: 0}
+  m_LocalPosition: {x: 0.13999987, y: -0.05, z: 0}
   m_LocalScale: {x: 0.6651094, y: 0.66510963, z: 0.66510963}
   m_Children:
   - {fileID: 4014107494874246}
@@ -255,7 +256,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1872674554651450}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0.003, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.774279, y: 0.77427864, z: 0.77427864}
   m_Children: []
   m_Father: {fileID: 4351300061492424}
@@ -268,7 +269,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1254981000651516}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.397, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4351300061492424}
@@ -355,7 +356,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1254981000651516}
-  m_Mesh: {fileID: 4300000, guid: 97b6d5d2504a0704680eb4b98b2b7048, type: 3}
+  m_Mesh: {fileID: 4300000, guid: f32514971f6af494ab733f3081f0746e, type: 3}
 --- !u!54 &54387879163051624
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -563,6 +564,36 @@ MonoBehaviour:
   transmissionLineRenderer: {fileID: 120313195406292594}
   transmissionPS: {fileID: 198963605972144674}
   abilitiesChangedEvent: {fileID: 0}
+--- !u!114 &114368438074658802
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1439914329747388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: a3637ea13dc4b674895931910892b2e2, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114551303034818714}
+        m_MethodName: ResetRing
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  linkedMethods: []
+  ignoreEventParameters: 1
 --- !u!114 &114551303034818714
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -591,7 +622,7 @@ MonoBehaviour:
   response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 114551303034818714}
         m_MethodName: ResizeRing
         m_Mode: 1
         m_Arguments:
@@ -621,7 +652,7 @@ MonoBehaviour:
   response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 114551303034818714}
         m_MethodName: ResizeRing
         m_Mode: 1
         m_Arguments:
@@ -872,7 +903,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 1.2
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!195 &195859284500807272
 NavMeshAgent:
@@ -955,7 +986,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 2078317113
+  randomSeed: 396645282
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -4337,7 +4368,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1487604687
+  randomSeed: -174559512
   InitialModule:
     serializedVersion: 3
     enabled: 1

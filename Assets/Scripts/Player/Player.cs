@@ -7,6 +7,7 @@ using UnityEngine;
 /// </summary>
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(AudioSource))]
+[SelectionBase]
 public class Player : MonoBehaviour
 {
 

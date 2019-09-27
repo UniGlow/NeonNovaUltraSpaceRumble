@@ -68,7 +68,7 @@ public class Boss : Player
     protected float colorChangeTimer;
     bool colorChangeSoundPlayed;
 
-    float cooldownTimer = 0f;
+    protected float cooldownTimer = 0f;
     #endregion
 
 
