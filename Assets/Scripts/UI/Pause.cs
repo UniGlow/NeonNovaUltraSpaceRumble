@@ -9,7 +9,7 @@ public class Pause : MonoBehaviour
 {
     public class PlayerRuleSet
     {
-        public Player player;
+        public Rewired.Player player;
         public List<ControllerMapLayoutManager.RuleSet> ruleSets = new List<ControllerMapLayoutManager.RuleSet>();
     }
 
@@ -61,7 +61,7 @@ public class Pause : MonoBehaviour
     {
         Time.timeScale = 0;
 
-        foreach (Player player in ReInput.players.Players)
+        foreach (Rewired.Player player in ReInput.players.Players)
         {
             playerRuleSets.Add(new PlayerRuleSet { player = player, ruleSets = player.controllers.maps.layoutManager.ruleSets });
             player.controllers.maps.layoutManager.ruleSets.Clear();
@@ -81,7 +81,7 @@ public class Pause : MonoBehaviour
     {
         Time.timeScale = 1f;
 
-        foreach (Player player in ReInput.players.Players)
+        foreach (Rewired.Player player in ReInput.players.Players)
         {
             player.controllers.maps.layoutManager.ruleSets.Clear();
             player.controllers.maps.layoutManager.ruleSets.AddRange(playerRuleSets.Find(x => x.player == player).ruleSets);

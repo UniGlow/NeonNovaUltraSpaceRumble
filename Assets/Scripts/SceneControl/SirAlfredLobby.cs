@@ -226,7 +226,7 @@ public class SirAlfredLobby : MonoBehaviour
     {
         playerCount = 0;
 
-        foreach (Player player in ReInput.players.Players)
+        foreach (Rewired.Player player in ReInput.players.Players)
         {
             if (player.isPlaying) playerCount++;
         }

@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(AudioSource))]
-public class Character : MonoBehaviour
+public class Player : MonoBehaviour
 {
 
     #region Variable Declarations

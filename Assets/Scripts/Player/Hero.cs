@@ -6,7 +6,7 @@ using Rewired;
 /// <summary>
 /// Handles everything related to the movement of Haru, our playable Character
 /// </summary>
-public class Hero : Character
+public class Hero : Player
 {
 
     #region Variable Declarations

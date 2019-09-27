@@ -13,7 +13,7 @@ public class PlayerConfig : ScriptableObject
 
     #region Variable Declarations
     // Serialized Fields
-    private Player player;
+    private Rewired.Player player;
     private int playerNumber;
     private Faction faction;
     private PlayerColor colorConfig;
@@ -28,7 +28,7 @@ public class PlayerConfig : ScriptableObject
 	
 	
 	#region Public Properties
-	public Player Player { get { return player; } }
+	public Rewired.Player Player { get { return player; } }
     public int PlayerNumber { get { return playerNumber; } }
     public Faction Faction { get { return faction; } }
     public PlayerColor ColorConfig
@@ -57,7 +57,7 @@ public class PlayerConfig : ScriptableObject
     /// <param name="faction">The Players Faction</param>
     /// <param name="colorConfig">The Players Color Configuration</param>
     /// <param name="aiControlled">Set this to True if the AI should control this Player</param>
-	public void Initialize(Player player, int playerNumber, Faction faction, PlayerColor colorConfig, bool aiControlled)
+	public void Initialize(Rewired.Player player, int playerNumber, Faction faction, PlayerColor colorConfig, bool aiControlled)
     {
         this.player = player;
         this.playerNumber = playerNumber;
