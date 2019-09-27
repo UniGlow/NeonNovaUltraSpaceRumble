@@ -18,4 +18,4 @@ MonoBehaviour:
   soundClip: {fileID: 0}
   volume: 1
   cooldownVisualized: 0
-  cooldownRingScale: 0.9
+  cooldownRingScale: 1

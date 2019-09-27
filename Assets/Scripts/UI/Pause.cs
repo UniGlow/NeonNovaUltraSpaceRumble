@@ -9,7 +9,7 @@ public class Pause : MonoBehaviour
 {
     public class PlayerRuleSet
     {
-        public Rewired.Player player;
+        public Player player;
         public List<ControllerMapLayoutManager.RuleSet> ruleSets = new List<ControllerMapLayoutManager.RuleSet>();
     }
 
@@ -34,15 +34,6 @@ public class Pause : MonoBehaviour
 
 
 	// Use this for initialization
-	void Start ()
-    {
-        pauseMenu = transform.Find("PauseMenu").gameObject;
-        mainMenu = pauseMenu.transform.Find("MainMenu").gameObject;
-        resumeButton = mainMenu.transform.Find("ResumeButton").gameObject;
-        optionsMenu = pauseMenu.transform.Find("OptionsMenu").gameObject;
-        eventSystem = transform.parent.Find("Rewired Event System").GetComponent<EventSystem>();
-    }
-
     private void Update()
     {
         if (gameIsPaused && !optionsMenu.activeSelf && Input.GetButtonDown(Constants.INPUT_CANCEL))
@@ -72,7 +63,7 @@ public class Pause : MonoBehaviour
     {
         Time.timeScale = 0;
 
-        foreach (Rewired.Player player in ReInput.players.Players)
+        foreach (Player player in ReInput.players.Players)
         {
             playerRuleSets.Add(new PlayerRuleSet { player = player, ruleSets = player.controllers.maps.layoutManager.ruleSets });
             player.controllers.maps.layoutManager.ruleSets.Clear();
@@ -92,7 +83,7 @@ public class Pause : MonoBehaviour
     {
         Time.timeScale = 1f;
 
-        foreach (Rewired.Player player in ReInput.players.Players)
+        foreach (Player player in ReInput.players.Players)
         {
             player.controllers.maps.layoutManager.ruleSets.Clear();
             player.controllers.maps.layoutManager.ruleSets.AddRange(playerRuleSets.Find(x => x.player == player).ruleSets);

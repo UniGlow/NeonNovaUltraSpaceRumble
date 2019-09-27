@@ -248,7 +248,7 @@ public class SirAlfredLobby : LevelManager
     {
         playerCount = 0;
 
-        foreach (Rewired.Player player in ReInput.players.Players)
+        foreach (Player player in ReInput.players.Players)
         {
             if (player.isPlaying) playerCount++;
         }

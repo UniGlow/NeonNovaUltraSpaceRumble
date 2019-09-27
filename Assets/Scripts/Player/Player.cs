@@ -8,7 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(AudioSource))]
 [SelectionBase]
-public class Player : MonoBehaviour
+public class Character : MonoBehaviour
 {
 
     #region Variable Declarations

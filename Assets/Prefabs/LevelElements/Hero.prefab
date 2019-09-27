@@ -354,7 +354,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1254981000651516}
-  m_Mesh: {fileID: 4300000, guid: dd4402d7fbcec7549b6aa0626cb44cc8, type: 3}
+  m_Mesh: {fileID: 4300000, guid: f32514971f6af494ab733f3081f0746e, type: 3}
 --- !u!54 &54387879163051624
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -660,8 +660,7 @@ MonoBehaviour:
   cooldownIndicator: {fileID: 114155210415509488}
   damageSprite: {fileID: 21300112, guid: cf7b38ec134eb49be8918c0504aeb76c, type: 3}
   opferSprite: {fileID: 21300094, guid: cf7b38ec134eb49be8918c0504aeb76c, type: 3}
-  playerMeshRenderer: {fileID: 23346185351575296}
-  playerMesh: {fileID: 33291095836504256}
+  playerMesh: {fileID: 1254981000651516}
 --- !u!114 &114461749476498428
 MonoBehaviour:
   m_ObjectHideFlags: 1

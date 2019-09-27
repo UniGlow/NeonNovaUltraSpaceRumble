@@ -8,7 +8,7 @@ using Rewired;
 /// <summary>
 /// Handles everything related to the movement of Haru, our playable Character
 /// </summary>
-public class Boss : Player
+public class Boss : Character
 {
 
     #region Variable Declarations

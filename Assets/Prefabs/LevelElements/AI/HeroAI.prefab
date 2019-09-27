@@ -713,8 +713,7 @@ MonoBehaviour:
   cooldownIndicator: {fileID: 114869992998677828}
   damageSprite: {fileID: 21300112, guid: cf7b38ec134eb49be8918c0504aeb76c, type: 3}
   opferSprite: {fileID: 21300094, guid: cf7b38ec134eb49be8918c0504aeb76c, type: 3}
-  playerMeshRenderer: {fileID: 23346185351575296}
-  playerMesh: {fileID: 33291095836504256}
+  playerMesh: {fileID: 1254981000651516}
   repathingDistance: 6
   randomness: 10
   shieldDelay: 2

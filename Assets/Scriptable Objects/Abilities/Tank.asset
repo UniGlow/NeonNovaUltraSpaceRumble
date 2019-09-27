@@ -18,5 +18,5 @@ MonoBehaviour:
   soundClip: {fileID: 8300000, guid: 9bf8565727fa20047bfa416674b33661, type: 3}
   volume: 0.9
   cooldownVisualized: 1
-  cooldownRingScale: 1.2
+  cooldownRingScale: 1
   shieldDuration: 2
