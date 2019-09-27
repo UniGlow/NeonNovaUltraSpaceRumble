@@ -9,6 +9,7 @@ ModelImporter:
     2300000: //RootNode
     3300000: //RootNode
     4300000: Hero_shape_Attack
+    4300002: Hero_shape_attack01
   externalObjects: {}
   materials:
     importMaterials: 1
