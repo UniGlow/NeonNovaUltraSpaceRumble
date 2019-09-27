@@ -113,7 +113,13 @@ public class Character : MonoBehaviour
 
     private void RotateCharacter()
     {
-        if (horizontalLook != 0 || verticalLook != 0)
+        // Ignore rotational inputs when playing victim
+        if (playerConfig.ability && playerConfig.ability.Class == Ability.AbilityClass.Victim && rigidbody.velocity.magnitude != 0f)
+        {
+            transform.forward = rigidbody.velocity;
+        }
+        // Set rotation corresponding to look inputs 
+        else if (horizontalLook != 0 || verticalLook != 0)
         {
             Vector3 lookDirection = new Vector3(horizontalLook, 0f, verticalLook);
             transform.rotation = Quaternion.RotateTowards(
