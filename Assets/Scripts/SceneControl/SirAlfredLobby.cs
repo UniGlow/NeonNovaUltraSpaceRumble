@@ -4,19 +4,18 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 using Rewired;
 
 /// <summary>
-/// 
+///
 /// </summary>
-public class SirAlfredLobby : MonoBehaviour 
+public class SirAlfredLobby : LevelManager
 {
 
     #region Variable Declaration
-    [Header("Game Settings")]
-    [SerializeField] GameSettings settings;
-
     [Header("Miscellaneous")]
+    [SerializeField] float timeTillLevelStart = 1f;
     [SerializeField] float timeTillIdle = 5f;
     [SerializeField] PlayerReadyUpdater playerReadyUpdater;
     [SerializeField] AudioMixer masterMixer;
@@ -51,7 +50,7 @@ public class SirAlfredLobby : MonoBehaviour
 
 
     #region Unity Event Functions
-    private void Start () 
+    private void Start ()
 	{
         masterMixer.GetFloat(Constants.MIXER_SFX_VOLUME, out originalSFXVolume);
         masterMixer.GetFloat(Constants.MIXER_MUSIC_VOLUME, out originalMusicVolume);
@@ -59,7 +58,7 @@ public class SirAlfredLobby : MonoBehaviour
         masterMixer.SetFloat(Constants.MIXER_SFX_VOLUME, originalSFXVolume * (1 + sfxVolumeDamp));
         StartCoroutine(Wait(0.1f, () => { AudioManager.Instance.StartTrack(backgroundTrack); }));
     }
-	
+
 	private void Update ()
     {
         UpdatePlayerConfirmsList();
@@ -79,7 +78,7 @@ public class SirAlfredLobby : MonoBehaviour
                 // Rstore SFX audio level
                 masterMixer.SetFloat(Constants.MIXER_SFX_VOLUME, originalSFXVolume);
 
-                GameManager.Instance.LoadNextScene();
+                SceneManager.Instance.LoadNextScene();
             }));
         }
 
@@ -184,6 +183,29 @@ public class SirAlfredLobby : MonoBehaviour
         points.ResetPoints(true);
 
         UpdatePlayerConfirmsList();
+    }
+    #endregion
+
+
+
+    #region Inherited Functions
+    protected override void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+    {
+        Initialize();
+
+        RaiseLevelLoaded(timeTillLevelStart);
+
+        Invoke("RaiseLevelStarted", timeTillLevelStart);
+    }
+
+    protected override void RaiseLevelLoaded(float levelStartDelay)
+    {
+        base.RaiseLevelLoaded(levelStartDelay);
+    }
+
+    protected override void RaiseLevelStarted()
+    {
+        base.RaiseLevelStarted();
     }
     #endregion
 

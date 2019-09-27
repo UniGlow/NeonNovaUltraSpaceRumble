@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
-using UnityEngine.SceneManagement;
 
 /// <summary>
 /// 
@@ -285,7 +284,7 @@ public class TutorialController : MonoBehaviour
         else
         {
             loadingLobbyField.SetActive(true);
-            SceneManager.LoadScene(Constants.SCENE_LOBBY);
+            SceneManager.Instance.LoadLobby();
         }
     }
     #endregion

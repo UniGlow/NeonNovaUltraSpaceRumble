@@ -180,8 +180,8 @@ Camera:
   m_GameObject: {fileID: 1770123261197230}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.7294118, g: 0.7294118, b: 0.7294118, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -250,11 +250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d70f1556d798efe49bdf84593dbe2133, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targets:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  targets: []
   smoothTime: 0.2
   minZoom: 55
   maxZoom: 20

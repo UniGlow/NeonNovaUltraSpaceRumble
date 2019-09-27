@@ -33,7 +33,6 @@ public class Transmission : MonoBehaviour
     protected bool receiverFound = false;
     protected float currentTransmissionDuration;
     protected bool transmissionCooldownB = true;
-    protected HomingMissile homingMissile;
     protected AudioSource audioSource;
 	#endregion
 	
@@ -43,7 +42,6 @@ public class Transmission : MonoBehaviour
 	virtual protected void Start()
     {
         hero = GetComponent<Hero>();
-        homingMissile = GameObject.FindObjectOfType<HomingMissile>();
         audioSource = GetComponent<AudioSource>();
 	}
 	

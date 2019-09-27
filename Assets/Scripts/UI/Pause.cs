@@ -13,12 +13,18 @@ public class Pause : MonoBehaviour
         public List<ControllerMapLayoutManager.RuleSet> ruleSets = new List<ControllerMapLayoutManager.RuleSet>();
     }
 
-    GameObject pauseMenu,
-               mainMenu,
-               optionsMenu,
-               resumeButton;
-    EventSystem eventSystem;
+    [SerializeField] GameObject pauseMenu;
+    [SerializeField] GameObject mainMenu;
+    [SerializeField] GameObject optionsMenu;
+    [SerializeField] GameObject resumeButton;
+    [SerializeField] EventSystem eventSystem;
+
+    [Header("References")]
+    [SerializeField] GameEvent gamePausedEvent = null;
+    [SerializeField] GameEvent gameResumedEvent = null;
+
     bool gameIsPaused;
+
     List<PlayerRuleSet> playerRuleSets = new List<PlayerRuleSet>();
 
 
@@ -55,6 +61,11 @@ public class Pause : MonoBehaviour
                 PauseGame();
             }
         }
+
+        if (gameIsPaused && !optionsMenu.activeSelf && Input.GetButtonDown(Constants.INPUT_CANCEL))
+        {
+            resumeButton.GetComponent<Button>().onClick.Invoke();
+        }
     }
 
     public void PauseGame()
@@ -69,12 +80,12 @@ public class Pause : MonoBehaviour
             player.controllers.maps.layoutManager.Apply();
         }
 
-        GameObject.FindObjectOfType<HomingMissile>().PauseMissile(true);
-
         pauseMenu.SetActive(true);
         eventSystem.SetSelectedGameObject(resumeButton);
 
         gameIsPaused = true;
+
+        RaiseGamePaused();
     }
 
     public void ResumeGame()
@@ -88,18 +99,33 @@ public class Pause : MonoBehaviour
             player.controllers.maps.layoutManager.Apply();
         }
 
-        GameObject.FindObjectOfType<HomingMissile>().PauseMissile(false);
-
         pauseMenu.SetActive(false);
         optionsMenu.SetActive(false);
         mainMenu.SetActive(true);
         eventSystem.SetSelectedGameObject(null);
 
         gameIsPaused = false;
+
+        RaiseGameResumed();
     }
 
     public void ReturnToMainMenu()
     {
-        GameManager.Instance.LoadLevel("MainMenu");
+        SceneManager.Instance.LoadMainMenu();
+    }
+
+    public void ExitGame()
+    {
+        SceneManager.Instance.ExitGame();
+    }
+
+    private void RaiseGamePaused()
+    {
+        gamePausedEvent.Raise(this);
+    }
+    
+    private void RaiseGameResumed()
+    {
+        gameResumedEvent.Raise(this);
     }
 }

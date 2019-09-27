@@ -13,16 +13,13 @@ public class MenuAudio : MonoBehaviour
     [SerializeField] AudioClip confirm;
     [Range(0,1)]
     [SerializeField] float confirmVolume = 1f;
-
-    AudioSource audioSource;
+    [SerializeField] AudioSource audioSource;
 	#endregion
 	
 	
 	
 	#region Unity Event Functions
-	private void Start () {
-        audioSource = GetComponent<AudioSource>();
-	}
+
     #endregion
 
 

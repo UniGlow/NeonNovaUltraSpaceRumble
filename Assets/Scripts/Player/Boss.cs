@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 using Rewired;
 
 /// <summary>
@@ -52,7 +53,7 @@ public class Boss : Player
     [Header("References")]
     [SerializeField] protected GameObject projectilePrefab;
     [SerializeField] protected Renderer bossMeshRenderer;
-    public SpriteRenderer healthIndicator;
+    [SerializeField] protected Image cooldownIndicator;
     [SerializeField] protected GameEvent bossColorChangedEvent = null;
     [SerializeField] protected GameSettings gameSettings = null;
 
@@ -67,6 +68,8 @@ public class Boss : Player
     // Color Change
     protected float colorChangeTimer;
     bool colorChangeSoundPlayed;
+
+    protected float cooldownTimer = 0f;
     #endregion
 
 
@@ -78,6 +81,22 @@ public class Boss : Player
 
         if (active)
         {
+            // Ability Cooldown
+            if (!abilityCooldownB)
+            {
+                if (cooldownTimer >= abilityCooldown)
+                {
+                    cooldownTimer = abilityCooldown;
+                    abilityCooldownB = true;
+                    cooldownIndicator.fillAmount = 1f;
+                }
+                else
+                {
+                    cooldownTimer += Time.deltaTime;
+                    cooldownIndicator.fillAmount = cooldownTimer / abilityCooldown;
+                }
+            }
+
             colorChangeTimer += Time.deltaTime;
 
             Shoot();
@@ -127,9 +146,9 @@ public class Boss : Player
         {
             GameObject projectile = Instantiate(projectilePrefab, transform.position + transform.forward * 1.9f + Vector3.up * 0.5f, transform.rotation);
             projectile.GetComponent<BossProjectile>().Initialize(
-                attackDamagePerShot, 
-                strengthColor, 
-                transform.forward * attackProjectileSpeed, 
+                attackDamagePerShot,
+                strengthColor,
+                transform.forward * attackProjectileSpeed,
                 attackProjectileLifeTime);
 
             audioSource.PlayOneShot(attackSound, attackSoundVolume);
@@ -158,13 +177,13 @@ public class Boss : Player
                 (projectile.transform.position - transform.position) * abilityProjectileSpeed,
                 attackProjectileLifeTime);
             }
-            
+
             audioSource.PlayOneShot(abilitySound, abilitySoundVolume);
 
             if (enableCameraShake) EZCameraShake.CameraShaker.Instance.ShakeOnce(magnitude, roughness, fadeIn, fadeOut);
 
             abilityCooldownB = false;
-            StartCoroutine(ResetAbilityCooldown());
+            cooldownTimer = 0f;
         }
     }
 

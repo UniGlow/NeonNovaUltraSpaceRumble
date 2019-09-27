@@ -14,8 +14,11 @@ MonoBehaviour:
   abilityClass: 0
   cooldown: 0.15
   speedBoost: 0
+  mesh: {fileID: 4300002, guid: dd4402d7fbcec7549b6aa0626cb44cc8, type: 3}
   soundClip: {fileID: 8300000, guid: 9a5792dc479bb5c47878c1c076adf5d0, type: 3}
   volume: 0.6
+  cooldownVisualized: 0
+  cooldownRingScale: 1
   damagePerShot: 20
   projectileSpeed: 50
   projectilePrefab: {fileID: 1693907411783006, guid: c023009a9133c5b4da7f7564326be655,
