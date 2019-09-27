@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 
+/// Spawns needed Heroes and Boss prefabs depending on the PlayerConfigs.
 /// </summary>
 public class PlayerManager : MonoBehaviour 
 {

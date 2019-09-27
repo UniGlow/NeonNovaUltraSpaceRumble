@@ -22,7 +22,8 @@ public abstract class Ability : ScriptableObject
     [SerializeField] protected float cooldown = 0.2f;
     [Tooltip("Percentual movement speed modifier. Proportional to base movement speed")]
     [SerializeField] protected float speedBoost = 0f;
-    [SerializeField] protected Mesh mesh = null;
+    [Tooltip("Should the player be able to hold down the ability button to trigger again after cooldown?")]
+    [SerializeField] protected bool autofire = false;
 
     [Header("Sound")]
     [SerializeField] protected AudioClip soundClip = null;
@@ -32,6 +33,9 @@ public abstract class Ability : ScriptableObject
     [Header("Cooldown")]
     [SerializeField] protected bool cooldownVisualized = false;
     [SerializeField] protected float cooldownRingScale = 1f;
+
+    [Header("References")]
+    [SerializeField] protected Mesh mesh = null;
 
     // Protected
     protected Hero hero = null;
@@ -66,6 +70,7 @@ public abstract class Ability : ScriptableObject
     public Mesh Mesh { get { return mesh; } }
     public bool CooldownVisualized { get { return cooldownVisualized; } }
     public float CooldownRingScale { get { return cooldownRingScale; } }
+    public bool Autofire { get { return autofire; } }
     #endregion
 
 
@@ -88,10 +93,7 @@ public abstract class Ability : ScriptableObject
     /// </summary>
     public virtual void Tick(float deltaTime, bool abilityButtonPressed)
     {
-        if (cooldownTimer >= cooldown)
-            cooldownTimer = cooldown;
-        else
-            cooldownTimer += deltaTime;
+        cooldownTimer += deltaTime;
 
         if (abilityButtonPressed && cooldownTimer >= cooldown)
         {
@@ -124,7 +126,7 @@ public abstract class Ability : ScriptableObject
 
 
     #region Private Functions
-
+    
     #endregion
 }
 

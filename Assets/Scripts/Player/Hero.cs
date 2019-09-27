@@ -40,7 +40,7 @@ public class Hero : Character
 
         if (active)
         {
-            playerConfig.ability.Tick(Time.deltaTime, playerConfig.Player.GetButtonDown(RewiredConsts.Action.TRIGGER_HEROABILITY));
+            playerConfig.ability.Tick(Time.deltaTime, AbilityButtonPressed());
 
             // Apply class-dependant movement speed modifier
             horizontalMovement *= (1 + playerConfig.ability.SpeedBoost);
@@ -94,6 +94,20 @@ public class Hero : Character
 
 
     #region Private Functions
+    bool AbilityButtonPressed()
+    {
+        if (playerConfig.ability.Autofire)
+        {
+            if (playerConfig.Player.GetButton(RewiredConsts.Action.TRIGGER_HEROABILITY))
+                return true;
+        }
+        else
+        {
+            if (playerConfig.Player.GetButtonDown(RewiredConsts.Action.TRIGGER_HEROABILITY))
+                return true;
+        }
 
+        return false;
+    }
     #endregion
 }

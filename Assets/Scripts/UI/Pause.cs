@@ -7,11 +7,7 @@ using Rewired;
 
 public class Pause : MonoBehaviour
 {
-    public class PlayerRuleSet
-    {
-        public Player player;
-        public List<ControllerMapLayoutManager.RuleSet> ruleSets = new List<ControllerMapLayoutManager.RuleSet>();
-    }
+    
 
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject mainMenu;
@@ -25,7 +21,7 @@ public class Pause : MonoBehaviour
 
     bool gameIsPaused;
 
-    List<PlayerRuleSet> playerRuleSets = new List<PlayerRuleSet>();
+    List<InputHelper.PlayerRuleSet> playerRuleSets = new List<InputHelper.PlayerRuleSet>();
 
 
 
@@ -63,13 +59,7 @@ public class Pause : MonoBehaviour
     {
         Time.timeScale = 0;
 
-        foreach (Player player in ReInput.players.Players)
-        {
-            playerRuleSets.Add(new PlayerRuleSet { player = player, ruleSets = player.controllers.maps.layoutManager.ruleSets });
-            player.controllers.maps.layoutManager.ruleSets.Clear();
-            player.controllers.maps.layoutManager.ruleSets.Add(ReInput.mapping.GetControllerMapLayoutManagerRuleSetInstance("RuleSetMenu"));
-            player.controllers.maps.layoutManager.Apply();
-        }
+        playerRuleSets = InputHelper.ChangeRuleSetForAllPlayers(RewiredConsts.LayoutManagerRuleSet.RULESETMENU);
 
         pauseMenu.SetActive(true);
         eventSystem.SetSelectedGameObject(resumeButton);
@@ -83,12 +73,7 @@ public class Pause : MonoBehaviour
     {
         Time.timeScale = 1f;
 
-        foreach (Player player in ReInput.players.Players)
-        {
-            player.controllers.maps.layoutManager.ruleSets.Clear();
-            player.controllers.maps.layoutManager.ruleSets.AddRange(playerRuleSets.Find(x => x.player == player).ruleSets);
-            player.controllers.maps.layoutManager.Apply();
-        }
+        InputHelper.ChangeRuleSetForPlayers(playerRuleSets);
 
         pauseMenu.SetActive(false);
         optionsMenu.SetActive(false);

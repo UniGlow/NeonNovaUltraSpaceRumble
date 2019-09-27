@@ -411,7 +411,7 @@ MonoBehaviour:
   heroesWinSoundVolume: 0.8
   audioSourceMusic: {fileID: 82989341837034522}
   audioSourceSFX: {fileID: 82203532128439068}
-  songChangedEvent: {fileID: 0}
+  songChangedEvent: {fileID: 11400000, guid: f6d8145741eb62847bd38ea32a89ef08, type: 2}
 --- !u!114 &114097331483697454
 MonoBehaviour:
   m_ObjectHideFlags: 1
