@@ -16,7 +16,6 @@ public class Hero : Player
     [SerializeField] protected Image cooldownIndicator;
     [SerializeField] protected Sprite damageSprite;
     [SerializeField] protected Sprite opferSprite;
-    [SerializeField] protected Renderer playerMeshRenderer;
     [SerializeField] protected MeshFilter playerMesh;
     #endregion
 
@@ -57,7 +56,7 @@ public class Hero : Player
         this.playerConfig = playerConfig;
 
         // Set colors
-        playerMeshRenderer.material = playerConfig.ColorConfig.heroMaterial;
+        playerMesh.GetComponent<Renderer>().material = playerConfig.ColorConfig.heroMaterial;
         cooldownIndicator.color = playerConfig.ColorConfig.uiElementColor;
 
         // TODO

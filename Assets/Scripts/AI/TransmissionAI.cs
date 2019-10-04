@@ -53,8 +53,7 @@ public class TransmissionAI : Transmission
     {
         receiver = null;
         currentTransmissionDuration = 0f;
-        receiverFound = false;
-        transmissionCooldownB = false;
+        transmissionReady = false;
         transmissionLineRenderer.gameObject.SetActive(false);
         StartCoroutine(ResetTransmissionCooldown());
     }

@@ -10,6 +10,7 @@ public class Transmission : MonoBehaviour
 {
 
     #region Variable Declarations
+    [Header("Settings")]
     [SerializeField] protected float transmissionRange = 5f;
     [SerializeField] protected float transmissionDuration = 3f;
     [SerializeField] protected float transmissionCooldown = 1f;
@@ -25,21 +26,27 @@ public class Transmission : MonoBehaviour
     [SerializeField] protected LineRenderer transmissionLineRenderer;
     [SerializeField] protected ParticleSystem transmissionPS;
     [SerializeField] protected GameEvent abilitiesChangedEvent = null;
-    public ParticleSystem TransmissionPS { get { return transmissionPS; } }
 
     protected Hero hero;
     protected GameObject receiver;
-    protected bool receiverFound = false;
     protected float currentTransmissionDuration;
-    protected bool transmissionCooldownB = true;
+    protected bool transmissionReady = true;
     protected AudioSource audioSource;
-    protected float transmissionAxisInputPrevFrame;
-	#endregion
-	
-	
-	
-	#region Unity Event Functions
-	virtual protected void Start()
+    GameObject targetedBy;
+    bool endingTransmission;
+    #endregion
+
+
+
+    #region Public Properties
+    public ParticleSystem TransmissionPS { get { return transmissionPS; } }
+    public GameObject TargetedBy { get { return targetedBy; } set { targetedBy = value; } }
+    #endregion
+
+
+
+    #region Unity Event Functions
+    virtual protected void Start()
     {
         hero = GetComponent<Hero>();
         audioSource = GetComponent<AudioSource>();
@@ -54,34 +61,39 @@ public class Transmission : MonoBehaviour
         }
 
         // Look for a receiver
-        if (!receiverFound && transmissionCooldownB && TransmissionButtonsPressed())
+        if (receiver == null && transmissionReady && TransmissionButtonsPressed())
         {
             UpdateLineRenderer();
             transmissionLineRenderer.gameObject.SetActive(true);
-            receiverFound = FindReceiver();
+            FindReceiver();
         }
         // Continue the transmission when a receiver is found
-        else if (receiverFound && TransmissionButtonsPressed())
+        else if (receiver != null && TransmissionButtonsPressed())
         {
             UpdateLineRenderer();
             Transmit();
         }
-
-
-        transmissionAxisInputPrevFrame = Input.GetAxis(Constants.INPUT_TRANSMIT_AXIS + hero.PlayerConfig.PlayerNumber);
     }
     #endregion
 
-
+                    
 
     public void EndTransmission()
     {
-        receiver = null;
+        endingTransmission = true;
+
+        if (receiver != null && !receiver.GetComponent<Transmission>().endingTransmission)
+        {
+            receiver.GetComponent<Transmission>().EndTransmission();
+            receiver = null;
+        }
+        targetedBy = null;
         currentTransmissionDuration = 0f;
-        receiverFound = false;
-        transmissionCooldownB = false;
+        transmissionReady = false;
         transmissionLineRenderer.gameObject.SetActive(false);
         StartCoroutine(ResetTransmissionCooldown());
+
+        endingTransmission = false;
     }
 
 
@@ -97,6 +109,7 @@ public class Transmission : MonoBehaviour
         {
             Debug.DrawLine(transform.position + Vector3.up * 0.5f, hitInfo.point, Color.green);
             receiver = hitInfo.transform.gameObject;
+            receiver.GetComponent<Transmission>().TargetedBy = gameObject;
             return true;
         }
         else
@@ -104,7 +117,6 @@ public class Transmission : MonoBehaviour
             Debug.DrawRay(transform.position + Vector3.up * 0.5f, transform.forward * transmissionRange, Color.red);
             return false;
         }
-
     }
 
     protected void Transmit()
@@ -120,7 +132,7 @@ public class Transmission : MonoBehaviour
         Debug.DrawLine(transform.position, receiver.transform.position, Color.green);
 
         // Successfull transmission: Swap abilities and end transmission
-        if (currentTransmissionDuration >= transmissionDuration)
+        if (targetedBy == receiver)
         {
             Hero otherHero = receiver.GetComponent<Hero>();
             Ability newAbility = otherHero.PlayerConfig.ability;
@@ -135,7 +147,6 @@ public class Transmission : MonoBehaviour
 
             transmissionPS.Play();
             receiver.GetComponent<Transmission>().transmissionPS.Play();
-            receiver.GetComponent<Transmission>().EndTransmission();
 
             EndTransmission();
         }
@@ -187,6 +198,6 @@ public class Transmission : MonoBehaviour
     protected IEnumerator ResetTransmissionCooldown()
     {
         yield return new WaitForSecondsRealtime(transmissionCooldown);
-        transmissionCooldownB = true;
+        transmissionReady = true;
     }
 }
