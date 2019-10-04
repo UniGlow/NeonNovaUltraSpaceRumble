@@ -108,19 +108,6 @@ public class SirAlfredLobby : LevelManager
         // Check and update Idle State of the game
         UpdateIdleState();
     }
-
-    public void UpdatePlayerCount()
-    {
-        playerCount = 0;
-        string[] joystickNames = Input.GetJoystickNames();
-        foreach (string name in joystickNames)
-        {
-            if (name != "")
-            {
-                playerCount++;
-            }
-        }
-    }
     #endregion
 
 
@@ -182,6 +169,19 @@ public class SirAlfredLobby : LevelManager
         points.ResetPoints(true);
 
         UpdatePlayerConfirmsList();
+    }
+
+    public void UpdatePlayerCount()
+    {
+        playerCount = 0;
+        string[] joystickNames = Input.GetJoystickNames();
+        foreach (string name in joystickNames)
+        {
+            if (name != "")
+            {
+                playerCount++;
+            }
+        }
     }
     #endregion
 

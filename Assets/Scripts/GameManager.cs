@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 
     // TODO: Verlagern in SO "GameSettings"
     [HideInInspector] public ColorSet activeColorSet = null;
+    [HideInInspector] public bool isInitialized = false;
     #endregion
 
 
