@@ -660,7 +660,6 @@ MonoBehaviour:
   cooldownIndicator: {fileID: 114155210415509488}
   damageSprite: {fileID: 21300112, guid: cf7b38ec134eb49be8918c0504aeb76c, type: 3}
   opferSprite: {fileID: 21300094, guid: cf7b38ec134eb49be8918c0504aeb76c, type: 3}
-  playerMeshRenderer: {fileID: 23346185351575296}
   playerMesh: {fileID: 33291095836504256}
 --- !u!114 &114461749476498428
 MonoBehaviour:
@@ -725,7 +724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transmissionRange: 14
-  transmissionDuration: 0.1
+  transmissionDuration: 3
   transmissionCooldown: 0.5
   transmissionSound: {fileID: 8300000, guid: 99a9562a9c5874546a152e7ded477cb5, type: 3}
   transmissionSoundVolume: 1

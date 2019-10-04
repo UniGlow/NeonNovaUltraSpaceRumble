@@ -65,7 +65,7 @@ public class Transmission : MonoBehaviour
         {
             UpdateLineRenderer();
             transmissionLineRenderer.gameObject.SetActive(true);
-            FindReceiver();
+            FindReceiverCircle();
         }
         // Continue the transmission when a receiver is found
         else if (receiver != null && TransmissionButtonsPressed())
@@ -76,7 +76,7 @@ public class Transmission : MonoBehaviour
     }
     #endregion
 
-                    
+    
 
     public void EndTransmission()
     {
@@ -99,7 +99,7 @@ public class Transmission : MonoBehaviour
 
 
     #region Private Functions
-    bool FindReceiver()
+    bool FindReceiverRay()
     {
         RaycastHit hitInfo;
         // Send 3 rays for a casual aiming
@@ -117,6 +117,36 @@ public class Transmission : MonoBehaviour
             Debug.DrawRay(transform.position + Vector3.up * 0.5f, transform.forward * transmissionRange, Color.red);
             return false;
         }
+    }
+
+    bool FindReceiverCircle()
+    {
+        Collider[] hits = Physics.OverlapSphere(transform.position, transmissionRange, 1 << 8);
+
+        if (hits.Length > 1)
+        {
+            for (int i = 0; i < hits.Length; i++)
+            {
+                if (hits[i].transform.GetComponentInParent<Rigidbody>().gameObject != gameObject)
+                {
+                    Debug.DrawLine(transform.position + Vector3.up * 0.5f, hits[i].transform.position, Color.green);
+                    receiver = hits[i].transform.GetComponentInParent<Rigidbody>().gameObject;
+                    receiver.GetComponent<Transmission>().TargetedBy = gameObject;
+                    return true;
+                }
+            }
+        }
+        else
+        {
+            Debug.DrawRay(transform.position + Vector3.up * 0.5f, transform.forward * transmissionRange, Color.red);
+            for (int i = 0; i < 360; i += 20)
+            {
+                Vector3 direction = Quaternion.Euler(0, i, 0) * transform.forward;
+                Debug.DrawRay(transform.position + Vector3.up * 0.5f, direction * transmissionRange, Color.red);
+            }
+        }
+
+        return false;
     }
 
     protected void Transmit()
