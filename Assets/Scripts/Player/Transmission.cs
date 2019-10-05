@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 /// <summary>
 /// 
@@ -15,15 +16,17 @@ public class Transmission : MonoBehaviour
     [SerializeField] protected float transmissionDuration = 3f;
     [SerializeField] protected float transmissionCooldown = 1f;
 
-    [Header("Sound")]
+    [Header("FX")]
     [SerializeField]
     protected AudioClip transmissionSound;
     [Range(0, 1)]
     [SerializeField]
     protected float transmissionSoundVolume = 1f;
+    [SerializeField] protected Color switchColor;
 
     [Header("References")]
     [SerializeField] protected LineRenderer transmissionLineRenderer;
+    [SerializeField] protected SpriteRenderer transmissionRangeIndicator;
     [SerializeField] protected ParticleSystem transmissionPS;
     [SerializeField] protected GameEvent abilitiesChangedEvent = null;
 
@@ -34,6 +37,8 @@ public class Transmission : MonoBehaviour
     protected AudioSource audioSource;
     GameObject targetedBy;
     bool endingTransmission;
+    Material playerMat;
+    bool transmissionInProgress;
     #endregion
 
 
@@ -49,7 +54,9 @@ public class Transmission : MonoBehaviour
     virtual protected void Start()
     {
         hero = GetComponent<Hero>();
+        playerMat = hero.PlayerMesh.GetComponent<MeshRenderer>().material;
         audioSource = GetComponent<AudioSource>();
+        transmissionRangeIndicator.transform.localScale = new Vector3(transmissionRange * 0.5f, transmissionRange * 0.5f, transmissionRange * 0.5f);
 	}
 	
 	virtual protected void Update()
@@ -63,8 +70,7 @@ public class Transmission : MonoBehaviour
         // Look for a receiver
         if (receiver == null && transmissionReady && TransmissionButtonsPressed())
         {
-            UpdateLineRenderer();
-            transmissionLineRenderer.gameObject.SetActive(true);
+            transmissionRangeIndicator.enabled = true;
             FindReceiverCircle();
         }
         // Continue the transmission when a receiver is found
@@ -91,6 +97,9 @@ public class Transmission : MonoBehaviour
         currentTransmissionDuration = 0f;
         transmissionReady = false;
         transmissionLineRenderer.gameObject.SetActive(false);
+        transmissionRangeIndicator.enabled = false;
+        playerMat.DOBlendableColor(hero.PlayerConfig.ColorConfig.heroMaterial.color, 1f);
+        transmissionInProgress = false;
         StartCoroutine(ResetTransmissionCooldown());
 
         endingTransmission = false;
@@ -130,8 +139,13 @@ public class Transmission : MonoBehaviour
                 if (hits[i].transform.GetComponentInParent<Rigidbody>().gameObject != gameObject)
                 {
                     Debug.DrawLine(transform.position + Vector3.up * 0.5f, hits[i].transform.position, Color.green);
+
                     receiver = hits[i].transform.GetComponentInParent<Rigidbody>().gameObject;
                     receiver.GetComponent<Transmission>().TargetedBy = gameObject;
+
+                    UpdateLineRenderer();
+                    transmissionLineRenderer.gameObject.SetActive(true);
+
                     return true;
                 }
             }
@@ -152,33 +166,41 @@ public class Transmission : MonoBehaviour
     protected void Transmit()
     {
         // End transmission if out of range
-        if ((transform.position - receiver.transform.position).magnitude > transmissionRange + 2f)
+        if ((transform.position - receiver.transform.position).magnitude > transmissionRange + 1.5f)
         {
             EndTransmission();
             return;
         }
 
-        currentTransmissionDuration += Time.deltaTime;
         Debug.DrawLine(transform.position, receiver.transform.position, Color.green);
 
-        // Successfull transmission: Swap abilities and end transmission
+        // Transmission in progress
         if (targetedBy == receiver)
         {
-            Hero otherHero = receiver.GetComponent<Hero>();
-            Ability newAbility = otherHero.PlayerConfig.ability;
+            if (!transmissionInProgress) playerMat.DOBlendableColor(switchColor, transmissionDuration);
+            transmissionInProgress = true;
 
-            // Switch abilities
-            otherHero.SetAbility(hero.PlayerConfig.ability);
-            hero.SetAbility(newAbility);
+            currentTransmissionDuration += Time.deltaTime;
 
-            audioSource.PlayOneShot(transmissionSound, transmissionSoundVolume);
+            // Successfull transmission: Swap abilities and end transmission
+            if (currentTransmissionDuration >= transmissionDuration)
+            {
+                Hero otherHero = receiver.GetComponent<Hero>();
+                Ability newAbility = otherHero.PlayerConfig.ability;
 
-            RaiseAbilitiesChanged(hero.PlayerConfig, otherHero.PlayerConfig);
+                // Switch abilities
+                otherHero.SetAbility(hero.PlayerConfig.ability);
+                hero.SetAbility(newAbility);
 
-            transmissionPS.Play();
-            receiver.GetComponent<Transmission>().transmissionPS.Play();
+                audioSource.PlayOneShot(transmissionSound, transmissionSoundVolume);
 
-            EndTransmission();
+                RaiseAbilitiesChanged(hero.PlayerConfig, otherHero.PlayerConfig);
+
+                transmissionPS.Play();
+                receiver.GetComponent<Transmission>().transmissionPS.Play();
+
+                EndTransmission();
+            }
         }
     }
 

@@ -28,6 +28,7 @@ public class Hero : Player
     public Sprite OpferSprite { get { return opferSprite; } }
     public AudioSource AudioSource { get { return audioSource; } }
     public Rigidbody Rigidbody { get { return rigidbody; } }
+    public MeshFilter PlayerMesh { get { return playerMesh; } }
     #endregion
 
 
