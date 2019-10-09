@@ -169,6 +169,7 @@ public class SirAlfredLobby : LevelManager
         points.ResetPoints(true);
 
         UpdatePlayerConfirmsList();
+        GameManager.Instance.IsInitialized = true;
     }
 
     public void UpdatePlayerCount()

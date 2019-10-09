@@ -56,7 +56,7 @@ public class EditorLevelStarter : MonoBehaviour
     private void OnLevelFinishedLoading(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
     {
 #if UNITY_EDITOR
-        if (!GameManager.Instance.isInitialized)
+        if (!GameManager.Instance.IsInitialized)
         {
             SetupPlayers();
         }
@@ -65,7 +65,6 @@ public class EditorLevelStarter : MonoBehaviour
 
     private void SetupPlayers()
     {
-        Debug.Log("Setting up the Players!");
 
         int playerCount = UpdatePlayerCount();
         // Set playerNumbers depending on amount of human players
@@ -116,6 +115,7 @@ public class EditorLevelStarter : MonoBehaviour
         }
 
         GameManager.Instance.activeColorSet = colorSet;
+        GameManager.Instance.IsInitialized = true;
     }
 
     public int UpdatePlayerCount()
@@ -129,6 +129,8 @@ public class EditorLevelStarter : MonoBehaviour
                 playerCount++;
             }
         }
+        if (playerCount == 0)
+            playerCount = 1;
         return playerCount;
     }
     #endregion

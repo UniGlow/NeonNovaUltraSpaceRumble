@@ -143,8 +143,6 @@ public class PlayerManager : MonoBehaviour
             default:
                 break;
         }
-        Debug.Log("Game Setup with " + humanPlayerCount + " Players found!");
-
         RaisePlayersSpawned(hero1PlayerConfig, hero2PlayerConfig, hero3PlayerConfig, bossPlayerConfig);
     }
 	#endregion

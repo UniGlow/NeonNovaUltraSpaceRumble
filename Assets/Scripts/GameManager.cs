@@ -13,7 +13,9 @@ public class GameManager : MonoBehaviour
 
     // TODO: Verlagern in SO "GameSettings"
     [HideInInspector] public ColorSet activeColorSet = null;
-    [HideInInspector] public bool isInitialized = false;
+    private bool isInitialized = false;
+
+    public bool IsInitialized { get { return isInitialized; } set { isInitialized = value; } }
     #endregion
 
 
