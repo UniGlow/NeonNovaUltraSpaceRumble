@@ -28,7 +28,7 @@ public class PlayerManager : MonoBehaviour
     [Header("References")]
     [SerializeField] private Points points = null;
     [SerializeField] private GameSettings gameSettings = null;
-
+    
     // Private
     // PlayerTransforms
     private Transform player1Transform = null;
@@ -143,7 +143,6 @@ public class PlayerManager : MonoBehaviour
             default:
                 break;
         }
-
         RaisePlayersSpawned(hero1PlayerConfig, hero2PlayerConfig, hero3PlayerConfig, bossPlayerConfig);
     }
 	#endregion
@@ -155,12 +154,12 @@ public class PlayerManager : MonoBehaviour
     {
         playersSpawnedEvent.Raise(this, hero1PlayerConfig, hero2PlayerConfig, hero3PlayerConfig, bossPlayerConfig);
     }
-	#endregion
-	
-	
-	
-	#region Coroutines
-	
-	#endregion
+#endregion
+
+
+
+    #region Coroutines
+
+    #endregion
 }
 
