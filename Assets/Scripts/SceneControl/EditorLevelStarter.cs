@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿#if UNITY_EDITOR
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -55,12 +56,10 @@ public class EditorLevelStarter : MonoBehaviour
     #region Private Functions
     private void OnLevelFinishedLoading(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
     {
-#if UNITY_EDITOR
         if (!GameManager.Instance.IsInitialized)
         {
             SetupPlayers();
         }
-#endif
     }
 
     private void SetupPlayers()
@@ -104,3 +103,4 @@ public class EditorLevelStarter : MonoBehaviour
     #endregion
 }
 
+#endif
