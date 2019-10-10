@@ -65,59 +65,15 @@ public class EditorLevelStarter : MonoBehaviour
 
     private void SetupPlayers()
     {
-
         int playerCount = UpdatePlayerCount();
         // Set playerNumbers depending on amount of human players
-        switch (playerCount)
-        {
-            case 1:
-                bossPlayerConfig.Initialize(1, Faction.Boss, colorSet.GetRandomColor(), false);
-                hero1PlayerConfig.Initialize(2, Faction.Heroes, colorSet.color1, true);
-                hero1PlayerConfig.ability = ability2;
-                hero2PlayerConfig.Initialize(3, Faction.Heroes, colorSet.color2, true);
-                hero2PlayerConfig.ability = ability1;
-                hero3PlayerConfig.Initialize(4, Faction.Heroes, colorSet.color3, true);
-                hero3PlayerConfig.ability = ability3;
-                break;
-
-            case 2:
-                hero1PlayerConfig.Initialize(1, Faction.Heroes, colorSet.color1, false);
-                hero1PlayerConfig.ability = ability2;
-                hero2PlayerConfig.Initialize(2, Faction.Heroes, colorSet.color2, false);
-                hero2PlayerConfig.ability = ability1;
-                hero3PlayerConfig.Initialize(3, Faction.Heroes, colorSet.color3, true);
-                hero3PlayerConfig.ability = ability3;
-                bossPlayerConfig.Initialize(4, Faction.Boss, colorSet.GetRandomColor(), true);
-                break;
-
-            case 3:
-                hero1PlayerConfig.Initialize(1, Faction.Heroes, colorSet.color1, false);
-                hero1PlayerConfig.ability = ability2;
-                hero2PlayerConfig.Initialize(2, Faction.Heroes, colorSet.color2, false);
-                hero2PlayerConfig.ability = ability1;
-                hero3PlayerConfig.Initialize(3, Faction.Heroes, colorSet.color3, false);
-                hero3PlayerConfig.ability = ability3;
-                bossPlayerConfig.Initialize(4, Faction.Boss, colorSet.GetRandomColor(), true);
-                break;
-
-            case 4:
-                bossPlayerConfig.Initialize(1, Faction.Boss, colorSet.GetRandomColor(), false);
-                hero1PlayerConfig.Initialize(2, Faction.Heroes, colorSet.color1, false);
-                hero1PlayerConfig.ability = ability2;
-                hero2PlayerConfig.Initialize(3, Faction.Heroes, colorSet.color2, false);
-                hero2PlayerConfig.ability = ability1;
-                hero3PlayerConfig.Initialize(4, Faction.Heroes, colorSet.color3, false);
-                hero3PlayerConfig.ability = ability3;
-                break;
-
-            default:
-                break;
-        }
-
-        GameManager.Instance.activeColorSet = colorSet;
-        GameManager.Instance.IsInitialized = true;
+        PlayerSetup.SetupPlayers(playerCount, bossPlayerConfig, hero1PlayerConfig, hero2PlayerConfig, hero3PlayerConfig, ability1, ability2, ability3, colorSet);
     }
 
+    /// <summary>
+    /// TODO: With Rewired, this function should be called from a static helper class (currently copy-pasted code from SirAlfred)
+    /// </summary>
+    /// <returns></returns>
     public int UpdatePlayerCount()
     {
         int playerCount = 0;

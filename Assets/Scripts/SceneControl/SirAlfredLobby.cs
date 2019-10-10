@@ -119,57 +119,11 @@ public class SirAlfredLobby : LevelManager
         UpdatePlayerCount();
 
         // Set playerNumbers depending on amount of human players
-        switch (playerCount)
-        {
-            case 1:
-                bossPlayerConfig.Initialize(1, Faction.Boss, colorSet.GetRandomColor(), false);
-                hero1PlayerConfig.Initialize(2, Faction.Heroes, colorSet.color1, true);
-                hero1PlayerConfig.ability = damageAbility;
-                hero2PlayerConfig.Initialize(3, Faction.Heroes, colorSet.color2, true);
-                hero2PlayerConfig.ability = tankAbility;
-                hero3PlayerConfig.Initialize(4, Faction.Heroes, colorSet.color3, true);
-                hero3PlayerConfig.ability = victimAbility;
-                break;
+        PlayerSetup.SetupPlayers(playerCount, bossPlayerConfig, hero1PlayerConfig, hero2PlayerConfig, hero3PlayerConfig, damageAbility, tankAbility, victimAbility, colorSet);
 
-            case 2:
-                hero1PlayerConfig.Initialize(1, Faction.Heroes, colorSet.color1, false);
-                hero1PlayerConfig.ability = damageAbility;
-                hero2PlayerConfig.Initialize(2, Faction.Heroes, colorSet.color2, false);
-                hero2PlayerConfig.ability = tankAbility;
-                hero3PlayerConfig.Initialize(3, Faction.Heroes, colorSet.color3, true);
-                hero3PlayerConfig.ability = victimAbility;
-                bossPlayerConfig.Initialize(4, Faction.Boss, colorSet.GetRandomColor(), true);
-                break;
-
-            case 3:
-                hero1PlayerConfig.Initialize(1, Faction.Heroes, colorSet.color1, false);
-                hero1PlayerConfig.ability = damageAbility;
-                hero2PlayerConfig.Initialize(2, Faction.Heroes, colorSet.color2, false);
-                hero2PlayerConfig.ability = tankAbility;
-                hero3PlayerConfig.Initialize(3, Faction.Heroes, colorSet.color3, false);
-                hero3PlayerConfig.ability = victimAbility;
-                bossPlayerConfig.Initialize(4, Faction.Boss, colorSet.GetRandomColor(), true);
-                break;
-
-            case 4:
-                bossPlayerConfig.Initialize(1, Faction.Boss, colorSet.GetRandomColor(), false);
-                hero1PlayerConfig.Initialize(2, Faction.Heroes, colorSet.color1, false);
-                hero1PlayerConfig.ability = damageAbility;
-                hero2PlayerConfig.Initialize(3, Faction.Heroes, colorSet.color2, false);
-                hero2PlayerConfig.ability = tankAbility;
-                hero3PlayerConfig.Initialize(4, Faction.Heroes, colorSet.color3, false);
-                hero3PlayerConfig.ability = victimAbility;
-                break;
-
-            default:
-                break;
-        }
-
-        GameManager.Instance.activeColorSet = colorSet;
         points.ResetPoints(true);
 
         UpdatePlayerConfirmsList();
-        GameManager.Instance.IsInitialized = true;
     }
 
     public void UpdatePlayerCount()

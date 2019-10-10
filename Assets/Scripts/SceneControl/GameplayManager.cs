@@ -16,8 +16,7 @@ public class GameplayManager : LevelManager
 
     [Space]
     [SerializeField] Points points = null;
-    [Header("Editor Startup")]
-    [SerializeField] 
+
     // Private
     float intensifyTimer = 0f;
     #endregion
