@@ -15,3 +15,4 @@ MonoBehaviour:
   bossProjectileColor: {r: 0, g: 1, b: 0.0069999998, a: 1}
   bossMaterial: {fileID: 2100000, guid: 966f269b5a0b25f4485446ac000d0ef7, type: 2}
   uiElementColor: {r: 0, g: 1, b: 0.0069999998, a: 1}
+  staubsaugerColor: {r: 0.53103447, g: 1, b: 0, a: 1}

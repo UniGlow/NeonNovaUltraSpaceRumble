@@ -59,6 +59,8 @@ public class Transmission : MonoBehaviour
     [Tooltip("Duration of the travel for the shooting stars. Percentual value from transmissionDuration.")]
     [SerializeField] protected float shootingStarsDuration = 0.77f;
     [SerializeField] protected Ease shootingStarEase = Ease.OutSine;
+    [Range(-1f, 1f)]
+    [SerializeField] protected float shootingStarsOffset = 0.08f;
 
     [Space]
     [Range(0f, 1f)]
@@ -104,6 +106,16 @@ public class Transmission : MonoBehaviour
 
         playerMat = hero.PlayerMesh.GetComponent<MeshRenderer>().material;
         transmissionRangeIndicator.transform.localScale = new Vector3(transmissionRange * 0.2f, transmissionRange * 0.2f, transmissionRange * 0.2f);
+        ParticleSystem[] rangeParticleSystems = transmissionRangeIndicator.GetComponentsInChildren<ParticleSystem>();
+        foreach (ParticleSystem ps in rangeParticleSystems)
+        {
+            var main = ps.main;
+            main.startColor = 
+                new Color(hero.PlayerConfig.ColorConfig.staubsaugerColor.r, 
+                hero.PlayerConfig.ColorConfig.staubsaugerColor.g, 
+                hero.PlayerConfig.ColorConfig.staubsaugerColor.b, 
+                ps.main.startColor.color.a);
+        }
 	}
 	
 	virtual protected void Update()
@@ -250,6 +262,8 @@ public class Transmission : MonoBehaviour
 
     protected void Transmit()
     {
+        hero.SetMovable(false);
+
         // Blinking Hero
         playerMat.DOBlendableColor(playerMat.color * switchColorMultiplier, (blinkDuration * transmissionDuration) / 2).OnComplete(() => 
         {
@@ -257,8 +271,9 @@ public class Transmission : MonoBehaviour
             // Shooting Stars go!
             // TODO: Shooting Stars need to track their targets
             // TODO: Shooting Stars slightly offset
-            GameObject shootingStar = Instantiate(shootingStarsPrefab, transform.position, Quaternion.LookRotation(transmissionPartner.transform.position - transform.position));
-            shootingStar.transform.DOMove(transmissionPartner.transform.position, shootingStarsDuration * transmissionDuration).SetEase(Ease.OutSine).OnComplete(() => 
+            Vector3 directionToReceiver = transmissionPartner.transform.position - transform.position;
+            GameObject shootingStar = Instantiate(shootingStarsPrefab, transform.position + Vector3.Cross(directionToReceiver, Vector3.down) * shootingStarsOffset, Quaternion.LookRotation(directionToReceiver));
+            shootingStar.transform.DOMove(transmissionPartner.transform.position + Vector3.Cross(directionToReceiver, Vector3.down) * shootingStarsOffset, shootingStarsDuration * transmissionDuration).SetEase(Ease.OutSine).OnComplete(() => 
             {
                 Destroy(shootingStar);
                 // Blink again
@@ -277,7 +292,10 @@ public class Transmission : MonoBehaviour
                 transparentMesh.GetComponent<MeshRenderer>().material.DOFade(1f, meshFadeDuration * transmissionDuration).SetEase(Ease.InQuad);
 
                 // Shrink into hero
-                transparentMesh.transform.DOScale(1f, meshScaleDuration * transmissionDuration).SetEase(Ease.OutCubic).OnComplete(() => 
+                transparentMesh.transform.DOScale(1f, meshScaleDuration * transmissionDuration).SetEase(Ease.OutCubic).OnUpdate(() => 
+                {
+                    transparentMesh.transform.position = transform.position;
+                }).OnComplete(() => 
                 {
                     Destroy(transparentMesh);
                 });
@@ -350,6 +368,7 @@ public class Transmission : MonoBehaviour
 
     protected void EndTransmission()
     {
+        hero.SetMovable(true);
         transmissionPartner = null;
         receivingAbility = null;
         ChangeState(State.Deactivated);
