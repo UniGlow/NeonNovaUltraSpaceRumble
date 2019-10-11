@@ -791,8 +791,9 @@ MonoBehaviour:
   blinkDuration: 0.23
   shootingStarsDuration: 0.4
   shootingStarEase: 3
+  shootingStarsOffset: 0.08
   meshFadeDuration: 0.77
-  meshFadeEase: 5
+  meshFadeEase: 6
   meshScaleDuration: 0.77
   meshScaleEase: 9
   transmissionRangeIndicator: {fileID: 1493951416420246}

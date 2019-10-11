@@ -270,7 +270,6 @@ public class Transmission : MonoBehaviour
             playerMat.DOBlendableColor(hero.PlayerConfig.ColorConfig.heroMaterial.color, (blinkDuration * transmissionDuration) / 2);
             // Shooting Stars go!
             // TODO: Shooting Stars need to track their targets
-            // TODO: Shooting Stars slightly offset
             Vector3 directionToReceiver = transmissionPartner.transform.position - transform.position;
             GameObject shootingStar = Instantiate(shootingStarsPrefab, transform.position + Vector3.Cross(directionToReceiver, Vector3.down) * shootingStarsOffset, Quaternion.LookRotation(directionToReceiver));
             shootingStar.transform.DOMove(transmissionPartner.transform.position + Vector3.Cross(directionToReceiver, Vector3.down) * shootingStarsOffset, shootingStarsDuration * transmissionDuration).SetEase(Ease.OutSine).OnComplete(() => 
@@ -285,7 +284,7 @@ public class Transmission : MonoBehaviour
                 
                 // Set color
                 Color transparentMeshColor = hero.PlayerConfig.ColorConfig.heroMaterial.GetColor("_EmissionColor");
-                transparentMeshColor.a = 0.02f;
+                transparentMeshColor.a = 0.2f;
                 transparentMesh.GetComponent<MeshRenderer>().material.SetColor("_Color", transparentMeshColor);
                 
                 // Fade alpha
