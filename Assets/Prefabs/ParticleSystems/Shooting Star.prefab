@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 23844968891776552}
   - component: {fileID: 54581629934450706}
   m_Layer: 11
-  m_Name: Shooting Start
+  m_Name: Shooting Star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -64,7 +64,7 @@ public class TransmissionAI : Transmission
         {
             Debug.DrawLine(transform.position + Vector3.up * 0.5f, hitInfo.point, Color.green);
             receivers.Clear();
-            receivers.Add(hitInfo.transform.GetComponentInParent<Transmission>());
+            receivers.Add(new Receiver(hitInfo.transform.GetComponentInParent<Transmission>(), hitInfo.transform.GetComponentInParent<Hero>().PlayerConfig.ColorConfig.heroMaterial.GetColor("_EmissionColor")));
             //hero.SetMovable(false);
             return true;
         }
