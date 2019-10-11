@@ -307,7 +307,7 @@ public class Transmission : MonoBehaviour
                 transmissionPS.Play();
 
                 // TODO: Both heroes are executing Transmit(), but only one event must be raised
-                if (transmissionPartner.transmissionPartner != null) RaiseAbilitiesChanged(hero.PlayerConfig, transmissionPartner.hero.PlayerConfig);
+                if (transmissionPartner.transmissionPartner == null) RaiseAbilitiesChanged(hero.PlayerConfig, transmissionPartner.hero.PlayerConfig);
 
                 EndTransmission();
             });
