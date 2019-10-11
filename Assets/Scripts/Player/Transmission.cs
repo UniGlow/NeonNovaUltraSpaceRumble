@@ -337,7 +337,12 @@ public class Transmission : MonoBehaviour
 
         if (newState == State.ReadyToTransmit)
         {
-            playerMat.DOBlendableColor(playerMat.color * inRangeColorMultiplier, (blinkDuration * transmissionDuration) / 2);
+            playerMat.DOBlendableColor(hero.PlayerConfig.ColorConfig.heroMaterial.color * inRangeColorMultiplier, (blinkDuration * transmissionDuration) / 2);
+        }
+
+        if (state == State.ReadyToTransmit && newState != State.Transmitting)
+        {
+            playerMat.DOBlendableColor(hero.PlayerConfig.ColorConfig.heroMaterial.color, (blinkDuration * transmissionDuration) / 2);
         }
 
         state = newState;
