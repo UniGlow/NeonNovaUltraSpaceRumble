@@ -14,8 +14,6 @@ public class Hero : Player
     [Header("References")]
     [SerializeField] protected GameObject wobbleBobble;
     [SerializeField] protected Image cooldownIndicator;
-    [SerializeField] protected Sprite damageSprite;
-    [SerializeField] protected Sprite opferSprite;
     [SerializeField] protected MeshFilter playerMesh;
     #endregion
 
@@ -24,8 +22,6 @@ public class Hero : Player
     #region Public Properties
     public GameObject WobbleBobble { get { return wobbleBobble; } }
     public Image CooldownIndicator { get { return cooldownIndicator; } }
-    public Sprite DamageSprite { get { return damageSprite; } }
-    public Sprite OpferSprite { get { return opferSprite; } }
     public AudioSource AudioSource { get { return audioSource; } }
     public Rigidbody Rigidbody { get { return rigidbody; } }
     public MeshFilter PlayerMesh { get { return playerMesh; } }

@@ -51,11 +51,7 @@ public class TransmissionAI : Transmission
 
     new public void EndTransmission()
     {
-        receiver = null;
-        currentTransmissionDuration = 0f;
-        transmissionReady = false;
-        transmissionLineRenderer.gameObject.SetActive(false);
-        StartCoroutine(ResetTransmissionCooldown());
+        
     }
 
 
@@ -67,7 +63,8 @@ public class TransmissionAI : Transmission
         if (Physics.Raycast(transform.position + Vector3.up * 0.5f, transform.forward, out hitInfo, transmissionRange, 1 << 8))
         {
             Debug.DrawLine(transform.position + Vector3.up * 0.5f, hitInfo.point, Color.green);
-            receiver = hitInfo.transform.gameObject;
+            receivers.Clear();
+            receivers.Add(hitInfo.transform.GetComponentInParent<Transmission>());
             //hero.SetMovable(false);
             return true;
         }

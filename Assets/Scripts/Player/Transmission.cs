@@ -7,14 +7,21 @@ using DG.Tweening;
 /// 
 /// </summary>
 [RequireComponent(typeof(Hero))]
+[RequireComponent(typeof(AudioSource))]
 public class Transmission : MonoBehaviour
 {
+    public enum State
+    {
+        Deactivated,
+        Searching,
+        ReadyToTransmit,
+        Transmitting
+    }
 
     #region Variable Declarations
     [Header("Settings")]
     [SerializeField] protected float transmissionRange = 5f;
     [SerializeField] protected float transmissionDuration = 3f;
-    [SerializeField] protected float transmissionCooldown = 1f;
 
     [Header("FX")]
     [SerializeField]
@@ -25,27 +32,24 @@ public class Transmission : MonoBehaviour
     [SerializeField] protected Color switchColor;
 
     [Header("References")]
-    [SerializeField] protected LineRenderer transmissionLineRenderer;
-    [SerializeField] protected SpriteRenderer transmissionRangeIndicator;
+    [SerializeField] protected GameObject transmissionRangeIndicator;
     [SerializeField] protected ParticleSystem transmissionPS;
     [SerializeField] protected GameEvent abilitiesChangedEvent = null;
+    [SerializeField] protected GameObject shootingStarsPrefab = null;
 
     protected Hero hero;
-    protected GameObject receiver;
-    protected float currentTransmissionDuration;
-    protected bool transmissionReady = true;
     protected AudioSource audioSource;
-    GameObject targetedBy;
-    bool endingTransmission;
-    Material playerMat;
-    bool transmissionInProgress;
+    protected Material playerMat;
+    protected State state;
+    protected List<Transmission> receivers = new List<Transmission>();
+    protected Transmission transmissionPartner;
+    protected Ability receivingAbility;
     #endregion
 
 
 
     #region Public Properties
     public ParticleSystem TransmissionPS { get { return transmissionPS; } }
-    public GameObject TargetedBy { get { return targetedBy; } set { targetedBy = value; } }
     #endregion
 
 
@@ -54,60 +58,78 @@ public class Transmission : MonoBehaviour
     virtual protected void Start()
     {
         hero = GetComponent<Hero>();
-        playerMat = hero.PlayerMesh.GetComponent<MeshRenderer>().material;
         audioSource = GetComponent<AudioSource>();
+
+        playerMat = hero.PlayerMesh.GetComponent<MeshRenderer>().material;
         transmissionRangeIndicator.transform.localScale = new Vector3(transmissionRange * 0.5f, transmissionRange * 0.5f, transmissionRange * 0.5f);
 	}
 	
 	virtual protected void Update()
-    {        
-        // End transmission if button is lifted
-        if (TransmissionButtonsUp())
+    {
+        switch (state)
         {
-            EndTransmission();
-        }
+            case State.Deactivated:
+                if (TransmissionButtonsPressed())
+                {
+                    ChangeState(State.Searching);
+                }
+                break;
 
-        // Look for a receiver
-        if (receiver == null && transmissionReady && TransmissionButtonsPressed())
-        {
-            transmissionRangeIndicator.enabled = true;
-            FindReceiverCircle();
-        }
-        // Continue the transmission when a receiver is found
-        else if (receiver != null && TransmissionButtonsPressed())
-        {
-            UpdateLineRenderer();
-            Transmit();
+            case State.Searching:
+                if (TransmissionButtonsUp())
+                {
+                    ChangeState(State.Deactivated);
+                }
+
+                else if (FindReceiversCircle() > 0)
+                {
+                    ChangeState(State.ReadyToTransmit);
+                }
+                break;
+
+            case State.ReadyToTransmit:
+                if (TransmissionButtonsUp())
+                {
+                    ChangeState(State.Deactivated);
+                }
+
+                else if (FindReceiversCircle() == 0)
+                {
+                    ChangeState(State.Searching);
+                }
+
+                // Two heroes ready? => Start transmitting
+                foreach (Transmission receiver in receivers)
+                {
+                    if (receiver.state == State.Searching || receiver.state == State.ReadyToTransmit)
+                    {
+                        receiver.transmissionPartner = this;
+                        receiver.receivingAbility = hero.PlayerConfig.ability;
+                        receiver.ChangeState(State.Transmitting);
+                        transmissionPartner = receiver;
+                        receivingAbility = receiver.hero.PlayerConfig.ability;
+                        ChangeState(State.Transmitting);
+                    }
+                }
+
+                break;
+
+            case State.Transmitting:
+                break;
+
+            default:
+                break;
         }
     }
     #endregion
 
-    
-
-    public void EndTransmission()
-    {
-        endingTransmission = true;
-
-        if (receiver != null && !receiver.GetComponent<Transmission>().endingTransmission)
-        {
-            receiver.GetComponent<Transmission>().EndTransmission();
-            receiver = null;
-        }
-        targetedBy = null;
-        currentTransmissionDuration = 0f;
-        transmissionReady = false;
-        transmissionLineRenderer.gameObject.SetActive(false);
-        transmissionRangeIndicator.enabled = false;
-        playerMat.DOBlendableColor(hero.PlayerConfig.ColorConfig.heroMaterial.color, 1f);
-        transmissionInProgress = false;
-        StartCoroutine(ResetTransmissionCooldown());
-
-        endingTransmission = false;
-    }
-
 
 
     #region Private Functions
+    /// <summary>
+    /// Shoots a ray forward to look for a receiver (old version of transmission)
+    /// </summary>
+    /// <returns></returns>
     bool FindReceiverRay()
     {
         RaycastHit hitInfo;
@@ -117,8 +139,8 @@ public class Transmission : MonoBehaviour
             || Physics.Raycast(transform.position + Vector3.up * 0.5f - Vector3.right * 0.3f, transform.forward, out hitInfo, transmissionRange, 1 << 8))
         {
             Debug.DrawLine(transform.position + Vector3.up * 0.5f, hitInfo.point, Color.green);
-            receiver = hitInfo.transform.gameObject;
-            receiver.GetComponent<Transmission>().TargetedBy = gameObject;
+            receivers.Clear();
+            receivers.Add(hitInfo.transform.GetComponentInParent<Transmission>());
             return true;
         }
         else
@@ -128,25 +150,39 @@ public class Transmission : MonoBehaviour
         }
     }
 
-    bool FindReceiverCircle()
+    /// <summary>
+    /// Searches receiving heroes in a sphere.
+    /// </summary>
+    /// <returns>Returns the number of receivers found.</returns>
+    int FindReceiversCircle()
     {
-        Collider[] hits = Physics.OverlapSphere(transform.position, transmissionRange, 1 << 8);
-
-        if (hits.Length > 1)
+        List<Collider> hits = new List<Collider>(Physics.OverlapSphere(transform.position, transmissionRange, 1 << 8));
+        List<Transmission> heroesHit = new List<Transmission>();
+        foreach (Collider hit in hits)
         {
-            for (int i = 0; i < hits.Length; i++)
+            Transmission hitTransmitter = hit.transform.GetComponentInParent<Transmission>();
+            if (hitTransmitter.gameObject != gameObject) heroesHit.Add(hitTransmitter);
+        }
+
+        if (heroesHit.Count > 0)
+        {
+            // Inform receivers that aren't any longer targeted and remove them from the list
+            for (int i = receivers.Count-1; i >= 0; i--)
             {
-                if (hits[i].transform.GetComponentInParent<Rigidbody>().gameObject != gameObject)
+                if (!heroesHit.Contains(receivers[i]))
                 {
-                    Debug.DrawLine(transform.position + Vector3.up * 0.5f, hits[i].transform.position, Color.green);
+                    receivers.Remove(receivers[i]);
+                }
+            }
 
-                    receiver = hits[i].transform.GetComponentInParent<Rigidbody>().gameObject;
-                    receiver.GetComponent<Transmission>().TargetedBy = gameObject;
+            // Inform new receivers and add them to the list
+            foreach (Transmission hit in heroesHit)
+            {
+                Debug.DrawLine(transform.position + Vector3.up * 0.5f, hit.transform.position, Color.green);
 
-                    UpdateLineRenderer();
-                    transmissionLineRenderer.gameObject.SetActive(true);
-
-                    return true;
+                if (!receivers.Contains(hit))
+                {
+                    receivers.Add(hit);
                 }
             }
         }
@@ -158,64 +194,43 @@ public class Transmission : MonoBehaviour
                 Vector3 direction = Quaternion.Euler(0, i, 0) * transform.forward;
                 Debug.DrawRay(transform.position + Vector3.up * 0.5f, direction * transmissionRange, Color.red);
             }
+
+            receivers.Clear();
         }
 
-        return false;
+        return receivers.Count;
     }
 
     protected void Transmit()
     {
-        // End transmission if out of range
-        if ((transform.position - receiver.transform.position).magnitude > transmissionRange + 1.5f)
+        Color originalColor = playerMat.color;
+        // Blinking Hero
+        playerMat.DOBlendableColor(switchColor, 0.3f).OnComplete(() => 
         {
-            EndTransmission();
-            return;
-        }
-
-        Debug.DrawLine(transform.position, receiver.transform.position, Color.green);
-
-        // Transmission in progress
-        if (targetedBy == receiver)
-        {
-            if (!transmissionInProgress) playerMat.DOBlendableColor(switchColor, transmissionDuration);
-            transmissionInProgress = true;
-
-            currentTransmissionDuration += Time.deltaTime;
-
-            // Successfull transmission: Swap abilities and end transmission
-            if (currentTransmissionDuration >= transmissionDuration)
+            playerMat.DOBlendableColor(originalColor, 0.3f);
+            // Shooting Stars go!
+            GameObject shootingStar = Instantiate(shootingStarsPrefab, transform.position, Quaternion.LookRotation(transmissionPartner.transform.position - transform.position));
+            shootingStar.transform.DOMove(transmissionPartner.transform.position, 1f).SetEase(Ease.OutSine).OnComplete(() => 
             {
-                Hero otherHero = receiver.GetComponent<Hero>();
-                Ability newAbility = otherHero.PlayerConfig.ability;
+                Destroy(shootingStar);
+                // Blink again
+                playerMat.DOBlendableColor(switchColor, 0.3f).SetLoops(2, LoopType.Yoyo);
+
+                // TODO: Scale transparent mesh of new hero shape
 
                 // Switch abilities
-                otherHero.SetAbility(hero.PlayerConfig.ability);
-                hero.SetAbility(newAbility);
+                hero.SetAbility(receivingAbility);
 
                 audioSource.PlayOneShot(transmissionSound, transmissionSoundVolume);
 
-                RaiseAbilitiesChanged(hero.PlayerConfig, otherHero.PlayerConfig);
-
                 transmissionPS.Play();
-                receiver.GetComponent<Transmission>().transmissionPS.Play();
+
+                // TODO: Both heroes are executing Transmit(), but only one event must be raised
+                if (transmissionPartner.transmissionPartner != null) RaiseAbilitiesChanged(hero.PlayerConfig, transmissionPartner.hero.PlayerConfig);
 
                 EndTransmission();
-            }
-        }
-    }
-
-    protected void UpdateLineRenderer()
-    {
-        if (receiver == null)
-        {
-            transmissionLineRenderer.SetPosition(0, transform.position + Vector3.up * 0.5f);
-            transmissionLineRenderer.SetPosition(1, transform.position + Vector3.up * 0.5f + transform.forward * transmissionRange);
-        }
-        else
-        {
-            transmissionLineRenderer.SetPosition(0, transform.position + Vector3.up * 0.5f);
-            transmissionLineRenderer.SetPosition(1, receiver.transform.position + Vector3.up * 0.5f);
-        }
+            });
+        });
     }
 
     protected bool TransmissionButtonsUp()
@@ -234,6 +249,37 @@ public class Transmission : MonoBehaviour
 
         return false;
     }
+
+    protected void ChangeState(State newState)
+    {
+        if (newState == State.Searching || newState == State.ReadyToTransmit)
+        {
+            transmissionRangeIndicator.SetActive(true);
+        }
+        else
+        {
+            transmissionRangeIndicator.SetActive(false);
+        }
+
+        if (newState == State.Deactivated)
+        {
+            receivers.Clear();
+        }
+
+        if (newState == State.Transmitting)
+        {
+            Transmit();
+        }
+
+        state = newState;
+    }
+
+    protected void EndTransmission()
+    {
+        transmissionPartner = null;
+        receivingAbility = null;
+        ChangeState(State.Deactivated);
+    }
     #endregion
 
 
@@ -244,12 +290,4 @@ public class Transmission : MonoBehaviour
         abilitiesChangedEvent.Raise(this, hero1Config, hero2Config);
     }
     #endregion
-
-
-
-    protected IEnumerator ResetTransmissionCooldown()
-    {
-        yield return new WaitForSecondsRealtime(transmissionCooldown);
-        transmissionReady = true;
-    }
 }
