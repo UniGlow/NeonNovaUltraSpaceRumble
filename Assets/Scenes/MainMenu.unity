@@ -2424,6 +2424,7 @@ GameObject:
   m_Component:
   - component: {fileID: 769192382}
   - component: {fileID: 769192381}
+  - component: {fileID: 769192383}
   m_Layer: 5
   m_Name: SFXVolumeSlider
   m_TagString: Untagged
@@ -2471,10 +2472,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1685125676}
   m_HandleRect: {fileID: 0}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 0
+  m_MinValue: 0.0001
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -2523,6 +2524,18 @@ RectTransform:
   m_AnchoredPosition: {x: 36, y: 0}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &769192383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 769192380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3edf63e24f88c7240b6798f1ec2bc46f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  step: 0.05
 --- !u!1 &784079678
 GameObject:
   m_ObjectHideFlags: 0
@@ -4884,6 +4897,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1472746011}
   - component: {fileID: 1472746010}
+  - component: {fileID: 1472746012}
   m_Layer: 5
   m_Name: MusicVolumeSlider
   m_TagString: Untagged
@@ -4931,10 +4945,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1346921061}
   m_HandleRect: {fileID: 0}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 0
+  m_MinValue: 0.0001
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -4972,6 +4986,18 @@ RectTransform:
   m_AnchoredPosition: {x: 36, y: 0}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1472746012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1472746009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3edf63e24f88c7240b6798f1ec2bc46f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  step: 0.05
 --- !u!1 &1518948662
 GameObject:
   m_ObjectHideFlags: 0

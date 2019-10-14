@@ -84,6 +84,7 @@ public class Character : MonoBehaviour
         {
             horizontalMovement = 0;
             verticalMovement = 0;
+            rigidbody.velocity = Vector3.zero;
         }
 
         try

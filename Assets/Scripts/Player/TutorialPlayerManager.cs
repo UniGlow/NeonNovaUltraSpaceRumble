@@ -4,6 +4,7 @@ using UnityEngine;
 
 /// <summary>
 /// Spawns needed Heroes and Boss prefabs depending on the PlayerConfigs.
+/// TODO: Redo this class with the new tutorial! Class is complete copy-pasta of PlayerManager. Only needed temporarily until the interactive tutorial is implemented.
 /// </summary>
 public class TutorialPlayerManager : MonoBehaviour 
 {

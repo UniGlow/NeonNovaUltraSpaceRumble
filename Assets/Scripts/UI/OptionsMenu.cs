@@ -71,11 +71,11 @@ public class OptionsMenu : MonoBehaviour
     }
 
     public void SetSFXVolume(float volume) {
-        masterMixer.SetFloat(Constants.MIXER_SFX_VOLUME, volume);
+        masterMixer.SetFloat(Constants.MIXER_SFX_VOLUME, Mathf.Log10(volume) * 20);
     }
 
     public void SetMusicVolume(float volume) {
-        masterMixer.SetFloat(Constants.MIXER_MUSIC_VOLUME, volume);
+        masterMixer.SetFloat(Constants.MIXER_MUSIC_VOLUME, Mathf.Log10(volume) * 20);
     }
     #endregion
 

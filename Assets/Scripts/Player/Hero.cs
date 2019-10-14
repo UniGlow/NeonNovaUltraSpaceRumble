@@ -17,7 +17,7 @@ public class Hero : Character
     [SerializeField] protected Image cooldownIndicator;
     [SerializeField] protected Sprite damageSprite;
     [SerializeField] protected Sprite opferSprite;
-    [SerializeField] protected GameObject playerMesh;
+    [SerializeField] protected MeshFilter playerMesh;
     #endregion
 
 
@@ -29,6 +29,7 @@ public class Hero : Character
     public Sprite OpferSprite { get { return opferSprite; } }
     public AudioSource AudioSource { get { return audioSource; } }
     public Rigidbody Rigidbody { get { return rigidbody; } }
+    public MeshFilter PlayerMesh { get { return playerMesh; } }
     #endregion
 
 
@@ -87,7 +88,7 @@ public class Hero : Character
 
         // Update Mesh
         // TODO: Transition-Animation / Partikeleffekt abspielen
-        playerMesh.GetComponent<MeshFilter>().mesh = ability.Mesh;
+        playerMesh.mesh = ability.Mesh;
     }
     #endregion
 

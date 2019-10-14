@@ -11,5 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecfae3fc5bdaf6a48be875988313fcfb, type: 3}
   m_Name: VersionNumber
   m_EditorClassIdentifier: 
-  releaseText: Alpha 1
-  versionNumber: v0.1.0a
+  releaseText: Alpha 2
+  versionNumber: v0.2.0a
