@@ -6381,7 +6381,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   confirm: {fileID: 8300000, guid: c23fc62dc0e0a9145b3197a0ac5a23a1, type: 3}
   confirmVolume: 1
-  audioSource: {fileID: 1107186111}
+  audioSource: {fileID: 0}
 --- !u!114 &1107186110
 MonoBehaviour:
   m_ObjectHideFlags: 0

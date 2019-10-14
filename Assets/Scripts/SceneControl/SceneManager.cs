@@ -49,7 +49,7 @@ public class SceneManager : MonoBehaviour
 
             //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of an SceneManager.
             Debug.Log("There can only be one SceneManager instantiated. Destroying this Instance...");
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
     #endregion

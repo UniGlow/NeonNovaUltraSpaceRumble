@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Rewired;
 using DG.Tweening;
 
 /// <summary>
@@ -116,6 +117,7 @@ public class Transmission : MonoBehaviour
                 hero.PlayerConfig.ColorConfig.staubsaugerColor.b, 
                 ps.main.startColor.color.a);
         }
+
 	}
 	
 	virtual protected void Update()
@@ -316,7 +318,7 @@ public class Transmission : MonoBehaviour
 
     protected bool TransmissionButtonsUp()
     {
-        if (Input.GetButtonUp(Constants.INPUT_TRANSMIT + hero.PlayerConfig.PlayerNumber))
+        if (hero.PlayerConfig.Player.GetButtonUp(RewiredConsts.Action.TRANSMIT_ABILITY))
         {
             return true;
         }
@@ -326,7 +328,7 @@ public class Transmission : MonoBehaviour
 
     protected bool TransmissionButtonsPressed()
     {
-        if (Input.GetButton(Constants.INPUT_TRANSMIT + hero.PlayerConfig.PlayerNumber)) return true;
+        if (hero.PlayerConfig.Player.GetButton(RewiredConsts.Action.TRANSMIT_ABILITY)) return true;
 
         return false;
     }

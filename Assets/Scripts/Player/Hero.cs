@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Rewired;
 
 /// <summary>
 /// Handles everything related to the movement of Haru, our playable Character
 /// </summary>
-public class Hero : Player
+public class Hero : Character
 {
 
     #region Variable Declarations
@@ -36,7 +37,7 @@ public class Hero : Player
 
         if (active)
         {
-            playerConfig.ability.Tick(Time.deltaTime, AbilityButtonsDown());
+            playerConfig.ability.Tick(Time.deltaTime, AbilityButtonPressed());
 
             // Apply class-dependant movement speed modifier
             horizontalMovement *= (1 + playerConfig.ability.SpeedBoost);
@@ -51,6 +52,14 @@ public class Hero : Player
     public void SetPlayerConfig(PlayerConfig playerConfig)
     {
         this.playerConfig = playerConfig;
+
+        playerConfig.Player.controllers.maps.layoutManager.ruleSets.Clear();
+        if (playerConfig.Faction == Faction.Heroes)
+        {
+            playerConfig.Player.controllers.maps.layoutManager.ruleSets.Add(ReInput.mapping.GetControllerMapLayoutManagerRuleSetInstance("RuleSetHero"));
+            PlayerConfig.Player.controllers.maps.layoutManager.Apply();
+        }
+        else Debug.LogError("Hero's playerConfig has set a wrong Faction.", this);
 
         // Set colors
         playerMesh.GetComponent<Renderer>().material = playerConfig.ColorConfig.heroMaterial;
@@ -82,9 +91,18 @@ public class Hero : Player
 
 
     #region Private Functions
-    private bool AbilityButtonsDown()
+    bool AbilityButtonPressed()
     {
-        if (Input.GetButton(Constants.INPUT_ABILITY + playerConfig.PlayerNumber)) return true;
+        if (playerConfig.ability.Autofire)
+        {
+            if (playerConfig.Player.GetButton(RewiredConsts.Action.TRIGGER_HEROABILITY))
+                return true;
+        }
+        else
+        {
+            if (playerConfig.Player.GetButtonDown(RewiredConsts.Action.TRIGGER_HEROABILITY))
+                return true;
+        }
 
         return false;
     }

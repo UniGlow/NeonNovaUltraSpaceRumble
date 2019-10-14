@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Rewired;
 
 public class Pause : MonoBehaviour
 {
+    
+
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject optionsMenu;
@@ -17,10 +20,23 @@ public class Pause : MonoBehaviour
     [SerializeField] GameEvent gameResumedEvent = null;
 
     bool gameIsPaused;
-    
 
+    List<InputHelper.PlayerRuleSet> playerRuleSets = new List<InputHelper.PlayerRuleSet>();
+
+
+
+    public bool GameIsPaused { get { return gameIsPaused; } }
+
+
+
+	// Use this for initialization
     private void Update()
     {
+        if (gameIsPaused && !optionsMenu.activeSelf && Input.GetButtonDown(Constants.INPUT_CANCEL))
+        {
+            resumeButton.GetComponent<Button>().onClick.Invoke();
+        }
+
         if (Input.GetButtonDown(Constants.INPUT_ESCAPE))
         {
             if (gameIsPaused)
@@ -43,6 +59,8 @@ public class Pause : MonoBehaviour
     {
         Time.timeScale = 0;
 
+        playerRuleSets = InputHelper.ChangeRuleSetForAllPlayers(RewiredConsts.LayoutManagerRuleSet.RULESETMENU);
+
         pauseMenu.SetActive(true);
         eventSystem.SetSelectedGameObject(resumeButton);
 
@@ -54,6 +72,8 @@ public class Pause : MonoBehaviour
     public void ResumeGame()
     {
         Time.timeScale = 1f;
+
+        InputHelper.ChangeRuleSetForPlayers(playerRuleSets);
 
         pauseMenu.SetActive(false);
         optionsMenu.SetActive(false);
@@ -79,7 +99,7 @@ public class Pause : MonoBehaviour
     {
         gamePausedEvent.Raise(this);
     }
-
+    
     private void RaiseGameResumed()
     {
         gameResumedEvent.Raise(this);
