@@ -123,6 +123,19 @@ public class SirAlfredLobby : LevelManager
 
         UpdatePlayerConfirmsList();
     }
+
+    public void UpdatePlayerCount()
+    {
+        playerCount = 0;
+        string[] joystickNames = Input.GetJoystickNames();
+        foreach (string name in joystickNames)
+        {
+            if (name != "")
+            {
+                playerCount++;
+            }
+        }
+    }
     #endregion
 
 
