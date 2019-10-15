@@ -405,7 +405,7 @@ MonoBehaviour:
   colorChangeSound: {fileID: 8300000, guid: cb3b90f02c52c49418a9a3fd50874d2b, type: 3}
   colorChangeSoundVolume: 1
   enableCameraShake: 1
-  magnitude: 1
+  magnitude: 1.2
   roughness: 10
   fadeIn: 0.1
   fadeOut: 1
