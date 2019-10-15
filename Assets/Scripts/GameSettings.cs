@@ -19,15 +19,7 @@ public class GameSettings : ScriptableObject
     [Range(0, .9f)]
     [SerializeField] private float intensifyAmount = 0.1f;
     [Space]
-    [SerializeField] private bool overrideLevelPointLimits = true;
-    [SerializeField] private int winningPointLead = 600;
-    [Space]
     [SerializeField] private float bossColorSwitchInterval = 10f;
-
-    [Header("AI Adjustments")]
-    [SerializeField] private int bossWinningSolo = 400;
-    [SerializeField] private int bossWinningDuo = 700;
-    [SerializeField] private int bossWinningTriple = 700;
 
 
     // Private
@@ -42,11 +34,6 @@ public class GameSettings : ScriptableObject
     public float CritDamageMultiplier { get { return critDamageMultiplier; } set { critDamageMultiplier = value; } }
     public float IntensifyTime { get { return intensifyTime; } set { intensifyTime = value; } }
     public float IntensifyAmount { get { return intensifyAmount; } set { intensifyAmount = value; } }
-    public bool OverrideLevelPointLimits { get { return overrideLevelPointLimits; } set { overrideLevelPointLimits = value; } }
-    public int WinningPointLead { get { return winningPointLead; } set { winningPointLead = value; } }
-    public int BossWinningSolo { get { return bossWinningSolo; } set { bossWinningSolo = value; } }
-    public int BossWinningDuo { get { return bossWinningDuo; } set { bossWinningDuo = value; } }
-    public int BossWinningTriple { get { return bossWinningTriple; } set { bossWinningTriple = value; } }
     public float BossColorSwitchInterval { get { return bossColorSwitchInterval; } set { bossColorSwitchInterval = value; } }
     #endregion
 

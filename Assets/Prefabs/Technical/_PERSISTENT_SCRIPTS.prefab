@@ -579,11 +579,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameSettings: {fileID: 11400000, guid: 4cbf2bb18122f9d4c92c9dbd86d8b7fa, type: 2}
+  points: {fileID: 11400000, guid: 5be3ffe199c802f45a47f0dbbedb0be5, type: 2}
   colorSwitchInterval: 
   critDamageMultiplier: 
   intensifyTime: 
   intensifyAmount: 
   pointLeadToWin: 
-  pointLeadToWinSolo: 
-  pointLeadToWinDuo: 
-  pointLeadToWinTriple: 

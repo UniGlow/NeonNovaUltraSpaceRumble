@@ -24,10 +24,6 @@ public class PlayerManager : MonoBehaviour
 
     [Header("GameEvents")]
     [SerializeField] private GameEvent playersSpawnedEvent = null;
-
-    [Header("References")]
-    [SerializeField] private Points points = null;
-    [SerializeField] private GameSettings gameSettings = null;
     
     // Private
     // PlayerTransforms
@@ -129,20 +125,6 @@ public class PlayerManager : MonoBehaviour
             }
         }
 
-        switch (humanPlayerCount)
-        {
-            case 1:
-                points.PointLeadToWin = gameSettings.BossWinningSolo;
-                break;
-            case 2:
-                points.PointLeadToWin = gameSettings.BossWinningDuo;
-                break;
-            case 3:
-                points.PointLeadToWin = gameSettings.BossWinningTriple;
-                break;
-            default:
-                break;
-        }
         RaisePlayersSpawned(hero1PlayerConfig, hero2PlayerConfig, hero3PlayerConfig, bossPlayerConfig);
     }
 	#endregion

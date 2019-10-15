@@ -447,10 +447,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterStats: {fileID: 11400000, guid: 9eab235bee7a65c4e8d326fd50253853, type: 2}
-  attackDamagePerShot: 10
+  attackDamagePerShot: 15
   attackProjectileSpeed: 40
   attackProjectileLifeTime: 1
-  attackCooldown: 0.2
+  attackCooldown: 0.18
   abilityDamagePerShot: 20
   numberOfProjectiles: 20
   abilityProjectileSpeed: 20
