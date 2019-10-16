@@ -48,18 +48,6 @@ public class HeroAI : Hero
 
     private void Start()
     {
-        StartCoroutine(Wait(1, () => 
-        {
-            Hero[] friends = GameObject.FindObjectsOfType<Hero>();
-            // Break, if not all heroes are instantiated
-            if (friends.Length < 3) return;
-
-            foreach (Hero hero in friends)
-            {
-                if (hero.PlayerConfig.ability.Class == Ability.AbilityClass.Damage) damage = hero.transform;
-            }
-        }));
-
         GameObject[] cornersGO = GameObject.FindGameObjectsWithTag(Constants.TAG_AI_CORNER);
         foreach (GameObject go in cornersGO)
         {
@@ -79,6 +67,19 @@ public class HeroAI : Hero
         }
 
         normalAgentSpeed = agent.speed;
+        if(IsAbilityClass(Ability.AbilityClass.Damage)) agent.updateRotation = false;
+
+        StartCoroutine(Wait(1, () =>
+        {
+            Hero[] friends = GameObject.FindObjectsOfType<Hero>();
+            // Break, if not all heroes are instantiated
+            if (friends.Length < 3) return;
+
+            foreach (Hero hero in friends)
+            {
+                if (hero.PlayerConfig.ability.Class == Ability.AbilityClass.Damage) damage = hero.transform;
+            }
+        }));
     }
 
     new private void FixedUpdate()
