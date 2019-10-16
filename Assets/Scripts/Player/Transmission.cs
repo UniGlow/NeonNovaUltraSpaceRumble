@@ -77,6 +77,9 @@ public class Transmission : MonoBehaviour
 
     [Header("Slow Motion")]
     [Range(0f, 1f)]
+    [SerializeField] protected float freezeFrameDuration = 0.1f;
+    [Range(0f, 1f)]
+    [Tooltip("Percentual value from realtime (realtime = 1).")]
     [SerializeField] protected float slowMotionStrength = 0.2f;
     [Range(0f, 1f)]
     [Tooltip("Duration of the fade in for the slow motion. Percentual value from transmissionDuration.")]
@@ -278,8 +281,11 @@ public class Transmission : MonoBehaviour
         // Raise Event only once (both players are performing Transmit()
         if (transmissionPartner.transmissionPartner == null) RaiseAbilitySwitchInitiated(hero.PlayerConfig, transmissionPartner.hero.PlayerConfig, transmissionDuration);
 
-        // Start Slow Motion
-        JuiceLib.TimeFX.BendTime(slowMotionStrength, transmissionDuration * slowMotionFadeInDuration);
+        // FreezeFrame and Slow Motion
+        JuiceLib.TimeFX.FreezeFrame(transmissionDuration * freezeFrameDuration, () =>
+        {
+            JuiceLib.TimeFX.BendTime(slowMotionStrength, transmissionDuration * slowMotionFadeInDuration);
+        });
 
         // Blinking Hero
         playerMat.DOBlendableColor(playerMat.color * switchColorMultiplier, (blinkDuration * transmissionDuration) / 2).SetUpdate(true).OnComplete(() => 

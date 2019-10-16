@@ -796,7 +796,8 @@ MonoBehaviour:
   meshFadeEase: 6
   meshScaleDuration: 0.77
   meshScaleEase: 9
-  slowMotionStrength: 0.2
+  freezeFrameDuration: 0.1
+  slowMotionStrength: 0.5
   slowMotionFadeInDuration: 0.2
   slowMotionFadeOutDuration: 0.3
   transmissionRangeIndicator: {fileID: 1493951416420246}
