@@ -31,7 +31,8 @@ public class Points : ScriptableObject
         set
         {
             // Make sure the current points scale according to the new point lead goal
-            currentHeroesPointLead = currentHeroesPointLead * (value / pointLeadToWin);
+            float scalingFactor = (float) value / (float) pointLeadToWin;
+            currentHeroesPointLead = Mathf.RoundToInt(currentHeroesPointLead * scalingFactor);
 
             pointLeadToWin = value;
         }

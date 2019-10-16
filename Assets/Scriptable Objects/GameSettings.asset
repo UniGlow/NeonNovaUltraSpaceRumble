@@ -11,12 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 928be8c1f188ed244b311429e88230a1, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
+  pointLeadToWin: 500
   critDamageMultiplier: 2
-  intensifyTime: 24
+  intensifyTime: 20
   intensifyAmount: 0.1
-  overrideLevelPointLimits: 1
-  winningPointLead: 600
   bossColorSwitchInterval: 15
-  bossWinningSolo: 400
-  bossWinningDuo: 700
-  bossWinningTriple: 700
