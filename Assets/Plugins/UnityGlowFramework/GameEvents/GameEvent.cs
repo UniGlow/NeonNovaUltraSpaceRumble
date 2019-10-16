@@ -16,6 +16,8 @@ public class GameEvent : ScriptableObject
     }
 
     #region Variable Declarations
+    [Tooltip("Logs a Debug Message whenever this event gets raised with information about who raised it and when")]
+    [SerializeField] private bool debugMode = false;
     [TextArea(2, 5)]
     public string description;
 
@@ -269,6 +271,8 @@ public class GameEvent : ScriptableObject
     #region Private Functions
     void AddRaisedEvent(EventRaise eventRaise)
     {
+        if (debugMode)
+            Debug.Log(eventRaise.TimeStamp + " | Event " + this.name + " got raised by " + eventRaise.EventRaiser, eventRaise.EventRaiser);
         raisedEvents.Add(eventRaise);
 
         if (raisedEvents.Count > 1000)
