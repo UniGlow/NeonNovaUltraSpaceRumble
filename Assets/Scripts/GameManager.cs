@@ -21,9 +21,9 @@ public class GameManager : MonoBehaviour
 
 
     #region Unity Event Functions
-
     //Awake is always called before any Start functions
-    void Awake() {
+    void Awake()
+    {
         //Check if instance already exists
         if (Instance == null)
 
@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
 
             //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of an AudioManager.
             Debug.Log("There can only be one GameManager instantiated. Destroying this Instance...");
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 

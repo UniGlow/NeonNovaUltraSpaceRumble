@@ -32,7 +32,7 @@ public class GameplayManager : LevelManager
     #region Unity Event Functions
     private void Start () 
 	{
-		
+        points.PointLeadToWin = gameSettings.PointLeadToWin;
 	}
 
     private void Update()

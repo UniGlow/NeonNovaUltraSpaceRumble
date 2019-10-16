@@ -9,7 +9,7 @@ Material:
   m_Name: MAT_Player_Red
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA _EMISSION
-  m_LightmapFlags: 0
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -72,5 +72,5 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.83823526, g: 0.17874137, b: 0.32883313, a: 1}
-    - _EmissionColor: {r: 0.875, g: 0.22518383, b: 0.26551723, a: 1}
+    - _Color: {r: 0.83823526, g: 0.17874134, b: 0.3288331, a: 1}
+    - _EmissionColor: {r: 0.875, g: 0.22518378, b: 0.2655172, a: 1}

@@ -36,7 +36,7 @@ public class CooldownUpdater : MonoBehaviour
             }
             else
             {
-                indicator.fillAmount = hero.PlayerConfig.ability.CooldownTimer / hero.PlayerConfig.ability.Cooldown;
+                Mathf.Clamp(indicator.fillAmount = hero.PlayerConfig.ability.CooldownTimer / hero.PlayerConfig.ability.Cooldown, 0f, 1f);
             }
         }
 	}

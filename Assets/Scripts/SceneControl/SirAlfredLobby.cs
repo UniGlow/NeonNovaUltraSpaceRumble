@@ -5,11 +5,12 @@ using UnityEngine.Audio;
 using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
+using Rewired;
 
 /// <summary>
-/// 
+///
 /// </summary>
-public class SirAlfredLobby : LevelManager 
+public class SirAlfredLobby : LevelManager
 {
 
     #region Variable Declaration
@@ -49,7 +50,7 @@ public class SirAlfredLobby : LevelManager
 
 
     #region Unity Event Functions
-    private void Start () 
+    private void Start ()
 	{
         masterMixer.GetFloat(Constants.MIXER_SFX_VOLUME, out originalSFXVolume);
         masterMixer.GetFloat(Constants.MIXER_MUSIC_VOLUME, out originalMusicVolume);
@@ -57,11 +58,21 @@ public class SirAlfredLobby : LevelManager
         masterMixer.SetFloat(Constants.MIXER_SFX_VOLUME, originalSFXVolume * (1 + sfxVolumeDamp));
         StartCoroutine(Wait(0.1f, () => { AudioManager.Instance.StartTrack(backgroundTrack); }));
     }
-	
-	private void Update ()
+
+    protected override void InheritedOnEnable()
     {
-        // Update player count
-        UpdatePlayerCount();
+        ReInput.ControllerConnectedEvent += ReloadLobby;
+        ReInput.ControllerDisconnectedEvent += ReloadLobby;
+    }
+
+    protected override void InheritedOnDisable()
+    {
+        ReInput.ControllerConnectedEvent -= ReloadLobby;
+        ReInput.ControllerDisconnectedEvent -= ReloadLobby;
+    }
+
+    private void Update ()
+    {
         UpdatePlayerConfirmsList();
         playerReadyUpdater.UpdateUIElements(playerCount);
 
@@ -83,26 +94,14 @@ public class SirAlfredLobby : LevelManager
             }));
         }
 
-        // Check Inputs to ready up
-		if (Input.GetButtonDown(Constants.INPUT_SUBMIT + "1"))
+        // Check inputs for Ready-Ups
+        for (int i = 0; i < ReInput.players.playerCount; i++)
         {
-            playerConfirms[0] = !playerConfirms[0];
-            playerReadyUpdater.UpdateState(0, playerConfirms[0]);
-        }
-        else if (Input.GetButtonDown(Constants.INPUT_SUBMIT + "2"))
-        {
-            playerConfirms[1] = !playerConfirms[1];
-            playerReadyUpdater.UpdateState(1, playerConfirms[1]);
-        }
-        else if (Input.GetButtonDown(Constants.INPUT_SUBMIT + "3"))
-        {
-            playerConfirms[2] = !playerConfirms[2];
-            playerReadyUpdater.UpdateState(2, playerConfirms[2]);
-        }
-        else if (Input.GetButtonDown(Constants.INPUT_SUBMIT + "4"))
-        {
-            playerConfirms[3] = !playerConfirms[3];
-            playerReadyUpdater.UpdateState(3, playerConfirms[3]);
+            if (ReInput.players.Players[i].GetButtonDown(RewiredConsts.Action.READY_UP))
+            {
+                playerConfirms[i] = !playerConfirms[i];
+                playerReadyUpdater.UpdateState(i, playerConfirms[i]);
+            }
         }
 
         // Check and update Idle State of the game
@@ -115,8 +114,7 @@ public class SirAlfredLobby : LevelManager
     #region Public Functions
     public void Initialize()
     {
-        // Update player count
-        UpdatePlayerCount();
+        playerCount = InputHelper.UpdatePlayerCount();
 
         // Set playerNumbers depending on amount of human players
         PlayerSetup.SetupPlayers(playerCount, bossPlayerConfig, hero1PlayerConfig, hero2PlayerConfig, hero3PlayerConfig, damageAbility, tankAbility, victimAbility, colorSet);
@@ -124,19 +122,6 @@ public class SirAlfredLobby : LevelManager
         points.ResetPoints(true);
 
         UpdatePlayerConfirmsList();
-    }
-
-    public void UpdatePlayerCount()
-    {
-        playerCount = 0;
-        string[] joystickNames = Input.GetJoystickNames();
-        foreach (string name in joystickNames)
-        {
-            if (name != "")
-            {
-                playerCount++;
-            }
-        }
     }
     #endregion
 
@@ -200,6 +185,8 @@ public class SirAlfredLobby : LevelManager
 
     void UpdatePlayerConfirmsList()
     {
+        playerCount = InputHelper.UpdatePlayerCount();
+
         if (playerConfirms.Count == playerCount)
         {
             return;
@@ -210,6 +197,11 @@ public class SirAlfredLobby : LevelManager
         {
             playerConfirms.Add(false);
         }
+    }
+
+    void ReloadLobby(ControllerStatusChangedEventArgs args)
+    {
+        SceneManager.Instance.ReloadLevel();
     }
     #endregion
 

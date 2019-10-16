@@ -11,15 +11,13 @@ public class DebugMode : MonoBehaviour
     public static DebugMode Instance;
 
     [SerializeField] public GameSettings gameSettings;
+    [SerializeField] public Points points;
 
     [HideInInspector] public string colorSwitchInterval;
     [HideInInspector] public string critDamageMultiplier;
     [HideInInspector] public string intensifyTime;
     [HideInInspector] public string intensifyAmount;
     [HideInInspector] public string pointLeadToWin;
-    [HideInInspector] public string pointLeadToWinSolo;
-    [HideInInspector] public string pointLeadToWinDuo;
-    [HideInInspector] public string pointLeadToWinTriple;
 
     private bool debugMode = false;
 
@@ -47,10 +45,7 @@ public class DebugMode : MonoBehaviour
         critDamageMultiplier = gameSettings.CritDamageMultiplier.ToString();
         intensifyTime = gameSettings.IntensifyTime.ToString();
         intensifyAmount = gameSettings.IntensifyAmount.ToString();
-        pointLeadToWin = gameSettings.WinningPointLead.ToString();
-        pointLeadToWinSolo = gameSettings.BossWinningSolo.ToString();
-        pointLeadToWinDuo = gameSettings.BossWinningDuo.ToString();
-        pointLeadToWinTriple = gameSettings.BossWinningTriple.ToString();
+        pointLeadToWin = points.PointLeadToWin.ToString();
         colorSwitchInterval = gameSettings.BossColorSwitchInterval.ToString();
     }
 
@@ -117,9 +112,6 @@ public class DebugMode : MonoBehaviour
             int newIntensifyTime;
             double newIntensifyAmount;
             int newHeroesPoints;
-            int newBossPointsSolo;
-            int newBossPointsDuo;
-            int newBossPointsTriple;
             float newColorSwitchInterval;
 
             GUILayout.BeginVertical("box");
@@ -155,31 +147,7 @@ public class DebugMode : MonoBehaviour
             GUILayout.BeginHorizontal();
             GUILayout.Label("Point Lead to Win");
             pointLeadToWin = GUILayout.TextField(pointLeadToWin);
-            if (System.Int32.TryParse(pointLeadToWin, out newHeroesPoints)) gameSettings.WinningPointLead = newHeroesPoints;
-            GUILayout.EndHorizontal();
-
-            GUILayout.EndVertical();
-
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("AI Tweaks (take effect on next level load)");
-            GUILayout.EndHorizontal();
-
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("Point Lead to Win Solo");
-            pointLeadToWinSolo = GUILayout.TextField(pointLeadToWinSolo);
-            if (System.Int32.TryParse(pointLeadToWinSolo, out newBossPointsSolo)) gameSettings.BossWinningSolo = newBossPointsSolo;
-            GUILayout.EndHorizontal();
-
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("Point Lead to Win Duo");
-            pointLeadToWinDuo = GUILayout.TextField(pointLeadToWinDuo);
-            if (System.Int32.TryParse(pointLeadToWinDuo, out newBossPointsDuo)) gameSettings.BossWinningDuo = newBossPointsDuo;
-            GUILayout.EndHorizontal();
-
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("Point Lead to Win Triple");
-            pointLeadToWinTriple = GUILayout.TextField(pointLeadToWinTriple);
-            if (System.Int32.TryParse(pointLeadToWinTriple, out newBossPointsTriple)) gameSettings.BossWinningTriple = newBossPointsTriple;
+            if (System.Int32.TryParse(pointLeadToWin, out newHeroesPoints)) points.PointLeadToWin = newHeroesPoints;
             GUILayout.EndHorizontal();
 
             GUILayout.EndVertical();

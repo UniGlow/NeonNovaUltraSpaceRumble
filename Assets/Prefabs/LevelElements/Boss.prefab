@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 224417304917833172}
   - component: {fileID: 222657074734819532}
   - component: {fileID: 114751374408814680}
+  - component: {fileID: 114506184283067000}
   m_Layer: 9
   m_Name: Image
   m_TagString: Untagged
@@ -183,7 +184,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1377968037358198}
-  m_Mesh: {fileID: 4300000, guid: 8c2611dbae74d834eb066aa9b336a93f, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 51a8d996c6cb8c44cb0954778d972cb2, type: 3}
 --- !u!54 &54132770966574978
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -387,7 +388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterStats: {fileID: 11400000, guid: 9eab235bee7a65c4e8d326fd50253853, type: 2}
-  attackDamagePerShot: 10
+  attackDamagePerShot: 18
   attackProjectileSpeed: 50
   attackProjectileLifeTime: 1
   attackCooldown: 0.18
@@ -404,7 +405,7 @@ MonoBehaviour:
   colorChangeSound: {fileID: 8300000, guid: cb3b90f02c52c49418a9a3fd50874d2b, type: 3}
   colorChangeSoundVolume: 1
   enableCameraShake: 1
-  magnitude: 1
+  magnitude: 1.2
   roughness: 10
   fadeIn: 0.1
   fadeOut: 1
@@ -415,6 +416,17 @@ MonoBehaviour:
   bossColorChangedEvent: {fileID: 11400000, guid: 5cb0235c1fda1e64dae1cfd14392faef,
     type: 2}
   gameSettings: {fileID: 11400000, guid: 4cbf2bb18122f9d4c92c9dbd86d8b7fa, type: 2}
+--- !u!114 &114506184283067000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1502636953176876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64bc31e3efc50bb44910a6393292c9de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114751374408814680
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -583,8 +595,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1301445356763670}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0.15}
-  m_LocalScale: {x: 0.9168216, y: 0.91682166, z: 0.91682166}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.0372772, y: 1.0372771, z: 1.0372771}
   m_Children:
   - {fileID: 224417304917833172}
   m_Father: {fileID: 4260685427587770}

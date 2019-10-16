@@ -172,7 +172,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1573548182032810}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.3499994, y: 0.5, z: 11.16}
+  m_LocalPosition: {x: -24.72, y: 0.5, z: -11.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4364361989329078}
@@ -527,8 +527,8 @@ MonoBehaviour:
   damage: 70
   hitSound: {fileID: 8300000, guid: 216323fd8e2633844a437d87bf28a085, type: 3}
   hitSoundVolume: 0.6
-  enableCameraShake: 0
-  magnitude: 1
+  enableCameraShake: 1
+  magnitude: 1.2
   roughness: 10
   fadeIn: 0.1
   fadeOut: 0.8

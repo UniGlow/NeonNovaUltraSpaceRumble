@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Rewired;
 
 /// <summary>
 /// Handles everything related to the movement of Haru, our playable Character
 /// </summary>
-public class Hero : Player
+public class Hero : Character
 {
 
     #region Variable Declarations
@@ -14,9 +15,6 @@ public class Hero : Player
     [Header("References")]
     [SerializeField] protected GameObject wobbleBobble;
     [SerializeField] protected Image cooldownIndicator;
-    [SerializeField] protected Sprite damageSprite;
-    [SerializeField] protected Sprite opferSprite;
-    [SerializeField] protected Renderer playerMeshRenderer;
     [SerializeField] protected MeshFilter playerMesh;
     #endregion
 
@@ -25,10 +23,9 @@ public class Hero : Player
     #region Public Properties
     public GameObject WobbleBobble { get { return wobbleBobble; } }
     public Image CooldownIndicator { get { return cooldownIndicator; } }
-    public Sprite DamageSprite { get { return damageSprite; } }
-    public Sprite OpferSprite { get { return opferSprite; } }
     public AudioSource AudioSource { get { return audioSource; } }
     public Rigidbody Rigidbody { get { return rigidbody; } }
+    public MeshFilter PlayerMesh { get { return playerMesh; } }
     #endregion
 
 
@@ -40,7 +37,7 @@ public class Hero : Player
 
         if (active)
         {
-            playerConfig.ability.Tick(Time.deltaTime, AbilityButtonsDown());
+            playerConfig.ability.Tick(Time.deltaTime, AbilityButtonPressed());
 
             // Apply class-dependant movement speed modifier
             horizontalMovement *= (1 + playerConfig.ability.SpeedBoost);
@@ -56,8 +53,16 @@ public class Hero : Player
     {
         this.playerConfig = playerConfig;
 
+        playerConfig.Player.controllers.maps.layoutManager.ruleSets.Clear();
+        if (playerConfig.Faction == Faction.Heroes)
+        {
+            playerConfig.Player.controllers.maps.layoutManager.ruleSets.Add(ReInput.mapping.GetControllerMapLayoutManagerRuleSetInstance("RuleSetHero"));
+            PlayerConfig.Player.controllers.maps.layoutManager.Apply();
+        }
+        else Debug.LogError("Hero's playerConfig has set a wrong Faction.", this);
+
         // Set colors
-        playerMeshRenderer.material = playerConfig.ColorConfig.heroMaterial;
+        playerMesh.GetComponent<Renderer>().material = playerConfig.ColorConfig.heroMaterial;
         cooldownIndicator.color = playerConfig.ColorConfig.uiElementColor;
 
         // TODO
@@ -86,9 +91,18 @@ public class Hero : Player
 
 
     #region Private Functions
-    private bool AbilityButtonsDown()
+    bool AbilityButtonPressed()
     {
-        if (Input.GetButton(Constants.INPUT_ABILITY + playerConfig.PlayerNumber)) return true;
+        if (playerConfig.ability.Autofire)
+        {
+            if (playerConfig.Player.GetButton(RewiredConsts.Action.TRIGGER_HEROABILITY))
+                return true;
+        }
+        else
+        {
+            if (playerConfig.Player.GetButtonDown(RewiredConsts.Action.TRIGGER_HEROABILITY))
+                return true;
+        }
 
         return false;
     }

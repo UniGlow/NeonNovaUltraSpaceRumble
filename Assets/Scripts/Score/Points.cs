@@ -12,6 +12,7 @@ public class Points : ScriptableObject
     #region Variable Declarations
     // Public
     [Header("Settings")]
+    [Tooltip("Current point lead to win. Is affected during runtime by the intensifyTimer of the GameplayManager.")]
     [SerializeField] int pointLeadToWin = 500;
     [SerializeField] bool endlessHealth = false;
 

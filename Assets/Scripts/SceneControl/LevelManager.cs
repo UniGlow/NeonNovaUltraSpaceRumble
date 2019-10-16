@@ -11,6 +11,7 @@ public abstract class LevelManager : MonoBehaviour
 
     #region Variable Declarations
     // Serialized Fields
+    [Header("Level Manager Variables")]
     [SerializeField] protected GameEvent levelLoadedEvent = null;
     [SerializeField] protected GameEvent levelStartedEvent = null;
 
