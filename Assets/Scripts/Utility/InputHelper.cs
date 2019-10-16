@@ -62,4 +62,28 @@ public static class InputHelper
 
         return previousPlayerRuleSets;
     }
+
+    /// <summary>
+    /// Updates the player count.
+    /// </summary>
+    /// <returns>Returns the number of currently active players.</returns>
+    public static int UpdatePlayerCount()
+    {
+        int playerCount = 0;
+
+        foreach (Player player in ReInput.players.Players)
+        {
+            if (player.controllers.joystickCount >= 1)
+            {
+                playerCount++;
+                player.isPlaying = true;
+            }
+            else
+            {
+                player.isPlaying = false;
+            }
+        }
+
+        return playerCount;
+    }
 }

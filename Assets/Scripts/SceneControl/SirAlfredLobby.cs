@@ -114,7 +114,7 @@ public class SirAlfredLobby : LevelManager
     #region Public Functions
     public void Initialize()
     {
-        UpdatePlayerCount();
+        playerCount = InputHelper.UpdatePlayerCount();
 
         // Set playerNumbers depending on amount of human players
         PlayerSetup.SetupPlayers(playerCount, bossPlayerConfig, hero1PlayerConfig, hero2PlayerConfig, hero3PlayerConfig, damageAbility, tankAbility, victimAbility, colorSet);
@@ -183,27 +183,9 @@ public class SirAlfredLobby : LevelManager
         masterMixer.DOSetFloat(mixerGroup, to, duration).SetEase(Ease.InOutQuad).SetId(this);
     }
 
-    void UpdatePlayerCount()
-    {
-        playerCount = 0;
-
-        foreach (Player player in ReInput.players.Players)
-        {
-            if (player.controllers.joystickCount >= 1)
-            {
-                playerCount++;
-                player.isPlaying = true;
-            }
-            else
-            {
-                player.isPlaying = false;
-            }
-        }
-    }
-
     void UpdatePlayerConfirmsList()
     {
-        UpdatePlayerCount();
+        playerCount = InputHelper.UpdatePlayerCount();
 
         if (playerConfirms.Count == playerCount)
         {
