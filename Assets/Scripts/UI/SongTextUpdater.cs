@@ -52,8 +52,9 @@ public class SongTextUpdater : MonoBehaviour
         // Set texts
         artistText.text = artist;
         titleText.text = title;
+        spacingText.text = "-";
         spacingText.enabled = true;
-        
+
         // Fade in alpha
         DOTween.ToAlpha(() => titleText.color, x => titleText.color = x, targetColor.a, fadeDuration).OnComplete(() => { DOTween.ToAlpha(() => titleText.color, x => titleText.color = x, 0f, fadeDuration).SetDelay(displayDuration); });
         DOTween.ToAlpha(() => spacingText.color, x => spacingText.color = x, targetColor.a, fadeDuration).OnComplete(() => { DOTween.ToAlpha(() => spacingText.color, x => spacingText.color = x, 0f, fadeDuration).SetDelay(displayDuration); });
