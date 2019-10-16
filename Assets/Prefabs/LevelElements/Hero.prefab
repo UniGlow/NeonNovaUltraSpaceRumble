@@ -783,7 +783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transmissionRange: 5
-  transmissionDuration: 1.5
+  transmissionDuration: 1.2
   transmissionSound: {fileID: 8300000, guid: 99a9562a9c5874546a152e7ded477cb5, type: 3}
   transmissionSoundVolume: 1
   inRangeColorMultiplier: 1.3
@@ -796,6 +796,9 @@ MonoBehaviour:
   meshFadeEase: 6
   meshScaleDuration: 0.77
   meshScaleEase: 9
+  slowMotionStrength: 0.2
+  slowMotionFadeInDuration: 0.2
+  slowMotionFadeOutDuration: 0.3
   transmissionRangeIndicator: {fileID: 1493951416420246}
   transmissionPS: {fileID: 198963605972144674}
   abilitiesChangedEvent: {fileID: 11400000, guid: a3637ea13dc4b674895931910892b2e2,
