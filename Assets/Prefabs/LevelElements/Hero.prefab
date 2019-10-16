@@ -801,6 +801,8 @@ MonoBehaviour:
   slowMotionFadeOutDuration: 0.3
   transmissionRangeIndicator: {fileID: 1493951416420246}
   transmissionPS: {fileID: 198963605972144674}
+  abilitySwitchInitiatedEvent: {fileID: 11400000, guid: 7363139ca9933444f9902753e7126642,
+    type: 2}
   abilitiesChangedEvent: {fileID: 11400000, guid: a3637ea13dc4b674895931910892b2e2,
     type: 2}
   shootingStarsPrefab: {fileID: 1273078338764796, guid: 6db695f43b2a865418218fa865f4488d,

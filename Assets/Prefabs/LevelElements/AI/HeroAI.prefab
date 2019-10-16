@@ -631,9 +631,15 @@ MonoBehaviour:
   meshFadeEase: 5
   meshScaleDuration: 0.77
   meshScaleEase: 9
+  slowMotionStrength: 0.2
+  slowMotionFadeInDuration: 0.25
+  slowMotionFadeOutDuration: 0.5
   transmissionRangeIndicator: {fileID: 1614495311706788}
   transmissionPS: {fileID: 198963605972144674}
-  abilitiesChangedEvent: {fileID: 0}
+  abilitySwitchInitiatedEvent: {fileID: 11400000, guid: 7363139ca9933444f9902753e7126642,
+    type: 2}
+  abilitiesChangedEvent: {fileID: 11400000, guid: a3637ea13dc4b674895931910892b2e2,
+    type: 2}
   shootingStarsPrefab: {fileID: 1273078338764796, guid: 6db695f43b2a865418218fa865f4488d,
     type: 2}
   transparentPlayerMeshPrefab: {fileID: 1637944263113884, guid: 667f868dfa8af6c47b0e27236ecc1c00,

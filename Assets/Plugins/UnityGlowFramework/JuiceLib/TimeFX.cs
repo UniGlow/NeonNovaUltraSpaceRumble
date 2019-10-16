@@ -5,7 +5,7 @@ using DG.Tweening;
 
 namespace JuiceLib
 {
-    public static class SlowMotion
+    public static class TimeFX
     {
         /// <summary>
         /// Bends time to the targetValue and then returns to the original timeScale.

@@ -88,6 +88,7 @@ public class Transmission : MonoBehaviour
     [Header("References")]
     [SerializeField] protected GameObject transmissionRangeIndicator;
     [SerializeField] protected ParticleSystem transmissionPS;
+    [SerializeField] protected GameEvent abilitySwitchInitiatedEvent = null;
     [SerializeField] protected GameEvent abilitiesChangedEvent = null;
     [SerializeField] protected GameObject shootingStarsPrefab = null;
     [SerializeField] protected GameObject transparentPlayerMeshPrefab = null;
@@ -274,7 +275,11 @@ public class Transmission : MonoBehaviour
 
     protected void Transmit()
     {
-        JuiceLib.SlowMotion.BendTime(slowMotionStrength, transmissionDuration * slowMotionFadeInDuration);
+        // Raise Event only once (both players are performing Transmit()
+        if (transmissionPartner.transmissionPartner == null) RaiseAbilitySwitchInitiated(hero.PlayerConfig, transmissionPartner.hero.PlayerConfig, transmissionDuration);
+
+        // Start Slow Motion
+        JuiceLib.TimeFX.BendTime(slowMotionStrength, transmissionDuration * slowMotionFadeInDuration);
 
         // Blinking Hero
         playerMat.DOBlendableColor(playerMat.color * switchColorMultiplier, (blinkDuration * transmissionDuration) / 2).SetUpdate(true).OnComplete(() => 
@@ -323,8 +328,9 @@ public class Transmission : MonoBehaviour
 
                 audioSource.PlayOneShot(transmissionSound, transmissionSoundVolume);
                 transmissionPS.Play();
-                JuiceLib.SlowMotion.BendTime(1f, transmissionDuration * slowMotionFadeOutDuration);
+                JuiceLib.TimeFX.BendTime(1f, transmissionDuration * slowMotionFadeOutDuration);
 
+                // Raise Event only once
                 if (transmissionPartner.transmissionPartner == null) RaiseAbilitiesChanged(hero.PlayerConfig, transmissionPartner.hero.PlayerConfig);
 
                 EndTransmission();
@@ -417,6 +423,11 @@ public class Transmission : MonoBehaviour
     void RaiseAbilitiesChanged(PlayerConfig hero1Config, PlayerConfig hero2Config)
     {
         abilitiesChangedEvent.Raise(this, hero1Config, hero2Config);
+    }
+
+    void RaiseAbilitySwitchInitiated(PlayerConfig hero1Config, PlayerConfig hero2Config, float duration)
+    {
+        abilitySwitchInitiatedEvent.Raise(this, hero1Config, hero2Config, duration);
     }
     #endregion
 }
