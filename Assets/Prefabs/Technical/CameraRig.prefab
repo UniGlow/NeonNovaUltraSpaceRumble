@@ -37,6 +37,7 @@ GameObject:
   - component: {fileID: 4868657538597488}
   - component: {fileID: 114295717314955092}
   - component: {fileID: 114963303541091248}
+  - component: {fileID: 114566314905802030}
   m_Layer: 0
   m_Name: CameraRig
   m_TagString: Untagged
@@ -127,7 +128,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1762329191500642}
   m_LocalRotation: {x: 0.60876137, y: 0, z: 0, w: 0.7933534}
-  m_LocalPosition: {x: 0, y: 39.56, z: -10.6}
+  m_LocalPosition: {x: 0, y: 36.6, z: -11.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4032901851656120}
@@ -154,7 +155,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 100
-  field of view: 40
+  field of view: 52
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -190,7 +191,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 110
-  field of view: 40
+  field of view: 52
   orthographic: 0
   orthographic size: 12.62
   m_Depth: -1
@@ -255,6 +256,32 @@ MonoBehaviour:
   minZoom: 55
   maxZoom: 20
   maxDistance: 60
+  zoomSmoothTime: 0.5
+--- !u!114 &114566314905802030
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1762329191500642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 7363139ca9933444f9902753e7126642, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  linkedMethods:
+  - component: {fileID: 114295717314955092}
+    methodID: 1
+    methodName: ZoomOnto
+    chosenID: 1
+    methodNames: []
+    gameObject: {fileID: 1762329191500642}
+  ignoreEventParameters: 0
 --- !u!114 &114841171022811928
 MonoBehaviour:
   m_ObjectHideFlags: 1

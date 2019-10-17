@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 /// <summary>
 /// 
@@ -12,11 +13,12 @@ public class AudioManager : MonoBehaviour
     #region Variable Declarations
     public static AudioManager Instance;
 
+    [Header("Music Tracks")]
     [SerializeField] List<MusicTrack> musicTracks = new List<MusicTrack>();
     [SerializeField] MusicTrack tutorialTrack = null;
     [SerializeField] MusicTrack titleTrack = null;
 
-    [Space]
+    [Header("Sound Effects")]
     [SerializeField] AudioClip levelEnd;
     [Range(0,1)]
     [SerializeField] float levelEndVolume = 1f;
@@ -26,6 +28,11 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioClip heroesWinSound;
     [Range(0, 1)]
     [SerializeField] float heroesWinSoundVolume = 1f;
+    [SerializeField] AudioClip slowMotion;
+    [Range(0, 1)]
+    [SerializeField] float slowMotionSoundVolume = 1f;
+
+    [Header("References")]
     [SerializeField] AudioSource audioSourceMusic = null;
     [SerializeField] AudioSource audioSourceSFX = null;
     [Space]
@@ -143,6 +150,17 @@ public class AudioManager : MonoBehaviour
     public void PlayClip(AudioClip clip, float volume)
     {
         audioSourceSFX.PlayOneShot(clip, volume);
+    }
+
+    public void BendTime(float targetValue, float duration, System.Action onComplete = null)
+    {
+        // Special to the usage of BendTime() in this project: The sound effect is for bending time in and out in one track
+        if (targetValue < 1f) audioSourceSFX.PlayOneShot(slowMotion, slowMotionSoundVolume);
+
+        audioSourceMusic.DOPitch(targetValue, duration).OnComplete(() =>
+        {
+            if (onComplete != null) onComplete.Invoke();
+        });
     }
     #endregion
 

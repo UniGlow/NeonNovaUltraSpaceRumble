@@ -783,7 +783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transmissionRange: 5
-  transmissionDuration: 1.5
+  transmissionDuration: 1.3
   transmissionSound: {fileID: 8300000, guid: 99a9562a9c5874546a152e7ded477cb5, type: 3}
   transmissionSoundVolume: 1
   inRangeColorMultiplier: 1.3
@@ -791,13 +791,19 @@ MonoBehaviour:
   blinkDuration: 0.23
   shootingStarsDuration: 0.4
   shootingStarEase: 3
-  shootingStarsOffset: 0.08
+  shootingStarsOffset: 0
   meshFadeDuration: 0.77
   meshFadeEase: 6
   meshScaleDuration: 0.77
   meshScaleEase: 9
+  freezeFrameDuration: 0
+  slowMotionStrength: 0.5
+  slowMotionFadeInDuration: 0.2
+  slowMotionFadeOutDuration: 0.3
   transmissionRangeIndicator: {fileID: 1493951416420246}
   transmissionPS: {fileID: 198963605972144674}
+  abilitySwitchInitiatedEvent: {fileID: 11400000, guid: 7363139ca9933444f9902753e7126642,
+    type: 2}
   abilitiesChangedEvent: {fileID: 11400000, guid: a3637ea13dc4b674895931910892b2e2,
     type: 2}
   shootingStarsPrefab: {fileID: 1273078338764796, guid: 6db695f43b2a865418218fa865f4488d,

@@ -439,6 +439,8 @@ MonoBehaviour:
   bossWinSoundVolume: 0.8
   heroesWinSound: {fileID: 8300000, guid: 2dc646915323a9840bfcee7e29d3b9d0, type: 3}
   heroesWinSoundVolume: 0.8
+  slowMotion: {fileID: 8300000, guid: 7bda31c0a8619e744b2f2e21769e926b, type: 3}
+  slowMotionSoundVolume: 1
   audioSourceMusic: {fileID: 82989341837034522}
   audioSourceSFX: {fileID: 82203532128439068}
   songChangedEvent: {fileID: 11400000, guid: f6d8145741eb62847bd38ea32a89ef08, type: 2}

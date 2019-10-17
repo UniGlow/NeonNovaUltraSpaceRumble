@@ -37,14 +37,14 @@ public class Transmission : MonoBehaviour
     [SerializeField] protected float transmissionRange = 5f;
     [SerializeField] protected float transmissionDuration = 3f;
 
-    [Header("FX")]
+    [Header("Sound")]
     [SerializeField]
     protected AudioClip transmissionSound;
     [Range(0, 1)]
     [SerializeField]
     protected float transmissionSoundVolume = 1f;
 
-    [Space]
+    [Header("Mesh Blink")]
     [Range(0f,10f)]
     [SerializeField] protected float inRangeColorMultiplier = 1f;
     [Range(0f,10f)]
@@ -55,7 +55,7 @@ public class Transmission : MonoBehaviour
     [Tooltip("Duration of the blinking of the mesh. Percentual value from transmissionDuration.")]
     [SerializeField] protected float blinkDuration = 0.23f;
 
-    [Space]
+    [Header("Shooting Stars")]
     [Range(0f, 1f)]
     [Tooltip("Duration of the travel for the shooting stars. Percentual value from transmissionDuration.")]
     [SerializeField] protected float shootingStarsDuration = 0.77f;
@@ -63,7 +63,7 @@ public class Transmission : MonoBehaviour
     [Range(-1f, 1f)]
     [SerializeField] protected float shootingStarsOffset = 0.08f;
 
-    [Space]
+    [Header("Transparent Mesh")]
     [Range(0f, 1f)]
     [Tooltip("Duration of the alpha fade for the transparent mesh. Percentual value from transmissionDuration.")]
     [SerializeField] protected float meshFadeDuration = 0.77f;
@@ -75,9 +75,23 @@ public class Transmission : MonoBehaviour
     [SerializeField] protected float meshScaleDuration = 0.77f;
     [SerializeField] protected Ease meshScaleEase = Ease.OutCubic;
 
+    [Header("Slow Motion")]
+    [Range(0f, 1f)]
+    [SerializeField] protected float freezeFrameDuration = 0.1f;
+    [Range(0f, 1f)]
+    [Tooltip("Percentual value from realtime (realtime = 1).")]
+    [SerializeField] protected float slowMotionStrength = 0.2f;
+    [Range(0f, 1f)]
+    [Tooltip("Duration of the fade in for the slow motion. Percentual value from transmissionDuration.")]
+    [SerializeField] protected float slowMotionFadeInDuration = 0.25f;
+    [Range(0f, 1f)]
+    [Tooltip("Duration of the fade out for the slow motion. Percentual value from transmissionDuration.")]
+    [SerializeField] protected float slowMotionFadeOutDuration = 0.5f;
+
     [Header("References")]
     [SerializeField] protected GameObject transmissionRangeIndicator;
     [SerializeField] protected ParticleSystem transmissionPS;
+    [SerializeField] protected GameEvent abilitySwitchInitiatedEvent = null;
     [SerializeField] protected GameEvent abilitiesChangedEvent = null;
     [SerializeField] protected GameObject shootingStarsPrefab = null;
     [SerializeField] protected GameObject transparentPlayerMeshPrefab = null;
@@ -265,21 +279,39 @@ public class Transmission : MonoBehaviour
 
     protected void Transmit()
     {
-        hero.SetMovable(false);
+        // Things to do only once (both players are performing Transmit()
+        if (transmissionPartner.transmissionPartner == null)
+        {
+            RaiseAbilitySwitchInitiated(hero.PlayerConfig, transmissionPartner.hero.PlayerConfig, transmissionDuration);
+
+            // FreezeFrame and Slow Motion
+            JuiceLib.TimeFX.FreezeFrame(transmissionDuration * freezeFrameDuration, () =>
+            {
+                JuiceLib.TimeFX.BendTime(slowMotionStrength, transmissionDuration * slowMotionFadeInDuration);
+            });
+            AudioManager.Instance.BendTime(slowMotionStrength, transmissionDuration * slowMotionFadeInDuration);
+        }
 
         // Blinking Hero
-        playerMat.DOBlendableColor(playerMat.color * switchColorMultiplier, (blinkDuration * transmissionDuration) / 2).OnComplete(() => 
+        playerMat.DOBlendableColor(playerMat.color * switchColorMultiplier, (blinkDuration * transmissionDuration) / 2).SetUpdate(true).OnComplete(() => 
         {
-            playerMat.DOBlendableColor(hero.PlayerConfig.ColorConfig.heroMaterial.color, (blinkDuration * transmissionDuration) / 2);
+            playerMat.DOBlendableColor(hero.PlayerConfig.ColorConfig.heroMaterial.color, (blinkDuration * transmissionDuration) / 2).SetUpdate(true);
             // Shooting Stars go!
-            // TODO: Shooting Stars need to track their targets
             Vector3 directionToReceiver = transmissionPartner.transform.position - transform.position;
             GameObject shootingStar = Instantiate(shootingStarsPrefab, transform.position + Vector3.Cross(directionToReceiver, Vector3.down) * shootingStarsOffset, Quaternion.LookRotation(directionToReceiver));
-            shootingStar.transform.DOMove(transmissionPartner.transform.position + Vector3.Cross(directionToReceiver, Vector3.down) * shootingStarsOffset, shootingStarsDuration * transmissionDuration).SetEase(Ease.OutSine).OnComplete(() => 
+            Tweener tween = null;
+            tween = shootingStar.transform.DOMove(transmissionPartner.transform.position + Vector3.Cross(directionToReceiver, Vector3.down) * shootingStarsOffset, 
+                shootingStarsDuration * transmissionDuration).SetUpdate(true).SetEase(Ease.OutSine);
+            // Keep track of target and correct path
+            tween.OnUpdate(() => 
+            {
+                if (tween.Duration() > 0.05f) tween.ChangeEndValue(transmissionPartner.transform.position + Vector3.Cross(directionToReceiver, Vector3.down) * shootingStarsOffset, tween.Duration() - tween.Elapsed(), true);
+            }
+            ).OnComplete(() => 
             {
                 Destroy(shootingStar);
                 // Blink again
-                playerMat.DOBlendableColor(playerMat.color * switchColorMultiplier, (blinkDuration * transmissionDuration) / 2).SetLoops(2, LoopType.Yoyo);
+                playerMat.DOBlendableColor(playerMat.color * switchColorMultiplier, (blinkDuration * transmissionDuration) / 2).SetUpdate(true).SetLoops(2, LoopType.Yoyo);
 
                 // Spawn transparent mesh of new hero shape
                 GameObject transparentMesh = Instantiate(transparentPlayerMeshPrefab, transform.position, transform.rotation);
@@ -294,7 +326,7 @@ public class Transmission : MonoBehaviour
                 transparentMesh.GetComponent<MeshRenderer>().material.DOFade(1f, meshFadeDuration * transmissionDuration).SetEase(Ease.InQuad);
 
                 // Shrink into hero
-                transparentMesh.transform.DOScale(1f, meshScaleDuration * transmissionDuration).SetEase(Ease.OutCubic).OnUpdate(() => 
+                transparentMesh.transform.DOScale(1f, meshScaleDuration * transmissionDuration).SetUpdate(true).SetEase(Ease.OutCubic).OnUpdate(() => 
                 {
                     transparentMesh.transform.position = transform.position;
                 }).OnComplete(() => 
@@ -305,12 +337,20 @@ public class Transmission : MonoBehaviour
                 // Switch abilities
                 hero.SetAbility(receivingAbility);
 
-                audioSource.PlayOneShot(transmissionSound, transmissionSoundVolume);
-
+                // More FX
                 transmissionPS.Play();
 
-                // TODO: Both heroes are executing Transmit(), but only one event must be raised
-                if (transmissionPartner.transmissionPartner == null) RaiseAbilitiesChanged(hero.PlayerConfig, transmissionPartner.hero.PlayerConfig);
+                // Things to do only once (both players are performing Transmit()
+                if (transmissionPartner.transmissionPartner == null)
+                {
+                    RaiseAbilitiesChanged(hero.PlayerConfig, transmissionPartner.hero.PlayerConfig);
+
+                    audioSource.PlayOneShot(transmissionSound, transmissionSoundVolume);
+
+                    // Bend time back to normal
+                    JuiceLib.TimeFX.BendTime(1f, transmissionDuration * slowMotionFadeOutDuration);
+                    AudioManager.Instance.BendTime(1f, transmissionDuration * slowMotionFadeOutDuration);
+                }
 
                 EndTransmission();
             });
@@ -370,7 +410,6 @@ public class Transmission : MonoBehaviour
 
     protected void EndTransmission()
     {
-        hero.SetMovable(true);
         transmissionPartner = null;
         receivingAbility = null;
         ChangeState(State.Deactivated);
@@ -405,6 +444,11 @@ public class Transmission : MonoBehaviour
     void RaiseAbilitiesChanged(PlayerConfig hero1Config, PlayerConfig hero2Config)
     {
         abilitiesChangedEvent.Raise(this, hero1Config, hero2Config);
+    }
+
+    void RaiseAbilitySwitchInitiated(PlayerConfig hero1Config, PlayerConfig hero2Config, float duration)
+    {
+        abilitySwitchInitiatedEvent.Raise(this, hero1Config, hero2Config, duration);
     }
     #endregion
 }
