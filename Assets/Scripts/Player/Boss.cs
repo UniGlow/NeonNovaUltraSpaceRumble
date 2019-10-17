@@ -135,6 +135,18 @@ public class Boss : Character
 
         RaiseBossColorChanged(playerConfig);
     }
+
+    /// <summary>
+    /// Randomly changes the boss weakness color
+    /// </summary>
+    public void ChangeWeaknessColor()
+    {
+        PlayerColor newWeaknessColor = colorSet.GetRandomColorExcept(playerConfig.ColorConfig);
+
+        playerConfig.ColorConfig = newWeaknessColor;
+
+        SetWeaknessColor(playerConfig.ColorConfig);
+    }
     #endregion
 
 
@@ -186,18 +198,7 @@ public class Boss : Character
             cooldownTimer = 0f;
         }
     }
-
-    /// <summary>
-    /// Randomly changes the boss weakness color
-    /// </summary>
-    void ChangeWeaknessColor()
-    {
-        PlayerColor newWeaknessColor = colorSet.GetRandomColorExcept(playerConfig.ColorConfig);
-
-        playerConfig.ColorConfig = newWeaknessColor;
-
-        SetWeaknessColor(playerConfig.ColorConfig);
-    }
+    
 
     void SetWeaknessColor(PlayerColor playerColor)
     {
@@ -206,6 +207,8 @@ public class Boss : Character
         bossMeshRenderer.material = playerConfig.ColorConfig.bossMaterial;
 
         bossMeshRenderer.material.DOColor(bossMeshRenderer.material.color * materialGlowOnSwitch, 0.6f).SetLoops(2, LoopType.Yoyo).SetEase(Ease.InOutQuad);
+
+        RaiseBossColorChanged(playerConfig);
     }
 
     protected void HandleColorSwitch()
@@ -219,8 +222,6 @@ public class Boss : Character
         if (colorChangeTimer >= gameSettings.BossColorSwitchInterval)
         {
             ChangeWeaknessColor();
-
-            RaiseBossColorChanged(playerConfig);
 
             colorChangeTimer = 0f;
             colorChangeSoundPlayed = false;
