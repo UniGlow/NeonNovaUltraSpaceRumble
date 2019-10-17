@@ -89,6 +89,7 @@ public class Transmission : MonoBehaviour
     protected List<Receiver> receivers = new List<Receiver>();
     protected Transmission transmissionPartner;
     protected Ability receivingAbility;
+    protected bool isTargeted;
     #endregion
 
 
@@ -377,12 +378,14 @@ public class Transmission : MonoBehaviour
 
     protected void AddReceiver(Receiver receiver)
     {
+        receiver.transmitter.isTargeted = true;
         receiver.transmitter.playerMat.DOBlendableColor(receiver.color * inRangeColorMultiplier, 0.3f);
         receivers.Add(receiver);
     }
 
     protected void RemoveReceiver(Receiver receiver)
     {
+        receiver.transmitter.isTargeted = false;
         receiver.transmitter.playerMat.DOBlendableColor(receiver.color, 0.3f);
         receivers.Remove(receiver);
     }
