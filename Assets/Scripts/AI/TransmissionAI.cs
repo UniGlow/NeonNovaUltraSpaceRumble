@@ -18,7 +18,7 @@ public class TransmissionAI : Transmission
     #region Unity Event Functions
     override protected void Update()
     {
-        if (isTargeted)
+        if (isTargeted && state == State.Deactivated)
         {
             ChangeState(State.ReadyToTransmit);
         }

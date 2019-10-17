@@ -315,7 +315,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1614495311706788}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.01999998, y: 0, z: -3.38}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4039620312066730}
@@ -618,7 +618,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transmissionRange: 5
-  transmissionDuration: 3
+  transmissionDuration: 1.3
   transmissionSound: {fileID: 8300000, guid: 99a9562a9c5874546a152e7ded477cb5, type: 3}
   transmissionSoundVolume: 1
   inRangeColorMultiplier: 1.3
@@ -977,7 +977,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 396645282
+  randomSeed: 100175864
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -4359,7 +4359,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
-  randomSeed: -1609964639
+  randomSeed: 226395919
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -7720,7 +7720,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
-  randomSeed: 1847217702
+  randomSeed: -103522827
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -11081,7 +11081,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -174559512
+  randomSeed: 1587038763
   InitialModule:
     serializedVersion: 3
     enabled: 1
