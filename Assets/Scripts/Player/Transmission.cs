@@ -278,14 +278,18 @@ public class Transmission : MonoBehaviour
 
     protected void Transmit()
     {
-        // Raise Event only once (both players are performing Transmit()
-        if (transmissionPartner.transmissionPartner == null) RaiseAbilitySwitchInitiated(hero.PlayerConfig, transmissionPartner.hero.PlayerConfig, transmissionDuration);
-
-        // FreezeFrame and Slow Motion
-        JuiceLib.TimeFX.FreezeFrame(transmissionDuration * freezeFrameDuration, () =>
+        // Things to do only once (both players are performing Transmit()
+        if (transmissionPartner.transmissionPartner == null)
         {
-            JuiceLib.TimeFX.BendTime(slowMotionStrength, transmissionDuration * slowMotionFadeInDuration);
-        });
+            RaiseAbilitySwitchInitiated(hero.PlayerConfig, transmissionPartner.hero.PlayerConfig, transmissionDuration);
+
+            // FreezeFrame and Slow Motion
+            JuiceLib.TimeFX.FreezeFrame(transmissionDuration * freezeFrameDuration, () =>
+            {
+                JuiceLib.TimeFX.BendTime(slowMotionStrength, transmissionDuration * slowMotionFadeInDuration);
+            });
+            AudioManager.Instance.BendTime(slowMotionStrength, transmissionDuration * slowMotionFadeInDuration);
+        }
 
         // Blinking Hero
         playerMat.DOBlendableColor(playerMat.color * switchColorMultiplier, (blinkDuration * transmissionDuration) / 2).SetUpdate(true).OnComplete(() => 
@@ -332,12 +336,20 @@ public class Transmission : MonoBehaviour
                 // Switch abilities
                 hero.SetAbility(receivingAbility);
 
-                audioSource.PlayOneShot(transmissionSound, transmissionSoundVolume);
+                // More FX
                 transmissionPS.Play();
-                JuiceLib.TimeFX.BendTime(1f, transmissionDuration * slowMotionFadeOutDuration);
 
-                // Raise Event only once
-                if (transmissionPartner.transmissionPartner == null) RaiseAbilitiesChanged(hero.PlayerConfig, transmissionPartner.hero.PlayerConfig);
+                // Things to do only once (both players are performing Transmit()
+                if (transmissionPartner.transmissionPartner == null)
+                {
+                    RaiseAbilitiesChanged(hero.PlayerConfig, transmissionPartner.hero.PlayerConfig);
+
+                    audioSource.PlayOneShot(transmissionSound, transmissionSoundVolume);
+
+                    // Bend time back to normal
+                    JuiceLib.TimeFX.BendTime(1f, transmissionDuration * slowMotionFadeOutDuration);
+                    AudioManager.Instance.BendTime(1f, transmissionDuration * slowMotionFadeOutDuration);
+                }
 
                 EndTransmission();
             });

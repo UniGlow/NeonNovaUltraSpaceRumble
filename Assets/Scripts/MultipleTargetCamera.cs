@@ -81,7 +81,8 @@ public class MultipleTargetCamera : MonoBehaviour
         targets.Add(hero1.playerTransform);
         targets.Add(hero2.playerTransform);
 
-        StartCoroutine(WaitRealtime(duration * zoomSmoothTime, () =>
+        // multiplier for duration is only needed, because the function is triggered by a GameEventListener. Else it could be passed via param on function call.
+        StartCoroutine(WaitRealtime(duration * 0.7f, () =>
         {
             targets.Clear();
             foreach (Transform target in originalTargets)

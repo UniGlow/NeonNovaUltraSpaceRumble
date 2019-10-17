@@ -256,7 +256,7 @@ MonoBehaviour:
   minZoom: 55
   maxZoom: 20
   maxDistance: 60
-  zoomSmoothTime: 0.7
+  zoomSmoothTime: 0.5
 --- !u!114 &114566314905802030
 MonoBehaviour:
   m_ObjectHideFlags: 1
