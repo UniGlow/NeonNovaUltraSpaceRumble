@@ -621,19 +621,21 @@ MonoBehaviour:
   transmissionDuration: 3
   transmissionSound: {fileID: 8300000, guid: 99a9562a9c5874546a152e7ded477cb5, type: 3}
   transmissionSoundVolume: 1
-  inRangeColorMultiplier: 1
-  switchColorMultiplier: 1
+  inRangeColorMultiplier: 1.3
+  switchColorMultiplier: 1.8
   blinkDuration: 0.23
-  shootingStarsDuration: 0.77
+  shootingStarsDuration: 0.4
   shootingStarEase: 3
   shootingStarsOffset: 0.08
   meshFadeDuration: 0.77
   meshFadeEase: 5
   meshScaleDuration: 0.77
   meshScaleEase: 9
-  slowMotionStrength: 0.2
+  freezeFrameDuration: 0
+  slowMotionStrength: 0.5
+  musicPitchStrength: 1
   slowMotionFadeInDuration: 0.25
-  slowMotionFadeOutDuration: 0.5
+  slowMotionFadeOutDuration: 0.3
   transmissionRangeIndicator: {fileID: 1614495311706788}
   transmissionPS: {fileID: 198963605972144674}
   abilitySwitchInitiatedEvent: {fileID: 11400000, guid: 7363139ca9933444f9902753e7126642,

@@ -82,6 +82,9 @@ public class Transmission : MonoBehaviour
     [Tooltip("Percentual value from realtime (realtime = 1).")]
     [SerializeField] protected float slowMotionStrength = 0.2f;
     [Range(0f, 1f)]
+    [Tooltip("Percentual value from realtime (realtime = 1).")]
+    [SerializeField] protected float musicPitchStrength = 0.2f;
+    [Range(0f, 1f)]
     [Tooltip("Duration of the fade in for the slow motion. Percentual value from transmissionDuration.")]
     [SerializeField] protected float slowMotionFadeInDuration = 0.25f;
     [Range(0f, 1f)]
@@ -289,7 +292,7 @@ public class Transmission : MonoBehaviour
             {
                 JuiceLib.TimeFX.BendTime(slowMotionStrength, transmissionDuration * slowMotionFadeInDuration);
             });
-            AudioManager.Instance.BendTime(slowMotionStrength, transmissionDuration * slowMotionFadeInDuration);
+            AudioManager.Instance.BendTime(musicPitchStrength, transmissionDuration * slowMotionFadeInDuration);
         }
 
         // Blinking Hero

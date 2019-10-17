@@ -791,14 +791,15 @@ MonoBehaviour:
   blinkDuration: 0.23
   shootingStarsDuration: 0.4
   shootingStarEase: 3
-  shootingStarsOffset: 0
+  shootingStarsOffset: 0.08
   meshFadeDuration: 0.77
   meshFadeEase: 6
   meshScaleDuration: 0.77
   meshScaleEase: 9
   freezeFrameDuration: 0
   slowMotionStrength: 0.5
-  slowMotionFadeInDuration: 0.2
+  musicPitchStrength: 1
+  slowMotionFadeInDuration: 0.25
   slowMotionFadeOutDuration: 0.3
   transmissionRangeIndicator: {fileID: 1493951416420246}
   transmissionPS: {fileID: 198963605972144674}
