@@ -271,6 +271,10 @@ public class GameEvent : ScriptableObject
     #region Private Functions
     void AddRaisedEvent(EventRaise eventRaise)
     {
+        /* TODO: This Debug-Output should be more fancy like those of DoTween so they stand out.
+         * Additionally it would be nice to have a Toggle all GameEvent Debug Outputs on/off in
+         * Unity under Tools/GameEvents, so it won't be as painful to handle in bigger projects
+         */ 
         if (debugMode)
             Debug.Log(eventRaise.TimeStamp + " | Event " + this.name + " got raised by " + eventRaise.EventRaiser, eventRaise.EventRaiser);
         raisedEvents.Add(eventRaise);
