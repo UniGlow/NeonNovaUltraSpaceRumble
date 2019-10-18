@@ -10,6 +10,9 @@ public class MainMenu : MonoBehaviour
 {
 
     #region Variable Declarations
+    [SerializeField] EventSystem eventSystem = null;
+    [SerializeField] GameObject playButton = null;
+
     List<InputHelper.PlayerRuleSet> ruleSets = new List<InputHelper.PlayerRuleSet>();
 	#endregion
 	
@@ -20,6 +23,11 @@ public class MainMenu : MonoBehaviour
     {
         ruleSets = InputHelper.ChangeRuleSetForAllPlayers(RewiredConsts.LayoutManagerRuleSet.RULESETMENU);
 	}
+
+    private void Update()
+    {
+        if (!eventSystem.currentSelectedGameObject.activeInHierarchy) eventSystem.SetSelectedGameObject(playButton);
+    }
 
     private void OnDisable()
     {
