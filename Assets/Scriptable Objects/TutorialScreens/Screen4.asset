@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 410ecf38e99629c47900cbf683162fab, type: 3}
   m_Name: Screen4
   m_EditorClassIdentifier: 
-  backgroundImage: {fileID: 21300000, guid: b57dcb34bdcaaaf409ec4cdf17c0417b, type: 3}
-  tutorialText: {fileID: 21300000, guid: fa48de13601215c4ea6dc5ce45f3b8cf, type: 3}
+  backgroundImage: {fileID: 21300000, guid: 0ee38f4be8051784e9a5e43cd1939ea2, type: 3}
+  tutorialText: {fileID: 21300000, guid: 0680c61729d95c04f9e152fd4247c48c, type: 3}
   nextScreen: {fileID: 11400000, guid: b6ce5b11e0058d9488bc81a50f7ca079, type: 2}
