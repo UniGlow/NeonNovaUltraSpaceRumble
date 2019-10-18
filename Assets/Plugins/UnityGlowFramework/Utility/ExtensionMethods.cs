@@ -124,10 +124,10 @@ public static class ExtensionMethods
     /// Remaps a value from one range to another.
     /// </summary>
     /// <param name="value">The value.</param>
-    /// <param name="from1">The from1.</param>
-    /// <param name="to1">The to1.</param>
-    /// <param name="from2">The from2.</param>
-    /// <param name="to2">The to2.</param>
+    /// <param name="from1">From the first Range.</param>
+    /// <param name="to1">To the first Range</param>
+    /// <param name="from2">From the second Range</param>
+    /// <param name="to2">To the second Range</param>
     /// <returns></returns>
     public static float Remap(this float value, float from1, float to1, float from2, float to2)
     {

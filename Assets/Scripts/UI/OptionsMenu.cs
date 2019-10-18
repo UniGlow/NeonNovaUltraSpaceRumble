@@ -16,6 +16,9 @@ public class OptionsMenu : MonoBehaviour
     [SerializeField] Button backButton;
     [SerializeField] AudioMixer masterMixer;
     Resolution[] resolutions;
+
+    float maxSFX;
+    float maxMusic;
     #endregion
 
 
@@ -23,6 +26,9 @@ public class OptionsMenu : MonoBehaviour
     #region Unity Event Functions
     private void Start()
     {
+        masterMixer.GetFloat(Constants.MIXER_SFX_VOLUME, out maxSFX);
+        masterMixer.GetFloat(Constants.MIXER_MUSIC_VOLUME, out maxMusic);
+
         resolutions = Screen.resolutions;
 
         resolutionDropdown.ClearOptions();
@@ -79,12 +85,12 @@ public class OptionsMenu : MonoBehaviour
 
     public void SetSFXVolume(float volume)
     {
-        masterMixer.SetFloat(Constants.MIXER_SFX_VOLUME, Mathf.Log10(volume) * 20);
+        masterMixer.SetFloat(Constants.MIXER_SFX_VOLUME, ExtensionMethods.Remap(Mathf.Log10(volume) * 20, -80f, 0f, -80f, maxSFX));
     }
 
     public void SetMusicVolume(float volume)
     {
-        masterMixer.SetFloat(Constants.MIXER_MUSIC_VOLUME, Mathf.Log10(volume) * 20);
+        masterMixer.SetFloat(Constants.MIXER_MUSIC_VOLUME, ExtensionMethods.Remap(Mathf.Log10(volume) * 20, -80f, 0f, -80f, maxMusic));
     }
     #endregion
 
