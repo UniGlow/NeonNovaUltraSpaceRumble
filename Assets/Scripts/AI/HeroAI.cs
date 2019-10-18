@@ -79,7 +79,6 @@ public class HeroAI : Hero
         }
 
         normalAgentSpeed = agent.speed;
-        if(IsAbilityClass(Ability.AbilityClass.Damage)) agent.updateRotation = false;
 
         StartCoroutine(Wait(1, () =>
         {
@@ -154,6 +153,14 @@ public class HeroAI : Hero
     public void SetReferences(PlayerConfig hero1, PlayerConfig hero2, PlayerConfig hero3, PlayerConfig boss)
     {
         this.boss = boss.playerTransform;
+    }
+
+    public override void SetPlayerConfig(PlayerConfig playerConfig)
+    {
+        base.SetPlayerConfig(playerConfig);
+
+        if (IsAbilityClass(Ability.AbilityClass.Damage)) agent.updateRotation = false;
+        else agent.updatePosition = true;
     }
     #endregion
 
