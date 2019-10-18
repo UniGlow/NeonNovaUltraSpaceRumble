@@ -2,20 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 /// <summary>
 /// 
 /// </summary>
-[RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour
 {
 
     #region Variable Declarations
     public static AudioManager Instance;
 
+    [Header("Music Tracks")]
     [SerializeField] List<MusicTrack> musicTracks = new List<MusicTrack>();
+    [SerializeField] MusicTrack tutorialTrack = null;
+    [SerializeField] MusicTrack titleTrack = null;
 
-    [Space]
+    [Header("Sound Effects")]
     [SerializeField] AudioClip levelEnd;
     [Range(0,1)]
     [SerializeField] float levelEndVolume = 1f;
@@ -25,9 +28,15 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioClip heroesWinSound;
     [Range(0, 1)]
     [SerializeField] float heroesWinSoundVolume = 1f;
+    [SerializeField] AudioClip slowMotion;
+    [Range(0, 1)]
+    [SerializeField] float slowMotionSoundVolume = 1f;
+
+    [Header("References")]
     [SerializeField] AudioSource audioSourceMusic = null;
     [SerializeField] AudioSource audioSourceSFX = null;
-
+    [Space]
+    [SerializeField] GameEvent songChangedEvent = null;
     bool startingTrack;
     #endregion
 
@@ -51,17 +60,6 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    private void Start()
-    {
-        audioSourceMusic = GetComponent<AudioSource>();
-        audioSourceSFX = transform.GetChild(0).GetComponent<AudioSource>();
-	}
-	
-	private void Update()
-    {
-		
-	}
     #endregion
 
 
@@ -100,17 +98,28 @@ public class AudioManager : MonoBehaviour
         StartCoroutine(StartAudioLoop(track));
     }
 
+    public void StartTitleTrack()
+    {
+        if (startingTrack) return;
+        startingTrack = true;
+
+        audioSourceMusic.clip = titleTrack.intro;
+        audioSourceMusic.volume = titleTrack.volume;
+        audioSourceMusic.loop = false;
+        audioSourceMusic.Play();
+        StartCoroutine(StartAudioLoop(titleTrack));
+    }
+
     public void StartTutorialTrack()
     {
         if (startingTrack) return;
         startingTrack = true;
 
-        MusicTrack track = GetTrack("TutorialTrack");
-        audioSourceMusic.clip = track.intro;
-        audioSourceMusic.volume = track.volume;
+        audioSourceMusic.clip = tutorialTrack.intro;
+        audioSourceMusic.volume = tutorialTrack.volume;
         audioSourceMusic.loop = false;
         audioSourceMusic.Play();
-        StartCoroutine(StartAudioLoop(track));
+        StartCoroutine(StartAudioLoop(tutorialTrack));
     }
 
     public void StartRandomTrack()
@@ -118,18 +127,18 @@ public class AudioManager : MonoBehaviour
         if (startingTrack) return;
         startingTrack = true;
 
-        // Ignore OriginalTrack and TutorialTrack
-        MusicTrack track = musicTracks[Random.Range(2, musicTracks.Count)];
+        MusicTrack track = musicTracks[Random.Range(0, musicTracks.Count)];
         audioSourceMusic.clip = track.intro;
         audioSourceMusic.volume = track.volume;
         audioSourceMusic.loop = false;
         audioSourceMusic.Play();
         StartCoroutine(StartAudioLoop(track));
 
-        GameObject.FindObjectOfType<SongTextUpdater>().ShowSongTitle(track.artist, track.title);
+        RaiseSongChanged(track.artist, track.title);
     }
 
-    public void StopPlaying() {
+    public void StopPlaying()
+    {
         audioSourceMusic.Stop();
         audioSourceMusic.clip = null;
         audioSourceMusic.volume = 1f;
@@ -141,6 +150,17 @@ public class AudioManager : MonoBehaviour
     public void PlayClip(AudioClip clip, float volume)
     {
         audioSourceSFX.PlayOneShot(clip, volume);
+    }
+
+    public void BendTime(float targetValue, float duration, System.Action onComplete = null)
+    {
+        // Special to the usage of BendTime() in this project: The sound effect is for bending time in and out in one track
+        if (targetValue < 1f) audioSourceSFX.PlayOneShot(slowMotion, slowMotionSoundVolume);
+
+        audioSourceMusic.DOPitch(targetValue, duration).OnComplete(() =>
+        {
+            if (onComplete != null) onComplete.Invoke();
+        });
     }
     #endregion
 
@@ -156,6 +176,11 @@ public class AudioManager : MonoBehaviour
         return null;
     }
     #endregion
+
+    void RaiseSongChanged(string artist, string title)
+    {
+        songChangedEvent.Raise(this, artist, title);
+    }
 
 
 

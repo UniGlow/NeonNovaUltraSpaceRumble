@@ -4,18 +4,18 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
+using Rewired;
 
 /// <summary>
-/// 
+///
 /// </summary>
-public class SirAlfredLobby : MonoBehaviour 
+public class SirAlfredLobby : LevelManager
 {
 
     #region Variable Declaration
-    [Header("Game Settings")]
-    [SerializeField] GameSettings settings;
-
     [Header("Miscellaneous")]
+    [SerializeField] float timeTillLevelStart = 1f;
     [SerializeField] float timeTillIdle = 5f;
     [SerializeField] PlayerReadyUpdater playerReadyUpdater;
     [SerializeField] AudioMixer masterMixer;
@@ -50,7 +50,7 @@ public class SirAlfredLobby : MonoBehaviour
 
 
     #region Unity Event Functions
-    private void Start () 
+    private void Start ()
 	{
         masterMixer.GetFloat(Constants.MIXER_SFX_VOLUME, out originalSFXVolume);
         masterMixer.GetFloat(Constants.MIXER_MUSIC_VOLUME, out originalMusicVolume);
@@ -58,11 +58,21 @@ public class SirAlfredLobby : MonoBehaviour
         masterMixer.SetFloat(Constants.MIXER_SFX_VOLUME, originalSFXVolume * (1 + sfxVolumeDamp));
         StartCoroutine(Wait(0.1f, () => { AudioManager.Instance.StartTrack(backgroundTrack); }));
     }
-	
-	private void Update ()
+
+    protected override void InheritedOnEnable()
     {
-        // Update player count
-        UpdatePlayerCount();
+        ReInput.ControllerConnectedEvent += ReloadLobby;
+        ReInput.ControllerDisconnectedEvent += ReloadLobby;
+    }
+
+    protected override void InheritedOnDisable()
+    {
+        ReInput.ControllerConnectedEvent -= ReloadLobby;
+        ReInput.ControllerDisconnectedEvent -= ReloadLobby;
+    }
+
+    private void Update ()
+    {
         UpdatePlayerConfirmsList();
         playerReadyUpdater.UpdateUIElements(playerCount);
 
@@ -80,47 +90,22 @@ public class SirAlfredLobby : MonoBehaviour
                 // Rstore SFX audio level
                 masterMixer.SetFloat(Constants.MIXER_SFX_VOLUME, originalSFXVolume);
 
-                GameManager.Instance.LoadNextScene();
+                SceneManager.Instance.LoadNextScene();
             }));
         }
 
-        // Check Inputs to ready up
-		if (Input.GetButtonDown(Constants.INPUT_SUBMIT + "1"))
+        // Check inputs for Ready-Ups
+        for (int i = 0; i < ReInput.players.playerCount; i++)
         {
-            playerConfirms[0] = !playerConfirms[0];
-            playerReadyUpdater.UpdateState(0, playerConfirms[0]);
-        }
-        else if (Input.GetButtonDown(Constants.INPUT_SUBMIT + "2"))
-        {
-            playerConfirms[1] = !playerConfirms[1];
-            playerReadyUpdater.UpdateState(1, playerConfirms[1]);
-        }
-        else if (Input.GetButtonDown(Constants.INPUT_SUBMIT + "3"))
-        {
-            playerConfirms[2] = !playerConfirms[2];
-            playerReadyUpdater.UpdateState(2, playerConfirms[2]);
-        }
-        else if (Input.GetButtonDown(Constants.INPUT_SUBMIT + "4"))
-        {
-            playerConfirms[3] = !playerConfirms[3];
-            playerReadyUpdater.UpdateState(3, playerConfirms[3]);
+            if (ReInput.players.Players[i].GetButtonDown(RewiredConsts.Action.READY_UP))
+            {
+                playerConfirms[i] = !playerConfirms[i];
+                playerReadyUpdater.UpdateState(i, playerConfirms[i]);
+            }
         }
 
         // Check and update Idle State of the game
         UpdateIdleState();
-    }
-
-    public void UpdatePlayerCount()
-    {
-        playerCount = 0;
-        string[] joystickNames = Input.GetJoystickNames();
-        foreach (string name in joystickNames)
-        {
-            if (name != "")
-            {
-                playerCount++;
-            }
-        }
     }
     #endregion
 
@@ -129,57 +114,11 @@ public class SirAlfredLobby : MonoBehaviour
     #region Public Functions
     public void Initialize()
     {
-        // Update player count
-        UpdatePlayerCount();
+        playerCount = InputHelper.UpdatePlayerCount();
 
         // Set playerNumbers depending on amount of human players
-        switch (playerCount)
-        {
-            case 1:
-                bossPlayerConfig.Initialize(1, Faction.Boss, colorSet.GetRandomColor(), false);
-                hero1PlayerConfig.Initialize(2, Faction.Heroes, colorSet.color1, true);
-                hero1PlayerConfig.ability = damageAbility;
-                hero2PlayerConfig.Initialize(3, Faction.Heroes, colorSet.color2, true);
-                hero2PlayerConfig.ability = tankAbility;
-                hero3PlayerConfig.Initialize(4, Faction.Heroes, colorSet.color3, true);
-                hero3PlayerConfig.ability = victimAbility;
-                break;
+        PlayerSetup.SetupPlayers(playerCount, bossPlayerConfig, hero1PlayerConfig, hero2PlayerConfig, hero3PlayerConfig, damageAbility, tankAbility, victimAbility, colorSet);
 
-            case 2:
-                hero1PlayerConfig.Initialize(1, Faction.Heroes, colorSet.color1, false);
-                hero1PlayerConfig.ability = damageAbility;
-                hero2PlayerConfig.Initialize(2, Faction.Heroes, colorSet.color2, false);
-                hero2PlayerConfig.ability = tankAbility;
-                hero3PlayerConfig.Initialize(3, Faction.Heroes, colorSet.color3, true);
-                hero3PlayerConfig.ability = victimAbility;
-                bossPlayerConfig.Initialize(4, Faction.Boss, colorSet.GetRandomColor(), true);
-                break;
-
-            case 3:
-                hero1PlayerConfig.Initialize(1, Faction.Heroes, colorSet.color1, false);
-                hero1PlayerConfig.ability = damageAbility;
-                hero2PlayerConfig.Initialize(2, Faction.Heroes, colorSet.color2, false);
-                hero2PlayerConfig.ability = tankAbility;
-                hero3PlayerConfig.Initialize(3, Faction.Heroes, colorSet.color3, false);
-                hero3PlayerConfig.ability = victimAbility;
-                bossPlayerConfig.Initialize(4, Faction.Boss, colorSet.GetRandomColor(), true);
-                break;
-
-            case 4:
-                bossPlayerConfig.Initialize(1, Faction.Boss, colorSet.GetRandomColor(), false);
-                hero1PlayerConfig.Initialize(2, Faction.Heroes, colorSet.color1, false);
-                hero1PlayerConfig.ability = damageAbility;
-                hero2PlayerConfig.Initialize(3, Faction.Heroes, colorSet.color2, false);
-                hero2PlayerConfig.ability = tankAbility;
-                hero3PlayerConfig.Initialize(4, Faction.Heroes, colorSet.color3, false);
-                hero3PlayerConfig.ability = victimAbility;
-                break;
-
-            default:
-                break;
-        }
-
-        GameManager.Instance.activeColorSet = colorSet;
         points.ResetPoints(true);
 
         UpdatePlayerConfirmsList();
@@ -188,10 +127,33 @@ public class SirAlfredLobby : MonoBehaviour
 
 
 
+    #region Inherited Functions
+    protected override void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+    {
+        Initialize();
+
+        RaiseLevelLoaded(timeTillLevelStart);
+
+        Invoke("RaiseLevelStarted", timeTillLevelStart);
+    }
+
+    protected override void RaiseLevelLoaded(float levelStartDelay)
+    {
+        base.RaiseLevelLoaded(levelStartDelay);
+    }
+
+    protected override void RaiseLevelStarted()
+    {
+        base.RaiseLevelStarted();
+    }
+    #endregion
+
+
+
     #region Private Functions
     void UpdateIdleState()
     {
-        if (Input.anyKey && idleState)
+        if (InputHelper.GetAnyButtonDown() && idleState)
         {
             if (DOTween.IsTweening(this)) DOTween.Kill(this);
 
@@ -212,7 +174,7 @@ public class SirAlfredLobby : MonoBehaviour
             idleState = true;
         }
 
-        if (Input.anyKey) idleTimer = 0f;
+        if (InputHelper.GetAnyButtonDown()) idleTimer = 0f;
         else idleTimer += Time.deltaTime;
     }
 
@@ -223,6 +185,8 @@ public class SirAlfredLobby : MonoBehaviour
 
     void UpdatePlayerConfirmsList()
     {
+        playerCount = InputHelper.UpdatePlayerCount();
+
         if (playerConfirms.Count == playerCount)
         {
             return;
@@ -233,6 +197,11 @@ public class SirAlfredLobby : MonoBehaviour
         {
             playerConfirms.Add(false);
         }
+    }
+
+    void ReloadLobby(ControllerStatusChangedEventArgs args)
+    {
+        SceneManager.Instance.ReloadLevel();
     }
     #endregion
 

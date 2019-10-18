@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
-using UnityEngine.SceneManagement;
+using Rewired;
 
 /// <summary>
 /// 
@@ -84,7 +84,7 @@ public class TutorialController : MonoBehaviour
     {
         if (!tweening)
         {
-            UpdatePlayerCount();
+            playerCount = InputHelper.UpdatePlayerCount();
             UpdateReadyImagesAmount();
             CheckControllerInput();
             if (CheckAllPlayerReady())
@@ -104,24 +104,10 @@ public class TutorialController : MonoBehaviour
 
 
     #region Private Functions
-    private void UpdatePlayerCount()
-    {
-        playerCount = 0;
-        string[] joystickNames = Input.GetJoystickNames();
-        foreach (string name in joystickNames)
-        {
-            if (name != "")
-            {
-                playerCount++;
-            }
-        }
-        if (playerCount > 4)
-            playerCount = 4;
-    }
-
     private void UpdateReadyImagesAmount()
     {
-        switch (playerCount) {
+        switch (playerCount)
+        {
             case 0:
                 player1ReadyPanel.SetActive(true);
                 player2ReadyPanel.SetActive(false);
@@ -159,8 +145,9 @@ public class TutorialController : MonoBehaviour
 
     private void CheckControllerInput()
     {
-        if(playerCount == 0)
+        if (playerCount == 0)
         {
+            // Only for debugging purposes, to be able to cycle through the screens when no player is registered
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 player1ReadyImage.sprite = playerReadyImage;
@@ -169,12 +156,12 @@ public class TutorialController : MonoBehaviour
         }
         if (playerCount >= 1)
         {
-            if(Input.GetButtonDown(Constants.INPUT_SUBMIT + "1") && player1ReadyImage != playerReadyImage)
+            if(ReInput.players.Players[0].GetButtonDown(RewiredConsts.Action.READY_UP) && player1ReadyImage != playerReadyImage)
             {
                 player1ReadyImage.sprite = playerReadyImage;
                 player1Ready = true;
             }
-            else if(Input.GetButtonDown(Constants.INPUT_CANCEL + "1") && player1ReadyImage != playerNotReadyImage)
+            else if(ReInput.players.Players[0].GetButtonDown(RewiredConsts.Action.UICANCEL) && player1ReadyImage != playerNotReadyImage)
             {
                 player1ReadyImage.sprite = playerNotReadyImage;
                 player1Ready = false;
@@ -182,12 +169,12 @@ public class TutorialController : MonoBehaviour
         }
         if (playerCount >= 2)
         {
-            if (Input.GetButtonDown(Constants.INPUT_SUBMIT + "2") && player2ReadyImage != playerReadyImage)
+            if (ReInput.players.Players[1].GetButtonDown(RewiredConsts.Action.READY_UP) && player2ReadyImage != playerReadyImage)
             {
                 player2ReadyImage.sprite = playerReadyImage;
                 player2Ready = true;
             }
-            else if (Input.GetButtonDown(Constants.INPUT_CANCEL + "2") && player2ReadyImage != playerNotReadyImage)
+            else if (ReInput.players.Players[1].GetButtonDown(RewiredConsts.Action.UICANCEL) && player2ReadyImage != playerNotReadyImage)
             {
                 player2ReadyImage.sprite = playerNotReadyImage;
                 player2Ready = false;
@@ -195,12 +182,12 @@ public class TutorialController : MonoBehaviour
         }
         if (playerCount >= 3)
         {
-            if (Input.GetButtonDown(Constants.INPUT_SUBMIT + "3") && player3ReadyImage != playerReadyImage)
+            if (ReInput.players.Players[2].GetButtonDown(RewiredConsts.Action.READY_UP) && player3ReadyImage != playerReadyImage)
             {
                 player3ReadyImage.sprite = playerReadyImage;
                 player3Ready = true;
             }
-            else if (Input.GetButtonDown(Constants.INPUT_CANCEL + "3") && player3ReadyImage != playerNotReadyImage)
+            else if (ReInput.players.Players[2].GetButtonDown(RewiredConsts.Action.UICANCEL) && player3ReadyImage != playerNotReadyImage)
             {
                 player3ReadyImage.sprite = playerNotReadyImage;
                 player3Ready = false;
@@ -208,12 +195,12 @@ public class TutorialController : MonoBehaviour
         }
         if (playerCount == 4)
         {
-            if (Input.GetButtonDown(Constants.INPUT_SUBMIT + "4") && player4ReadyImage != playerReadyImage)
+            if (ReInput.players.Players[3].GetButtonDown(RewiredConsts.Action.READY_UP) && player4ReadyImage != playerReadyImage)
             {
                 player4ReadyImage.sprite = playerReadyImage;
                 player4Ready = true;
             }
-            else if (Input.GetButtonDown(Constants.INPUT_CANCEL + "4") && player4ReadyImage != playerNotReadyImage)
+            else if (ReInput.players.Players[3].GetButtonDown(RewiredConsts.Action.UICANCEL) && player4ReadyImage != playerNotReadyImage)
             {
                 player4ReadyImage.sprite = playerNotReadyImage;
                 player4Ready = false;
@@ -285,7 +272,7 @@ public class TutorialController : MonoBehaviour
         else
         {
             loadingLobbyField.SetActive(true);
-            SceneManager.LoadScene(Constants.SCENE_LOBBY);
+            SceneManager.Instance.LoadLobby();
         }
     }
     #endregion

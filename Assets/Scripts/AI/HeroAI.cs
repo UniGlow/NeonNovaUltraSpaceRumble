@@ -12,16 +12,27 @@ public class HeroAI : Hero
 
     #region Variable Declarations
     [Header("AI Parameters")]
+
+    [Header("Runner")]
     [SerializeField] float repathingDistance = 5f;
     [SerializeField] float randomness = 5f;
+
+    [Header("Tank")]
     [SerializeField] float shieldDelay = 2f;
     [Range(0,1)]
     [SerializeField] float tankFollowSpeed = 0.5f;
     [Range(0,5)]
     [SerializeField] float tankTargetDistance = 1.5f;
+
+    [Header("Damage")]
+    [Tooltip("Maximum duration after which the AI will set a new path.")]
+    [SerializeField] float repathingDuration = 2f;
     [Range(0,1)]
     [SerializeField] float damageCornerPeek = 0.2f;
     [SerializeField] LayerMask attackRayMask;
+
+    [Header("Hacks")]
+    // HACK
     [Tooltip("Can be used to pre-set up AIs in a level if no PlayerConfig will be set through other instances on Play. Only working for Victim.")]
     [SerializeField] Ability ability = null;
 
@@ -34,6 +45,7 @@ public class HeroAI : Hero
     int currentlyTargetedCorner;
     float randomnessTimer;
     float normalAgentSpeed;
+    float repathingTimer;
     #endregion
 
 
@@ -48,18 +60,6 @@ public class HeroAI : Hero
 
     private void Start()
     {
-        StartCoroutine(Wait(1, () => 
-        {
-            Hero[] friends = GameObject.FindObjectsOfType<Hero>();
-            // Break, if not all heroes are instantiated
-            if (friends.Length < 3) return;
-
-            foreach (Hero hero in friends)
-            {
-                if (hero.PlayerConfig.ability.Class == Ability.AbilityClass.Damage) damage = hero.transform;
-            }
-        }));
-
         GameObject[] cornersGO = GameObject.FindGameObjectsWithTag(Constants.TAG_AI_CORNER);
         foreach (GameObject go in cornersGO)
         {
@@ -79,6 +79,18 @@ public class HeroAI : Hero
         }
 
         normalAgentSpeed = agent.speed;
+
+        StartCoroutine(Wait(1, () =>
+        {
+            Hero[] friends = GameObject.FindObjectsOfType<Hero>();
+            // Break, if not all heroes are instantiated
+            if (friends.Length < 3) return;
+
+            foreach (Hero hero in friends)
+            {
+                if (hero.PlayerConfig.ability.Class == Ability.AbilityClass.Damage) damage = hero.transform;
+            }
+        }));
     }
 
     new private void FixedUpdate()
@@ -141,6 +153,14 @@ public class HeroAI : Hero
     public void SetReferences(PlayerConfig hero1, PlayerConfig hero2, PlayerConfig hero3, PlayerConfig boss)
     {
         this.boss = boss.playerTransform;
+    }
+
+    public override void SetPlayerConfig(PlayerConfig playerConfig)
+    {
+        base.SetPlayerConfig(playerConfig);
+
+        if (IsAbilityClass(Ability.AbilityClass.Damage)) agent.updateRotation = false;
+        else agent.updatePosition = true;
     }
     #endregion
 
@@ -214,12 +234,16 @@ public class HeroAI : Hero
         // Calculate path to boss
         NavMeshPath path = new NavMeshPath();
         NavMesh.CalculatePath(transform.position, boss.position, agent.areaMask, path);
-        if (agent.destination == transform.position && path.corners.Length > 2)
+
+        if ((Vector3.Distance(agent.destination, transform.position) <= repathingDistance && path.corners.Length > 2)
+            || (repathingTimer >= repathingDuration && path.corners.Length > 2))
         {
             Vector3 destination = path.corners[path.corners.Length - 2] + (boss.position - path.corners[path.corners.Length - 2]) * damageCornerPeek;
             SetDestination(destination);
+            repathingTimer = 0f;
         }
 
+        repathingTimer += Time.deltaTime;
     }
 
     private void SetTankDestination()
@@ -289,12 +313,12 @@ public class HeroAI : Hero
             if (ability.Class == abilityClass)
                 return true;
         }
-        catch (System.Exception)
+        catch (System.NullReferenceException)
         {
 
         }
 
-        if (playerConfig.ability.Class == abilityClass)
+        if (ability == null && playerConfig.ability.Class == abilityClass)
             return true;
 
         return false;

@@ -12,6 +12,7 @@ public class Points : ScriptableObject
     #region Variable Declarations
     // Public
     [Header("Settings")]
+    [Tooltip("Current point lead to win. Is affected during runtime by the intensifyTimer of the GameplayManager.")]
     [SerializeField] int pointLeadToWin = 500;
     [SerializeField] bool endlessHealth = false;
 
@@ -30,7 +31,8 @@ public class Points : ScriptableObject
         set
         {
             // Make sure the current points scale according to the new point lead goal
-            currentHeroesPointLead = currentHeroesPointLead * (value / pointLeadToWin);
+            float scalingFactor = (float) value / (float) pointLeadToWin;
+            currentHeroesPointLead = Mathf.RoundToInt(currentHeroesPointLead * scalingFactor);
 
             pointLeadToWin = value;
         }

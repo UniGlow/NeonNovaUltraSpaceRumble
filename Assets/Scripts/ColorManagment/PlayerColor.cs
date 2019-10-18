@@ -16,6 +16,7 @@ public class PlayerColor : ScriptableObject
     public Color bossProjectileColor;
     public Material bossMaterial;
     public Color uiElementColor;
+    public Color staubsaugerColor;
 	// Private
 	
 	#endregion

@@ -59,15 +59,15 @@ public class PopUpTextController : MonoBehaviour
         text.transform.localScale = Vector3.zero;
         text.gameObject.SetActive(true);
         text.text = "3";
-        text.transform.DOScale(maxSize, duration/4f).SetEase(Ease.OutBounce).SetUpdate(true).SetDelay(duration / 4f).OnComplete(() =>
+        text.transform.DOScale(maxSize, duration/4f).SetEase(Ease.OutBounce).SetUpdate(false).SetDelay(duration / 4f).OnComplete(() =>
         {
             text.text = "2";
             text.transform.localScale = Vector3.zero;
-            text.transform.DOScale(maxSize, duration/4f).SetEase(Ease.OutBounce).SetUpdate(true).OnComplete(() =>
+            text.transform.DOScale(maxSize, duration/4f).SetEase(Ease.OutBounce).SetUpdate(false).OnComplete(() =>
             {
                 text.text = "1";
                 text.transform.localScale = Vector3.zero;
-                text.transform.DOScale(maxSize, duration/4f).SetEase(Ease.OutBounce).SetUpdate(true).OnComplete(() =>
+                text.transform.DOScale(maxSize, duration/4f).SetEase(Ease.OutBounce).SetUpdate(false).OnComplete(() =>
                 {
                     text.gameObject.SetActive(false);
                 });

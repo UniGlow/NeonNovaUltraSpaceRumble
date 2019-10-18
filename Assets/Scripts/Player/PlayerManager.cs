@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 
+/// Spawns needed Heroes and Boss prefabs depending on the PlayerConfigs.
 /// </summary>
 public class PlayerManager : MonoBehaviour 
 {
@@ -24,11 +24,7 @@ public class PlayerManager : MonoBehaviour
 
     [Header("GameEvents")]
     [SerializeField] private GameEvent playersSpawnedEvent = null;
-
-    [Header("References")]
-    [SerializeField] private Points points = null;
-    [SerializeField] private GameSettings gameSettings = null;
-
+    
     // Private
     // PlayerTransforms
     private Transform player1Transform = null;
@@ -129,21 +125,6 @@ public class PlayerManager : MonoBehaviour
             }
         }
 
-        switch (humanPlayerCount)
-        {
-            case 1:
-                points.PointLeadToWin = gameSettings.BossWinningSolo;
-                break;
-            case 2:
-                points.PointLeadToWin = gameSettings.BossWinningDuo;
-                break;
-            case 3:
-                points.PointLeadToWin = gameSettings.BossWinningTriple;
-                break;
-            default:
-                break;
-        }
-
         RaisePlayersSpawned(hero1PlayerConfig, hero2PlayerConfig, hero3PlayerConfig, bossPlayerConfig);
     }
 	#endregion
@@ -155,12 +136,12 @@ public class PlayerManager : MonoBehaviour
     {
         playersSpawnedEvent.Raise(this, hero1PlayerConfig, hero2PlayerConfig, hero3PlayerConfig, bossPlayerConfig);
     }
-	#endregion
-	
-	
-	
-	#region Coroutines
-	
-	#endregion
+#endregion
+
+
+
+    #region Coroutines
+
+    #endregion
 }
 

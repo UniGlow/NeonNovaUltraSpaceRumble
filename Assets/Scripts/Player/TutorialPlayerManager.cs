@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 
+/// Spawns needed Heroes and Boss prefabs depending on the PlayerConfigs.
+/// TODO: Redo this class with the new tutorial! Class is complete copy-pasta of PlayerManager. Only needed temporarily until the interactive tutorial is implemented.
 /// </summary>
 public class TutorialPlayerManager : MonoBehaviour 
 {
@@ -22,10 +23,6 @@ public class TutorialPlayerManager : MonoBehaviour
 
     [Header("GameEvents")]
     [SerializeField] private GameEvent playersSpawnedEvent = null;
-
-    [Header("References")]
-    [SerializeField] private Points points = null;
-    [SerializeField] private GameSettings gameSettings = null;
 
     // Private
     // PlayerTransforms
@@ -130,21 +127,6 @@ public class TutorialPlayerManager : MonoBehaviour
                     bossPlayerConfig.playerTransform = bossTransform;
                 }
             }
-        }
-
-        switch (humanPlayerCount)
-        {
-            case 1:
-                points.PointLeadToWin = gameSettings.BossWinningSolo;
-                break;
-            case 2:
-                points.PointLeadToWin = gameSettings.BossWinningDuo;
-                break;
-            case 3:
-                points.PointLeadToWin = gameSettings.BossWinningTriple;
-                break;
-            default:
-                break;
         }
 
         RaisePlayersSpawned(hero1PlayerConfig, hero2PlayerConfig, hero3PlayerConfig, bossPlayerConfig);

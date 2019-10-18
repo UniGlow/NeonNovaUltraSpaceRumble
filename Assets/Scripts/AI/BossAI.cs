@@ -12,11 +12,13 @@ public class BossAI : Boss
 
     #region Variable Declarations
     [Header("AI Parameters")]
-    [SerializeField]
-    float repathingDistance = 5f;
+    [Tooltip("Maximum distance from boss to current path destination to set a new path.")]
+    [SerializeField] float repathingDistance = 0.5f;
+    [SerializeField] float repathingStartDistance = 5f;
+    [Tooltip("Maximum duration after which the AI will set a new path.")]
+    [SerializeField] float repathingDuration = 2f;
     [Range(0, 1)]
-    [SerializeField]
-    float cornerPeek = 0.2f;
+    [SerializeField] float cornerPeek = 0.2f;
     [SerializeField] List<PlayerConfig> heroConfigs = new List<PlayerConfig>();
 
     NavMeshAgent agent;
@@ -24,6 +26,7 @@ public class BossAI : Boss
     List<Transform> middleTargets = new List<Transform>();
     List<Transform> allAITargets = new List<Transform>();
     float randomnessTimer;
+    float repathingTimer = 0f;
     #endregion
 
 
@@ -34,6 +37,7 @@ public class BossAI : Boss
         base.Awake();
 
         agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
     }
 
     private void Start()
@@ -70,6 +74,22 @@ public class BossAI : Boss
     {
         if (active)
         {
+            // Ability Cooldown
+            if (!abilityCooldownB)
+            {
+                if (cooldownTimer >= abilityCooldown)
+                {
+                    cooldownTimer = abilityCooldown;
+                    abilityCooldownB = true;
+                    cooldownIndicator.fillAmount = 1f;
+                }
+                else
+                {
+                    cooldownTimer += Time.deltaTime;
+                    cooldownIndicator.fillAmount = cooldownTimer / abilityCooldown;
+                }
+            }
+
             colorChangeTimer += Time.deltaTime;
             HandleColorSwitch();
             randomnessTimer += Time.deltaTime;
@@ -81,7 +101,7 @@ public class BossAI : Boss
         if (!Application.isPlaying) return;
 
         Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(transform.position + agent.velocity * (repathingDistance / agent.speed), 1f);
+        Gizmos.DrawWireSphere(transform.position + agent.velocity * (repathingStartDistance / agent.speed), 1f);
 
 
         for (int i = 0; i < agent.path.corners.Length; i++)
@@ -119,7 +139,8 @@ public class BossAI : Boss
                 NavMesh.CalculatePath(transform.position, playerConfig.playerTransform.position, agent.areaMask, path);
 
                 // strength hero not in shooting range
-                if (agent.destination == transform.position && path.corners.Length > 2)
+                if ((Vector3.Distance(agent.destination, transform.position) <= repathingDistance && path.corners.Length > 2) 
+                || (repathingTimer >= repathingDuration && path.corners.Length > 2))
                 {
                     // Move
                     Vector3 destination = path.corners[path.corners.Length - 2] + (playerConfig.playerTransform.position - path.corners[path.corners.Length - 2]) * cornerPeek;
@@ -128,11 +149,13 @@ public class BossAI : Boss
 
                 // Rotate
                 transform.rotation = Quaternion.RotateTowards(
-                    transform.rotation, 
-                    Quaternion.LookRotation(playerConfig.playerTransform.position - transform.position, Vector3.up), 
+                    transform.rotation,
+                    Quaternion.LookRotation(playerConfig.playerTransform.position - transform.position, Vector3.up),
                     Time.deltaTime * characterStats.rotationSpeed);
             }
         });
+
+        repathingTimer += Time.deltaTime;
     }
 
     private void HandleAbilities()
@@ -143,12 +166,14 @@ public class BossAI : Boss
 
     private void SetDestination(Vector3 destination)
     {
-        Vector3 start = transform.position + agent.velocity * (repathingDistance / agent.speed);
+        Vector3 start = transform.position + agent.velocity * (repathingStartDistance / agent.speed);
 
         NavMeshPath path = new NavMeshPath();
         NavMesh.CalculatePath(start, destination, agent.areaMask, path);
 
         agent.SetPath(path);
+
+        repathingTimer = 0f;
     }
 
     private void Attack()
@@ -193,7 +218,7 @@ public class BossAI : Boss
             audioSource.PlayOneShot(abilitySound, abilitySoundVolume);
 
             abilityCooldownB = false;
-            StartCoroutine(ResetAbilityCooldown());
+            cooldownTimer = 0f;
         }
     }
     #endregion

@@ -52,6 +52,7 @@ public class SongTextUpdater : MonoBehaviour
         // Set texts
         artistText.text = artist;
         titleText.text = title;
+        spacingText.text = "-";
         spacingText.enabled = true;
 
         // Fade in alpha

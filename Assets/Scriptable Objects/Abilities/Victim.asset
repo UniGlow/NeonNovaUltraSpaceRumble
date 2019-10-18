@@ -14,5 +14,9 @@ MonoBehaviour:
   abilityClass: 2
   cooldown: 0
   speedBoost: 0.5
+  autofire: 0
   soundClip: {fileID: 0}
   volume: 1
+  cooldownVisualized: 0
+  cooldownRingScale: 0.8
+  mesh: {fileID: 4300000, guid: f32514971f6af494ab733f3081f0746e, type: 3}

@@ -13,21 +13,19 @@ public class GameSettings : ScriptableObject
     #region Variable Declarations
     // Serialized Fields
     [Header("Game Properties")]
+    [Tooltip("The point lead needed to win every gameplay level starts with.")]
+    [SerializeField] private int pointLeadToWin = 500;
+
+    [Space]
     [SerializeField] private float critDamageMultiplier = 2f;
+
     [Space]
     [SerializeField] private float intensifyTime = 24f;
     [Range(0, .9f)]
     [SerializeField] private float intensifyAmount = 0.1f;
-    [Space]
-    [SerializeField] private bool overrideLevelPointLimits = true;
-    [SerializeField] private int winningPointLead = 600;
+
     [Space]
     [SerializeField] private float bossColorSwitchInterval = 10f;
-
-    [Header("AI Adjustments")]
-    [SerializeField] private int bossWinningSolo = 400;
-    [SerializeField] private int bossWinningDuo = 700;
-    [SerializeField] private int bossWinningTriple = 700;
 
 
     // Private
@@ -39,14 +37,10 @@ public class GameSettings : ScriptableObject
 
     #region Public Properties
     public ColorSet ActiveColorSet { get { return activeColorSet; } }
+    public int PointLeadToWin { get { return pointLeadToWin; } }
     public float CritDamageMultiplier { get { return critDamageMultiplier; } set { critDamageMultiplier = value; } }
     public float IntensifyTime { get { return intensifyTime; } set { intensifyTime = value; } }
     public float IntensifyAmount { get { return intensifyAmount; } set { intensifyAmount = value; } }
-    public bool OverrideLevelPointLimits { get { return overrideLevelPointLimits; } set { overrideLevelPointLimits = value; } }
-    public int WinningPointLead { get { return winningPointLead; } set { winningPointLead = value; } }
-    public int BossWinningSolo { get { return bossWinningSolo; } set { bossWinningSolo = value; } }
-    public int BossWinningDuo { get { return bossWinningDuo; } set { bossWinningDuo = value; } }
-    public int BossWinningTriple { get { return bossWinningTriple; } set { bossWinningTriple = value; } }
     public float BossColorSwitchInterval { get { return bossColorSwitchInterval; } set { bossColorSwitchInterval = value; } }
     #endregion
 

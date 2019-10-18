@@ -12,10 +12,16 @@ public class MultipleTargetCamera : MonoBehaviour
 
     public List<Transform> targets;
 
+    [Header("General Properties")]
     [SerializeField] float smoothTime = 0.5f;
     [SerializeField] float minZoom = 40f;
     [SerializeField] float maxZoom = 10f;
     [SerializeField] float maxDistance = 100f;
+
+    [Header("Zoom Effect")]
+    [Range(0f, 1f)]
+    [Tooltip("Percentual value of the duration of the zoom.")]
+    [SerializeField] float zoomSmoothTime = 0.7f;
 
     private Vector3 velocity;
     private Camera[] cams;
@@ -58,6 +64,33 @@ public class MultipleTargetCamera : MonoBehaviour
         targets.Add(hero2.playerTransform);
         targets.Add(hero3.playerTransform);
         targets.Add(boss.playerTransform);
+    }
+
+    public void ZoomOnto(PlayerConfig hero1, PlayerConfig hero2, float duration)
+    {
+        float originalSmoothTime = smoothTime;
+        List<Transform> originalTargets = new List<Transform>();
+        foreach (Transform target in targets)
+        {
+            originalTargets.Add(target);
+        }
+
+        smoothTime = duration * zoomSmoothTime;
+
+        targets.Clear();
+        targets.Add(hero1.playerTransform);
+        targets.Add(hero2.playerTransform);
+
+        // multiplier for duration is only needed, because the function is triggered by a GameEventListener. Else it could be passed via param on function call.
+        StartCoroutine(WaitRealtime(duration * 0.7f, () =>
+        {
+            targets.Clear();
+            foreach (Transform target in originalTargets)
+            {
+                targets.Add(target);
+            }
+            smoothTime = originalSmoothTime;
+        }));
     }
     #endregion
 
@@ -119,6 +152,16 @@ public class MultipleTargetCamera : MonoBehaviour
 
             return bounds.center;
         }
+    }
+    #endregion
+
+
+
+    #region Coroutines
+    IEnumerator WaitRealtime(float seconds, System.Action onComplete)
+    {
+        yield return new WaitForSecondsRealtime(seconds);
+        onComplete.Invoke();
     }
     #endregion
 }

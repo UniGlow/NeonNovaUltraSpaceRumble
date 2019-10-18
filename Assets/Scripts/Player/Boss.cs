@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
+using Rewired;
 
 /// <summary>
 /// Handles everything related to the movement of Haru, our playable Character
 /// </summary>
-public class Boss : Player
+public class Boss : Character
 {
 
     #region Variable Declarations
@@ -51,7 +53,7 @@ public class Boss : Player
     [Header("References")]
     [SerializeField] protected GameObject projectilePrefab;
     [SerializeField] protected Renderer bossMeshRenderer;
-    public SpriteRenderer healthIndicator;
+    [SerializeField] protected Image cooldownIndicator;
     [SerializeField] protected GameEvent bossColorChangedEvent = null;
     [SerializeField] protected GameSettings gameSettings = null;
 
@@ -66,6 +68,8 @@ public class Boss : Player
     // Color Change
     protected float colorChangeTimer;
     bool colorChangeSoundPlayed;
+
+    protected float cooldownTimer = 0f;
     #endregion
 
 
@@ -77,9 +81,25 @@ public class Boss : Player
 
         if (active)
         {
+            // Ability Cooldown
+            if (!abilityCooldownB)
+            {
+                if (cooldownTimer >= abilityCooldown)
+                {
+                    cooldownTimer = abilityCooldown;
+                    abilityCooldownB = true;
+                    cooldownIndicator.fillAmount = 1f;
+                }
+                else
+                {
+                    cooldownTimer += Time.deltaTime;
+                    cooldownIndicator.fillAmount = cooldownTimer / abilityCooldown;
+                }
+            }
+
             colorChangeTimer += Time.deltaTime;
 
-            Attack();
+            Shoot();
             Ability();
             HandleColorSwitch();
         }
@@ -100,6 +120,13 @@ public class Boss : Player
         this.playerConfig = playerConfig;
         this.colorSet = colorSet;
 
+        if (playerConfig.Faction == Faction.Boss)
+        {
+            playerConfig.Player.controllers.maps.layoutManager.ruleSets.Add(ReInput.mapping.GetControllerMapLayoutManagerRuleSetInstance("RuleSetBoss"));
+            playerConfig.Player.controllers.maps.layoutManager.Apply();
+        }
+        else Debug.LogError("Boss' playerConfig has set a wrong Faction.", this);
+
         // Set color
         bossMeshRenderer.material = playerConfig.ColorConfig.heroMaterial;
 
@@ -108,18 +135,32 @@ public class Boss : Player
 
         RaiseBossColorChanged(playerConfig);
     }
+
+    /// <summary>
+    /// Randomly changes the boss weakness color
+    /// </summary>
+    public void ChangeWeaknessColor()
+    {
+        PlayerColor newWeaknessColor = colorSet.GetRandomColorExcept(playerConfig.ColorConfig);
+
+        playerConfig.ColorConfig = newWeaknessColor;
+
+        SetWeaknessColor(playerConfig.ColorConfig);
+    }
     #endregion
 
 
 
     #region Private Functions
-    private void Attack() {
-        if (AttackButtonsPressed() && attackCooldownB) {
+    private void Shoot()
+    {
+        if (playerConfig.Player.GetButton(RewiredConsts.Action.SHOOT) && attackCooldownB)
+        {
             GameObject projectile = Instantiate(projectilePrefab, transform.position + transform.forward * 1.9f + Vector3.up * 0.5f, transform.rotation);
             projectile.GetComponent<BossProjectile>().Initialize(
-                attackDamagePerShot, 
-                strengthColor, 
-                transform.forward * attackProjectileSpeed, 
+                attackDamagePerShot,
+                strengthColor,
+                transform.forward * attackProjectileSpeed,
                 attackProjectileLifeTime);
 
             audioSource.PlayOneShot(attackSound, attackSoundVolume);
@@ -129,8 +170,10 @@ public class Boss : Player
         }
     }
 
-    private void Ability() {
-        if (AbilityButtonsDown() && abilityCooldownB) {
+    private void Ability()
+    {
+        if (playerConfig.Player.GetButtonDown(RewiredConsts.Action.TRIGGER_BOSSABILITY) && abilityCooldownB)
+        {
 
             for (int i = 0; i < numberOfProjectiles; ++i) {
                 float factor = (i / (float)numberOfProjectiles) * Mathf.PI * 2f;
@@ -146,41 +189,16 @@ public class Boss : Player
                 (projectile.transform.position - transform.position) * abilityProjectileSpeed,
                 attackProjectileLifeTime);
             }
-            
+
             audioSource.PlayOneShot(abilitySound, abilitySoundVolume);
 
             if (enableCameraShake) EZCameraShake.CameraShaker.Instance.ShakeOnce(magnitude, roughness, fadeIn, fadeOut);
 
             abilityCooldownB = false;
-            StartCoroutine(ResetAbilityCooldown());
+            cooldownTimer = 0f;
         }
     }
-
-    private bool AttackButtonsPressed()
-    {
-        if (Input.GetButton(Constants.INPUT_ABILITY + playerConfig.PlayerNumber)) return true;
-
-        return false;
-    }
-
-    private bool AbilityButtonsDown()
-    {
-        if (Input.GetButtonDown(Constants.INPUT_TRANSMIT + playerConfig.PlayerNumber)) return true;
-
-        return false;
-    }
-
-    /// <summary>
-    /// Randomly changes the boss weakness color
-    /// </summary>
-    void ChangeWeaknessColor()
-    {
-        PlayerColor newWeaknessColor = colorSet.GetRandomColorExcept(playerConfig.ColorConfig);
-
-        playerConfig.ColorConfig = newWeaknessColor;
-
-        SetWeaknessColor(playerConfig.ColorConfig);
-    }
+    
 
     void SetWeaknessColor(PlayerColor playerColor)
     {
@@ -189,6 +207,8 @@ public class Boss : Player
         bossMeshRenderer.material = playerConfig.ColorConfig.bossMaterial;
 
         bossMeshRenderer.material.DOColor(bossMeshRenderer.material.color * materialGlowOnSwitch, 0.6f).SetLoops(2, LoopType.Yoyo).SetEase(Ease.InOutQuad);
+
+        RaiseBossColorChanged(playerConfig);
     }
 
     protected void HandleColorSwitch()
@@ -202,8 +222,6 @@ public class Boss : Player
         if (colorChangeTimer >= gameSettings.BossColorSwitchInterval)
         {
             ChangeWeaknessColor();
-
-            RaiseBossColorChanged(playerConfig);
 
             colorChangeTimer = 0f;
             colorChangeSoundPlayed = false;
@@ -225,12 +243,12 @@ public class Boss : Player
     #region Coroutines
     protected IEnumerator ResetAttackCooldown()
     {
-        yield return new WaitForSecondsRealtime(attackCooldown);
+        yield return new WaitForSeconds(attackCooldown);
         attackCooldownB = true;
     }
 
     protected IEnumerator ResetAbilityCooldown() {
-        yield return new WaitForSecondsRealtime(abilityCooldown);
+        yield return new WaitForSeconds(abilityCooldown);
         abilityCooldownB = true;
     }
     #endregion
