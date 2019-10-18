@@ -11,7 +11,8 @@ public class MainMenu : MonoBehaviour
 
     #region Variable Declarations
     [SerializeField] GameObject playButton = null;
-    [SerializeField] EventSystem eventSystem = null;
+
+    List<InputHelper.PlayerRuleSet> ruleSets = new List<InputHelper.PlayerRuleSet>();
 	#endregion
 	
 	
@@ -19,12 +20,13 @@ public class MainMenu : MonoBehaviour
 	#region Unity Event Functions
 	private void Start()
     {
-        eventSystem.SetSelectedGameObject(playButton);
+        ruleSets = InputHelper.ChangeRuleSetForAllPlayers(RewiredConsts.LayoutManagerRuleSet.RULESETMENU);
 	}
 
     private void OnDisable()
     {
         AudioManager.Instance.StopPlaying();
+        InputHelper.ChangeRuleSetForPlayers(ruleSets);
     }
     #endregion
 
