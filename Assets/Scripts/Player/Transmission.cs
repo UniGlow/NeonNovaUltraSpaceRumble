@@ -36,6 +36,7 @@ public class Transmission : MonoBehaviour
     [Header("Settings")]
     [SerializeField] protected float transmissionRange = 5f;
     [SerializeField] protected float transmissionDuration = 3f;
+    [SerializeField] protected float transmissionCooldown = 1f;
 
     [Header("Sound")]
     [SerializeField]
@@ -107,6 +108,7 @@ public class Transmission : MonoBehaviour
     protected Transmission transmissionPartner;
     protected Ability receivingAbility;
     protected bool isTargeted;
+    protected bool transmissionReady = true;
     #endregion
 
 
@@ -143,7 +145,7 @@ public class Transmission : MonoBehaviour
         switch (state)
         {
             case State.Deactivated:
-                if (TransmissionButtonsPressed())
+                if (TransmissionButtonsPressed() && transmissionReady)
                 {
                     ChangeState(State.Searching);
                 }
@@ -372,7 +374,7 @@ public class Transmission : MonoBehaviour
 
     protected bool TransmissionButtonsPressed()
     {
-        if (hero.PlayerConfig.Player.GetButton(RewiredConsts.Action.TRANSMIT_ABILITY)) return true;
+        if (hero.PlayerConfig.Player.GetButtonDown(RewiredConsts.Action.TRANSMIT_ABILITY)) return true;
 
         return false;
     }
@@ -395,6 +397,7 @@ public class Transmission : MonoBehaviour
 
         if (newState == State.Transmitting)
         {
+            transmissionReady = false;
             Transmit();
         }
 
@@ -415,6 +418,7 @@ public class Transmission : MonoBehaviour
     {
         transmissionPartner = null;
         receivingAbility = null;
+        StartCoroutine(TransmissionCooldown());
         ChangeState(State.Deactivated);
     }
 
@@ -452,6 +456,16 @@ public class Transmission : MonoBehaviour
     void RaiseAbilitySwitchInitiated(PlayerConfig hero1Config, PlayerConfig hero2Config, float duration)
     {
         abilitySwitchInitiatedEvent.Raise(this, hero1Config, hero2Config, duration);
+    }
+    #endregion
+
+
+
+    #region Coroutines
+    IEnumerator TransmissionCooldown()
+    {
+        yield return new WaitForSeconds(transmissionCooldown);
+        transmissionReady = true;
     }
     #endregion
 }
