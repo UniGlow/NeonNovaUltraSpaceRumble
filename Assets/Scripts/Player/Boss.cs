@@ -243,12 +243,12 @@ public class Boss : Character
     #region Coroutines
     protected IEnumerator ResetAttackCooldown()
     {
-        yield return new WaitForSecondsRealtime(attackCooldown);
+        yield return new WaitForSeconds(attackCooldown);
         attackCooldownB = true;
     }
 
     protected IEnumerator ResetAbilityCooldown() {
-        yield return new WaitForSecondsRealtime(abilityCooldown);
+        yield return new WaitForSeconds(abilityCooldown);
         abilityCooldownB = true;
     }
     #endregion
