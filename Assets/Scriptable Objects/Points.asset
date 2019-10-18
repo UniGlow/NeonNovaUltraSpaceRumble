@@ -11,8 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d6b0ba534c82e14aa93da6d7a70796b, type: 3}
   m_Name: Points
   m_EditorClassIdentifier: 
-  pointLeadToWin: 328
-  endlessHealth: 1
+  pointLeadToWin: 500
+  endlessHealth: 0
   levelCompletedEvent: {fileID: 11400000, guid: 447d59970781ce142a63ea883b30c2b1,
     type: 2}
   damageTakenEvent: {fileID: 11400000, guid: c4a3331b53b10d9408bdf30d9d041dfe, type: 2}
