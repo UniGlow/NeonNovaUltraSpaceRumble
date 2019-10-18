@@ -49,7 +49,7 @@ public class Hero : Character
 
 
     #region Public Funtcions
-    public void SetPlayerConfig(PlayerConfig playerConfig)
+    public virtual void SetPlayerConfig(PlayerConfig playerConfig)
     {
         this.playerConfig = playerConfig;
 
@@ -65,7 +65,6 @@ public class Hero : Character
         playerMesh.GetComponent<Renderer>().material = playerConfig.ColorConfig.heroMaterial;
         cooldownIndicator.color = playerConfig.ColorConfig.uiElementColor;
 
-        // TODO
         SetAbility(playerConfig.ability);
     }
 
@@ -83,7 +82,6 @@ public class Hero : Character
         ability.BindTo(this);
 
         // Update Mesh
-        // TODO: Transition-Animation / Partikeleffekt abspielen
         playerMesh.mesh = ability.Mesh;
     }
     #endregion
