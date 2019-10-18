@@ -619,6 +619,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transmissionRange: 5
   transmissionDuration: 1.3
+  transmissionCooldown: 1
   transmissionSound: {fileID: 8300000, guid: 99a9562a9c5874546a152e7ded477cb5, type: 3}
   transmissionSoundVolume: 1
   inRangeColorMultiplier: 1.3
@@ -798,7 +799,8 @@ MonoBehaviour:
   randomness: 10
   shieldDelay: 2
   tankFollowSpeed: 0.8
-  tankTargetDistance: 1.5
+  tankTargetDistance: 2.5
+  repathingDuration: 2
   damageCornerPeek: 0.2
   attackRayMask:
     serializedVersion: 2
