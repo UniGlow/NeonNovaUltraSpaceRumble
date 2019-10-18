@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Rewired;
 
 /// <summary>
 /// 
@@ -24,7 +25,7 @@ public class CreditsManager : LevelManager
 	
 	private void Update()
     {
-        if (Input.GetButtonDown(Constants.INPUT_ESCAPE) || Input.GetButtonDown(Constants.INPUT_CANCEL))
+        if (InputHelper.GetButtonDown(RewiredConsts.Action.UICANCEL) || InputHelper.GetButtonDown(RewiredConsts.Action.UISUBMIT))
         {
             SceneManager.Instance.LoadMainMenu();
         }

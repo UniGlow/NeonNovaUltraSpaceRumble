@@ -153,7 +153,7 @@ public class SirAlfredLobby : LevelManager
     #region Private Functions
     void UpdateIdleState()
     {
-        if (Input.anyKey && idleState)
+        if (InputHelper.GetAnyButtonDown() && idleState)
         {
             if (DOTween.IsTweening(this)) DOTween.Kill(this);
 
@@ -174,7 +174,7 @@ public class SirAlfredLobby : LevelManager
             idleState = true;
         }
 
-        if (Input.anyKey) idleTimer = 0f;
+        if (InputHelper.GetAnyButtonDown()) idleTimer = 0f;
         else idleTimer += Time.deltaTime;
     }
 

@@ -15,8 +15,10 @@ public class EditorLevelStarter : MonoBehaviour
     [SerializeField] PlayerConfig hero1PlayerConfig = null;
     [SerializeField] PlayerConfig hero2PlayerConfig = null;
     [SerializeField] PlayerConfig hero3PlayerConfig = null;
+
     [Space]
     [SerializeField] ColorSet colorSet = null;
+
     [Space]
     [SerializeField] Ability ability1 = null;
     [SerializeField] Ability ability2 = null;
@@ -64,29 +66,9 @@ public class EditorLevelStarter : MonoBehaviour
 
     private void SetupPlayers()
     {
-        int playerCount = UpdatePlayerCount();
+        int playerCount = InputHelper.UpdatePlayerCount();
         // Set playerNumbers depending on amount of human players
         PlayerSetup.SetupPlayers(playerCount, bossPlayerConfig, hero1PlayerConfig, hero2PlayerConfig, hero3PlayerConfig, ability1, ability2, ability3, colorSet);
-    }
-
-    /// <summary>
-    /// TODO: With Rewired, this function should be called from a static helper class (currently copy-pasted code from SirAlfred)
-    /// </summary>
-    /// <returns></returns>
-    public int UpdatePlayerCount()
-    {
-        int playerCount = 0;
-        string[] joystickNames = Input.GetJoystickNames();
-        foreach (string name in joystickNames)
-        {
-            if (name != "")
-            {
-                playerCount++;
-            }
-        }
-        if (playerCount == 0)
-            playerCount = 1;
-        return playerCount;
     }
     #endregion
 

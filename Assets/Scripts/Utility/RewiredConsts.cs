@@ -24,6 +24,8 @@ namespace RewiredConsts {
         public const int UNREADY = 31;
         [Rewired.Dev.ActionIdFieldInfo(categoryName = "Default", friendlyName = "Pause")]
         public const int PAUSE = 13;
+        [Rewired.Dev.ActionIdFieldInfo(categoryName = "Default", friendlyName = "Debug")]
+        public const int DEBUG = 32;
         // Hero
         [Rewired.Dev.ActionIdFieldInfo(categoryName = "Hero", friendlyName = "Trigger Ability")]
         public const int TRIGGER_HEROABILITY = 23;

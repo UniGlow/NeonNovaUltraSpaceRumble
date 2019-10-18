@@ -32,12 +32,12 @@ public class Pause : MonoBehaviour
 	// Use this for initialization
     private void Update()
     {
-        if (gameIsPaused && !optionsMenu.activeSelf && Input.GetButtonDown(Constants.INPUT_CANCEL))
+        if (gameIsPaused && !optionsMenu.activeSelf && InputHelper.GetButtonDown(RewiredConsts.Action.UICANCEL))
         {
             resumeButton.GetComponent<Button>().onClick.Invoke();
         }
 
-        if (Input.GetButtonDown(Constants.INPUT_ESCAPE))
+        if (InputHelper.GetButtonDown(RewiredConsts.Action.PAUSE))
         {
             if (gameIsPaused)
             {
@@ -49,7 +49,7 @@ public class Pause : MonoBehaviour
             }
         }
 
-        if (gameIsPaused && !optionsMenu.activeSelf && Input.GetButtonDown(Constants.INPUT_CANCEL))
+        if (gameIsPaused && !optionsMenu.activeSelf && InputHelper.GetButtonDown(RewiredConsts.Action.UICANCEL))
         {
             resumeButton.GetComponent<Button>().onClick.Invoke();
         }

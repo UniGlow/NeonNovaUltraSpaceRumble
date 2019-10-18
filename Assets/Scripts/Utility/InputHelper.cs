@@ -86,4 +86,37 @@ public static class InputHelper
 
         return playerCount;
     }
+
+    /// <summary>
+    /// Returns input for the defined action from all players.
+    /// </summary>
+    /// <param name="actionID">The action identifier.</param>
+    /// <returns>True if any player pressed the specified button.</returns>
+    public static bool GetButtonDown(int actionID)
+    {
+        bool buttonPressed = false;
+
+        foreach (Player player in ReInput.players.Players)
+        {
+            if (player.GetButtonDown(actionID)) buttonPressed = true;
+        }
+
+        return buttonPressed;
+    }
+
+    /// <summary>
+    /// Gets any button down from all players.
+    /// </summary>
+    /// <returns>True if any player pressed any button.</returns>
+    public static bool GetAnyButtonDown()
+    {
+        bool buttonPressed = false;
+
+        foreach (Player player in ReInput.players.Players)
+        {
+            if (player.GetAnyButtonDown()) buttonPressed = true;
+        }
+
+        return buttonPressed;
+    }
 }
