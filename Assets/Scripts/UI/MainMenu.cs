@@ -10,8 +10,6 @@ public class MainMenu : MonoBehaviour
 {
 
     #region Variable Declarations
-    [SerializeField] GameObject playButton = null;
-
     List<InputHelper.PlayerRuleSet> ruleSets = new List<InputHelper.PlayerRuleSet>();
 	#endregion
 	
