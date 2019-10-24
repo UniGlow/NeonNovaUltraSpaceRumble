@@ -128,7 +128,7 @@ public class Boss : Character
         else Debug.LogError("Boss' playerConfig has set a wrong Faction.", this);
 
         // Set color
-        bossMeshRenderer.material = playerConfig.ColorConfig.heroMaterial;
+        //bossMeshRenderer.material = playerConfig.ColorConfig.heroMaterial;
 
         SetStrengthColor(colorSet.GetRandomColor());
         SetWeaknessColor(playerConfig.ColorConfig);
@@ -204,9 +204,9 @@ public class Boss : Character
     {
         playerConfig.ColorConfig = playerColor;
 
-        bossMeshRenderer.material = playerConfig.ColorConfig.bossMaterial;
+        //bossMeshRenderer.material = playerConfig.ColorConfig.bossMaterial;
 
-        bossMeshRenderer.material.DOColor(bossMeshRenderer.material.color * materialGlowOnSwitch, 0.6f).SetLoops(2, LoopType.Yoyo).SetEase(Ease.InOutQuad);
+        //bossMeshRenderer.material.DOColor(bossMeshRenderer.material.color * materialGlowOnSwitch, 0.6f).SetLoops(2, LoopType.Yoyo).SetEase(Ease.InOutQuad);
 
         RaiseBossColorChanged(playerConfig);
     }
