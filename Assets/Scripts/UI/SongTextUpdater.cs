@@ -16,9 +16,9 @@ public class SongTextUpdater : MonoBehaviour
     [SerializeField] float displayDuration = 7f;
 
     [Space]
-    [SerializeField] TextMeshProUGUI titleText;
-    [SerializeField] TextMeshProUGUI spacingText;
-    [SerializeField] TextMeshProUGUI artistText;
+    [SerializeField] TextMeshProUGUI titleText = null;
+    [SerializeField] TextMeshProUGUI spacingText = null;
+    [SerializeField] TextMeshProUGUI artistText = null;
 
     Color targetColor;
     #endregion

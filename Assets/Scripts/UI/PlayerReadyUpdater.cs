@@ -14,8 +14,8 @@ public class PlayerReadyUpdater : MonoBehaviour
     }
 
     #region Variable Declarations
-    [SerializeField] Color readyColor;
-    [SerializeField] Color notReadyColor;
+    [SerializeField] Color readyColor = new Color();
+    [SerializeField] Color notReadyColor = new Color();
 
     ReadyState[] readyStates;
     int playerCount;

@@ -11,10 +11,10 @@ public class OptionsMenu : MonoBehaviour
 {
 
     #region Variable Declarations
-    [SerializeField] TMPro.TMP_Dropdown resolutionDropdown;
-    [SerializeField] Toggle fullscreenToggle;
-    [SerializeField] Button backButton;
-    [SerializeField] AudioMixer masterMixer;
+    [SerializeField] TMPro.TMP_Dropdown resolutionDropdown = null;
+    [SerializeField] Toggle fullscreenToggle = null;
+    [SerializeField] Button backButton = null;
+    [SerializeField] AudioMixer masterMixer = null;
     Resolution[] resolutions;
 
     float maxSFX;

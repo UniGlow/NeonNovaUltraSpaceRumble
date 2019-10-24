@@ -17,9 +17,9 @@ public class SirAlfredLobby : LevelManager
     [Header("Miscellaneous")]
     [SerializeField] float timeTillLevelStart = 1f;
     [SerializeField] float timeTillIdle = 5f;
-    [SerializeField] PlayerReadyUpdater playerReadyUpdater;
-    [SerializeField] AudioMixer masterMixer;
-    [SerializeField] MusicTrack backgroundTrack;
+    [SerializeField] PlayerReadyUpdater playerReadyUpdater = null;
+    [SerializeField] AudioMixer masterMixer = null;
+    [SerializeField] MusicTrack backgroundTrack = null;
     [Range(0f,2f)]
     [SerializeField] float sfxVolumeDamp = 0.1f;
     [SerializeField] Points points = null;

@@ -11,7 +11,7 @@ public class Rainbow : MonoBehaviour
 {
 
     #region Variable Declarations
-    [SerializeField] Gradient colors;
+    [SerializeField] Gradient colors = null;
     [Tooltip("Time it takes to go trhough all colors of the defined color gradient.")]
     [SerializeField] float fadeTime = 2f;
 
