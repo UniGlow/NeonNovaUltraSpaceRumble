@@ -18,6 +18,7 @@ public class SceneManager : MonoBehaviour
     [SerializeField] SceneReference credits = null;
     [SerializeField] SceneReference title = null;
     [SerializeField] SceneReference tutorial = null;
+    [SerializeField] SceneReference ui = null;
 
     [Header("Properties")]
     [SerializeField] float delayAtLevelEnd = 12f;
@@ -120,6 +121,11 @@ public class SceneManager : MonoBehaviour
     public void LoadLobby()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(lobby);
+    }
+
+    public void LoadUIAdditive()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(ui, UnityEngine.SceneManagement.LoadSceneMode.Additive);
     }
     #endregion
 

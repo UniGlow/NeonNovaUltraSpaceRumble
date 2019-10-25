@@ -45,6 +45,7 @@ public class EditorLevelStarter : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnLevelFinishedLoading;
     }
+    
     #endregion
 
 
