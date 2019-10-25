@@ -176,6 +176,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 973630cd12acc694a9d661dd9c3c53e2, type: 2}
   - {fileID: 11400000, guid: acecd302c0ec46a4f97170a61dce15d4, type: 2}
   - {fileID: 11400000, guid: 85dd666458e007548970f68ea256f9ee, type: 2}
+  - {fileID: 11400000, guid: b647750ae970617478e5d358cf1b0dbf, type: 2}
   - {fileID: 11400000, guid: 770a22fe483520746b98d10d6bfa723b, type: 2}
   joystickTemplates:
   - {fileID: 11400000, guid: 91b946f6f6823f4469dbe63db04db904, type: 2}
