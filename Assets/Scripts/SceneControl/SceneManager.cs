@@ -76,17 +76,9 @@ public class SceneManager : MonoBehaviour
     /// <summary>
     /// Loads the next scene in build index
     /// </summary>
-    public void LoadNextScene()
+    public void LoadNextScene(SceneReference nextScene)
     {
-        int activeScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
-        if (activeScene + 1 < UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings)
-        {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(activeScene + 1);
-        }
-        else
-        {
-            Debug.LogError("No more levels in build index to be loaded");
-        }
+        UnityEngine.SceneManagement.SceneManager.LoadScene(nextScene);
     }
 
     /// <summary>
@@ -102,10 +94,44 @@ public class SceneManager : MonoBehaviour
 #endif
     }
 
+    /// <summary>
+    /// Loads next Level of current LevelSet or Credits if Last Level of Set is active
+    /// </summary>
     public void LoadNextLevel()
     {
-        StartCoroutine(LoadNextLevelCoroutine());
-        Time.timeScale = 0.0f;
+        bool levelFound = false;
+        Scene activeScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+        if (lobby.Equals(activeScene))
+        {
+            LoadNextScene(levels[0]);
+            LoadUIAdditive();
+        }
+        else
+        {
+            for (int i = 0; i < levels.Count; i++)
+            {
+                if (levels[i].Equals(activeScene))
+                {
+                    if (i < levels.Count-1)
+                    {
+                        SceneReference nextScene = levels[i + 1];
+                        StartCoroutine(LoadNextLevelCoroutine(nextScene));
+                        Time.timeScale = 0.0f;
+                        levelFound = true;
+                    }
+                    else
+                    {
+                        StartCoroutine(LoadCreditsCoroutine());
+                        Time.timeScale = 0.0f;
+                        levelFound = true;
+                    }
+                }
+            }
+            if (!levelFound)
+            {
+                Debug.LogError("There isn't a next Level in this Level Set!");
+            }
+        }
     }
 
     public void ReloadLevel()
@@ -170,12 +196,19 @@ public class SceneManager : MonoBehaviour
 
 
     #region Coroutines
-    IEnumerator LoadNextLevelCoroutine()
+    IEnumerator LoadNextLevelCoroutine(SceneReference nextScene)
     {
         yield return new WaitForSecondsRealtime(delayAtLevelEnd);
-        LoadNextScene();
+        LoadNextScene(nextScene);
         Time.timeScale = 1;
         LoadUIAdditive();
+    }
+
+    IEnumerator LoadCreditsCoroutine()
+    {
+        yield return new WaitForSecondsRealtime(delayAtLevelEnd);
+        LoadCredits();
+        Time.timeScale = 1;
     }
     #endregion
 }
