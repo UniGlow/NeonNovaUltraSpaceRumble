@@ -12,7 +12,7 @@ public abstract class LevelManager : MonoBehaviour
     #region Variable Declarations
     // Serialized Fields
     [Header("Level Manager Variables")]
-    [SerializeField] protected GameEvent levelLoadedEvent = null;
+    [SerializeField] protected GameEvent levelInitializedEvent = null;
     [SerializeField] protected GameEvent levelStartedEvent = null;
 
     // Private
@@ -30,14 +30,14 @@ public abstract class LevelManager : MonoBehaviour
     #region Unity Event Functions
     protected void OnEnable () 
 	{
-        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnLevelFinishedLoading;
+        //UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnLevelFinishedLoading;
 
         InheritedOnEnable();
     }
 
     protected void OnDisable()
     {
-        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+        //UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnLevelFinishedLoading;
 
         InheritedOnDisable();
     }
@@ -52,11 +52,11 @@ public abstract class LevelManager : MonoBehaviour
 
 
     #region Protected Functions
-    protected virtual void OnLevelFinishedLoading(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode) { }
+    //protected virtual void OnLevelFinishedLoading(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode) { }
 
-    protected virtual void RaiseLevelLoaded(float levelStartDelay)
+    protected virtual void RaiseLevelInitialized(float levelStartDelay)
     {
-        levelLoadedEvent.Raise(this, levelStartDelay);
+        levelInitializedEvent.Raise(this, levelStartDelay);
     }
 
     protected virtual void RaiseLevelStarted()

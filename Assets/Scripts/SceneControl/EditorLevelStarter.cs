@@ -36,16 +36,11 @@ public class EditorLevelStarter : MonoBehaviour
 
 
     #region Unity Event Functions
-    protected void OnEnable()
+    private void Start()
     {
-        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnLevelFinishedLoading;
+        if(UnityEngine.SceneManagement.SceneManager.sceneCount <= 1)
+            SceneManager.Instance.LoadUIAdditive();
     }
-
-    protected void OnDisable()
-    {
-        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnLevelFinishedLoading;
-    }
-    
     #endregion
 
 
@@ -57,7 +52,7 @@ public class EditorLevelStarter : MonoBehaviour
 
 
     #region Private Functions
-    private void OnLevelFinishedLoading(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
+    public void Initialize()
     {
         if (!GameManager.Instance.IsInitialized)
         {

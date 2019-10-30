@@ -122,24 +122,28 @@ public class SirAlfredLobby : LevelManager
         points.ResetPoints(true);
 
         UpdatePlayerConfirmsList();
+
+        RaiseLevelInitialized(timeTillLevelStart);
+
+        Invoke("RaiseLevelStarted", timeTillLevelStart);
     }
     #endregion
 
 
 
     #region Inherited Functions
-    protected override void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+    /*protected override void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
         Initialize();
 
-        RaiseLevelLoaded(timeTillLevelStart);
+        RaiseLevelInitialized(timeTillLevelStart);
 
         Invoke("RaiseLevelStarted", timeTillLevelStart);
-    }
+    }*/
 
-    protected override void RaiseLevelLoaded(float levelStartDelay)
+    protected override void RaiseLevelInitialized(float levelStartDelay)
     {
-        base.RaiseLevelLoaded(levelStartDelay);
+        base.RaiseLevelInitialized(levelStartDelay);
     }
 
     protected override void RaiseLevelStarted()

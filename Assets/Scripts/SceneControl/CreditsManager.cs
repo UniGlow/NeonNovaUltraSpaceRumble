@@ -34,17 +34,28 @@ public class CreditsManager : LevelManager
 
 
 
+    #region Public Functions
+    public void Initialize()
+    {
+        points.ResetPoints(true);
+        RaiseLevelInitialized(0f);
+        Invoke("RaiseLevelStarted", 3f);
+    }
+    #endregion
+
+
+
     #region Inherited Functions
-    protected override void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+    /*protected override void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
         points.ResetPoints(true);
 
         Invoke("RaiseLevelStarted", 3f);
-    }
+    }*/
 
-    protected override void RaiseLevelLoaded(float levelStartDelay)
+    protected override void RaiseLevelInitialized(float levelStartDelay)
     {
-        base.RaiseLevelLoaded(levelStartDelay);
+        base.RaiseLevelInitialized(levelStartDelay);
     }
 
     protected override void RaiseLevelStarted()

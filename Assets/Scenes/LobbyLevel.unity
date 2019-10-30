@@ -3225,7 +3225,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97789860a68897f489879925cd6603bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelLoadedEvent: {fileID: 11400000, guid: dd95ddef2760add43a73ce45d743f5e5, type: 2}
+  levelInitializedEvent: {fileID: 11400000, guid: dd95ddef2760add43a73ce45d743f5e5,
+    type: 2}
   levelStartedEvent: {fileID: 11400000, guid: a93bef75cc487ef48b9411ec84a74c73, type: 2}
   timeTillLevelStart: 1
   timeTillIdle: 15
@@ -4038,12 +4039,12 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 20299908489427122, guid: 2d1d66f95b252b6458df80a5e38d35d1,
+    - target: {fileID: 20016080238216692, guid: 2d1d66f95b252b6458df80a5e38d35d1,
         type: 3}
       propertyPath: field of view
       value: 52
       objectReference: {fileID: 0}
-    - target: {fileID: 20016080238216692, guid: 2d1d66f95b252b6458df80a5e38d35d1,
+    - target: {fileID: 20299908489427122, guid: 2d1d66f95b252b6458df80a5e38d35d1,
         type: 3}
       propertyPath: field of view
       value: 52

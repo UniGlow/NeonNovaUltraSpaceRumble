@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2e9bcf44708ae349a9904884aa12f93, type: 3}
-  m_Name: LevelLoaded
+  m_Name: LevelInitialized
   m_EditorClassIdentifier: 
-  debugMode: 0
+  debugMode: 1
   description: 
   parameter1Type:
-    data: ff
+    data: 005a53797374656d2e53696e676c652c206d73636f726c69622c2056657273696f6e3d342e302e302e302c2043756c747572653d6e65757472616c2c205075626c69634b6579546f6b656e3d62373761356335363139333465303839
   parameter2Type:
     data: ff
   parameter3Type:

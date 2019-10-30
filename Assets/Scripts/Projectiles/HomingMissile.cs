@@ -42,7 +42,7 @@ public class HomingMissile : MonoBehaviour
     Transform target;
     NavMeshAgent agent;
     AudioSource audioSource;
-    bool agentPaused = false;
+    bool agentPaused = true;
 	#endregion
 	
 	

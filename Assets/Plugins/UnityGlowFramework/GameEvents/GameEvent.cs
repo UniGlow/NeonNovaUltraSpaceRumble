@@ -71,10 +71,11 @@ public class GameEvent : ScriptableObject
         }
 
         // Call functions on listeners
-        listeners.ForEach((GameEventListener listener) =>
+        for (int i = 0; i < listeners.Count; i++)
         {
-            listener.OnRaise();
-        });
+            GameEventListener rel = listeners[i];
+            rel.OnRaise();
+        }
 
         eventRaised.raisedSuccessfull = true;
     }

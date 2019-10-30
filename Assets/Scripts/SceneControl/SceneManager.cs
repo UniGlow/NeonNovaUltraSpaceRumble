@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// 
@@ -19,12 +20,16 @@ public class SceneManager : MonoBehaviour
     [SerializeField] SceneReference title = null;
     [SerializeField] SceneReference tutorial = null;
     [SerializeField] SceneReference ui = null;
+    [Space]
+    [SerializeField] List<SceneReference> levels = new List<SceneReference>();
 
     [Header("Properties")]
     [SerializeField] float delayAtLevelEnd = 12f;
 
-    // Private
+    [Header("Game Events")]
+    [SerializeField] GameEvent levelLoadedEvent = null;
 
+    // Private
     #endregion
 
 
@@ -36,6 +41,16 @@ public class SceneManager : MonoBehaviour
 
 
     #region Unity Event Functions
+    private void OnEnable()
+    {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnLevelFinishedLoading;
+    }
+
+    private void OnDisable()
+    {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+    }
+
     void Awake()
     {
         //Check if instance already exists
@@ -96,6 +111,7 @@ public class SceneManager : MonoBehaviour
     public void ReloadLevel()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+        LoadUIAdditive();
     }
 
     public void LoadMainMenu()
@@ -125,14 +141,30 @@ public class SceneManager : MonoBehaviour
 
     public void LoadUIAdditive()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(ui, UnityEngine.SceneManagement.LoadSceneMode.Additive);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(ui, LoadSceneMode.Additive);
     }
     #endregion
 
 
 
     #region Private Functions
+    protected void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+    {
+        if (!ui.Equals(scene))
+        {
+            Debug.Log("Raising LevelLoaded");
+            RaiseLevelLoaded();
+        }
+    }
+    #endregion
 
+
+
+    #region GameEvent Raiser
+    private void RaiseLevelLoaded()
+    {
+        levelLoadedEvent.Raise(this);
+    }
     #endregion
 
 
@@ -143,6 +175,7 @@ public class SceneManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(delayAtLevelEnd);
         LoadNextScene();
         Time.timeScale = 1;
+        LoadUIAdditive();
     }
     #endregion
 }
