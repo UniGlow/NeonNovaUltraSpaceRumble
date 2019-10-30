@@ -175,7 +175,8 @@ public class Boss : Character
         if (playerConfig.Player.GetButtonDown(RewiredConsts.Action.TRIGGER_BOSSABILITY) && abilityCooldownB)
         {
 
-            for (int i = 0; i < numberOfProjectiles; ++i) {
+            for (int i = 0; i < numberOfProjectiles; ++i) 
+            {
                 float factor = (i / (float)numberOfProjectiles) * Mathf.PI * 2f;
                 Vector3 pos = new Vector3(
                     Mathf.Sin(factor) * 1.9f,
@@ -183,6 +184,7 @@ public class Boss : Character
                     Mathf.Cos(factor) * 1.9f);
 
                 GameObject projectile = Instantiate(projectilePrefab, pos + transform.position, Quaternion.identity);
+                projectile.transform.rotation = Quaternion.LookRotation(projectile.transform.position - transform.position);
                 projectile.GetComponent<BossProjectile>().Initialize(
                 attackDamagePerShot,
                 strengthColor,
