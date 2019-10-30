@@ -45,7 +45,7 @@ public class TitleScreenManager : LevelManager
 
         if (timer >= delayBetweenWords * delayAfterCompletion && currentWord >= numberOfWords && !nextSceneLoaded)
         {
-            SceneManager.Instance.LoadNextScene();
+            SceneManager.Instance.LoadMainMenu();
             nextSceneLoaded = true;
         }
 

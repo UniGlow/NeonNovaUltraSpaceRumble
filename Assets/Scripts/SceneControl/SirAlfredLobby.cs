@@ -90,7 +90,7 @@ public class SirAlfredLobby : LevelManager
                 // Rstore SFX audio level
                 masterMixer.SetFloat(Constants.MIXER_SFX_VOLUME, originalSFXVolume);
 
-                SceneManager.Instance.LoadNextScene();
+                SceneManager.Instance.LoadNextLevel();
             }));
         }
 

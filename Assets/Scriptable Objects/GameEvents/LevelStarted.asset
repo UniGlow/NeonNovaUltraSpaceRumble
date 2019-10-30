@@ -3,14 +3,16 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2e9bcf44708ae349a9904884aa12f93, type: 3}
   m_Name: LevelStarted
   m_EditorClassIdentifier: 
+  debugMode: 1
   description: Called when the action starts (after the countdown)
   parameter1Type:
     data: ff
