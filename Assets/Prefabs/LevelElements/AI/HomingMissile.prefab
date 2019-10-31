@@ -532,6 +532,8 @@ MonoBehaviour:
   roughness: 10
   fadeIn: 0.1
   fadeOut: 0.8
+  rumbleStrength: 1
+  rumbleDuration: 0.4
   hitPSHeroes: {fileID: 1086934119878164, guid: 9943029a31d4e3a44bf6d6676eecb198,
     type: 2}
   hitPSBoss: {fileID: 1086934119878164, guid: 9943029a31d4e3a44bf6d6676eecb198, type: 2}
