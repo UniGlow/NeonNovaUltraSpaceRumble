@@ -25,8 +25,12 @@ public class Boss : Character
     [SerializeField] protected float abilityProjectileSpeed = 20f;
     [SerializeField] protected float abilityProjectileLifeTime = 1f;
     [SerializeField] protected float abilityCooldown = 3f;
+
+    [Header("Rumble")]
     [Range(0f, 1f)]
-    [SerializeField] float rumbleStrength = 1f;
+    [SerializeField] float rumbleStrengthDeep = 1f;
+    [Range(0f, 1f)]
+    [SerializeField] float rumbleStrengthHigh = 1f;
     [SerializeField] float rumbleDuration = 0.5f;
 
     [Header("Properties")]
@@ -196,8 +200,8 @@ public class Boss : Character
             audioSource.PlayOneShot(abilitySound, abilitySoundVolume);
 
             if (enableCameraShake) EZCameraShake.CameraShaker.Instance.ShakeOnce(magnitude, roughness, fadeIn, fadeOut);
-            playerConfig.Player.SetVibration(0, rumbleStrength, rumbleDuration);
-            playerConfig.Player.SetVibration(1, rumbleStrength, rumbleDuration);
+            playerConfig.Player.SetVibration(0, rumbleStrengthDeep, rumbleDuration);
+            playerConfig.Player.SetVibration(1, rumbleStrengthHigh, rumbleDuration);
 
             abilityCooldownB = false;
             cooldownTimer = 0f;

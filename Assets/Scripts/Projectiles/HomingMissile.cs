@@ -32,7 +32,9 @@ public class HomingMissile : MonoBehaviour
 
     [Header("Rumble")]
     [Range(0f,1f)]
-    [SerializeField] float rumbleStrength = 1f;
+    [SerializeField] float rumbleStrengthDeep = 1f;
+    [Range(0f, 1f)]
+    [SerializeField] float rumbleStrengthHigh = 1f;
     [SerializeField] float rumbleDuration = 0.5f;
 
     [Header("Particle Systems")]
@@ -76,8 +78,8 @@ public class HomingMissile : MonoBehaviour
 
             if (enableCameraShake) EZCameraShake.CameraShaker.Instance.ShakeOnce(magnitude, roughness, fadeIn, fadeOut);
 
-            other.GetComponentInParent<Character>().PlayerConfig.Player.SetVibration(0, rumbleStrength, rumbleDuration, false);
-            other.GetComponentInParent<Character>().PlayerConfig.Player.SetVibration(1, rumbleStrength, rumbleDuration, false);
+            other.GetComponentInParent<Character>().PlayerConfig.Player.SetVibration(0, rumbleStrengthDeep, rumbleDuration, false);
+            other.GetComponentInParent<Character>().PlayerConfig.Player.SetVibration(1, rumbleStrengthHigh, rumbleDuration, false);
         }
 
         else if (other.tag.Contains(Constants.TAG_BOSS))
@@ -90,8 +92,8 @@ public class HomingMissile : MonoBehaviour
 
             if (enableCameraShake) EZCameraShake.CameraShaker.Instance.ShakeOnce(magnitude, roughness, fadeIn, fadeOut);
 
-            other.GetComponentInParent<Character>().PlayerConfig.Player.SetVibration(0, rumbleStrength, rumbleDuration, false);
-            other.GetComponentInParent<Character>().PlayerConfig.Player.SetVibration(1, rumbleStrength, rumbleDuration, false);
+            other.GetComponentInParent<Character>().PlayerConfig.Player.SetVibration(0, rumbleStrengthDeep, rumbleDuration, false);
+            other.GetComponentInParent<Character>().PlayerConfig.Player.SetVibration(1, rumbleStrengthHigh, rumbleDuration, false);
         }
     }
 

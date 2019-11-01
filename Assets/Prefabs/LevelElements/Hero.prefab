@@ -787,6 +787,11 @@ MonoBehaviour:
   transmissionCooldown: 0
   transmissionSound: {fileID: 8300000, guid: 99a9562a9c5874546a152e7ded477cb5, type: 3}
   transmissionSoundVolume: 1
+  rumbleStrengthInRangeDeep: 0
+  rumbleStrengthInRangeHigh: 0.25
+  rumbleStrengthOnSwitchDeep: 0.1
+  rumbleStrengthOnSwitchHigh: 0.7
+  rumbleDurationOnSwitch: 0.2
   inRangeColorMultiplier: 1.3
   switchColorMultiplier: 1.8
   blinkDuration: 0.23
