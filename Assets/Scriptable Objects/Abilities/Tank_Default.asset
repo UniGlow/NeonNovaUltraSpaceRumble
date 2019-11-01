@@ -9,14 +9,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af2b580508271634dbdd00b275cd9f67, type: 3}
-  m_Name: Tank
+  m_Name: Tank_Default
   m_EditorClassIdentifier: 
   abilityClass: 1
-  cooldown: 3
   speedBoost: 0
-  mesh: {fileID: 4300000, guid: eeedf6b3e6a52b040bc8b36f72d05e85, type: 3}
+  autofire: 1
   soundClip: {fileID: 8300000, guid: 9bf8565727fa20047bfa416674b33661, type: 3}
   volume: 0.9
-  cooldownVisualized: 1
   cooldownRingScale: 1
-  shieldDuration: 2
+  cooldown: 3
+  cooldownVisualized: 1
+  hasEnergyPool: 1
+  maxEnergy: 1000
+  energyLossPerSecond: 100
+  mesh: {fileID: 4300000, guid: eeedf6b3e6a52b040bc8b36f72d05e85, type: 3}

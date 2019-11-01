@@ -28,6 +28,7 @@ public class BossProjectile : Projectile
 
         if (other.tag.Contains(Constants.TAG_SHIELD))
         {
+            other.transform.GetComponentInParent<Hero>().PlayerConfig.ability.AddEnergy(-damage);
             Destroy(gameObject);
         }
 

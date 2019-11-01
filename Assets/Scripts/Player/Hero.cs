@@ -13,7 +13,7 @@ public class Hero : Character
     #region Variable Declarations
     // Variables that should be visible in Inspector
     [Header("References")]
-    [SerializeField] protected GameObject wobbleBobble;
+    [SerializeField] protected GameObject shield;
     [SerializeField] protected Image cooldownIndicator;
     [SerializeField] protected MeshFilter playerMesh;
     #endregion
@@ -21,7 +21,7 @@ public class Hero : Character
 
 
     #region Public Properties
-    public GameObject WobbleBobble { get { return wobbleBobble; } }
+    public GameObject Shield { get { return shield; } }
     public Image CooldownIndicator { get { return cooldownIndicator; } }
     public AudioSource AudioSource { get { return audioSource; } }
     public Rigidbody Rigidbody { get { return rigidbody; } }
@@ -83,6 +83,12 @@ public class Hero : Character
 
         // Update Mesh
         playerMesh.mesh = ability.Mesh;
+    }
+
+    public override void ResetCooldowns()
+    {
+        base.ResetCooldowns();
+        PlayerConfig.ability.ResetCooldowns(true);
     }
     #endregion
 

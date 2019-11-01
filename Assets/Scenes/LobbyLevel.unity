@@ -3097,7 +3097,7 @@ MonoBehaviour:
   bossPlayerConfig: {fileID: 11400000, guid: ca08c440eca8d854190afe2ee3e321e7, type: 2}
   colorSet: {fileID: 11400000, guid: 68d47b220c1450a46a2330237d217b40, type: 2}
   damageAbility: {fileID: 11400000, guid: c3a8eab940a7e934e8c41e8e444f06ca, type: 2}
-  tankAbility: {fileID: 11400000, guid: a4451c0694acc7e44b35144d52e4bbed, type: 2}
+  tankAbility: {fileID: 11400000, guid: ea651a0727fca904886ca5fea0d3c71b, type: 2}
   victimAbility: {fileID: 11400000, guid: 0247d2ab78a5bf148811c5c43bcfc496, type: 2}
 --- !u!4 &483622205
 Transform:
