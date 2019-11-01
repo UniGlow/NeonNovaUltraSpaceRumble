@@ -151,7 +151,7 @@ public class BossAI : Boss
                 transform.rotation = Quaternion.RotateTowards(
                     transform.rotation,
                     Quaternion.LookRotation(playerConfig.playerTransform.position - transform.position, Vector3.up),
-                    Time.deltaTime * characterStats.rotationSpeed);
+                    Time.deltaTime * characterStats.RotationSpeed);
             }
         });
 

@@ -61,11 +61,11 @@ public class Character : MonoBehaviour
     {
         if (active)
         {
-            horizontalMovement = playerConfig.Player.GetAxis(RewiredConsts.Action.MOVE_HORIZONTAL) * characterStats.speed;
-            verticalMovement = playerConfig.Player.GetAxis(RewiredConsts.Action.MOVE_VERTICAL) * characterStats.speed;
+            horizontalMovement = playerConfig.Player.GetAxis(RewiredConsts.Action.MOVE_HORIZONTAL) * characterStats.Speed;
+            verticalMovement = playerConfig.Player.GetAxis(RewiredConsts.Action.MOVE_VERTICAL) * characterStats.Speed;
         }
-            horizontalLook = playerConfig.Player.GetAxis(RewiredConsts.Action.LOOK_HORIZONTAL) * characterStats.rotationSpeed;
-            verticalLook = playerConfig.Player.GetAxis(RewiredConsts.Action.LOOK_VERTICAL) * characterStats.rotationSpeed;
+            horizontalLook = playerConfig.Player.GetAxis(RewiredConsts.Action.LOOK_HORIZONTAL) * characterStats.RotationSpeed;
+            verticalLook = playerConfig.Player.GetAxis(RewiredConsts.Action.LOOK_VERTICAL) * characterStats.RotationSpeed;
     }
     #endregion
 
@@ -128,7 +128,7 @@ public class Character : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(
                 transform.rotation, 
                 Quaternion.LookRotation(lookDirection, Vector3.up), 
-                Time.deltaTime * characterStats.rotationSpeed);
+                Time.deltaTime * characterStats.RotationSpeed);
         }
     }
     #endregion

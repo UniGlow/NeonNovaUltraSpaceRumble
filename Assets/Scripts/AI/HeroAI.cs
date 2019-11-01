@@ -192,7 +192,7 @@ public class HeroAI : Hero
             transform.rotation = Quaternion.RotateTowards(
                 transform.rotation, 
                 Quaternion.LookRotation(boss.position - transform.position, Vector3.up), 
-                Time.deltaTime * characterStats.rotationSpeed);
+                Time.deltaTime * characterStats.RotationSpeed);
         }
         else if (IsAbilityClass(Ability.AbilityClass.Tank))
         {

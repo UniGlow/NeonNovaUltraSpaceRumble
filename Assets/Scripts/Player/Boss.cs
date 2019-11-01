@@ -19,12 +19,26 @@ public class Boss : Character
     [SerializeField] protected float attackProjectileLifeTime = 1f;
     [SerializeField] protected float attackCooldown = 0.2f;
 
-    [Header("Ability")]
+    [Header("Ability Settings")]
     [SerializeField] protected int abilityDamagePerShot = 10;
     [SerializeField] protected int numberOfProjectiles = 20;
     [SerializeField] protected float abilityProjectileSpeed = 20f;
     [SerializeField] protected float abilityProjectileLifeTime = 1f;
+
+    [Space]
+    [SerializeField] protected int numberOfNovas = 10;
+    [SerializeField] protected float timeBetweenNovas = 0.2f;
+    [SerializeField] protected float consecutiveNovaOffset = 0.1f;
+
+    [Space]
     [SerializeField] protected float abilityCooldown = 3f;
+    [Range(0f, 1f)]
+    [SerializeField] protected float movementSpeedReduction = 0.5f;
+
+    [Header("Ability FX")]
+    [SerializeField] protected float colorMultiplierBeforeAbility = 3f;
+    [SerializeField] protected float abilityAnnounceDuration = 3f;
+    [SerializeField] protected Ease meshBlinkEaseType = Ease.InOutCubic;
 
     [Header("Properties")]
     [SerializeField] float materialGlowOnSwitch = 3f;
@@ -70,6 +84,7 @@ public class Boss : Character
     bool colorChangeSoundPlayed;
 
     protected float cooldownTimer = 0f;
+    protected bool abilityInProgress = false;
     #endregion
 
 
@@ -82,7 +97,7 @@ public class Boss : Character
         if (active)
         {
             // Ability Cooldown
-            if (!abilityCooldownB)
+            if (!abilityCooldownB && !abilityInProgress)
             {
                 if (cooldownTimer >= abilityCooldown)
                 {
@@ -154,7 +169,7 @@ public class Boss : Character
     #region Private Functions
     private void Shoot()
     {
-        if (playerConfig.Player.GetButton(RewiredConsts.Action.SHOOT) && attackCooldownB)
+        if (playerConfig.Player.GetButton(RewiredConsts.Action.SHOOT) && attackCooldownB && !abilityInProgress)
         {
             GameObject projectile = Instantiate(projectilePrefab, transform.position + transform.forward * 1.9f + Vector3.up * 0.5f, transform.rotation);
             projectile.GetComponent<BossProjectile>().Initialize(
@@ -172,34 +187,26 @@ public class Boss : Character
 
     private void Ability()
     {
-        if (playerConfig.Player.GetButtonDown(RewiredConsts.Action.TRIGGER_BOSSABILITY) && abilityCooldownB)
+        if (playerConfig.Player.GetButtonDown(RewiredConsts.Action.TRIGGER_BOSSABILITY) && abilityCooldownB && !abilityInProgress)
         {
+            abilityInProgress = true;
 
-            for (int i = 0; i < numberOfProjectiles; ++i) {
-                float factor = (i / (float)numberOfProjectiles) * Mathf.PI * 2f;
-                Vector3 pos = new Vector3(
-                    Mathf.Sin(factor) * 1.9f,
-                    transform.position.y + 0.5f,
-                    Mathf.Cos(factor) * 1.9f);
+            characterStats.ModifySpeed(characterStats.Speed * (1 - movementSpeedReduction));
 
-                GameObject projectile = Instantiate(projectilePrefab, pos + transform.position, Quaternion.identity);
-                projectile.GetComponent<BossProjectile>().Initialize(
-                attackDamagePerShot,
-                strengthColor,
-                (projectile.transform.position - transform.position) * abilityProjectileSpeed,
-                attackProjectileLifeTime);
-            }
-
-            audioSource.PlayOneShot(abilitySound, abilitySoundVolume);
-
-            if (enableCameraShake) EZCameraShake.CameraShaker.Instance.ShakeOnce(magnitude, roughness, fadeIn, fadeOut);
-
-            abilityCooldownB = false;
-            cooldownTimer = 0f;
+            bossMeshRenderer.material.DOBlendableColor(PlayerConfig.ColorConfig.bossMaterial.color * colorMultiplierBeforeAbility, abilityAnnounceDuration).SetEase(meshBlinkEaseType).OnComplete(() => 
+            {
+                bossMeshRenderer.material.DOBlendableColor(PlayerConfig.ColorConfig.bossMaterial.color, 0.1f);
+                StartCoroutine(ShootNovas(numberOfNovas, timeBetweenNovas, () =>
+                {
+                    characterStats.ResetSpeed();
+                    cooldownTimer = 0f;
+                    abilityCooldownB = false;
+                    abilityInProgress = false;
+                }));
+            });
         }
     }
     
-
     void SetWeaknessColor(PlayerColor playerColor)
     {
         playerConfig.ColorConfig = playerColor;
@@ -227,6 +234,28 @@ public class Boss : Character
             colorChangeSoundPlayed = false;
         }
     }
+
+    protected void ShootNova(float offset)
+    {
+        for (int i = 0; i < numberOfProjectiles; ++i)
+        {
+            float factor = (i / (float)numberOfProjectiles) * Mathf.PI * 2f + offset;
+            Vector3 pos = new Vector3(
+                Mathf.Sin(factor) * 1.9f,
+                transform.position.y + 0.5f,
+                Mathf.Cos(factor) * 1.9f);
+
+            GameObject projectile = Instantiate(projectilePrefab, pos + transform.position, Quaternion.identity);
+            projectile.GetComponent<BossProjectile>().Initialize(
+            attackDamagePerShot,
+            strengthColor,
+            (projectile.transform.position - transform.position) * abilityProjectileSpeed,
+            attackProjectileLifeTime);
+        }
+
+        audioSource.PlayOneShot(abilitySound, abilitySoundVolume);
+        if (enableCameraShake) EZCameraShake.CameraShaker.Instance.ShakeOnce(magnitude, roughness, fadeIn, fadeOut);
+    }
     #endregion
 
 
@@ -247,9 +276,21 @@ public class Boss : Character
         attackCooldownB = true;
     }
 
-    protected IEnumerator ResetAbilityCooldown() {
+    protected IEnumerator ResetAbilityCooldown() 
+    {
         yield return new WaitForSeconds(abilityCooldown);
         abilityCooldownB = true;
+    }
+
+    protected IEnumerator ShootNovas (int numberOfNovas, float timeBetweenNovas, System.Action onComplete = null)
+    {
+        for (int i = 0; i < numberOfNovas; i++)
+        {
+            ShootNova(consecutiveNovaOffset * i);
+            yield return new WaitForSeconds(timeBetweenNovas);
+        }
+
+        if (onComplete != null) onComplete.Invoke();
     }
     #endregion
 }
