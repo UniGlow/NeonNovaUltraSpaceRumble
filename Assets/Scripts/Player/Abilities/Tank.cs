@@ -49,6 +49,7 @@ public class Tank : Ability
     public override void TriggerAbility()
     {
         hero.WobbleBobble.SetActive(true);
+        hero.Rigidbody.mass = 100f;
         audioSource.PlayOneShot(soundClip, volume);
 
         shieldActive = true;
@@ -57,6 +58,7 @@ public class Tank : Ability
     public void DeactivateShield()
     {
         hero.WobbleBobble.SetActive(false);
+        hero.Rigidbody.mass = 1f;
         cooldownTimer = 0f;
         shieldTimer = 0f;
         shieldActive = false;
