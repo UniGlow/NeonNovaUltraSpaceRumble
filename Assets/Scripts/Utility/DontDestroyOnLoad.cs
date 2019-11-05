@@ -9,4 +9,9 @@ public class DontDestroyOnLoad : MonoBehaviour
         if (transform.childCount == 0) Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
     }
+
+    private void Update()
+    {
+        if (transform.childCount == 0) Destroy(gameObject);
+    }
 }

@@ -9,7 +9,7 @@ public class BossTutorialAI : MonoBehaviour
 {
 
     #region Variable Declarations
-    [SerializeField] MeshRenderer meshRenderer;
+    [SerializeField] MeshRenderer meshRenderer = null;
 
     Boss boss;
     PlayerColor weaknessColor;

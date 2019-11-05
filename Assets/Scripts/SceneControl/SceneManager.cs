@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// 
@@ -18,12 +19,20 @@ public class SceneManager : MonoBehaviour
     [SerializeField] SceneReference credits = null;
     [SerializeField] SceneReference title = null;
     [SerializeField] SceneReference tutorial = null;
+    [SerializeField] SceneReference uiLevel = null;
+    [SerializeField] SceneReference uiLobby = null;
+    [SerializeField] SceneReference uiCredits = null;
+    [Space]
+    [SerializeField] List<SceneReference> levels = new List<SceneReference>();
 
     [Header("Properties")]
     [SerializeField] float delayAtLevelEnd = 12f;
 
-    // Private
+    [Header("Game Events")]
+    [SerializeField] GameEvent levelLoadedEvent = null;
 
+    // Private
+    
     #endregion
 
 
@@ -35,6 +44,16 @@ public class SceneManager : MonoBehaviour
 
 
     #region Unity Event Functions
+    private void OnEnable()
+    {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnLevelFinishedLoading;
+    }
+
+    private void OnDisable()
+    {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+    }
+
     void Awake()
     {
         //Check if instance already exists
@@ -60,17 +79,9 @@ public class SceneManager : MonoBehaviour
     /// <summary>
     /// Loads the next scene in build index
     /// </summary>
-    public void LoadNextScene()
+    public void LoadNextScene(SceneReference nextScene)
     {
-        int activeScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
-        if (activeScene + 1 < UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings)
-        {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(activeScene + 1);
-        }
-        else
-        {
-            Debug.LogError("No more levels in build index to be loaded");
-        }
+        UnityEngine.SceneManagement.SceneManager.LoadScene(nextScene);
     }
 
     /// <summary>
@@ -86,15 +97,61 @@ public class SceneManager : MonoBehaviour
 #endif
     }
 
+    /// <summary>
+    /// Loads next Level of current LevelSet or Credits if Last Level of Set is active
+    /// </summary>
     public void LoadNextLevel()
     {
-        StartCoroutine(LoadNextLevelCoroutine());
-        Time.timeScale = 0.0f;
+        bool levelFound = false;
+        Scene activeScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+        if (lobby.Equals(activeScene))
+        {
+            LoadNextScene(levels[0]);
+            LoadUIAdditive();
+        }
+        else
+        {
+            for (int i = 0; i < levels.Count; i++)
+            {
+                if (levels[i].Equals(activeScene))
+                {
+                    if (i < levels.Count-1)
+                    {
+                        SceneReference nextScene = levels[i + 1];
+                        StartCoroutine(LoadNextLevelCoroutine(nextScene));
+                        Time.timeScale = 0.0f;
+                        levelFound = true;
+                    }
+                    else
+                    {
+                        StartCoroutine(LoadCreditsCoroutine());
+                        Time.timeScale = 0.0f;
+                        levelFound = true;
+                    }
+                }
+            }
+            if (!levelFound)
+            {
+                Debug.LogError("There isn't a next Level in this Level Set!");
+            }
+        }
     }
 
     public void ReloadLevel()
     {
+        bool loadUIAdditive = false;
+        int uiToLoad = 0;
+        // if more then one Scene is open (UI Scene)
+        if (UnityEngine.SceneManagement.SceneManager.sceneCount == 2)
+        {
+            loadUIAdditive = true;
+            // Then get that UI Scene's build Index
+            uiToLoad = UnityEngine.SceneManagement.SceneManager.GetSceneAt(1).buildIndex;
+        }
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+        // And Reload it Additive after the Active Scene loading is started
+        if (loadUIAdditive)
+            UnityEngine.SceneManagement.SceneManager.LoadScene(uiToLoad, LoadSceneMode.Additive);
     }
 
     public void LoadMainMenu()
@@ -105,6 +162,7 @@ public class SceneManager : MonoBehaviour
     public void LoadCredits()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(credits);
+        LoadUIAdditive(uiCredits);
     }
 
     public void LoadTitleScreen()
@@ -120,22 +178,68 @@ public class SceneManager : MonoBehaviour
     public void LoadLobby()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(lobby);
+        LoadUIAdditive(uiLobby);
+    }
+
+    /// <summary>
+    /// Only use this for EditorStartup!
+    /// </summary>
+    public void LoadUIAdditive(SceneReference sceneToLoad = null)
+    {
+        if (sceneToLoad != null)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneToLoad, LoadSceneMode.Additive);
+        }
+        else
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(uiLevel, LoadSceneMode.Additive);
+        }
     }
     #endregion
 
 
 
     #region Private Functions
+    protected void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+    {
+#if UNITY_EDITOR
+        if (mode != LoadSceneMode.Additive)
+        {
+            if(EditorLevelStarter.Instance != null)
+                EditorLevelStarter.Instance.Initialize();
+        }
+#endif
+        if (mode == LoadSceneMode.Additive)
+        {
+            RaiseLevelLoaded();
+        }
+    }
+    #endregion
 
+
+
+    #region GameEvent Raiser
+    private void RaiseLevelLoaded()
+    {
+        levelLoadedEvent.Raise(this);
+    }
     #endregion
 
 
 
     #region Coroutines
-    IEnumerator LoadNextLevelCoroutine()
+    IEnumerator LoadNextLevelCoroutine(SceneReference nextScene)
     {
         yield return new WaitForSecondsRealtime(delayAtLevelEnd);
-        LoadNextScene();
+        LoadNextScene(nextScene);
+        Time.timeScale = 1;
+        LoadUIAdditive();
+    }
+
+    IEnumerator LoadCreditsCoroutine()
+    {
+        yield return new WaitForSecondsRealtime(delayAtLevelEnd);
+        LoadCredits();
         Time.timeScale = 1;
     }
     #endregion

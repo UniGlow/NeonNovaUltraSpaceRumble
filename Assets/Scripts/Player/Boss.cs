@@ -31,15 +31,15 @@ public class Boss : Character
 
     [Header("Sound")]
     [SerializeField]
-    protected AudioClip abilitySound;
+    protected AudioClip abilitySound = null;
     [Range(0, 1)]
     [SerializeField]
     protected float abilitySoundVolume = 1f;
-    [SerializeField] protected AudioClip attackSound;
+    [SerializeField] protected AudioClip attackSound = null;
     [Range(0, 1)]
     [SerializeField]
     protected float attackSoundVolume = 1f;
-    [SerializeField] AudioClip colorChangeSound;
+    [SerializeField] AudioClip colorChangeSound = null;
     [Range(0, 1)]
     [SerializeField] float colorChangeSoundVolume = 1f;
 
@@ -51,9 +51,9 @@ public class Boss : Character
     [SerializeField] protected float fadeOut = 0.8f;
 
     [Header("References")]
-    [SerializeField] protected GameObject projectilePrefab;
-    [SerializeField] protected Renderer bossMeshRenderer;
-    [SerializeField] protected Image cooldownIndicator;
+    [SerializeField] protected GameObject projectilePrefab = null;
+    [SerializeField] protected Renderer bossMeshRenderer = null;
+    [SerializeField] protected Image cooldownIndicator = null;
     [SerializeField] protected GameEvent bossColorChangedEvent = null;
     [SerializeField] protected GameSettings gameSettings = null;
 

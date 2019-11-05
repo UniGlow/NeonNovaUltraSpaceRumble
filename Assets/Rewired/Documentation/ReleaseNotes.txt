@@ -1,3 +1,23 @@
+1.1.29.0:
+  
+    Changes:
+      - Rewired Standalone Input Module: Added Deselect If Background Clicked inspector option.
+      - Rewired Standalone Input Module: Added Deselect Before Selecting inspector option.
+      - Windows Standalone, XInput: Moved vibration to separate thread from input to eliminate input lag when sending vibration to a problem XInput device.
+        - PlayStation 4: Added Aim Controller support.
+
+    API Changes:
+      - Added RewiredStandaloneInputModule.deselectIfBackgroundClicked property.
+      - Added RewiredStandaloneInputModule.deselectBeforeSelecting property.
+      - Added Rewired.Platforms.PS4.Ps4AimExtension class.
+      - Added Rewired.Platforms.PS4.PS4AimMotorType enum.
+      
+    Controller Definitions:
+      - Added Sony PS4 Aim Controller.
+      
+    Bug Fixes:
+      - ControllerMapWithAxes.GetElementMapsWithAction: Fixed bug causing button maps to not be returned in List<ActionElementMap> results method overloads.
+
 1.1.28.0:
 
     Changes:
@@ -9,8 +29,8 @@
     API Changes:
       - ReInput.ControllerHelper.GetJoysticks now returns an empty array when no Joysticks are found instead of null.
       - ReInput.ControllerHelper.GetJoystickNames now returns an empty array when no Joysticks are found instead of null.
-      - ReInput.ControllerHelper.GetCustomControllers now returns an empty array when no Joysticks are found instead of null.
-      - ReInput.ControllerHelper.GetCustomControllerNames now returns an empty array when no Joysticks are found instead of null.
+      - ReInput.ControllerHelper.GetCustomControllers now returns an empty array when no Custom Controllers are found instead of null.
+      - ReInput.ControllerHelper.GetCustomControllerNames now returns an empty array when no Custom Controllers are found instead of null.
     
     Controller Definitions:
       - Added Stadia Gamepad.

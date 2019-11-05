@@ -1928,7 +1928,7 @@ namespace AssetUsageDetectorNamespace
 			// Check if this GameObject's prefab is one of the selected assets
 			if( searchGameObjectReferences )
 			{
-				Object prefab = PrefabUtility.GetPrefabObject( go );
+				Object prefab = PrefabUtility.GetPrefabInstanceHandle( go );
 				if( assetsSet.Contains( prefab ))
 					referenceNode.AddLinkTo( GetReferenceNode( prefab ), "Prefab object" );
 			}

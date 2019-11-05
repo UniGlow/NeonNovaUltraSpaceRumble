@@ -16,24 +16,20 @@ public class SongTextUpdater : MonoBehaviour
     [SerializeField] float displayDuration = 7f;
 
     [Space]
-    [SerializeField] TextMeshProUGUI titleText;
-    [SerializeField] TextMeshProUGUI spacingText;
-    [SerializeField] TextMeshProUGUI artistText;
+    [SerializeField] TextMeshProUGUI titleText = null;
+    [SerializeField] TextMeshProUGUI spacingText = null;
+    [SerializeField] TextMeshProUGUI artistText = null;
 
-    Color targetColor;
+    Color originalColor;
     #endregion
 
 
 
     #region Unity Event Functions
-    private void Start () 
+    private void Awake () 
 	{
-        targetColor = titleText.color;
-	}
-	
-	private void Update () 
-	{
-		
+        originalColor = titleText.color;
+        HideText();
 	}
 	#endregion
 	
@@ -42,12 +38,7 @@ public class SongTextUpdater : MonoBehaviour
 	#region Public Functions
 	public void ShowSongTitle(string artist, string title)
     {
-        // Alpha = 0
-        Color newColor = targetColor;
-        newColor.a = 0f;
-        titleText.color = newColor;
-        spacingText.color = newColor;
-        artistText.color = newColor;
+        HideText();
 
         // Set texts
         artistText.text = artist;
@@ -56,15 +47,22 @@ public class SongTextUpdater : MonoBehaviour
         spacingText.enabled = true;
 
         // Fade in alpha
-        DOTween.ToAlpha(() => titleText.color, x => titleText.color = x, targetColor.a, fadeDuration).OnComplete(() => { DOTween.ToAlpha(() => titleText.color, x => titleText.color = x, 0f, fadeDuration).SetDelay(displayDuration); });
-        DOTween.ToAlpha(() => spacingText.color, x => spacingText.color = x, targetColor.a, fadeDuration).OnComplete(() => { DOTween.ToAlpha(() => spacingText.color, x => spacingText.color = x, 0f, fadeDuration).SetDelay(displayDuration); });
-        DOTween.ToAlpha(() => artistText.color, x => artistText.color = x, targetColor.a, fadeDuration).OnComplete(() => { DOTween.ToAlpha(() => artistText.color, x => artistText.color = x, 0f, fadeDuration).SetDelay(displayDuration); });
+        DOTween.ToAlpha(() => titleText.color, x => titleText.color = x, originalColor.a, fadeDuration).OnComplete(() => { DOTween.ToAlpha(() => titleText.color, x => titleText.color = x, 0f, fadeDuration).SetDelay(displayDuration); });
+        DOTween.ToAlpha(() => spacingText.color, x => spacingText.color = x, originalColor.a, fadeDuration).OnComplete(() => { DOTween.ToAlpha(() => spacingText.color, x => spacingText.color = x, 0f, fadeDuration).SetDelay(displayDuration); });
+        DOTween.ToAlpha(() => artistText.color, x => artistText.color = x, originalColor.a, fadeDuration).OnComplete(() => { DOTween.ToAlpha(() => artistText.color, x => artistText.color = x, 0f, fadeDuration).SetDelay(displayDuration); });
     }
 	#endregion
 	
 	
 	
 	#region Private Functions
-	
+	void HideText()
+    {
+        Color newColor = originalColor;
+        newColor.a = 0f;
+        titleText.color = newColor;
+        spacingText.color = newColor;
+        artistText.color = newColor;
+    }
 	#endregion
 }

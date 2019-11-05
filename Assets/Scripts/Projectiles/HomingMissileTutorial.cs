@@ -16,15 +16,15 @@ public class HomingMissileTutorial : MonoBehaviour
 
     [Header("Sound")]
     [SerializeField]
-    AudioClip hitSound;
+    AudioClip hitSound = null;
     [Range(0, 1)]
     [SerializeField]
     float hitSoundVolume = 1f;
 
     [Header("Object References")]
-    [SerializeField] GameObject hitPSHeroes;
-    [SerializeField] GameObject hitPSBoss;
-    [SerializeField] Transform target;
+    [SerializeField] GameObject hitPSHeroes = null;
+    [SerializeField] GameObject hitPSBoss = null;
+    [SerializeField] Transform target = null;
 
     NavMeshAgent agent;
     AudioSource audioSource;

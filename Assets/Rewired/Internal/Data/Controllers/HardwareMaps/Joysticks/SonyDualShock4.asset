@@ -9543,7 +9543,7 @@ MonoBehaviour:
       alwaysMatch: 0
       productName_useRegex: 1
       productName:
-      - Controller [0-9]+
+      - ^Controller [0-9]+
     elements:
       axes:
       - elementIdentifier: 0

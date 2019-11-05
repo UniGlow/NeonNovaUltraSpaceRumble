@@ -125,20 +125,24 @@ public class Transmission : MonoBehaviour
         hero = GetComponent<Hero>();
         audioSource = GetComponent<AudioSource>();
 
-        playerMat = hero.PlayerMesh.GetComponent<MeshRenderer>().material;
-        transmissionRangeIndicator.transform.localScale = new Vector3(transmissionRange * 0.2f, transmissionRange * 0.2f, transmissionRange * 0.2f);
-        ParticleSystem[] rangeParticleSystems = transmissionRangeIndicator.GetComponentsInChildren<ParticleSystem>();
-        foreach (ParticleSystem ps in rangeParticleSystems)
-        {
-            var main = ps.main;
-            main.startColor = 
-                new Color(hero.PlayerConfig.ColorConfig.staubsaugerColor.r, 
-                hero.PlayerConfig.ColorConfig.staubsaugerColor.g, 
-                hero.PlayerConfig.ColorConfig.staubsaugerColor.b, 
-                ps.main.startColor.color.a);
-        }
 
-	}
+        // Hero PlayerConfig is null in Credits Scene
+        if(hero.PlayerConfig != null)
+        {
+            playerMat = hero.PlayerMesh.GetComponent<MeshRenderer>().material;
+            transmissionRangeIndicator.transform.localScale = new Vector3(transmissionRange * 0.2f, transmissionRange * 0.2f, transmissionRange * 0.2f);
+            ParticleSystem[] rangeParticleSystems = transmissionRangeIndicator.GetComponentsInChildren<ParticleSystem>();
+            foreach (ParticleSystem ps in rangeParticleSystems)
+            {
+                var main = ps.main;
+                main.startColor = 
+                    new Color(hero.PlayerConfig.ColorConfig.staubsaugerColor.r, 
+                    hero.PlayerConfig.ColorConfig.staubsaugerColor.g, 
+                    hero.PlayerConfig.ColorConfig.staubsaugerColor.b, 
+                    ps.main.startColor.color.a);
+            }
+        }
+    }
 	
 	virtual protected void Update()
     {

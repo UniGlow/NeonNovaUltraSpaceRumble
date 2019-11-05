@@ -1,22 +1,12 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &100100000
-Prefab:
-  m_ObjectHideFlags: 1
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications: []
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1690773440578928}
-  m_IsPrefabParent: 1
 --- !u!1 &1406122196359206
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 4288050773798458}
   - component: {fileID: 114843260671403338}
@@ -27,60 +17,12 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1491103438566612
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4548166854614208}
-  - component: {fileID: 114780710039012894}
-  - component: {fileID: 114619018464177134}
-  m_Layer: 0
-  m_Name: GameplayManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1690773440578928
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4927766817885444}
-  m_Layer: 0
-  m_Name: _LEVEL_MANAGER
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
---- !u!1 &1837832007041848
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4480906784141612}
-  - component: {fileID: 114375003677341120}
-  - component: {fileID: 114941057426689738}
-  m_Layer: 0
-  m_Name: PlayerManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!4 &4288050773798458
 Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1406122196359206}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -89,24 +31,51 @@ Transform:
   m_Father: {fileID: 4927766817885444}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4480906784141612
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1837832007041848}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4927766817885444}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114843260671403338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406122196359206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64ecf0d49518b4a4e942bbdfa6d89d64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossPlayerConfig: {fileID: 11400000, guid: ca08c440eca8d854190afe2ee3e321e7, type: 2}
+  hero1PlayerConfig: {fileID: 11400000, guid: 0d24b38cff3ab7645a78e798c43bbfd7, type: 2}
+  hero2PlayerConfig: {fileID: 11400000, guid: d6c98b3edc55ae84cb27c6305d3154cd, type: 2}
+  hero3PlayerConfig: {fileID: 11400000, guid: d4656183e05243d4bab4bc739760ed99, type: 2}
+  colorSet: {fileID: 11400000, guid: 68d47b220c1450a46a2330237d217b40, type: 2}
+  ability1: {fileID: 11400000, guid: c3a8eab940a7e934e8c41e8e444f06ca, type: 2}
+  ability2: {fileID: 11400000, guid: a4451c0694acc7e44b35144d52e4bbed, type: 2}
+  ability3: {fileID: 11400000, guid: 0247d2ab78a5bf148811c5c43bcfc496, type: 2}
+--- !u!1 &1491103438566612
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4548166854614208}
+  - component: {fileID: 114780710039012894}
+  - component: {fileID: 114619018464177134}
+  - component: {fileID: 1267570422}
+  m_Layer: 0
+  m_Name: GameplayManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &4548166854614208
 Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1491103438566612}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -115,50 +84,29 @@ Transform:
   m_Father: {fileID: 4927766817885444}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4927766817885444
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1690773440578928}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4480906784141612}
-  - {fileID: 4548166854614208}
-  - {fileID: 4288050773798458}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114375003677341120
+--- !u!114 &114780710039012894
 MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1837832007041848}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1491103438566612}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abf0adcd44db2c5488e08062040ca2aa, type: 3}
+  m_Script: {fileID: 11500000, guid: 6dda150320a219e44be14e9e53b68ece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossPlayerConfig: {fileID: 11400000, guid: ca08c440eca8d854190afe2ee3e321e7, type: 2}
-  hero1PlayerConfig: {fileID: 11400000, guid: 0d24b38cff3ab7645a78e798c43bbfd7, type: 2}
-  hero2PlayerConfig: {fileID: 11400000, guid: d6c98b3edc55ae84cb27c6305d3154cd, type: 2}
-  hero3PlayerConfig: {fileID: 11400000, guid: d4656183e05243d4bab4bc739760ed99, type: 2}
-  heroPrefab: {fileID: 1742559250600126, guid: f18b3066470fb6a4990858005c226abe, type: 2}
-  heroAIPrefab: {fileID: 1742559250600126, guid: 925e3a17bcf7ee843a48b6cbe697aab6,
+  levelInitializedEvent: {fileID: 11400000, guid: dd95ddef2760add43a73ce45d743f5e5,
     type: 2}
-  bossPrefab: {fileID: 1735896002571996, guid: b1e1569e895ceee48869b355039c0cbf, type: 2}
-  bossAIPrefab: {fileID: 1566906718194532, guid: 8c475107a1ba5c54695c67a9aba025ba,
-    type: 2}
-  playersSpawnedEvent: {fileID: 11400000, guid: 1dcba030088afea41a808b9b310c1669,
-    type: 2}
+  levelStartedEvent: {fileID: 11400000, guid: a93bef75cc487ef48b9411ec84a74c73, type: 2}
+  gameSettings: {fileID: 11400000, guid: 4cbf2bb18122f9d4c92c9dbd86d8b7fa, type: 2}
+  points: {fileID: 11400000, guid: 5be3ffe199c802f45a47f0dbbedb0be5, type: 2}
 --- !u!114 &114619018464177134
 MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1491103438566612}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -184,52 +132,139 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   linkedMethods: []
   ignoreEventParameters: 0
---- !u!114 &114780710039012894
+--- !u!114 &1267570422
 MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1491103438566612}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6dda150320a219e44be14e9e53b68ece, type: 3}
+  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelLoadedEvent: {fileID: 11400000, guid: dd95ddef2760add43a73ce45d743f5e5, type: 2}
-  levelStartedEvent: {fileID: 11400000, guid: a93bef75cc487ef48b9411ec84a74c73, type: 2}
-  gameSettings: {fileID: 11400000, guid: 4cbf2bb18122f9d4c92c9dbd86d8b7fa, type: 2}
-  points: {fileID: 11400000, guid: 5be3ffe199c802f45a47f0dbbedb0be5, type: 2}
---- !u!114 &114843260671403338
+  gameEvent: {fileID: 11400000, guid: 4ccd4681e54ddf24fb501d2a15f51590, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114780710039012894}
+        m_MethodName: InitializeLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  linkedMethods: []
+  ignoreEventParameters: 0
+--- !u!1 &1690773440578928
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4927766817885444}
+  m_Layer: 0
+  m_Name: _LEVEL_MANAGER
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &4927766817885444
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690773440578928}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4480906784141612}
+  - {fileID: 4548166854614208}
+  - {fileID: 4288050773798458}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1837832007041848
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4480906784141612}
+  - component: {fileID: 114375003677341120}
+  - component: {fileID: 114941057426689738}
+  m_Layer: 0
+  m_Name: PlayerManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4480906784141612
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837832007041848}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4927766817885444}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114375003677341120
 MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1406122196359206}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837832007041848}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 846f57fe8c459684dbddd947c1ef60ce, type: 3}
+  m_Script: {fileID: 11500000, guid: abf0adcd44db2c5488e08062040ca2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bossPlayerConfig: {fileID: 11400000, guid: ca08c440eca8d854190afe2ee3e321e7, type: 2}
   hero1PlayerConfig: {fileID: 11400000, guid: 0d24b38cff3ab7645a78e798c43bbfd7, type: 2}
   hero2PlayerConfig: {fileID: 11400000, guid: d6c98b3edc55ae84cb27c6305d3154cd, type: 2}
   hero3PlayerConfig: {fileID: 11400000, guid: d4656183e05243d4bab4bc739760ed99, type: 2}
-  colorSet: {fileID: 11400000, guid: 68d47b220c1450a46a2330237d217b40, type: 2}
-  ability1: {fileID: 11400000, guid: a4451c0694acc7e44b35144d52e4bbed, type: 2}
-  ability2: {fileID: 11400000, guid: c3a8eab940a7e934e8c41e8e444f06ca, type: 2}
-  ability3: {fileID: 11400000, guid: 0247d2ab78a5bf148811c5c43bcfc496, type: 2}
+  heroPrefab: {fileID: 1742559250600126, guid: f18b3066470fb6a4990858005c226abe, type: 3}
+  heroAIPrefab: {fileID: 1742559250600126, guid: 925e3a17bcf7ee843a48b6cbe697aab6,
+    type: 3}
+  bossPrefab: {fileID: 1735896002571996, guid: b1e1569e895ceee48869b355039c0cbf, type: 3}
+  bossAIPrefab: {fileID: 1566906718194532, guid: 8c475107a1ba5c54695c67a9aba025ba,
+    type: 3}
+  playersSpawnedEvent: {fileID: 11400000, guid: 1dcba030088afea41a808b9b310c1669,
+    type: 2}
 --- !u!114 &114941057426689738
 MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1837832007041848}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: dd95ddef2760add43a73ce45d743f5e5, type: 2}
+  gameEvent: {fileID: 11400000, guid: 4ccd4681e54ddf24fb501d2a15f51590, type: 2}
   response:
     m_PersistentCalls:
       m_Calls:
@@ -247,4 +282,4 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   linkedMethods: []
-  ignoreEventParameters: 1
+  ignoreEventParameters: 0

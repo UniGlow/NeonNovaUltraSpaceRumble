@@ -14,8 +14,8 @@ public class PlayerReadyUpdater : MonoBehaviour
     }
 
     #region Variable Declarations
-    [SerializeField] Color readyColor;
-    [SerializeField] Color notReadyColor;
+    [SerializeField] Color readyColor = new Color();
+    [SerializeField] Color notReadyColor = new Color();
 
     ReadyState[] readyStates;
     int playerCount;
@@ -24,7 +24,7 @@ public class PlayerReadyUpdater : MonoBehaviour
 	
 	
 	#region Unity Event Functions
-	private void Start () 
+	private void Awake () 
 	{
         readyStates = new ReadyState[4];
         for (int i = 0; i < readyStates.Length; i++)
@@ -35,8 +35,6 @@ public class PlayerReadyUpdater : MonoBehaviour
                 readyText = transform.GetChild(i).GetChild(1).GetComponent<TextMeshProUGUI>()
             };
         }
-
-        
 	}
 	#endregion
 	
@@ -57,8 +55,10 @@ public class PlayerReadyUpdater : MonoBehaviour
         }
     }
 
-    public void UpdateUIElements(int playerCount)
+    public void UpdateUIElements()
     {
+        int playerCount = InputHelper.UpdatePlayerCount();
+
         if (playerCount == this.playerCount)
         {
             return;
