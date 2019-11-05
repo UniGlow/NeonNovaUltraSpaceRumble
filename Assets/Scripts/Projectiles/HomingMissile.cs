@@ -18,7 +18,7 @@ public class HomingMissile : MonoBehaviour
 
     [Header("Sound")]
     [SerializeField]
-    AudioClip hitSound;
+    AudioClip hitSound = null;
     [Range(0, 1)]
     [SerializeField]
     float hitSoundVolume = 1f;
@@ -38,8 +38,8 @@ public class HomingMissile : MonoBehaviour
     [SerializeField] float rumbleDuration = 0.5f;
 
     [Header("Particle Systems")]
-    [SerializeField] GameObject hitPSHeroes;
-    [SerializeField] GameObject hitPSBoss;
+    [SerializeField] GameObject hitPSHeroes = null;
+    [SerializeField] GameObject hitPSBoss = null;
 
     [Header("References")]
     [SerializeField] Points points = null;
@@ -49,7 +49,7 @@ public class HomingMissile : MonoBehaviour
     Transform target;
     NavMeshAgent agent;
     AudioSource audioSource;
-    bool agentPaused = false;
+    bool agentPaused = true;
 	#endregion
 	
 	

@@ -17,13 +17,13 @@ public class HealthbarUpdater : MonoBehaviour
     [SerializeField] float punchDuration = 0.3f;
 
     [Header("References in Prefab")]
-    [SerializeField] RectTransform heroHealthbar;
-    [SerializeField] RectTransform bossHealthbar;
-    [SerializeField] RectTransform middleImage;
+    [SerializeField] RectTransform heroHealthbar = null;
+    [SerializeField] RectTransform bossHealthbar = null;
+    [SerializeField] RectTransform middleImage = null;
 
     [Header("General References")]
-    [SerializeField] Sprite winBoss;
-    [SerializeField] Sprite winHeroes;
+    [SerializeField] Sprite winBoss = null;
+    [SerializeField] Sprite winHeroes = null;
     [SerializeField] Points points = null;
 
     float neutralWidth;

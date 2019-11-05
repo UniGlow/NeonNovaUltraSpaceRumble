@@ -17,12 +17,12 @@ public class TitleScreenManager : LevelManager
     [SerializeField] float delayBetweenWords = 1f;
     [SerializeField] float fadeInTime = 0.6f;
     [SerializeField] float delayAfterCompletion = 3f;
-    [SerializeField] bool screenshotMode;
+    [SerializeField] bool screenshotMode = false;
 
     [Space]
-    [SerializeField] List<TextMeshProUGUI> textFields;
-    [SerializeField] List<string> words;
-    [SerializeField] List<Color> colors;
+    [SerializeField] List<TextMeshProUGUI> textFields = null;
+    [SerializeField] List<string> words = null;
+    [SerializeField] List<Color> colors = null;
 
     float timer;
     int currentWord;
@@ -45,7 +45,7 @@ public class TitleScreenManager : LevelManager
 
         if (timer >= delayBetweenWords * delayAfterCompletion && currentWord >= numberOfWords && !nextSceneLoaded)
         {
-            SceneManager.Instance.LoadNextScene();
+            SceneManager.Instance.LoadMainMenu();
             nextSceneLoaded = true;
         }
 

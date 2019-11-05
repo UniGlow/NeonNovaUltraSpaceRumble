@@ -22,7 +22,7 @@ public class Character : MonoBehaviour
     protected float verticalMovement;
     protected float horizontalLook;
     protected float verticalLook;
-    protected bool active = true;
+    protected bool active = false;
 
     // Component References
     protected new Rigidbody rigidbody;
