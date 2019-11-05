@@ -766,8 +766,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114843260671403338, guid: c960190ecc1261249afa261cb260fe2f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c960190ecc1261249afa261cb260fe2f, type: 3}
+--- !u!1 &1121186095 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1406122196359206, guid: c960190ecc1261249afa261cb260fe2f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1121186094}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1121186096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1121186095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64ecf0d49518b4a4e942bbdfa6d89d64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossPlayerConfig: {fileID: 11400000, guid: ca08c440eca8d854190afe2ee3e321e7, type: 2}
+  hero1PlayerConfig: {fileID: 11400000, guid: 0d24b38cff3ab7645a78e798c43bbfd7, type: 2}
+  hero2PlayerConfig: {fileID: 11400000, guid: d6c98b3edc55ae84cb27c6305d3154cd, type: 2}
+  hero3PlayerConfig: {fileID: 11400000, guid: d4656183e05243d4bab4bc739760ed99, type: 2}
+  colorSet: {fileID: 11400000, guid: 68d47b220c1450a46a2330237d217b40, type: 2}
+  ability1: {fileID: 11400000, guid: c3a8eab940a7e934e8c41e8e444f06ca, type: 2}
+  ability2: {fileID: 11400000, guid: a4451c0694acc7e44b35144d52e4bbed, type: 2}
+  ability3: {fileID: 11400000, guid: 0247d2ab78a5bf148811c5c43bcfc496, type: 2}
 --- !u!1 &1178707304
 GameObject:
   m_ObjectHideFlags: 0

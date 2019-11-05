@@ -24,7 +24,7 @@ public class PlayerReadyUpdater : MonoBehaviour
 	
 	
 	#region Unity Event Functions
-	private void Start () 
+	private void Awake () 
 	{
         readyStates = new ReadyState[4];
         for (int i = 0; i < readyStates.Length; i++)
@@ -35,8 +35,6 @@ public class PlayerReadyUpdater : MonoBehaviour
                 readyText = transform.GetChild(i).GetChild(1).GetComponent<TextMeshProUGUI>()
             };
         }
-
-        
 	}
 	#endregion
 	

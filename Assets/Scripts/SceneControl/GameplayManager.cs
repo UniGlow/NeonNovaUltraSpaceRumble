@@ -66,17 +66,6 @@ public class GameplayManager : LevelManager
 
 
     #region Inherited Functions
-    /*protected override void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
-    {
-        if (mode == LoadSceneMode.Single)
-        {
-            RaiseLevelInitialized(4f);
-            points.ResetPoints(false);
-
-            StartCoroutine(InitializeLevel());
-        }
-    }*/
-
     protected override void RaiseLevelInitialized(float levelStartDelay)
     {
         base.RaiseLevelInitialized(levelStartDelay);

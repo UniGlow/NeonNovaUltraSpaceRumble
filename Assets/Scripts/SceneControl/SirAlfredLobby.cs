@@ -132,15 +132,6 @@ public class SirAlfredLobby : LevelManager
 
 
     #region Inherited Functions
-    /*protected override void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
-    {
-        Initialize();
-
-        RaiseLevelInitialized(timeTillLevelStart);
-
-        Invoke("RaiseLevelStarted", timeTillLevelStart);
-    }*/
-
     protected override void RaiseLevelInitialized(float levelStartDelay)
     {
         base.RaiseLevelInitialized(levelStartDelay);

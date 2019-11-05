@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4288050773798458}
   - component: {fileID: 114843260671403338}
-  - component: {fileID: 1272553998}
   m_Layer: 0
   m_Name: EditorLevelStarter
   m_TagString: Untagged
@@ -41,7 +40,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1406122196359206}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 846f57fe8c459684dbddd947c1ef60ce, type: 3}
+  m_Script: {fileID: 11500000, guid: 64ecf0d49518b4a4e942bbdfa6d89d64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bossPlayerConfig: {fileID: 11400000, guid: ca08c440eca8d854190afe2ee3e321e7, type: 2}
@@ -49,40 +48,9 @@ MonoBehaviour:
   hero2PlayerConfig: {fileID: 11400000, guid: d6c98b3edc55ae84cb27c6305d3154cd, type: 2}
   hero3PlayerConfig: {fileID: 11400000, guid: d4656183e05243d4bab4bc739760ed99, type: 2}
   colorSet: {fileID: 11400000, guid: 68d47b220c1450a46a2330237d217b40, type: 2}
-  ability1: {fileID: 11400000, guid: a4451c0694acc7e44b35144d52e4bbed, type: 2}
-  ability2: {fileID: 11400000, guid: c3a8eab940a7e934e8c41e8e444f06ca, type: 2}
+  ability1: {fileID: 11400000, guid: c3a8eab940a7e934e8c41e8e444f06ca, type: 2}
+  ability2: {fileID: 11400000, guid: a4451c0694acc7e44b35144d52e4bbed, type: 2}
   ability3: {fileID: 11400000, guid: 0247d2ab78a5bf148811c5c43bcfc496, type: 2}
---- !u!114 &1272553998
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1406122196359206}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: 4ccd4681e54ddf24fb501d2a15f51590, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114843260671403338}
-        m_MethodName: Initialize
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  linkedMethods: []
-  ignoreEventParameters: 1
 --- !u!1 &1491103438566612
 GameObject:
   m_ObjectHideFlags: 0

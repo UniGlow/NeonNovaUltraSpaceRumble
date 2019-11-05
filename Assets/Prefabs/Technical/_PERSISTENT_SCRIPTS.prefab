@@ -550,9 +550,15 @@ MonoBehaviour:
   tutorial:
     sceneAsset: {fileID: 102900000, guid: b837dcee6af5f1b448a2bdedb88141d4, type: 3}
     scenePath: Assets/Scenes/Tutorial.unity
-  ui:
+  uiLevel:
     sceneAsset: {fileID: 102900000, guid: fdd8b6d462605b0439d91bf7382d1c18, type: 3}
     scenePath: Assets/Scenes/UILevel.unity
+  uiLobby:
+    sceneAsset: {fileID: 102900000, guid: 26ddaa2e2b9eb2f47a441d2053afa0db, type: 3}
+    scenePath: Assets/Scenes/UILobby.unity
+  uiCredits:
+    sceneAsset: {fileID: 102900000, guid: 7933299e2ef63134581d1c40c5075fa5, type: 3}
+    scenePath: Assets/Scenes/UICredits.unity
   levels:
   - sceneAsset: {fileID: 102900000, guid: 50b3a1d7947ffc345abfefec9e79fbbf, type: 3}
     scenePath: Assets/Scenes/Level001.unity

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: LevelLoaded
   m_EditorClassIdentifier: 
   debugMode: 0
-  description: 
+  description: Gets Raised when all Scenes are loaded (only in Levels & Credits &
+    Lobby)
   parameter1Type:
     data: ff
   parameter2Type:

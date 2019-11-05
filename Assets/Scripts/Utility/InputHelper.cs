@@ -64,7 +64,7 @@ public static class InputHelper
     }
 
     /// <summary>
-    /// Updates the player count.
+    /// Updates the player count depending on connected Joysticks.
     /// </summary>
     /// <returns>Returns the number of currently active players.</returns>
     public static int UpdatePlayerCount()

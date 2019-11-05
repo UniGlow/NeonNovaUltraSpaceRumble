@@ -30,15 +30,11 @@ public abstract class LevelManager : MonoBehaviour
     #region Unity Event Functions
     protected void OnEnable () 
 	{
-        //UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnLevelFinishedLoading;
-
         InheritedOnEnable();
     }
 
     protected void OnDisable()
     {
-        //UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnLevelFinishedLoading;
-
         InheritedOnDisable();
     }
     #endregion
@@ -52,8 +48,6 @@ public abstract class LevelManager : MonoBehaviour
 
 
     #region Protected Functions
-    //protected virtual void OnLevelFinishedLoading(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode) { }
-
     protected virtual void RaiseLevelInitialized(float levelStartDelay)
     {
         levelInitializedEvent.Raise(this, levelStartDelay);

@@ -1,4 +1,5 @@
 ﻿#if UNITY_EDITOR
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,23 +7,12 @@ using UnityEngine;
 /// <summary>
 /// 
 /// </summary>
-public class EditorLevelStarter : MonoBehaviour 
+public abstract class EditorLevelStarter : MonoBehaviour 
 {
-
     #region Variable Declarations
+    public static EditorLevelStarter Instance = null;
     // Serialized Fields
-    [SerializeField] PlayerConfig bossPlayerConfig = null;
-    [SerializeField] PlayerConfig hero1PlayerConfig = null;
-    [SerializeField] PlayerConfig hero2PlayerConfig = null;
-    [SerializeField] PlayerConfig hero3PlayerConfig = null;
-
-    [Space]
-    [SerializeField] ColorSet colorSet = null;
-
-    [Space]
-    [SerializeField] Ability ability1 = null;
-    [SerializeField] Ability ability2 = null;
-    [SerializeField] Ability ability3 = null;
+    
     // Private
 
     #endregion
@@ -36,10 +26,11 @@ public class EditorLevelStarter : MonoBehaviour
 
 
     #region Unity Event Functions
-    private void Start()
+    protected void Awake()
     {
-        if(UnityEngine.SceneManagement.SceneManager.sceneCount <= 1)
-            SceneManager.Instance.LoadUIAdditive();
+        if (Instance == null)
+            Instance = this;
+        InheritedAwake();
     }
     #endregion
 
@@ -52,19 +43,10 @@ public class EditorLevelStarter : MonoBehaviour
 
 
     #region Private Functions
-    public void Initialize()
+    public abstract void Initialize();
+    protected virtual void InheritedAwake()
     {
-        if (!GameManager.Instance.IsInitialized)
-        {
-            SetupPlayers();
-        }
-    }
 
-    private void SetupPlayers()
-    {
-        int playerCount = InputHelper.UpdatePlayerCount();
-        // Set playerNumbers depending on amount of human players
-        PlayerSetup.SetupPlayers(playerCount, bossPlayerConfig, hero1PlayerConfig, hero2PlayerConfig, hero3PlayerConfig, ability1, ability2, ability3, colorSet);
     }
     #endregion
 
@@ -80,5 +62,4 @@ public class EditorLevelStarter : MonoBehaviour
 
     #endregion
 }
-
 #endif

@@ -19,7 +19,9 @@ public class SceneManager : MonoBehaviour
     [SerializeField] SceneReference credits = null;
     [SerializeField] SceneReference title = null;
     [SerializeField] SceneReference tutorial = null;
-    [SerializeField] SceneReference ui = null;
+    [SerializeField] SceneReference uiLevel = null;
+    [SerializeField] SceneReference uiLobby = null;
+    [SerializeField] SceneReference uiCredits = null;
     [Space]
     [SerializeField] List<SceneReference> levels = new List<SceneReference>();
 
@@ -165,9 +167,23 @@ public class SceneManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(lobby);
     }
 
+    /// <summary>
+    /// Only use this for EditorStartup!
+    /// </summary>
     public void LoadUIAdditive()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(ui, LoadSceneMode.Additive);
+        Scene activeScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+        if (lobby.Equals(activeScene))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(uiLobby, LoadSceneMode.Additive);
+        }else if (credits.Equals(activeScene))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(uiCredits, LoadSceneMode.Additive);
+        }
+        else
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(uiLevel, LoadSceneMode.Additive);
+        }
     }
     #endregion
 
@@ -176,9 +192,14 @@ public class SceneManager : MonoBehaviour
     #region Private Functions
     protected void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
-        if (!ui.Equals(scene))
+#if UNITY_EDITOR
+        if (mode != LoadSceneMode.Additive)
         {
-            Debug.Log("Raising LevelLoaded");
+            EditorLevelStarter.Instance.Initialize();
+        }
+#endif
+        if (mode == LoadSceneMode.Additive)
+        {
             RaiseLevelLoaded();
         }
     }
