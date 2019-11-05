@@ -13,7 +13,7 @@ public class PopUpTextController : MonoBehaviour
 
     #region Variable Declarations
     // Serialized Fields
-    [SerializeField] private TextMeshProUGUI text;
+    [SerializeField] private TextMeshProUGUI text = null;
     [SerializeField] private float maxSize = 1f;
     [SerializeField] private float popUpAnimationDuration = 0.7f;
     [SerializeField] private string bossWinText = "Boss wins!";

@@ -13,15 +13,18 @@ public class CreditsManager : LevelManager
     #region Variable Declarations
     [SerializeField] MusicTrack backgroundTrack = null;
     [SerializeField] Points points = null;
-	#endregion
-	
-	
-	
-	#region Unity Event Functions
-	private void Start()
+
+    List<InputHelper.PlayerRuleSet> ruleSets = new List<InputHelper.PlayerRuleSet>();
+    #endregion
+
+
+
+    #region Unity Event Functions
+    private void Start()
     {
         StartCoroutine(StartAudioNextFrame());
-	}
+        ruleSets = InputHelper.ChangeRuleSetForAllPlayers(RewiredConsts.LayoutManagerRuleSet.RULESETMENU);
+    }
 	
 	private void Update()
     {
@@ -30,21 +33,30 @@ public class CreditsManager : LevelManager
             SceneManager.Instance.LoadMainMenu();
         }
 	}
+
+    protected override void InheritedOnDisable()
+    {
+        InputHelper.ChangeRuleSetForPlayers(ruleSets);
+    }
+    #endregion
+
+
+
+    #region Public Functions
+    public void Initialize()
+    {
+        points.ResetPoints(true);
+        RaiseLevelInitialized(0f);
+        Invoke("RaiseLevelStarted", 0.01f);
+    }
     #endregion
 
 
 
     #region Inherited Functions
-    protected override void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+    protected override void RaiseLevelInitialized(float levelStartDelay)
     {
-        points.ResetPoints(true);
-
-        Invoke("RaiseLevelStarted", 3f);
-    }
-
-    protected override void RaiseLevelLoaded(float levelStartDelay)
-    {
-        base.RaiseLevelLoaded(levelStartDelay);
+        base.RaiseLevelInitialized(levelStartDelay);
     }
 
     protected override void RaiseLevelStarted()

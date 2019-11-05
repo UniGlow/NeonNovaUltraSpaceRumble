@@ -9,11 +9,11 @@ public class Pause : MonoBehaviour
 {
     
 
-    [SerializeField] GameObject pauseMenu;
-    [SerializeField] GameObject mainMenu;
-    [SerializeField] GameObject optionsMenu;
-    [SerializeField] GameObject resumeButton;
-    [SerializeField] EventSystem eventSystem;
+    [SerializeField] GameObject pauseMenu = null;
+    [SerializeField] GameObject mainMenu = null;
+    [SerializeField] GameObject optionsMenu = null;
+    [SerializeField] GameObject resumeButton = null;
+    [SerializeField] EventSystem eventSystem = null;
 
     [Header("References")]
     [SerializeField] GameEvent gamePausedEvent = null;
