@@ -7,10 +7,10 @@ using UnityEngine;
 /// </summary>
 public class EditorLevelStarterNonLevel : EditorLevelStarter 
 {
-	
-	#region Variable Declarations
-	// Serialized Fields
-	
+
+    #region Variable Declarations
+    // Serialized Fields
+    [SerializeField] SceneReference uI = null;
 	// Private
 	
 	#endregion
@@ -34,7 +34,7 @@ public class EditorLevelStarterNonLevel : EditorLevelStarter
     {
         if (!GameManager.Instance.IsInitialized && UnityEngine.SceneManagement.SceneManager.sceneCount <= 1)
         {
-            SceneManager.Instance.LoadUIAdditive();
+            SceneManager.Instance.LoadUIAdditive(uI);
         }
     }
 	#endregion

@@ -1913,6 +1913,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fcd69a5feca06b418465948592a0219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uI:
+    sceneAsset: {fileID: 102900000, guid: 26ddaa2e2b9eb2f47a441d2053afa0db, type: 3}
+    scenePath: Assets/Scenes/UILobby.unity
 --- !u!1001 &1508378691
 PrefabInstance:
   m_ObjectHideFlags: 0

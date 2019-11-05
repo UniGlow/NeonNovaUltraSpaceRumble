@@ -897,16 +897,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 0247d2ab78a5bf148811c5c43bcfc496,
         type: 2}
-    - target: {fileID: 114869992998677828, guid: 925e3a17bcf7ee843a48b6cbe697aab6,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114869992998677828, guid: 925e3a17bcf7ee843a48b6cbe697aab6,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0.0069999998
-      objectReference: {fileID: 0}
     - target: {fileID: 224581387714022626, guid: 925e3a17bcf7ee843a48b6cbe697aab6,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -921,6 +911,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114869992998677828, guid: 925e3a17bcf7ee843a48b6cbe697aab6,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114869992998677828, guid: 925e3a17bcf7ee843a48b6cbe697aab6,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.0069999998
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114658714563021212, guid: 925e3a17bcf7ee843a48b6cbe697aab6, type: 3}
@@ -1987,6 +1987,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fcd69a5feca06b418465948592a0219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uI:
+    sceneAsset: {fileID: 102900000, guid: 7933299e2ef63134581d1c40c5075fa5, type: 3}
+    scenePath: Assets/Scenes/UICredits.unity
 --- !u!1001 &1929296616
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -32,6 +32,7 @@ public class SceneManager : MonoBehaviour
     [SerializeField] GameEvent levelLoadedEvent = null;
 
     // Private
+    
     #endregion
 
 
@@ -138,8 +139,16 @@ public class SceneManager : MonoBehaviour
 
     public void ReloadLevel()
     {
+        bool loadUIAdditive = false;
+        int uiToLoad = 0;
+        if (UnityEngine.SceneManagement.SceneManager.sceneCount == 2)
+        {
+            loadUIAdditive = true;
+            uiToLoad = UnityEngine.SceneManagement.SceneManager.GetSceneAt(1).buildIndex;
+        }
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
-        LoadUIAdditive();
+        if (loadUIAdditive)
+            UnityEngine.SceneManagement.SceneManager.LoadScene(uiToLoad, LoadSceneMode.Additive);
     }
 
     public void LoadMainMenu()
@@ -150,7 +159,7 @@ public class SceneManager : MonoBehaviour
     public void LoadCredits()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(credits);
-        LoadUIAdditive();
+        LoadUIAdditive(uiCredits);
     }
 
     public void LoadTitleScreen()
@@ -166,21 +175,17 @@ public class SceneManager : MonoBehaviour
     public void LoadLobby()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(lobby);
-        LoadUIAdditive();
+        LoadUIAdditive(uiLobby);
     }
 
     /// <summary>
     /// Only use this for EditorStartup!
     /// </summary>
-    public void LoadUIAdditive()
+    public void LoadUIAdditive(SceneReference sceneToLoad = null)
     {
-        Scene activeScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
-        if (lobby.Equals(activeScene))
+        if (sceneToLoad != null)
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(uiLobby, LoadSceneMode.Additive);
-        }else if (credits.Equals(activeScene))
-        {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(uiCredits, LoadSceneMode.Additive);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneToLoad, LoadSceneMode.Additive);
         }
         else
         {
