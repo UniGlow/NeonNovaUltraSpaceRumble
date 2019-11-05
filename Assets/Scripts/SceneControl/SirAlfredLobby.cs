@@ -17,7 +17,6 @@ public class SirAlfredLobby : LevelManager
     [Header("Miscellaneous")]
     [SerializeField] float timeTillLevelStart = 1f;
     [SerializeField] float timeTillIdle = 5f;
-    [SerializeField] PlayerReadyUpdater playerReadyUpdater = null;
     [SerializeField] AudioMixer masterMixer = null;
     [SerializeField] MusicTrack backgroundTrack = null;
     [Range(0f,2f)]
@@ -37,6 +36,9 @@ public class SirAlfredLobby : LevelManager
     [SerializeField] Ability damageAbility = null;
     [SerializeField] Ability tankAbility = null;
     [SerializeField] Ability victimAbility = null;
+
+    [Header("Game Events")]
+    [SerializeField] GameEvent playerStateChangedEvent = null;
 
     List<bool> playerConfirms = new List<bool>();
     float idleTimer;
@@ -74,7 +76,6 @@ public class SirAlfredLobby : LevelManager
     private void Update ()
     {
         UpdatePlayerConfirmsList();
-        playerReadyUpdater.UpdateUIElements(playerCount);
 
         // Load next scene if all players are ready
         int ready = 0;
@@ -100,7 +101,7 @@ public class SirAlfredLobby : LevelManager
             if (ReInput.players.Players[i].GetButtonDown(RewiredConsts.Action.READY_UP))
             {
                 playerConfirms[i] = !playerConfirms[i];
-                playerReadyUpdater.UpdateState(i, playerConfirms[i]);
+                RaisePlayerStateChanged(i, playerConfirms[i]);
             }
         }
 
@@ -200,6 +201,14 @@ public class SirAlfredLobby : LevelManager
     }
     #endregion
 
+
+
+    #region Event Raiser
+    void RaisePlayerStateChanged(int playerNumber, bool state)
+    {
+        playerStateChangedEvent.Raise(this, playerNumber, state);
+    }
+    #endregion
 
 
     #region Coroutines

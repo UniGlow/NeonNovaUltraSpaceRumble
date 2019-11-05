@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: LevelInitialized
   m_EditorClassIdentifier: 
   debugMode: 1
-  description: Gets Raised by LevelManager after LevelLoaded & Level Initialization
-    is completed
+  description: 'Gets Raised by LevelManager after LevelLoaded & Level Initialization
+    is completed.
+
+    Param: Time (in seconds) until LevelStarted gets called'
   parameter1Type:
     data: 005a53797374656d2e53696e676c652c206d73636f726c69622c2056657273696f6e3d342e302e302e302c2043756c747572653d6e65757472616c2c205075626c69634b6579546f6b656e3d62373761356335363139333465303839
   parameter2Type:

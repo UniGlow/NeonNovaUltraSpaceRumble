@@ -1246,7 +1246,6 @@ MonoBehaviour:
   levelStartedEvent: {fileID: 11400000, guid: a93bef75cc487ef48b9411ec84a74c73, type: 2}
   timeTillLevelStart: 1
   timeTillIdle: 15
-  playerReadyUpdater: {fileID: 0}
   masterMixer: {fileID: 24100000, guid: e213e6dc1e1471a4189369ba1ec91b45, type: 2}
   backgroundTrack: {fileID: 11400000, guid: dc118b1a3d2f334428767bcd546f7dac, type: 2}
   sfxVolumeDamp: 0.2
@@ -1259,6 +1258,8 @@ MonoBehaviour:
   damageAbility: {fileID: 11400000, guid: c3a8eab940a7e934e8c41e8e444f06ca, type: 2}
   tankAbility: {fileID: 11400000, guid: a4451c0694acc7e44b35144d52e4bbed, type: 2}
   victimAbility: {fileID: 11400000, guid: 0247d2ab78a5bf148811c5c43bcfc496, type: 2}
+  playerStateChangedEvent: {fileID: 11400000, guid: 411ed047da69e7547a044f8588816b4f,
+    type: 2}
 --- !u!4 &483622205
 Transform:
   m_ObjectHideFlags: 0

@@ -55,8 +55,10 @@ public class PlayerReadyUpdater : MonoBehaviour
         }
     }
 
-    public void UpdateUIElements(int playerCount)
+    public void UpdateUIElements()
     {
+        int playerCount = InputHelper.UpdatePlayerCount();
+
         if (playerCount == this.playerCount)
         {
             return;
