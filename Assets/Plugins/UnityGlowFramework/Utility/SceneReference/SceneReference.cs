@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -192,7 +193,7 @@ public class SceneReference : ISerializationCallbackReceiver
             return sceneAsset.name;
         }
 #else
-		return Path.GetFileNameWithoutExtension(scenePath);
+        return Path.GetFileNameWithoutExtension(scenePath);
 #endif
     }
 }
