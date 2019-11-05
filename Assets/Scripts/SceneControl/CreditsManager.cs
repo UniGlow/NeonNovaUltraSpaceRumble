@@ -13,8 +13,6 @@ public class CreditsManager : LevelManager
     #region Variable Declarations
     [SerializeField] MusicTrack backgroundTrack = null;
     [SerializeField] Points points = null;
-    [SerializeField] PlayerConfig creditsAIPlayerConfig = null;
-    [SerializeField] HeroAI creditsAI = null;
 	#endregion
 	
 

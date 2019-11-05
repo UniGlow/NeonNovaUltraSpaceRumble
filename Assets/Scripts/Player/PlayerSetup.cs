@@ -11,7 +11,6 @@ public static class PlayerSetup
         switch (playerCount)
         {
             case 1:
-                Debug.Log(ReInput.players.GetPlayer(0).descriptiveName);
                 bossPlayerConfig.Initialize(ReInput.players.GetPlayer(0), 0, Faction.Boss, colorSet.GetRandomColor(), false);
                 ReInput.players.GetPlayer(0).isPlaying = true;
                 hero1PlayerConfig.Initialize(ReInput.players.GetPlayer(1), 1, Faction.Heroes, colorSet.color1, true);
