@@ -150,6 +150,7 @@ public class SceneManager : MonoBehaviour
     public void LoadCredits()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(credits);
+        LoadUIAdditive();
     }
 
     public void LoadTitleScreen()
@@ -165,6 +166,7 @@ public class SceneManager : MonoBehaviour
     public void LoadLobby()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(lobby);
+        LoadUIAdditive();
     }
 
     /// <summary>
@@ -195,7 +197,8 @@ public class SceneManager : MonoBehaviour
 #if UNITY_EDITOR
         if (mode != LoadSceneMode.Additive)
         {
-            EditorLevelStarter.Instance.Initialize();
+            if(EditorLevelStarter.Instance != null)
+                EditorLevelStarter.Instance.Initialize();
         }
 #endif
         if (mode == LoadSceneMode.Additive)

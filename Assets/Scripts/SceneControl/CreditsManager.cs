@@ -13,12 +13,14 @@ public class CreditsManager : LevelManager
     #region Variable Declarations
     [SerializeField] MusicTrack backgroundTrack = null;
     [SerializeField] Points points = null;
+    [SerializeField] PlayerConfig creditsAIPlayerConfig = null;
+    [SerializeField] HeroAI creditsAI = null;
 	#endregion
 	
-	
-	
-	#region Unity Event Functions
-	private void Start()
+
+
+    #region Unity Event Functions
+    private void Start()
     {
         StartCoroutine(StartAudioNextFrame());
 	}
@@ -39,20 +41,13 @@ public class CreditsManager : LevelManager
     {
         points.ResetPoints(true);
         RaiseLevelInitialized(0f);
-        Invoke("RaiseLevelStarted", 3f);
+        Invoke("RaiseLevelStarted", 0.01f);
     }
     #endregion
 
 
 
     #region Inherited Functions
-    /*protected override void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
-    {
-        points.ResetPoints(true);
-
-        Invoke("RaiseLevelStarted", 3f);
-    }*/
-
     protected override void RaiseLevelInitialized(float levelStartDelay)
     {
         base.RaiseLevelInitialized(levelStartDelay);

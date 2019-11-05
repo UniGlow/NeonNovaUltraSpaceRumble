@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// 
 /// </summary>
-public class EditorLevelStarterLobby : EditorLevelStarter 
+public class EditorLevelStarterNonLevel : EditorLevelStarter 
 {
 	
 	#region Variable Declarations
