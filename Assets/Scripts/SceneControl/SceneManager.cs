@@ -141,12 +141,15 @@ public class SceneManager : MonoBehaviour
     {
         bool loadUIAdditive = false;
         int uiToLoad = 0;
+        // if more then one Scene is open (UI Scene)
         if (UnityEngine.SceneManagement.SceneManager.sceneCount == 2)
         {
             loadUIAdditive = true;
+            // Then get that UI Scene's build Index
             uiToLoad = UnityEngine.SceneManagement.SceneManager.GetSceneAt(1).buildIndex;
         }
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+        // And Reload it Additive after the Active Scene loading is started
         if (loadUIAdditive)
             UnityEngine.SceneManagement.SceneManager.LoadScene(uiToLoad, LoadSceneMode.Additive);
     }
