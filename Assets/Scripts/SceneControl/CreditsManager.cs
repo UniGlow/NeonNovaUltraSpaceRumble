@@ -13,15 +13,18 @@ public class CreditsManager : LevelManager
     #region Variable Declarations
     [SerializeField] MusicTrack backgroundTrack = null;
     [SerializeField] Points points = null;
-	#endregion
-	
+
+    List<InputHelper.PlayerRuleSet> ruleSets = new List<InputHelper.PlayerRuleSet>();
+    #endregion
+
 
 
     #region Unity Event Functions
     private void Start()
     {
         StartCoroutine(StartAudioNextFrame());
-	}
+        ruleSets = InputHelper.ChangeRuleSetForAllPlayers(RewiredConsts.LayoutManagerRuleSet.RULESETMENU);
+    }
 	
 	private void Update()
     {
@@ -30,6 +33,11 @@ public class CreditsManager : LevelManager
             SceneManager.Instance.LoadMainMenu();
         }
 	}
+
+    protected override void InheritedOnDisable()
+    {
+        InputHelper.ChangeRuleSetForPlayers(ruleSets);
+    }
     #endregion
 
 
