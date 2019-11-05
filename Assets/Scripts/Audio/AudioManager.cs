@@ -84,6 +84,8 @@ public class AudioManager : MonoBehaviour
         audioSourceMusic.loop = false;
         audioSourceMusic.Play();
         StartCoroutine(StartAudioLoop(track));
+
+        RaiseSongChanged(track.artist, track.title);
     }
 
     public void StartTrack(MusicTrack track)
@@ -96,6 +98,8 @@ public class AudioManager : MonoBehaviour
         audioSourceMusic.loop = false;
         audioSourceMusic.Play();
         StartCoroutine(StartAudioLoop(track));
+
+        RaiseSongChanged(track.artist, track.title);
     }
 
     public void StartTitleTrack()
@@ -108,6 +112,8 @@ public class AudioManager : MonoBehaviour
         audioSourceMusic.loop = false;
         audioSourceMusic.Play();
         StartCoroutine(StartAudioLoop(titleTrack));
+
+        RaiseSongChanged(titleTrack.artist, titleTrack.title);
     }
 
     public void StartTutorialTrack()
@@ -120,6 +126,8 @@ public class AudioManager : MonoBehaviour
         audioSourceMusic.loop = false;
         audioSourceMusic.Play();
         StartCoroutine(StartAudioLoop(tutorialTrack));
+
+        RaiseSongChanged(tutorialTrack.artist, tutorialTrack.title);
     }
 
     public void StartRandomTrack()
