@@ -45,6 +45,21 @@ public class Transmission : MonoBehaviour
     [SerializeField]
     protected float transmissionSoundVolume = 1f;
 
+    [Header("Rumble")]
+    [Tooltip("Rumble strength when a hero is targeted for a switch by another hero.")]
+    [Range(0f, 1f)]
+    [SerializeField] protected float rumbleStrengthInRangeDeep = 0.2f;
+    [Tooltip("Rumble strength when a hero is targeted for a switch by another hero.")]
+    [Range(0f, 1f)]
+    [SerializeField] protected float rumbleStrengthInRangeHigh = 0.2f;
+
+    [Space]
+    [Range(0f, 1f)]
+    [SerializeField] protected float rumbleStrengthOnSwitchDeep = 0.4f;
+    [Range(0f, 1f)]
+    [SerializeField] protected float rumbleStrengthOnSwitchHigh = 0.4f;
+    [SerializeField] protected float rumbleDurationOnSwitch = 0.4f;
+
     [Header("Mesh Blink")]
     [Range(0f,10f)]
     [SerializeField] protected float inRangeColorMultiplier = 1f;
@@ -301,6 +316,9 @@ public class Transmission : MonoBehaviour
             AudioManager.Instance.BendTime(musicPitchStrength, transmissionDuration * slowMotionFadeInDuration);
         }
 
+        hero.PlayerConfig.Player.SetVibration(0, rumbleStrengthOnSwitchDeep, rumbleDurationOnSwitch);
+        hero.PlayerConfig.Player.SetVibration(1, rumbleStrengthOnSwitchHigh, rumbleDurationOnSwitch);
+
         // Blinking Hero
         playerMat.DOBlendableColor(playerMat.color * switchColorMultiplier, (blinkDuration * transmissionDuration) / 2).SetUpdate(true).OnComplete(() => 
         {
@@ -430,6 +448,8 @@ public class Transmission : MonoBehaviour
     {
         receiver.transmitter.isTargeted = true;
         receiver.transmitter.playerMat.DOBlendableColor(receiver.color * inRangeColorMultiplier, 0.3f);
+        receiver.transmitter.hero.PlayerConfig.Player.SetVibration(0, rumbleStrengthInRangeDeep);
+        receiver.transmitter.hero.PlayerConfig.Player.SetVibration(1, rumbleStrengthInRangeHigh);
         receivers.Add(receiver);
     }
 
@@ -437,6 +457,8 @@ public class Transmission : MonoBehaviour
     {
         receiver.transmitter.isTargeted = false;
         receiver.transmitter.playerMat.DOBlendableColor(receiver.color, 0.3f);
+        if (rumbleStrengthInRangeDeep > 0f) receiver.transmitter.hero.PlayerConfig.Player.SetVibration(0, 0f);
+        if (rumbleStrengthInRangeHigh > 0f) receiver.transmitter.hero.PlayerConfig.Player.SetVibration(1, 0f);
         receivers.Remove(receiver);
     }
 

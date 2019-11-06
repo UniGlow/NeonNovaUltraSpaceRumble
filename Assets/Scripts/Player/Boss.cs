@@ -40,6 +40,13 @@ public class Boss : Character
     [SerializeField] protected float abilityAnnounceDuration = 3f;
     [SerializeField] protected Ease meshBlinkEaseType = Ease.InOutCubic;
 
+    [Header("Rumble")]
+    [Range(0f, 1f)]
+    [SerializeField] float rumbleStrengthDeep = 1f;
+    [Range(0f, 1f)]
+    [SerializeField] float rumbleStrengthHigh = 1f;
+    [SerializeField] float rumbleDuration = 0.5f;
+
     [Header("Properties")]
     [SerializeField] float materialGlowOnSwitch = 3f;
 
@@ -193,7 +200,7 @@ public class Boss : Character
 
             characterStats.ModifySpeed(characterStats.Speed * (1 - movementSpeedReduction));
 
-            bossMeshRenderer.material.DOBlendableColor(PlayerConfig.ColorConfig.bossMaterial.color * colorMultiplierBeforeAbility, abilityAnnounceDuration).SetEase(meshBlinkEaseType).OnComplete(() => 
+            bossMeshRenderer.material.DOBlendableColor(PlayerConfig.ColorConfig.bossMaterial.color * colorMultiplierBeforeAbility, abilityAnnounceDuration).SetEase(meshBlinkEaseType).OnComplete(() =>
             {
                 bossMeshRenderer.material.DOBlendableColor(PlayerConfig.ColorConfig.bossMaterial.color, 0.1f);
                 StartCoroutine(ShootNovas(numberOfNovas, timeBetweenNovas, () =>
@@ -206,7 +213,7 @@ public class Boss : Character
             });
         }
     }
-    
+
     void SetWeaknessColor(PlayerColor playerColor)
     {
         playerConfig.ColorConfig = playerColor;
@@ -255,6 +262,8 @@ public class Boss : Character
 
         audioSource.PlayOneShot(abilitySound, abilitySoundVolume);
         if (enableCameraShake) EZCameraShake.CameraShaker.Instance.ShakeOnce(magnitude, roughness, fadeIn, fadeOut);
+        playerConfig.Player.SetVibration(0, rumbleStrengthDeep, rumbleDuration);
+        playerConfig.Player.SetVibration(1, rumbleStrengthHigh, rumbleDuration);
     }
     #endregion
 
@@ -276,7 +285,7 @@ public class Boss : Character
         attackCooldownB = true;
     }
 
-    protected IEnumerator ResetAbilityCooldown() 
+    protected IEnumerator ResetAbilityCooldown()
     {
         yield return new WaitForSeconds(abilityCooldown);
         abilityCooldownB = true;
