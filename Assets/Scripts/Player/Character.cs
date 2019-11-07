@@ -97,7 +97,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    public virtual void ResetCooldowns() { }
+    public virtual void ResetCooldowns(bool maximum) { }
     #endregion
 
 

@@ -177,6 +177,23 @@ public class Boss : Character
     {
         characterStats.ResetSpeed();
     }
+
+    public override void ResetCooldowns(bool maximum)
+    {
+        base.ResetCooldowns(maximum);
+        if (!maximum)
+        {
+            cooldownTimer = 0f;
+            cooldownIndicator.fillAmount = 0f;
+            abilityCooldownB = false;
+        }
+        else
+        {
+            cooldownTimer = abilityCooldown;
+            cooldownIndicator.fillAmount = 1f;
+            abilityCooldownB = true;
+        }
+    }
     #endregion
 
 

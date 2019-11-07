@@ -12,8 +12,8 @@ public class CharacterStats : ScriptableObject
 
     #region Variable Declarations
     // Serialized Fields
-    [SerializeField] float speed;
-    [SerializeField] float rotationSpeed;
+    [SerializeField] float speed = 0f;
+    [SerializeField] float rotationSpeed = 0f;
 
     // Private
     float originalSpeed = 0f;

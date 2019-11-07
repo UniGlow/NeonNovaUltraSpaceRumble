@@ -85,10 +85,15 @@ public class Hero : Character
         playerMesh.mesh = ability.Mesh;
     }
 
-    public override void ResetCooldowns()
+    /// <summary>
+    /// Resets the cooldowns (time- and energy-based).
+    /// </summary>
+    /// <remarks>Only calls function in ability ScriptableObject, but needs to be present on an instantiated GameObject to receive GameEvents.</remarks>
+    /// <param name="maximum">If true, sets cooldowns to maximum values (ready state). If false, sets cooldowns to 0.</param>
+    public override void ResetCooldowns(bool maximum)
     {
-        base.ResetCooldowns();
-        PlayerConfig.ability.ResetCooldowns(true);
+        base.ResetCooldowns(maximum);
+        PlayerConfig.ability.ResetCooldowns(maximum);
     }
     #endregion
 
