@@ -30,6 +30,13 @@ public class HomingMissile : MonoBehaviour
     [SerializeField] float fadeIn = 0.1f;
     [SerializeField] float fadeOut = 0.8f;
 
+    [Header("Rumble")]
+    [Range(0f,1f)]
+    [SerializeField] float rumbleStrengthDeep = 1f;
+    [Range(0f, 1f)]
+    [SerializeField] float rumbleStrengthHigh = 1f;
+    [SerializeField] float rumbleDuration = 0.5f;
+
     [Header("Particle Systems")]
     [SerializeField] GameObject hitPSHeroes = null;
     [SerializeField] GameObject hitPSBoss = null;
@@ -70,6 +77,9 @@ public class HomingMissile : MonoBehaviour
             Instantiate(hitPSHeroes, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
 
             if (enableCameraShake) EZCameraShake.CameraShaker.Instance.ShakeOnce(magnitude, roughness, fadeIn, fadeOut);
+
+            other.GetComponentInParent<Character>().PlayerConfig.Player.SetVibration(0, rumbleStrengthDeep, rumbleDuration, false);
+            other.GetComponentInParent<Character>().PlayerConfig.Player.SetVibration(1, rumbleStrengthHigh, rumbleDuration, false);
         }
 
         else if (other.tag.Contains(Constants.TAG_BOSS))
@@ -81,6 +91,9 @@ public class HomingMissile : MonoBehaviour
             Instantiate(hitPSBoss, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
 
             if (enableCameraShake) EZCameraShake.CameraShaker.Instance.ShakeOnce(magnitude, roughness, fadeIn, fadeOut);
+
+            other.GetComponentInParent<Character>().PlayerConfig.Player.SetVibration(0, rumbleStrengthDeep, rumbleDuration, false);
+            other.GetComponentInParent<Character>().PlayerConfig.Player.SetVibration(1, rumbleStrengthHigh, rumbleDuration, false);
         }
     }
 

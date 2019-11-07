@@ -123,7 +123,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1735896002571996}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.077342026, y: -0.1, z: -2.239764}
+  m_LocalPosition: {x: -0.55615425, y: -0.1, z: -6.449273}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4042691140480942}
@@ -390,14 +390,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterStats: {fileID: 11400000, guid: 9eab235bee7a65c4e8d326fd50253853, type: 2}
   attackDamagePerShot: 18
-  attackProjectileSpeed: 50
+  attackProjectileSpeed: 70
   attackProjectileLifeTime: 1
   attackCooldown: 0.18
-  abilityDamagePerShot: 20
-  numberOfProjectiles: 20
-  abilityProjectileSpeed: 20
-  abilityProjectileLifeTime: 1
-  abilityCooldown: 3
+  abilityDamagePerShot: 5
+  numberOfProjectiles: 11
+  abilityProjectileSpeed: 10
+  abilityProjectileLifeTime: 2
+  numberOfNovas: 20
+  timeBetweenNovas: 0.1
+  consecutiveNovaOffset: 0.06
+  abilityCooldown: 1
+  movementSpeedReduction: 0.6
+  colorMultiplierBeforeAbility: 2.5
+  abilityAnnounceDuration: 3
+  meshBlinkEaseType: 3
   materialGlowOnSwitch: 2
   abilitySound: {fileID: 8300000, guid: ddbdc3544101111438a9b6c3b546a294, type: 3}
   abilitySoundVolume: 1
@@ -406,7 +413,7 @@ MonoBehaviour:
   colorChangeSound: {fileID: 8300000, guid: cb3b90f02c52c49418a9a3fd50874d2b, type: 3}
   colorChangeSoundVolume: 1
   enableCameraShake: 1
-  magnitude: 1.2
+  magnitude: 1
   roughness: 10
   fadeIn: 0.1
   fadeOut: 1
