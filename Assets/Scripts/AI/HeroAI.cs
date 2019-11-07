@@ -29,7 +29,7 @@ public class HeroAI : Hero
     [SerializeField] float repathingDuration = 2f;
     [Range(0,1)]
     [SerializeField] float damageCornerPeek = 0.2f;
-    [SerializeField] LayerMask attackRayMask;
+    [SerializeField] LayerMask attackRayMask = 0;
 
     [Header("Hacks")]
     // HACK

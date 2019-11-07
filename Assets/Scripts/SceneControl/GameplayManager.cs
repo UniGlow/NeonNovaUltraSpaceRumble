@@ -53,22 +53,22 @@ public class GameplayManager : LevelManager
     {
         intensifyTimer = 0f;
     }
+
+    public void InitializeLevel()
+    {
+        RaiseLevelInitialized(4f);
+        points.ResetPoints(false);
+
+        StartCoroutine(InitializeLevelCoroutine());
+    }
     #endregion
 
 
 
     #region Inherited Functions
-    protected override void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+    protected override void RaiseLevelInitialized(float levelStartDelay)
     {
-        RaiseLevelLoaded(4f);
-        points.ResetPoints(false);
-
-        StartCoroutine(InitializeLevel());
-    }
-
-    protected override void RaiseLevelLoaded(float levelStartDelay)
-    {
-        base.RaiseLevelLoaded(levelStartDelay);
+        base.RaiseLevelInitialized(levelStartDelay);
     }
 
     protected override void RaiseLevelStarted()
@@ -101,7 +101,7 @@ public class GameplayManager : LevelManager
 
 
     #region Coroutines
-    IEnumerator InitializeLevel()
+    IEnumerator InitializeLevelCoroutine()
     {
         yield return new WaitForSeconds(1f);
 

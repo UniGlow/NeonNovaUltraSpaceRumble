@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2018 Augie R. Maddox, Guavaman Enterprises. All rights reserved.
-// Based on Unity StandaloneInputModule.cs, veersion 2017.3
-// https://bitbucket.org/Unity-Technologies/ui/src/2017.3/UnityEngine.UI/EventSystem/InputModules/StandaloneInputModule.cs
+// Based on Unity StandaloneInputModule.cs
+// https://bitbucket.org/Unity-Technologies/ui/src
 // Heavily modified to add multiple pointer support, interchangeable touch and mouse input sources, and 128 buttons per mouse.
 
 #region Defines
@@ -549,8 +549,9 @@ namespace Rewired.Integration.UnityUI {
             var selectHandlerGO = ExecuteEvents.GetEventHandler<ISelectHandler>(currentOverGo);
             // if we have clicked something new, deselect the old thing
             // leave 'selection handling' up to the press event though.
-            if(selectHandlerGO != eventSystem.currentSelectedGameObject)
+            if (selectHandlerGO != eventSystem.currentSelectedGameObject) {
                 eventSystem.SetSelectedGameObject(null, pointerEvent);
+            }
         }
 
         protected void CopyFromTo(PointerEventData @from, PointerEventData @to) {

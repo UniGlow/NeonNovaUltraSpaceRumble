@@ -443,42 +443,6 @@ namespace Rewired.Utils {
 #endif
         }
 
-        public Vector3 PS4Input_GetLastMoveAcceleration(int id, int index) {
-            return UnityEngine.PS4.PS4Input.GetLastMoveAcceleration(id, index);
-        }
-
-        public Vector3 PS4Input_GetLastMoveGyro(int id, int index) {
-            return UnityEngine.PS4.PS4Input.GetLastMoveGyro(id, index);
-        }
-
-        public int PS4Input_MoveGetButtons(int id, int index) {
-            return UnityEngine.PS4.PS4Input.MoveGetButtons(id, index);
-        }
-
-        public int PS4Input_MoveGetAnalogButton(int id, int index) {
-            return UnityEngine.PS4.PS4Input.MoveGetAnalogButton(id, index);
-        }
-
-        public bool PS4Input_MoveIsConnected(int id, int index) {
-            return UnityEngine.PS4.PS4Input.MoveIsConnected(id, index);
-        }
-
-        public int PS4Input_MoveGetUsersMoveHandles(int maxNumberControllers, int[] primaryHandles, int[] secondaryHandles) {
-            return UnityEngine.PS4.PS4Input.MoveGetUsersMoveHandles(maxNumberControllers, primaryHandles, secondaryHandles);
-        }
-
-		public int PS4Input_MoveGetUsersMoveHandles(int maxNumberControllers, int[] primaryHandles) {
-			return UnityEngine.PS4.PS4Input.MoveGetUsersMoveHandles(maxNumberControllers, primaryHandles);
-		}
-
-		public int PS4Input_MoveGetUsersMoveHandles(int maxNumberControllers) {
-			return UnityEngine.PS4.PS4Input.MoveGetUsersMoveHandles(maxNumberControllers);
-		}
-
-		public System.IntPtr PS4Input_MoveGetControllerInputForTracking() {
-            return UnityEngine.PS4.PS4Input.MoveGetControllerInputForTracking();
-        }
-
 #if UNITY_PS4_2018_PLUS
 
         private readonly UnityEngine.PS4.PS4Input.ControllerInformation _controllerInformation = new UnityEngine.PS4.PS4Input.ControllerInformation();
@@ -556,6 +520,106 @@ namespace Rewired.Utils {
             UnityEngine.PS4.PS4Input.SpecialSetVibration(id, largeMotor, smallMotor);
         }
 
+        // Aim
+
+        public Vector3 PS4Input_AimGetLastAcceleration(int id) {
+            return UnityEngine.PS4.PS4Input.AimGetLastAcceleration(id);
+        }
+
+        public Vector3 PS4Input_AimGetLastGyro(int id) {
+            return UnityEngine.PS4.PS4Input.AimGetLastGyro(id);
+        }
+
+        public Vector4 PS4Input_AimGetLastOrientation(int id) {
+            return UnityEngine.PS4.PS4Input.AimGetLastOrientation(id);
+        }
+
+        public int PS4Input_AimGetUsersHandles(int maxNumberControllers, int[] handles) {
+            return UnityEngine.PS4.PS4Input.AimGetUsersHandles(maxNumberControllers, handles);
+        }
+
+        public int PS4Input_AimGetUsersHandles2(int maxNumberControllers, int[] handles) {
+            return UnityEngine.PS4.PS4Input.AimGetUsersHandles2(maxNumberControllers, handles);
+        }
+
+        public bool PS4Input_AimIsConnected(int id) {
+            return UnityEngine.PS4.PS4Input.AimIsConnected(id);
+        }
+
+        public void PS4Input_AimResetLightSphere(int id) {
+            UnityEngine.PS4.PS4Input.AimResetLightSphere(id);
+        }
+
+        public void PS4Input_AimResetOrientation(int id) {
+            UnityEngine.PS4.PS4Input.AimResetOrientation(id);
+        }
+
+        public void PS4Input_AimSetAngularVelocityDeadbandState(int id, bool bEnable) {
+            UnityEngine.PS4.PS4Input.AimSetAngularVelocityDeadbandState(id, bEnable);
+        }
+
+        public void PS4Input_AimSetLightSphere(int id, int red, int green, int blue) {
+            UnityEngine.PS4.PS4Input.AimSetLightSphere(id, red, green, blue);
+        }
+
+        public void PS4Input_AimSetMotionSensorState(int id, bool bEnable) {
+            UnityEngine.PS4.PS4Input.AimSetMotionSensorState(id, bEnable);
+        }
+
+        public void PS4Input_AimSetTiltCorrectionState(int id, bool bEnable) {
+            UnityEngine.PS4.PS4Input.AimSetTiltCorrectionState(id, bEnable);
+        }
+
+        public void PS4Input_AimSetVibration(int id, int largeMotor, int smallMotor) {
+            UnityEngine.PS4.PS4Input.AimSetVibration(id, largeMotor, smallMotor);
+        }
+
+        // Move
+
+        public Vector3 PS4Input_GetLastMoveAcceleration(int id, int index) {
+            return UnityEngine.PS4.PS4Input.GetLastMoveAcceleration(id, index);
+        }
+
+        public Vector3 PS4Input_GetLastMoveGyro(int id, int index) {
+            return UnityEngine.PS4.PS4Input.GetLastMoveGyro(id, index);
+        }
+
+        public int PS4Input_MoveGetButtons(int id, int index) {
+            return UnityEngine.PS4.PS4Input.MoveGetButtons(id, index);
+        }
+
+        public int PS4Input_MoveGetAnalogButton(int id, int index) {
+            return UnityEngine.PS4.PS4Input.MoveGetAnalogButton(id, index);
+        }
+
+        public bool PS4Input_MoveIsConnected(int id, int index) {
+            return UnityEngine.PS4.PS4Input.MoveIsConnected(id, index);
+        }
+
+        public int PS4Input_MoveGetUsersMoveHandles(int maxNumberControllers, int[] primaryHandles, int[] secondaryHandles) {
+            return UnityEngine.PS4.PS4Input.MoveGetUsersMoveHandles(maxNumberControllers, primaryHandles, secondaryHandles);
+        }
+
+        public int PS4Input_MoveGetUsersMoveHandles(int maxNumberControllers, int[] primaryHandles) {
+            return UnityEngine.PS4.PS4Input.MoveGetUsersMoveHandles(maxNumberControllers, primaryHandles);
+        }
+
+        public int PS4Input_MoveGetUsersMoveHandles(int maxNumberControllers) {
+            return UnityEngine.PS4.PS4Input.MoveGetUsersMoveHandles(maxNumberControllers);
+        }
+
+        public System.IntPtr PS4Input_MoveGetControllerInputForTracking() {
+            return UnityEngine.PS4.PS4Input.MoveGetControllerInputForTracking();
+        }
+
+        public int PS4Input_MoveSetLightSphere(int id, int index, int red, int green, int blue) {
+            return UnityEngine.PS4.PS4Input.MoveSetLightSphere(id, index, red, green, blue);
+        }
+
+        public int PS4Input_MoveSetVibration(int id, int index, int motor) {
+            return UnityEngine.PS4.PS4Input.MoveSetVibration(id, index, motor);
+        }
+
 #endif
 
 #else
@@ -593,24 +657,6 @@ namespace Rewired.Utils {
 
         public int PS4Input_PadGetUsersHandles2(int maxControllers, int[] handles) { return 0; }
 
-        public Vector3 PS4Input_GetLastMoveAcceleration(int id, int index) { return Vector3.zero; }
-
-        public Vector3 PS4Input_GetLastMoveGyro(int id, int index) { return Vector3.zero; }
-
-        public int PS4Input_MoveGetButtons(int id, int index) { return 0; }
-
-        public int PS4Input_MoveGetAnalogButton(int id, int index) { return 0; }
-
-        public bool PS4Input_MoveIsConnected(int id, int index) { return false; }
-
-        public int PS4Input_MoveGetUsersMoveHandles(int maxNumberControllers, int[] primaryHandles, int[] secondaryHandles) { return 0; }
-
-        public int PS4Input_MoveGetUsersMoveHandles(int maxNumberControllers, int[] primaryHandles) { return 0; }
-
-        public int PS4Input_MoveGetUsersMoveHandles(int maxNumberControllers) { return 0; }
-
-        public System.IntPtr PS4Input_MoveGetControllerInputForTracking() { return System.IntPtr.Zero; }
-
 #if UNITY_2018_PLUS
 
         public void PS4Input_GetSpecialControllerInformation(int id, int padIndex, object controllerInformation) { }
@@ -640,6 +686,58 @@ namespace Rewired.Utils {
         public void PS4Input_SpecialSetTiltCorrectionState(int id, bool bEnable) { }
 
         public void PS4Input_SpecialSetVibration(int id, int largeMotor, int smallMotor) { }
+
+        // Aim
+
+        public Vector3 PS4Input_AimGetLastAcceleration(int id) { return Vector3.zero; }
+
+        public Vector3 PS4Input_AimGetLastGyro(int id) { return Vector3.zero; }
+
+        public Vector4 PS4Input_AimGetLastOrientation(int id) { return Vector4.zero; }
+
+        public int PS4Input_AimGetUsersHandles(int maxNumberControllers, int[] handles) { return 0; }
+
+        public int PS4Input_AimGetUsersHandles2(int maxNumberControllers, int[] handles) { return 0; }
+
+        public bool PS4Input_AimIsConnected(int id) { return false; }
+
+        public void PS4Input_AimResetLightSphere(int id) { }
+
+        public void PS4Input_AimResetOrientation(int id) { }
+
+        public void PS4Input_AimSetAngularVelocityDeadbandState(int id, bool bEnable) { }
+
+        public void PS4Input_AimSetLightSphere(int id, int red, int green, int blue) { }
+
+        public void PS4Input_AimSetMotionSensorState(int id, bool bEnable) { }
+
+        public void PS4Input_AimSetTiltCorrectionState(int id, bool bEnable) { }
+
+        public void PS4Input_AimSetVibration(int id, int largeMotor, int smallMotor) { }
+
+        // Move
+
+        public Vector3 PS4Input_GetLastMoveAcceleration(int id, int index) { return Vector3.zero; }
+
+        public Vector3 PS4Input_GetLastMoveGyro(int id, int index) { return Vector3.zero; }
+
+        public int PS4Input_MoveGetButtons(int id, int index) { return 0; }
+
+        public int PS4Input_MoveGetAnalogButton(int id, int index) { return 0; }
+
+        public bool PS4Input_MoveIsConnected(int id, int index) { return false; }
+
+        public int PS4Input_MoveGetUsersMoveHandles(int maxNumberControllers, int[] primaryHandles, int[] secondaryHandles) { return 0; }
+
+        public int PS4Input_MoveGetUsersMoveHandles(int maxNumberControllers, int[] primaryHandles) { return 0; }
+
+        public int PS4Input_MoveGetUsersMoveHandles(int maxNumberControllers) { return 0; }
+
+        public System.IntPtr PS4Input_MoveGetControllerInputForTracking() { return System.IntPtr.Zero; }
+
+        public int PS4Input_MoveSetLightSphere(int id, int index, int red, int green, int blue) { return 0; }
+
+        public int PS4Input_MoveSetVibration(int id, int index, int motor) { return 0; }
 
 #endif
 

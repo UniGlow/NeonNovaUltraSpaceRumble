@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using System.IO;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -149,6 +151,51 @@ public class SceneReference : ISerializationCallbackReceiver
         }
     }
 #endif
+    public bool Equals(Scene tScene)
+    {
+        string sName = GetSceneName();
+        if (sName.Equals(tScene.name))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public bool Equals(SceneReference tScene)
+    {
+        string sName = GetSceneName();
+        if (sName.Equals(tScene.GetSceneName()))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public bool Equals(string name)
+    {
+        string sName = GetSceneName();
+        if (sName.Equals(name))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public string GetSceneName()
+    {
+#if UNITY_EDITOR
+        if (sceneAsset == null)
+        {
+            return "NULL";
+        }
+        else
+        {
+            return sceneAsset.name;
+        }
+#else
+        return Path.GetFileNameWithoutExtension(scenePath);
+#endif
+    }
 }
 
 

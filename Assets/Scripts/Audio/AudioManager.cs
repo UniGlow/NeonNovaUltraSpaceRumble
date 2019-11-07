@@ -19,16 +19,16 @@ public class AudioManager : MonoBehaviour
     [SerializeField] MusicTrack titleTrack = null;
 
     [Header("Sound Effects")]
-    [SerializeField] AudioClip levelEnd;
+    [SerializeField] AudioClip levelEnd = null;
     [Range(0,1)]
     [SerializeField] float levelEndVolume = 1f;
-    [SerializeField] AudioClip bossWinSound;
+    [SerializeField] AudioClip bossWinSound = null;
     [Range(0, 1)]
     [SerializeField] float bossWinSoundVolume = 1f;
-    [SerializeField] AudioClip heroesWinSound;
+    [SerializeField] AudioClip heroesWinSound = null;
     [Range(0, 1)]
     [SerializeField] float heroesWinSoundVolume = 1f;
-    [SerializeField] AudioClip slowMotion;
+    [SerializeField] AudioClip slowMotion = null;
     [Range(0, 1)]
     [SerializeField] float slowMotionSoundVolume = 1f;
 
@@ -84,6 +84,8 @@ public class AudioManager : MonoBehaviour
         audioSourceMusic.loop = false;
         audioSourceMusic.Play();
         StartCoroutine(StartAudioLoop(track));
+
+        RaiseSongChanged(track.artist, track.title);
     }
 
     public void StartTrack(MusicTrack track)
@@ -96,6 +98,8 @@ public class AudioManager : MonoBehaviour
         audioSourceMusic.loop = false;
         audioSourceMusic.Play();
         StartCoroutine(StartAudioLoop(track));
+
+        RaiseSongChanged(track.artist, track.title);
     }
 
     public void StartTitleTrack()
@@ -108,6 +112,8 @@ public class AudioManager : MonoBehaviour
         audioSourceMusic.loop = false;
         audioSourceMusic.Play();
         StartCoroutine(StartAudioLoop(titleTrack));
+
+        RaiseSongChanged(titleTrack.artist, titleTrack.title);
     }
 
     public void StartTutorialTrack()
@@ -120,6 +126,8 @@ public class AudioManager : MonoBehaviour
         audioSourceMusic.loop = false;
         audioSourceMusic.Play();
         StartCoroutine(StartAudioLoop(tutorialTrack));
+
+        RaiseSongChanged(tutorialTrack.artist, tutorialTrack.title);
     }
 
     public void StartRandomTrack()

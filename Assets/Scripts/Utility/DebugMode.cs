@@ -98,7 +98,8 @@ public class DebugMode : MonoBehaviour
             if (GUILayout.Button("Load next scene"))
             {
                 Debug.Log("Debug Mode: Loading next scene.");
-                SceneManager.Instance.LoadNextScene();
+                //TODO: Schnelles Szenenladen ermöglichen, ohne das Delay nach Levelende
+                SceneManager.Instance.LoadNextLevel();
             }
             if (GUILayout.Button("Reload scene"))
             {
