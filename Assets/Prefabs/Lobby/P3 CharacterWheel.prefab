@@ -1,0 +1,121 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &323734009467475284
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5290935578398387559, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_Name
+      value: P3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290935578398387559, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290935578398387558, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290935578398387558, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290935578398387558, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290935578398387558, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290935578398387558, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290935578398387558, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290935578398387558, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290935578398387558, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290935578398387558, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290935578398387558, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290935578398387558, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290935577794940777, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290935579125878881, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290935578261945897, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290935579323837981, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290935577383117154, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290935578787673318, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290935578787673318, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_Name
+      value: Camera Lobby P3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290935578787673323, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_TargetTexture
+      value: 
+      objectReference: {fileID: 8400000, guid: 20ee4b261d0a88c419edc454ce723bb5, type: 2}
+    - target: {fileID: 5290935578787673323, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 16384
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 024f24893e3397340917e1145e75f4db, type: 3}
