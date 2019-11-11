@@ -104,6 +104,16 @@ public static class InputHelper
         return buttonPressed;
     }
 
+    public static Player GetPlayerButtonDown(int actionID)
+    {
+        foreach (Player player in ReInput.players.Players)
+        {
+            if (player.GetButtonDown(actionID)) return player;
+        }
+
+        return null;
+    }
+
     /// <summary>
     /// Gets any button down from all players.
     /// </summary>

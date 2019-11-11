@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5290935577794940777}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 20}
+  m_LocalPosition: {x: 0, y: 0, z: 50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5290935579125582913}
@@ -43,8 +43,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5290935578398387558}
+  - component: {fileID: 5956122618146565894}
   m_Layer: 12
-  m_Name: P1
+  m_Name: P1 CharacterWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66,6 +67,52 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5956122618146565894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5290935578398387559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbf24796fc104074797d6c088a3dee4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panelNumber: 1
+  rotationDuration: 1
+  animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  wheel: {fileID: 5290935577794940776}
+  models:
+  - {fileID: 5290935579125582913}
+  - {fileID: 5290935578261512713}
+  - {fileID: 5290935579324002877}
+  - {fileID: 5290935577382894914}
+  playerChangedStepEvent: {fileID: 11400000, guid: 61d960440cf04714e8f0dac62b89ca5b,
+    type: 2}
 --- !u!1 &5290935578787673318
 GameObject:
   m_ObjectHideFlags: 0
@@ -76,7 +123,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5290935578787673317}
   - component: {fileID: 5290935578787673323}
-  - component: {fileID: 5290935578787673316}
   m_Layer: 12
   m_Name: Camera Lobby P1
   m_TagString: Untagged
@@ -122,7 +168,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 20
+  far clip plane: 12
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -141,14 +187,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &5290935578787673316
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5290935578787673318}
-  m_Enabled: 1
 --- !u!1001 &5290935577383020482
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -166,7 +204,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: eeedf6b3e6a52b040bc8b36f72d05e85, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -20
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: eeedf6b3e6a52b040bc8b36f72d05e85, type: 3}
       propertyPath: m_LocalPosition.y
@@ -249,7 +287,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: dd4402d7fbcec7549b6aa0626cb44cc8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 20
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: dd4402d7fbcec7549b6aa0626cb44cc8, type: 3}
       propertyPath: m_LocalPosition.y
@@ -340,7 +378,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 51a8d996c6cb8c44cb0954778d972cb2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -20
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 51a8d996c6cb8c44cb0954778d972cb2, type: 3}
       propertyPath: m_LocalRotation.x
@@ -419,7 +457,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f32514971f6af494ab733f3081f0746e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 20
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f32514971f6af494ab733f3081f0746e, type: 3}
       propertyPath: m_LocalRotation.x

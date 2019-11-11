@@ -10,12 +10,27 @@ PrefabInstance:
     - target: {fileID: 5290935578398387559, guid: 024f24893e3397340917e1145e75f4db,
         type: 3}
       propertyPath: m_Name
-      value: P2
+      value: P2 CharacterWheel
       objectReference: {fileID: 0}
     - target: {fileID: 5290935578398387559, guid: 024f24893e3397340917e1145e75f4db,
         type: 3}
       propertyPath: m_Layer
       value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290935577794940777, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290935578787673318, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290935578787673318, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_Name
+      value: Camera Lobby P2
       objectReference: {fileID: 0}
     - target: {fileID: 5290935578398387558, guid: 024f24893e3397340917e1145e75f4db,
         type: 3}
@@ -72,41 +87,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5290935577794940777, guid: 024f24893e3397340917e1145e75f4db,
-        type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 5290935579125878881, guid: 024f24893e3397340917e1145e75f4db,
-        type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 5290935578261945897, guid: 024f24893e3397340917e1145e75f4db,
-        type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 5290935579323837981, guid: 024f24893e3397340917e1145e75f4db,
-        type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 5290935577383117154, guid: 024f24893e3397340917e1145e75f4db,
-        type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 5290935578787673318, guid: 024f24893e3397340917e1145e75f4db,
-        type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 5290935578787673318, guid: 024f24893e3397340917e1145e75f4db,
-        type: 3}
-      propertyPath: m_Name
-      value: Camera Lobby P2
-      objectReference: {fileID: 0}
     - target: {fileID: 5290935578787673323, guid: 024f24893e3397340917e1145e75f4db,
         type: 3}
       propertyPath: m_CullingMask.m_Bits
@@ -117,5 +97,30 @@ PrefabInstance:
       propertyPath: m_TargetTexture
       value: 
       objectReference: {fileID: 8400000, guid: fa3836e6669335847b9ac48bb58d82fb, type: 2}
+    - target: {fileID: 5290935577383117154, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290935578261945897, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290935579125878881, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290935579323837981, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956122618146565894, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: panelNumber
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 024f24893e3397340917e1145e75f4db, type: 3}

@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 219}
+  m_AnchoredPosition: {x: 0, y: 2}
   m_SizeDelta: {x: 500, y: 75}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &912889696477965913
@@ -134,7 +134,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -427, y: 217}
+  m_AnchoredPosition: {x: -2, y: -2}
   m_SizeDelta: {x: 75, y: 75}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &912889696665611670
@@ -271,6 +271,7 @@ GameObject:
   - component: {fileID: 912889697591679947}
   - component: {fileID: 1394123924860895440}
   - component: {fileID: 912889697591679946}
+  - component: {fileID: 7594083303493845330}
   m_Layer: 5
   m_Name: P1 UI
   m_TagString: Untagged
@@ -319,11 +320,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e5e4da9471781842b706a4b897eda97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panelNumber: 1
+  offlineScreen: {fileID: 6660497662281290487}
+  selectionScreen: {fileID: 6894643365022853297}
   topPanel: {fileID: 912889696477965918}
   textMesh: {fileID: 912889697673169541}
   renderTexture: {fileID: 912889697832813188}
-  leftArrow: {fileID: 0}
-  rightArrow: {fileID: 0}
+  leftArrow: {fileID: 5742789691684675660}
+  rightArrow: {fileID: 1144764191109530909}
   backgroundImage: {fileID: 912889697591679946}
 --- !u!114 &912889697591679946
 MonoBehaviour:
@@ -354,6 +358,32 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &7594083303493845330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912889697591679944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 61d960440cf04714e8f0dac62b89ca5b, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  linkedMethods:
+  - component: {fileID: 1394123924860895440}
+    methodID: 0
+    methodName: ChangeStep
+    chosenID: 1
+    methodNames: []
+    gameObject: {fileID: 912889697591679944}
+  ignoreEventParameters: 0
 --- !u!1 &912889697673169547
 GameObject:
   m_ObjectHideFlags: 0
@@ -728,10 +758,10 @@ RectTransform:
   m_Father: {fileID: 912889697591679945}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &9094103032792945168
 GameObject:

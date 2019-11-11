@@ -13,6 +13,11 @@ public class SelectionUI : MonoBehaviour
     #region Variable Declarations
     // Serialized Fields
     [Header("References")]
+    [Tooltip("The Number of this Panel")]
+    [Range(1,4)]
+    [SerializeField] int panelNumber = 1;
+    [SerializeField] GameObject offlineScreen = null;
+    [SerializeField] GameObject selectionScreen = null;
     [SerializeField] GameObject topPanel = null;
     [SerializeField] TextMeshProUGUI textMesh = null;
     [SerializeField] RawImage renderTexture = null;
@@ -41,7 +46,23 @@ public class SelectionUI : MonoBehaviour
 	
 	
 	#region Public Functions
-	
+	public void ChangeStep(int panelNumber, SelectionController.Step nextStep)
+    {
+        if (this.panelNumber == panelNumber)
+        {
+            switch (nextStep)
+            {
+                case SelectionController.Step.CharacterSelection:
+                    offlineScreen.SetActive(false);
+                    selectionScreen.SetActive(true);
+                    break;
+                case SelectionController.Step.Offline:
+                    offlineScreen.SetActive(true);
+                    selectionScreen.SetActive(false);
+                    break;
+            }
+        }
+    }
 	#endregion
 	
 	
