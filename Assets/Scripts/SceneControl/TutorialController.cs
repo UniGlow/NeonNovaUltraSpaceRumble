@@ -59,6 +59,7 @@ public class TutorialController : MonoBehaviour
 	#region Unity Event Functions
 	private void Start () 
 	{
+        Time.timeScale = 1f;
         loadingLobbyField.SetActive(false);
 
         activeScreen = firstScreen;
