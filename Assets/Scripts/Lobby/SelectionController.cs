@@ -25,8 +25,10 @@ public class SelectionController : MonoBehaviour
     [SerializeField] float rotationDuration = 1f;
     [SerializeField] AnimationCurve animationCurve = new AnimationCurve();
     [SerializeField] Transform wheel = null;
-    [SerializeField] List<Transform> models = new List<Transform>();
+    [SerializeField] List<Transform> heroModels = new List<Transform>();
     [SerializeField] GameEvent playerChangedStepEvent = null;
+    [SerializeField] GameEvent playerChangedColor = null;
+    [SerializeField] float delayBetweenChanges = 0.25f;
 
 
     // Private
@@ -35,6 +37,8 @@ public class SelectionController : MonoBehaviour
     Rewired.Player player = null;
     Step activeStep = Step.Offline;
     bool isBoss = false; // This will be used, to show only the relevant Steps to the Player - Example: Boss cannot choose Color
+    PlayerColor activeColor = null;
+    float changeTimer = 0f;
     #endregion
 
 
@@ -52,6 +56,14 @@ public class SelectionController : MonoBehaviour
         if (player != null && !inputsLocked)
         {
             ManageSelection();
+        }
+        if(changeTimer != 0f)
+        {
+            changeTimer += Time.deltaTime;
+        }
+        if(changeTimer >= delayBetweenChanges)
+        {
+            changeTimer = 0f;
         }
     }
     #endregion
@@ -84,8 +96,12 @@ public class SelectionController : MonoBehaviour
         }
         else if(player != null)
         {
+            bool playerPressedButton = false;
+            // Switches in first Iteration just Change Steps and Raise Step Events
+            // Player pressed B
             if (player.GetButtonDown(RewiredConsts.Action.UICANCEL))
             {
+                playerPressedButton = true;
                 switch (activeStep)
                 {
                     case Step.Offline:
@@ -95,8 +111,6 @@ public class SelectionController : MonoBehaviour
                     case Step.CharacterSelection:
                         RaisePlayerChangedStep(panelNumber, Step.Offline);
                         activeStep = Step.Offline;
-                        NewSirAlfredLobby.Instance.SetPlayer(panelNumber, null);
-                        player = null;
                         break;
                     case Step.ColorSelection:
                         RaisePlayerChangedStep(panelNumber, Step.CharacterSelection);
@@ -106,6 +120,7 @@ public class SelectionController : MonoBehaviour
                         if (isBoss)
                         {
                             RaisePlayerChangedStep(panelNumber, Step.CharacterSelection);
+                            activeStep = Step.CharacterSelection;
                         }
                         else
                         {
@@ -120,6 +135,7 @@ public class SelectionController : MonoBehaviour
                         if (isBoss)
                         {
                             RaisePlayerChangedStep(panelNumber, Step.CharacterSelection);
+                            activeStep = Step.CharacterSelection;
                         }
                         else
                         {
@@ -132,8 +148,10 @@ public class SelectionController : MonoBehaviour
                         break;
                 }
             }
+            // Player Pressed A
             else if(player.GetButtonDown(RewiredConsts.Action.UISUBMIT))
             {
+                playerPressedButton = true;
                 switch (activeStep)
                 {
                     case Step.Offline:
@@ -144,6 +162,7 @@ public class SelectionController : MonoBehaviour
                         if (isBoss)
                         {
                             RaisePlayerChangedStep(panelNumber, Step.ReadyToPlay);
+                            activeStep = Step.ReadyToPlay;
                         }
                         else
                         {
@@ -166,6 +185,21 @@ public class SelectionController : MonoBehaviour
                         break;
                 }
             }
+            // Switch in second Iteration does Logic
+            // Player Press any Button
+            if (playerPressedButton)
+            {
+                switch (activeStep)
+                {
+                    case Step.Offline:
+                        NewSirAlfredLobby.Instance.SetPlayer(panelNumber, null);
+                        player = null;
+                        break;
+                    case Step.ColorSelection:
+                        activeColor = NewSirAlfredLobby.Instance.AvailableColors[0];
+                        break;
+                }
+            }
         }
     }
 
@@ -173,33 +207,75 @@ public class SelectionController : MonoBehaviour
     {
         if(player.GetAxis(RewiredConsts.Action.UIHORIZONTAL) > 0)
         {
-            //Debug.Log("UIHorizontal: " + player.GetAxis(RewiredConsts.Action.UIHORIZONTAL));
-            inputsLocked = true;
-            Vector3 targetRotation = new Vector3(wheel.transform.rotation.eulerAngles.x, wheel.transform.rotation.eulerAngles.y + 90, wheel.transform.rotation.eulerAngles.z);
-            //Debug.Log("Old Rotation: " + wheel.transform.rotation + " | New Rotation: " + targetRotation);
-            wheel.DORotate(targetRotation, rotationDuration).SetEase(animationCurve).OnComplete(() =>
-                {
-                    inputsLocked = false;
-                }
-            );
+            switch (activeStep)
+            {
+                case Step.CharacterSelection:
+                    //Debug.Log("UIHorizontal: " + player.GetAxis(RewiredConsts.Action.UIHORIZONTAL));
+                    inputsLocked = true;
+                    Vector3 targetRotation = new Vector3(wheel.transform.rotation.eulerAngles.x, wheel.transform.rotation.eulerAngles.y + 90, wheel.transform.rotation.eulerAngles.z);
+                    //Debug.Log("Old Rotation: " + wheel.transform.rotation + " | New Rotation: " + targetRotation);
+                    wheel.DORotate(targetRotation, rotationDuration).SetEase(animationCurve).OnComplete(() =>
+                    {
+                        inputsLocked = false;
+                    });
+                    break;
+                case Step.ColorSelection:
+                    if (changeTimer == 0f)
+                    {
+                        PlayerColor tempColor = NewSirAlfredLobby.Instance.GetNextAvailableColor(true, activeColor);
+                        if (activeColor != tempColor)
+                        {
+                            activeColor = tempColor;
+                            RaisePlayerChangedColor(panelNumber, activeColor);
+                        }
+                        UpdateModelColor();
+                        changeTimer += Time.deltaTime;
+                    }
+                    break;
+            }
         }
         else if(player.GetAxis(RewiredConsts.Action.UIHORIZONTAL) < 0)
         {
-            //Debug.Log("UIHorizontal: " + player.GetAxis(RewiredConsts.Action.UIHORIZONTAL));
-            inputsLocked = true;
-            Vector3 targetRotation = new Vector3(wheel.transform.rotation.eulerAngles.x, wheel.transform.rotation.eulerAngles.y - 90, wheel.transform.rotation.eulerAngles.z);
-            //Debug.Log("Old Rotation: " + wheel.transform.rotation +  " | New Rotation: " + targetRotation);
-            wheel.DORotate(targetRotation, rotationDuration).SetEase(animationCurve).OnComplete(() =>
+            switch (activeStep)
             {
-                inputsLocked = false;
+                case Step.CharacterSelection:
+                    //Debug.Log("UIHorizontal: " + player.GetAxis(RewiredConsts.Action.UIHORIZONTAL));
+                    inputsLocked = true;
+                    Vector3 targetRotation = new Vector3(wheel.transform.rotation.eulerAngles.x, wheel.transform.rotation.eulerAngles.y - 90, wheel.transform.rotation.eulerAngles.z);
+                    //Debug.Log("Old Rotation: " + wheel.transform.rotation +  " | New Rotation: " + targetRotation);
+                    wheel.DORotate(targetRotation, rotationDuration).SetEase(animationCurve).OnComplete(() =>
+                    {
+                        inputsLocked = false;
+                    });
+                    break;
+                case Step.ColorSelection:
+                    if (changeTimer == 0f)
+                    {
+                        PlayerColor tempColor = NewSirAlfredLobby.Instance.GetNextAvailableColor(false, activeColor);
+                        if (activeColor != tempColor)
+                        {
+                            activeColor = tempColor;
+                            RaisePlayerChangedColor(panelNumber, activeColor);
+                        }
+                        UpdateModelColor();
+                        changeTimer += Time.deltaTime;
+                    }
+                    break;
             }
-            );
         }
     }
 
     void ManageCharacterRotation()
     {
         
+    }
+
+    void UpdateModelColor()
+    {
+        foreach(Transform model in heroModels)
+        {
+            model.GetComponent<MeshRenderer>().material = activeColor.heroMaterial;
+        }
     }
     #endregion
 
@@ -209,6 +285,11 @@ public class SelectionController : MonoBehaviour
     void RaisePlayerChangedStep(int panelNumber, Step newStep)
     {
         playerChangedStepEvent.Raise(this, panelNumber, newStep);
+    }
+
+    void RaisePlayerChangedColor(int panelNumber, PlayerColor color)
+    {
+        playerChangedColor.Raise(this, panelNumber, color);
     }
     #endregion
 

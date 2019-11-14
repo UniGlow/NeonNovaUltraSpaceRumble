@@ -135,6 +135,39 @@ public class NewSirAlfredLobby : MonoBehaviour
             availablePlayerColors.Add(playerColor);
         }
     }
+    /// <summary>
+    /// Returns next Available Color when next is true
+    /// Return previous Available Color when next is false
+    /// </summary>
+    /// <param name="next">true = next Color | false = previous Color</param>
+    /// <param name="activeColor"></param>
+    /// <returns></returns>
+    public PlayerColor GetNextAvailableColor(bool next, PlayerColor activeColor)
+    {
+        int index = availablePlayerColors.IndexOf(activeColor);
+        if (next)
+        {
+            if (index != availablePlayerColors.Count - 1)
+            {
+                return availablePlayerColors[index + 1];
+            }
+            else
+            {
+                return availablePlayerColors[0];
+            }
+        }
+        else
+        {
+            if(index != 0)
+            {
+                return availablePlayerColors[index - 1];
+            }
+            else
+            {
+                return availablePlayerColors[availablePlayerColors.Count - 1];
+            }
+        }
+    }
 	#endregion
 	
 	
