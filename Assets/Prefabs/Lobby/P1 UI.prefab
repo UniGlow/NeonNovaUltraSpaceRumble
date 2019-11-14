@@ -92,12 +92,12 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 4
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
+  m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
 --- !u!1 &912889696665611675
@@ -329,6 +329,8 @@ MonoBehaviour:
   leftArrow: {fileID: 5742789691684675660}
   rightArrow: {fileID: 1144764191109530909}
   backgroundImage: {fileID: 912889697591679946}
+  topPanelSelectablePrefab: {fileID: 5640966763399568031, guid: ff97ef31ff5a5604791681b4558c982c,
+    type: 3}
 --- !u!114 &912889697591679946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -702,7 +704,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3398810493969533
 RectTransform:
   m_ObjectHideFlags: 0
@@ -737,7 +739,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &296530273853671411
 RectTransform:
   m_ObjectHideFlags: 0

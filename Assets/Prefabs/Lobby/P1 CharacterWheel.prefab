@@ -44,6 +44,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5290935578398387558}
   - component: {fileID: 5956122618146565894}
+  - component: {fileID: 2431556548938591295}
   m_Layer: 12
   m_Name: P1 CharacterWheel
   m_TagString: Untagged
@@ -113,6 +114,32 @@ MonoBehaviour:
   - {fileID: 5290935577382894914}
   playerChangedStepEvent: {fileID: 11400000, guid: 61d960440cf04714e8f0dac62b89ca5b,
     type: 2}
+--- !u!114 &2431556548938591295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5290935578398387559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 6f53a27eda7561c46a754969fff2405f, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  linkedMethods:
+  - component: {fileID: 5956122618146565894}
+    methodID: 0
+    methodName: ListeningForInputsChanged
+    chosenID: 1
+    methodNames: []
+    gameObject: {fileID: 5290935578398387559}
+  ignoreEventParameters: 0
 --- !u!1 &5290935578787673318
 GameObject:
   m_ObjectHideFlags: 0

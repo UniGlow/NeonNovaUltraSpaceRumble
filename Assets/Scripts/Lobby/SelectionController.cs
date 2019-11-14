@@ -30,9 +30,11 @@ public class SelectionController : MonoBehaviour
 
 
     // Private
+    bool listeningForPlayerInput = false;
     bool inputsLocked = false;
     Rewired.Player player = null;
     Step activeStep = Step.Offline;
+    bool isBoss = false; // This will be used, to show only the relevant Steps to the Player - Example: Boss cannot choose Color
     #endregion
 
 
@@ -44,15 +46,10 @@ public class SelectionController : MonoBehaviour
 
 
     #region Unity Event Functions
-    private void Start()
-    {
-        InputHelper.ChangeRuleSetForAllPlayers(RewiredConsts.LayoutManagerRuleSet.RULESETLOBBY);
-    }
-
     private void Update()
     {
         ManageReadyInputs();
-        if(player != null && !inputsLocked)
+        if (player != null && !inputsLocked)
         {
             ManageSelection();
         }
@@ -62,7 +59,10 @@ public class SelectionController : MonoBehaviour
 
 
     #region Public Functions
-
+    public void ListeningForInputsChanged(bool[] playerListeningForInput)
+    {
+        listeningForPlayerInput = playerListeningForInput[panelNumber - 1];
+    }
     #endregion
 
 
@@ -70,18 +70,19 @@ public class SelectionController : MonoBehaviour
     #region Private Functions
     void ManageReadyInputs()
     {
-        if (player == null)
+        if (player == null && listeningForPlayerInput)
         {
-            Rewired.Player player = InputHelper.GetPlayerButtonDown(RewiredConsts.Action.UISUBMIT);
-            if (player != null)
+            Rewired.Player tempPlayer = InputHelper.GetPlayerButtonDown(RewiredConsts.Action.UISUBMIT);
+            if (tempPlayer != null && !NewSirAlfredLobby.Instance.IsPlayerActive(tempPlayer))
             {
-                Debug.Log("Player Joined: " + player.name);
-                this.player = player;
+                Debug.Log("Player Joined: " + tempPlayer.name);
+                this.player = tempPlayer;
+                NewSirAlfredLobby.Instance.SetPlayer(panelNumber, tempPlayer);
                 activeStep = Step.CharacterSelection;
-                RaisePlayerChangedStep(panelNumber, Step.CharacterSelection);
+                RaisePlayerChangedStep(panelNumber, activeStep);
             }
         }
-        else
+        else if(player != null)
         {
             if (player.GetButtonDown(RewiredConsts.Action.UICANCEL))
             {
@@ -94,6 +95,7 @@ public class SelectionController : MonoBehaviour
                     case Step.CharacterSelection:
                         RaisePlayerChangedStep(panelNumber, Step.Offline);
                         activeStep = Step.Offline;
+                        NewSirAlfredLobby.Instance.SetPlayer(panelNumber, null);
                         player = null;
                         break;
                     case Step.ColorSelection:
@@ -101,15 +103,29 @@ public class SelectionController : MonoBehaviour
                         activeStep = Step.CharacterSelection;
                         break;
                     case Step.AbilitySelection:
-                        RaisePlayerChangedStep(panelNumber, Step.ColorSelection);
-                        activeStep = Step.ColorSelection;
+                        if (isBoss)
+                        {
+                            RaisePlayerChangedStep(panelNumber, Step.CharacterSelection);
+                        }
+                        else
+                        {
+                            RaisePlayerChangedStep(panelNumber, Step.ColorSelection);
+                            activeStep = Step.ColorSelection;
+                        }
                         break;
                     case Step.ReadyToPlay:
                         // TODO: Uncomment following Lines once Abilities should be selectable in Lobby!
                         //RaisePlayerChangedStepEvent(panelNumber, Step.AbilitySelection);
                         //activeStep = Step.AbilitySelection;
-                        RaisePlayerChangedStep(panelNumber, Step.ColorSelection);
-                        activeStep = Step.ColorSelection;
+                        if (isBoss)
+                        {
+                            RaisePlayerChangedStep(panelNumber, Step.CharacterSelection);
+                        }
+                        else
+                        {
+                            RaisePlayerChangedStep(panelNumber, Step.ColorSelection);
+                            activeStep = Step.ColorSelection;
+                        }
                         break;
                     default:
                         Debug.LogWarning("Something went wrong here! Eather a new Step didn't get implemented or some Error accured!");
@@ -125,8 +141,15 @@ public class SelectionController : MonoBehaviour
                         Debug.LogWarning("Something went wrong here!");
                         break;
                     case Step.CharacterSelection:
-                        RaisePlayerChangedStep(panelNumber, Step.ColorSelection);
-                        activeStep = Step.ColorSelection;
+                        if (isBoss)
+                        {
+                            RaisePlayerChangedStep(panelNumber, Step.ReadyToPlay);
+                        }
+                        else
+                        {
+                            RaisePlayerChangedStep(panelNumber, Step.ColorSelection);
+                            activeStep = Step.ColorSelection;
+                        }
                         break;
                     case Step.ColorSelection:
                         // TODO: Uncomment following Lines once Abilities should be selectable in Lobby!
@@ -148,8 +171,6 @@ public class SelectionController : MonoBehaviour
 
     void ManageSelection()
     {
-        // TODO: We should have configurable Deadzones for all Controllers! Eather Rewired does this automaticly and ajusts
-        // the Inputs accordingly or we should write a GameSetting for this and implement it here
         if(player.GetAxis(RewiredConsts.Action.UIHORIZONTAL) > 0)
         {
             //Debug.Log("UIHorizontal: " + player.GetAxis(RewiredConsts.Action.UIHORIZONTAL));
