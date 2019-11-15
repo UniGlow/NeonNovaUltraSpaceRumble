@@ -113,13 +113,13 @@ public class HeroAI : Hero
             // Apply class-dependant movement speed modifier
             if (ability)
             {
-                agent.speed = normalAgentSpeed * (ability.SpeedBoost + 1);
-                agent.speed = normalAgentSpeed * (ability.SpeedBoost + 1);
+                agent.speed = normalAgentSpeed * ability.SpeedModifier;
+                agent.speed = normalAgentSpeed * ability.SpeedModifier;
             }
             else
             {
-                agent.speed = normalAgentSpeed * (playerConfig.ability.SpeedBoost + 1);
-                agent.speed = normalAgentSpeed * (playerConfig.ability.SpeedBoost + 1);
+                agent.speed = normalAgentSpeed * playerConfig.ability.SpeedModifier;
+                agent.speed = normalAgentSpeed * playerConfig.ability.SpeedModifier;
             }
         }
     }
@@ -169,7 +169,7 @@ public class HeroAI : Hero
     #region Private Functions
     private void CalculateMovement()
     {
-        if (IsAbilityClass(Ability.AbilityClass.Victim))
+        if (IsAbilityClass(Ability.AbilityClass.Runner))
         {
             if (agent.destination == transform.position) SetDestination(GetRandomTarget());
 

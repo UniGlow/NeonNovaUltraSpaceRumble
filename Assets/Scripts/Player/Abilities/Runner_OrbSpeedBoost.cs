@@ -6,8 +6,8 @@ using UnityEngine;
 /// 
 /// </summary>
 /// 
-[CreateAssetMenu(menuName = "Scriptable Objects/Abilities/Victim/OrbSpeedBoost")]
-public class Victim_OrbSpeedBoost : Ability 
+[CreateAssetMenu(menuName = "Scriptable Objects/Abilities/Runner/OrbSpeedBoost")]
+public class Runner_OrbSpeedBoost : Ability 
 {
 
     #region Variable Declarations
@@ -51,15 +51,11 @@ public class Victim_OrbSpeedBoost : Ability
     public override void TriggerAbility()
     {
         orb.Speed = originalOrbSpeed * orbSpeedBoost;
-
-        abilityActive = true;
     }
 
     public override void DeactivateAbility()
     {
         orb.Speed = originalOrbSpeed;
-
-        abilityActive = false;
     }
     #endregion
 

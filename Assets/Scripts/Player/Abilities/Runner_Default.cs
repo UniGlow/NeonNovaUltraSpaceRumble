@@ -6,8 +6,8 @@ using UnityEngine;
 /// 
 /// </summary>
 /// 
-[CreateAssetMenu(menuName = "Scriptable Objects/Abilities/Victim/Default")]
-public class Victim_Default : Ability 
+[CreateAssetMenu(menuName = "Scriptable Objects/Abilities/Runner/Default")]
+public class Runner_Default : Ability 
 {
 
     #region Variable Declarations

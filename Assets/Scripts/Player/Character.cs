@@ -117,7 +117,7 @@ public class Character : MonoBehaviour
     private void RotateCharacter()
     {
         // Ignore rotational inputs when playing victim
-        if (playerConfig.ability && playerConfig.ability.Class == Ability.AbilityClass.Victim && rigidbody.velocity.magnitude != 0f)
+        if (playerConfig.ability && playerConfig.ability.Class == Ability.AbilityClass.Runner && rigidbody.velocity.magnitude != 0f)
         {
             transform.forward = rigidbody.velocity;
         }

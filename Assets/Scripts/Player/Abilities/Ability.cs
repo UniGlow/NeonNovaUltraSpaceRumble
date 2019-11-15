@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 
+/// Base class for all abilities. Sets universal properties for the ability and handles different cooldown types.
 /// </summary>
 
 public abstract class Ability : ScriptableObject 
@@ -12,15 +12,21 @@ public abstract class Ability : ScriptableObject
     {
         Damage,
         Tank,
-        Victim
+        Runner
     }
 
     #region Variable Declarations
     // Serialized Fields
     [Header("General Properties")]
-    [SerializeField] protected AbilityClass abilityClass = AbilityClass.Victim;
-    [Tooltip("Percentual movement speed modifier. Proportional to base movement speed")]
-    [SerializeField] protected float speedBoost = 0f;
+    [SerializeField] protected AbilityClass abilityClass = AbilityClass.Runner;
+    [SerializeField] protected Mesh mesh = null;
+
+    [Space]
+    [Tooltip("Percentual movement speed modifier. Proportional to base movement speed. 1 = normal speed.")]
+    [Range(0f, 2f)]
+    [SerializeField] protected float speedModifier = 0f;
+    [Range(0f, 1f)]
+    [SerializeField] protected float cooldownRingScale = 1f;
     [Tooltip("Should the player be able to hold down the ability button to trigger again after cooldown?")]
     [SerializeField] protected bool autofire = false;
 
@@ -30,23 +36,21 @@ public abstract class Ability : ScriptableObject
     [SerializeField] protected float volume = 1f;
 
     [Header("Cooldown")]
-    [SerializeField] protected float cooldownRingScale = 1f;
-
-    [Space]
-    [SerializeField] protected float cooldown = 0.2f;
     [SerializeField] protected bool cooldownVisualized = false;
-
-    [Space]
     [SerializeField] protected bool hasEnergyPool = false;
+
+    [Header("Time-based Cooldown")]
+    [SerializeField] protected float cooldown = 0.2f;
+    [SerializeField] protected float abilityDuration = 1f;
+
+    [Header("Energy-based Cooldown")]
     [SerializeField] protected float maxEnergy = 100f;
     [SerializeField] protected float energyLossPerSecond = 1f;
-
-    [Header("References")]
-    [SerializeField] protected Mesh mesh = null;
 
     // Protected
     protected Hero hero = null;
     protected float cooldownTimer = 0f;
+    protected float abilityDurationTimer = 0f;
     protected AudioSource audioSource = null;
     protected Rigidbody rigidbody = null;
     protected bool binded = false;
@@ -64,7 +68,7 @@ public abstract class Ability : ScriptableObject
     public float CurrentEnergy { get { return currentEnergy; } }
     public float MaxEnergy { get { return maxEnergy; } }
     public AbilityClass Class { get { return abilityClass; } }
-    public float SpeedBoost { get { return speedBoost; } }
+    public float SpeedModifier { get { return speedModifier; } }
     public bool Binded
     {
         get
@@ -108,36 +112,57 @@ public abstract class Ability : ScriptableObject
     /// </summary>
     public virtual void Tick(float deltaTime, bool abilityButtonPressed)
     {
-        // energy available => triggering ability possible
-        if (hasEnergyPool && !energyPoolRecharging)
+        if (hasEnergyPool)
         {
-            // Ability active? => adding or reducing energy over time
-            if (abilityActive) AddEnergy(-deltaTime * energyLossPerSecond);
-            else AddEnergy(deltaTime * (maxEnergy / cooldown));
-
-            if (abilityButtonPressed && !abilityActive && currentEnergy > 0f)
-                TriggerAbility();
-        }
-        // energy has hit 0 => waiting for cooldown to recharge
-        else if (hasEnergyPool && energyPoolRecharging)
-        {
-            AddEnergy(deltaTime * (maxEnergy / cooldown));
-
-            if (currentEnergy >= maxEnergy)
+            // energy available => triggering ability possible
+            if (!energyPoolRecharging)
             {
-                currentEnergy = maxEnergy;
-                energyPoolRecharging = false;
+                // Ability active? => adding or reducing energy over time
+                if (abilityActive) AddEnergy(-deltaTime * energyLossPerSecond);
+                else AddEnergy(deltaTime * (maxEnergy / cooldown));
+
+                if (abilityButtonPressed && !abilityActive && currentEnergy > 0f)
+                    TriggerAbility();
+            }
+            // energy has hit 0 => waiting for cooldown to recharge
+            else
+            {
+                AddEnergy(deltaTime * (maxEnergy / cooldown));
+
+                if (currentEnergy >= maxEnergy)
+                {
+                    currentEnergy = maxEnergy;
+                    energyPoolRecharging = false;
+                }
             }
         }
+
         // No energy pool => wait for cooldown to trigger ability
         else
         {
-            cooldownTimer += deltaTime;
-
-            if (abilityButtonPressed && cooldownTimer >= cooldown)
+            // Ability not currently active => triggering possible if cooldown ready
+            if (!abilityActive)
             {
-                TriggerAbility();
-                cooldownTimer = 0f;
+                cooldownTimer += deltaTime;
+
+                if (abilityButtonPressed && cooldownTimer >= cooldown)
+                {
+                    TriggerAbility();
+                    abilityActive = true;
+                    cooldownTimer = 0f;
+                }
+            }
+            // Ability currently active => waiting for abilityDurationCooldown to deactivate ability
+            else
+            {
+                abilityDurationTimer += deltaTime;
+
+                if (abilityDurationTimer >= abilityDuration)
+                {
+                    DeactivateAbility();
+                    abilityActive = false;
+                    abilityDurationTimer = 0f;
+                }
             }
         }
     }

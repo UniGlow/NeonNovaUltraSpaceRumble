@@ -40,8 +40,8 @@ public class Hero : Character
             playerConfig.ability.Tick(Time.deltaTime, AbilityButtonPressed());
 
             // Apply class-dependant movement speed modifier
-            horizontalMovement *= (1 + playerConfig.ability.SpeedBoost);
-            verticalMovement *= (1 + playerConfig.ability.SpeedBoost);
+            horizontalMovement *= playerConfig.ability.SpeedModifier;
+            verticalMovement *= playerConfig.ability.SpeedModifier;
         }
     }
     #endregion
