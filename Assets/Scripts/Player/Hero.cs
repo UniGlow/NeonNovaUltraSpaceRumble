@@ -70,11 +70,10 @@ public class Hero : Character
 
     public void SetAbility(Ability ability)
     {
-        // Cancel shield, if current ability is Tank class
-        if (playerConfig.ability.Binded && playerConfig.ability.Class == Ability.AbilityClass.Tank)
+        // Cancel currently active ability
+        if (playerConfig.ability.Binded)
         {
-            Tank tankAbility = playerConfig.ability as Tank;
-            tankAbility.DeactivateShield();
+            playerConfig.ability.DeactivateAbility();
         }
 
         // Set new ability

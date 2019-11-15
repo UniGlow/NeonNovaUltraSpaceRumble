@@ -1256,7 +1256,7 @@ MonoBehaviour:
   colorSet: {fileID: 11400000, guid: 68d47b220c1450a46a2330237d217b40, type: 2}
   damageAbility: {fileID: 11400000, guid: c3a8eab940a7e934e8c41e8e444f06ca, type: 2}
   tankAbility: {fileID: 11400000, guid: ea651a0727fca904886ca5fea0d3c71b, type: 2}
-  victimAbility: {fileID: 11400000, guid: 0247d2ab78a5bf148811c5c43bcfc496, type: 2}
+  victimAbility: {fileID: 11400000, guid: 314e7d8107326ca4a938b24b7bcae384, type: 2}
   playerStateChangedEvent: {fileID: 11400000, guid: 411ed047da69e7547a044f8588816b4f,
     type: 2}
 --- !u!4 &483622205
@@ -1345,6 +1345,11 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 20299908489427122, guid: 2d1d66f95b252b6458df80a5e38d35d1,
+        type: 3}
+      propertyPath: field of view
+      value: 52
+      objectReference: {fileID: 0}
     - target: {fileID: 114295717314955092, guid: 2d1d66f95b252b6458df80a5e38d35d1,
         type: 3}
       propertyPath: targets.Array.data[0]
@@ -1368,14 +1373,9 @@ PrefabInstance:
     - target: {fileID: 114295717314955092, guid: 2d1d66f95b252b6458df80a5e38d35d1,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 20016080238216692, guid: 2d1d66f95b252b6458df80a5e38d35d1,
-        type: 3}
-      propertyPath: field of view
-      value: 52
-      objectReference: {fileID: 0}
-    - target: {fileID: 20299908489427122, guid: 2d1d66f95b252b6458df80a5e38d35d1,
         type: 3}
       propertyPath: field of view
       value: 52

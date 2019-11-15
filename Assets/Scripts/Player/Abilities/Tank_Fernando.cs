@@ -5,18 +5,15 @@ using UnityEngine;
 /// <summary>
 /// 
 /// </summary>
-/// 
-[CreateAssetMenu(menuName = "Scriptable Objects/Abilities/Tank/WobbleBobble")]
-public class Tank_WobbleBobble : Ability
+[CreateAssetMenu(menuName = "Scriptable Objects/Abilities/Tank/Fernando")]
+public class Tank_Fernando : Ability
 {
 
     #region Variable Declarations
     // Serialized Fields
-    [Header("Ability Properties")]
-    [SerializeField] float shieldDuration = 2f;
 
     // Private
-    float shieldTimer = 0f;
+
     #endregion
 
 
@@ -30,18 +27,11 @@ public class Tank_WobbleBobble : Ability
     #region Public Functions
     public override void Tick(float deltaTime, bool abilityButtonPressed)
     {
-        if (!abilityActive)
-        {
-            base.Tick(deltaTime, abilityButtonPressed);
-        }
-        else
-        {
-            shieldTimer += deltaTime;
+        base.Tick(deltaTime, abilityButtonPressed);
 
-            if (shieldTimer >= shieldDuration)
-            {
-                DeactivateAbility();
-            }
+        if (abilityActive && (!abilityButtonPressed || energyPoolRecharging))
+        {
+            DeactivateAbility();
         }
     }
 
@@ -58,8 +48,6 @@ public class Tank_WobbleBobble : Ability
     {
         hero.Shield.SetActive(false);
         hero.Rigidbody.mass = 1f;
-        cooldownTimer = 0f;
-        shieldTimer = 0f;
         abilityActive = false;
     }
     #endregion

@@ -14565,7 +14565,7 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   linkedMethods:
   - component: {fileID: 114474593516083838}
-    methodID: 1
+    methodID: 3
     methodName: AcquireNewTarget
     chosenID: 1
     methodNames: []
@@ -14591,7 +14591,7 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   linkedMethods:
   - component: {fileID: 114474593516083838}
-    methodID: 0
+    methodID: 2
     methodName: AcquireNewTarget
     chosenID: 1
     methodNames: []

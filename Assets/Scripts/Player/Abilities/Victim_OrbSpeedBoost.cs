@@ -5,15 +5,20 @@ using UnityEngine;
 /// <summary>
 /// 
 /// </summary>
-[CreateAssetMenu(menuName = "Scriptable Objects/Abilities/Tank/Default")]
-public class Tank : Ability
+/// 
+[CreateAssetMenu(menuName = "Scriptable Objects/Abilities/Victim/OrbSpeedBoost")]
+public class Victim_OrbSpeedBoost : Ability 
 {
 
     #region Variable Declarations
     // Serialized Fields
+    [Tooltip("Percentual speed boost for the orb. 1 = normal speed.")]
+    [Range(0f, 5f)]
+    [SerializeField] float orbSpeedBoost = 2f;
 
     // Private
-
+    HomingMissile orb = null;
+    float originalOrbSpeed = 0f;
     #endregion
 
 
@@ -25,29 +30,35 @@ public class Tank : Ability
 
 
     #region Public Functions
+    public override void BindTo(Hero hero)
+    {
+        base.BindTo(hero);
+
+        orb = FindObjectOfType<HomingMissile>();
+        originalOrbSpeed = orb.Speed;
+    }
+
     public override void Tick(float deltaTime, bool abilityButtonPressed)
     {
         base.Tick(deltaTime, abilityButtonPressed);
 
         if (abilityActive && (!abilityButtonPressed || energyPoolRecharging))
         {
-            DeactivateShield();
+            DeactivateAbility();
         }
     }
 
     public override void TriggerAbility()
     {
-        hero.Shield.SetActive(true);
-        hero.Rigidbody.mass = 100f;
-        audioSource.PlayOneShot(soundClip, volume);
+        orb.Speed = originalOrbSpeed * orbSpeedBoost;
 
         abilityActive = true;
     }
 
-    public void DeactivateShield()
+    public override void DeactivateAbility()
     {
-        hero.Shield.SetActive(false);
-        hero.Rigidbody.mass = 1f;
+        orb.Speed = originalOrbSpeed;
+
         abilityActive = false;
     }
     #endregion

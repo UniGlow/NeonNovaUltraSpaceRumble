@@ -6,8 +6,8 @@ using UnityEngine;
 /// 
 /// </summary>
 /// 
-[CreateAssetMenu(menuName = "Scriptable Objects/Abilities/Victim")]
-public class Victim : Ability 
+[CreateAssetMenu(menuName = "Scriptable Objects/Abilities/Victim/Default")]
+public class Victim_Default : Ability 
 {
 
     #region Variable Declarations
@@ -29,6 +29,11 @@ public class Victim : Ability
     public override void TriggerAbility()
     {
         // Nothing to do here. Default Victim has no active ability.
+    }
+
+    public override void DeactivateAbility()
+    {
+        
     }
     #endregion
 

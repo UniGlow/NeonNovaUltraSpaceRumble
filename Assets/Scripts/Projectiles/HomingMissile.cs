@@ -17,6 +17,7 @@ public class HomingMissile : MonoBehaviour
         public float timeStamp = 0f;
     }
 
+     
 
 
     #region Variable Declarations
@@ -61,11 +62,17 @@ public class HomingMissile : MonoBehaviour
     AudioSource audioSource;
     bool agentPaused = true;
     List<HitDetails> recentHits = new List<HitDetails>();
-	#endregion
-	
-	
-	
-	#region Unity Event Functions
+    #endregion
+
+
+
+    #region Public Properties
+    public float Speed { get { return speed; } set { speed = value; } }
+    #endregion
+
+
+
+    #region Unity Event Functions
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();

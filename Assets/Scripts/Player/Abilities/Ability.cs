@@ -194,6 +194,7 @@ public abstract class Ability : ScriptableObject
     }
 
     public abstract void TriggerAbility();
+    public abstract void DeactivateAbility();
     #endregion
 
 
