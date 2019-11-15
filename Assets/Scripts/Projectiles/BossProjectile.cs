@@ -58,7 +58,8 @@ public class BossProjectile : Projectile
     {
         base.Initialize(damage, color, velocity, lifeTime);
 
-        GetComponent<Renderer>().material.SetColor("_TintColor", color.bossProjectileColor);
+        GetComponent<Renderer>().material.SetColor("_BaseColor", color.bossProjectileColor);
+        GetComponent<Renderer>().material.SetColor("_EmissionColor", color.bossProjectileColor);
     }
     #endregion
 }
