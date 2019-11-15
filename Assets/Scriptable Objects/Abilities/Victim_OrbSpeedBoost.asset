@@ -18,10 +18,10 @@ MonoBehaviour:
   soundClip: {fileID: 0}
   volume: 1
   cooldownRingScale: 0.8
-  cooldown: 3
+  cooldown: 5
   cooldownVisualized: 1
   hasEnergyPool: 1
   maxEnergy: 100
-  energyLossPerSecond: 40
+  energyLossPerSecond: 80
   mesh: {fileID: 4300000, guid: f32514971f6af494ab733f3081f0746e, type: 3}
-  orbSpeedBoost: 2
+  orbSpeedBoost: 3
