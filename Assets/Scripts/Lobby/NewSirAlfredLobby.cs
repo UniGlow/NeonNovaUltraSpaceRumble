@@ -15,11 +15,22 @@ public class NewSirAlfredLobby : MonoBehaviour
         public bool readyToPlay = false;
         public PlayerColor playerColor = null;
         public PlayerCharacter PlayerCharacter = PlayerCharacter.Empty;
-        public int playerNumber; // THIS IS STARTING AT 0!!! NOT THE PANELNUMBER!
+        public int playerNumber = -1; // THIS IS STARTING AT 0!!! NOT THE PANELNUMBER!
 
         // For Alfred
         public bool listeningForInput = false;
         public bool active = false;
+
+        public void Clear()
+        {
+            player = null;
+            readyToPlay = false;
+            playerColor = null;
+            PlayerCharacter = PlayerCharacter.Empty;
+            playerNumber = -1;
+            listeningForInput = false;
+            active = false;
+        }
     }
 
     public enum PlayerCharacter
@@ -29,6 +40,12 @@ public class NewSirAlfredLobby : MonoBehaviour
         Tank,
         Damage,
         Runner
+    }
+
+    public enum Direction
+    {
+        Left,
+        Right
     }
 
     #region Variable Declarations
@@ -54,8 +71,9 @@ public class NewSirAlfredLobby : MonoBehaviour
     // Player Settings for PlayerConfigs
     PlayerSettings[] players = new PlayerSettings[4] { new PlayerSettings(), new PlayerSettings(), new PlayerSettings(), new PlayerSettings() };
     
-        // Data
+    // Data
     List<PlayerColor> availablePlayerColors = new List<PlayerColor>();
+    PlayerCharacter[] lastPlayerCharacters = new PlayerCharacter[4] { PlayerCharacter.Empty, PlayerCharacter.Empty, PlayerCharacter.Empty, PlayerCharacter.Empty };
     bool gameReadyToStart = false;
     #endregion
 
@@ -104,6 +122,11 @@ public class NewSirAlfredLobby : MonoBehaviour
         bool somethingChanged = false;
         if(activeStep == SelectionController.Step.Offline)
         {
+            // Save last selected Character
+            lastPlayerCharacters[panelNumber - 1] = players[panelNumber - 1].PlayerCharacter;
+            // Clear all Data of that Player
+            players[panelNumber - 1].Clear();
+            // Make that Slot available for all Players again
             players[panelNumber - 1].listeningForInput = true;
             players[panelNumber - 1].active = false;
             bool firstElementChanged = false;
@@ -127,6 +150,14 @@ public class NewSirAlfredLobby : MonoBehaviour
         {
             players[panelNumber - 1].listeningForInput = false;
             players[panelNumber - 1].active = true;
+            if(lastPlayerCharacters[panelNumber-1] != PlayerCharacter.Empty)
+            {
+                players[panelNumber - 1].PlayerCharacter = lastPlayerCharacters[panelNumber - 1];
+            }
+            else
+            {
+                players[panelNumber - 1].PlayerCharacter = PlayerCharacter.Boss;
+            }
             bool firstElementChanged = false;
             for (int i = 0; i < players.Length; i++)
             {
@@ -222,6 +253,36 @@ public class NewSirAlfredLobby : MonoBehaviour
                 return availablePlayerColors[availablePlayerColors.Count - 1];
             }
         }
+    }
+
+    /// <summary>
+    /// Sets the current Player Character to the next Character in the Wheel
+    /// </summary>
+    /// <param name="panelNumber"></param>
+    /// <param name="direction">Direction of Turning the Wheel, Left or Right</param>
+    /// <returns>True if Player is Boss, False if Player isn't</returns>
+    public bool SwitchPlayerCharacter(int panelNumber, Direction direction)
+    {
+        // TODO: Hardcode-Reihenfolge entfernen und dynamische Lösung finden
+        switch (players[panelNumber - 1].PlayerCharacter)
+        {
+            case PlayerCharacter.Boss:
+                players[panelNumber - 1].PlayerCharacter = direction == Direction.Left ? PlayerCharacter.Tank : PlayerCharacter.Damage;
+                break;
+            case PlayerCharacter.Damage:
+                players[panelNumber - 1].PlayerCharacter = direction == Direction.Left ? PlayerCharacter.Boss : PlayerCharacter.Runner;
+                break;
+            case PlayerCharacter.Runner:
+                players[panelNumber - 1].PlayerCharacter = direction == Direction.Left ? PlayerCharacter.Damage : PlayerCharacter.Tank;
+                break;
+            case PlayerCharacter.Tank:
+                players[panelNumber - 1].PlayerCharacter = direction == Direction.Left ? PlayerCharacter.Runner : PlayerCharacter.Boss;
+                break;
+        }
+        if (players[panelNumber - 1].PlayerCharacter == PlayerCharacter.Boss)
+            return true;
+        else
+            return false;
     }
 	#endregion
 	

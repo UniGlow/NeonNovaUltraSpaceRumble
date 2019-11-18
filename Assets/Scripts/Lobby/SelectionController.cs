@@ -188,6 +188,7 @@ public class SelectionController : MonoBehaviour
                         break;
                 }
             }
+            // Following Code has been extracted from aboth for better usability. This happens once a specific Step has been entered
             if (playerPressedButton)
             {
                 switch (activeStep)
@@ -217,6 +218,7 @@ public class SelectionController : MonoBehaviour
                     //Debug.Log("UIHorizontal: " + player.GetAxis(RewiredConsts.Action.UIHORIZONTAL));
                     inputsLocked = true;
                     Vector3 targetRotation = new Vector3(wheel.transform.rotation.eulerAngles.x, wheel.transform.rotation.eulerAngles.y + 90, wheel.transform.rotation.eulerAngles.z);
+                    isBoss = NewSirAlfredLobby.Instance.SwitchPlayerCharacter(panelNumber, NewSirAlfredLobby.Direction.Right);
                     //Debug.Log("Old Rotation: " + wheel.transform.rotation + " | New Rotation: " + targetRotation);
                     wheel.DORotate(targetRotation, rotationDuration).SetEase(animationCurve).OnComplete(() =>
                     {
@@ -246,6 +248,7 @@ public class SelectionController : MonoBehaviour
                     //Debug.Log("UIHorizontal: " + player.GetAxis(RewiredConsts.Action.UIHORIZONTAL));
                     inputsLocked = true;
                     Vector3 targetRotation = new Vector3(wheel.transform.rotation.eulerAngles.x, wheel.transform.rotation.eulerAngles.y - 90, wheel.transform.rotation.eulerAngles.z);
+                    isBoss = NewSirAlfredLobby.Instance.SwitchPlayerCharacter(panelNumber, NewSirAlfredLobby.Direction.Left);
                     //Debug.Log("Old Rotation: " + wheel.transform.rotation +  " | New Rotation: " + targetRotation);
                     wheel.DORotate(targetRotation, rotationDuration).SetEase(animationCurve).OnComplete(() =>
                     {
