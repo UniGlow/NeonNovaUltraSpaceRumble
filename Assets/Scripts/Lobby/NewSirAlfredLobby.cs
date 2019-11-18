@@ -107,6 +107,9 @@ public class NewSirAlfredLobby : MonoBehaviour
                 if (player.player != null && player.player.GetButtonDown(RewiredConsts.Action.UISTART))
                 {
                     // TODO: Setup PlayerConfigs and load first Level
+                    SetupPlayerConfigs();
+                    SceneManager.Instance.LoadNextLevel();
+
                     Debug.LogAssertion("Game Started!");
                 }
             }
@@ -402,6 +405,9 @@ public class NewSirAlfredLobby : MonoBehaviour
             }
         }
         // Setup Active ColorSet
+        activeColorSet.color1 = hero1Config.ColorConfig;
+        activeColorSet.color2 = hero2Config.ColorConfig;
+        activeColorSet.color3 = hero3Config.ColorConfig;
 
         // Initialise Boss here
         for(int i=0; i<characters.Count; i++)
