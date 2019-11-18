@@ -91,13 +91,13 @@ public class SelectionController : MonoBehaviour
                 this.player = tempPlayer;
                 NewSirAlfredLobby.Instance.SetPlayer(panelNumber, tempPlayer);
                 activeStep = Step.CharacterSelection;
+                Debug.Log("Raising Event");
                 RaisePlayerChangedStep(panelNumber, activeStep);
             }
         }
         else if(player != null)
         {
             bool playerPressedButton = false;
-            // Switches in first Iteration just Change Steps and Raise Step Events
             // Player pressed B
             if (player.GetButtonDown(RewiredConsts.Action.UICANCEL))
             {
@@ -142,6 +142,7 @@ public class SelectionController : MonoBehaviour
                             RaisePlayerChangedStep(panelNumber, Step.ColorSelection);
                             activeStep = Step.ColorSelection;
                         }
+                        NewSirAlfredLobby.Instance.SetReadyToPlay(panelNumber, false);
                         break;
                     default:
                         Debug.LogWarning("Something went wrong here! Eather a new Step didn't get implemented or some Error accured!");
@@ -179,14 +180,14 @@ public class SelectionController : MonoBehaviour
                         break;
                     case Step.ReadyToPlay:
                         // This step doesn't do anything, the player is just nervously pressing the A button :)
+                        // Ignoring that Input so Alfred doesn't have to deal with it :D
+                        playerPressedButton = false;
                         break;
                     default:
                         Debug.LogWarning("Something went wrong here! Eather a new Step didn't get implemented or some Error accured!");
                         break;
                 }
             }
-            // Switch in second Iteration does Logic
-            // Player Press any Button
             if (playerPressedButton)
             {
                 switch (activeStep)
@@ -197,6 +198,9 @@ public class SelectionController : MonoBehaviour
                         break;
                     case Step.ColorSelection:
                         activeColor = NewSirAlfredLobby.Instance.AvailableColors[0];
+                        break;
+                    case Step.ReadyToPlay:
+                        NewSirAlfredLobby.Instance.SetReadyToPlay(panelNumber, true);
                         break;
                 }
             }
