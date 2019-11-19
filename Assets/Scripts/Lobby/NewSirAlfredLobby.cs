@@ -95,7 +95,10 @@ public class NewSirAlfredLobby : MonoBehaviour
     {
         InputHelper.ChangeRuleSetForAllPlayers(RewiredConsts.LayoutManagerRuleSet.RULESETLOBBY);
         RaiseSlotsListeningForInputs(MakeListeningForInputArray(true));
-        availablePlayerColors = availableColors.playerColors;
+        foreach(PlayerColor pc in availableColors.PlayerColors)
+        {
+            availablePlayerColors.Add(pc);
+        }
     }
 
     private void Update()
@@ -193,6 +196,10 @@ public class NewSirAlfredLobby : MonoBehaviour
     public void SetPlayer(int panelNumber, Rewired.Player player)
     {
         players[panelNumber - 1].player = player;
+        if (player != null)
+            players[panelNumber - 1].playerNumber = panelNumber - 1;
+        else
+            players[panelNumber - 1].playerNumber = -1;
     }
 
     public bool IsPlayerActive(Rewired.Player player)
@@ -205,17 +212,18 @@ public class NewSirAlfredLobby : MonoBehaviour
         return false;
     }
 
+    // Used directly by SelectionControllers NOT by GameEvent
     public void SetPlayerColor(int panelNumber, PlayerColor playerColor)
     {
-        players[panelNumber - 1].playerColor = playerColor;
         if (playerColor != null)
         {
             availablePlayerColors.Remove(playerColor);
         }
         else
         {
-            availablePlayerColors.Add(playerColor);
+            availablePlayerColors.Add(players[panelNumber-1].playerColor);
         }
+        players[panelNumber - 1].playerColor = playerColor;
     }
 
     public void SetReadyToPlay(int panelNumber, bool readyState)
@@ -340,6 +348,13 @@ public class NewSirAlfredLobby : MonoBehaviour
         characters.Add(PlayerCharacter.Empty);
         characters.Add(PlayerCharacter.Empty);
         List<PlayerColor> colorsNotToUse = new List<PlayerColor>();
+        // TODO: TEST THIS WITH 5 CONTROLLERS ON THE SAME MACHINE!!!!!!!!!!!!!!!
+        List<Rewired.Player> availablePlayers = new List<Rewired.Player>();
+        availablePlayers.Add(Rewired.ReInput.players.GetPlayer(0));
+        availablePlayers.Add(Rewired.ReInput.players.GetPlayer(1));
+        availablePlayers.Add(Rewired.ReInput.players.GetPlayer(2));
+        availablePlayers.Add(Rewired.ReInput.players.GetPlayer(3));
+        Rewired.Player bossplayer = null;
         for(int i = 0; i < players.Length; i++)
         {
             if(players[i].player != null)
@@ -348,6 +363,8 @@ public class NewSirAlfredLobby : MonoBehaviour
                 {
                     case PlayerCharacter.Boss:
                         // Boss has to be Initialised last! ColorSet has to be filled first!
+                        bossplayer = players[i].player;
+                        availablePlayers.Remove(players[i].player);
                         characters[i] = PlayerCharacter.Boss;
                         break;
                     case PlayerCharacter.Damage:
@@ -355,18 +372,21 @@ public class NewSirAlfredLobby : MonoBehaviour
                         hero1Config.ability = damageAbility;
                         characters[i] = PlayerCharacter.Damage;
                         colorsNotToUse.Add(players[i].playerColor);
+                        availablePlayers.Remove(players[i].player);
                         break;
                     case PlayerCharacter.Runner:
                         hero2Config.Initialize(players[i].player, players[i].playerNumber, Faction.Heroes, players[i].playerColor, false);
                         hero2Config.ability = runnerAbility;
                         characters[i] = PlayerCharacter.Runner;
                         colorsNotToUse.Add(players[i].playerColor);
+                        availablePlayers.Remove(players[i].player);
                         break;
                     case PlayerCharacter.Tank:
                         hero3Config.Initialize(players[i].player, players[i].playerNumber, Faction.Heroes, players[i].playerColor, false);
                         hero3Config.ability = tankAbility;
                         characters[i] = PlayerCharacter.Tank;
                         colorsNotToUse.Add(players[i].playerColor);
+                        availablePlayers.Remove(players[i].player);
                         break;
                 }
             }
@@ -380,7 +400,8 @@ public class NewSirAlfredLobby : MonoBehaviour
                     PlayerColor color = colorsNotToUse.Count == 0 ? availableColors.GetRandomColorExcept() :
                         (colorsNotToUse.Count == 1 ? availableColors.GetRandomColorExcept(colorsNotToUse[0]) :
                             (colorsNotToUse.Count == 2 ? availableColors.GetRandomColorExcept(colorsNotToUse[0], colorsNotToUse[1]) : availablePlayerColors[0]));
-                    hero1Config.Initialize(null, i, Faction.Heroes, color, true);
+                    hero1Config.Initialize(availablePlayers[0], i, Faction.Heroes, color, true);
+                    availablePlayers.RemoveAt(0);
                     characters[i] = PlayerCharacter.Damage;
                     colorsNotToUse.Add(color);
                 }
@@ -389,7 +410,8 @@ public class NewSirAlfredLobby : MonoBehaviour
                     PlayerColor color = colorsNotToUse.Count == 0 ? availableColors.GetRandomColorExcept() :
                         (colorsNotToUse.Count == 1 ? availableColors.GetRandomColorExcept(colorsNotToUse[0]) :
                             (colorsNotToUse.Count == 2 ? availableColors.GetRandomColorExcept(colorsNotToUse[0], colorsNotToUse[1]) : availablePlayerColors[0]));
-                    hero2Config.Initialize(null, i, Faction.Heroes, color, true);
+                    hero2Config.Initialize(availablePlayers[0], i, Faction.Heroes, color, true);
+                    availablePlayers.RemoveAt(0);
                     characters[i] = PlayerCharacter.Runner;
                     colorsNotToUse.Add(color);
                 }
@@ -398,8 +420,9 @@ public class NewSirAlfredLobby : MonoBehaviour
                     PlayerColor color = colorsNotToUse.Count == 0 ? availableColors.GetRandomColorExcept() :
                         (colorsNotToUse.Count == 1 ? availableColors.GetRandomColorExcept(colorsNotToUse[0]) :
                             (colorsNotToUse.Count == 2 ? availableColors.GetRandomColorExcept(colorsNotToUse[0], colorsNotToUse[1]) : availablePlayerColors[0]));
-                    hero3Config.Initialize(null, i, Faction.Heroes, color, true);
-                    characters[i] = PlayerCharacter.Damage;
+                    hero3Config.Initialize(availablePlayers[0], i, Faction.Heroes, color, true);
+                    availablePlayers.RemoveAt(0);
+                    characters[i] = PlayerCharacter.Tank;
                     colorsNotToUse.Add(color);
                 }
             }
@@ -414,14 +437,17 @@ public class NewSirAlfredLobby : MonoBehaviour
         {
             if(characters[i] == PlayerCharacter.Empty)
             {
-                bossConfig.Initialize(null, players[i].playerNumber, Faction.Boss, activeColorSet.GetRandomColor(), true);
+                bossConfig.Initialize(availablePlayers[0], players[i].playerNumber, Faction.Boss, activeColorSet.GetRandomColor(), true);
             }
             if(characters[i] == PlayerCharacter.Boss)
             {
                 bossConfig.Initialize(players[i].player, players[i].playerNumber, Faction.Boss, activeColorSet.GetRandomColor(), false);
             }
         }
-            
+
+        // Setup GameManager
+        GameManager.Instance.activeColorSet = activeColorSet;
+        GameManager.Instance.IsInitialized = true;
     }
 	#endregion
 	

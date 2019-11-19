@@ -124,12 +124,13 @@ public class SelectionController : MonoBehaviour
                         }
                         else
                         {
+                            NewSirAlfredLobby.Instance.SetPlayerColor(panelNumber, null);
                             RaisePlayerChangedStep(panelNumber, Step.ColorSelection);
                             activeStep = Step.ColorSelection;
                         }
                         break;
                     case Step.ReadyToPlay:
-                        // TODO: Uncomment following Lines once Abilities should be selectable in Lobby!
+                        // TODO: Uncomment following Lines once Abilities should be selectable in Lobby! Delete the rest
                         //RaisePlayerChangedStepEvent(panelNumber, Step.AbilitySelection);
                         //activeStep = Step.AbilitySelection;
                         if (isBoss)
@@ -139,9 +140,11 @@ public class SelectionController : MonoBehaviour
                         }
                         else
                         {
+                            NewSirAlfredLobby.Instance.SetPlayerColor(panelNumber, null);
                             RaisePlayerChangedStep(panelNumber, Step.ColorSelection);
                             activeStep = Step.ColorSelection;
                         }
+                        // But don't delete this
                         NewSirAlfredLobby.Instance.SetReadyToPlay(panelNumber, false);
                         break;
                     default:
@@ -172,11 +175,13 @@ public class SelectionController : MonoBehaviour
                         }
                         break;
                     case Step.ColorSelection:
-                        // TODO: Uncomment following Lines once Abilities should be selectable in Lobby!
+                        // TODO: Uncomment following Lines once Abilities should be selectable in Lobby! Delete the Rest.
                         //RaisePlayerChangedStepEvent(panelNumber, Step.AbilitySelection);
                         //activeStep = Step.AbilitySelection;
                         RaisePlayerChangedStep(panelNumber, Step.ReadyToPlay);
                         activeStep = Step.ReadyToPlay;
+                        // Don't delete this
+                        NewSirAlfredLobby.Instance.SetPlayerColor(panelNumber, activeColor);
                         break;
                     case Step.ReadyToPlay:
                         // This step doesn't do anything, the player is just nervously pressing the A button :)
@@ -199,6 +204,8 @@ public class SelectionController : MonoBehaviour
                         break;
                     case Step.ColorSelection:
                         activeColor = NewSirAlfredLobby.Instance.AvailableColors[0];
+                        RaisePlayerChangedColor(panelNumber, activeColor);
+                        UpdateModelColor();
                         break;
                     case Step.ReadyToPlay:
                         NewSirAlfredLobby.Instance.SetReadyToPlay(panelNumber, true);

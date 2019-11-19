@@ -11,7 +11,8 @@ public class AvailableColors : ScriptableObject
 
     #region Variable Declarations
     // Serialized Fields
-    public List<PlayerColor> playerColors;
+    [SerializeField]
+    private List<PlayerColor> playerColors;
 	// Private
 	
 	#endregion
@@ -19,7 +20,7 @@ public class AvailableColors : ScriptableObject
 	
 	
 	#region Public Properties
-	
+	public List<PlayerColor> PlayerColors { get { return playerColors; } }
 	#endregion
 	
 	
@@ -33,12 +34,35 @@ public class AvailableColors : ScriptableObject
 	#region Public Functions
 	public PlayerColor GetRandomColorExcept(PlayerColor color1 = null, PlayerColor color2 = null)
     {
-        List<PlayerColor> colors = playerColors;
-        if(color1 != null)
-            colors.Remove(color1);
-        if (color2 != null)
-            colors.Remove(color2);
-        return colors[Random.Range(0, colors.Count)];
+        PlayerColor[] colors = new PlayerColor[playerColors.Count - (color1 == null ? (color2 == null ? 0 : 1) : (color2 == null ? 1 : 2))];
+        int j = 0;
+        for (int i=0; i<playerColors.Count; i++)
+        {
+            bool copy = false;
+            if(color1 == null)
+            {
+                if (color2 == null)
+                    copy = true;
+                else if (color2 != playerColors[i])
+                        copy = true;
+            }
+            else
+            {
+                if(color1 != playerColors[i])
+                {
+                    if (color2 == null)
+                        copy = true;
+                    else if (color2 != playerColors[i])
+                            copy = true;
+                }
+            }
+            if (copy)
+            {
+                colors[j] = playerColors[i];
+                j++;
+            }
+        }
+        return colors[Random.Range(0, colors.Length)];
     }
 	#endregion
 	
