@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using DG.Tweening;
 
 /// <summary>
 /// 
@@ -52,9 +53,9 @@ public class SelectionUI : MonoBehaviour
 	#region Public Functions
 	public void ChangeStep(int panelNumber, SelectionController.Step nextStep)
     {
-        // TODO: Once Abilities for Heros and Boss are in the Game: Add "|| SelectionController.Step.ReadyToPlay" to this If-Statement
-        if(keepColorsUpdated && activeStep != SelectionController.Step.Offline)
+        if(activeStep == SelectionController.Step.ColorSelection)
         {
+            Debug.Log("Test");
             UpdateTopPanel();
         }
         if (this.panelNumber == panelNumber)
@@ -69,18 +70,34 @@ public class SelectionUI : MonoBehaviour
                 case SelectionController.Step.CharacterSelection:
                     offlineScreen.SetActive(false);
                     selectionScreen.SetActive(true);
+                    leftArrow.gameObject.SetActive(true);
+                    rightArrow.gameObject.SetActive(true);
+                    topPanel.SetActive(false);
                     break;
                 case SelectionController.Step.ColorSelection:
-                    playerColors = NewSirAlfredLobby.Instance.AvailableColors;
-                    keepColorsUpdated = true;
+                    playerColors = CopyColorList(NewSirAlfredLobby.Instance.AvailableColors);
                     FillTopPanel(SelectionController.Step.ColorSelection);
+                    leftArrow.gameObject.SetActive(true);
+                    rightArrow.gameObject.SetActive(true);
+                    topPanel.SetActive(true);
                     break;
                 case SelectionController.Step.AbilitySelection:
                     FillTopPanel(SelectionController.Step.AbilitySelection);
+                    leftArrow.gameObject.SetActive(true);
+                    rightArrow.gameObject.SetActive(true);
+                    topPanel.SetActive(true);
                     break;
                 case SelectionController.Step.Offline:
                     offlineScreen.SetActive(true);
                     selectionScreen.SetActive(false);
+                    leftArrow.gameObject.SetActive(false);
+                    rightArrow.gameObject.SetActive(false);
+                    topPanel.SetActive(false);
+                    break;
+                case SelectionController.Step.ReadyToPlay:
+                    leftArrow.gameObject.SetActive(false);
+                    rightArrow.gameObject.SetActive(false);
+                    topPanel.SetActive(false);
                     break;
             }
         }
@@ -91,6 +108,21 @@ public class SelectionUI : MonoBehaviour
         if(panelNumber == this.panelNumber)
         {
             textMesh.text = activeCharacter.ToString();
+        }
+    }
+
+    public void AnimateArrow(int panelNumber, Direction direction)
+    {
+        if(panelNumber == this.panelNumber)
+        {
+            if(direction == Direction.Left)
+            {
+                leftArrow.DOScale(.8f, .05f).SetLoops(2, LoopType.Yoyo);
+            }
+            else
+            {
+                rightArrow.DOScale(.8f, .05f).SetLoops(2, LoopType.Yoyo);
+            }
         }
     }
 	#endregion
@@ -126,14 +158,14 @@ public class SelectionUI : MonoBehaviour
                 topPanelSelectables.Add(toAdd);
             }
         }
-        foreach(PlayerColor pc in playerColors)
+        for(int i = playerColors.Count - 1; i >= 0; i--)
         {
-            if (!tempColors.Contains(pc))
+            if (!tempColors.Contains(playerColors[i]))
             {
-                GameObject toDestroy = topPanelSelectables[playerColors.IndexOf(pc)];
+                GameObject toDestroy = topPanelSelectables[playerColors.IndexOf(playerColors[i])];
                 Destroy(toDestroy);
                 topPanelSelectables.Remove(toDestroy);
-                playerColors.Remove(pc);
+                playerColors.Remove(playerColors[i]);
             }
         }
     }
@@ -145,6 +177,16 @@ public class SelectionUI : MonoBehaviour
             Destroy(go);
         }
         topPanelSelectables.Clear();
+    }
+
+    List<PlayerColor> CopyColorList(List<PlayerColor> listToCopy)
+    {
+        List<PlayerColor> list = new List<PlayerColor>();
+        foreach(PlayerColor pc in listToCopy)
+        {
+            list.Add(pc);
+        }
+        return list;
     }
 	#endregion
 	

@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &912889696477965919
 RectTransform:
   m_ObjectHideFlags: 0
@@ -273,6 +273,7 @@ GameObject:
   - component: {fileID: 912889697591679946}
   - component: {fileID: 7594083303493845330}
   - component: {fileID: 7247527358148327584}
+  - component: {fileID: 2696466387731179761}
   m_Layer: 5
   m_Name: P1 UI
   m_TagString: Untagged
@@ -409,6 +410,32 @@ MonoBehaviour:
   - component: {fileID: 1394123924860895440}
     methodID: 1
     methodName: ChangeText
+    chosenID: 1
+    methodNames: []
+    gameObject: {fileID: 912889697591679944}
+  ignoreEventParameters: 0
+--- !u!114 &2696466387731179761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912889697591679944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: c4a1e5f198a851840ac505928c8d0a63, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  linkedMethods:
+  - component: {fileID: 1394123924860895440}
+    methodID: 2
+    methodName: AnimateArrow
     chosenID: 1
     methodNames: []
     gameObject: {fileID: 912889697591679944}
@@ -659,7 +686,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5742789691684675660
 RectTransform:
   m_ObjectHideFlags: 0
@@ -809,7 +836,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1144764191109530909
 RectTransform:
   m_ObjectHideFlags: 0

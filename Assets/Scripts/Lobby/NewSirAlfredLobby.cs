@@ -41,13 +41,7 @@ public class NewSirAlfredLobby : MonoBehaviour
         Damage,
         Runner
     }
-
-    public enum Direction
-    {
-        Left,
-        Right
-    }
-
+    
     #region Variable Declarations
     public static NewSirAlfredLobby Instance = null;
     // Serialized Fields

@@ -28,7 +28,10 @@ public class SelectionController : MonoBehaviour
     [SerializeField] List<Transform> heroModels = new List<Transform>();
     [SerializeField] GameEvent playerChangedStepEvent = null;
     [SerializeField] GameEvent playerChangedColor = null;
+    [SerializeField] GameEvent playerSelectedColorEvent = null;
+    [SerializeField] GameEvent directionTriggeredLobbyEvent = null;
     [SerializeField] float delayBetweenChanges = 0.25f;
+    [SerializeField] float rotationSpeed = .25f;
 
 
     // Private
@@ -56,6 +59,7 @@ public class SelectionController : MonoBehaviour
         if (player != null && !inputsLocked)
         {
             ManageSelection();
+            ManageCharacterRotation();
         }
         if(changeTimer != 0f)
         {
@@ -87,6 +91,15 @@ public class SelectionController : MonoBehaviour
             }
         }
     }
+
+    public void UpdateColorSelection(int panelNumber, PlayerColor colorNotToUse)
+    {
+        if(panelNumber != this.panelNumber && colorNotToUse != null && colorNotToUse == activeColor)
+        {
+            activeColor = NewSirAlfredLobby.Instance.GetNextAvailableColor(true, activeColor);
+            RaisePlayerChangedColor(this.panelNumber, activeColor);
+        }
+    }
     #endregion
 
 
@@ -99,11 +112,9 @@ public class SelectionController : MonoBehaviour
             Rewired.Player tempPlayer = InputHelper.GetPlayerButtonDown(RewiredConsts.Action.UISUBMIT);
             if (tempPlayer != null && !NewSirAlfredLobby.Instance.IsPlayerActive(tempPlayer))
             {
-                Debug.Log("Player Joined: " + tempPlayer.name);
                 this.player = tempPlayer;
                 NewSirAlfredLobby.Instance.SetPlayer(panelNumber, tempPlayer);
                 activeStep = Step.CharacterSelection;
-                Debug.Log("Raising Event");
                 RaisePlayerChangedStep(panelNumber, activeStep);
             }
         }
@@ -136,6 +147,7 @@ public class SelectionController : MonoBehaviour
                         }
                         else
                         {
+                            RaisePlayerSelectedColor(panelNumber, activeColor);
                             NewSirAlfredLobby.Instance.SetPlayerColor(panelNumber, null);
                             RaisePlayerChangedStep(panelNumber, Step.ColorSelection);
                             activeStep = Step.ColorSelection;
@@ -152,6 +164,7 @@ public class SelectionController : MonoBehaviour
                         }
                         else
                         {
+                            RaisePlayerSelectedColor(panelNumber, activeColor);
                             NewSirAlfredLobby.Instance.SetPlayerColor(panelNumber, null);
                             RaisePlayerChangedStep(panelNumber, Step.ColorSelection);
                             activeStep = Step.ColorSelection;
@@ -187,13 +200,13 @@ public class SelectionController : MonoBehaviour
                         }
                         break;
                     case Step.ColorSelection:
+                        RaisePlayerSelectedColor(panelNumber, activeColor);
+                        NewSirAlfredLobby.Instance.SetPlayerColor(panelNumber, activeColor);
                         // TODO: Uncomment following Lines once Abilities should be selectable in Lobby! Delete the Rest.
                         //RaisePlayerChangedStepEvent(panelNumber, Step.AbilitySelection);
                         //activeStep = Step.AbilitySelection;
                         RaisePlayerChangedStep(panelNumber, Step.ReadyToPlay);
                         activeStep = Step.ReadyToPlay;
-                        // Don't delete this
-                        NewSirAlfredLobby.Instance.SetPlayerColor(panelNumber, activeColor);
                         break;
                     case Step.ReadyToPlay:
                         // This step doesn't do anything, the player is just nervously pressing the A button :)
@@ -237,12 +250,13 @@ public class SelectionController : MonoBehaviour
                     //Debug.Log("UIHorizontal: " + player.GetAxis(RewiredConsts.Action.UIHORIZONTAL));
                     inputsLocked = true;
                     Vector3 targetRotation = new Vector3(wheel.transform.rotation.eulerAngles.x, wheel.transform.rotation.eulerAngles.y + 90, wheel.transform.rotation.eulerAngles.z);
-                    isBoss = NewSirAlfredLobby.Instance.SwitchPlayerCharacter(panelNumber, NewSirAlfredLobby.Direction.Right);
+                    isBoss = NewSirAlfredLobby.Instance.SwitchPlayerCharacter(panelNumber, Direction.Right);
                     //Debug.Log("Old Rotation: " + wheel.transform.rotation + " | New Rotation: " + targetRotation);
                     wheel.DORotate(targetRotation, rotationDuration).SetEase(animationCurve).OnComplete(() =>
                     {
                         inputsLocked = false;
                     });
+                    RaiseDirectionTriggeredLobby(panelNumber, Direction.Right);
                     break;
                 case Step.ColorSelection:
                     if (changeTimer == 0f)
@@ -254,6 +268,7 @@ public class SelectionController : MonoBehaviour
                             RaisePlayerChangedColor(panelNumber, activeColor);
                         }
                         changeTimer += Time.deltaTime;
+                        RaiseDirectionTriggeredLobby(panelNumber, Direction.Right);
                     }
                     break;
             }
@@ -266,12 +281,13 @@ public class SelectionController : MonoBehaviour
                     //Debug.Log("UIHorizontal: " + player.GetAxis(RewiredConsts.Action.UIHORIZONTAL));
                     inputsLocked = true;
                     Vector3 targetRotation = new Vector3(wheel.transform.rotation.eulerAngles.x, wheel.transform.rotation.eulerAngles.y - 90, wheel.transform.rotation.eulerAngles.z);
-                    isBoss = NewSirAlfredLobby.Instance.SwitchPlayerCharacter(panelNumber, NewSirAlfredLobby.Direction.Left);
+                    isBoss = NewSirAlfredLobby.Instance.SwitchPlayerCharacter(panelNumber, Direction.Left);
                     //Debug.Log("Old Rotation: " + wheel.transform.rotation +  " | New Rotation: " + targetRotation);
                     wheel.DORotate(targetRotation, rotationDuration).SetEase(animationCurve).OnComplete(() =>
                     {
                         inputsLocked = false;
                     });
+                    RaiseDirectionTriggeredLobby(panelNumber, Direction.Left);
                     break;
                 case Step.ColorSelection:
                     if (changeTimer == 0f)
@@ -283,6 +299,7 @@ public class SelectionController : MonoBehaviour
                             RaisePlayerChangedColor(panelNumber, activeColor);
                         }
                         changeTimer += Time.deltaTime;
+                        RaiseDirectionTriggeredLobby(panelNumber, Direction.Left);
                     }
                     break;
             }
@@ -291,7 +308,11 @@ public class SelectionController : MonoBehaviour
 
     void ManageCharacterRotation()
     {
-        
+        float rotationValue = player.GetAxis(RewiredConsts.Action.UIROTATEHORIZONTAL);
+        foreach(Transform t in wheel.GetComponentInChildren<Transform>(true))
+        {
+            t.Rotate(new Vector3(0, rotationValue * rotationSpeed * Time.deltaTime, 0));
+        }
     }
     #endregion
 
@@ -306,6 +327,16 @@ public class SelectionController : MonoBehaviour
     void RaisePlayerChangedColor(int panelNumber, PlayerColor color)
     {
         playerChangedColor.Raise(this, panelNumber, color);
+    }
+
+    void RaisePlayerSelectedColor(int panelNumber, PlayerColor selectedColor)
+    {
+        playerSelectedColorEvent.Raise(this, panelNumber, selectedColor);
+    }
+
+    void RaiseDirectionTriggeredLobby(int panelNumber, Direction direction)
+    {
+        directionTriggeredLobbyEvent.Raise(this, panelNumber, direction);
     }
     #endregion
 

@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 5956122618146565894}
   - component: {fileID: 2431556548938591295}
   - component: {fileID: 6751974844513108905}
+  - component: {fileID: 1443131327790552597}
   m_Layer: 12
   m_Name: P1 CharacterWheel
   m_TagString: Untagged
@@ -160,7 +161,12 @@ MonoBehaviour:
   playerChangedStepEvent: {fileID: 11400000, guid: 61d960440cf04714e8f0dac62b89ca5b,
     type: 2}
   playerChangedColor: {fileID: 11400000, guid: 81d70d448ece7ca4080cc540c8d2695a, type: 2}
+  playerSelectedColorEvent: {fileID: 11400000, guid: 41fcb95e1a5b8f34f82370826efc7ed9,
+    type: 2}
+  directionTriggeredLobbyEvent: {fileID: 11400000, guid: c4a1e5f198a851840ac505928c8d0a63,
+    type: 2}
   delayBetweenChanges: 0.25
+  rotationSpeed: 200
 --- !u!114 &2431556548938591295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,6 +216,32 @@ MonoBehaviour:
     methodID: 1
     methodName: UpdateModelColor
     chosenID: 1
+    methodNames: []
+    gameObject: {fileID: 5290935578398387559}
+  ignoreEventParameters: 0
+--- !u!114 &1443131327790552597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5290935578398387559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 41fcb95e1a5b8f34f82370826efc7ed9, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  linkedMethods:
+  - component: {fileID: 5956122618146565894}
+    methodID: 2
+    methodName: UpdateColorSelection
+    chosenID: 2
     methodNames: []
     gameObject: {fileID: 5290935578398387559}
   ignoreEventParameters: 0
@@ -294,14 +326,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5290935577794940776}
     m_Modifications:
-    - target: {fileID: 100000, guid: eeedf6b3e6a52b040bc8b36f72d05e85, type: 3}
-      propertyPath: m_Name
-      value: Hero_mesh_shield
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: eeedf6b3e6a52b040bc8b36f72d05e85, type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: eeedf6b3e6a52b040bc8b36f72d05e85, type: 3}
       propertyPath: m_LocalPosition.x
       value: -50
@@ -358,6 +382,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: eeedf6b3e6a52b040bc8b36f72d05e85, type: 3}
+      propertyPath: m_Name
+      value: Hero_mesh_shield
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: eeedf6b3e6a52b040bc8b36f72d05e85, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: eeedf6b3e6a52b040bc8b36f72d05e85, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -377,14 +409,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5290935577794940776}
     m_Modifications:
-    - target: {fileID: 100000, guid: dd4402d7fbcec7549b6aa0626cb44cc8, type: 3}
-      propertyPath: m_Name
-      value: Hero_mesh_attack
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: dd4402d7fbcec7549b6aa0626cb44cc8, type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: dd4402d7fbcec7549b6aa0626cb44cc8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 50
@@ -441,6 +465,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: dd4402d7fbcec7549b6aa0626cb44cc8, type: 3}
+      propertyPath: m_Name
+      value: Hero_mesh_attack
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: dd4402d7fbcec7549b6aa0626cb44cc8, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: dd4402d7fbcec7549b6aa0626cb44cc8, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -460,14 +492,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5290935577794940776}
     m_Modifications:
-    - target: {fileID: 100000, guid: 51a8d996c6cb8c44cb0954778d972cb2, type: 3}
-      propertyPath: m_Name
-      value: Boss
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 51a8d996c6cb8c44cb0954778d972cb2, type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 51a8d996c6cb8c44cb0954778d972cb2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -523,6 +547,14 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 51a8d996c6cb8c44cb0954778d972cb2, type: 3}
       propertyPath: m_LocalScale.z
       value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 51a8d996c6cb8c44cb0954778d972cb2, type: 3}
+      propertyPath: m_Name
+      value: Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 51a8d996c6cb8c44cb0954778d972cb2, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51a8d996c6cb8c44cb0954778d972cb2, type: 3}
