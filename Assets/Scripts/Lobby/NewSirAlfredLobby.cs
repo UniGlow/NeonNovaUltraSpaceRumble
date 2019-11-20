@@ -45,8 +45,12 @@ public class NewSirAlfredLobby : MonoBehaviour
     #region Variable Declarations
     public static NewSirAlfredLobby Instance = null;
     // Serialized Fields
+    [Header("Game Events")]
     [SerializeField] GameEvent slotListeningForInputEvent = null;
     [SerializeField] GameEvent playerCharacterChangedLobbyEvent = null;
+    [SerializeField] GameEvent readyToStartEvent = null;
+
+    [Header("References")]
     [Tooltip("The Scriptable Object that holds all available Colors in the Game")]
     [SerializeField] AvailableColors availableColors = null;
     [Tooltip("The Scriptable Object that will be used during the battles which only holds 3 Colors")]
@@ -315,12 +319,14 @@ public class NewSirAlfredLobby : MonoBehaviour
             gameReadyToStart = true;
             // TODO: Anzeige UI
             Debug.LogAssertion("Game Ready to Start!");
+            RaiseReadyToStart(true);
         }
         else
         {
             gameReadyToStart = false;
             // TODO: Anzeige UI abschalten
             Debug.LogAssertion("Game NOT Ready to Start!");
+            RaiseReadyToStart(false);
         }
     }
 
@@ -458,6 +464,11 @@ public class NewSirAlfredLobby : MonoBehaviour
     void RaisePlayerCharacterChangedLobby(int panelNumber, PlayerCharacter activeCharacter)
     {
         playerCharacterChangedLobbyEvent.Raise(this, panelNumber, activeCharacter);
+    }
+
+    void RaiseReadyToStart(bool value)
+    {
+        readyToStartEvent.Raise(this, value);
     }
     #endregion
 

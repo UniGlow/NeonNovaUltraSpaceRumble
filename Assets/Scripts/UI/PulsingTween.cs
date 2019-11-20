@@ -33,5 +33,12 @@ public class PulsingTween : MonoBehaviour
         DOTween.ToAlpha(() => textMesh.color, x => textMesh.color = x, maxAlpha, duration).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
         gameObject.GetComponent<RectTransform>().DOScale(Vector3.one * scaleTo, duration).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
 	}
-	#endregion
+    #endregion
+
+    #region Public Functions
+    public void SetActive(bool value)
+    {
+        gameObject.SetActive(value);
+    }
+    #endregion
 }

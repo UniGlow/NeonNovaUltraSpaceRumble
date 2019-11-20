@@ -31,7 +31,9 @@ public class SelectionController : MonoBehaviour
     [SerializeField] GameEvent playerSelectedColorEvent = null;
     [SerializeField] GameEvent directionTriggeredLobbyEvent = null;
     [SerializeField] float delayBetweenChanges = 0.25f;
-    [SerializeField] float rotationSpeed = .25f;
+    [SerializeField] float rotationSpeed = 200f;
+    [SerializeField] float timeUntilAutoRotate = 5f;
+    [SerializeField] float autoRotationSpeed = 40f;
 
 
     // Private
@@ -42,6 +44,7 @@ public class SelectionController : MonoBehaviour
     bool isBoss = true; // This will be used, to show only the relevant Steps to the Player - Example: Boss cannot choose Color
     PlayerColor activeColor = null;
     float changeTimer = 0f;
+    float autoRotatingCountdown = 0f;
     #endregion
 
 
@@ -309,9 +312,27 @@ public class SelectionController : MonoBehaviour
     void ManageCharacterRotation()
     {
         float rotationValue = player.GetAxis(RewiredConsts.Action.UIROTATEHORIZONTAL);
-        foreach(Transform t in wheel.GetComponentInChildren<Transform>(true))
+        if (rotationValue != 0f)
         {
-            t.Rotate(new Vector3(0, rotationValue * rotationSpeed * Time.deltaTime, 0));
+            foreach (Transform t in wheel.GetComponentInChildren<Transform>(true))
+            {
+                t.Rotate(new Vector3(0, rotationValue * rotationSpeed * Time.deltaTime, 0));
+            }
+            autoRotatingCountdown = timeUntilAutoRotate;
+        }
+        else
+        {
+            if (autoRotatingCountdown <= 0)
+            {
+                foreach (Transform t in wheel.GetComponentInChildren<Transform>(true))
+                {
+                    t.Rotate(new Vector3(0, 1f * autoRotationSpeed * Time.deltaTime, 0));
+                }
+            }
+            else
+            {
+                autoRotatingCountdown -= Time.deltaTime;
+            }
         }
     }
     #endregion

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2e9bcf44708ae349a9904884aa12f93, type: 3}
+  m_Name: ReadyToStart
+  m_EditorClassIdentifier: 
+  debugMode: 0
+  description: Gets Raised when Lobby is Ready to Start the Game
+  parameter1Type:
+    data: 005b53797374656d2e426f6f6c65616e2c206d73636f726c69622c2056657273696f6e3d342e302e302e302c2043756c747572653d6e65757472616c2c205075626c69634b6579546f6b656e3d62373761356335363139333465303839
+  parameter2Type:
+    data: ff
+  parameter3Type:
+    data: ff
+  parameter4Type:
+    data: ff
+  isSet: 1
