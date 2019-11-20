@@ -22,6 +22,8 @@ public class EditorLevelStarterLevels : EditorLevelStarter
     [SerializeField] Ability ability1 = null;
     [SerializeField] Ability ability2 = null;
     [SerializeField] Ability ability3 = null;
+
+    // New variables for P1-P4 to select a Character they want to Play
     // Private
 
     #endregion
@@ -35,7 +37,7 @@ public class EditorLevelStarterLevels : EditorLevelStarter
 
 
     #region Unity Event Functions
-    
+    // In Start take variables P1-P4 and add them into a list for better use
     #endregion
 
 

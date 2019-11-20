@@ -29,6 +29,7 @@ public class SelectionUI : MonoBehaviour
     SelectionController.Step activeStep = SelectionController.Step.Offline;
     List<PlayerColor> playerColors = null;
     List<GameObject> topPanelSelectables = new List<GameObject>();
+    bool keepColorsUpdated = false;
 	#endregion
 	
 	
@@ -51,7 +52,8 @@ public class SelectionUI : MonoBehaviour
 	#region Public Functions
 	public void ChangeStep(int panelNumber, SelectionController.Step nextStep)
     {
-        if(activeStep == SelectionController.Step.ColorSelection)
+        // TODO: Once Abilities for Heros and Boss are in the Game: Add "|| SelectionController.Step.ReadyToPlay" to this If-Statement
+        if(keepColorsUpdated && activeStep != SelectionController.Step.Offline)
         {
             UpdateTopPanel();
         }
@@ -70,6 +72,7 @@ public class SelectionUI : MonoBehaviour
                     break;
                 case SelectionController.Step.ColorSelection:
                     playerColors = NewSirAlfredLobby.Instance.AvailableColors;
+                    keepColorsUpdated = true;
                     FillTopPanel(SelectionController.Step.ColorSelection);
                     break;
                 case SelectionController.Step.AbilitySelection:
@@ -157,4 +160,3 @@ public class SelectionUI : MonoBehaviour
 	
 	#endregion
 }
-

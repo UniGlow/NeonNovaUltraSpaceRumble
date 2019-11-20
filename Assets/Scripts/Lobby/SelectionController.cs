@@ -75,6 +75,18 @@ public class SelectionController : MonoBehaviour
     {
         listeningForPlayerInput = playerListeningForInput[panelNumber - 1];
     }
+
+    public void UpdateModelColor(int panelNumber, PlayerColor newColor)
+    {
+        if (panelNumber == this.panelNumber)
+        {
+            activeColor = newColor;
+            foreach (Transform model in heroModels)
+            {
+                model.GetComponent<MeshRenderer>().material = newColor.heroMaterial;
+            }
+        }
+    }
     #endregion
 
 
@@ -203,9 +215,9 @@ public class SelectionController : MonoBehaviour
                         player = null;
                         break;
                     case Step.ColorSelection:
-                        activeColor = NewSirAlfredLobby.Instance.AvailableColors[0];
+                        if(activeColor == null)
+                            activeColor = NewSirAlfredLobby.Instance.AvailableColors[0];
                         RaisePlayerChangedColor(panelNumber, activeColor);
-                        UpdateModelColor();
                         break;
                     case Step.ReadyToPlay:
                         NewSirAlfredLobby.Instance.SetReadyToPlay(panelNumber, true);
@@ -241,7 +253,6 @@ public class SelectionController : MonoBehaviour
                             activeColor = tempColor;
                             RaisePlayerChangedColor(panelNumber, activeColor);
                         }
-                        UpdateModelColor();
                         changeTimer += Time.deltaTime;
                     }
                     break;
@@ -271,7 +282,6 @@ public class SelectionController : MonoBehaviour
                             activeColor = tempColor;
                             RaisePlayerChangedColor(panelNumber, activeColor);
                         }
-                        UpdateModelColor();
                         changeTimer += Time.deltaTime;
                     }
                     break;
@@ -282,14 +292,6 @@ public class SelectionController : MonoBehaviour
     void ManageCharacterRotation()
     {
         
-    }
-
-    void UpdateModelColor()
-    {
-        foreach(Transform model in heroModels)
-        {
-            model.GetComponent<MeshRenderer>().material = activeColor.heroMaterial;
-        }
     }
     #endregion
 
@@ -313,4 +315,3 @@ public class SelectionController : MonoBehaviour
 
     #endregion
 }
-
