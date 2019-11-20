@@ -52,6 +52,7 @@ public class NewSirAlfredLobby : MonoBehaviour
     public static NewSirAlfredLobby Instance = null;
     // Serialized Fields
     [SerializeField] GameEvent slotListeningForInputEvent = null;
+    [SerializeField] GameEvent playerCharacterChangedLobbyEvent = null;
     [Tooltip("The Scriptable Object that holds all available Colors in the Game")]
     [SerializeField] AvailableColors availableColors = null;
     [Tooltip("The Scriptable Object that will be used during the battles which only holds 3 Colors")]
@@ -290,6 +291,7 @@ public class NewSirAlfredLobby : MonoBehaviour
                 players[panelNumber - 1].PlayerCharacter = direction == Direction.Left ? PlayerCharacter.Runner : PlayerCharacter.Boss;
                 break;
         }
+        RaisePlayerCharacterChangedLobby(panelNumber, players[panelNumber - 1].PlayerCharacter);
         if (players[panelNumber - 1].PlayerCharacter == PlayerCharacter.Boss)
             return true;
         else
@@ -458,11 +460,16 @@ public class NewSirAlfredLobby : MonoBehaviour
     {
         slotListeningForInputEvent.Raise(this, playerListeningForInput);
     }
-	#endregion
-	
-	
-	
-	#region Coroutines
-	
-	#endregion
+
+    void RaisePlayerCharacterChangedLobby(int panelNumber, PlayerCharacter activeCharacter)
+    {
+        playerCharacterChangedLobbyEvent.Raise(this, panelNumber, activeCharacter);
+    }
+    #endregion
+
+
+
+    #region Coroutines
+
+    #endregion
 }

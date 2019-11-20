@@ -272,6 +272,7 @@ GameObject:
   - component: {fileID: 1394123924860895440}
   - component: {fileID: 912889697591679946}
   - component: {fileID: 7594083303493845330}
+  - component: {fileID: 7247527358148327584}
   m_Layer: 5
   m_Name: P1 UI
   m_TagString: Untagged
@@ -382,6 +383,32 @@ MonoBehaviour:
   - component: {fileID: 1394123924860895440}
     methodID: 0
     methodName: ChangeStep
+    chosenID: 1
+    methodNames: []
+    gameObject: {fileID: 912889697591679944}
+  ignoreEventParameters: 0
+--- !u!114 &7247527358148327584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912889697591679944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: fd7aa754cc3970a4bbe1f5173be3d5a1, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  linkedMethods:
+  - component: {fileID: 1394123924860895440}
+    methodID: 1
+    methodName: ChangeText
     chosenID: 1
     methodNames: []
     gameObject: {fileID: 912889697591679944}

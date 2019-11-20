@@ -36,7 +36,7 @@ public class SelectionController : MonoBehaviour
     bool inputsLocked = false;
     Rewired.Player player = null;
     Step activeStep = Step.Offline;
-    bool isBoss = false; // This will be used, to show only the relevant Steps to the Player - Example: Boss cannot choose Color
+    bool isBoss = true; // This will be used, to show only the relevant Steps to the Player - Example: Boss cannot choose Color
     PlayerColor activeColor = null;
     float changeTimer = 0f;
     #endregion

@@ -82,6 +82,14 @@ public class SelectionUI : MonoBehaviour
             }
         }
     }
+
+    public void ChangeText(int panelNumber, NewSirAlfredLobby.PlayerCharacter activeCharacter)
+    {
+        if(panelNumber == this.panelNumber)
+        {
+            textMesh.text = activeCharacter.ToString();
+        }
+    }
 	#endregion
 	
 	

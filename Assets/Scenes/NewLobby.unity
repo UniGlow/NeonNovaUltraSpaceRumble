@@ -775,6 +775,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotListeningForInputEvent: {fileID: 11400000, guid: 6f53a27eda7561c46a754969fff2405f,
     type: 2}
+  playerCharacterChangedLobbyEvent: {fileID: 11400000, guid: fd7aa754cc3970a4bbe1f5173be3d5a1,
+    type: 2}
   availableColors: {fileID: 11400000, guid: 866142ef2b107ab4f968660c69adec4f, type: 2}
   activeColorSet: {fileID: 11400000, guid: 68d47b220c1450a46a2330237d217b40, type: 2}
   bossConfig: {fileID: 11400000, guid: ca08c440eca8d854190afe2ee3e321e7, type: 2}
