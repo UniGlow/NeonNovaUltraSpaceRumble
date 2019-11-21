@@ -155,13 +155,16 @@ public class NewSirAlfredLobby : MonoBehaviour
         {
             players[panelNumber - 1].listeningForInput = false;
             players[panelNumber - 1].active = true;
-            if(lastPlayerCharacters[panelNumber-1] != PlayerCharacter.Empty)
+            if(players[panelNumber-1].PlayerCharacter == PlayerCharacter.Empty)
             {
-                players[panelNumber - 1].PlayerCharacter = lastPlayerCharacters[panelNumber - 1];
-            }
-            else
-            {
-                players[panelNumber - 1].PlayerCharacter = PlayerCharacter.Boss;
+                if (lastPlayerCharacters[panelNumber-1] != PlayerCharacter.Empty)
+                {
+                    players[panelNumber - 1].PlayerCharacter = lastPlayerCharacters[panelNumber - 1];
+                }
+                else
+                {
+                    players[panelNumber - 1].PlayerCharacter = PlayerCharacter.Boss;
+                }
             }
             bool firstElementChanged = false;
             for (int i = 0; i < players.Length; i++)
