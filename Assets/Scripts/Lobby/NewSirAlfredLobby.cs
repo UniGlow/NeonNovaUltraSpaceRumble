@@ -15,6 +15,7 @@ public class NewSirAlfredLobby : MonoBehaviour
         public bool readyToPlay = false;
         public PlayerColor playerColor = null;
         public PlayerCharacter PlayerCharacter = PlayerCharacter.Empty;
+        public bool characterSelectionLoggedIn = false;
         public int playerNumber = -1; // THIS IS STARTING AT 0!!! NOT THE PANELNUMBER!
 
         // For Alfred
@@ -49,6 +50,7 @@ public class NewSirAlfredLobby : MonoBehaviour
     [SerializeField] GameEvent slotListeningForInputEvent = null;
     [SerializeField] GameEvent playerCharacterChangedLobbyEvent = null;
     [SerializeField] GameEvent readyToStartEvent = null;
+    [SerializeField] GameEvent playerSelectedCharacterEvent = null;
 
     [Header("References")]
     [Tooltip("The Scriptable Object that holds all available Colors in the Game")]
@@ -274,7 +276,7 @@ public class NewSirAlfredLobby : MonoBehaviour
     /// <param name="panelNumber"></param>
     /// <param name="direction">Direction of Turning the Wheel, Left or Right</param>
     /// <returns>True if Player is Boss, False if Player isn't</returns>
-    public bool SwitchPlayerCharacter(int panelNumber, Direction direction)
+    public PlayerCharacter SwitchPlayerCharacter(int panelNumber, Direction direction)
     {
         // TODO: Hardcode-Reihenfolge entfernen und dynamische Lösung finden
         switch (players[panelNumber - 1].PlayerCharacter)
@@ -293,10 +295,34 @@ public class NewSirAlfredLobby : MonoBehaviour
                 break;
         }
         RaisePlayerCharacterChangedLobby(panelNumber, players[panelNumber - 1].PlayerCharacter);
-        if (players[panelNumber - 1].PlayerCharacter == PlayerCharacter.Boss)
-            return true;
-        else
-            return false;
+
+        return players[panelNumber - 1].PlayerCharacter;
+    }
+
+    /// <summary>
+    /// Updates the available characters. Gets called by SelectionController.
+    /// </summary>
+    /// <param name="selectedCharacter">The selected character.</param>
+    /// <param name="panelNumber">The panel number.</param>
+    public void UpdateAvailableCharacters (PlayerCharacter selectedCharacter, int panelNumber)
+    {
+        players[panelNumber - 1].PlayerCharacter = selectedCharacter;
+        players[panelNumber - 1].characterSelectionLoggedIn = selectedCharacter == PlayerCharacter.Empty ? false : true;
+
+        // Create return list
+        List<PlayerCharacter> availableCharacters = new List<PlayerCharacter>();
+        availableCharacters.Add(PlayerCharacter.Boss);
+        availableCharacters.Add(PlayerCharacter.Damage);
+        availableCharacters.Add(PlayerCharacter.Tank);
+        availableCharacters.Add(PlayerCharacter.Runner);
+
+        // delete currently logged in characters
+        foreach (PlayerSettings player in players)
+        {
+            if (player.characterSelectionLoggedIn) availableCharacters.Remove(player.PlayerCharacter);
+        }
+
+        RaisePlayerSelectedCharacter(availableCharacters);
     }
 	#endregion
 	
@@ -475,6 +501,11 @@ public class NewSirAlfredLobby : MonoBehaviour
     void RaiseReadyToStart(bool value)
     {
         readyToStartEvent.Raise(this, value);
+    }
+
+    void RaisePlayerSelectedCharacter(List<PlayerCharacter> availableCharacters)
+    {
+        playerSelectedCharacterEvent.Raise(this, availableCharacters);
     }
     #endregion
 

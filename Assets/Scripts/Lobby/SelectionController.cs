@@ -16,32 +16,37 @@ public class SelectionController : MonoBehaviour
         AbilitySelection,
         ReadyToPlay
     }
+
     #region Variable Declarations
     // Serialized Fields
-    [Header("References")]
+    [Header("Settings")]
     [Tooltip("The Panel this Controller should Control")]
     [Range(1,4)]
     [SerializeField] int panelNumber = 1;
     [SerializeField] float rotationDuration = 1f;
     [SerializeField] AnimationCurve animationCurve = new AnimationCurve();
-    [SerializeField] Transform wheel = null;
-    [SerializeField] List<Transform> heroModels = new List<Transform>();
-    [SerializeField] GameEvent playerChangedStepEvent = null;
-    [SerializeField] GameEvent playerChangedColor = null;
-    [SerializeField] GameEvent playerSelectedColorEvent = null;
-    [SerializeField] GameEvent directionTriggeredLobbyEvent = null;
+
     [SerializeField] float delayBetweenChanges = 0.25f;
     [SerializeField] float rotationSpeed = 200f;
     [SerializeField] float timeUntilAutoRotate = 5f;
     [SerializeField] float autoRotationSpeed = 40f;
 
+    [Header("Game Events")]
+    [SerializeField] GameEvent playerChangedStepEvent = null;
+    [SerializeField] GameEvent playerChangedColor = null;
+    [SerializeField] GameEvent playerSelectedColorEvent = null;
+    [SerializeField] GameEvent directionTriggeredLobbyEvent = null;
+
+    [Header("References")]
+    [SerializeField] Transform wheel = null;
+    [SerializeField] List<Transform> heroModels = new List<Transform>();
 
     // Private
     bool listeningForPlayerInput = false;
     bool inputsLocked = false;
     Rewired.Player player = null;
     Step activeStep = Step.Offline;
-    bool isBoss = true; // This will be used, to show only the relevant Steps to the Player - Example: Boss cannot choose Color
+    NewSirAlfredLobby.PlayerCharacter selectedCharacter = NewSirAlfredLobby.PlayerCharacter.Empty; // This will be used, to show only the relevant Steps to the Player - Example: Boss cannot choose Color
     PlayerColor activeColor = null;
     float changeTimer = 0f;
     float autoRotatingCountdown = 0f;
@@ -110,8 +115,10 @@ public class SelectionController : MonoBehaviour
     #region Private Functions
     void ManageReadyInputs()
     {
+        bool playerPressedButton = false;
         if (player == null && listeningForPlayerInput)
         {
+            playerPressedButton = true;
             Rewired.Player tempPlayer = InputHelper.GetPlayerButtonDown(RewiredConsts.Action.UISUBMIT);
             if (tempPlayer != null && !NewSirAlfredLobby.Instance.IsPlayerActive(tempPlayer))
             {
@@ -123,7 +130,6 @@ public class SelectionController : MonoBehaviour
         }
         else if(player != null)
         {
-            bool playerPressedButton = false;
             // Player pressed B
             if (player.GetButtonDown(RewiredConsts.Action.UICANCEL))
             {
@@ -143,7 +149,7 @@ public class SelectionController : MonoBehaviour
                         activeStep = Step.CharacterSelection;
                         break;
                     case Step.AbilitySelection:
-                        if (isBoss)
+                        if (selectedCharacter == NewSirAlfredLobby.PlayerCharacter.Boss)
                         {
                             RaisePlayerChangedStep(panelNumber, Step.CharacterSelection);
                             activeStep = Step.CharacterSelection;
@@ -160,7 +166,7 @@ public class SelectionController : MonoBehaviour
                         // TODO: Uncomment following Lines once Abilities should be selectable in Lobby! Delete the rest
                         //RaisePlayerChangedStepEvent(panelNumber, Step.AbilitySelection);
                         //activeStep = Step.AbilitySelection;
-                        if (isBoss)
+                        if (selectedCharacter == NewSirAlfredLobby.PlayerCharacter.Boss)
                         {
                             RaisePlayerChangedStep(panelNumber, Step.CharacterSelection);
                             activeStep = Step.CharacterSelection;
@@ -191,7 +197,7 @@ public class SelectionController : MonoBehaviour
                         Debug.LogWarning("Something went wrong here!");
                         break;
                     case Step.CharacterSelection:
-                        if (isBoss)
+                        if (selectedCharacter == NewSirAlfredLobby.PlayerCharacter.Boss)
                         {
                             RaisePlayerChangedStep(panelNumber, Step.ReadyToPlay);
                             activeStep = Step.ReadyToPlay;
@@ -201,6 +207,7 @@ public class SelectionController : MonoBehaviour
                             RaisePlayerChangedStep(panelNumber, Step.ColorSelection);
                             activeStep = Step.ColorSelection;
                         }
+                        NewSirAlfredLobby.Instance.UpdateAvailableCharacters(selectedCharacter, panelNumber);
                         break;
                     case Step.ColorSelection:
                         RaisePlayerSelectedColor(panelNumber, activeColor);
@@ -221,24 +228,28 @@ public class SelectionController : MonoBehaviour
                         break;
                 }
             }
-            // Following Code has been extracted from aboth for better usability. This happens once a specific Step has been entered
-            if (playerPressedButton)
+        }
+        // Following Code has been extracted from aboth for better usability. This happens once a specific Step has been entered
+        if (playerPressedButton)
+        {
+            switch (activeStep)
             {
-                switch (activeStep)
-                {
-                    case Step.Offline:
-                        NewSirAlfredLobby.Instance.SetPlayer(panelNumber, null);
-                        player = null;
-                        break;
-                    case Step.ColorSelection:
-                        if(activeColor == null)
-                            activeColor = NewSirAlfredLobby.Instance.AvailableColors[0];
-                        RaisePlayerChangedColor(panelNumber, activeColor);
-                        break;
-                    case Step.ReadyToPlay:
-                        NewSirAlfredLobby.Instance.SetReadyToPlay(panelNumber, true);
-                        break;
-                }
+                case Step.Offline:
+                    NewSirAlfredLobby.Instance.SetPlayer(panelNumber, null);
+                    player = null;
+                    break;
+                case Step.CharacterSelection:
+                    // TODO: GetNextAvailableCharacter
+                    if (selectedCharacter == NewSirAlfredLobby.PlayerCharacter.Empty) selectedCharacter = NewSirAlfredLobby.PlayerCharacter.Boss;
+                    break;
+                case Step.ColorSelection:
+                    if (activeColor == null)
+                        activeColor = NewSirAlfredLobby.Instance.AvailableColors[0];
+                    RaisePlayerChangedColor(panelNumber, activeColor);
+                    break;
+                case Step.ReadyToPlay:
+                    NewSirAlfredLobby.Instance.SetReadyToPlay(panelNumber, true);
+                    break;
             }
         }
     }
@@ -253,7 +264,7 @@ public class SelectionController : MonoBehaviour
                     //Debug.Log("UIHorizontal: " + player.GetAxis(RewiredConsts.Action.UIHORIZONTAL));
                     inputsLocked = true;
                     Vector3 targetRotation = new Vector3(wheel.transform.rotation.eulerAngles.x, wheel.transform.rotation.eulerAngles.y + 90, wheel.transform.rotation.eulerAngles.z);
-                    isBoss = NewSirAlfredLobby.Instance.SwitchPlayerCharacter(panelNumber, Direction.Right);
+                    selectedCharacter = NewSirAlfredLobby.Instance.SwitchPlayerCharacter(panelNumber, Direction.Right);
                     //Debug.Log("Old Rotation: " + wheel.transform.rotation + " | New Rotation: " + targetRotation);
                     wheel.DORotate(targetRotation, rotationDuration).SetEase(animationCurve).OnComplete(() =>
                     {
@@ -284,7 +295,7 @@ public class SelectionController : MonoBehaviour
                     //Debug.Log("UIHorizontal: " + player.GetAxis(RewiredConsts.Action.UIHORIZONTAL));
                     inputsLocked = true;
                     Vector3 targetRotation = new Vector3(wheel.transform.rotation.eulerAngles.x, wheel.transform.rotation.eulerAngles.y - 90, wheel.transform.rotation.eulerAngles.z);
-                    isBoss = NewSirAlfredLobby.Instance.SwitchPlayerCharacter(panelNumber, Direction.Left);
+                    selectedCharacter = NewSirAlfredLobby.Instance.SwitchPlayerCharacter(panelNumber, Direction.Left);
                     //Debug.Log("Old Rotation: " + wheel.transform.rotation +  " | New Rotation: " + targetRotation);
                     wheel.DORotate(targetRotation, rotationDuration).SetEase(animationCurve).OnComplete(() =>
                     {
@@ -314,9 +325,12 @@ public class SelectionController : MonoBehaviour
         float rotationValue = player.GetAxis(RewiredConsts.Action.UIROTATEHORIZONTAL);
         if (rotationValue != 0f)
         {
-            foreach (Transform t in wheel.GetComponentInChildren<Transform>(true))
+            for (int i = 0; i < wheel.childCount; i++)
             {
-                t.Rotate(new Vector3(0, rotationValue * rotationSpeed * Time.deltaTime, 0));
+                foreach (Transform t in wheel.GetChild(i).GetComponentInChildren<Transform>(true))
+                {
+                    t.Rotate(new Vector3(0, rotationValue * rotationSpeed * Time.deltaTime, 0));
+                }
             }
             autoRotatingCountdown = timeUntilAutoRotate;
         }
@@ -324,9 +338,12 @@ public class SelectionController : MonoBehaviour
         {
             if (autoRotatingCountdown <= 0)
             {
-                foreach (Transform t in wheel.GetComponentInChildren<Transform>(true))
+                for (int i = 0; i < wheel.childCount; i++)
                 {
-                    t.Rotate(new Vector3(0, 1f * autoRotationSpeed * Time.deltaTime, 0));
+                    foreach (Transform t in wheel.GetChild(i).GetComponentInChildren<Transform>(true))
+                    {
+                        t.Rotate(new Vector3(0, 1f * autoRotationSpeed * Time.deltaTime, 0));
+                    }
                 }
             }
             else
