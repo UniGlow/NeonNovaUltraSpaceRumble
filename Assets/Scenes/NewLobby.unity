@@ -597,7 +597,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: e6131594f5449424db60dd30c2a754a5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 21cfc034fe04f3f49ae6b0059af30015, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1531,41 +1531,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5290935577794940776, guid: 024f24893e3397340917e1145e75f4db,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5290935577794940776, guid: 024f24893e3397340917e1145e75f4db,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5290935577794940776, guid: 024f24893e3397340917e1145e75f4db,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5290935577794940776, guid: 024f24893e3397340917e1145e75f4db,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5290935577794940776, guid: 024f24893e3397340917e1145e75f4db,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5290935578787673323, guid: 024f24893e3397340917e1145e75f4db,
-        type: 3}
-      propertyPath: field of view
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 5290935578787673323, guid: 024f24893e3397340917e1145e75f4db,
-        type: 3}
-      propertyPath: far clip plane
-      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1383041282041094871, guid: 024f24893e3397340917e1145e75f4db,
         type: 3}

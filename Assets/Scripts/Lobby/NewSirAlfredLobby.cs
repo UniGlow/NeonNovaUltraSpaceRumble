@@ -403,6 +403,7 @@ public class NewSirAlfredLobby : MonoBehaviour
                         (colorsNotToUse.Count == 1 ? availableColors.GetRandomColorExcept(colorsNotToUse[0]) :
                             (colorsNotToUse.Count == 2 ? availableColors.GetRandomColorExcept(colorsNotToUse[0], colorsNotToUse[1]) : availablePlayerColors[0]));
                     hero1Config.Initialize(availablePlayers[0], i, Faction.Heroes, color, true);
+                    hero1Config.ability = damageAbility;
                     availablePlayers.RemoveAt(0);
                     characters[i] = PlayerCharacter.Damage;
                     colorsNotToUse.Add(color);
@@ -413,6 +414,7 @@ public class NewSirAlfredLobby : MonoBehaviour
                         (colorsNotToUse.Count == 1 ? availableColors.GetRandomColorExcept(colorsNotToUse[0]) :
                             (colorsNotToUse.Count == 2 ? availableColors.GetRandomColorExcept(colorsNotToUse[0], colorsNotToUse[1]) : availablePlayerColors[0]));
                     hero2Config.Initialize(availablePlayers[0], i, Faction.Heroes, color, true);
+                    hero2Config.ability = runnerAbility;
                     availablePlayers.RemoveAt(0);
                     characters[i] = PlayerCharacter.Runner;
                     colorsNotToUse.Add(color);
@@ -423,6 +425,7 @@ public class NewSirAlfredLobby : MonoBehaviour
                         (colorsNotToUse.Count == 1 ? availableColors.GetRandomColorExcept(colorsNotToUse[0]) :
                             (colorsNotToUse.Count == 2 ? availableColors.GetRandomColorExcept(colorsNotToUse[0], colorsNotToUse[1]) : availablePlayerColors[0]));
                     hero3Config.Initialize(availablePlayers[0], i, Faction.Heroes, color, true);
+                    hero3Config.ability = tankAbility;
                     availablePlayers.RemoveAt(0);
                     characters[i] = PlayerCharacter.Tank;
                     colorsNotToUse.Add(color);

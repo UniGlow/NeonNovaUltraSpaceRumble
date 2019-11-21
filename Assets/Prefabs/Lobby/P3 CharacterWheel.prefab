@@ -17,20 +17,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 14
       objectReference: {fileID: 0}
-    - target: {fileID: 5290935577794940777, guid: 024f24893e3397340917e1145e75f4db,
+    - target: {fileID: 5956122618146565894, guid: 024f24893e3397340917e1145e75f4db,
         type: 3}
-      propertyPath: m_Layer
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 5290935578787673318, guid: 024f24893e3397340917e1145e75f4db,
-        type: 3}
-      propertyPath: m_Layer
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 5290935578787673318, guid: 024f24893e3397340917e1145e75f4db,
-        type: 3}
-      propertyPath: m_Name
-      value: Camera Lobby P3
+      propertyPath: panelNumber
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5290935578398387558, guid: 024f24893e3397340917e1145e75f4db,
         type: 3}
@@ -97,7 +87,27 @@ PrefabInstance:
       propertyPath: m_CullingMask.m_Bits
       value: 16384
       objectReference: {fileID: 0}
+    - target: {fileID: 5290935578787673318, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290935578787673318, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_Name
+      value: Camera Lobby P3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290935579323837981, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 5290935577383117154, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290935577794940777, guid: 024f24893e3397340917e1145e75f4db,
         type: 3}
       propertyPath: m_Layer
       value: 14
@@ -112,15 +122,25 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 14
       objectReference: {fileID: 0}
-    - target: {fileID: 5290935579323837981, guid: 024f24893e3397340917e1145e75f4db,
+    - target: {fileID: 3721770003779457934, guid: 024f24893e3397340917e1145e75f4db,
         type: 3}
       propertyPath: m_Layer
       value: 14
       objectReference: {fileID: 0}
-    - target: {fileID: 5956122618146565894, guid: 024f24893e3397340917e1145e75f4db,
+    - target: {fileID: 7181597318930658835, guid: 024f24893e3397340917e1145e75f4db,
         type: 3}
-      propertyPath: panelNumber
-      value: 3
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 4866596375866250893, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1406764865599501072, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 024f24893e3397340917e1145e75f4db, type: 3}
