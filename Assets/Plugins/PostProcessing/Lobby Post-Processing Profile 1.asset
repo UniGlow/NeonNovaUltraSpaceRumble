@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a3bdb2cd68f901469e7cc149151eb49, type: 3}
-  m_Name: InGame Post-Processing Profile
+  m_Name: Lobby Post-Processing Profile 1
   m_EditorClassIdentifier: 
   debugViews:
     m_Enabled: 1
@@ -41,7 +41,7 @@ MonoBehaviour:
         stationaryBlending: 0.95
         motionBlending: 0.85
   ambientOcclusion:
-    m_Enabled: 1
+    m_Enabled: 0
     m_Settings:
       intensity: 0.93
       radius: 0.9
@@ -101,10 +101,10 @@ MonoBehaviour:
     m_Enabled: 1
     m_Settings:
       bloom:
-        intensity: 4.28
-        threshold: 1.1
-        softKnee: 0.5
-        radius: 3.6
+        intensity: 0.38
+        threshold: 1
+        softKnee: 0.322
+        radius: 2.5
         antiFlicker: 0
       lensDirt:
         texture: {fileID: 0}
@@ -121,7 +121,7 @@ MonoBehaviour:
         neutralWhiteLevel: 5.3
         neutralWhiteClip: 10
       basic:
-        postExposure: 0.61
+        postExposure: 0.56
         temperature: 0
         tint: 0
         hueShift: 0
@@ -309,7 +309,7 @@ MonoBehaviour:
     m_Enabled: 0
     m_Settings:
       spectralTexture: {fileID: 0}
-      intensity: 0.1
+      intensity: 0.374
   grain:
     m_Enabled: 0
     m_Settings:
@@ -323,7 +323,7 @@ MonoBehaviour:
       mode: 0
       color: {r: 0, g: 0, b: 0, a: 1}
       center: {x: 0.5, y: 0.5}
-      intensity: 0.52
+      intensity: 0.502
       smoothness: 0.47
       roundness: 0.5
       mask: {fileID: 0}
