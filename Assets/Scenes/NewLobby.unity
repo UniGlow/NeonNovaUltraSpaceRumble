@@ -1532,16 +1532,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5290935578787673323, guid: 024f24893e3397340917e1145e75f4db,
-        type: 3}
-      propertyPath: field of view
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 5290935578787673323, guid: 024f24893e3397340917e1145e75f4db,
-        type: 3}
-      propertyPath: far clip plane
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 5290935577794940776, guid: 024f24893e3397340917e1145e75f4db,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -1566,6 +1556,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290935578787673323, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: field of view
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290935578787673323, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: far clip plane
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1383041282041094871, guid: 024f24893e3397340917e1145e75f4db,
         type: 3}
