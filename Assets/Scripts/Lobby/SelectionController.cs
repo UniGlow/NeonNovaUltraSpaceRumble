@@ -229,7 +229,7 @@ public class SelectionController : MonoBehaviour
                 }
             }
         }
-        // Following Code has been extracted from above for better usability. This happens once a specific Step has been entered
+        // This happens once a specific Step has been entered
         if (playerPressedButton)
         {
             switch (activeStep)

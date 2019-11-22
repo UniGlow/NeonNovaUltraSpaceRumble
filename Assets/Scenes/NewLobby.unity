@@ -1140,6 +1140,8 @@ MonoBehaviour:
   playerCharacterChangedLobbyEvent: {fileID: 11400000, guid: fd7aa754cc3970a4bbe1f5173be3d5a1,
     type: 2}
   readyToStartEvent: {fileID: 11400000, guid: a839b7162acecc2499f9440e35254c79, type: 2}
+  playerSelectedCharacterEvent: {fileID: 11400000, guid: 2ad5e39be429e44418d25d56102d19a1,
+    type: 2}
   availableColors: {fileID: 11400000, guid: 866142ef2b107ab4f968660c69adec4f, type: 2}
   activeColorSet: {fileID: 11400000, guid: 68d47b220c1450a46a2330237d217b40, type: 2}
   bossConfig: {fileID: 11400000, guid: ca08c440eca8d854190afe2ee3e321e7, type: 2}
