@@ -105,6 +105,7 @@ public class NewSirAlfredLobby : MonoBehaviour
         {
             availablePlayerColors.Add(pc);
         }
+        UpdateAvailableCharacters(PlayerCharacter.Empty);
     }
 
     private void Update()
@@ -308,12 +309,13 @@ public class NewSirAlfredLobby : MonoBehaviour
     /// Updates the available characters. Gets called by SelectionController.
     /// </summary>
     /// <param name="selectedCharacter">The selected character.</param>
-    /// <param name="panelNumber">The panel number.</param>
-    public void UpdateAvailableCharacters (PlayerCharacter selectedCharacter, int panelNumber)
+    /// <param name="panelNumber">The panel number. If 0 a full List will be created</param>
+    public void UpdateAvailableCharacters (PlayerCharacter selectedCharacter, int panelNumber = 0)
     {
-        players[panelNumber - 1].PlayerCharacter = selectedCharacter;
-        players[panelNumber - 1].characterSelectionLoggedIn = selectedCharacter == PlayerCharacter.Empty ? false : true;
-
+        if (panelNumber != 0)
+        {
+            players[panelNumber - 1].characterSelectionLoggedIn = selectedCharacter == PlayerCharacter.Empty ? false : true;
+        }
         // Create return list
         List<PlayerCharacter> availableCharacters = new List<PlayerCharacter>();
         availableCharacters.Add(PlayerCharacter.Boss);
@@ -321,6 +323,7 @@ public class NewSirAlfredLobby : MonoBehaviour
         availableCharacters.Add(PlayerCharacter.Tank);
         availableCharacters.Add(PlayerCharacter.Runner);
 
+        
         // delete currently logged in characters
         foreach (PlayerSettings player in players)
         {

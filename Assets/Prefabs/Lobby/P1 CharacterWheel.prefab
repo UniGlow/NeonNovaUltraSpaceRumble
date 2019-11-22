@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: 2431556548938591295}
   - component: {fileID: 6751974844513108905}
   - component: {fileID: 1443131327790552597}
+  - component: {fileID: 3915681824044936690}
   m_Layer: 12
   m_Name: P1 CharacterWheel
   m_TagString: Untagged
@@ -291,6 +292,32 @@ MonoBehaviour:
     methodID: 2
     methodName: UpdateColorSelection
     chosenID: 2
+    methodNames: []
+    gameObject: {fileID: 5290935578398387559}
+  ignoreEventParameters: 0
+--- !u!114 &3915681824044936690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5290935578398387559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 2ad5e39be429e44418d25d56102d19a1, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  linkedMethods:
+  - component: {fileID: 5956122618146565894}
+    methodID: 3
+    methodName: UpdateAvailableCharacters
+    chosenID: 1
     methodNames: []
     gameObject: {fileID: 5290935578398387559}
   ignoreEventParameters: 0
