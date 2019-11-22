@@ -655,7 +655,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeDuration: 3
-  displayDuration: 7
+  displayDuration: 5
   titleText: {fileID: 114911603247564334}
   spacingText: {fileID: 114461609615663406}
   artistText: {fileID: 114301081278887050}
