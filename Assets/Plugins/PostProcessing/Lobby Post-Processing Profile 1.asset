@@ -101,7 +101,7 @@ MonoBehaviour:
     m_Enabled: 1
     m_Settings:
       bloom:
-        intensity: 0.38
+        intensity: 0.3
         threshold: 1
         softKnee: 0.322
         radius: 2.5
@@ -157,14 +157,14 @@ MonoBehaviour:
               inWeight: 0.33333334
               outWeight: 0.33333334
             - serializedVersion: 3
-              time: 1
-              value: 1
+              time: 0.745283
+              value: 0.88590604
               inSlope: 1
               outSlope: 1
               tangentMode: 0
               weightedMode: 0
-              inWeight: 0.33333334
-              outWeight: 0.33333334
+              inWeight: 0
+              outWeight: 0
             m_PreInfinity: 2
             m_PostInfinity: 2
             m_RotationOrder: 0
