@@ -243,8 +243,8 @@ public class SelectionController : MonoBehaviour
                     if (selectedCharacter == NewSirAlfredLobby.PlayerCharacter.Empty) selectedCharacter = NewSirAlfredLobby.PlayerCharacter.Boss;
                     break;
                 case Step.ColorSelection:
-                    if (activeColor == null)
-                        activeColor = NewSirAlfredLobby.Instance.AvailableColors[0];
+                    if (activeColor == null && selectedCharacter != NewSirAlfredLobby.PlayerCharacter.Boss)
+                        activeColor = NewSirAlfredLobby.Instance.GetStartingColor(selectedCharacter);
                     RaisePlayerChangedColor(panelNumber, activeColor);
                     break;
                 case Step.ReadyToPlay:

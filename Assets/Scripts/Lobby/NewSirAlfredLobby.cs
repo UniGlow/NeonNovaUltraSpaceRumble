@@ -68,6 +68,11 @@ public class NewSirAlfredLobby : MonoBehaviour
     [SerializeField] Ability damageAbility = null;
     [SerializeField] Ability tankAbility = null;
     [SerializeField] Ability runnerAbility = null;
+
+    [Header("Start Colors")]
+    [SerializeField] PlayerColor damageHeroColor = null;
+    [SerializeField] PlayerColor tankHeroColor = null;
+    [SerializeField] PlayerColor runnerHeroColor = null;
     // Private
     // Player Settings for PlayerConfigs
     PlayerSettings[] players = new PlayerSettings[4] { new PlayerSettings(), new PlayerSettings(), new PlayerSettings(), new PlayerSettings() };
@@ -323,6 +328,21 @@ public class NewSirAlfredLobby : MonoBehaviour
         }
 
         RaisePlayerSelectedCharacter(availableCharacters);
+    }
+
+    public PlayerColor GetStartingColor(PlayerCharacter character)
+    {
+        switch (character)
+        {
+            case PlayerCharacter.Damage:
+                return damageHeroColor;
+            case PlayerCharacter.Runner:
+                return runnerHeroColor;
+            case PlayerCharacter.Tank:
+                return tankHeroColor;
+            default:
+                return null;
+        }
     }
 	#endregion
 	
