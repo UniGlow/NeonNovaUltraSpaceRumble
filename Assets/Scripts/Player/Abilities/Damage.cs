@@ -39,6 +39,11 @@ public class Damage : Ability
 
         audioSource.PlayOneShot(soundClip, volume);
     }
+
+    public override void DeactivateAbility()
+    {
+
+    }
     #endregion
 
 

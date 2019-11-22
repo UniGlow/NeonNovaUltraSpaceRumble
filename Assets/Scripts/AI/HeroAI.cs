@@ -18,7 +18,6 @@ public class HeroAI : Hero
     [SerializeField] float randomness = 5f;
 
     [Header("Tank")]
-    [SerializeField] float shieldDelay = 2f;
     [Range(0,1)]
     [SerializeField] float tankFollowSpeed = 0.5f;
     [Range(0,5)]
@@ -29,7 +28,7 @@ public class HeroAI : Hero
     [SerializeField] float repathingDuration = 2f;
     [Range(0,1)]
     [SerializeField] float damageCornerPeek = 0.2f;
-    [SerializeField] LayerMask attackRayMask;
+    [SerializeField] LayerMask attackRayMask = 0;
 
     [Header("Hacks")]
     // HACK
@@ -113,13 +112,13 @@ public class HeroAI : Hero
             // Apply class-dependant movement speed modifier
             if (ability)
             {
-                agent.speed = normalAgentSpeed * (ability.SpeedBoost + 1);
-                agent.speed = normalAgentSpeed * (ability.SpeedBoost + 1);
+                agent.speed = normalAgentSpeed * ability.SpeedModifier;
+                agent.speed = normalAgentSpeed * ability.SpeedModifier;
             }
             else
             {
-                agent.speed = normalAgentSpeed * (playerConfig.ability.SpeedBoost + 1);
-                agent.speed = normalAgentSpeed * (playerConfig.ability.SpeedBoost + 1);
+                agent.speed = normalAgentSpeed * playerConfig.ability.SpeedModifier;
+                agent.speed = normalAgentSpeed * playerConfig.ability.SpeedModifier;
             }
         }
     }
@@ -159,7 +158,7 @@ public class HeroAI : Hero
     {
         base.SetPlayerConfig(playerConfig);
 
-        if (IsAbilityClass(Ability.AbilityClass.Damage)) agent.updateRotation = false;
+        if (IsAbilityClass(Ability.AbilityClass.Damage) || IsAbilityClass(Ability.AbilityClass.Tank)) agent.updateRotation = false;
         else agent.updatePosition = true;
     }
     #endregion
@@ -169,7 +168,7 @@ public class HeroAI : Hero
     #region Private Functions
     private void CalculateMovement()
     {
-        if (IsAbilityClass(Ability.AbilityClass.Victim))
+        if (IsAbilityClass(Ability.AbilityClass.Runner))
         {
             if (agent.destination == transform.position) SetDestination(GetRandomTarget());
 
@@ -192,11 +191,18 @@ public class HeroAI : Hero
             transform.rotation = Quaternion.RotateTowards(
                 transform.rotation, 
                 Quaternion.LookRotation(boss.position - transform.position, Vector3.up), 
-                Time.deltaTime * characterStats.rotationSpeed);
+                Time.deltaTime * characterStats.RotationSpeed);
         }
         else if (IsAbilityClass(Ability.AbilityClass.Tank))
         {
+            // Move
             SetTankDestination();
+
+            // Rotate
+            transform.rotation = Quaternion.RotateTowards(
+                transform.rotation,
+                Quaternion.LookRotation(boss.position - transform.position, Vector3.up),
+                Time.deltaTime * characterStats.RotationSpeed);
         }
     }
 
@@ -219,10 +225,7 @@ public class HeroAI : Hero
         }
         else if (IsAbilityClass(Ability.AbilityClass.Tank))
         {
-            if (playerConfig.ability.CooldownTimer >= playerConfig.ability.Cooldown + shieldDelay)
-            {
-                return true;
-            }
+            return true;
         }
 
         return false;

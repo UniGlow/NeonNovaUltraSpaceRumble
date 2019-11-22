@@ -7533,7 +7533,7 @@
         </member>
         <member name="M:Rewired.PlayerMouse.Factory.Create">
             <summary>
-            Creates a new Player Mouse.
+            Creates a new Player Mouse with the default elements.
             </summary>
             <returns>A new Player Mouse.</returns>
         </member>
@@ -7547,7 +7547,7 @@
         </member>
         <member name="M:Rewired.PlayerMouse.Factory.Create(Rewired.PlayerMouse.Definition)">
             <summary>
-            Creates a new Player Mouse with the default elements.
+            Creates a new Player Mouse.
             </summary>
             <param name="definition">Definition use to set initial values in the controller.</param>
             <returns>A new Player Mouse.</returns>
@@ -13230,7 +13230,7 @@
         <member name="M:Rewired.Player.GetButton(System.String)">
             <summary>
             Gets the button held state of an Action. This will return TRUE as long as the button is held.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             </summary>
             <param name="actionName">Name of the Action</param>
             <returns>The button held state</returns>
@@ -13238,7 +13238,7 @@
         <member name="M:Rewired.Player.GetButton(System.Int32)">
             <summary>
             Gets the button held state of an Action. This will return TRUE as long as the button is held.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             </summary>
             <param name="actionId">Id of the Action</param>
             <returns>The button held state</returns>
@@ -13246,7 +13246,7 @@
         <member name="M:Rewired.Player.GetButtonDown(System.String)">
             <summary>
             Gets the button just pressed state of an Action. This will only return TRUE only on the first frame the button is pressed or for the duration of the Button Down Buffer time limit if set in the <see cref="T:Rewired.InputBehavior"/> assigned to this Action.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             </summary>
             <param name="actionName">Name of the Action</param>
             <returns>The button just pressed state</returns>
@@ -13254,7 +13254,7 @@
         <member name="M:Rewired.Player.GetButtonDown(System.Int32)">
             <summary>
             Gets the button just pressed state of an Action. This will only return TRUE only on the first frame the button is pressed or for the duration of the Button Down Buffer time limit if set in the <see cref="T:Rewired.InputBehavior"/> assigned to this Action.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             </summary>
             <param name="actionId">Id of the Action</param>
             <returns>The button just pressed state</returns>
@@ -13262,7 +13262,7 @@
         <member name="M:Rewired.Player.GetButtonUp(System.String)">
             <summary>
             Get the button just released state for an Action. This will only return TRUE for the first frame the button is released.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             </summary>
             <param name="actionName">Name of the Action</param>
             <returns>The button just released state</returns>
@@ -13270,7 +13270,7 @@
         <member name="M:Rewired.Player.GetButtonUp(System.Int32)">
             <summary>
             Get the button just released state for an Action. This will only return TRUE for the first frame the button is released.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             </summary>
             <param name="actionId">Id of the Action</param>
             <returns>The button just released state</returns>
@@ -13469,7 +13469,7 @@
             This will return TRUE only after the button has been held
             for the specified time and will continue to return TRUE
             until the button is released.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             </summary>
             <param name="actionName">Name of the Action</param>
             <param name="time">Minimum time the button must be held before returning true.</param>
@@ -13481,7 +13481,7 @@
             This will return TRUE only after the button has been held
             for the specified time and will continue to return TRUE
             until the button is released.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             </summary>
             <param name="actionId">Id of the Action</param>
             <param name="time">Minimum time the button must be held before returning true.</param>
@@ -13493,7 +13493,7 @@
             This will return TRUE only after the button has been held
             for the specified time and will continue to return TRUE
             until the button is released.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             </summary>
             <param name="actionName">Name of the Action</param>
             <param name="time">Minimum time in seconds the button must be held before returning true.</param>
@@ -13506,7 +13506,7 @@
             This will return TRUE only after the button has been held
             for the specified time and will continue to return TRUE
             until the button is released.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             </summary>
             <param name="actionId">Id of the Action</param>
             <param name="time">Minimum time the button must be held before returning true.</param>
@@ -13518,7 +13518,7 @@
             Gets the button state of an Action after being held for a period of time.
             This will return TRUE only on the frame in which
             the button had been held for the specified time.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             </summary>
             <param name="actionName">Name of the Action</param>
             <param name="time">Minimum time the button must be held before returning true.</param>
@@ -13529,7 +13529,7 @@
             Gets the button state of an Action after being held for a period of time.
             This will return TRUE only on the frame in which
             the button had been held for the specified time.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             </summary>
             <param name="actionId">Id of the Action</param>
             <param name="time">Minimum time the button must be held before returning true.</param>
@@ -13540,7 +13540,7 @@
             Gets the button state of an Action after being held for a period of time and then released.
             This will return TRUE only on the frame in which the button had
             been held for at least the specified time and then released.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             </summary>
             <param name="actionName">Name of the Action</param>
             <param name="time">Minimum time the button must be held before returning true when released.</param>
@@ -13551,7 +13551,7 @@
             Gets the button state of an Action after being held for a period of time and then released.
             This will return TRUE only on the frame in which the button had
             been held for at least the specified time and then released.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             </summary>
             <param name="actionId">Id of the Action</param>
             <param name="time">Minimum time the button must be held before returning true when released.</param>
@@ -13562,7 +13562,7 @@
             Gets the button state of an Action after being held for a period of time and then released.
             This will return TRUE only on the frame in which the button had
             been held for at least the specified time and then released.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             </summary>
             <param name="actionName">Name of the Action</param>
             <param name="time">Minimum time the button must be held before returning true when released.</param>
@@ -13574,7 +13574,7 @@
             Gets the button state of an Action after being held for a period of time and then released.
             This will return TRUE only on the frame in which the button had
             been held for at least the specified time and then released.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             </summary>
             <param name="actionId">Id of the Action</param>
             <param name="time">Minimum time the button must be held before returning true when released.</param>
@@ -13587,7 +13587,7 @@
             This will return TRUE only after the button has been held
             for the specified time and will continue to return TRUE
             until the button is released.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             The button short press time is set in the <see cref="T:Rewired.InputBehavior"/> assigned to the Action.
             For a custom duration, use GetButtonTimedPress instead.
             </summary>
@@ -13600,7 +13600,7 @@
             This will return TRUE only after the button has been held
             for the specified time and will continue to return TRUE
             until the button is released.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             The button short press time is set in the <see cref="T:Rewired.InputBehavior"/> assigned to the Action.
             For a custom duration, use GetButtonTimedPress instead.
             </summary>
@@ -13612,7 +13612,7 @@
             Gets the button state of an Action after being held for a period of time.
             This will return TRUE only on the frame in which
             the button had been held for the specified time.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             The button short press time is set in the <see cref="T:Rewired.InputBehavior"/> assigned to the Action.
             For a custom duration, use GetButtonTimedPressDown instead.
             </summary>
@@ -13624,7 +13624,7 @@
             Gets the button state of an Action after being held for a period of time.
             This will return TRUE only on the frame in which
             the button had been held for the specified time.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             The button short press time is set in the <see cref="T:Rewired.InputBehavior"/> assigned to the Action.
             For a custom duration, use GetButtonTimedPressDown instead.
             </summary>
@@ -13636,7 +13636,7 @@
             Gets the button state of an Action after being held for a period of time and then released.
             This will return TRUE only on the frame in which the button had
             been held for at least the specified time and then released.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             The button short press time is set in the <see cref="T:Rewired.InputBehavior"/> assigned to the Action.
             For a custom duration, use GetButtonTimedPressUp instead.
             </summary>
@@ -13648,7 +13648,7 @@
             Gets the button state of an Action after being held for a period of time and then released.
             This will return TRUE only on the frame in which the button had
             been held for at least the specified time and then released.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             The button short press time is set in the <see cref="T:Rewired.InputBehavior"/> assigned to the Action.
             For a custom duration, use GetButtonTimedPressUp instead.
             </summary>
@@ -13661,7 +13661,7 @@
             This will return TRUE only after the button has been held
             for the specified time and will continue to return TRUE
             until the button is released.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             The button long press time is set in the <see cref="T:Rewired.InputBehavior"/> assigned to the Action.
             For a custom duration, use GetButtonTimedPress instead.
             </summary>
@@ -13674,7 +13674,7 @@
             This will return TRUE only after the button has been held
             for the specified time and will continue to return TRUE
             until the button is released.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             The button long press time is set in the <see cref="T:Rewired.InputBehavior"/> assigned to the Action.
             For a custom duration, use GetButtonTimedPress instead.
             </summary>
@@ -13686,7 +13686,7 @@
             Gets the button state of an Action after being held for a period of time.
             This will return TRUE only on the frame in which
             the button had been held for the specified time.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             The button long press time is set in the <see cref="T:Rewired.InputBehavior"/> assigned to the Action.
             For a custom duration, use GetButtonTimedPressDown instead.
             </summary>
@@ -13698,7 +13698,7 @@
             Gets the button state of an Action after being held for a period of time.
             This will return TRUE only on the frame in which
             the button had been held for the specified time.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             The button long press time is set in the <see cref="T:Rewired.InputBehavior"/> assigned to the Action.
             For a custom duration, use GetButtonTimedPressDown instead.
             </summary>
@@ -13710,7 +13710,7 @@
             Gets the button state of an Action after being held for a period of time and then released.
             This will return TRUE only on the frame in which the button had
             been held for at least the specified time and then released.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             The button long press time is set in the <see cref="T:Rewired.InputBehavior"/> assigned to the Action.
             For a custom duration, use GetButtonTimedPressUp instead.
             </summary>
@@ -13722,7 +13722,7 @@
             Gets the button state of an Action after being held for a period of time and then released.
             This will return TRUE only on the frame in which the button had
             been held for at least the specified time and then released.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             The button long press time is set in the <see cref="T:Rewired.InputBehavior"/> assigned to the Action.
             For a custom duration, use GetButtonTimedPressUp instead.
             </summary>
@@ -13734,7 +13734,7 @@
             Gets the repeating button state of an Action.
             This will return TRUE when immediately pressed, then FALSE until the Input Behaviour button repeat delay has elapsed,
             then TRUE for a 1-frame duration repeating at the interval specified in the <see cref="T:Rewired.InputBehavior"/> assigned to the Action.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             </summary>
             <param name="actionName">Name of the Action</param>
             <returns>The button state.</returns>
@@ -13744,7 +13744,7 @@
             Gets the repeating button state of an Action.
             This will return TRUE when immediately pressed, then FALSE until the Input Behaviour button repeat delay has elapsed,
             then TRUE for a 1-frame duration repeating at the interval specified in the <see cref="T:Rewired.InputBehavior"/> assigned to the Action.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             </summary>
             <param name="actionId">Id of the Action</param>
             <returns>The button state.</returns>
@@ -13752,7 +13752,7 @@
         <member name="M:Rewired.Player.GetAnyButton">
             <summary>
             Gets the button held state of all Actions. This will return TRUE as long as any button is held.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             </summary>
             <returns>The button held state</returns>
         </member>
@@ -13760,7 +13760,7 @@
             <summary>
             Gets the button just pressed state of all Actions. This will only return TRUE only on the first frame any button is pressed or for the duration of the Button Down Buffer time limit if set in the <see cref="T:Rewired.InputBehavior"/> assigned to the Action.
             This will return TRUE each time any button is pressed even if others are being held down.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             </summary>
             <returns>The button just pressed state</returns>
         </member>
@@ -13768,14 +13768,14 @@
             <summary>
             Get the button just released state for all Actions. This will only return TRUE for the first frame the button is released.
             This will return TRUE each time any button is released even if others are being held down.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             </summary>
             <returns>The button just released state</returns>
         </member>
         <member name="M:Rewired.Player.GetAnyButtonPrev">
             <summary>
             Gets the button held state of an any Action during the previous frame.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             </summary>
             <returns>The previous button held state</returns>
         </member>
@@ -13810,7 +13810,7 @@
         <member name="M:Rewired.Player.GetNegativeButton(System.String)">
             <summary>
             Gets the negative button held state of an Action. This will return TRUE as long as the negative button is held.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             </summary>
             <param name="actionName">Name of the Action</param>
             <returns>The negative button held state</returns>
@@ -13818,7 +13818,7 @@
         <member name="M:Rewired.Player.GetNegativeButton(System.Int32)">
             <summary>
             Gets the negative button held state of an Action. This will return TRUE as long as the negative button is held.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             </summary>
             <param name="actionId">Id of the Action</param>
             <returns>The negative button held state</returns>
@@ -13826,7 +13826,7 @@
         <member name="M:Rewired.Player.GetNegativeButtonDown(System.String)">
             <summary>
             Gets the negative button just pressed state of an Action. This will only return TRUE only on the first frame the negative button is pressed or for the duration of the Button Down Buffer time limit if set in the <see cref="T:Rewired.InputBehavior"/> assigned to this Action.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             </summary>
             <param name="actionName">Name of the Action</param>
             <returns>The negative button just pressed state</returns>
@@ -13834,7 +13834,7 @@
         <member name="M:Rewired.Player.GetNegativeButtonDown(System.Int32)">
             <summary>
             Gets the negative button just pressed state of an Action. This will only return TRUE only on the first frame the negative button is pressed or for the duration of the Button Down Buffer time limit if set in the <see cref="T:Rewired.InputBehavior"/> assigned to this Action.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             </summary>
             <param name="actionId">Id of the Action</param>
             <returns>The negative button just pressed state</returns>
@@ -13842,7 +13842,7 @@
         <member name="M:Rewired.Player.GetNegativeButtonUp(System.String)">
             <summary>
             Get the negative button just released state for an Action. This will only return TRUE for the first frame the negative button is released.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             </summary>
             <param name="actionName">Name of the Action</param>
             <returns>The negative button just released state</returns>
@@ -13850,7 +13850,7 @@
         <member name="M:Rewired.Player.GetNegativeButtonUp(System.Int32)">
             <summary>
             Get the negative button just released state for an Action. This will only return TRUE for the first frame the negative button is released.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             </summary>
             <param name="actionId">Id of the Action</param>
             <returns>The negative button just released state</returns>
@@ -14314,7 +14314,7 @@
             Gets the repeating negative button state of an Action.
             This will return TRUE when immediately pressed, then FALSE until the Input Behaviour button repeat delay has elapsed,
             then TRUE for a 1-frame duration repeating at the interval specified in the <see cref="T:Rewired.InputBehavior"/> assigned to the Action.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             </summary>
             <param name="actionName">Name of the Action</param>
             <returns>The negative button state.</returns>
@@ -14324,7 +14324,7 @@
             Gets the repeating negative button state of an Action.
             This will return TRUE when immediately pressed, then FALSE until the Input Behaviour button repeat delay has elapsed,
             then TRUE for a 1-frame duration repeating at the interval specified in the <see cref="T:Rewired.InputBehavior"/> assigned to the Action.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             </summary>
             <param name="actionId">Id of the Action</param>
             <returns>The negative button state.</returns>
@@ -14332,7 +14332,7 @@
         <member name="M:Rewired.Player.GetAnyNegativeButton">
             <summary>
             Gets the negative button held state of all Actions. This will return TRUE as long as any negative button is held.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             </summary>
             <returns>The negative button held state</returns>
         </member>
@@ -14340,7 +14340,7 @@
             <summary>
             Gets the negative button just pressed state of all Actions. This will only return TRUE only on the first frame any negative button is pressed or for the duration of the Button Down Buffer time limit if set in the <see cref="T:Rewired.InputBehavior"/> assigned to the Action.
             This will return TRUE each time any negative button is pressed even if others are being held down.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             </summary>
             <returns>The negative button just pressed state</returns>
         </member>
@@ -14348,14 +14348,14 @@
             <summary>
             Get the negative button just released state for all Actions. This will only return TRUE for the first frame the negative button is released.
             This will return TRUE each time any negative button is released even if others are being held down.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             </summary>
             <returns>The negative button just released state</returns>
         </member>
         <member name="M:Rewired.Player.GetAnyNegativeButtonPrev">
             <summary>
             Gets the negative button held state of an any Action during the previous frame.
-            This also applies to axes being used as buttons.
+            This also applies to axes.
             </summary>
             <returns>The previous negative button held state</returns>
         </member>
@@ -17592,6 +17592,26 @@
         <member name="T:Rewired.Platforms.PS4.Internal.LoggedInUser">
             <exclude></exclude>
         </member>
+        <member name="T:Rewired.Platforms.PS4.Internal.ControllerInformation">
+            <exclude></exclude>
+        </member>
+        <member name="T:Rewired.Platforms.PS4.Internal.PadControllerInformation">
+            <exclude></exclude>
+        </member>
+        <member name="T:Rewired.Platforms.PS4.Internal.PadDeviceClassExtendedInformation">
+            <exclude></exclude>
+        </member>
+        <member name="T:Rewired.Platforms.PS4.Internal.PadStickInformation">
+            <exclude></exclude>
+        </member>
+        <member name="T:Rewired.Platforms.PS4.Internal.PadTouchPadInformation">
+            <exclude></exclude>
+        </member>
+        <member name="T:Rewired.Platforms.PS4.PS4AimExtension">
+            <summary>
+            Allows access to Aim-specific functions.
+            </summary>
+        </member>
         <member name="T:Rewired.Platforms.PS4.PS4ControllerExtension">
             <summary>
             Allows access to controller-specific functions.
@@ -17773,6 +17793,68 @@
         <member name="P:Rewired.Platforms.PS4.PS4ControllerExtension.vibrationMotorCount">
             <summary>
             The number of vibration motors in this controller.
+            </summary>
+        </member>
+        <member name="M:Rewired.Platforms.PS4.PS4AimExtension.GetVibration(Rewired.Platforms.PS4.PS4AimMotorType)">
+            <summary>
+            Gets vibration level for a specific motor.
+            </summary>
+            <param name="motor">Motor type</param>
+            <returns>Motor level [float: 0.0 - 1.0]</returns>
+        </member>
+        <member name="M:Rewired.Platforms.PS4.PS4AimExtension.SetVibration(Rewired.Platforms.PS4.PS4AimMotorType,System.Single)">
+            <summary>
+            Sets vibration leves on an individual motor.
+            </summary>
+            <param name="motor">Motor type</param>
+            <param name="motorLevel">Motor level [float: 0.0 - 1.0]</param>
+        </member>
+        <member name="M:Rewired.Platforms.PS4.PS4AimExtension.SetVibration(Rewired.Platforms.PS4.PS4AimMotorType,System.Single,System.Boolean)">
+            <summary>
+            Sets vibration level on an individual motor.
+            </summary>
+            <param name="motor">Motor type</param>
+            <param name="motorLevel">Motor level [float: 0.0 - 1.0]</param>
+            <param name="stopOtherMotors">Stop other motors?</param>
+        </member>
+        <member name="M:Rewired.Platforms.PS4.PS4AimExtension.SetVibration(Rewired.Platforms.PS4.PS4AimMotorType,System.Single,System.Single,System.Boolean)">
+            <summary>
+            Sets vibration level on an individual motor.
+            </summary>
+            <param name="motor">Motor type</param>
+            <param name="motorLevel">Motor level [float: 0.0 - 1.0]</param>
+            <param name="duration">Length of time in seconds to activate the motor before it stops. [0 = Infinite]</param>
+            <param name="stopOtherMotors">Stop other motors?</param>
+        </member>
+        <member name="M:Rewired.Platforms.PS4.PS4AimExtension.SetVibration(System.Single,System.Single)">
+            <summary>
+            Sets vibration level for left and right motors.
+            </summary>
+            <param name="strongMotorLevel">float: 0.0 - 1.0</param>
+            <param name="weakMotorLevel">float: 0.0 - 1.0</param>
+        </member>
+        <member name="M:Rewired.Platforms.PS4.PS4AimExtension.SetVibration(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Sets vibration level for left and right motors.
+            </summary>
+            <param name="strongMotorLevel">float: 0.0 - 1.0</param>
+            <param name="weakMotorLevel">float: 0.0 - 1.0</param>
+            <param name="strongMotorDuration">Length of time in seconds to activate the left motor before it stops. [0 = Infinite]</param>
+            <param name="weakMotorDuration">Length of time in seconds to activate the right motor before it stops. [0 = Infinite]</param>
+        </member>
+        <member name="T:Rewired.Platforms.PS4.PS4AimMotorType">
+            <summary>
+            PS4 Aim motors. Used for vibration.
+            </summary>
+        </member>
+        <member name="F:Rewired.Platforms.PS4.PS4AimMotorType.StrongMotor">
+            <summary>
+            Strong motor
+            </summary>
+        </member>
+        <member name="F:Rewired.Platforms.PS4.PS4AimMotorType.WeakMotor">
+            <summary>
+            Weak motor
             </summary>
         </member>
         <member name="T:Rewired.Platforms.PS4.PS4GamepadExtension">
@@ -20739,6 +20821,12 @@
             </summary>
             <returns>Number of bytes written</returns>
         </member>
+        <member name="M:Rewired.Utils.Classes.Data.NativeBuffer.TryFill(System.Byte,System.Int32,System.Int32)">
+            <summary>
+            Writes a repeating value to the buffer.
+            </summary>
+            <returns>Number of bytes written</returns>
+        </member>
         <member name="M:Rewired.Utils.Classes.Data.NativeBuffer.Resize(System.Int32,System.Boolean)">
             <summary>
             Resizes the buffer.
@@ -20776,6 +20864,12 @@
             Creates a native ring buffer.
             </summary>
             <param name="capacity">Size of the buffer in bytes</param>
+        </member>
+        <member name="M:Rewired.Utils.Classes.Data.NativeRingBuffer.Allocate(System.Int32,System.Boolean,System.UInt32@)">
+            <summary>
+            Allocates space in the buffer.
+            </summary>
+            <returns>Pointer to the start of the allocated space.</returns>
         </member>
         <member name="M:Rewired.Utils.Classes.Data.NativeRingBuffer.Write(System.IntPtr,System.Int32,System.Int32,System.Int32@,System.UInt32@)">
             <summary>
@@ -20833,6 +20927,14 @@
         <member name="M:Rewired.Utils.Classes.Data.NativeRingBuffer.AdvanceReadPosition(System.Int32)">
             <summary>
             Do not call this anywhere except within Read
+            </summary>
+        </member>
+        <member name="T:Rewired.Utils.Classes.Data.NativeMemoryBlock">
+            <summary>
+            Creates a block of native memory which can be then allocated into smaller blocks.
+            When the buffer is out of space, it will wrap and allocate new blocks
+            from the beginning. There is no guarantee any block previously allocated
+            won't be overwritten by a new block.
             </summary>
         </member>
         <member name="T:Rewired.Utils.Classes.Data.ScreenRect">

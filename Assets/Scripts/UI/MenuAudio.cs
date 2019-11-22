@@ -10,10 +10,10 @@ public class MenuAudio : MonoBehaviour
 {
 
     #region Variable Declarations
-    [SerializeField] AudioClip confirm;
+    [SerializeField] AudioClip confirm = null;
     [Range(0,1)]
     [SerializeField] float confirmVolume = 1f;
-    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioSource audioSource = null;
 	#endregion
 	
 	

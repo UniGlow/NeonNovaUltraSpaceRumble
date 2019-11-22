@@ -28,13 +28,15 @@ public class CooldownUpdater : MonoBehaviour
 	#region Unity Event Functions
 	private void Update () 
 	{
-        if (hero.PlayerConfig && hero.PlayerConfig.ability.CooldownVisualized && hero.PlayerConfig.ability.Cooldown != 0)
+        if (!hero.PlayerConfig) return;
+
+        if (hero.PlayerConfig.ability.HasEnergyPool)
         {
-            if (hero.PlayerConfig.ability.CooldownTimer == 0)
-            {
-                indicator.fillAmount = 0;
-            }
-            else
+            Mathf.Clamp(indicator.fillAmount = hero.PlayerConfig.ability.CurrentEnergy / hero.PlayerConfig.ability.MaxEnergy, 0f, 1f);
+        }
+        else
+        {
+            if (hero.PlayerConfig.ability.CooldownVisualized && hero.PlayerConfig.ability.Cooldown != 0)
             {
                 Mathf.Clamp(indicator.fillAmount = hero.PlayerConfig.ability.CooldownTimer / hero.PlayerConfig.ability.Cooldown, 0f, 1f);
             }

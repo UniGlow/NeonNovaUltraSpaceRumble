@@ -71,10 +71,11 @@ public class GameEvent : ScriptableObject
         }
 
         // Call functions on listeners
-        listeners.ForEach((GameEventListener listener) =>
+        for (int i = 0; i < listeners.Count; i++)
         {
-            listener.OnRaise();
-        });
+            GameEventListener rel = listeners[i];
+            rel.OnRaise();
+        }
 
         eventRaised.raisedSuccessfull = true;
     }
@@ -101,10 +102,11 @@ public class GameEvent : ScriptableObject
         }
 
         // Call functions on listeners
-        listeners.ForEach((GameEventListener rel) =>
+        for(int i=0; i<listeners.Count; i++)
         {
+            GameEventListener rel = listeners[i];
             rel.OnRaise(firstParameter);
-        });
+        }
 
         eventRaised.raisedSuccessfull = true;
     }
@@ -131,10 +133,11 @@ public class GameEvent : ScriptableObject
         }
 
         // Call functions on listeners
-        listeners.ForEach((GameEventListener rel) =>
+        for (int i = 0; i < listeners.Count; i++)
         {
+            GameEventListener rel = listeners[i];
             rel.OnRaise(firstParameter, secondParameter);
-        });
+        }
 
         eventRaised.raisedSuccessfull = true;
     }
@@ -161,10 +164,11 @@ public class GameEvent : ScriptableObject
         }
 
         // Call functions on listeners
-        listeners.ForEach((GameEventListener rel) =>
+        for (int i = 0; i < listeners.Count; i++)
         {
+            GameEventListener rel = listeners[i];
             rel.OnRaise(firstParameter, secondParameter, thirdParameter);
-        });
+        }
 
         eventRaised.raisedSuccessfull = true;
     }
@@ -191,10 +195,11 @@ public class GameEvent : ScriptableObject
         }
 
         // Call functions on listeners
-        listeners.ForEach((GameEventListener rel) =>
+        for (int i = 0; i < listeners.Count; i++)
         {
+            GameEventListener rel = listeners[i];
             rel.OnRaise(firstParameter, secondParameter, thirdParameter, fourthParameter);
-        });
+        }
 
         eventRaised.raisedSuccessfull = true;
     }

@@ -9,12 +9,12 @@ public class BossProjectile : Projectile
 {
 
     #region Variable Declarations
-    [SerializeField] GameObject hitPS;
-    [SerializeField] AudioClip hitSound;
+    [SerializeField] GameObject hitPS = null;
+    [SerializeField] AudioClip hitSound = null;
     [Range(0f, 1f)]
     [SerializeField] float hitVolume = 0.8f;
-    [SerializeField] GameObject critHitPS;
-    [SerializeField] AudioClip critHitSound;
+    [SerializeField] GameObject critHitPS = null;
+    [SerializeField] AudioClip critHitSound = null;
     [Range(0f, 1f)]
     [SerializeField] float critHitVolume = 0.8f;
     #endregion
@@ -28,6 +28,7 @@ public class BossProjectile : Projectile
 
         if (other.tag.Contains(Constants.TAG_SHIELD))
         {
+            other.transform.GetComponentInParent<Hero>().PlayerConfig.ability.AddEnergy(-damage);
             Destroy(gameObject);
         }
 

@@ -3,15 +3,19 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2e9bcf44708ae349a9904884aa12f93, type: 3}
   m_Name: LevelCompleted
   m_EditorClassIdentifier: 
-  description: Called when heroes or the boss reach 0 hp
+  debugMode: 0
+  description: 'Called when heroes or the boss reach 0 hp
+
+    Param: Winning faction'
   parameter1Type:
     data: 004f46616374696f6e2c20417373656d626c792d4353686172702c2056657273696f6e3d302e302e302e302c2043756c747572653d6e65757472616c2c205075626c69634b6579546f6b656e3d6e756c6c
   parameter2Type:
