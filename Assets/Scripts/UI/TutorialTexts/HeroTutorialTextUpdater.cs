@@ -30,7 +30,7 @@ public class HeroTutorialTextUpdater : TutorialTextUpdater
         {
             if (hero.PlayerConfig.ability.Class == Ability.AbilityClass.Damage) ChangeTextTo("Damage");
             else if (hero.PlayerConfig.ability.Class == Ability.AbilityClass.Tank) ChangeTextTo("Tank");
-            else if (hero.PlayerConfig.ability.Class == Ability.AbilityClass.Victim) ChangeTextTo("Opfer");
+            else if (hero.PlayerConfig.ability.Class == Ability.AbilityClass.Runner) ChangeTextTo("Opfer");
         }
         else if (colorChanges == 2)
         {
@@ -49,7 +49,7 @@ public class HeroTutorialTextUpdater : TutorialTextUpdater
             {
                 if (hero.PlayerConfig.ability.Class == Ability.AbilityClass.Damage) ChangeTextTo("PassDamage");
                 else if (hero.PlayerConfig.ability.Class == Ability.AbilityClass.Tank) ChangeTextTo("Tank");
-                else if (hero.PlayerConfig.ability.Class == Ability.AbilityClass.Victim) ChangeTextTo("Opfer");
+                else if (hero.PlayerConfig.ability.Class == Ability.AbilityClass.Runner) ChangeTextTo("Opfer");
             }
         }
     }

@@ -40,8 +40,8 @@ public class Hero : Character
             playerConfig.ability.Tick(Time.deltaTime, AbilityButtonPressed());
 
             // Apply class-dependant movement speed modifier
-            horizontalMovement *= (1 + playerConfig.ability.SpeedBoost);
-            verticalMovement *= (1 + playerConfig.ability.SpeedBoost);
+            horizontalMovement *= playerConfig.ability.SpeedModifier;
+            verticalMovement *= playerConfig.ability.SpeedModifier;
         }
     }
     #endregion
@@ -70,11 +70,10 @@ public class Hero : Character
 
     public void SetAbility(Ability ability)
     {
-        // Cancel shield, if current ability is Tank class
-        if (playerConfig.ability.Binded && playerConfig.ability.Class == Ability.AbilityClass.Tank)
+        // Cancel currently active ability
+        if (playerConfig.ability.Binded)
         {
-            Tank tankAbility = playerConfig.ability as Tank;
-            tankAbility.DeactivateShield();
+            playerConfig.ability.DeactivateAbility();
         }
 
         // Set new ability
@@ -85,10 +84,15 @@ public class Hero : Character
         playerMesh.mesh = ability.Mesh;
     }
 
-    public override void ResetCooldowns()
+    /// <summary>
+    /// Resets the cooldowns (time- and energy-based).
+    /// </summary>
+    /// <remarks>Only calls function in ability ScriptableObject, but needs to be present on an instantiated GameObject to receive GameEvents.</remarks>
+    /// <param name="maximum">If true, sets cooldowns to maximum values (ready state). If false, sets cooldowns to 0.</param>
+    public override void ResetCooldowns(bool maximum)
     {
-        base.ResetCooldowns();
-        PlayerConfig.ability.ResetCooldowns(true);
+        base.ResetCooldowns(maximum);
+        PlayerConfig.ability.ResetCooldowns(maximum);
     }
     #endregion
 

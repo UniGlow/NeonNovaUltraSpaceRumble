@@ -14313,6 +14313,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.1
   damage: 70
+  invulnerabilityAfterHit: 1
   hitSound: {fileID: 8300000, guid: 216323fd8e2633844a437d87bf28a085, type: 3}
   hitSoundVolume: 0.6
   enableCameraShake: 1
@@ -14320,6 +14321,9 @@ MonoBehaviour:
   roughness: 10
   fadeIn: 0.1
   fadeOut: 0.8
+  rumbleStrengthDeep: 1
+  rumbleStrengthHigh: 1
+  rumbleDuration: 0.7
   hitPSHeroes: {fileID: 1086934119878164, guid: 9943029a31d4e3a44bf6d6676eecb198,
     type: 3}
   hitPSBoss: {fileID: 1086934119878164, guid: 9943029a31d4e3a44bf6d6676eecb198, type: 3}
@@ -14561,7 +14565,7 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   linkedMethods:
   - component: {fileID: 114474593516083838}
-    methodID: 1
+    methodID: 3
     methodName: AcquireNewTarget
     chosenID: 1
     methodNames: []
@@ -14587,7 +14591,7 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   linkedMethods:
   - component: {fileID: 114474593516083838}
-    methodID: 0
+    methodID: 2
     methodName: AcquireNewTarget
     chosenID: 1
     methodNames: []

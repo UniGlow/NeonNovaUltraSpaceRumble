@@ -3,23 +3,25 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af2b580508271634dbdd00b275cd9f67, type: 3}
+  m_Script: {fileID: 11500000, guid: 815f2e0a3a9d33748b0c89f83a7a8759, type: 3}
   m_Name: Tank_WobbleBobble
   m_EditorClassIdentifier: 
   abilityClass: 1
-  speedBoost: 0
-  autofire: 1
-  soundClip: {fileID: 8300000, guid: 9bf8565727fa20047bfa416674b33661, type: 3}
-  volume: 0.9
+  mesh: {fileID: 4300000, guid: eeedf6b3e6a52b040bc8b36f72d05e85, type: 3}
+  speedModifier: 1
   cooldownRingScale: 1
-  cooldown: 0
+  autofire: 0
+  soundClip: {fileID: 8300000, guid: 9bf8565727fa20047bfa416674b33661, type: 3}
+  volume: 1
   cooldownVisualized: 1
   hasEnergyPool: 0
+  cooldown: 5
+  abilityDuration: 3
   maxEnergy: 100
   energyLossPerSecond: 1
-  mesh: {fileID: 4300000, guid: eeedf6b3e6a52b040bc8b36f72d05e85, type: 3}

@@ -169,6 +169,31 @@ public class Boss : Character
 
         SetWeaknessColor(playerConfig.ColorConfig);
     }
+
+    /// <summary>
+    /// Extra function to be able to call it via GameEvents.
+    /// </summary>
+    public void ResetSpeed()
+    {
+        characterStats.ResetSpeed();
+    }
+
+    public override void ResetCooldowns(bool maximum)
+    {
+        base.ResetCooldowns(maximum);
+        if (!maximum)
+        {
+            cooldownTimer = 0f;
+            cooldownIndicator.fillAmount = 0f;
+            abilityCooldownB = false;
+        }
+        else
+        {
+            cooldownTimer = abilityCooldown;
+            cooldownIndicator.fillAmount = 1f;
+            abilityCooldownB = true;
+        }
+    }
     #endregion
 
 
@@ -205,7 +230,7 @@ public class Boss : Character
                 bossMeshRenderer.material.DOBlendableColor(PlayerConfig.ColorConfig.bossMaterial.color, 0.1f);
                 StartCoroutine(ShootNovas(numberOfNovas, timeBetweenNovas, () =>
                 {
-                    characterStats.ResetSpeed();
+                    ResetSpeed();
                     cooldownTimer = 0f;
                     abilityCooldownB = false;
                     abilityInProgress = false;

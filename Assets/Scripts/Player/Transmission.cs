@@ -347,7 +347,7 @@ public class Transmission : MonoBehaviour
                 // Set color
                 Color transparentMeshColor = hero.PlayerConfig.ColorConfig.heroMaterial.GetColor("_EmissionColor");
                 transparentMeshColor.a = 0.2f;
-                transparentMesh.GetComponent<MeshRenderer>().material.SetColor("_Color", transparentMeshColor);
+                transparentMesh.GetComponent<MeshRenderer>().material.SetColor("_BaseColor", transparentMeshColor);
                 
                 // Fade alpha
                 transparentMesh.GetComponent<MeshRenderer>().material.DOFade(1f, meshFadeDuration * transmissionDuration).SetEase(Ease.InQuad);
