@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4337183692543796}
   - component: {fileID: 114097331483697454}
   m_Layer: 0
-  m_Name: _PERSISTENT_SCRIPTS
+  m_Name: PERSISTENT_SCRIPTS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -273,11 +273,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicTracks:
-  - {fileID: 11400000, guid: d8d042d8cb1147342837b8ad5297c9b5, type: 2}
-  - {fileID: 11400000, guid: ad5efa830d7605d4ea38ea2f21945802, type: 2}
-  - {fileID: 11400000, guid: 55d2cad03fa76ce4f92b6bd0f1cab1d3, type: 2}
-  - {fileID: 11400000, guid: 200b072a36f49c54cb988e75e003ae4a, type: 2}
-  - {fileID: 11400000, guid: ef1baf16c61b67a4aaea8b515fa61cf9, type: 2}
+  - {fileID: 11400000, guid: 1ee4388a4dcb0e244b1006604683cfa4, type: 2}
+  - {fileID: 11400000, guid: 2cffb183310cdd74292d240b6a6b87f9, type: 2}
+  - {fileID: 11400000, guid: 7c1a8ce7177fe2e4c92b25e0b95f7537, type: 2}
+  - {fileID: 11400000, guid: 7bf4489d6b3df0e499f8dcbcca469624, type: 2}
+  - {fileID: 11400000, guid: b162c3390399fe048a8aa0f155f48f3e, type: 2}
   tutorialTrack: {fileID: 11400000, guid: dc118b1a3d2f334428767bcd546f7dac, type: 2}
   titleTrack: {fileID: 11400000, guid: 27d65f21b0fb9294cb21a92346fdb487, type: 2}
   levelEnd: {fileID: 8300000, guid: f8139e7be195b47a7a1b53e20a35e244, type: 3}
