@@ -57,7 +57,6 @@ public class SelectionUI : MonoBehaviour
     {
         if(activeStep == SelectionController.Step.ColorSelection)
         {
-            Debug.Log("Test");
             UpdateTopPanel();
         }
         if (this.panelNumber == panelNumber)
@@ -149,7 +148,6 @@ public class SelectionUI : MonoBehaviour
     void SelectionChanged(PlayerColor playerColor, bool animated)
     {
         activeColor = playerColor;
-        Debug.Log(playerColors.Count);
         for (int i = 0; i < playerColors.Count; i++)
         {
             if (playerColors[i] == playerColor)
@@ -183,7 +181,6 @@ public class SelectionUI : MonoBehaviour
         StartCoroutine(InvokeOneFrameLater(() =>
         {
             selectionMarker.GetComponent<RectTransform>().sizeDelta = new Vector2(topPanelSelectables[0].GetComponent<RectTransform>().rect.height, topPanelSelectables[0].GetComponent<RectTransform>().rect.height);
-            Debug.Log(new Vector2(topPanelSelectables[0].GetComponent<RectTransform>().rect.height, topPanelSelectables[0].GetComponent<RectTransform>().rect.height));
             SelectionChanged(activeColor, false);
         }));
     }
@@ -220,7 +217,6 @@ public class SelectionUI : MonoBehaviour
             StartCoroutine(InvokeOneFrameLater(()=>
             {
                 selectionMarker.GetComponent<RectTransform>().sizeDelta = new Vector2(topPanelSelectables[0].GetComponent<RectTransform>().rect.height, topPanelSelectables[0].GetComponent<RectTransform>().rect.height);
-                Debug.Log(new Vector2(topPanelSelectables[0].GetComponent<RectTransform>().rect.height +2, topPanelSelectables[0].GetComponent<RectTransform>().rect.height+2));
                 SelectionChanged(activeColor, false);
             }));
         }
@@ -231,7 +227,6 @@ public class SelectionUI : MonoBehaviour
         if (!animated)
         {
             // Set Selection Marker to Position of first Object
-            Debug.Log("Setting Position to: " + topPanelSelectables[position].transform.position);
             selectionMarker.DOMove(topPanelSelectables[position].transform.position, 0.001f).OnComplete(()=> {
                 selectionMarker.gameObject.SetActive(true);
             });

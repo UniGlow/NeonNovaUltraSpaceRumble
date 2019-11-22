@@ -123,8 +123,6 @@ public class NewSirAlfredLobby : MonoBehaviour
                         // TODO: Setup PlayerConfigs and load first Level
                         SetupPlayerConfigs();
                         SceneManager.Instance.LoadNextLevel();
-
-                        Debug.LogAssertion("Game Started!");
                     }
                 }
             }
@@ -135,8 +133,6 @@ public class NewSirAlfredLobby : MonoBehaviour
                 {
                     SetupPlayerConfigs();
                     SceneManager.Instance.LoadNextLevel();
-
-                    Debug.LogAssertion("Game Started!");
                 }
             }*/
         }
@@ -210,10 +206,6 @@ public class NewSirAlfredLobby : MonoBehaviour
         }
         if (somethingChanged)
         {
-            string log = "Slots listening for Input:\n";
-            for (int i = 0; i < players.Length; i++)
-                log += "P" + (i+1) + ": " + players[i].listeningForInput + "\n";
-            Debug.Log(log);
             RaiseSlotsListeningForInputs(MakeListeningForInputArray());
             CheckReadyStates();
         }
@@ -392,14 +384,12 @@ public class NewSirAlfredLobby : MonoBehaviour
         {
             gameReadyToStart = true;
             // TODO: Anzeige UI
-            Debug.LogAssertion("Game Ready to Start!");
             RaiseReadyToStart(true);
         }
         else
         {
             gameReadyToStart = false;
             // TODO: Anzeige UI abschalten
-            Debug.LogAssertion("Game NOT Ready to Start!");
             RaiseReadyToStart(false);
         }
     }
