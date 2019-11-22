@@ -2060,6 +2060,81 @@ PrefabInstance:
       propertyPath: m_Name
       value: P1
       objectReference: {fileID: 0}
+    - target: {fileID: 5956122618146565894, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: animationCurve.m_Curve.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956122618146565894, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: animationCurve.m_Curve.Array.data[3].time
+      value: 0.8101803
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956122618146565894, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: animationCurve.m_Curve.Array.data[4].time
+      value: 1.0641599
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956122618146565894, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: animationCurve.m_Curve.Array.data[2].time
+      value: 0.5463866
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956122618146565894, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: animationCurve.m_Curve.Array.data[2].value
+      value: 0.9860246
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956122618146565894, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: animationCurve.m_Curve.Array.data[1].value
+      value: 1.0192859
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956122618146565894, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: animationCurve.m_Curve.Array.data[1].time
+      value: 0.3231027
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956122618146565894, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: animationCurve.m_Curve.Array.data[3].value
+      value: 1.0049591
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956122618146565894, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: animationCurve.m_Curve.Array.data[3].inSlope
+      value: 0.00004504527
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956122618146565894, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: animationCurve.m_Curve.Array.data[3].outSlope
+      value: 0.00004504527
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956122618146565894, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: animationCurve.m_Curve.Array.data[3].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956122618146565894, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: animationCurve.m_Curve.Array.data[3].outWeight
+      value: 0.3196582
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956122618146565894, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: animationCurve.m_Curve.Array.data[2].inSlope
+      value: -0.034000084
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956122618146565894, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: animationCurve.m_Curve.Array.data[2].outSlope
+      value: -0.034000084
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956122618146565894, guid: 024f24893e3397340917e1145e75f4db,
+        type: 3}
+      propertyPath: animationCurve.m_Curve.Array.data[2].outWeight
+      value: 0.25283247
+      objectReference: {fileID: 0}
     - target: {fileID: 5290935578398387558, guid: 024f24893e3397340917e1145e75f4db,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2438,11 +2513,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: P2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4217278109915300834, guid: 43b07d9155a175e409a7355540b817ad,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4217278109915300835, guid: 43b07d9155a175e409a7355540b817ad,
         type: 3}

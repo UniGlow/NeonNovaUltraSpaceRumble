@@ -113,12 +113,6 @@ public class SelectionController : MonoBehaviour
 
     public void UpdateAvailableCharacters(List<NewSirAlfredLobby.PlayerCharacter> availableCharacters)
     {
-        string characters = "Available Characters:";
-        foreach(NewSirAlfredLobby.PlayerCharacter pc in availableCharacters)
-        {
-            characters += "\n- " + pc.ToString();
-        }
-        Debug.Log(characters);
         this.availableCharacters = availableCharacters;
     }
     #endregion

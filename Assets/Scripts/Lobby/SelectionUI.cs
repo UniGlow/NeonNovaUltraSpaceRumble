@@ -44,20 +44,21 @@ public class SelectionUI : MonoBehaviour
 	
 	
 	#region Unity Event Functions
-	private void Start () 
-	{
-		
-	}
+
 	#endregion
 	
 	
 	
 	#region Public Functions
-	public void ChangeStep(int panelNumber, SelectionController.Step nextStep)
+    /// <summary>
+    /// Call this when a Player enters a new Lobby State
+    /// </summary>
+    /// <param name="panelNumber">Number of Panel the Player is occupying</param>
+    /// <param name="nextStep">The Lobby State that got entered by the Player</param>
+	public void StepChanged(int panelNumber, SelectionController.Step nextStep)
     {
         if(activeStep == SelectionController.Step.ColorSelection)
         {
-            Debug.Log("Test");
             UpdateTopPanel();
         }
         if (this.panelNumber == panelNumber)
@@ -109,6 +110,11 @@ public class SelectionUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Call this to Change the Text displayed in the lower Center of this Panel
+    /// </summary>
+    /// <param name="panelNumber">The Panel Number of the Player</param>
+    /// <param name="activeCharacter">The Active Character that Player can see to display its Name</param>
     public void ChangeText(int panelNumber, NewSirAlfredLobby.PlayerCharacter activeCharacter)
     {
         if(panelNumber == this.panelNumber)
@@ -117,6 +123,11 @@ public class SelectionUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Animates the Arrow in UI depending of the given Direction
+    /// </summary>
+    /// <param name="panelNumber">The Panel Number of the Player</param>
+    /// <param name="direction">Direction of the Arrow that should be animated</param>
     public void AnimateArrow(int panelNumber, Direction direction)
     {
         if(panelNumber == this.panelNumber)
@@ -132,6 +143,11 @@ public class SelectionUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Call this when a Player changed the selected Color
+    /// </summary>
+    /// <param name="panelNumber">The Panel Number of the Player</param>
+    /// <param name="playerColor">The new selected Color</param>
     // TODO: Once GameEvents can handle Optional Parameters combine following Methods into one
     public void SelectionChanged(int panelNumber, PlayerColor playerColor)
     {
@@ -145,11 +161,10 @@ public class SelectionUI : MonoBehaviour
             }
         }
     }
-    // Not Public but sits here for contextual reasons
+    // Not Public but sits here for contextual reasons, see Method aboth
     void SelectionChanged(PlayerColor playerColor, bool animated)
     {
         activeColor = playerColor;
-        Debug.Log(playerColors.Count);
         for (int i = 0; i < playerColors.Count; i++)
         {
             if (playerColors[i] == playerColor)
@@ -183,7 +198,6 @@ public class SelectionUI : MonoBehaviour
         StartCoroutine(InvokeOneFrameLater(() =>
         {
             selectionMarker.GetComponent<RectTransform>().sizeDelta = new Vector2(topPanelSelectables[0].GetComponent<RectTransform>().rect.height, topPanelSelectables[0].GetComponent<RectTransform>().rect.height);
-            Debug.Log(new Vector2(topPanelSelectables[0].GetComponent<RectTransform>().rect.height, topPanelSelectables[0].GetComponent<RectTransform>().rect.height));
             SelectionChanged(activeColor, false);
         }));
     }
@@ -220,7 +234,6 @@ public class SelectionUI : MonoBehaviour
             StartCoroutine(InvokeOneFrameLater(()=>
             {
                 selectionMarker.GetComponent<RectTransform>().sizeDelta = new Vector2(topPanelSelectables[0].GetComponent<RectTransform>().rect.height, topPanelSelectables[0].GetComponent<RectTransform>().rect.height);
-                Debug.Log(new Vector2(topPanelSelectables[0].GetComponent<RectTransform>().rect.height +2, topPanelSelectables[0].GetComponent<RectTransform>().rect.height+2));
                 SelectionChanged(activeColor, false);
             }));
         }
@@ -231,7 +244,6 @@ public class SelectionUI : MonoBehaviour
         if (!animated)
         {
             // Set Selection Marker to Position of first Object
-            Debug.Log("Setting Position to: " + topPanelSelectables[position].transform.position);
             selectionMarker.DOMove(topPanelSelectables[position].transform.position, 0.001f).OnComplete(()=> {
                 selectionMarker.gameObject.SetActive(true);
             });

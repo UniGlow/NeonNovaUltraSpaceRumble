@@ -123,8 +123,6 @@ public class NewSirAlfredLobby : MonoBehaviour
                         // TODO: Setup PlayerConfigs and load first Level
                         SetupPlayerConfigs();
                         SceneManager.Instance.LoadNextLevel();
-
-                        Debug.LogAssertion("Game Started!");
                     }
                 }
             }
@@ -135,8 +133,6 @@ public class NewSirAlfredLobby : MonoBehaviour
                 {
                     SetupPlayerConfigs();
                     SceneManager.Instance.LoadNextLevel();
-
-                    Debug.LogAssertion("Game Started!");
                 }
             }*/
         }
@@ -146,6 +142,11 @@ public class NewSirAlfredLobby : MonoBehaviour
 
 
     #region Public Functions
+    /// <summary>
+    /// Call this if a Player has entered a new State in the Lobby.
+    /// </summary>
+    /// <param name="panelNumber">Number of that Players Panel.</param>
+    /// <param name="activeStep">The State that has been entered.</param>
     public void PlayerChangedState(int panelNumber, SelectionController.Step activeStep)
     {
         bool somethingChanged = false;
@@ -210,15 +211,16 @@ public class NewSirAlfredLobby : MonoBehaviour
         }
         if (somethingChanged)
         {
-            string log = "Slots listening for Input:\n";
-            for (int i = 0; i < players.Length; i++)
-                log += "P" + (i+1) + ": " + players[i].listeningForInput + "\n";
-            Debug.Log(log);
             RaiseSlotsListeningForInputs(MakeListeningForInputArray());
             CheckReadyStates();
         }
     }
 
+    /// <summary>
+    /// Marks the given Rewired.Player as active and assigns it to the given Panel
+    /// </summary>
+    /// <param name="panelNumber">Number of the Panel in question</param>
+    /// <param name="player">Rewired.Player that should be marked as active. If null is given, the previously active Player is set to inactive</param>
     public void SetPlayer(int panelNumber, Rewired.Player player)
     {
         players[panelNumber - 1].player = player;
@@ -228,6 +230,12 @@ public class NewSirAlfredLobby : MonoBehaviour
             players[panelNumber - 1].playerNumber = -1;
     }
 
+    /// <summary>
+    /// Returns true if the given Rewired.Player is marked as active in the Lobby.
+    /// Returns false if not.
+    /// </summary>
+    /// <param name="player">The Rewired.Player in question</param>
+    /// <returns></returns>
     public bool IsPlayerActive(Rewired.Player player)
     {
         for(int i = 0; i < players.Length; i++)
@@ -238,6 +246,12 @@ public class NewSirAlfredLobby : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// Saves the active Color of that Player as selected and blocks that Color for all other Players.
+    /// </summary>
+    /// <param name="panelNumber">Panel Number of the Player</param>
+    /// <param name="playerColor">Color that has been selected, if null is given
+    /// the previously selected Color will be made available for all Players again</param>
     // Used directly by SelectionControllers NOT by GameEvent
     public void SetPlayerColor(int panelNumber, PlayerColor playerColor)
     {
@@ -252,6 +266,11 @@ public class NewSirAlfredLobby : MonoBehaviour
         players[panelNumber - 1].playerColor = playerColor;
     }
 
+    /// <summary>
+    /// Sets a Players Ready-To-Play-Status to the given value.
+    /// </summary>
+    /// <param name="panelNumber">Players Panel Number</param>
+    /// <param name="readyState">value</param>
     public void SetReadyToPlay(int panelNumber, bool readyState)
     {
         players[panelNumber - 1].readyToPlay = readyState;
@@ -325,7 +344,7 @@ public class NewSirAlfredLobby : MonoBehaviour
     /// Updates the available characters. Gets called by SelectionController.
     /// </summary>
     /// <param name="selectedCharacter">The selected character.</param>
-    /// <param name="panelNumber">The panel number. If 0 a full List will be created</param>
+    /// <param name="panelNumber">The panel number. If 0 a full List will be created.</param>
     public void UpdateAvailableCharacters (PlayerCharacter selectedCharacter, int panelNumber = 0)
     {
         if (panelNumber != 0)
@@ -368,12 +387,15 @@ public class NewSirAlfredLobby : MonoBehaviour
                 return null;
         }
     }
-	#endregion
-	
-	
-	
-	#region Private Functions
-	void CheckReadyStates()
+    #endregion
+
+
+
+    #region Private Functions
+    /// <summary>
+    /// Checks if all Players are Ready to Play and reacts to that Checks result appropriatly
+    /// </summary>
+    void CheckReadyStates()
     {
         int playerCount = 0;
         int playersReady = 0;
@@ -392,18 +414,21 @@ public class NewSirAlfredLobby : MonoBehaviour
         {
             gameReadyToStart = true;
             // TODO: Anzeige UI
-            Debug.LogAssertion("Game Ready to Start!");
             RaiseReadyToStart(true);
         }
         else
         {
             gameReadyToStart = false;
             // TODO: Anzeige UI abschalten
-            Debug.LogAssertion("Game NOT Ready to Start!");
             RaiseReadyToStart(false);
         }
     }
 
+    /// <summary>
+    /// Constructs an Array of Bools representing the Lobby Panels that are activly Listening for Inputs of all Controllers.
+    /// </summary>
+    /// <param name="start">When true the first Lobby-Panel will be set to Listening</param>
+    /// <returns></returns>
     bool[] MakeListeningForInputArray(bool start = false)
     {
         bool[] playerListeningForInput = new bool[4] { false, false, false, false };
@@ -416,6 +441,10 @@ public class NewSirAlfredLobby : MonoBehaviour
         return playerListeningForInput;
     }
 
+    /// <summary>
+    /// Sets up the PlayerConfigs with all the Information needed to Start the Game.
+    /// All Human Players will be Set first, then AIs will be Setup to fill that Number up to 4.
+    /// </summary>
     void SetupPlayerConfigs()
     {
         List<PlayerCharacter> characters = new List<PlayerCharacter>();

@@ -459,7 +459,7 @@ MonoBehaviour:
   linkedMethods:
   - component: {fileID: 1394123924860895440}
     methodID: 0
-    methodName: ChangeStep
+    methodName: StepChanged
     chosenID: 1
     methodNames: []
     gameObject: {fileID: 912889697591679944}
