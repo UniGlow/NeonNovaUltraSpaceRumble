@@ -51,6 +51,7 @@ public class SelectionController : MonoBehaviour
     PlayerColor activeColor = null;
     float changeTimer = 0f;
     float autoRotatingCountdown = 0f;
+    List<NewSirAlfredLobby.PlayerCharacter> availableCharacters = new List<NewSirAlfredLobby.PlayerCharacter>();
     #endregion
 
 
@@ -108,6 +109,17 @@ public class SelectionController : MonoBehaviour
             activeColor = NewSirAlfredLobby.Instance.GetNextAvailableColor(true, activeColor);
             RaisePlayerChangedColor(this.panelNumber, activeColor);
         }
+    }
+
+    public void UpdateAvailableCharacters(List<NewSirAlfredLobby.PlayerCharacter> availableCharacters)
+    {
+        string characters = "Available Characters:";
+        foreach(NewSirAlfredLobby.PlayerCharacter pc in availableCharacters)
+        {
+            characters += "\n- " + pc.ToString();
+        }
+        Debug.Log(characters);
+        this.availableCharacters = availableCharacters;
     }
     #endregion
 
@@ -181,6 +193,7 @@ public class SelectionController : MonoBehaviour
                         }
                         // But don't delete this
                         NewSirAlfredLobby.Instance.SetReadyToPlay(panelNumber, false);
+                        NewSirAlfredLobby.Instance.UpdateAvailableCharacters(NewSirAlfredLobby.PlayerCharacter.Empty, panelNumber);
                         break;
                     default:
                         Debug.LogWarning("Something went wrong here! Eather a new Step didn't get implemented or some Error accured!");
@@ -198,17 +211,20 @@ public class SelectionController : MonoBehaviour
                         Debug.LogWarning("Something went wrong here!");
                         break;
                     case Step.CharacterSelection:
-                        if (selectedCharacter == NewSirAlfredLobby.PlayerCharacter.Boss)
+                        if (availableCharacters.Contains(selectedCharacter))
                         {
-                            RaisePlayerChangedStep(panelNumber, Step.ReadyToPlay);
-                            activeStep = Step.ReadyToPlay;
+                            if (selectedCharacter == NewSirAlfredLobby.PlayerCharacter.Boss)
+                            {
+                                RaisePlayerChangedStep(panelNumber, Step.ReadyToPlay);
+                                activeStep = Step.ReadyToPlay;
+                            }
+                            else
+                            {
+                                RaisePlayerChangedStep(panelNumber, Step.ColorSelection);
+                                activeStep = Step.ColorSelection;
+                            }
+                            NewSirAlfredLobby.Instance.UpdateAvailableCharacters(selectedCharacter, panelNumber);
                         }
-                        else
-                        {
-                            RaisePlayerChangedStep(panelNumber, Step.ColorSelection);
-                            activeStep = Step.ColorSelection;
-                        }
-                        NewSirAlfredLobby.Instance.UpdateAvailableCharacters(selectedCharacter, panelNumber);
                         break;
                     case Step.ColorSelection:
                         RaisePlayerSelectedColor(panelNumber, activeColor);
