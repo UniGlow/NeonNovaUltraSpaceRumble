@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panelNumber: 1
-  rotationDuration: 1
+  rotationDuration: 0.75
   animationCurve:
     serializedVersion: 2
     m_Curve:
@@ -216,6 +216,15 @@ MonoBehaviour:
   - {fileID: 3307142591632726498}
   - {fileID: 5859290027072007840}
   - {fileID: 8153146644988318776}
+  rotatingObjects:
+  - {fileID: 1166632494121594926}
+  - {fileID: 6229430247565349750}
+  - {fileID: 3307142591632726498}
+  - {fileID: 8700798851631986489}
+  - {fileID: 8153146644988318776}
+  - {fileID: 6721587996429356298}
+  - {fileID: 5859290027072007840}
+  - {fileID: 5721560491059710343}
 --- !u!114 &2431556548938591295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -319,13 +328,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5290935578787673318}
-  m_LocalRotation: {x: 0.2588186, y: -0, z: -0, w: 0.965926}
-  m_LocalPosition: {x: 0, y: 6.31, z: -8.36}
+  m_LocalRotation: {x: 0.15361793, y: -0, z: -0, w: 0.9881304}
+  m_LocalPosition: {x: 0, y: 6.91, z: -17.21}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_Children: []
   m_Father: {fileID: 5290935578398387558}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 30.000002, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 17.673, y: 0, z: 0}
 --- !u!20 &5290935578787673323
 Camera:
   m_ObjectHideFlags: 0
@@ -350,8 +359,8 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 33.9
-  field of view: 70
+  far clip plane: 41.68
+  field of view: 51.8
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -453,14 +462,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4182099815592242580}
     m_Modifications:
-    - target: {fileID: 100000, guid: 51a8d996c6cb8c44cb0954778d972cb2, type: 3}
-      propertyPath: m_Name
-      value: Boss
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 51a8d996c6cb8c44cb0954778d972cb2, type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 51a8d996c6cb8c44cb0954778d972cb2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -516,6 +517,14 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 51a8d996c6cb8c44cb0954778d972cb2, type: 3}
       propertyPath: m_LocalScale.z
       value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 51a8d996c6cb8c44cb0954778d972cb2, type: 3}
+      propertyPath: m_Name
+      value: Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 51a8d996c6cb8c44cb0954778d972cb2, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51a8d996c6cb8c44cb0954778d972cb2, type: 3}
@@ -998,31 +1007,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5290935578398387558}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: fd8da252145aa084a9b1248e48750649,
-        type: 3}
-      propertyPath: m_Name
-      value: Background_Lobby_Frames3
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: fd8da252145aa084a9b1248e48750649,
-        type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: -845922935963229679, guid: fd8da252145aa084a9b1248e48750649,
-        type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: -355749200800792107, guid: fd8da252145aa084a9b1248e48750649,
-        type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 3330596916673864638, guid: fd8da252145aa084a9b1248e48750649,
-        type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: fd8da252145aa084a9b1248e48750649,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1083,6 +1067,31 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.3450056
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: fd8da252145aa084a9b1248e48750649,
+        type: 3}
+      propertyPath: m_Name
+      value: Background_Lobby_Frames3
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: fd8da252145aa084a9b1248e48750649,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: -845922935963229679, guid: fd8da252145aa084a9b1248e48750649,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: -355749200800792107, guid: fd8da252145aa084a9b1248e48750649,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3330596916673864638, guid: fd8da252145aa084a9b1248e48750649,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: -8387230437285127086, guid: fd8da252145aa084a9b1248e48750649,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1092,11 +1101,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.x
       value: 1.141667
-      objectReference: {fileID: 0}
-    - target: {fileID: -8387230437285127086, guid: fd8da252145aa084a9b1248e48750649,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -1989585190102608526, guid: fd8da252145aa084a9b1248e48750649,
         type: 3}
@@ -1128,14 +1132,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3436841090125536966}
     m_Modifications:
-    - target: {fileID: 100000, guid: f32514971f6af494ab733f3081f0746e, type: 3}
-      propertyPath: m_Name
-      value: Hero_mesh_runner
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: f32514971f6af494ab733f3081f0746e, type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f32514971f6af494ab733f3081f0746e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1191,6 +1187,14 @@ PrefabInstance:
     - target: {fileID: 400000, guid: f32514971f6af494ab733f3081f0746e, type: 3}
       propertyPath: m_LocalScale.z
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: f32514971f6af494ab733f3081f0746e, type: 3}
+      propertyPath: m_Name
+      value: Hero_mesh_runner
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: f32514971f6af494ab733f3081f0746e, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: f32514971f6af494ab733f3081f0746e, type: 3}
       propertyPath: m_Materials.Array.data[0]
