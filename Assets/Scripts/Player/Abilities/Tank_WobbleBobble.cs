@@ -28,6 +28,8 @@ public class Tank_WobbleBobble : Ability
     #region Public Functions
     public override void TriggerAbility()
     {
+        base.TriggerAbility();
+
         hero.Shield.SetActive(true);
         hero.Rigidbody.mass = 100f;
         audioSource.PlayOneShot(soundClip, volume);
@@ -35,6 +37,8 @@ public class Tank_WobbleBobble : Ability
 
     public override void DeactivateAbility()
     {
+        base.DeactivateAbility();
+
         hero.Shield.SetActive(false);
         hero.Rigidbody.mass = 1f;
     }

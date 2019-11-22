@@ -50,11 +50,15 @@ public class Runner_OrbSpeedBoost : Ability
 
     public override void TriggerAbility()
     {
+        base.TriggerAbility();
+
         orb.Speed = originalOrbSpeed * orbSpeedBoost;
     }
 
     public override void DeactivateAbility()
     {
+        base.DeactivateAbility();
+
         orb.Speed = originalOrbSpeed;
     }
     #endregion

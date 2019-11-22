@@ -26,15 +26,7 @@ public class Runner_Default : Ability
 
 
     #region Public Functions
-    public override void TriggerAbility()
-    {
-        // Nothing to do here. Default Victim has no active ability.
-    }
 
-    public override void DeactivateAbility()
-    {
-        
-    }
     #endregion
 
 

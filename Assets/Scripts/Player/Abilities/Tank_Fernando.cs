@@ -37,18 +37,19 @@ public class Tank_Fernando : Ability
 
     public override void TriggerAbility()
     {
+        base.TriggerAbility();
+
         hero.Shield.SetActive(true);
         hero.Rigidbody.mass = 100f;
         audioSource.PlayOneShot(soundClip, volume);
-
-        abilityActive = true;
     }
 
     public override void DeactivateAbility()
     {
+        base.DeactivateAbility();
+
         hero.Shield.SetActive(false);
         hero.Rigidbody.mass = 1f;
-        abilityActive = false;
     }
     #endregion
 

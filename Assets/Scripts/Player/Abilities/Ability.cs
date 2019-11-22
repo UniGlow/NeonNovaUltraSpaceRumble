@@ -148,7 +148,6 @@ public abstract class Ability : ScriptableObject
                 if (abilityButtonPressed && cooldownTimer >= cooldown)
                 {
                     TriggerAbility();
-                    abilityActive = true;
                     cooldownTimer = 0f;
                 }
             }
@@ -160,7 +159,6 @@ public abstract class Ability : ScriptableObject
                 if (abilityDurationTimer >= abilityDuration)
                 {
                     DeactivateAbility();
-                    abilityActive = false;
                     abilityDurationTimer = 0f;
                 }
             }
@@ -184,6 +182,7 @@ public abstract class Ability : ScriptableObject
             binded = false;
         }
     }
+
     public void AddEnergy(float amount)
     {
         currentEnergy += amount;
@@ -218,8 +217,15 @@ public abstract class Ability : ScriptableObject
         }
     }
 
-    public abstract void TriggerAbility();
-    public abstract void DeactivateAbility();
+    public virtual void TriggerAbility()
+    {
+        abilityActive = true;
+    }
+
+    public virtual void DeactivateAbility()
+    {
+        abilityActive = false;
+    }
     #endregion
 
 
