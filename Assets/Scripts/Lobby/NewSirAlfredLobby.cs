@@ -112,17 +112,33 @@ public class NewSirAlfredLobby : MonoBehaviour
     {
         if (gameReadyToStart)
         {
+            bool humans = false;
             foreach (PlayerSettings player in players)
             {
-                if (player.player != null && player.player.GetButtonDown(RewiredConsts.Action.UISTART))
+                if (player.player != null)
                 {
-                    // TODO: Setup PlayerConfigs and load first Level
+                    humans = true;
+                    if (player.player.GetButtonDown(RewiredConsts.Action.UISTART))
+                    {
+                        // TODO: Setup PlayerConfigs and load first Level
+                        SetupPlayerConfigs();
+                        SceneManager.Instance.LoadNextLevel();
+
+                        Debug.LogAssertion("Game Started!");
+                    }
+                }
+            }
+            /* TODO: After AI-Rework, implement this to be able to Start a Game with nothing but AI
+            if (!humans)
+            {
+                if (InputHelper.GetButtonDown(RewiredConsts.Action.UISTART))
+                {
                     SetupPlayerConfigs();
                     SceneManager.Instance.LoadNextLevel();
 
                     Debug.LogAssertion("Game Started!");
                 }
-            }
+            }*/
         }
     }
     #endregion
@@ -333,6 +349,11 @@ public class NewSirAlfredLobby : MonoBehaviour
         RaisePlayerSelectedCharacter(availableCharacters);
     }
 
+    /// <summary>
+    /// Returns the Starting Color of the Given Character
+    /// </summary>
+    /// <param name="character">Character of which the Color is needed</param>
+    /// <returns></returns>
     public PlayerColor GetStartingColor(PlayerCharacter character)
     {
         switch (character)
@@ -366,7 +387,8 @@ public class NewSirAlfredLobby : MonoBehaviour
             if (players[i].readyToPlay)
                 playersReady++;
         }
-        if (playerCount == playersReady)
+        // TODO: After AI-Rework, delete playerCount != 0 Statement to be able to Start a Match with nothing but AI playing
+        if (playerCount != 0 && playerCount == playersReady)
         {
             gameReadyToStart = true;
             // TODO: Anzeige UI
