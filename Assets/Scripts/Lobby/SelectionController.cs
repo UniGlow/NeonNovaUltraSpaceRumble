@@ -40,6 +40,7 @@ public class SelectionController : MonoBehaviour
     [Header("References")]
     [SerializeField] Transform wheel = null;
     [SerializeField] List<Transform> heroModels = new List<Transform>();
+    [SerializeField] List<Transform> rotatingObjects = new List<Transform>();
 
     // Private
     bool listeningForPlayerInput = false;
@@ -337,10 +338,7 @@ public class SelectionController : MonoBehaviour
         {
             for (int i = 0; i < wheel.childCount; i++)
             {
-                foreach (Transform t in wheel.GetChild(i).GetComponentInChildren<Transform>(true))
-                {
-                    t.Rotate(new Vector3(0, rotationValue * rotationSpeed * Time.deltaTime, 0));
-                }
+                wheel.GetChild(i).Rotate(new Vector3(0, rotationValue * rotationSpeed * Time.deltaTime, 0));
             }
             autoRotatingCountdown = timeUntilAutoRotate;
         }
@@ -348,12 +346,9 @@ public class SelectionController : MonoBehaviour
         {
             if (autoRotatingCountdown <= 0)
             {
-                for (int i = 0; i < wheel.childCount; i++)
+                foreach (Transform transform in rotatingObjects)
                 {
-                    foreach (Transform t in wheel.GetChild(i).GetComponentInChildren<Transform>(true))
-                    {
-                        t.Rotate(new Vector3(0, 1f * autoRotationSpeed * Time.deltaTime, 0));
-                    }
+                    transform.Rotate(new Vector3(0, 1f * autoRotationSpeed * Time.deltaTime, 0));
                 }
             }
             else
