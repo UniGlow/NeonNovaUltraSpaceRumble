@@ -116,6 +116,7 @@ public class GameEventListenerEditor : Editor
                         new Rect(rect.x + rect.width / 2, rect.y, rect.width / 2, EditorGUIUtility.singleLineHeight),
                         script.linkedMethods[index].chosenID, popupOptions);
                     // This Line is needed for Unity Versions older then 2019
+                    //if(UnityEditor.Experimental.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage() == null)
                     //EditorUtility.SetDirty(script);
                     
                     script.linkedMethods[index].gameObject = component.gameObject;
