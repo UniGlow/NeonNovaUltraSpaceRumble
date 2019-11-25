@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4337183692543796}
   - component: {fileID: 114097331483697454}
   m_Layer: 0
-  m_Name: _PERSISTENT_SCRIPTS
+  m_Name: PERSISTENT_SCRIPTS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -539,8 +539,8 @@ MonoBehaviour:
     sceneAsset: {fileID: 102900000, guid: ea52997c431bf204f882253cfe60c29d, type: 3}
     scenePath: Assets/Scenes/MainMenu.unity
   lobby:
-    sceneAsset: {fileID: 102900000, guid: 409fc4bbec8102043aa9759a56f2fa4f, type: 3}
-    scenePath: Assets/Scenes/LobbyLevel.unity
+    sceneAsset: {fileID: 102900000, guid: d10d7da2b4177ba47b94633deb92069e, type: 3}
+    scenePath: Assets/Scenes/Lobby.unity
   credits:
     sceneAsset: {fileID: 102900000, guid: cf8d9fb94f1d7104c8ac2db690fa42ff, type: 3}
     scenePath: Assets/Scenes/CreditScene.unity
@@ -554,8 +554,8 @@ MonoBehaviour:
     sceneAsset: {fileID: 102900000, guid: fdd8b6d462605b0439d91bf7382d1c18, type: 3}
     scenePath: Assets/Scenes/UILevel.unity
   uiLobby:
-    sceneAsset: {fileID: 102900000, guid: 26ddaa2e2b9eb2f47a441d2053afa0db, type: 3}
-    scenePath: Assets/Scenes/UILobby.unity
+    sceneAsset: {fileID: 102900000, guid: 76ad05bca7494984582b8d71bdf1a217, type: 3}
+    scenePath: Assets/Scenes/UINewLobby.unity
   uiCredits:
     sceneAsset: {fileID: 102900000, guid: 7933299e2ef63134581d1c40c5075fa5, type: 3}
     scenePath: Assets/Scenes/UICredits.unity
