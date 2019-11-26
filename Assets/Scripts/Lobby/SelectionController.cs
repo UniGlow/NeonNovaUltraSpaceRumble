@@ -85,11 +85,20 @@ public class SelectionController : MonoBehaviour
 
 
     #region Public Functions
+    /// <summary>
+    /// This will take the given Bool-Array to Check if this Panel should Listen for Inputs of new Players/Controllers
+    /// </summary>
+    /// <param name="playerListeningForInput">An Array of Bools that represent the 4 Panels and their Listening-State through their Position inside the Array</param>
     public void ListeningForInputsChanged(bool[] playerListeningForInput)
     {
         listeningForPlayerInput = playerListeningForInput[panelNumber - 1];
     }
 
+    /// <summary>
+    /// This will change the Material (and therefore the Color) of all Hero-Meshes linked to this Panel to the given PlayerColor.
+    /// </summary>
+    /// <param name="panelNumber">The PanelNumber this Action is aimed at.</param>
+    /// <param name="newColor">The PlayerColor to be changed to.</param>
     public void UpdateModelColor(int panelNumber, PlayerColor newColor)
     {
         if (panelNumber == this.panelNumber)
@@ -102,6 +111,12 @@ public class SelectionController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// This is used to block a Color from being used by other Players. If the given Color is Selected by this Panel, it will automaticly
+    /// select a new one so the blocked Color can be removed savely from the availablility-List of Alfred
+    /// </summary>
+    /// <param name="panelNumber">The Panel/Player that has chosen the Color (this will avoid that that Players Color will also change)</param>
+    /// <param name="colorNotToUse">The Selected Color to be blocked for all other Players</param>
     public void UpdateColorSelection(int panelNumber, PlayerColor colorNotToUse)
     {
         if(panelNumber != this.panelNumber && colorNotToUse != null && colorNotToUse == activeColor)
@@ -111,6 +126,10 @@ public class SelectionController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Saves the List of availableCharacters the Player can choose from.
+    /// </summary>
+    /// <param name="availableCharacters">List of available Characters</param>
     public void UpdateAvailableCharacters(List<NewSirAlfredLobby.PlayerCharacter> availableCharacters)
     {
         this.availableCharacters = availableCharacters;
@@ -120,6 +139,9 @@ public class SelectionController : MonoBehaviour
 
 
     #region Private Functions
+    /// <summary>
+    /// This Manages all A and B Inputs of that Player, including the Join and Leave Commands
+    /// </summary>
     void ManageReadyInputs()
     {
         bool playerPressedButton = false;
@@ -265,6 +287,9 @@ public class SelectionController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// This Manages all Left and Right Inputs of that Player to change Selections in the Lobby
+    /// </summary>
     void ManageSelection()
     {
         if(player.GetAxis(RewiredConsts.Action.UIHORIZONTAL) > 0)
@@ -331,6 +356,9 @@ public class SelectionController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// This Manages the Rotation of the PlayerCharacter
+    /// </summary>
     void ManageCharacterRotation()
     {
         float rotationValue = player.GetAxis(RewiredConsts.Action.UIROTATEHORIZONTAL);

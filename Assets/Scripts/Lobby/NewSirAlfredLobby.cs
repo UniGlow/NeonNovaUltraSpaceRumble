@@ -99,6 +99,7 @@ public class NewSirAlfredLobby : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1;
         InputHelper.ChangeRuleSetForAllPlayers(RewiredConsts.LayoutManagerRuleSet.RULESETLOBBY);
         RaiseSlotsListeningForInputs(MakeListeningForInputArray(true));
         foreach(PlayerColor pc in availableColors.PlayerColors)

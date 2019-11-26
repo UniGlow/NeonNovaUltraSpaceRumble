@@ -176,6 +176,10 @@ public class SelectionUI : MonoBehaviour
 	
 	
 	#region Private Functions
+    /// <summary>
+    /// This will fill the Top Panel with all selectable Items such as Colors etc.
+    /// </summary>
+    /// <param name="forStep">The Lobby State for which to fill the Top Panel (contextual)</param>
 	void FillTopPanel(SelectionController.Step forStep)
     {
         // TODO: Step for AbilitySelection once that is implemented
@@ -202,31 +206,38 @@ public class SelectionUI : MonoBehaviour
         }));
     }
 
+    /// <summary>
+    /// Updates the Top Panel to Account for Changes in Availablility of selectable Items.
+    /// </summary>
     void UpdateTopPanel()
     {
-        List<PlayerColor> tempColors = NewSirAlfredLobby.Instance.AvailableColors;
         bool somethingChanged = false;
-        foreach(PlayerColor pc in tempColors)
-        {
-            if (!playerColors.Contains(pc))
-            {
-                playerColors.Add(pc);
-                GameObject toAdd = Instantiate(topPanelSelectablePrefab, topPanel.transform);
-                toAdd.GetComponent<Image>().color = pc.uiElementColor;
-                topPanelSelectables.Add(toAdd);
-                somethingChanged = true;
-            }
-        }
-        for(int i = playerColors.Count - 1; i >= 0; i--)
-        {
-            if (!tempColors.Contains(playerColors[i]))
-            {
-                GameObject toDestroy = topPanelSelectables[playerColors.IndexOf(playerColors[i])];
-                Destroy(toDestroy);
-                topPanelSelectables.Remove(toDestroy);
-                playerColors.Remove(playerColors[i]);
-                somethingChanged = true;
-            }
+        switch (activeStep) {
+            case SelectionController.Step.ColorSelection:
+                List<PlayerColor> tempColors = NewSirAlfredLobby.Instance.AvailableColors;
+                foreach (PlayerColor pc in tempColors)
+                {
+                    if (!playerColors.Contains(pc))
+                    {
+                        playerColors.Add(pc);
+                        GameObject toAdd = Instantiate(topPanelSelectablePrefab, topPanel.transform);
+                        toAdd.GetComponent<Image>().color = pc.uiElementColor;
+                        topPanelSelectables.Add(toAdd);
+                        somethingChanged = true;
+                    }
+                }
+                for (int i = playerColors.Count - 1; i >= 0; i--)
+                {
+                    if (!tempColors.Contains(playerColors[i]))
+                    {
+                        GameObject toDestroy = topPanelSelectables[playerColors.IndexOf(playerColors[i])];
+                        Destroy(toDestroy);
+                        topPanelSelectables.Remove(toDestroy);
+                        playerColors.Remove(playerColors[i]);
+                        somethingChanged = true;
+                    }
+                }
+                break;
         }
         if (somethingChanged)
         {
@@ -239,12 +250,17 @@ public class SelectionUI : MonoBehaviour
         }
     }
 
-    void PlaceSelectionMarker(int position, bool animated = false)
+    /// <summary>
+    /// Places the SelectionMarker at the Position of the given Item-Number inside the Top Panel
+    /// </summary>
+    /// <param name="itemNumber">Number (or Position) of the Item to Select (beginning at 0)</param>
+    /// <param name="animated"></param>
+    void PlaceSelectionMarker(int itemNumber, bool animated = false)
     {
         if (!animated)
         {
             // Set Selection Marker to Position of first Object
-            selectionMarker.DOMove(topPanelSelectables[position].transform.position, 0.001f).OnComplete(()=> {
+            selectionMarker.DOMove(topPanelSelectables[itemNumber].transform.position, 0.001f).OnComplete(()=> {
                 selectionMarker.gameObject.SetActive(true);
             });
 
@@ -254,11 +270,14 @@ public class SelectionUI : MonoBehaviour
             // Set Selection Marker to its new Target, Take Position from Selectable List (Animated)
             StartCoroutine(InvokeOneFrameLater(() =>
             {
-                selectionMarker.DOMove(topPanelSelectables[position].transform.position, 0.25f).SetEase(Ease.InOutCubic);
+                selectionMarker.DOMove(topPanelSelectables[itemNumber].transform.position, 0.25f).SetEase(Ease.InOutCubic);
             }));
         }
     }
 
+    /// <summary>
+    /// Deletes all entries for Selectable Items in the Top Panel
+    /// </summary>
     void ClearTopPanel()
     {
         foreach(GameObject go in topPanelSelectables)
@@ -268,6 +287,11 @@ public class SelectionUI : MonoBehaviour
         topPanelSelectables.Clear();
     }
 
+    /// <summary>
+    /// Makes a deep copy of the given List of PlayerColors and returns it
+    /// </summary>
+    /// <param name="listToCopy">List to Copy</param>
+    /// <returns>Deep Copy of the given List</returns>
     List<PlayerColor> CopyColorList(List<PlayerColor> listToCopy)
     {
         List<PlayerColor> list = new List<PlayerColor>();
@@ -288,6 +312,11 @@ public class SelectionUI : MonoBehaviour
 	
 	
 	#region Coroutines
+    /// <summary>
+    /// Invokes the given Action one Frame later
+    /// </summary>
+    /// <param name="action">Action to Invoke</param>
+    /// <returns>Nothing</returns>
 	IEnumerator InvokeOneFrameLater(System.Action action)
     {
         yield return null;
