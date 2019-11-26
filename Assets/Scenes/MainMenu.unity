@@ -2173,9 +2173,9 @@ MonoBehaviour:
   m_CancelButton: UICancel
   m_InputActionsPerSecond: 4.5
   m_RepeatDelay: 0
-  m_allowMouseInput: 1
-  m_allowMouseInputIfTouchSupported: 1
-  m_allowTouchInput: 1
+  m_allowMouseInput: 0
+  m_allowMouseInputIfTouchSupported: 0
+  m_allowTouchInput: 0
   m_deselectIfBackgroundClicked: 1
   m_deselectBeforeSelecting: 1
   m_ForceModuleActive: 0
@@ -2611,6 +2611,21 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5876816614994923960, guid: e236933714a8bb8488392190b1eccff7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 345255119}
+    - target: {fileID: 5876816614994923960, guid: e236933714a8bb8488392190b1eccff7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1041059724}
+    - target: {fileID: 5876816614994923960, guid: e236933714a8bb8488392190b1eccff7,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 903229914}
     - target: {fileID: 5876816614934002295, guid: e236933714a8bb8488392190b1eccff7,
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -2631,20 +2646,5 @@ PrefabInstance:
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1041059724}
-    - target: {fileID: 5876816614994923960, guid: e236933714a8bb8488392190b1eccff7,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 345255119}
-    - target: {fileID: 5876816614994923960, guid: e236933714a8bb8488392190b1eccff7,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 1041059724}
-    - target: {fileID: 5876816614994923960, guid: e236933714a8bb8488392190b1eccff7,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 903229914}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e236933714a8bb8488392190b1eccff7, type: 3}
