@@ -73,6 +73,10 @@ public class NewSirAlfredLobby : MonoBehaviour
     [SerializeField] PlayerColor damageHeroColor = null;
     [SerializeField] PlayerColor tankHeroColor = null;
     [SerializeField] PlayerColor runnerHeroColor = null;
+
+    [Header("General Settings")]
+    [Tooltip("Determines how long a Player has to hold B to return to the Main Menu")]
+    [SerializeField] float abortPressDuration = 1.5f;
     // Private
     // Player Settings for PlayerConfigs
     PlayerSettings[] players = new PlayerSettings[4] { new PlayerSettings(), new PlayerSettings(), new PlayerSettings(), new PlayerSettings() };
@@ -81,6 +85,7 @@ public class NewSirAlfredLobby : MonoBehaviour
     List<PlayerColor> availablePlayerColors = new List<PlayerColor>();
     PlayerCharacter[] lastPlayerCharacters = new PlayerCharacter[4] { PlayerCharacter.Empty, PlayerCharacter.Empty, PlayerCharacter.Empty, PlayerCharacter.Empty };
     bool gameReadyToStart = false;
+    float abortTimer = 0f;
     #endregion
 
 
@@ -111,6 +116,18 @@ public class NewSirAlfredLobby : MonoBehaviour
 
     private void Update()
     {
+        if (InputHelper.GetButton(RewiredConsts.Action.UICANCEL))
+        {
+            abortTimer += Time.deltaTime;
+        }
+        else
+        {
+            abortTimer = 0f;
+        }
+        if (abortTimer > abortPressDuration)
+        {
+            SceneManager.Instance.LoadMainMenu();
+        }
         if (gameReadyToStart)
         {
             bool humans = false;

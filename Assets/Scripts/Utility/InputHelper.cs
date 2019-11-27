@@ -115,6 +115,24 @@ public static class InputHelper
     }
 
     /// <summary>
+    /// Returns input for the defined action from all players.
+    /// Will return true as long as any Player keeps holding that action.
+    /// </summary>
+    /// <param name="actionID">The action identifier.</param>
+    /// <returns>True if any player pressed or holds the specified button.</returns>
+    public static bool GetButton(int actionID)
+    {
+        bool buttonPressed = false;
+
+        foreach(Player player in ReInput.players.Players)
+        {
+            if (player.GetButton(actionID)) buttonPressed = true;
+        }
+
+        return buttonPressed;
+    }
+
+    /// <summary>
     /// Gets any button down from all players.
     /// </summary>
     /// <returns>True if any player pressed any button.</returns>
