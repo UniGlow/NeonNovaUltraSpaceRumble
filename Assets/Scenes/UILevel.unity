@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -701,6 +701,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1680910192414098, guid: ea5a8526cdd9ce240ac7f1be6485565a, type: 3}
+      propertyPath: m_Name
+      value: PauseMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 224640612034935892, guid: ea5a8526cdd9ce240ac7f1be6485565a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -740,6 +744,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224640612034935892, guid: ea5a8526cdd9ce240ac7f1be6485565a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224640612034935892, guid: ea5a8526cdd9ce240ac7f1be6485565a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224640612034935892, guid: ea5a8526cdd9ce240ac7f1be6485565a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224640612034935892, guid: ea5a8526cdd9ce240ac7f1be6485565a,
         type: 3}
@@ -791,31 +810,5 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114738683751226938, guid: ea5a8526cdd9ce240ac7f1be6485565a,
-        type: 3}
-      propertyPath: gamePausedEvent
-      value: 
-      objectReference: {fileID: 11400000, guid: 1ea968f9ad57732498b111a663021061,
-        type: 2}
-    - target: {fileID: 114738683751226938, guid: ea5a8526cdd9ce240ac7f1be6485565a,
-        type: 3}
-      propertyPath: gameResumedEvent
-      value: 
-      objectReference: {fileID: 11400000, guid: cfef13325ec1499459137fbb9b3d8888,
-        type: 2}
-    m_RemovedComponents:
-    - {fileID: 114904102081721278, guid: ea5a8526cdd9ce240ac7f1be6485565a, type: 3}
-    - {fileID: 114460706266004910, guid: ea5a8526cdd9ce240ac7f1be6485565a, type: 3}
-    - {fileID: 114933783878037974, guid: ea5a8526cdd9ce240ac7f1be6485565a, type: 3}
-    - {fileID: 114703263882124734, guid: ea5a8526cdd9ce240ac7f1be6485565a, type: 3}
-    - {fileID: 114304015120178914, guid: ea5a8526cdd9ce240ac7f1be6485565a, type: 3}
-    - {fileID: 114450661466022496, guid: ea5a8526cdd9ce240ac7f1be6485565a, type: 3}
-    - {fileID: 114049235920513094, guid: ea5a8526cdd9ce240ac7f1be6485565a, type: 3}
-    - {fileID: 114909010827604486, guid: ea5a8526cdd9ce240ac7f1be6485565a, type: 3}
-    - {fileID: 114508928176953732, guid: ea5a8526cdd9ce240ac7f1be6485565a, type: 3}
-    - {fileID: 114848201159524766, guid: ea5a8526cdd9ce240ac7f1be6485565a, type: 3}
-    - {fileID: 114348011856205900, guid: ea5a8526cdd9ce240ac7f1be6485565a, type: 3}
-    - {fileID: 114302007894314602, guid: ea5a8526cdd9ce240ac7f1be6485565a, type: 3}
-    - {fileID: 114173212574701932, guid: ea5a8526cdd9ce240ac7f1be6485565a, type: 3}
-    - {fileID: 114016534281950738, guid: ea5a8526cdd9ce240ac7f1be6485565a, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea5a8526cdd9ce240ac7f1be6485565a, type: 3}

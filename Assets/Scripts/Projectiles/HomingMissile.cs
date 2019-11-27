@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 /// <summary>
-/// 
+///
 /// </summary>
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(AudioSource))]
@@ -17,7 +17,7 @@ public class HomingMissile : MonoBehaviour
         public float timeStamp = 0f;
     }
 
-     
+
 
 
     #region Variable Declarations
@@ -61,6 +61,7 @@ public class HomingMissile : MonoBehaviour
     NavMeshAgent agent;
     AudioSource audioSource;
     bool agentPaused = true;
+    bool gameStarted = false;
     List<HitDetails> recentHits = new List<HitDetails>();
     #endregion
 
@@ -83,7 +84,7 @@ public class HomingMissile : MonoBehaviour
     {
         if (fixedTarget) target = fixedTarget;
     }
-    
+
     private void OnTriggerEnter(Collider other)
     {
         Character character = other.GetComponentInParent<Character>();
@@ -134,8 +135,8 @@ public class HomingMissile : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (agentPaused) return;
-
+        if (agentPaused && !gameStarted) return;
+        
         if (target == null)
         {
             Debug.LogError("Homing Missile has no target set", this);
@@ -168,6 +169,12 @@ public class HomingMissile : MonoBehaviour
     {
         agent.isStopped = pause;
         agentPaused = pause;
+    }
+
+    public void StartGame(bool started)
+    {
+        agent.isStopped = !started;
+        gameStarted = started;
     }
     #endregion
 

@@ -170,8 +170,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8780d562c5219184fa5a0394bef594ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textMesh: {fileID: 6848588771876031694}
   maxAlpha: 0.8
   minAlpha: 0.3
+  rectTransform: {fileID: 6402401505913493146}
   scaleTo: 1.1
   duration: 1.7
 --- !u!1 &1589533912308682816
@@ -434,7 +436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: 411ed047da69e7547a044f8588816b4f, type: 2}
+  gameEvent: {fileID: 0}
   response:
     m_PersistentCalls:
       m_Calls: []
@@ -618,8 +620,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8780d562c5219184fa5a0394bef594ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textMesh: {fileID: 4353236740634278033}
   maxAlpha: 0.8
   minAlpha: 0.3
+  rectTransform: {fileID: 6734228749842437192}
   scaleTo: 1.1
   duration: 1.7
 --- !u!1 &4204766136212418364
@@ -1232,8 +1236,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8780d562c5219184fa5a0394bef594ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textMesh: {fileID: 84112583824446200}
   maxAlpha: 0.8
   minAlpha: 0.3
+  rectTransform: {fileID: 7063382303371883068}
   scaleTo: 1.1
   duration: 1.7
 --- !u!1 &8547765367159984949
@@ -1563,8 +1569,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8780d562c5219184fa5a0394bef594ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textMesh: {fileID: 8716607925712773649}
   maxAlpha: 0.8
   minAlpha: 0.3
+  rectTransform: {fileID: 51853961778182892}
   scaleTo: 1.1
   duration: 1.7
 --- !u!1 &8724796075744211093

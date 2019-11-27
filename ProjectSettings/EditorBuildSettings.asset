@@ -44,4 +44,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/UILobby.unity
     guid: 26ddaa2e2b9eb2f47a441d2053afa0db
+  - enabled: 1
+    path: Assets/Scenes/Lobby.unity
+    guid: d10d7da2b4177ba47b94633deb92069e
+  - enabled: 1
+    path: Assets/Scenes/UINewLobby.unity
+    guid: 76ad05bca7494984582b8d71bdf1a217
   m_configObjects: {}
