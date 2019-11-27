@@ -31,6 +31,11 @@ public class SelectionController : MonoBehaviour
     [SerializeField] float timeUntilAutoRotate = 5f;
     [SerializeField] float autoRotationSpeed = 40f;
 
+    [Header("Sound")]
+    [SerializeField] AudioClip selectionChange = null;
+    [Range(0, 1)]
+    [SerializeField] float selectionChangeVolume = 1f;
+
     [Header("Game Events")]
     [SerializeField] GameEvent playerChangedStepEvent = null;
     [SerializeField] GameEvent playerChangedColor = null;
@@ -155,6 +160,7 @@ public class SelectionController : MonoBehaviour
                 NewSirAlfredLobby.Instance.SetPlayer(panelNumber, tempPlayer);
                 activeStep = Step.CharacterSelection;
                 RaisePlayerChangedStep(panelNumber, activeStep);
+                AudioManager.Instance.PlayMenuConfirm();
             }
         }
         else if(player != null)
@@ -163,6 +169,7 @@ public class SelectionController : MonoBehaviour
             if (player.GetButtonDown(RewiredConsts.Action.UICANCEL))
             {
                 playerPressedButton = true;
+                AudioManager.Instance.PlayMenuCancel();
                 switch (activeStep)
                 {
                     case Step.Offline:
@@ -219,6 +226,7 @@ public class SelectionController : MonoBehaviour
             // Player Pressed A
             else if(player.GetButtonDown(RewiredConsts.Action.UISUBMIT))
             {
+                AudioManager.Instance.PlayMenuConfirm();
                 playerPressedButton = true;
                 switch (activeStep)
                 {
@@ -309,6 +317,7 @@ public class SelectionController : MonoBehaviour
                         inputsLocked = false;
                     });
                     RaiseDirectionTriggeredLobby(panelNumber, Direction.Right);
+                    AudioManager.Instance.PlayClip(selectionChange, selectionChangeVolume);
                     break;
                 case Step.ColorSelection:
                     if (changeTimer == 0f)
@@ -321,6 +330,7 @@ public class SelectionController : MonoBehaviour
                         }
                         changeTimer += Time.deltaTime;
                         RaiseDirectionTriggeredLobby(panelNumber, Direction.Right);
+                        AudioManager.Instance.PlayClip(selectionChange, selectionChangeVolume);
                     }
                     break;
             }
@@ -340,6 +350,7 @@ public class SelectionController : MonoBehaviour
                         inputsLocked = false;
                     });
                     RaiseDirectionTriggeredLobby(panelNumber, Direction.Left);
+                    AudioManager.Instance.PlayClip(selectionChange, selectionChangeVolume);
                     break;
                 case Step.ColorSelection:
                     if (changeTimer == 0f)
@@ -352,6 +363,7 @@ public class SelectionController : MonoBehaviour
                         }
                         changeTimer += Time.deltaTime;
                         RaiseDirectionTriggeredLobby(panelNumber, Direction.Left);
+                        AudioManager.Instance.PlayClip(selectionChange, selectionChangeVolume);
                     }
                     break;
             }

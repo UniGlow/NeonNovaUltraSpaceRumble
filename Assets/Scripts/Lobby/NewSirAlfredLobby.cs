@@ -113,6 +113,8 @@ public class NewSirAlfredLobby : MonoBehaviour
             availablePlayerColors.Add(pc);
         }
         UpdateAvailableCharacters(PlayerCharacter.Empty);
+
+        AudioManager.Instance.StartTutorialTrack();
     }
 
     private void Update()

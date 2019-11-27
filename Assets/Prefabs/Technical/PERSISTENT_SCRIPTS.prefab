@@ -288,6 +288,10 @@ MonoBehaviour:
   heroesWinSoundVolume: 0.8
   slowMotion: {fileID: 8300000, guid: 7bda31c0a8619e744b2f2e21769e926b, type: 3}
   slowMotionSoundVolume: 1
+  menuConfirm: {fileID: 8300000, guid: c23fc62dc0e0a9145b3197a0ac5a23a1, type: 3}
+  menuConfirmVolume: 1
+  menuCancel: {fileID: 8300000, guid: d20f9ee72a5f18544973517bd47c9952, type: 3}
+  menuCancelVolume: 1
   audioSourceMusic: {fileID: 82989341837034522}
   audioSourceSFX: {fileID: 82203532128439068}
   songChangedEvent: {fileID: 11400000, guid: f6d8145741eb62847bd38ea32a89ef08, type: 2}

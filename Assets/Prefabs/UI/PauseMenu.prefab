@@ -1707,11 +1707,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 224128132133039138}
     m_Modifications:
-    - target: {fileID: 5876816616218716150, guid: e236933714a8bb8488392190b1eccff7,
-        type: 3}
-      propertyPath: m_Name
-      value: OptionsMenu
-      objectReference: {fileID: 0}
     - target: {fileID: 5876816616218716153, guid: e236933714a8bb8488392190b1eccff7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1817,6 +1812,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5876816616218716150, guid: e236933714a8bb8488392190b1eccff7,
+        type: 3}
+      propertyPath: m_Name
+      value: OptionsMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 5876816614994923960, guid: e236933714a8bb8488392190b1eccff7,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1880,6 +1880,11 @@ PrefabInstance:
     - target: {fileID: 5876816616688051532, guid: e236933714a8bb8488392190b1eccff7,
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 114552871420631092}
+    - target: {fileID: 5876816615699373331, guid: e236933714a8bb8488392190b1eccff7,
+        type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 114552871420631092}
     m_RemovedComponents: []

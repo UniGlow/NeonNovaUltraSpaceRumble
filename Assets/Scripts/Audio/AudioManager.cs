@@ -31,6 +31,12 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioClip slowMotion = null;
     [Range(0, 1)]
     [SerializeField] float slowMotionSoundVolume = 1f;
+    [SerializeField] AudioClip menuConfirm = null;
+    [Range(0, 1)]
+    [SerializeField] float menuConfirmVolume = 1f;
+    [SerializeField] AudioClip menuCancel = null;
+    [Range(0, 1)]
+    [SerializeField] float menuCancelVolume = 1f;
 
     [Header("References")]
     [SerializeField] AudioSource audioSourceMusic = null;
@@ -169,6 +175,16 @@ public class AudioManager : MonoBehaviour
         {
             if (onComplete != null) onComplete.Invoke();
         });
+    }
+
+    public void PlayMenuConfirm()
+    {
+        audioSourceSFX.PlayOneShot(menuConfirm, menuConfirmVolume);
+    }
+
+    public void PlayMenuCancel()
+    {
+        audioSourceSFX.PlayOneShot(menuCancel, menuCancelVolume);
     }
     #endregion
 
