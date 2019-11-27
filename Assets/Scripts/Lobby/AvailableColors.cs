@@ -12,7 +12,7 @@ public class AvailableColors : ScriptableObject
     #region Variable Declarations
     // Serialized Fields
     [SerializeField]
-    private List<PlayerColor> playerColors;
+    private List<PlayerColor> playerColors = new List<PlayerColor>();
 	// Private
 	
 	#endregion
