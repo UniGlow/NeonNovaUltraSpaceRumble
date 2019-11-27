@@ -57,10 +57,6 @@ public class SelectionUI : MonoBehaviour
     /// <param name="nextStep">The Lobby State that got entered by the Player</param>
 	public void StepChanged(int panelNumber, SelectionController.Step nextStep)
     {
-        if(activeStep == SelectionController.Step.ColorSelection)
-        {
-            UpdateTopPanel();
-        }
         if (this.panelNumber == panelNumber)
         {
             if(nextStep != SelectionController.Step.ColorSelection)
@@ -103,10 +99,17 @@ public class SelectionUI : MonoBehaviour
                 case SelectionController.Step.ReadyToPlay:
                     leftArrow.gameObject.SetActive(false);
                     rightArrow.gameObject.SetActive(false);
-                    topPanel.SetActive(false);
+                    StartCoroutine(InvokeOneFrameLater(() =>
+                    {
+                        topPanel.SetActive(false);
+                    }, 0.05f));
                     selectionMarker.gameObject.SetActive(false);
                     break;
             }
+        }
+        if (activeStep == SelectionController.Step.ColorSelection)
+        {
+            UpdateTopPanel();
         }
     }
 
@@ -241,6 +244,7 @@ public class SelectionUI : MonoBehaviour
         }
         if (somethingChanged)
         {
+            Debug.Log("Active Step: " + activeStep.ToString());
             // Set Selection Marker to size of Top Panel Selectables (takes 2x Height of a TopPanelSelectable to fit the Aspect Radio of Selection Marker)
             StartCoroutine(InvokeOneFrameLater(()=>
             {
@@ -317,9 +321,12 @@ public class SelectionUI : MonoBehaviour
     /// </summary>
     /// <param name="action">Action to Invoke</param>
     /// <returns>Nothing</returns>
-	IEnumerator InvokeOneFrameLater(System.Action action)
+	IEnumerator InvokeOneFrameLater(System.Action action, float delay = 0f)
     {
-        yield return null;
+        if (delay == 0f)
+            yield return null;
+        else
+            yield return new WaitForSecondsRealtime(delay);
         action.Invoke();
     }
 	#endregion

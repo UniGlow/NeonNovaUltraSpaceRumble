@@ -199,6 +199,7 @@ public class SelectionController : MonoBehaviour
                         {
                             RaisePlayerChangedStep(panelNumber, Step.CharacterSelection);
                             activeStep = Step.CharacterSelection;
+                            NewSirAlfredLobby.Instance.UpdateAvailableCharacters(NewSirAlfredLobby.PlayerCharacter.Empty, panelNumber);
                         }
                         else
                         {
@@ -209,7 +210,6 @@ public class SelectionController : MonoBehaviour
                         }
                         // But don't delete this
                         NewSirAlfredLobby.Instance.SetReadyToPlay(panelNumber, false);
-                        NewSirAlfredLobby.Instance.UpdateAvailableCharacters(NewSirAlfredLobby.PlayerCharacter.Empty, panelNumber);
                         break;
                     default:
                         Debug.LogWarning("Something went wrong here! Eather a new Step didn't get implemented or some Error accured!");
@@ -274,9 +274,11 @@ public class SelectionController : MonoBehaviour
                 case Step.CharacterSelection:
                     // TODO: GetNextAvailableCharacter
                     if (selectedCharacter == NewSirAlfredLobby.PlayerCharacter.Empty) selectedCharacter = NewSirAlfredLobby.PlayerCharacter.Boss;
+                    if (selectedCharacter != NewSirAlfredLobby.PlayerCharacter.Boss)
+                        NewSirAlfredLobby.Instance.UpdateAvailableCharacters(NewSirAlfredLobby.PlayerCharacter.Empty, panelNumber);
                     break;
                 case Step.ColorSelection:
-                    if (activeColor == null && selectedCharacter != NewSirAlfredLobby.PlayerCharacter.Boss)
+                    if (activeColor == null)
                         activeColor = NewSirAlfredLobby.Instance.GetStartingColor(selectedCharacter);
                     RaisePlayerChangedColor(panelNumber, activeColor);
                     break;

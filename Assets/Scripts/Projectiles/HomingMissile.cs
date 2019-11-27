@@ -42,7 +42,8 @@ public class HomingMissile : MonoBehaviour
     Transform target;
     NavMeshAgent agent;
     AudioSource audioSource;
-    bool agentPaused = true;
+    bool agentPaused = false;
+    bool gameStarted = false;
 	#endregion
 	
 	
@@ -86,7 +87,7 @@ public class HomingMissile : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!agentPaused)
+        if (gameStarted && !agentPaused)
         {
             if (target == null)
             {
@@ -120,6 +121,12 @@ public class HomingMissile : MonoBehaviour
     {
         agent.isStopped = pause;
         agentPaused = pause;
+    }
+
+    public void StartGame(bool started)
+    {
+        agent.isStopped = !started;
+        gameStarted = started;
     }
     #endregion
 }
