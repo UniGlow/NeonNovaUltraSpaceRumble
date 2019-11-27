@@ -14444,7 +14444,8 @@ GameObject:
   - component: {fileID: 4041770346198284}
   - component: {fileID: 33170228428681286}
   - component: {fileID: 23009700766749820}
-  - component: {fileID: 135035528115435666}
+  - component: {fileID: 4262755773136910779}
+  - component: {fileID: 5024024949774975253}
   m_Layer: 10
   m_Name: Shield
   m_TagString: Shield
@@ -14459,13 +14460,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1521786441716086}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4.2999997, y: 4.2999997, z: 4.2999997}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.88, z: 2.79}
+  m_LocalScale: {x: 21.167427, y: 10.910892, z: 82.13114}
   m_Children: []
   m_Father: {fileID: 4351300061492424}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &33170228428681286
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -14473,7 +14474,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1521786441716086}
-  m_Mesh: {fileID: 4300000, guid: 69d53cd0ba6cc194f96dcd3cdb4363e6, type: 3}
+  m_Mesh: {fileID: 4300000, guid: bba51838468aa304fa86b119f91512c4, type: 3}
 --- !u!23 &23009700766749820
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -14491,7 +14492,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c84ac1492a4bccd45951945f7eb61535, type: 2}
+  - {fileID: 2100000, guid: 06eff9b6eb0fc9444a91ef5f29d6e0d0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14511,19 +14512,36 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &135035528115435666
-SphereCollider:
+--- !u!64 &4262755773136910779
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1521786441716086}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c9069a65ae7de0a4fbd1ad365aba320f, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.18
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300000, guid: bba51838468aa304fa86b119f91512c4, type: 3}
+--- !u!208 &5024024949774975253
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521786441716086}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.125, y: 0.063, z: 0.010000001}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 0
+  m_Center: {x: 0, y: 0.053000003, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &1742559250600126
 GameObject:
   m_ObjectHideFlags: 0
@@ -14538,6 +14556,7 @@ GameObject:
   - component: {fileID: 114644863178948232}
   - component: {fileID: 82443329634492120}
   - component: {fileID: 114229208092135222}
+  - component: {fileID: 6902143605961225207}
   - component: {fileID: 114461749476498428}
   - component: {fileID: 114207285056760470}
   m_Layer: 8
@@ -14596,7 +14615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterStats: {fileID: 11400000, guid: ea1e0b8a36897574284478c2e13ef73f, type: 2}
-  wobbleBobble: {fileID: 1521786441716086}
+  shield: {fileID: 1521786441716086}
   cooldownIndicator: {fileID: 114155210415509488}
   playerMesh: {fileID: 33291095836504256}
 --- !u!114 &114644863178948232
@@ -14616,6 +14635,11 @@ MonoBehaviour:
   transmissionCooldown: 0
   transmissionSound: {fileID: 8300000, guid: 99a9562a9c5874546a152e7ded477cb5, type: 3}
   transmissionSoundVolume: 1
+  rumbleStrengthInRangeDeep: 0
+  rumbleStrengthInRangeHigh: 0.25
+  rumbleStrengthOnSwitchDeep: 0.1
+  rumbleStrengthOnSwitchHigh: 0.7
+  rumbleDurationOnSwitch: 0.2
   inRangeColorMultiplier: 1.3
   switchColorMultiplier: 1.8
   blinkDuration: 0.23
@@ -14756,6 +14780,37 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 114360600958716434}
         m_MethodName: SetMovable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  linkedMethods: []
+  ignoreEventParameters: 1
+--- !u!114 &6902143605961225207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1742559250600126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: dd95ddef2760add43a73ce45d743f5e5, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114360600958716434}
+        m_MethodName: ResetCooldowns
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

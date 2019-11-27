@@ -13,7 +13,7 @@ public class Hero : Character
     #region Variable Declarations
     // Variables that should be visible in Inspector
     [Header("References")]
-    [SerializeField] protected GameObject wobbleBobble;
+    [SerializeField] protected GameObject shield;
     [SerializeField] protected Image cooldownIndicator;
     [SerializeField] protected MeshFilter playerMesh;
     #endregion
@@ -21,7 +21,7 @@ public class Hero : Character
 
 
     #region Public Properties
-    public GameObject WobbleBobble { get { return wobbleBobble; } }
+    public GameObject Shield { get { return shield; } }
     public Image CooldownIndicator { get { return cooldownIndicator; } }
     public AudioSource AudioSource { get { return audioSource; } }
     public Rigidbody Rigidbody { get { return rigidbody; } }
@@ -40,8 +40,8 @@ public class Hero : Character
             playerConfig.ability.Tick(Time.deltaTime, AbilityButtonPressed());
 
             // Apply class-dependant movement speed modifier
-            horizontalMovement *= (1 + playerConfig.ability.SpeedBoost);
-            verticalMovement *= (1 + playerConfig.ability.SpeedBoost);
+            horizontalMovement *= playerConfig.ability.SpeedModifier;
+            verticalMovement *= playerConfig.ability.SpeedModifier;
         }
     }
     #endregion
@@ -70,11 +70,10 @@ public class Hero : Character
 
     public void SetAbility(Ability ability)
     {
-        // Cancel shield, if current ability is Tank class
-        if (playerConfig.ability.Binded && playerConfig.ability.Class == Ability.AbilityClass.Tank)
+        // Cancel currently active ability
+        if (playerConfig.ability.Binded)
         {
-            Tank tankAbility = playerConfig.ability as Tank;
-            tankAbility.DeactivateShield();
+            playerConfig.ability.DeactivateAbility();
         }
 
         // Set new ability
@@ -83,6 +82,17 @@ public class Hero : Character
 
         // Update Mesh
         playerMesh.mesh = ability.Mesh;
+    }
+
+    /// <summary>
+    /// Resets the cooldowns (time- and energy-based).
+    /// </summary>
+    /// <remarks>Only calls function in ability ScriptableObject, but needs to be present on an instantiated GameObject to receive GameEvents.</remarks>
+    /// <param name="maximum">If true, sets cooldowns to maximum values (ready state). If false, sets cooldowns to 0.</param>
+    public override void ResetCooldowns(bool maximum)
+    {
+        base.ResetCooldowns(maximum);
+        PlayerConfig.ability.ResetCooldowns(maximum);
     }
     #endregion
 
