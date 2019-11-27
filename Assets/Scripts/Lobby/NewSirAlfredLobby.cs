@@ -51,6 +51,7 @@ public class NewSirAlfredLobby : MonoBehaviour
     [SerializeField] GameEvent playerCharacterChangedLobbyEvent = null;
     [SerializeField] GameEvent readyToStartEvent = null;
     [SerializeField] GameEvent playerSelectedCharacterEvent = null;
+    [SerializeField] GameEvent messagePlayer5Event = null;
 
     [Header("References")]
     [Tooltip("The Scriptable Object that holds all available Colors in the Game")]
@@ -130,12 +131,12 @@ public class NewSirAlfredLobby : MonoBehaviour
         }
         if (gameReadyToStart)
         {
-            bool humans = false;
+            //bool humans = false;
             foreach (PlayerSettings player in players)
             {
                 if (player.player != null)
                 {
-                    humans = true;
+                    //humans = true;
                     if (player.player.GetButtonDown(RewiredConsts.Action.UISTART))
                     {
                         // TODO: Setup PlayerConfigs and load first Level
@@ -153,6 +154,21 @@ public class NewSirAlfredLobby : MonoBehaviour
                     SceneManager.Instance.LoadNextLevel();
                 }
             }*/
+        }
+
+        // Message to Player 5
+        Rewired.Player p = InputHelper.GetPlayerButtonDown(RewiredConsts.Action.UISUBMIT);
+        if (p != null)
+        {
+            bool player5 = true;
+            for (int i = 0; i < 4; i++)
+            {
+                Debug.Log(p == players[i].player);
+                if (p == players[i].player)
+                    player5 = false;
+            }
+            if (player5)
+                RaiseMessagePlayer5();
         }
     }
     #endregion
@@ -598,6 +614,11 @@ public class NewSirAlfredLobby : MonoBehaviour
     void RaisePlayerSelectedCharacter(List<PlayerCharacter> availableCharacters)
     {
         playerSelectedCharacterEvent.Raise(this, availableCharacters);
+    }
+
+    void RaiseMessagePlayer5()
+    {
+        messagePlayer5Event.Raise(this);
     }
     #endregion
 

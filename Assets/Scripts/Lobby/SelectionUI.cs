@@ -21,10 +21,8 @@ public class SelectionUI : MonoBehaviour
     [SerializeField] GameObject selectionScreen = null;
     [SerializeField] GameObject topPanel = null;
     [SerializeField] TextMeshProUGUI textMesh = null;
-    [SerializeField] RawImage renderTexture = null;
     [SerializeField] Transform leftArrow = null;
     [SerializeField] Transform rightArrow = null;
-    [SerializeField] Image backgroundImage = null;
     [SerializeField] GameObject topPanelSelectablePrefab = null;
     [SerializeField] Transform selectionMarker = null;
     // Private
@@ -32,7 +30,6 @@ public class SelectionUI : MonoBehaviour
     List<PlayerColor> playerColors = null;
     PlayerColor activeColor = null;
     List<GameObject> topPanelSelectables = new List<GameObject>();
-    bool keepColorsUpdated = false;
 	#endregion
 	
 	

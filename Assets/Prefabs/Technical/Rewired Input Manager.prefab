@@ -275,6 +275,28 @@ MonoBehaviour:
       _controllerMapEnablerSettings:
         _enabled: 1
         _ruleSets: []
+    - _id: 5
+      _name: Player4
+      _descriptiveName: Player4
+      _startPlaying: 0
+      _defaultJoystickMaps:
+      - _enabled: 1
+        _categoryId: 0
+        _layoutId: 0
+      _defaultMouseMaps: []
+      _defaultKeyboardMaps: []
+      _defaultCustomControllerMaps: []
+      _startingCustomControllers: []
+      _assignMouseOnStart: 0
+      _assignKeyboardOnStart: 0
+      _excludeFromControllerAutoAssignment: 0
+      _controllerMapLayoutManagerSettings:
+        _enabled: 1
+        _loadFromUserDataStore: 1
+        _ruleSets: []
+      _controllerMapEnablerSettings:
+        _enabled: 1
+        _ruleSets: []
     actions:
     - _id: 0
       _name: Move Horizontal
@@ -1719,7 +1741,7 @@ MonoBehaviour:
           _customControllerSourceId: -1
           _controllerId: -1
     controllerMapEnablerRuleSets: []
-    playerIdCounter: 5
+    playerIdCounter: 6
     actionIdCounter: 35
     actionCategoryIdCounter: 5
     inputBehaviorIdCounter: 1
