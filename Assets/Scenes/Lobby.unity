@@ -379,6 +379,7 @@ MonoBehaviour:
   readyToStartEvent: {fileID: 11400000, guid: a839b7162acecc2499f9440e35254c79, type: 2}
   playerSelectedCharacterEvent: {fileID: 11400000, guid: 2ad5e39be429e44418d25d56102d19a1,
     type: 2}
+  messagePlayer5Event: {fileID: 0}
   availableColors: {fileID: 11400000, guid: 866142ef2b107ab4f968660c69adec4f, type: 2}
   activeColorSet: {fileID: 11400000, guid: 68d47b220c1450a46a2330237d217b40, type: 2}
   bossConfig: {fileID: 11400000, guid: ca08c440eca8d854190afe2ee3e321e7, type: 2}
@@ -386,8 +387,8 @@ MonoBehaviour:
   hero2Config: {fileID: 11400000, guid: d6c98b3edc55ae84cb27c6305d3154cd, type: 2}
   hero3Config: {fileID: 11400000, guid: d4656183e05243d4bab4bc739760ed99, type: 2}
   damageAbility: {fileID: 11400000, guid: c3a8eab940a7e934e8c41e8e444f06ca, type: 2}
-  tankAbility: {fileID: 11400000, guid: a4451c0694acc7e44b35144d52e4bbed, type: 2}
-  runnerAbility: {fileID: 11400000, guid: 0247d2ab78a5bf148811c5c43bcfc496, type: 2}
+  tankAbility: {fileID: 11400000, guid: ea651a0727fca904886ca5fea0d3c71b, type: 2}
+  runnerAbility: {fileID: 11400000, guid: 314e7d8107326ca4a938b24b7bcae384, type: 2}
   damageHeroColor: {fileID: 11400000, guid: 5f950a45fdd3a134cb09820bde7d0781, type: 2}
   tankHeroColor: {fileID: 11400000, guid: 78cebc80fe6c61d4aae129fa4ed0829f, type: 2}
   runnerHeroColor: {fileID: 11400000, guid: 5747b0f3d3c16d34e9f62cf2382f2370, type: 2}
