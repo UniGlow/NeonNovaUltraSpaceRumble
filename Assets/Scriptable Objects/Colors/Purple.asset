@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2069b9d105202164cb9720118d2b71b7, type: 3}
+  m_Name: Purple
+  m_EditorClassIdentifier: 
+  heroMaterial: {fileID: 2100000, guid: d2aef76dbfd3a424c8dc1fdd5124cee2, type: 2}
+  bossProjectileColor: {r: 0.8601296, g: 0.15566039, b: 1, a: 1}
+  bossMaterial: {fileID: 2100000, guid: 2a2b8a98a1b356a4da21510919db3bbe, type: 2}
+  uiElementColor: {r: 0.8601296, g: 0.15566039, b: 1, a: 1}
+  staubsaugerColor: {r: 0.8601296, g: 0.15566039, b: 1, a: 1}
