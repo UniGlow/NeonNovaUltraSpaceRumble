@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_BossShape
+  m_Name: Boss SHADER
   m_Shader: {fileID: -6465566751694194690, guid: bd3b314ef86dedd42b5a082b7c0d826a,
     type: 3}
   m_ShaderKeywords: 
