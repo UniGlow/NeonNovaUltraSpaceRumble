@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4288050773798458}
-  - component: {fileID: 114843260671403338}
+  - component: {fileID: 3344345491592768880}
   m_Layer: 0
   m_Name: EditorLevelStarter
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 4927766817885444}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114843260671403338
+--- !u!114 &3344345491592768880
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -49,8 +49,8 @@ MonoBehaviour:
   hero3PlayerConfig: {fileID: 11400000, guid: d4656183e05243d4bab4bc739760ed99, type: 2}
   colorSet: {fileID: 11400000, guid: 68d47b220c1450a46a2330237d217b40, type: 2}
   ability1: {fileID: 11400000, guid: c3a8eab940a7e934e8c41e8e444f06ca, type: 2}
-  ability2: {fileID: 11400000, guid: a4451c0694acc7e44b35144d52e4bbed, type: 2}
-  ability3: {fileID: 11400000, guid: 0247d2ab78a5bf148811c5c43bcfc496, type: 2}
+  ability2: {fileID: 11400000, guid: ea651a0727fca904886ca5fea0d3c71b, type: 2}
+  ability3: {fileID: 11400000, guid: 314e7d8107326ca4a938b24b7bcae384, type: 2}
 --- !u!1 &1491103438566612
 GameObject:
   m_ObjectHideFlags: 0

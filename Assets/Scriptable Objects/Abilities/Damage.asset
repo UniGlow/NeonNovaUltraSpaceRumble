@@ -22,7 +22,7 @@ MonoBehaviour:
   cooldownVisualized: 0
   hasEnergyPool: 0
   cooldown: 0.15
-  abilityDuration: 1
+  abilityDuration: 0
   maxEnergy: 100
   energyLossPerSecond: 1
   damagePerShot: 20
