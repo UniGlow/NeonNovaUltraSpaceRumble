@@ -36,9 +36,7 @@ public class Boss : Character
     [SerializeField] protected float movementSpeedReduction = 0.5f;
 
     [Header("Ability FX")]
-    [SerializeField] protected float colorMultiplierBeforeAbility = 3f;
     [SerializeField] protected float abilityAnnounceDuration = 3f;
-    [SerializeField] protected Ease meshBlinkEaseType = Ease.InOutCubic;
 
     [Header("Rumble")]
     [Range(0f, 1f)]
@@ -77,6 +75,7 @@ public class Boss : Character
     [SerializeField] protected Image cooldownIndicator = null;
     [SerializeField] protected GameEvent bossColorChangedEvent = null;
     [SerializeField] protected GameSettings gameSettings = null;
+    [SerializeField] protected GameObject novaAnticipationParticle = null;
 
     protected bool attackCooldownB = true;
     protected bool abilityCooldownB = true;
@@ -225,9 +224,8 @@ public class Boss : Character
 
             characterStats.ModifySpeed(characterStats.Speed * (1 - movementSpeedReduction));
 
-            bossMeshRenderer.material.DOBlendableColor(PlayerConfig.ColorConfig.bossMaterial.color * colorMultiplierBeforeAbility, abilityAnnounceDuration).SetEase(meshBlinkEaseType).OnComplete(() =>
+            StartCoroutine(PrepareNova(() => 
             {
-                bossMeshRenderer.material.DOBlendableColor(PlayerConfig.ColorConfig.bossMaterial.color, 0.1f);
                 StartCoroutine(ShootNovas(numberOfNovas, timeBetweenNovas, () =>
                 {
                     ResetSpeed();
@@ -235,7 +233,7 @@ public class Boss : Character
                     abilityCooldownB = false;
                     abilityInProgress = false;
                 }));
-            });
+            }));
         }
     }
 
@@ -325,6 +323,15 @@ public class Boss : Character
         }
 
         if (onComplete != null) onComplete.Invoke();
+    }
+
+    protected IEnumerator PrepareNova(System.Action onComplete)
+    {
+        novaAnticipationParticle.SetActive(true);
+        yield return new WaitForSeconds(abilityAnnounceDuration);
+        novaAnticipationParticle.SetActive(false);
+
+        onComplete.Invoke();
     }
     #endregion
 }

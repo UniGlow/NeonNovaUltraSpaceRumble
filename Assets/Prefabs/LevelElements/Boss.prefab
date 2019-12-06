@@ -396,6 +396,7 @@ Transform:
   - {fileID: 4042691140480942}
   - {fileID: 4845738020718340}
   - {fileID: 224988713563434486}
+  - {fileID: 2685856221483564066}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -441,9 +442,7 @@ MonoBehaviour:
   consecutiveNovaOffset: 0.06
   abilityCooldown: 13
   movementSpeedReduction: 0.5
-  colorMultiplierBeforeAbility: 2.5
   abilityAnnounceDuration: 2
-  meshBlinkEaseType: 3
   rumbleStrengthDeep: 1
   rumbleStrengthHigh: 1
   rumbleDuration: 0.5
@@ -466,6 +465,7 @@ MonoBehaviour:
   bossColorChangedEvent: {fileID: 11400000, guid: 5cb0235c1fda1e64dae1cfd14392faef,
     type: 2}
   gameSettings: {fileID: 11400000, guid: 4cbf2bb18122f9d4c92c9dbd86d8b7fa, type: 2}
+  novaAnticipationParticle: {fileID: 7894583445312723948}
 --- !u!82 &82736236401359494
 AudioSource:
   m_ObjectHideFlags: 0
@@ -761,3 +761,104 @@ MonoBehaviour:
     methodNames: []
     gameObject: {fileID: 0}
   ignoreEventParameters: 1
+--- !u!1001 &2935632876724546345
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4260685427587770}
+    m_Modifications:
+    - target: {fileID: 4986126201330643141, guid: e0d465a34b1d7c043a79f60146f27edd,
+        type: 3}
+      propertyPath: m_Name
+      value: Boss Nova Anticipation PARTCL
+      objectReference: {fileID: 0}
+    - target: {fileID: 4986126201330643141, guid: e0d465a34b1d7c043a79f60146f27edd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1007507299231799051, guid: e0d465a34b1d7c043a79f60146f27edd,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1007507299231799051, guid: e0d465a34b1d7c043a79f60146f27edd,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1007507299231799051, guid: e0d465a34b1d7c043a79f60146f27edd,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1007507299231799051, guid: e0d465a34b1d7c043a79f60146f27edd,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1007507299231799051, guid: e0d465a34b1d7c043a79f60146f27edd,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1007507299231799051, guid: e0d465a34b1d7c043a79f60146f27edd,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1007507299231799051, guid: e0d465a34b1d7c043a79f60146f27edd,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1007507299231799051, guid: e0d465a34b1d7c043a79f60146f27edd,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1007507299231799051, guid: e0d465a34b1d7c043a79f60146f27edd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1007507299231799051, guid: e0d465a34b1d7c043a79f60146f27edd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1007507299231799051, guid: e0d465a34b1d7c043a79f60146f27edd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7451406894093603596, guid: e0d465a34b1d7c043a79f60146f27edd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7451406894877567741, guid: e0d465a34b1d7c043a79f60146f27edd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7451406894877567743, guid: e0d465a34b1d7c043a79f60146f27edd,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e0d465a34b1d7c043a79f60146f27edd, type: 3}
+--- !u!1 &7894583445312723948 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4986126201330643141, guid: e0d465a34b1d7c043a79f60146f27edd,
+    type: 3}
+  m_PrefabInstance: {fileID: 2935632876724546345}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2685856221483564066 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1007507299231799051, guid: e0d465a34b1d7c043a79f60146f27edd,
+    type: 3}
+  m_PrefabInstance: {fileID: 2935632876724546345}
+  m_PrefabAsset: {fileID: 0}
