@@ -14,6 +14,7 @@ public class Hero : Character
     // Variables that should be visible in Inspector
     [Header("References")]
     [SerializeField] protected GameObject shield;
+    [SerializeField] protected ParticleSystem shieldBreaker;
     [SerializeField] protected Image cooldownIndicator;
     [SerializeField] protected MeshFilter playerMesh;
     #endregion
@@ -26,6 +27,7 @@ public class Hero : Character
     public AudioSource AudioSource { get { return audioSource; } }
     public Rigidbody Rigidbody { get { return rigidbody; } }
     public MeshFilter PlayerMesh { get { return playerMesh; } }
+    public ParticleSystem ShieldBreaker { get { return shieldBreaker; } }
     #endregion
 
 

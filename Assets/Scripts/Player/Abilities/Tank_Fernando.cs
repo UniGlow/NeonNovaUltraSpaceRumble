@@ -29,9 +29,14 @@ public class Tank_Fernando : Ability
     {
         base.Tick(deltaTime, abilityButtonPressed);
 
-        if (abilityActive && (!abilityButtonPressed || energyPoolRecharging))
+        if (abilityActive && !abilityButtonPressed)
         {
             DeactivateAbility();
+        }
+        else if (abilityActive && energyPoolRecharging)
+        {
+            DeactivateAbility();
+            hero.ShieldBreaker.Play();
         }
     }
 

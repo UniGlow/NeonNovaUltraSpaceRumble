@@ -4898,7 +4898,7 @@ RectTransform:
   m_Children:
   - {fileID: 224581387714022626}
   m_Father: {fileID: 4351300061492424}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5008,7 +5008,7 @@ Transform:
   m_Children:
   - {fileID: 4014107494874246}
   m_Father: {fileID: 4351300061492424}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &198963605972144674
 ParticleSystem:
@@ -14770,6 +14770,7 @@ Transform:
   - {fileID: 4503279731701416}
   - {fileID: 4706634360340640}
   - {fileID: 5057309725245213382}
+  - {fileID: 3446313165489368606}
   - {fileID: 4247990884022492}
   - {fileID: 224519662535948808}
   m_Father: {fileID: 0}
@@ -14789,6 +14790,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterStats: {fileID: 11400000, guid: ea1e0b8a36897574284478c2e13ef73f, type: 2}
   shield: {fileID: 7082286601567934900}
+  shieldBreaker: {fileID: 3446313165489368607}
   cooldownIndicator: {fileID: 114869992998677828}
   playerMesh: {fileID: 33291095836504256}
   repathingDistance: 6
@@ -20042,3 +20044,84 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 0
   m_Center: {x: 0, y: 0.7, z: 1.15}
   m_TimeToStationary: 0.5
+--- !u!1001 &6964854668881695968
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4351300061492424}
+    m_Modifications:
+    - target: {fileID: 5727419819541986045, guid: cbc30d6ea1e254f4fa16c0e54ff898eb,
+        type: 3}
+      propertyPath: m_Name
+      value: Shield Break EFT
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727419819541986046, guid: cbc30d6ea1e254f4fa16c0e54ff898eb,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.09000015
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727419819541986046, guid: cbc30d6ea1e254f4fa16c0e54ff898eb,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.070242405
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727419819541986046, guid: cbc30d6ea1e254f4fa16c0e54ff898eb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727419819541986046, guid: cbc30d6ea1e254f4fa16c0e54ff898eb,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.9134185
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727419819541986046, guid: cbc30d6ea1e254f4fa16c0e54ff898eb,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727419819541986046, guid: cbc30d6ea1e254f4fa16c0e54ff898eb,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727419819541986046, guid: cbc30d6ea1e254f4fa16c0e54ff898eb,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.40702173
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727419819541986046, guid: cbc30d6ea1e254f4fa16c0e54ff898eb,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727419819541986046, guid: cbc30d6ea1e254f4fa16c0e54ff898eb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -131.96399
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727419819541986046, guid: cbc30d6ea1e254f4fa16c0e54ff898eb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727419819541986046, guid: cbc30d6ea1e254f4fa16c0e54ff898eb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cbc30d6ea1e254f4fa16c0e54ff898eb, type: 3}
+--- !u!4 &3446313165489368606 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5727419819541986046, guid: cbc30d6ea1e254f4fa16c0e54ff898eb,
+    type: 3}
+  m_PrefabInstance: {fileID: 6964854668881695968}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &3446313165489368607 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5727419819541986047, guid: cbc30d6ea1e254f4fa16c0e54ff898eb,
+    type: 3}
+  m_PrefabInstance: {fileID: 6964854668881695968}
+  m_PrefabAsset: {fileID: 0}
