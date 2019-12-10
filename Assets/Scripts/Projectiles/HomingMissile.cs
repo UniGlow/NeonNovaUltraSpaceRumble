@@ -141,17 +141,24 @@ public class HomingMissile : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (agentPaused || !gameStarted) return;
-        
-        if (target == null)
+        if (gameStarted)
         {
-            Debug.LogError("Homing Missile has no target set", this);
+            if (agentPaused) return;
+
+            if (target == null)
+            {
+                Debug.LogError("Homing Missile has no target set", this);
+                return;
+            }
+
+            agent.SetDestination(target.position);
+            agent.Move(transform.forward * speed);
+            UpdateRecentHits();
+        }
+        else
+        {
             return;
         }
-
-        agent.SetDestination(target.position);
-        agent.Move(transform.forward * speed);
-        UpdateRecentHits();
     }
     #endregion
 
