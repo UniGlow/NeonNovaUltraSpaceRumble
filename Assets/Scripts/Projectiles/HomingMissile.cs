@@ -108,8 +108,11 @@ public class HomingMissile : MonoBehaviour
 
             if (enableCameraShake) EZCameraShake.CameraShaker.Instance.ShakeOnce(magnitude, roughness, fadeIn, fadeOut);
 
-            character.PlayerConfig.Player.SetVibration(0, rumbleStrengthDeep, rumbleDuration, false);
-            character.PlayerConfig.Player.SetVibration(1, rumbleStrengthHigh, rumbleDuration, false);
+            if (!character.PlayerConfig.AIControlled)
+            {
+                character.PlayerConfig.Player.SetVibration(0, rumbleStrengthDeep, rumbleDuration, false);
+                character.PlayerConfig.Player.SetVibration(1, rumbleStrengthHigh, rumbleDuration, false);
+            }
         }
 
         else if (other.tag.Contains(Constants.TAG_BOSS))
@@ -128,8 +131,11 @@ public class HomingMissile : MonoBehaviour
 
             if (enableCameraShake) EZCameraShake.CameraShaker.Instance.ShakeOnce(magnitude, roughness, fadeIn, fadeOut);
 
-            character.PlayerConfig.Player.SetVibration(0, rumbleStrengthDeep, rumbleDuration, false);
-            character.PlayerConfig.Player.SetVibration(1, rumbleStrengthHigh, rumbleDuration, false);
+            if (!character.PlayerConfig.AIControlled)
+            {
+                character.PlayerConfig.Player.SetVibration(0, rumbleStrengthDeep, rumbleDuration, false);
+                character.PlayerConfig.Player.SetVibration(1, rumbleStrengthHigh, rumbleDuration, false);
+            }
         }
     }
 
