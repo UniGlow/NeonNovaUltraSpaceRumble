@@ -395,7 +395,7 @@ MonoBehaviour:
   tankHeroColor: {fileID: 11400000, guid: 78cebc80fe6c61d4aae129fa4ed0829f, type: 2}
   runnerHeroColor: {fileID: 11400000, guid: 5747b0f3d3c16d34e9f62cf2382f2370, type: 2}
   abortPressDuration: 1.5
-  readyToFight: {fileID: 8300000, guid: c9a2245ecf3539d49be10fc00ab13721, type: 3}
+  readyToFight: {fileID: 8300000, guid: 0d2aef47a3b27b347833cc71a455a70c, type: 3}
   readyToFightVolume: 1
 --- !u!4 &2137147711
 Transform:

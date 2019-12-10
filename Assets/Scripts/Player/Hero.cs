@@ -75,6 +75,8 @@ public class Hero : Character
         // Cancel currently active ability
         if (playerConfig.ability.Binded)
         {
+            ability.DeactivateAbility();
+            // TODO: Actually not needed (I believe?), but just to be safe, because the bug haunted us pretty long...
             playerConfig.ability.DeactivateAbility();
         }
 
