@@ -78,6 +78,12 @@ public class NewSirAlfredLobby : MonoBehaviour
     [Header("General Settings")]
     [Tooltip("Determines how long a Player has to hold B to return to the Main Menu")]
     [SerializeField] float abortPressDuration = 1.5f;
+
+    [Header("Sounds")]
+    [SerializeField] AudioClip readyToFight = null;
+    [Range(0, 1)]
+    [SerializeField] float readyToFightVolume = 1f;
+
     // Private
     // Player Settings for PlayerConfigs
     PlayerSettings[] players = new PlayerSettings[4] { new PlayerSettings(), new PlayerSettings(), new PlayerSettings(), new PlayerSettings() };
@@ -87,6 +93,7 @@ public class NewSirAlfredLobby : MonoBehaviour
     PlayerCharacter[] lastPlayerCharacters = new PlayerCharacter[4] { PlayerCharacter.Empty, PlayerCharacter.Empty, PlayerCharacter.Empty, PlayerCharacter.Empty };
     bool gameReadyToStart = false;
     float abortTimer = 0f;
+    AudioSource audioSource = null;
     #endregion
 
 
@@ -105,6 +112,7 @@ public class NewSirAlfredLobby : MonoBehaviour
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         Time.timeScale = 1;
         InputHelper.ChangeRuleSetForAllPlayers(RewiredConsts.LayoutManagerRuleSet.RULESETLOBBY);
         RaiseSlotsListeningForInputs(MakeListeningForInputArray(true));
@@ -449,7 +457,7 @@ public class NewSirAlfredLobby : MonoBehaviour
         if (playerCount != 0 && playerCount == playersReady)
         {
             gameReadyToStart = true;
-            // TODO: Anzeige UI
+            audioSource.PlayOneShot(readyToFight, readyToFightVolume);
             RaiseReadyToStart(true);
         }
         else
