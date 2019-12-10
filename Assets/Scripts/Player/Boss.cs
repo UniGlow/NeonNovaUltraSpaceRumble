@@ -96,6 +96,13 @@ public class Boss : Character
 
 
     #region Unity Event Functions
+    // HACK: This normally gets called via GameEvent (LevelInitialized). 
+    // For some reason, it doesn't seem to be called though in the built game. Placing it in Start() here is a hotfix.
+    private void Start()
+    {
+        ResetCooldowns(false);
+    }
+
     override protected void Update()
     {
         base.Update();
@@ -306,12 +313,6 @@ public class Boss : Character
     {
         yield return new WaitForSeconds(attackCooldown);
         attackCooldownB = true;
-    }
-
-    protected IEnumerator ResetAbilityCooldown()
-    {
-        yield return new WaitForSeconds(abilityCooldown);
-        abilityCooldownB = true;
     }
 
     protected IEnumerator ShootNovas (int numberOfNovas, float timeBetweenNovas, System.Action onComplete = null)
