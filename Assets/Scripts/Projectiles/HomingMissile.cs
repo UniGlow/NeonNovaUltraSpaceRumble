@@ -60,7 +60,7 @@ public class HomingMissile : MonoBehaviour
     Transform target;
     NavMeshAgent agent;
     AudioSource audioSource;
-    bool agentPaused = true;
+    bool agentPaused = false;
     bool gameStarted = false;
     List<HitDetails> recentHits = new List<HitDetails>();
     #endregion
