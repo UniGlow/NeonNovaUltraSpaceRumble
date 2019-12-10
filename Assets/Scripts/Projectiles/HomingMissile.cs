@@ -141,7 +141,7 @@ public class HomingMissile : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (agentPaused && !gameStarted) return;
+        if (agentPaused || !gameStarted) return;
         
         if (target == null)
         {
