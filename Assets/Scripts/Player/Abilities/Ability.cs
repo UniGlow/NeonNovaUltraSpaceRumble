@@ -173,6 +173,7 @@ public abstract class Ability : ScriptableObject
         {
             audioSource = hero.AudioSource;
             rigidbody = hero.Rigidbody;
+            ResetCooldowns(false);
             binded = true;
         }
         else

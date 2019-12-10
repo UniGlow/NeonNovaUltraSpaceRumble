@@ -280,7 +280,7 @@ public class Boss : Character
             attackDamagePerShot,
             strengthColor,
             (projectile.transform.position - transform.position) * abilityProjectileSpeed,
-            attackProjectileLifeTime);
+            abilityProjectileLifeTime);
         }
 
         audioSource.PlayOneShot(abilitySound, abilitySoundVolume);

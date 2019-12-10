@@ -23,5 +23,5 @@ MonoBehaviour:
   hasEnergyPool: 1
   cooldown: 3
   abilityDuration: 1
-  maxEnergy: 1000
-  energyLossPerSecond: 100
+  maxEnergy: 600
+  energyLossPerSecond: 90

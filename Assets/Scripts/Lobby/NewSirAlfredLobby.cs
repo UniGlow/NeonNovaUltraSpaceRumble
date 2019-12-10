@@ -143,6 +143,7 @@ public class NewSirAlfredLobby : MonoBehaviour
                     {
                         // TODO: Setup PlayerConfigs and load first Level
                         SetupPlayerConfigs();
+                        AudioManager.Instance.StopPlaying();
                         SceneManager.Instance.LoadNextLevel();
                     }
                 }

@@ -33,9 +33,8 @@ public class DebugMode : MonoBehaviour
             Instance = this;
 
         //If instance already exists and it's not this:
-        else if (Instance != this) { 
-            //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a DebugMode.
-            Debug.Log("There can only be one DebugMode instantiated. Destroying this Instance...");
+        else if (Instance != this) 
+        {
             Destroy(gameObject);
         }
     }

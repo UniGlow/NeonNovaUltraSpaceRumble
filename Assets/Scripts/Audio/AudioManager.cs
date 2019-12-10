@@ -60,9 +60,6 @@ public class AudioManager : MonoBehaviour
         //If instance already exists and it's not this:
         else if (Instance != this)
         {
-
-            //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of an AudioManager.
-            Debug.Log("There can only be one AudioManager instantiated. Destroying this Instance...");
             Destroy(gameObject);
         }
     }
