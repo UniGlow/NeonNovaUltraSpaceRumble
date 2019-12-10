@@ -456,9 +456,12 @@ public class NewSirAlfredLobby : MonoBehaviour
         // TODO: After AI-Rework, delete playerCount != 0 Statement to be able to Start a Match with nothing but AI playing
         if (playerCount != 0 && playerCount == playersReady)
         {
-            gameReadyToStart = true;
-            audioSource.PlayOneShot(readyToFight, readyToFightVolume);
-            RaiseReadyToStart(true);
+            if (!gameReadyToStart)
+            {
+                gameReadyToStart = true;
+                audioSource.PlayOneShot(readyToFight, readyToFightVolume);
+                RaiseReadyToStart(true);
+            }
         }
         else
         {
