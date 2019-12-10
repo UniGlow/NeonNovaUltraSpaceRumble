@@ -378,9 +378,9 @@ public class SelectionController : MonoBehaviour
         float rotationValue = player.GetAxis(RewiredConsts.Action.UIROTATEHORIZONTAL);
         if (rotationValue != 0f)
         {
-            for (int i = 0; i < wheel.childCount; i++)
+            foreach (Transform transform in rotatingObjects)
             {
-                wheel.GetChild(i).Rotate(new Vector3(0, rotationValue * rotationSpeed * Time.deltaTime, 0));
+                transform.Rotate(new Vector3(0, -rotationValue * rotationSpeed * Time.deltaTime, 0));
             }
             autoRotatingCountdown = timeUntilAutoRotate;
         }
