@@ -165,7 +165,6 @@ public class NewSirAlfredLobby : MonoBehaviour
             bool player5 = true;
             for (int i = 0; i < 4; i++)
             {
-                Debug.Log(p == players[i].player);
                 if (p == players[i].player)
                     player5 = false;
             }

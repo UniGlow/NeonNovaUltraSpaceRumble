@@ -14452,7 +14452,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4041770346198284
 Transform:
   m_ObjectHideFlags: 0
@@ -14523,7 +14523,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: -2432090755550338912, guid: 0fec6f598b94e2240bbaded5f87d504d, type: 3}
 --- !u!208 &5024024949774975253
@@ -20035,11 +20035,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4351300061492424}
     m_Modifications:
-    - target: {fileID: 5727419819541986045, guid: cbc30d6ea1e254f4fa16c0e54ff898eb,
-        type: 3}
-      propertyPath: m_Name
-      value: Shield Break EFT
-      objectReference: {fileID: 0}
     - target: {fileID: 5727419819541986046, guid: cbc30d6ea1e254f4fa16c0e54ff898eb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -20094,6 +20089,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727419819541986045, guid: cbc30d6ea1e254f4fa16c0e54ff898eb,
+        type: 3}
+      propertyPath: m_Name
+      value: Shield Break EFT
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbc30d6ea1e254f4fa16c0e54ff898eb, type: 3}
