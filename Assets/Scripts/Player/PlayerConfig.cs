@@ -21,6 +21,8 @@ public class PlayerConfig : ScriptableObject
     public Ability ability;
     private bool aiControlled;
     public Transform playerTransform;
+    [SerializeField] HeroScore heroScore = null;
+
 	// Private
 	
 	#endregion
@@ -45,6 +47,7 @@ public class PlayerConfig : ScriptableObject
         }
     }
     public bool AIControlled { get { return aiControlled; } }
+    public HeroScore HeroScore { get { return heroScore; } }
 	#endregion
 	
 	

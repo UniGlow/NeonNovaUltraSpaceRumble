@@ -27,6 +27,7 @@ public class GameSettings : ScriptableObject
     [Space]
     [SerializeField] private float bossColorSwitchInterval = 10f;
 
+    // TODO: Otimal scores for each class go here
 
     // Private
     private ColorSet activeColorSet = null;

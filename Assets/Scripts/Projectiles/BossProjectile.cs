@@ -34,7 +34,7 @@ public class BossProjectile : Projectile
 
         if (other.tag == Constants.TAG_HERO)
         {
-            if (playerColor == other.transform.parent.GetComponent<Hero>().PlayerConfig.ColorConfig)
+            if (playerConfig == other.transform.parent.GetComponent<Hero>().PlayerConfig.ColorConfig)
             {
                 points.ScorePoints(Faction.Boss, Mathf.RoundToInt(damage * gameSettings.CritDamageMultiplier));
                 Instantiate(critHitPS, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
@@ -55,12 +55,12 @@ public class BossProjectile : Projectile
 
 
     #region Public Functions
-    public override void Initialize(int damage, PlayerColor color, Vector3 velocity, float lifeTime = 1)
+    public override void Initialize(int damage, PlayerColor playerColor, Vector3 velocity, float lifeTime = 1)
     {
-        base.Initialize(damage, color, velocity, lifeTime);
+        base.Initialize(damage, playerColor, velocity, lifeTime);
 
-        GetComponent<Renderer>().material.SetColor("_BaseColor", color.bossProjectileColor);
-        GetComponent<Renderer>().material.SetColor("_EmissionColor", color.bossProjectileColor);
+        GetComponent<Renderer>().material.SetColor("_BaseColor", playerColor.bossProjectileColor);
+        GetComponent<Renderer>().material.SetColor("_EmissionColor", playerColor.bossProjectileColor);
     }
     #endregion
 }

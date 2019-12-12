@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// 
 /// </summary>
-[CreateAssetMenu(menuName = "Scriptable Objects/Points")]
+[CreateAssetMenu(menuName = "Scriptable Objects/Score/Points")]
 public class Points : ScriptableObject 
 {
 
@@ -22,6 +22,7 @@ public class Points : ScriptableObject
 
     // Private
     int currentHeroesPointLead = 0;
+    int bossTotalPoints = 0;
 	#endregion
 	
 	
@@ -37,6 +38,7 @@ public class Points : ScriptableObject
             pointLeadToWin = value;
         }
     }
+    public int BossTotalPoints { get { return bossTotalPoints; } }
     #endregion
 
 
@@ -60,6 +62,7 @@ public class Points : ScriptableObject
                 break;
             case Faction.Boss:
                 currentHeroesPointLead -= amount;
+                bossTotalPoints += amount;
                 break;
             default:
                 break;
@@ -89,6 +92,7 @@ public class Points : ScriptableObject
     public void ResetPoints(bool endlessHealth)
     {
         currentHeroesPointLead = 0;
+        bossTotalPoints = 0;
         this.endlessHealth = endlessHealth;
     }
     #endregion

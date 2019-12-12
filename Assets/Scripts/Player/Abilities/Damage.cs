@@ -37,7 +37,7 @@ public class Damage : Ability
         base.TriggerAbility();
 
         GameObject projectile = Instantiate(projectilePrefab, hero.transform.position + Vector3.up * 0.5f, hero.transform.rotation);
-        projectile.GetComponent<HeroProjectile>().Initialize(damagePerShot, hero.PlayerConfig.ColorConfig, hero.transform.forward * projectileSpeed);
+        projectile.GetComponent<HeroProjectile>().Initialize(damagePerShot, hero.PlayerConfig, hero.transform.forward * projectileSpeed);
 
         audioSource.PlayOneShot(soundClip, volume);
     }

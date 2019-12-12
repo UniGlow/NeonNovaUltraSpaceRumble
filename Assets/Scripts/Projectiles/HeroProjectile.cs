@@ -28,19 +28,20 @@ public class HeroProjectile : Projectile
 
         if (other.tag == Constants.TAG_BOSS)
         {
-            if (playerColor == other.transform.parent.GetComponent<Boss>().PlayerConfig.ColorConfig)
+            if (base.playerConfig == other.transform.parent.GetComponent<Boss>().PlayerConfig.ColorConfig)
             {
                 points.ScorePoints(Faction.Heroes, Mathf.RoundToInt(damage * gameSettings.CritDamageMultiplier));
+                playerConfig.HeroScore.CurrentLevelScore.DamageScore.CritDamageDone(Mathf.RoundToInt(damage * gameSettings.CritDamageMultiplier));
                 Instantiate(critHitPS, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
                 AudioManager.Instance.PlayClip(critHitSound, critHitVolume);
             }
             else
             {
                 points.ScorePoints(Faction.Heroes, damage);
+                playerConfig.HeroScore.CurrentLevelScore.DamageScore.DamageDone(damage);
                 Instantiate(hitPS, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
                 AudioManager.Instance.PlayClip(hitSound, hitVolume);
             }
-
 
             Destroy(gameObject);
         }
