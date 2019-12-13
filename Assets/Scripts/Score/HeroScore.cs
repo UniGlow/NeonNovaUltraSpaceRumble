@@ -25,7 +25,8 @@ public class HeroScore : ScriptableObject, IScore
 
     public void CreateLevelScore()
     {
-        currentLevelScore = new LevelScore(gameSettings, points);
+        // TODO: This object needs to hold a list of the available scoreCategories and give all of them as param
+        currentLevelScore = new LevelScore(gameSettings, points, new List<ScoreCategory>());
         levelScores.Add(currentLevelScore);
     }
 
@@ -67,7 +68,7 @@ public class HeroScore : ScriptableObject, IScore
         CurrentLevelScore.RunnerScore.StopTimer(timeStamp);
     }
 
-    public int GetScore()
+    public Dictionary<string, int> GetScore()
     {
         throw new System.NotImplementedException();
     }

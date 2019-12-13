@@ -95,6 +95,7 @@ public class HomingMissile : MonoBehaviour
         if (other.tag.Contains(Constants.TAG_HERO))
         {
             points.ScorePoints(Faction.Boss, damage);
+            target.GetComponent<Hero>().PlayerConfig.HeroScore.CurrentLevelScore.RunnerScore.RegisterOrbHit(Faction.Heroes);
 
             recentHits.Add(new HitDetails
             {
@@ -118,6 +119,7 @@ public class HomingMissile : MonoBehaviour
         else if (other.tag.Contains(Constants.TAG_BOSS))
         {
             points.ScorePoints(Faction.Heroes, damage);
+            target.GetComponent<Hero>().PlayerConfig.HeroScore.CurrentLevelScore.RunnerScore.RegisterOrbHit(Faction.Boss);
 
             recentHits.Add(new HitDetails
             {

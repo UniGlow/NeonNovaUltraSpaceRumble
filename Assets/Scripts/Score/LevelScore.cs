@@ -15,14 +15,15 @@ public class LevelScore : IScore
 
 
 
-    public LevelScore (GameSettings gameSettings, Points points)
+    public LevelScore (GameSettings gameSettings, Points points, List<ScoreCategory> scoreCategories)
     {
-        damageScore = new DamageScore(gameSettings, points);
-        tankScore = new TankScore(gameSettings, points);
-        runnerScore = new RunnerScore(gameSettings, points);
+        // TODO: scoreCategories need to be broken down into their respective categories
+        damageScore = new DamageScore(gameSettings, points, scoreCategories);
+        tankScore = new TankScore(gameSettings, points, scoreCategories);
+        runnerScore = new RunnerScore(gameSettings, points, scoreCategories);
     }
 
-    public int GetScore()
+    public Dictionary<string, int> GetScore()
     {
         throw new System.NotImplementedException();
     }

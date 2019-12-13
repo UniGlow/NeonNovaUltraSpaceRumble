@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IScore
 {
-    int GetScore();
+    Dictionary<string, int> GetScore();
 }

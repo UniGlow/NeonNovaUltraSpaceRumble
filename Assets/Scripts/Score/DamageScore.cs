@@ -14,7 +14,7 @@ public class DamageScore : ClassScore, IScore
 
 
 
-    public DamageScore(GameSettings gameSettings, Points points) : base(gameSettings, points) { }
+    public DamageScore(GameSettings gameSettings, Points points, List<ScoreCategory> scoreCategories) : base(gameSettings, points, scoreCategories) { }
 
 
 
@@ -30,40 +30,50 @@ public class DamageScore : ClassScore, IScore
 
     public override void StartTimer(float timeStamp, bool isBossWeaknessColor)
     {
-        if (currentTimeStamp == -1f)
-        {
-            currentTimeStamp = timeStamp;
-        }
-        else
+        // Boss Color changed, player stays damage
+        if (lastTimeStamp != -1f)
         {
             if (isBossWeaknessColor)
-                activeCritTime += timeStamp - currentTimeStamp;
+                activeCritTime += timeStamp - lastTimeStamp;
             else
-                activeTime += timeStamp - currentTimeStamp;
+                activeTime += timeStamp - lastTimeStamp;
         }
+
+        lastTimeStamp = timeStamp;
         crit = isBossWeaknessColor;
     }
 
     public override void StopTimer(float timeStamp)
     {
-        if (currentTimeStamp == -1f)
+        // Already stopped
+        if (lastTimeStamp == -1f)
             return;
+
         if (crit)
         {
-            activeCritTime += timeStamp - currentTimeStamp;
+            activeCritTime += timeStamp - lastTimeStamp;
         }
         else
         {
-            activeTime += timeStamp - currentTimeStamp;
+            activeTime += timeStamp - lastTimeStamp;
         }
-        crit = false;
-        currentTimeStamp = -1f;
+
+        lastTimeStamp = -1f;
     }
 
 
-    public int GetScore()
+    public Dictionary<string, int> GetScore()
     {
-        // TODO
-        return damageScore + critDamageScore;
+        Dictionary<string, int> scores = new Dictionary<string, int>();
+
+        float fullActiveTime = activeTime + activeCritTime;
+        float percentageCritTime = activeCritTime / fullActiveTime;
+        float optimalDamagePerSecond = (gameSettings.OptimalDamageDealt * percentageCritTime + (gameSettings.OptimalDamageDealt / 2) * (1 - percentageCritTime)) * fullActiveTime;
+        float damagePerSecond = (damageScore + critDamageScore) / fullActiveTime;
+
+        // TODO: Split up categories returned here into normal and crit damage
+        scores.Add("Combined Damage dealt (normal+crit)", Mathf.RoundToInt((damagePerSecond / optimalDamagePerSecond) * gameSettings.OptimalScorePerSecond * fullActiveTime));
+
+        return scores;
     }
 }

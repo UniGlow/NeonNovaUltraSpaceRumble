@@ -5,16 +5,18 @@ using UnityEngine;
 public abstract class ClassScore
 {
     protected float activeTime = 0f;
-    protected float currentTimeStamp = -1f;
+    protected float lastTimeStamp = -1f; // -1 if scoring not currently active
     protected GameSettings gameSettings;
     protected Points points;
+    protected List<ScoreCategory> scoreCategories = new List<ScoreCategory>();
 
 
 
-    public ClassScore(GameSettings gameSettings, Points points)
+    public ClassScore(GameSettings gameSettings, Points points, List<ScoreCategory> scoreCategories)
     {
         this.gameSettings = gameSettings;
         this.points = points;
+        this.scoreCategories = scoreCategories;
     }
 
     public virtual void Initialize(GameSettings gameSettings, Points points)
@@ -25,9 +27,9 @@ public abstract class ClassScore
 
     public virtual void StartTimer(float timeStamp, bool isBossWeaknessColor = false)
     {
-        if (currentTimeStamp == -1f)
+        if (lastTimeStamp == -1f)
         {
-            currentTimeStamp = timeStamp;
+            lastTimeStamp = timeStamp;
         }
         else
         {
@@ -37,9 +39,9 @@ public abstract class ClassScore
 
     public virtual void StopTimer(float timeStamp)
     {
-        if (currentTimeStamp == -1f)
+        if (lastTimeStamp == -1f)
             return;
-        activeTime += timeStamp - currentTimeStamp;
-        currentTimeStamp = -1f;
+        activeTime += timeStamp - lastTimeStamp;
+        lastTimeStamp = -1f;
     }
 }
