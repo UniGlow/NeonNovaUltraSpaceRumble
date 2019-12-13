@@ -4,8 +4,28 @@ using UnityEngine;
 
 public class TankScore : IScore
 {
+    float tankTime = 0f;
+
+    float currentTimeStamp = -1f;
 
 
+    public void StartTimer(float timeStamp)
+    {
+        if(currentTimeStamp == -1f)
+        {
+            currentTimeStamp = timeStamp;
+        }
+        else
+        {
+            Debug.LogWarning("Something went wrong!");
+        }
+    }
+
+    public void StopTimer(float timeStamp)
+    {
+        tankTime += timeStamp - currentTimeStamp;
+        currentTimeStamp = -1f;
+    }
 
     public int GetScore()
     {
