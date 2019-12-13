@@ -57,7 +57,7 @@ public class DamageScore : IScore
         crit = true;
     }
 
-    public void EndCurrentTimer(float timeStamp)
+    public void StopTimer(float timeStamp)
     {
         if (currentTimeStamp == -1f)
             return;

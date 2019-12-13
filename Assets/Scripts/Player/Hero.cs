@@ -98,6 +98,14 @@ public class Hero : Character
         base.ResetCooldowns(maximum);
         PlayerConfig.ability.ResetCooldowns(maximum);
     }
+
+    /// <summary>
+    /// Informs the Scoring System about changes with timeStamps.
+    /// </summary>
+    public void UpdateScoring()
+    {
+        PlayerConfig.HeroScore.UpdateClassScoreStates(Time.timeSinceLevelLoad, playerConfig.ColorConfig, playerConfig.ability.Class);
+    }
     #endregion
 
 
