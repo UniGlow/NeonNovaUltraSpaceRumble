@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TankScore : IScore
+public class TankScore : ClassScore, IScore
 {
-    float tankTime = 0f;
-
-    float currentTimeStamp = -1f;
+    int damageShielded = 0;
 
 
-    public void StartTimer(float timeStamp)
+
+    public override void StartTimer(float timeStamp, bool isBossWeaknessColor = false)
     {
         if(currentTimeStamp == -1f)
         {
@@ -20,17 +19,14 @@ public class TankScore : IScore
             Debug.LogWarning("Something went wrong!");
         }
     }
-
-    public void StopTimer(float timeStamp)
-    {
-        if (currentTimeStamp == -1f)
-            return;
-        tankTime += timeStamp - currentTimeStamp;
-        currentTimeStamp = -1f;
-    }
-
+    
     public int GetScore()
     {
         throw new System.NotImplementedException();
+    }
+
+    public void DamageShielded(int amount)
+    {
+        damageShielded += amount;
     }
 }

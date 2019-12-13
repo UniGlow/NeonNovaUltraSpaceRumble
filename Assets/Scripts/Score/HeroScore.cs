@@ -6,7 +6,7 @@ using UnityEngine;
 public class HeroScore : ScriptableObject, IScore 
 {
     LinkedList<LevelScore> levelScores = new LinkedList<LevelScore>();
-    PlayerConfig bossConfig;
+    [SerializeField] PlayerConfig bossConfig = null;
 
     public LevelScore CurrentLevelScore { get { return levelScores.Last.Value; } }
 
@@ -15,10 +15,10 @@ public class HeroScore : ScriptableObject, IScore
         switch (heroAbility)
         {
             case Ability.AbilityClass.Damage:
-                if (bossConfig == heroColor)
-                    CurrentLevelScore.DamageScore.StartCritDamage(timeStamp);
+                if (bossConfig.ColorConfig == heroColor)
+                    CurrentLevelScore.DamageScore.StartTimer(timeStamp, true);
                 else
-                    CurrentLevelScore.DamageScore.StartNormalDamage(timeStamp);
+                    CurrentLevelScore.DamageScore.StartTimer(timeStamp, false);
                 CurrentLevelScore.TankScore.StopTimer(timeStamp);
                 CurrentLevelScore.RunnerScore.StopTimer(timeStamp);
                 break;

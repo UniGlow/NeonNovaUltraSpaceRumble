@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageScore : IScore
+public class DamageScore : ClassScore, IScore
 {
     int damageScore;
     int critDamageScore;
 
-    float normalDamageTime = 0f;
-    float critDamageTime = 0f;
-
-    float currentTimeStamp = -1f;
+    float activeCritTime = 0f;
 
     bool crit = false;
 
@@ -25,49 +22,33 @@ public class DamageScore : IScore
         damageScore += amount;
     }
 
-    public void StartNormalDamage(float timeStamp)
+    public override void StartTimer(float timeStamp, bool isBossWeaknessColor)
     {
-        if(currentTimeStamp == -1f)
+        if (currentTimeStamp == -1f)
         {
             currentTimeStamp = timeStamp;
         }
         else
         {
-            if (crit)
-                critDamageTime += timeStamp - currentTimeStamp;
+            if (isBossWeaknessColor)
+                activeCritTime += timeStamp - currentTimeStamp;
             else
-                Debug.LogWarning("Something went wrong!");
+                activeTime += timeStamp - currentTimeStamp;
         }
-        crit = false;
+        crit = isBossWeaknessColor;
     }
 
-    public void StartCritDamage(float timeStamp)
-    {
-        if(currentTimeStamp == -1f)
-        {
-            currentTimeStamp = timeStamp;
-        }
-        else
-        {
-            if (crit)
-                normalDamageTime += timeStamp - currentTimeStamp;
-            else
-                Debug.LogWarning("Something went wrong!");
-        }
-        crit = true;
-    }
-
-    public void StopTimer(float timeStamp)
+    public override void StopTimer(float timeStamp)
     {
         if (currentTimeStamp == -1f)
             return;
         if (crit)
         {
-            critDamageTime += timeStamp - currentTimeStamp;
+            activeCritTime += timeStamp - currentTimeStamp;
         }
         else
         {
-            normalDamageTime += timeStamp - currentTimeStamp;
+            activeTime += timeStamp - currentTimeStamp;
         }
         crit = false;
         currentTimeStamp = -1f;

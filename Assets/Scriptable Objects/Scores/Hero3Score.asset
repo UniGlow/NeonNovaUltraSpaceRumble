@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78e6df0a6bef3ab4480f8f4412c77a9a, type: 3}
   m_Name: Hero3Score
   m_EditorClassIdentifier: 
+  bossConfig: {fileID: 11400000, guid: ca08c440eca8d854190afe2ee3e321e7, type: 2}
