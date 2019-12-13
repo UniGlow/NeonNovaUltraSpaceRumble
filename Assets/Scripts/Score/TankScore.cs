@@ -23,6 +23,8 @@ public class TankScore : IScore
 
     public void StopTimer(float timeStamp)
     {
+        if (currentTimeStamp == -1f)
+            return;
         tankTime += timeStamp - currentTimeStamp;
         currentTimeStamp = -1f;
     }

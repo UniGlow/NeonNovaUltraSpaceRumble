@@ -15,7 +15,6 @@ public class DamageScore : IScore
     bool crit = false;
 
 
-
     public void CritDamageDone(int amount)
     {
         critDamageScore += amount;
@@ -60,6 +59,8 @@ public class DamageScore : IScore
 
     public void EndCurrentTimer(float timeStamp)
     {
+        if (currentTimeStamp == -1f)
+            return;
         if (crit)
         {
             critDamageTime += timeStamp - currentTimeStamp;

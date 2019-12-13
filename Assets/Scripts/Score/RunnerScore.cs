@@ -23,6 +23,8 @@ public class RunnerScore : IScore
 
     public void StopTimer(float timeStamp)
     {
+        if (currentTimeStamp == -1f)
+            return;
         runnerTime += timeStamp - currentTimeStamp;
         currentTimeStamp = -1f;
     }

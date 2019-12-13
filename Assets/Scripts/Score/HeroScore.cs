@@ -18,7 +18,8 @@ public class HeroScore : ScriptableObject, IScore
                     CurrentLevelScore.DamageScore.StartCritDamage(timeStamp);
                 else
                     CurrentLevelScore.DamageScore.StartNormalDamage(timeStamp);
-
+                CurrentLevelScore.TankScore.StopTimer(timeStamp);
+                CurrentLevelScore.RunnerScore.StopTimer(timeStamp);
                 break;
         }
     }
