@@ -54,6 +54,7 @@ public class Hero : Character
     public virtual void SetPlayerConfig(PlayerConfig playerConfig)
     {
         this.playerConfig = playerConfig;
+        playerConfig.HeroScore.CreateLevelScore();
 
         playerConfig.Player.controllers.maps.layoutManager.ruleSets.Clear();
         if (playerConfig.Faction == Faction.Heroes)
@@ -105,6 +106,11 @@ public class Hero : Character
     public void UpdateScoring()
     {
         PlayerConfig.HeroScore.UpdateClassScoreStates(Time.timeSinceLevelLoad, playerConfig.ColorConfig, playerConfig.ability.Class);
+    }
+
+    public void StopScoring()
+    {
+        PlayerConfig.HeroScore.StopScoring(Time.timeSinceLevelLoad);
     }
     #endregion
 

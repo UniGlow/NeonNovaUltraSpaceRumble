@@ -5,10 +5,35 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Scriptable Objects/Score/HeroScore")]
 public class HeroScore : ScriptableObject, IScore 
 {
-    LinkedList<LevelScore> levelScores = new LinkedList<LevelScore>();
     [SerializeField] PlayerConfig bossConfig = null;
+    [SerializeField] GameSettings gameSettings = null;
+    [SerializeField] Points points = null;
 
-    public LevelScore CurrentLevelScore { get { return levelScores.Last.Value; } }
+    List<LevelScore> levelScores = new List<LevelScore>();
+    LevelScore currentLevelScore = null;
+    
+
+
+    public LevelScore CurrentLevelScore { get { return currentLevelScore; } }
+
+
+
+    private void OnEnable()
+    {
+        ClearAllLevels();
+    }
+
+    public void CreateLevelScore()
+    {
+        currentLevelScore = new LevelScore(gameSettings, points);
+        levelScores.Add(currentLevelScore);
+    }
+
+    // TODO: Alfred needs to call this
+    public void ClearAllLevels()
+    {
+        levelScores.Clear();
+    }
 
     public void UpdateClassScoreStates(float timeStamp, PlayerColor heroColor, Ability.AbilityClass heroAbility)
     {
@@ -33,6 +58,13 @@ public class HeroScore : ScriptableObject, IScore
                 CurrentLevelScore.RunnerScore.StopTimer(timeStamp);
                 break;
         }
+    }
+
+    public void StopScoring(float timeStamp)
+    {
+        CurrentLevelScore.TankScore.StopTimer(timeStamp);
+        CurrentLevelScore.DamageScore.StopTimer(timeStamp);
+        CurrentLevelScore.RunnerScore.StopTimer(timeStamp);
     }
 
     public int GetScore()

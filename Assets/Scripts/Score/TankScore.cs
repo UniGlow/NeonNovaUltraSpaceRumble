@@ -2,23 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class TankScore : ClassScore, IScore
 {
     int damageShielded = 0;
 
 
+    
+    public TankScore(GameSettings gameSettings, Points points) : base(gameSettings, points) { }
 
-    public override void StartTimer(float timeStamp, bool isBossWeaknessColor = false)
-    {
-        if(currentTimeStamp == -1f)
-        {
-            currentTimeStamp = timeStamp;
-        }
-        else
-        {
-            Debug.LogWarning("Something went wrong!");
-        }
-    }
+
     
     public int GetScore()
     {

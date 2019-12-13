@@ -2,32 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RunnerScore : IScore
+[System.Serializable]
+public class RunnerScore : ClassScore, IScore
 {
-    float runnerTime = 0f;
-
-    float currentTimeStamp = -1f;
 
 
-    public void StartTimer(float timeStamp)
-    {
-        if (currentTimeStamp == -1f)
-        {
-            currentTimeStamp = timeStamp;
-        }
-        else
-        {
-            Debug.LogWarning("Something went wrong!");
-        }
-    }
 
-    public void StopTimer(float timeStamp)
-    {
-        if (currentTimeStamp == -1f)
-            return;
-        runnerTime += timeStamp - currentTimeStamp;
-        currentTimeStamp = -1f;
-    }
+    public RunnerScore(GameSettings gameSettings, Points points) : base(gameSettings, points) { }
+
+
 
     public int GetScore()
     {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class DamageScore : ClassScore, IScore
 {
     int damageScore;
@@ -10,6 +11,11 @@ public class DamageScore : ClassScore, IScore
     float activeCritTime = 0f;
 
     bool crit = false;
+
+
+
+    public DamageScore(GameSettings gameSettings, Points points) : base(gameSettings, points) { }
+
 
 
     public void CritDamageDone(int amount)
