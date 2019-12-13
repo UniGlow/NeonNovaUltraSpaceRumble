@@ -5,6 +5,8 @@ using UnityEngine;
 public class TankScore : IScore
 {
 
+
+
     public int GetScore()
     {
         throw new System.NotImplementedException();

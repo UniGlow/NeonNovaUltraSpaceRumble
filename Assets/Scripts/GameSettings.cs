@@ -28,6 +28,17 @@ public class GameSettings : ScriptableObject
     [SerializeField] private float bossColorSwitchInterval = 10f;
 
     // TODO: Otimal scores for each class go here
+    [Header("Hero Scoring")]
+    [SerializeField] float optimalScorePerSecond = 100f;
+
+    [Space]
+    [SerializeField] float optimalDamageDealt = 213f;
+
+    [Space]
+    [Range(0f,1f)]
+    [SerializeField] float optimalShieldPercentage = 0.63f;
+
+
 
     // Private
     private ColorSet activeColorSet = null;
@@ -43,12 +54,15 @@ public class GameSettings : ScriptableObject
     public float IntensifyTime { get { return intensifyTime; } set { intensifyTime = value; } }
     public float IntensifyAmount { get { return intensifyAmount; } set { intensifyAmount = value; } }
     public float BossColorSwitchInterval { get { return bossColorSwitchInterval; } set { bossColorSwitchInterval = value; } }
+    public float OptimalScorePerSecond { get { return optimalScorePerSecond; } }
+    public float OptimalDamageDealt { get { return optimalDamageDealt; } }
+    public float OptimalShieldPercentage { get { return optimalShieldPercentage; } }
     #endregion
 
-	
-	
-	#region Public Functions
-	public void Initialize(ColorSet colorSet)
+
+
+    #region Public Functions
+    public void Initialize(ColorSet colorSet)
     {
         this.activeColorSet = colorSet;
     }
