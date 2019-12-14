@@ -18,5 +18,8 @@ MonoBehaviour:
   intensifyAmount: 0.1
   bossColorSwitchInterval: 15
   optimalScorePerSecond: 100
-  optimalDamageDealt: 213
-  optimalShieldPercentage: 0.42
+  damageScoreCategories:
+  - {fileID: 11400000, guid: 47c8105dfa1edd64da4bb9f32b371f71, type: 2}
+  - {fileID: 11400000, guid: 20324363cf986624ebb2b63fee40b272, type: 2}
+  tankScoreCategories: []
+  runnerScoreCategories: []

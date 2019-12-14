@@ -9,10 +9,14 @@ public class TankScore : ClassScore, IScore
     int bossTotalPointsDuringActivation = 0;
     float shieldedPercentage = 0f;
     int bossTotalPointsOnLastStart = 0;
+    ScoreCategory damageShieldedCategory;
 
 
     
-    public TankScore(GameSettings gameSettings, Points points, List<ScoreCategory> scoreCategories) : base(gameSettings, points, scoreCategories) { }
+    public TankScore(GameSettings gameSettings, Points points) : base (gameSettings, points)
+    {
+        damageShieldedCategory = gameSettings.TankScoreCategories.Find(x => x.name == "DamageShielded");
+    }
 
 
     
@@ -23,7 +27,7 @@ public class TankScore : ClassScore, IScore
         // Calculate current shieldedPercentage only if scoring is currently running
         if (lastTimeStamp != -1f) CalculateShieldedPercentage();
 
-        scores.Add(gameSettings.DamageShielded, Mathf.RoundToInt((shieldedPercentage / gameSettings.OptimalShieldPercentage) * gameSettings.OptimalScorePerSecond));
+        scores.Add(damageShieldedCategory.name, Mathf.RoundToInt((shieldedPercentage / damageShieldedCategory.optimalValue) * gameSettings.OptimalScorePerSecond));
 
         return scores;
     }

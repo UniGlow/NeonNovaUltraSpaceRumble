@@ -32,19 +32,6 @@ public class GameSettings : ScriptableObject
     [SerializeField] float optimalScorePerSecond = 100f;
 
     [Space]
-    [SerializeField] float optimalDamageDealt = 213f;
-
-    [Space]
-    [SerializeField] string damageShielded = "Damage shielded";
-    [Range(0f,1f)]
-    [SerializeField] float optimalShieldPercentage = 0.63f;
-
-    [Space]
-    [SerializeField] int optimalHeroOrbHits = 0;
-    [SerializeField] int worstHeroOrbHits = 3;
-    [SerializeField] int optimalBossOrbHits = 3;
-
-    [Space]
     [SerializeField] List<ScoreCategory> damageScoreCategories = new List<ScoreCategory>();
     [SerializeField] List<ScoreCategory> tankScoreCategories = new List<ScoreCategory>();
     [SerializeField] List<ScoreCategory> runnerScoreCategories = new List<ScoreCategory>();
@@ -66,12 +53,6 @@ public class GameSettings : ScriptableObject
     public float IntensifyAmount { get { return intensifyAmount; } set { intensifyAmount = value; } }
     public float BossColorSwitchInterval { get { return bossColorSwitchInterval; } set { bossColorSwitchInterval = value; } }
     public float OptimalScorePerSecond { get { return optimalScorePerSecond; } }
-    public float OptimalDamageDealt { get { return optimalDamageDealt; } }
-    public string DamageShielded { get { return damageShielded; } }
-    public float OptimalShieldPercentage { get { return optimalShieldPercentage; } }
-    public int OptimalHeroOrbHits { get { return optimalHeroOrbHits; } }
-    public int WorstHeroOrbHits { get { return WorstHeroOrbHits; } }
-    public int OptimalBossOrbHits { get { return optimalBossOrbHits; } }
     public List<ScoreCategory> DamageScoreCategories { get { return damageScoreCategories; } }
     public List<ScoreCategory> TankScoreCategories { get { return tankScoreCategories; } }
     public List<ScoreCategory> RunnerScoreCategories { get { return runnerScoreCategories; } }

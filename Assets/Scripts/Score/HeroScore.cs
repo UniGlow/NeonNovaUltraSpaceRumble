@@ -25,8 +25,7 @@ public class HeroScore : ScriptableObject, IScore
 
     public void CreateLevelScore()
     {
-        // TODO: This object needs to hold a list of the available scoreCategories and give all of them as param
-        currentLevelScore = new LevelScore(gameSettings, points, new List<ScoreCategory>());
+        currentLevelScore = new LevelScore(gameSettings, points);
         levelScores.Add(currentLevelScore);
     }
 
@@ -70,6 +69,26 @@ public class HeroScore : ScriptableObject, IScore
 
     public Dictionary<string, int> GetScore()
     {
-        throw new System.NotImplementedException();
+        Dictionary<string, int> scores = new Dictionary<string, int>();
+
+        // TODO: Not implemented yet. Needs to combine all LevelScores
+        List<Dictionary<string, int>> levelScoresResults = new List<Dictionary<string, int>>();
+
+        foreach (LevelScore levelScore in levelScores)
+        {
+            levelScoresResults.Add(levelScore.GetScore());
+        }
+
+        // merge all level scores
+        foreach (Dictionary<string, int> levelScore in levelScoresResults)
+        {
+            foreach (KeyValuePair<string, int> scoreCategory in levelScore)
+            {
+                if (!scores.ContainsKey(scoreCategory.Key)) scores.Add(scoreCategory.Key, scoreCategory.Value);
+                else scores[scoreCategory.Key] += scoreCategory.Value;
+            }
+        }
+
+        return scores;
     }
 }

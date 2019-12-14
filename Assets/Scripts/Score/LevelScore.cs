@@ -15,16 +15,35 @@ public class LevelScore : IScore
 
 
 
-    public LevelScore (GameSettings gameSettings, Points points, List<ScoreCategory> scoreCategories)
+    public LevelScore (GameSettings gameSettings, Points points)
     {
-        // TODO: scoreCategories need to be broken down into their respective categories
-        damageScore = new DamageScore(gameSettings, points, scoreCategories);
-        tankScore = new TankScore(gameSettings, points, scoreCategories);
-        runnerScore = new RunnerScore(gameSettings, points, scoreCategories);
+        damageScore = new DamageScore(gameSettings, points);
+        tankScore = new TankScore(gameSettings, points);
+        runnerScore = new RunnerScore(gameSettings, points);
     }
 
     public Dictionary<string, int> GetScore()
     {
-        throw new System.NotImplementedException();
+        Dictionary<string, int> scores = new Dictionary<string, int>();
+
+        Dictionary<string, int> damageScores = damageScore.GetScore();
+        foreach (KeyValuePair<string, int> damageScore in damageScores)
+        {
+            scores.Add(damageScore.Key, damageScore.Value);
+        }
+
+        Dictionary<string, int> tankScores = tankScore.GetScore();
+        foreach (KeyValuePair<string, int> tankScore in tankScores)
+        {
+            scores.Add(tankScore.Key, tankScore.Value);
+        }
+
+        Dictionary<string, int> runnerScores = runnerScore.GetScore();
+        foreach (KeyValuePair<string, int> runnerScore in runnerScores)
+        {
+            scores.Add(runnerScore.Key, runnerScore.Value);
+        }
+
+        return scores;
     }
 }
