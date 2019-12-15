@@ -43,8 +43,8 @@ public class TankScore : ClassScore, IScore
     public override void StopTimer(float timeStamp)
     {
         base.StopTimer(timeStamp);
-
-        CalculateShieldedPercentage();
+        if(damageShielded > 0)
+            CalculateShieldedPercentage();
     }
 
     public void DamageShielded(int amount)
