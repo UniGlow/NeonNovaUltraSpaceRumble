@@ -22,24 +22,24 @@ public class LevelScore : IScore
         runnerScore = new RunnerScore(gameSettings, points);
     }
 
-    public Dictionary<string, int> GetScore()
+    public Dictionary<ScoreCategory, int> GetScore()
     {
-        Dictionary<string, int> scores = new Dictionary<string, int>();
+        Dictionary<ScoreCategory, int> scores = new Dictionary<ScoreCategory, int>();
 
-        Dictionary<string, int> damageScores = damageScore.GetScore();
-        foreach (KeyValuePair<string, int> damageScore in damageScores)
+        Dictionary<ScoreCategory, int> damageScores = damageScore.GetScore();
+        foreach (KeyValuePair<ScoreCategory, int> damageScore in damageScores)
         {
             scores.Add(damageScore.Key, damageScore.Value);
         }
 
-        Dictionary<string, int> tankScores = tankScore.GetScore();
-        foreach (KeyValuePair<string, int> tankScore in tankScores)
+        Dictionary<ScoreCategory, int> tankScores = tankScore.GetScore();
+        foreach (KeyValuePair<ScoreCategory, int> tankScore in tankScores)
         {
             scores.Add(tankScore.Key, tankScore.Value);
         }
 
-        Dictionary<string, int> runnerScores = runnerScore.GetScore();
-        foreach (KeyValuePair<string, int> runnerScore in runnerScores)
+        Dictionary<ScoreCategory, int> runnerScores = runnerScore.GetScore();
+        foreach (KeyValuePair<ScoreCategory, int> runnerScore in runnerScores)
         {
             scores.Add(runnerScore.Key, runnerScore.Value);
         }

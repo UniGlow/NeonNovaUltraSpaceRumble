@@ -20,14 +20,16 @@ public class TankScore : ClassScore, IScore
 
 
     
-    public Dictionary<string, int> GetScore()
+    public Dictionary<ScoreCategory, int> GetScore()
     {
-        Dictionary<string, int> scores = new Dictionary<string, int>();
+        Dictionary<ScoreCategory, int> scores = new Dictionary<ScoreCategory, int>();
 
         // Calculate current shieldedPercentage only if scoring is currently running
         if (lastTimeStamp != -1f) CalculateShieldedPercentage();
 
-        scores.Add(damageShieldedCategory.name, Mathf.RoundToInt((shieldedPercentage / damageShieldedCategory.optimalValue) * gameSettings.OptimalScorePerSecond));
+        float score = (shieldedPercentage / damageShieldedCategory.optimalValue) * gameSettings.OptimalScorePerSecond;
+
+        scores.Add(damageShieldedCategory, Mathf.RoundToInt(score));
 
         return scores;
     }
@@ -37,14 +39,13 @@ public class TankScore : ClassScore, IScore
         base.StartTimer(timeStamp, isBossWeaknessColor);
 
         bossTotalPointsOnLastStart = points.BossTotalPoints;
-        damageShielded = 0;
     }
 
     public override void StopTimer(float timeStamp)
     {
         base.StopTimer(timeStamp);
-        if(damageShielded > 0)
-            CalculateShieldedPercentage();
+
+        CalculateShieldedPercentage();
     }
 
     public void DamageShielded(int amount)
@@ -57,6 +58,9 @@ public class TankScore : ClassScore, IScore
     void CalculateShieldedPercentage()
     {
         bossTotalPointsDuringActivation += points.BossTotalPoints - bossTotalPointsOnLastStart;
+        
+        if (bossTotalPointsDuringActivation == 0) return;
+
         shieldedPercentage = damageShielded / bossTotalPointsDuringActivation;
     }
 }

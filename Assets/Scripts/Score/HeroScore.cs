@@ -67,12 +67,11 @@ public class HeroScore : ScriptableObject, IScore
         CurrentLevelScore.RunnerScore.StopTimer(timeStamp);
     }
 
-    public Dictionary<string, int> GetScore()
+    public Dictionary<ScoreCategory, int> GetScore()
     {
-        Dictionary<string, int> scores = new Dictionary<string, int>();
+        Dictionary<ScoreCategory, int> scores = new Dictionary<ScoreCategory, int>();
 
-        // TODO: Not implemented yet. Needs to combine all LevelScores
-        List<Dictionary<string, int>> levelScoresResults = new List<Dictionary<string, int>>();
+        List<Dictionary<ScoreCategory, int>> levelScoresResults = new List<Dictionary<ScoreCategory, int>>();
 
         foreach (LevelScore levelScore in levelScores)
         {
@@ -80,9 +79,9 @@ public class HeroScore : ScriptableObject, IScore
         }
 
         // merge all level scores
-        foreach (Dictionary<string, int> levelScore in levelScoresResults)
+        foreach (Dictionary<ScoreCategory, int> levelScore in levelScoresResults)
         {
-            foreach (KeyValuePair<string, int> scoreCategory in levelScore)
+            foreach (KeyValuePair<ScoreCategory, int> scoreCategory in levelScore)
             {
                 if (!scores.ContainsKey(scoreCategory.Key)) scores.Add(scoreCategory.Key, scoreCategory.Value);
                 else scores[scoreCategory.Key] += scoreCategory.Value;

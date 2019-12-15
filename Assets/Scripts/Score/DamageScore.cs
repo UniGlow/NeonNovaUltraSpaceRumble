@@ -19,8 +19,8 @@ public class DamageScore : ClassScore, IScore
 
     public DamageScore(GameSettings gameSettings, Points points) : base (gameSettings, points) 
     {
-        damageDoneCategory = gameSettings.DamageScoreCategories.Find(x => x.displayName == "DamageDone");
-        critDamageDoneCategory = gameSettings.DamageScoreCategories.Find(x => x.displayName == "CritDamageDone");
+        damageDoneCategory = gameSettings.DamageScoreCategories.Find(x => x.name == "DamageDone");
+        critDamageDoneCategory = gameSettings.DamageScoreCategories.Find(x => x.name == "CritDamageDone");
     }
 
 
@@ -69,19 +69,19 @@ public class DamageScore : ClassScore, IScore
     }
 
 
-    public Dictionary<string, int> GetScore()
+    public Dictionary<ScoreCategory, int> GetScore()
     {
-        Dictionary<string, int> scores = new Dictionary<string, int>();
+        Dictionary<ScoreCategory, int> scores = new Dictionary<ScoreCategory, int>();
 
         // crit damage score
         float critDamageDonePerSecond = critDamageDone / activeCritTime;
         int critDamageScore = Mathf.RoundToInt((critDamageDonePerSecond / critDamageDoneCategory.optimalValue) * gameSettings.OptimalScorePerSecond);
-        scores.Add(critDamageDoneCategory.name, critDamageScore);
+        scores.Add(critDamageDoneCategory, critDamageScore);
 
         // normal damage score
         float damageDonePerSecond = damageDone / activeTime;
         int damageScore = Mathf.RoundToInt((damageDonePerSecond / damageDoneCategory.optimalValue) * gameSettings.OptimalScorePerSecond);
-        scores.Add(damageDoneCategory.name, damageScore);
+        scores.Add(damageDoneCategory, damageScore);
 
         return scores;
     }

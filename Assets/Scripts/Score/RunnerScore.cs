@@ -32,17 +32,17 @@ public class RunnerScore : ClassScore, IScore
         }
     }
 
-    public Dictionary<string, int> GetScore()
+    public Dictionary<ScoreCategory, int> GetScore()
     {
-        Dictionary<string, int> scores = new Dictionary<string, int>();
+        Dictionary<ScoreCategory, int> scores = new Dictionary<ScoreCategory, int>();
 
         // hero orb hits
         float orbHeroHitsPerSecond = orbHeroHits / activeTime;
-        scores.Add(orbHeroHitsCategory.name, Mathf.RoundToInt((orbHeroHitsPerSecond / orbHeroHitsCategory.optimalValue) * gameSettings.OptimalScorePerSecond));
+        scores.Add(orbHeroHitsCategory, Mathf.RoundToInt((orbHeroHitsPerSecond / orbHeroHitsCategory.optimalValue) * gameSettings.OptimalScorePerSecond));
 
         // boss orb hits
         float orbBossHitsPerSecond = orbBossHits / activeTime;
-        scores.Add(orbBossHitsCategory.name, Mathf.RoundToInt((orbBossHitsPerSecond / orbBossHitsCategory.optimalValue) * gameSettings.OptimalScorePerSecond));
+        scores.Add(orbBossHitsCategory, Mathf.RoundToInt((orbBossHitsPerSecond / orbBossHitsCategory.optimalValue) * gameSettings.OptimalScorePerSecond));
 
         return scores;
     }
