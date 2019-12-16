@@ -31,7 +31,7 @@ public abstract class ClassScore
         }
         else
         {
-            Debug.LogWarning("Something went wrong!");
+            Debug.LogWarning("Tried to start timer for the already active role of " + this.GetType() + ".");
         }
     }
 

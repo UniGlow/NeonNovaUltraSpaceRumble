@@ -31,7 +31,7 @@ public class BossProjectile : Projectile
             Hero hero = other.transform.GetComponentInParent<Hero>();
             hero.PlayerConfig.ability.AddEnergy(-damage);
             hero.PlayerConfig.HeroScore.CurrentLevelScore.TankScore.DamageShielded(damage);
-            points.UpdateBossPoints(Mathf.RoundToInt(damage * gameSettings.CritDamageMultiplier), false);
+            points.UpdateBossPoints(Mathf.RoundToInt(damage * gameSettings.CritDamageMultiplier), true);
             Destroy(gameObject);
         }
 
