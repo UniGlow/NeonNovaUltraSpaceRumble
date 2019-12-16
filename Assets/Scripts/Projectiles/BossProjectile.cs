@@ -31,7 +31,7 @@ public class BossProjectile : Projectile
             Hero hero = other.transform.GetComponentInParent<Hero>();
             hero.PlayerConfig.ability.AddEnergy(-damage);
             hero.PlayerConfig.HeroScore.CurrentLevelScore.TankScore.DamageShielded(damage);
-            points.UpdateBossPoints(Mathf.RoundToInt(damage * gameSettings.CritDamageMultiplier), true);
+            points.UpdateBossPoints(damage, true);
             Destroy(gameObject);
         }
 
@@ -47,6 +47,7 @@ public class BossProjectile : Projectile
             else
             {
                 points.ScorePoints(Faction.Boss, damage);
+                points.UpdateBossPoints(damage, false);
                 Instantiate(hitPS, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
                 AudioManager.Instance.PlayClip(hitSound, hitVolume);
             }
