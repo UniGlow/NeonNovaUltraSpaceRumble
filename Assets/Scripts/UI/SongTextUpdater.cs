@@ -47,22 +47,25 @@ public class SongTextUpdater : MonoBehaviour
         spacingText.enabled = true;
 
         // Fade in alpha
-        DOTween.ToAlpha(() => titleText.color, x => titleText.color = x, originalColor.a, fadeDuration).OnComplete(() => { DOTween.ToAlpha(() => titleText.color, x => titleText.color = x, 0f, fadeDuration).SetDelay(displayDuration); });
-        DOTween.ToAlpha(() => spacingText.color, x => spacingText.color = x, originalColor.a, fadeDuration).OnComplete(() => { DOTween.ToAlpha(() => spacingText.color, x => spacingText.color = x, 0f, fadeDuration).SetDelay(displayDuration); });
-        DOTween.ToAlpha(() => artistText.color, x => artistText.color = x, originalColor.a, fadeDuration).OnComplete(() => { DOTween.ToAlpha(() => artistText.color, x => artistText.color = x, 0f, fadeDuration).SetDelay(displayDuration); });
+        DOTween.ToAlpha(() => titleText.color, x => titleText.color = x, originalColor.a, fadeDuration).SetId(this).OnComplete(() => { DOTween.ToAlpha(() => titleText.color, x => titleText.color = x, 0f, fadeDuration).SetId(this).SetDelay(displayDuration); });
+        DOTween.ToAlpha(() => spacingText.color, x => spacingText.color = x, originalColor.a, fadeDuration).SetId(this).OnComplete(() => { DOTween.ToAlpha(() => spacingText.color, x => spacingText.color = x, 0f, fadeDuration).SetId(this).SetDelay(displayDuration); });
+        DOTween.ToAlpha(() => artistText.color, x => artistText.color = x, originalColor.a, fadeDuration).SetId(this).OnComplete(() => { DOTween.ToAlpha(() => artistText.color, x => artistText.color = x, 0f, fadeDuration).SetId(this).SetDelay(displayDuration); });
     }
-	#endregion
-	
-	
-	
-	#region Private Functions
-	void HideText()
+
+    public void HideText()
     {
+        DOTween.Kill(this);
         Color newColor = originalColor;
         newColor.a = 0f;
         titleText.color = newColor;
         spacingText.color = newColor;
         artistText.color = newColor;
     }
-	#endregion
+    #endregion
+
+
+
+    #region Private Functions
+
+    #endregion
 }

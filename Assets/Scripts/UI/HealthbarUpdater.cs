@@ -17,6 +17,7 @@ public class HealthbarUpdater : MonoBehaviour
     [SerializeField] float punchDuration = 0.3f;
 
     [Header("References in Prefab")]
+    [SerializeField] RectTransform healthbarParent = null;
     [SerializeField] RectTransform heroHealthbar = null;
     [SerializeField] RectTransform bossHealthbar = null;
     [SerializeField] RectTransform middleImage = null;
@@ -71,6 +72,11 @@ public class HealthbarUpdater : MonoBehaviour
         Vector2 newImagePosition = new Vector2(heroHealthbar.sizeDelta.x - neutralWidth, middleImage.anchoredPosition.y);
         middleImage.anchoredPosition = newImagePosition;
         if (!DOTween.IsTweening(middleImage)) middleImage.DOPunchScale(middleImage.localScale * punchAmountOnHit, punchDuration);
+    }
+
+    public void Hide()
+    {
+        healthbarParent.gameObject.SetActive(false);
     }
 	#endregion
 	

@@ -61,13 +61,13 @@ public class SirAlfredLobby : LevelManager
         StartCoroutine(Wait(0.1f, () => { AudioManager.Instance.StartTrack(backgroundTrack); }));
     }
 
-    protected override void InheritedOnEnable()
+    private void OnEnable()
     {
         ReInput.ControllerConnectedEvent += ReloadLobby;
         ReInput.ControllerDisconnectedEvent += ReloadLobby;
     }
 
-    protected override void InheritedOnDisable()
+    private void OnDisable()
     {
         ReInput.ControllerConnectedEvent -= ReloadLobby;
         ReInput.ControllerDisconnectedEvent -= ReloadLobby;
