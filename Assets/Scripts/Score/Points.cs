@@ -23,7 +23,17 @@ public class Points : ScriptableObject
     // Private
     int currentHeroesPointLead = 0;
     int bossTotalPoints = 0; // total points including shielded damage
+
+    int bossPointsNormal = 0;
+    int bossPointsCritical = 0;
     int bossTotalPointsShielded = 0;
+
+    // TODO: Reset all these Lists when starting a new Match!
+    List<Faction> winningFactions = new List<Faction>();
+
+    List<int> bossDamageInLevels = new List<int>();
+    List<int> bossCritDamageInLevels = new List<int>();
+    List<int> bossDamageShieldedInLevels = new List<int>();
     #endregion
 
 
@@ -40,6 +50,10 @@ public class Points : ScriptableObject
         }
     }
     public int BossTotalPoints { get { return bossTotalPoints; } }
+    public List<Faction> WinningFactions { get { return winningFactions; } }
+    public List<int> BossDamageInLevels { get { return bossDamageInLevels; } }
+    public List<int> BossCritDamageInLevels { get { return bossCritDamageInLevels; } }
+    public List<int> BossDamageShieldedInLevels { get { return bossDamageShieldedInLevels; } }
     #endregion
 
 
@@ -79,12 +93,16 @@ public class Points : ScriptableObject
         // Did one faction win?
         if (currentHeroesPointLead >= pointLeadToWin)
         {
+            winningFactions.Add(Faction.Heroes);
             RaiseLevelCompleted(Faction.Heroes);
+            SaveBossPoints();
             currentHeroesPointLead = 0;
         }
         else if (-currentHeroesPointLead >= pointLeadToWin)
         {
+            winningFactions.Add(Faction.Boss);
             RaiseLevelCompleted(Faction.Boss);
+            SaveBossPoints();
             currentHeroesPointLead = 0;
         }
     }
@@ -94,20 +112,33 @@ public class Points : ScriptableObject
         currentHeroesPointLead = 0;
         bossTotalPoints = 0;
         bossTotalPointsShielded = 0;
+
+        bossPointsNormal = 0;
+        bossPointsCritical = 0;
+        bossTotalPointsShielded = 0;
+
         this.endlessHealth = endlessHealth;
     }
 
-    public void UpdateBossPoints(int amount, bool shielded)
+    public void UpdateBossPoints(int amount, bool shielded, bool crit = false)
     {
         bossTotalPoints += amount;
         if (shielded) bossTotalPointsShielded += amount;
+        if (crit) bossPointsCritical += amount;
+        else bossPointsNormal += amount;
+
     }
     #endregion
 
 
 
     #region Private Functions
-
+    private void SaveBossPoints()
+    {
+        bossDamageInLevels.Add(bossPointsNormal);
+        bossCritDamageInLevels.Add(bossPointsCritical);
+        bossDamageShieldedInLevels.Add(bossTotalPointsShielded);
+    }
     #endregion
 
 

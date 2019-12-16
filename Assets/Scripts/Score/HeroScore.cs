@@ -15,7 +15,7 @@ public class HeroScore : ScriptableObject, IScore
 
 
     public LevelScore CurrentLevelScore { get { return currentLevelScore; } }
-
+    public List<LevelScore> LevelScores { get { return levelScores; } }
 
 
     private void OnEnable()

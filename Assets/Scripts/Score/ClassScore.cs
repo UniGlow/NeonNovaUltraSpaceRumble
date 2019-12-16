@@ -9,6 +9,7 @@ public abstract class ClassScore
     protected GameSettings gameSettings;
     protected Points points;
 
+    public float ActiveTime { get { return activeTime; } }
 
 
     public ClassScore(GameSettings gameSettings, Points points)

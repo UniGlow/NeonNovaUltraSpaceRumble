@@ -11,7 +11,9 @@ public class TankScore : ClassScore, IScore
     int bossTotalPointsOnLastStart = 0;
     ScoreCategory damageShieldedCategory;
 
-
+    public int Shielded { get { return damageShielded; } }
+    public int BossTotalPointsDuringActivation { get { return bossTotalPointsDuringActivation; } }
+    public float ShieldedPercentage { get { return shieldedPercentage; } }
     
     public TankScore(GameSettings gameSettings, Points points) : base (gameSettings, points)
     {

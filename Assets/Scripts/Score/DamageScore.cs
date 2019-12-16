@@ -15,7 +15,8 @@ public class DamageScore : ClassScore, IScore
     ScoreCategory damageDoneCategory;
     ScoreCategory critDamageDoneCategory;
 
-
+    public int Damage { get { return damageDone; } }
+    public int CritDamage { get { return critDamageDone; } }
 
     public DamageScore(GameSettings gameSettings, Points points) : base (gameSettings, points) 
     {

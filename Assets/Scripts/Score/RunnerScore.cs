@@ -11,6 +11,8 @@ public class RunnerScore : ClassScore, IScore
     ScoreCategory orbBossHitsCategory;
     ScoreCategory orbHeroHitsCategory;
 
+    public int OrbBossHits { get { return orbBossHits; } }
+    public int OrbHeroHits { get { return orbHeroHits; } }
 
     public RunnerScore(GameSettings gameSettings, Points points) : base (gameSettings, points) 
     {
