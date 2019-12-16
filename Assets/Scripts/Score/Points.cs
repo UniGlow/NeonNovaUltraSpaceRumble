@@ -22,13 +22,14 @@ public class Points : ScriptableObject
 
     // Private
     int currentHeroesPointLead = 0;
-    int bossTotalPoints = 0;
-	#endregion
-	
-	
-	
-	#region Public Properties
-	public int PointLeadToWin { get { return pointLeadToWin; }
+    int bossTotalPoints = 0; // total points including shielded damage
+    int bossTotalPointsShielded = 0;
+    #endregion
+
+
+
+    #region Public Properties
+    public int PointLeadToWin { get { return pointLeadToWin; }
         set
         {
             // Make sure the current points scale according to the new point lead goal
@@ -62,7 +63,6 @@ public class Points : ScriptableObject
                 break;
             case Faction.Boss:
                 currentHeroesPointLead -= amount;
-                bossTotalPoints += amount;
                 break;
             default:
                 break;
@@ -93,7 +93,14 @@ public class Points : ScriptableObject
     {
         currentHeroesPointLead = 0;
         bossTotalPoints = 0;
+        bossTotalPointsShielded = 0;
         this.endlessHealth = endlessHealth;
+    }
+
+    public void UpdateBossPoints(int amount, bool shielded)
+    {
+        bossTotalPoints += amount;
+        if (shielded) bossTotalPointsShielded += amount;
     }
     #endregion
 
