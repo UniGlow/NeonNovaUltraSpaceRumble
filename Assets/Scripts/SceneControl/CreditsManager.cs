@@ -34,7 +34,7 @@ public class CreditsManager : LevelManager
         }
 	}
 
-    protected override void InheritedOnDisable()
+    private void OnDisable()
     {
         InputHelper.ChangeRuleSetForPlayers(ruleSets);
     }

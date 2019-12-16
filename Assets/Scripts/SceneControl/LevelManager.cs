@@ -28,15 +28,7 @@ public abstract class LevelManager : MonoBehaviour
 
 
     #region Unity Event Functions
-    protected void OnEnable () 
-	{
-        InheritedOnEnable();
-    }
 
-    protected void OnDisable()
-    {
-        InheritedOnDisable();
-    }
     #endregion
 
 
@@ -57,10 +49,6 @@ public abstract class LevelManager : MonoBehaviour
     {
         levelStartedEvent.Raise(this);
     }
-
-    protected virtual void InheritedOnEnable() { }
-
-    protected virtual void InheritedOnDisable() { }
     #endregion
 
 
