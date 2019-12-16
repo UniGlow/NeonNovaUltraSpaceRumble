@@ -61,6 +61,6 @@ public class TankScore : ClassScore, IScore
         
         if (bossTotalPointsDuringActivation == 0) return;
 
-        shieldedPercentage = damageShielded / bossTotalPointsDuringActivation;
+        shieldedPercentage = (float) damageShielded / (float) bossTotalPointsDuringActivation;
     }
 }
