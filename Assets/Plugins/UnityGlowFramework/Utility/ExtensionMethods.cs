@@ -121,7 +121,7 @@ public static class ExtensionMethods
     }
 
     /// <summary>
-    /// Remaps a value from one range to another.
+    /// Remaps a value from one range ("from" params) to another range ("to" params).
     /// </summary>
     /// <param name="value">The value.</param>
     /// <param name="from1">From the first Range.</param>
