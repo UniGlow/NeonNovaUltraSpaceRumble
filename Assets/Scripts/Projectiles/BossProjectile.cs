@@ -31,6 +31,7 @@ public class BossProjectile : Projectile
             Hero hero = other.transform.GetComponentInParent<Hero>();
             hero.PlayerConfig.ability.AddEnergy(-damage);
             hero.PlayerConfig.HeroScore.CurrentLevelScore.TankScore.DamageShielded(damage);
+            points.UpdateBossPoints(Mathf.RoundToInt(damage * gameSettings.CritDamageMultiplier), false);
             Destroy(gameObject);
         }
 
@@ -39,6 +40,7 @@ public class BossProjectile : Projectile
             if (playerConfig == other.transform.parent.GetComponent<Hero>().PlayerConfig.ColorConfig)
             {
                 points.ScorePoints(Faction.Boss, Mathf.RoundToInt(damage * gameSettings.CritDamageMultiplier));
+                points.UpdateBossPoints(Mathf.RoundToInt(damage * gameSettings.CritDamageMultiplier), false);
                 Instantiate(critHitPS, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
                 AudioManager.Instance.PlayClip(critHitSound, critHitVolume);
             }
