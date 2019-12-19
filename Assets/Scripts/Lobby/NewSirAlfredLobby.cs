@@ -58,6 +58,7 @@ public class NewSirAlfredLobby : MonoBehaviour
     [SerializeField] AvailableColors availableColors = null;
     [Tooltip("The Scriptable Object that will be used during the battles which only holds 3 Colors")]
     [SerializeField] ColorSet activeColorSet = null;
+    [SerializeField] Points points = null;
 
     [Header("PlayerConfigs")]
     [SerializeField] PlayerConfig bossConfig = null;
@@ -121,6 +122,9 @@ public class NewSirAlfredLobby : MonoBehaviour
             availablePlayerColors.Add(pc);
         }
         UpdateAvailableCharacters(PlayerCharacter.Empty);
+
+        // Reset Points
+        points.ResetPoints();
 
         AudioManager.Instance.StartTutorialTrack();
     }

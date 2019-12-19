@@ -120,7 +120,7 @@ public class SirAlfredLobby : LevelManager
         // Set playerNumbers depending on amount of human players
         PlayerSetup.SetupPlayers(playerCount, bossPlayerConfig, hero1PlayerConfig, hero2PlayerConfig, hero3PlayerConfig, damageAbility, tankAbility, victimAbility, colorSet);
 
-        points.ResetPoints(true);
+        points.ResetLevelPoints(true);
 
         UpdatePlayerConfirmsList();
 

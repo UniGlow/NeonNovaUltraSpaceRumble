@@ -185,6 +185,7 @@ public static class DumpFileExport
 		dumpArray[lineIdentifier][0] = "Boss;";
 		dumpArray[lineIdentifier][2] = "AIControlled;";
 		dumpArray[lineIdentifier][3] = bossConfig.AIControlled + ";";
+		dumpArray[lineIdentifier][5] = "\n";
 		
 		lineIdentifier++;
 
@@ -196,9 +197,9 @@ public static class DumpFileExport
 		// Values
         for(int i = 0; i < points.BossDamageInLevels.Count; i++)
         {
-            dumpArray[lineIdentifier][i + 1] = points.BossDamageInLevels[i] + PutRightLineEnding(i);
-            dumpArray[lineIdentifier + 1][i + 1] = points.BossCritDamageInLevels[i] + PutRightLineEnding(i);
-            dumpArray[lineIdentifier + 2][i + 1] = points.BossDamageShieldedInLevels[i] + PutRightLineEnding(i);
+            dumpArray[lineIdentifier][i + 1] = points.BossDamageInLevels[i] + PutRightLineEnding(i+1);
+            dumpArray[lineIdentifier + 1][i + 1] = points.BossCritDamageInLevels[i] + PutRightLineEnding(i+1);
+            dumpArray[lineIdentifier + 2][i + 1] = points.BossDamageShieldedInLevels[i] + PutRightLineEnding(i+1);
         }
         lineIdentifier += 3;
 
@@ -206,14 +207,14 @@ public static class DumpFileExport
         dumpArray[lineIdentifier][0] = "Winner;";
         for(int i = 0; i < points.WinningFactions.Count; i++)
         {
-            dumpArray[lineIdentifier][i + 1] = points.WinningFactions[i] + PutRightLineEnding(i);
+            dumpArray[lineIdentifier][i + 1] = points.WinningFactions[i] + PutRightLineEnding(i+1);
         }
         lineIdentifier++;
 
         dumpArray[lineIdentifier][0] = "LevelDuration;";
         for(int i = 0; i < matchDurations.Count; i++)
         {
-            dumpArray[lineIdentifier][i + 1] = matchDurations[i] + PutRightLineEnding(i);
+            dumpArray[lineIdentifier][i + 1] = matchDurations[i] + PutRightLineEnding(i+1);
         }
         lineIdentifier++;
 
@@ -227,27 +228,27 @@ public static class DumpFileExport
         // Game Settings
         dumpArray[lineIdentifier][0] = "PointsLeadToWin;";
         dumpArray[lineIdentifier][1] = gameSettings.PointLeadToWin + ";";
-        lineIdentifier++;
+		lineIdentifier++;
 
         dumpArray[lineIdentifier][0] = "CritDamageMultiplier;";
         dumpArray[lineIdentifier][1] = gameSettings.CritDamageMultiplier + ";";
-        lineIdentifier++;
+		lineIdentifier++;
 
         dumpArray[lineIdentifier][0] = "IntensifyTime;";
         dumpArray[lineIdentifier][1] = gameSettings.IntensifyTime + ";";
-        lineIdentifier++;
+		lineIdentifier++;
 
         dumpArray[lineIdentifier][0] = "IntensifyAmount;";
         dumpArray[lineIdentifier][1] = gameSettings.IntensifyAmount + ";";
-        lineIdentifier++;
+		lineIdentifier++;
 
         dumpArray[lineIdentifier][0] = "BossColorSwitchInterval;";
         dumpArray[lineIdentifier][1] = gameSettings.BossColorSwitchInterval + ";";
-        lineIdentifier++;
+		lineIdentifier++;
 
         dumpArray[lineIdentifier][0] = "OptimalPointsPerSecond;";
         dumpArray[lineIdentifier][1] = gameSettings.OptimalScorePerSecond + ";";
-        lineIdentifier++;
+		lineIdentifier++;
 
         // Define writer string and fill it with all the Information contained in the DumpArray
         string dumpText = "";
