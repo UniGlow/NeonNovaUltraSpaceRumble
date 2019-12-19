@@ -28,7 +28,7 @@ public class HeroScoreController : MonoBehaviour
 
 
     #region Public Functions
-    public void Reset()
+    public void DisplayTotalPoints()
     {
         // TODO: Show scores from last rounds
         score.text = "";
