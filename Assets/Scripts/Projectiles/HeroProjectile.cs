@@ -28,7 +28,7 @@ public class HeroProjectile : Projectile
 
         if (other.tag == Constants.TAG_BOSS)
         {
-            if (base.playerConfig == other.transform.parent.GetComponent<Boss>().PlayerConfig.ColorConfig)
+            if (base.playerColor == other.transform.parent.GetComponent<Boss>().PlayerConfig.ColorConfig)
             {
                 points.ScorePoints(Faction.Heroes, Mathf.RoundToInt(damage * gameSettings.CritDamageMultiplier));
                 playerConfig.HeroScore.CurrentLevelScore.DamageScore.CritDamageDone(Mathf.RoundToInt(damage * gameSettings.CritDamageMultiplier));

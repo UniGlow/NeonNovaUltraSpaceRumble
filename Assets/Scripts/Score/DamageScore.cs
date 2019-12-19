@@ -5,8 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class DamageScore : ClassScore, IScore
 {
-    int damageDone;
-    int critDamageDone;
+    int damageDone = 0;
+    int critDamageDone = 0;
 
     float activeCritTime = 0f;
 

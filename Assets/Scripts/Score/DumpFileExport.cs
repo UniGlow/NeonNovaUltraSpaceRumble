@@ -93,7 +93,7 @@ public static class DumpFileExport
 			{
 				endScore += valuePair.Value;
 			}
-			dumpArray[a * offset][3] = endScore + "\n";
+			dumpArray[a * offset][5] = endScore + "\n";
 
             // Fill first Column
             dumpArray[a * offset + 1][0] = "DamageDone;";
@@ -155,7 +155,9 @@ public static class DumpFileExport
 
 			// Putting it all into the Dump Array
 				// Damage
-				dumpArray[a * offset + 1][i] = damageDone + PutRightLineEnding(i);
+				dumpArray[a * offset + 1][i] = damageDone.ToString() + PutRightLineEnding(i);
+				Debug.Log(dumpArray[a * offset + 1][i]);
+				Debug.Log(damageDone);
 				dumpArray[a * offset + 2][i] = damageDoneScore + PutRightLineEnding(i);
 				dumpArray[a * offset + 3][i] = critDamageDone + PutRightLineEnding(i);
 				dumpArray[a * offset + 4][i] = critDamageDoneScore + PutRightLineEnding(i);
@@ -267,6 +269,7 @@ public static class DumpFileExport
         {
             sw.Write(dumpText);
         }
+		Debug.Log(dumpText);
 	}
     #endregion
 
