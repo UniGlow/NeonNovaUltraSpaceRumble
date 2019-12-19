@@ -45,7 +45,7 @@ public class CreditsManager : LevelManager
     #region Public Functions
     public void Initialize()
     {
-        points.ResetPoints(true);
+        points.ResetLevelPoints(true);
         RaiseLevelInitialized(0f);
         Invoke("RaiseLevelStarted", 0.01f);
     }

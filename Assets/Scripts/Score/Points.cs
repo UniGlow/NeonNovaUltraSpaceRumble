@@ -85,7 +85,7 @@ public class Points : ScriptableObject
     #region Unity Event Functions
 	private void OnEnable () 
 	{
-        ResetPoints(false);
+        ResetLevelPoints(false);
 	}
     #endregion
 
@@ -131,7 +131,11 @@ public class Points : ScriptableObject
         }
     }
 
-    public void ResetPoints(bool endlessHealth)
+    /// <summary>
+    /// Resets the Data collected during this Level.
+    /// </summary>
+    /// <param name="endlessHealth"></param>
+    public void ResetLevelPoints(bool endlessHealth)
     {
         currentHeroesPointLead = 0;
         bossTotalPoints = 0;
@@ -150,7 +154,18 @@ public class Points : ScriptableObject
         if (shielded) bossTotalPointsShielded += amount;
         if (crit) bossPointsCritical += amount;
         else bossPointsNormal += amount;
+    }
 
+    /// <summary>
+    /// Resets the Points Object and deletes all saved Data of the last Match.
+    /// </summary>
+    public void ResetPoints()
+    {
+        ResetLevelPoints(endlessHealth);
+        winningFactions.Clear();
+        bossDamageInLevels.Clear();
+        bossCritDamageInLevels.Clear();
+        bossDamageShieldedInLevels.Clear();
     }
     #endregion
 

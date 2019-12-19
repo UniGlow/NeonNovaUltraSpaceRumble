@@ -57,7 +57,7 @@ public class GameplayManager : LevelManager
     public void InitializeLevel()
     {
         RaiseLevelInitialized(4f);
-        points.ResetPoints(false);
+        points.ResetLevelPoints(false);
 
         StartCoroutine(InitializeLevelCoroutine());
     }
