@@ -361,6 +361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: {fileID: 689689924888366857}
+  heroScore: {fileID: 11400000, guid: b27417fdb61f3db46a8afbc2656de549, type: 2}
 --- !u!222 &4025464464571025271
 CanvasRenderer:
   m_ObjectHideFlags: 0

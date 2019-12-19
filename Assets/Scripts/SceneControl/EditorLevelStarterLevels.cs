@@ -23,6 +23,9 @@ public class EditorLevelStarterLevels : EditorLevelStarter
     [SerializeField] Ability ability2 = null;
     [SerializeField] Ability ability3 = null;
 
+    [Space]
+    [SerializeField] Points points = null;
+
     // New variables for P1-P4 to select a Character they want to Play
     // Private
 
@@ -56,6 +59,7 @@ public class EditorLevelStarterLevels : EditorLevelStarter
             if(UnityEngine.SceneManagement.SceneManager.sceneCount <= 1)
                 SceneManager.Instance.LoadUIAdditive();
             SetupPlayers();
+            points.ResetPoints();
         }
     }
 

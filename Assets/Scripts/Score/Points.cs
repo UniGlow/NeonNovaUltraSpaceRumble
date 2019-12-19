@@ -22,8 +22,8 @@ public class Points : ScriptableObject
 
     // Private
     int currentHeroesPointLead = 0;
-    int bossTotalPoints = 0; // total points including shielded damage
 
+    int bossTotalPoints = 0; // total points including shielded damage
     int bossPointsNormal = 0;
     int bossPointsCritical = 0;
     int bossTotalPointsShielded = 0;
@@ -51,6 +51,30 @@ public class Points : ScriptableObject
     }
     public int BossTotalPoints { get { return bossTotalPoints; } }
     public List<Faction> WinningFactions { get { return winningFactions; } }
+    public int BossWins
+    {
+        get
+        {
+            int wins = 0;
+            foreach (Faction faction in winningFactions)
+            {
+                if (faction == Faction.Boss) wins++;
+            }
+            return wins;
+        }
+    }
+    public int HeroWins
+    {
+        get
+        {
+            int wins = 0;
+            foreach (Faction faction in winningFactions)
+            {
+                if (faction == Faction.Heroes) wins++;
+            }
+            return wins;
+        }
+    }
     public List<int> BossDamageInLevels { get { return bossDamageInLevels; } }
     public List<int> BossCritDamageInLevels { get { return bossCritDamageInLevels; } }
     public List<int> BossDamageShieldedInLevels { get { return bossDamageShieldedInLevels; } }
