@@ -8,9 +8,10 @@ public class HeroScoreController : MonoBehaviour
     #region Variable Declarations
     // Serialized Fields
     [SerializeField] TextMeshProUGUI score = null;
+    [SerializeField] HeroScore heroScore = null;
 
     // Private
-
+    int currentScore;
     #endregion
 
 
@@ -30,8 +31,25 @@ public class HeroScoreController : MonoBehaviour
     #region Public Functions
     public void DisplayTotalPoints()
     {
-        // TODO: Show scores from last rounds
-        score.text = "";
+        UpdateTotalPoints();
+        score.text = currentScore.ToString();
+    }
+    #endregion
+
+
+
+    #region Private Functions
+    void UpdateTotalPoints()
+    {
+        int totalScore = 0;
+
+        Dictionary<ScoreCategory, int> scoresDict = heroScore.GetScore();
+        foreach (KeyValuePair<ScoreCategory, int> scoreCategory in scoresDict)
+        {
+            totalScore += scoreCategory.Value;
+        }
+
+        currentScore = totalScore;
     }
     #endregion
 }

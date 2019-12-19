@@ -998,7 +998,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 110.36, y: 0}
+  m_AnchoredPosition: {x: 110.359375, y: 0}
   m_SizeDelta: {x: 3602.4, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8947434401038018043
@@ -1071,6 +1071,7 @@ MonoBehaviour:
   text: {fileID: 5539050955561233724}
   maxSize: 1
   popUpAnimationDuration: 0.7
+  popUpAnimationDelay: 1
   bossWinText: Boss wins!
   herosWinText: Heroes win!
 --- !u!114 &8673553938429338599
@@ -1152,6 +1153,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 674c7b493aaf6c944a03384cd4ee7ba0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  factionScoreIncreaseDelay: 2
+  roundTimeDelay: 1
+  scoreCategoryDelay: 3
+  tweeningDuration: 0.7
   scoreScreenParent: {fileID: 5190208180572738486}
   heroScore: {fileID: 4285550516313322795}
   bossScore: {fileID: 6581567508895051223}
@@ -2287,6 +2292,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: HeroPanel (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5255127317134108324, guid: 2db423a0bf7e78e419091b49110691d0,
+        type: 3}
+      propertyPath: heroScore
+      value: 
+      objectReference: {fileID: 11400000, guid: 93243f85dea67a545889900416409d0b,
+        type: 2}
     - target: {fileID: 689689924888366857, guid: 2db423a0bf7e78e419091b49110691d0,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -2569,6 +2580,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: HeroPanel (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5255127317134108324, guid: 2db423a0bf7e78e419091b49110691d0,
+        type: 3}
+      propertyPath: heroScore
+      value: 
+      objectReference: {fileID: 11400000, guid: 3600eceb8d4d1ea44b58bdbd4ee491ae,
+        type: 2}
     - target: {fileID: 689689924888366857, guid: 2db423a0bf7e78e419091b49110691d0,
         type: 3}
       propertyPath: m_textInfo.characterCount

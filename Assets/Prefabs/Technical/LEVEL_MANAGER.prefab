@@ -51,6 +51,7 @@ MonoBehaviour:
   ability1: {fileID: 11400000, guid: c3a8eab940a7e934e8c41e8e444f06ca, type: 2}
   ability2: {fileID: 11400000, guid: ea651a0727fca904886ca5fea0d3c71b, type: 2}
   ability3: {fileID: 11400000, guid: 314e7d8107326ca4a938b24b7bcae384, type: 2}
+  points: {fileID: 11400000, guid: 5be3ffe199c802f45a47f0dbbedb0be5, type: 2}
 --- !u!1 &1491103438566612
 GameObject:
   m_ObjectHideFlags: 0

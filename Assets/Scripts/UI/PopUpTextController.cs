@@ -16,6 +16,7 @@ public class PopUpTextController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI text = null;
     [SerializeField] private float maxSize = 1f;
     [SerializeField] private float popUpAnimationDuration = 0.7f;
+    [SerializeField] private float popUpAnimationDelay = 1f;
     [SerializeField] private string bossWinText = "Boss wins!";
     [SerializeField] private string herosWinText = "Heros win!";
 
@@ -51,7 +52,7 @@ public class PopUpTextController : MonoBehaviour
             text.text = bossWinText;
         else
             text.text = herosWinText;
-        text.transform.DOScale(maxSize, popUpAnimationDuration).SetEase(Ease.OutBounce).SetUpdate(true).SetDelay(1f);
+        text.transform.DOScale(maxSize, popUpAnimationDuration).SetEase(Ease.OutBounce).SetUpdate(true).SetDelay(popUpAnimationDelay);
     }
 
     public void StartCountdown(float duration)
