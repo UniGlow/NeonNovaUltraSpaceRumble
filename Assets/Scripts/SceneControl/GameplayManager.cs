@@ -19,6 +19,7 @@ public class GameplayManager : LevelManager
 
     // Private
     float intensifyTimer = 0f;
+    bool waitingForInputToContinue = false;
     #endregion
 
 
@@ -33,6 +34,9 @@ public class GameplayManager : LevelManager
     private void Start () 
 	{
         points.PointLeadToWin = gameSettings.PointLeadToWin;
+        SceneManager.Instance.ManualContine = gameSettings.UseEndScores;
+
+        waitingForInputToContinue = false;
 	}
 
     private void Update()
@@ -40,6 +44,25 @@ public class GameplayManager : LevelManager
         intensifyTimer += Time.deltaTime;
 
         HandleIntensify();
+
+        //TODO: Delay
+        if (waitingForInputToContinue)
+        {
+            if((points.BossWins > gameSettings.BestOf / 2) || (points.HeroWins > gameSettings.BestOf / 2))
+            {
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    SceneManager.Instance.LoadCredits();
+                }
+            }
+            else
+            {
+                if (InputHelper.GetButtonDown(RewiredConsts.Action.READY_UP))
+                {
+                    SceneManager.Instance.LoadNextLevel(1f);
+                }
+            }
+        }
     }
     #endregion
 
@@ -60,6 +83,12 @@ public class GameplayManager : LevelManager
         points.ResetLevelPoints(false);
 
         StartCoroutine(InitializeLevelCoroutine());
+    }
+
+    public void WaitForContinueInput()
+    {
+        if (gameSettings.UseEndScores)
+            waitingForInputToContinue = true;
     }
     #endregion
 

@@ -28,7 +28,6 @@ public class Points : ScriptableObject
     int bossPointsCritical = 0;
     int bossTotalPointsShielded = 0;
 
-    // TODO: Reset all these Lists when starting a new Match!
     List<Faction> winningFactions = new List<Faction>();
 
     List<int> bossDamageInLevels = new List<int>();

@@ -26,20 +26,19 @@ public class SceneManager : MonoBehaviour
     [SerializeField] List<SceneReference> levels = new List<SceneReference>();
 
     [Header("Properties")]
-    [SerializeField] bool manualContinue = false;
     [SerializeField] float delayAtLevelEnd = 12f;
 
     [Header("Game Events")]
     [SerializeField] GameEvent levelLoadedEvent = null;
 
     // Private
-    private bool waitingForInputToContinue = false;
+    bool manualContinue = false;
     #endregion
 
 
 
     #region Public Properties
-
+    public bool ManualContine { set { manualContinue = value; } }
     #endregion
 
 
@@ -95,10 +94,16 @@ public class SceneManager : MonoBehaviour
 #endif
     }
 
+    public void StartNextLevel()
+    {
+        if (!manualContinue)
+            LoadNextLevel();
+    }
+
     /// <summary>
     /// Loads next Level of current LevelSet or Credits if Last Level of Set is active
     /// </summary>
-    public void LoadNextLevel()
+    public void LoadNextLevel(float optionalDelay = -1f)
     {
         bool levelFound = false;
         Scene activeScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
@@ -113,16 +118,16 @@ public class SceneManager : MonoBehaviour
             {
                 if (levels[i].Equals(activeScene))
                 {
-                    if (i < levels.Count-1)
+                    if (i < levels.Count - 1)
                     {
                         SceneReference nextScene = levels[i + 1];
-                        StartCoroutine(LoadNextLevelCoroutine(nextScene));
+                        StartCoroutine(LoadNextLevelCoroutine(nextScene, optionalDelay >= 0f ? optionalDelay : delayAtLevelEnd));
                         Time.timeScale = 0.0f;
                         levelFound = true;
                     }
                     else
                     {
-                        StartCoroutine(LoadCreditsCoroutine());
+                        StartCoroutine(LoadCreditsCoroutine(optionalDelay >= 0f ? optionalDelay : delayAtLevelEnd));
                         Time.timeScale = 0.0f;
                         levelFound = true;
                     }
@@ -226,17 +231,17 @@ public class SceneManager : MonoBehaviour
 
 
     #region Coroutines
-    IEnumerator LoadNextLevelCoroutine(SceneReference nextScene)
+    IEnumerator LoadNextLevelCoroutine(SceneReference nextScene, float delay)
     {
-        yield return new WaitForSecondsRealtime(delayAtLevelEnd);
+        yield return new WaitForSecondsRealtime(delay);
         LoadNextScene(nextScene);
         Time.timeScale = 1;
         LoadUIAdditive();
     }
 
-    IEnumerator LoadCreditsCoroutine()
+    IEnumerator LoadCreditsCoroutine(float delay)
     {
-        yield return new WaitForSecondsRealtime(delayAtLevelEnd);
+        yield return new WaitForSecondsRealtime(delay);
         LoadCredits();
         Time.timeScale = 1;
     }
