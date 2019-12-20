@@ -24,6 +24,8 @@ public class TankScore : ClassScore, IScore
     
     public Dictionary<ScoreCategory, int> GetScore()
     {
+        StopTimer(Time.timeSinceLevelLoad);
+        
         Dictionary<ScoreCategory, int> scores = new Dictionary<ScoreCategory, int>();
 
         // Calculate current shieldedPercentage only if scoring is currently running

@@ -72,17 +72,23 @@ public class DamageScore : ClassScore, IScore
 
     public Dictionary<ScoreCategory, int> GetScore()
     {
+        StopTimer(Time.timeSinceLevelLoad);
+
         Dictionary<ScoreCategory, int> scores = new Dictionary<ScoreCategory, int>();
 
         // crit damage score
-        float critDamageDonePerSecond = critDamageDone / activeCritTime;
+        float critDamageDonePerSecond = 0f;
+        critDamageDonePerSecond = critDamageDone / activeCritTime;
+        
         int critDamageScore = 0;
         if(critDamageDone != 0)
             critDamageScore = Mathf.RoundToInt((critDamageDonePerSecond / critDamageDoneCategory.optimalValue) * gameSettings.OptimalScorePerSecond);
         scores.Add(critDamageDoneCategory, critDamageScore);
 
         // normal damage score
-        float damageDonePerSecond = damageDone / activeTime;
+        float damageDonePerSecond = 0f;
+        damageDonePerSecond = damageDone / activeTime;
+
         int damageScore = 0;
         if(damageDone != 0)
             damageScore = Mathf.RoundToInt((damageDonePerSecond / damageDoneCategory.optimalValue) * gameSettings.OptimalScorePerSecond);

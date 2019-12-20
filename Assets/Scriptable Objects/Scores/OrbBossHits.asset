@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: OrbBossHits
   displayName: Boss hit by Orb
-  optimalValue: 0.3
+  optimalValue: 0.5
   worstValue: 0

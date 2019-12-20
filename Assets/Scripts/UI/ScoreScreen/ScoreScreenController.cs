@@ -18,7 +18,9 @@ public class ScoreScreenController : MonoBehaviour
     [Header("Timing Settings")]
     [SerializeField] float factionScoreIncreaseDelay = 3f;
     [SerializeField] float roundTimeDelay = 1f;
-    [SerializeField] float scoreCategoryDelay = 3f;
+    [SerializeField] float scoreCategoryFirstDelay = 1f;
+    [SerializeField] float scoreCategoryDelay = 2f;
+    [SerializeField] float buttonPromptDelay = 3f;
 
     [SerializeField] float tweeningDuration = 0.7f;
 
@@ -30,19 +32,22 @@ public class ScoreScreenController : MonoBehaviour
     [SerializeField] TextMeshProUGUI currentCategory = null;
 
     [Header("Scores Panels References")]
-    [SerializeField] List<HeroScoreController> heroScoreControllers = new List<HeroScoreController>();
     [SerializeField] TextMeshProUGUI bossDamageScore = null;
     [SerializeField] TextMeshProUGUI bossCritDamageScore = null;
     [SerializeField] TextMeshProUGUI bossShieldedScore = null;
+    [SerializeField] List<HeroScoreController> heroScoreControllers = new List<HeroScoreController>();
+    //[SerializeField] 
 
     [Header("Out Of Prefab References")]
     [SerializeField] Points points = null;
+    [SerializeField] GameSettings gameSettings = null;
+    [SerializeField] List<PlayerConfig> playerConfigs = new List<PlayerConfig>();
+    [SerializeField] VersionNumber versionNumber = null;
 
     // Private
     Faction winnerOfCurrentRound;
-    bool scoreScreenActive;
-    float activeTimer;
-    float elapsedDelays;
+    List<ScoreCategory> scoreCategories = new List<ScoreCategory>();
+    DumpFileExport dumpFileExporter;
     #endregion
 
 
@@ -56,19 +61,13 @@ public class ScoreScreenController : MonoBehaviour
     #region Unity Event Functions
     private void Awake()
     {
+        dumpFileExporter = GetComponent<DumpFileExport>();
+
         scoreScreenParent.SetActive(false);
-    }
 
-    private void Update()
-    {
-        // Break condition
-        if (!scoreScreenActive) return;
-
-        // Main Stuff
-        
-
-        // Increase timer
-        activeTimer += Time.deltaTime;
+        scoreCategories.AddRange(gameSettings.DamageScoreCategories);
+        scoreCategories.AddRange(gameSettings.TankScoreCategories);
+        scoreCategories.AddRange(gameSettings.RunnerScoreCategories);
     }
     #endregion
 
@@ -77,13 +76,18 @@ public class ScoreScreenController : MonoBehaviour
     #region Public Functions
     public void ShowScoreScreen()
     {
+        if (!gameSettings.UseEndScores) return;
+
         winnerOfCurrentRound = points.WinningFactions[points.WinningFactions.Count - 1];
-        // For now, subtract the winner of this round
+
+        // Display the scores of previous rounds
         if (winnerOfCurrentRound == Faction.Boss) bossScore.text = (points.BossWins - 1).ToString();
         if (winnerOfCurrentRound == Faction.Heroes) heroScore.text = (points.HeroWins - 1).ToString();
 
+        // TODO: Display texts ("Red", "Blue", "Green") in correct Hero colors
+
         // Set all Hero Scores to values previous to this round
-        foreach (HeroScoreController heroScoreController in heroScoreControllers) heroScoreController.DisplayTotalPoints();
+        foreach (HeroScoreController heroScoreController in heroScoreControllers) heroScoreController.DisplayTotalPoints(false, true);
 
         // Clear/hide all other texts
         roundTime.transform.localScale = Vector3.zero;
@@ -98,7 +102,6 @@ public class ScoreScreenController : MonoBehaviour
         bossShieldedScore.text = "";
 
         // Show the screen
-        scoreScreenActive = true;
         scoreScreenParent.SetActive(true);
 
         // Let loose the tweening madness
@@ -110,25 +113,66 @@ public class ScoreScreenController : MonoBehaviour
                 {
                     roundTime.transform.DOScale(1f, tweeningDuration).SetEase(Ease.OutBounce).SetUpdate(true).SetDelay(roundTimeDelay).OnStart(() =>
                     {
-                        // TODO: Start the score categories orchestra
+                        // Start the score categories orchestra
+                        StartCoroutine(DisplayScoreCategories());
                     });
                 });
             });
         }
         else if (winnerOfCurrentRound == Faction.Heroes)
         {
+            // Hide Hero Score
             heroScore.transform.DOScale(0f, 0.1f).SetUpdate(true).SetDelay(factionScoreIncreaseDelay).OnComplete(() =>
             {
+                // Show new Hero Score
                 heroScore.text = points.HeroWins.ToString();
                 heroScore.transform.DOScale(1f, tweeningDuration).SetEase(Ease.OutBounce).SetUpdate(true).OnStart(() =>
                 {
+                    // Show round time
                     roundTime.transform.DOScale(1f, tweeningDuration).SetEase(Ease.OutBounce).SetUpdate(true).SetDelay(roundTimeDelay).OnStart(() =>
                     {
-                        // TODO: Start the score categories orchestra
+                        // Start the score categories orchestra
+                        StartCoroutine(DisplayScoreCategories());
                     });
                 });
             });
         }
+    }
+    #endregion
+
+
+
+    #region Private Functions
+    void DisplayWinner()
+    {
+        // TODO: Display Winner
+
+        dumpFileExporter.CreateDumpFileEntry(playerConfigs[0], playerConfigs[1], playerConfigs[2], playerConfigs[3], points.LevelTimes, points, gameSettings, versionNumber);
+    }
+    #endregion
+
+
+
+    #region Coroutines
+    IEnumerator DisplayScoreCategories()
+    {
+        yield return new WaitForSecondsRealtime(scoreCategoryFirstDelay);
+        foreach (ScoreCategory scoreCategory in scoreCategories)
+        {
+            currentCategory.transform.localScale = Vector3.zero;
+            currentCategory.text = scoreCategory.displayName;
+            currentCategory.transform.DOScale(1f, tweeningDuration).SetUpdate(true).SetEase(Ease.OutBounce);
+            foreach (HeroScoreController heroScoreController in heroScoreControllers)
+            {
+                heroScoreController.DisplayScoreCategory(scoreCategory);
+            }
+            yield return new WaitForSecondsRealtime(scoreCategoryDelay);
+        }
+
+        // Show end scores
+        foreach (HeroScoreController heroScoreController in heroScoreControllers) heroScoreController.DisplayTotalPoints(true, false);
+
+        yield return new WaitForSecondsRealtime(buttonPromptDelay);
     }
     #endregion
 }

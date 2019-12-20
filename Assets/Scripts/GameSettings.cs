@@ -29,6 +29,7 @@ public class GameSettings : ScriptableObject
 
     [Space]
     [SerializeField] private bool useEndScores = true;
+    [SerializeField] private float delayForButtonPrompt = 10f;
     [ConditionalHide("useEndScores", true)]
     [SerializeField] private int bestOf = 5;
 
@@ -63,6 +64,7 @@ public class GameSettings : ScriptableObject
     public List<ScoreCategory> RunnerScoreCategories { get { return runnerScoreCategories; } }
     public bool UseEndScores { get { return useEndScores; } }
     public int BestOf { get { return bestOf; } }
+    public float DelayForButtonPrompt { get { return delayForButtonPrompt; } }
     #endregion
 
 
