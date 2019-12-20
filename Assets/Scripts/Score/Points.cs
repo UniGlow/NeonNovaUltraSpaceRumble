@@ -33,6 +33,9 @@ public class Points : ScriptableObject
     List<int> bossDamageInLevels = new List<int>();
     List<int> bossCritDamageInLevels = new List<int>();
     List<int> bossDamageShieldedInLevels = new List<int>();
+
+    // TEMPORARY!!!!
+    List<float> levelTimes = new List<float>();
     #endregion
 
 
@@ -77,6 +80,7 @@ public class Points : ScriptableObject
     public List<int> BossDamageInLevels { get { return bossDamageInLevels; } }
     public List<int> BossCritDamageInLevels { get { return bossCritDamageInLevels; } }
     public List<int> BossDamageShieldedInLevels { get { return bossDamageShieldedInLevels; } }
+    public List<float> LevelTimes { get { return levelTimes; } }
     #endregion
 
 
@@ -165,6 +169,7 @@ public class Points : ScriptableObject
         bossDamageInLevels.Clear();
         bossCritDamageInLevels.Clear();
         bossDamageShieldedInLevels.Clear();
+        levelTimes.Clear();
     }
     #endregion
 
@@ -176,6 +181,7 @@ public class Points : ScriptableObject
         bossDamageInLevels.Add(bossPointsNormal);
         bossCritDamageInLevels.Add(bossPointsCritical);
         bossDamageShieldedInLevels.Add(bossTotalPointsShielded);
+        levelTimes.Add(Time.timeSinceLevelLoad - 4f);
     }
     #endregion
 

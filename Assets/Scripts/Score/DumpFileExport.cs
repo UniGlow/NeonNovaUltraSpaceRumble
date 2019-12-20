@@ -289,7 +289,7 @@ public class DumpFileExport : MonoBehaviour
 
 	public void CreateTestDump()
 	{
-		CreateDumpFileEntry(hero1Config, hero2Config, hero3Config, bossConfig, matchDurations, points, gameSettings, versionNumber);
+		CreateDumpFileEntry(hero1Config, hero2Config, hero3Config, bossConfig, points.LevelTimes, points, gameSettings, versionNumber);
 	}
     #endregion
 
