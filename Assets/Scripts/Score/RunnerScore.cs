@@ -46,7 +46,7 @@ public class RunnerScore : ClassScore, IScore
         if (orbHeroHits != 0)
         {
             // TODO: Remap-Function may not support inverted Remapping from(0.3 - 0) to(0 - 100)
-            heroHitScore = Mathf.RoundToInt(orbHeroHitsPerSecond.Remap(orbHeroHitsCategory.worstValue, 0f, orbHeroHitsCategory.optimalValue, gameSettings.OptimalScorePerSecond));
+            heroHitScore = Mathf.RoundToInt(orbHeroHitsPerSecond.Remap(orbHeroHitsCategory.worstValue, 0f, orbHeroHitsCategory.optimalValue, gameSettings.OptimalScorePerSecond / gameSettings.RunnerScoreCategories.Count));
         }
         scores.Add(orbHeroHitsCategory, heroHitScore);
 
@@ -54,7 +54,7 @@ public class RunnerScore : ClassScore, IScore
         float orbBossHitsPerSecond = orbBossHits / activeTime;
         int bossHitScore = 0;
         if (orbBossHits != 0)
-            bossHitScore = Mathf.RoundToInt((orbBossHitsPerSecond / orbBossHitsCategory.optimalValue) * gameSettings.OptimalScorePerSecond);
+            bossHitScore = Mathf.RoundToInt((orbBossHitsPerSecond / orbBossHitsCategory.optimalValue) * gameSettings.OptimalScorePerSecond / gameSettings.RunnerScoreCategories.Count);
         scores.Add(orbBossHitsCategory, bossHitScore);
 
         return scores;

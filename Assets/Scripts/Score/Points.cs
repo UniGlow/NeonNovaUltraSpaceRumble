@@ -34,7 +34,6 @@ public class Points : ScriptableObject
     List<int> bossCritDamageInLevels = new List<int>();
     List<int> bossDamageShieldedInLevels = new List<int>();
 
-    // TEMPORARY!!!!
     List<float> levelTimes = new List<float>();
     #endregion
 
