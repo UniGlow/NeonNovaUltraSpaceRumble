@@ -18,6 +18,12 @@ public class DebugMode : MonoBehaviour
     [HideInInspector] public string intensifyTime;
     [HideInInspector] public string intensifyAmount;
     [HideInInspector] public string pointLeadToWin;
+    [HideInInspector] public string optimalScorePerSecond;
+    [HideInInspector] public string optimalCritDamage;
+    [HideInInspector] public string optimalDamage;
+    [HideInInspector] public string optimalShieldingPercentage;
+    [HideInInspector] public string optimalBossOrbHits;
+    [HideInInspector] public string worstHeroOrbHits;
 
     private bool debugMode = false;
 
@@ -46,6 +52,14 @@ public class DebugMode : MonoBehaviour
         intensifyAmount = gameSettings.IntensifyAmount.ToString();
         pointLeadToWin = points.PointLeadToWin.ToString();
         colorSwitchInterval = gameSettings.BossColorSwitchInterval.ToString();
+
+        // Scoring System
+        optimalScorePerSecond = gameSettings.OptimalScorePerSecond.ToString();
+        optimalCritDamage = gameSettings.DamageScoreCategories.Find(x => x.name == "CritDamageDone").optimalValue.ToString();
+        optimalDamage = gameSettings.DamageScoreCategories.Find(x => x.name == "DamageDone").optimalValue.ToString();
+        optimalShieldingPercentage = gameSettings.TankScoreCategories.Find(x => x.name == "DamageShielded").optimalValue.ToString();
+        optimalBossOrbHits = gameSettings.RunnerScoreCategories.Find(x => x.name == "OrbBossHits").optimalValue.ToString();
+        worstHeroOrbHits = gameSettings.RunnerScoreCategories.Find(x => x.name == "OrbHeroHits").worstValue.ToString();
     }
 
     private void Update ()
@@ -114,6 +128,14 @@ public class DebugMode : MonoBehaviour
             int newHeroesPoints;
             float newColorSwitchInterval;
 
+            // Score Parameters
+            int newOptimalScorePerSecond;
+            int newOptimalCritDamage;
+            int newOptimalDamage;
+            int newOptimalShieldingPercentage;
+            int newOptimalBossOrbHits;
+            int newWorstHeroOrbHits;
+
             GUILayout.BeginVertical("box");
             GUILayout.Label("Balancing Parameters");
             
@@ -148,6 +170,44 @@ public class DebugMode : MonoBehaviour
             GUILayout.Label("Point Lead to Win");
             pointLeadToWin = GUILayout.TextField(pointLeadToWin);
             if (System.Int32.TryParse(pointLeadToWin, out newHeroesPoints)) points.PointLeadToWin = newHeroesPoints;
+            GUILayout.EndHorizontal();
+
+            // Score System
+            GUILayout.Space(10);
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Optimal Score per Second");
+            optimalScorePerSecond = GUILayout.TextField(optimalScorePerSecond);
+            if (System.Int32.TryParse(optimalScorePerSecond, out newOptimalScorePerSecond)) gameSettings.OptimalScorePerSecond = newOptimalScorePerSecond;
+            GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Optimal Normal Damage");
+            optimalDamage = GUILayout.TextField(optimalDamage);
+            if (System.Int32.TryParse(optimalDamage, out newOptimalDamage)) gameSettings.DamageScoreCategories.Find(x => x.name == "DamageDone").optimalValue = newOptimalScorePerSecond;
+            GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Optimal Critical Damage");
+            optimalCritDamage = GUILayout.TextField(optimalCritDamage);
+            if (System.Int32.TryParse(optimalCritDamage, out newOptimalCritDamage)) gameSettings.DamageScoreCategories.Find(x => x.name == "CritDamageDone").optimalValue = newOptimalCritDamage;
+            GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Optimal Shielding Percentage");
+            optimalShieldingPercentage = GUILayout.TextField(optimalShieldingPercentage);
+            if (System.Int32.TryParse(optimalShieldingPercentage, out newOptimalShieldingPercentage)) gameSettings.TankScoreCategories.Find(x => x.name == "DamageShielded").optimalValue = newOptimalShieldingPercentage;
+            GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Optimal Boss Orb Hits");
+            optimalBossOrbHits = GUILayout.TextField(optimalBossOrbHits);
+            if (System.Int32.TryParse(optimalBossOrbHits, out newOptimalBossOrbHits)) gameSettings.RunnerScoreCategories.Find(x => x.name == "OrbBossHits").optimalValue = newOptimalBossOrbHits;
+            GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Worst Hero Orb Hits");
+            worstHeroOrbHits = GUILayout.TextField(worstHeroOrbHits);
+            if (System.Int32.TryParse(worstHeroOrbHits, out newWorstHeroOrbHits)) gameSettings.RunnerScoreCategories.Find(x => x.name == "OrbHeroHits").worstValue = newWorstHeroOrbHits;
             GUILayout.EndHorizontal();
 
             GUILayout.EndVertical();

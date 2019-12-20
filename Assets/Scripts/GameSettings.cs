@@ -57,7 +57,7 @@ public class GameSettings : ScriptableObject
     public float IntensifyTime { get { return intensifyTime; } set { intensifyTime = value; } }
     public float IntensifyAmount { get { return intensifyAmount; } set { intensifyAmount = value; } }
     public float BossColorSwitchInterval { get { return bossColorSwitchInterval; } set { bossColorSwitchInterval = value; } }
-    public float OptimalScorePerSecond { get { return optimalScorePerSecond; } }
+    public float OptimalScorePerSecond { get { return optimalScorePerSecond; } set { optimalScorePerSecond = value; } }
     public List<ScoreCategory> DamageScoreCategories { get { return damageScoreCategories; } }
     public List<ScoreCategory> TankScoreCategories { get { return tankScoreCategories; } }
     public List<ScoreCategory> RunnerScoreCategories { get { return runnerScoreCategories; } }
