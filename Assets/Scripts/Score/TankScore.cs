@@ -29,8 +29,9 @@ public class TankScore : ClassScore, IScore
         // Calculate current shieldedPercentage only if scoring is currently running
         if (lastTimeStamp != -1f) CalculateShieldedPercentage();
 
-        float score = (shieldedPercentage / damageShieldedCategory.optimalValue) * gameSettings.OptimalScorePerSecond;
-
+        float score = 0;
+        if(shieldedPercentage != 0)
+            score = (shieldedPercentage / damageShieldedCategory.optimalValue) * gameSettings.OptimalScorePerSecond;
         scores.Add(damageShieldedCategory, Mathf.RoundToInt(score));
 
         return scores;
@@ -45,9 +46,9 @@ public class TankScore : ClassScore, IScore
 
     public override void StopTimer(float timeStamp)
     {
+        if(lastTimeStamp != -1)
+            CalculateShieldedPercentage();
         base.StopTimer(timeStamp);
-
-        CalculateShieldedPercentage();
     }
 
     public void DamageShielded(int amount)

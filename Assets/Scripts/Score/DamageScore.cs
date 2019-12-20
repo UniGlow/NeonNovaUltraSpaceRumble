@@ -41,7 +41,7 @@ public class DamageScore : ClassScore, IScore
         // Boss Color changed, player stays damage
         if (lastTimeStamp != -1f)
         {
-            if (isBossWeaknessColor)
+            if (!isBossWeaknessColor)
                 activeCritTime += timeStamp - lastTimeStamp;
             else
                 activeTime += timeStamp - lastTimeStamp;
@@ -76,12 +76,16 @@ public class DamageScore : ClassScore, IScore
 
         // crit damage score
         float critDamageDonePerSecond = critDamageDone / activeCritTime;
-        int critDamageScore = Mathf.RoundToInt((critDamageDonePerSecond / critDamageDoneCategory.optimalValue) * gameSettings.OptimalScorePerSecond);
+        int critDamageScore = 0;
+        if(critDamageDone != 0)
+            critDamageScore = Mathf.RoundToInt((critDamageDonePerSecond / critDamageDoneCategory.optimalValue) * gameSettings.OptimalScorePerSecond);
         scores.Add(critDamageDoneCategory, critDamageScore);
 
         // normal damage score
         float damageDonePerSecond = damageDone / activeTime;
-        int damageScore = Mathf.RoundToInt((damageDonePerSecond / damageDoneCategory.optimalValue) * gameSettings.OptimalScorePerSecond);
+        int damageScore = 0;
+        if(damageDone != 0)
+            damageScore = Mathf.RoundToInt((damageDonePerSecond / damageDoneCategory.optimalValue) * gameSettings.OptimalScorePerSecond);
         scores.Add(damageDoneCategory, damageScore);
 
         return scores;

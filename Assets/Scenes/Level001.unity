@@ -245,12 +245,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 84447179}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca886c8d453f4ed418f6802c5b3d6732, type: 3}
+  m_Script: {fileID: 11500000, guid: 1602d1c11f9eac54e9db80015942bcfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hero1: {fileID: 11400000, guid: 0d24b38cff3ab7645a78e798c43bbfd7, type: 2}
-  hero2: {fileID: 11400000, guid: d6c98b3edc55ae84cb27c6305d3154cd, type: 2}
-  hero3: {fileID: 11400000, guid: d4656183e05243d4bab4bc739760ed99, type: 2}
+  manualExport: 1
+  hero1Config: {fileID: 11400000, guid: 0d24b38cff3ab7645a78e798c43bbfd7, type: 2}
+  hero2Config: {fileID: 11400000, guid: d6c98b3edc55ae84cb27c6305d3154cd, type: 2}
+  hero3Config: {fileID: 11400000, guid: d4656183e05243d4bab4bc739760ed99, type: 2}
   bossConfig: {fileID: 11400000, guid: ca08c440eca8d854190afe2ee3e321e7, type: 2}
   matchDurations:
   - 35.4

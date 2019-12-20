@@ -26,13 +26,14 @@ public class SceneManager : MonoBehaviour
     [SerializeField] List<SceneReference> levels = new List<SceneReference>();
 
     [Header("Properties")]
+    [SerializeField] bool manualContinue = false;
     [SerializeField] float delayAtLevelEnd = 12f;
 
     [Header("Game Events")]
     [SerializeField] GameEvent levelLoadedEvent = null;
 
     // Private
-    
+    private bool waitingForInputToContinue = false;
     #endregion
 
 

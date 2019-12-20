@@ -14748,6 +14748,8 @@ GameObject:
   - component: {fileID: 114845218418286896}
   - component: {fileID: 114699601297447812}
   - component: {fileID: 114263956079094616}
+  - component: {fileID: -8612837050207909337}
+  - component: {fileID: -5131885756155236288}
   m_Layer: 8
   m_Name: HeroAI
   m_TagString: Hero
@@ -15074,6 +15076,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 114808124267496032}
+        m_MethodName: StopScoring
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   linkedMethods: []
@@ -15104,6 +15117,68 @@ MonoBehaviour:
     methodNames: []
     gameObject: {fileID: 1742559250600126}
   ignoreEventParameters: 0
+--- !u!114 &-8612837050207909337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1742559250600126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: a3637ea13dc4b674895931910892b2e2, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114808124267496032}
+        m_MethodName: UpdateScoring
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  linkedMethods: []
+  ignoreEventParameters: 1
+--- !u!114 &-5131885756155236288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1742559250600126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 5cb0235c1fda1e64dae1cfd14392faef, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114808124267496032}
+        m_MethodName: UpdateScoring
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  linkedMethods: []
+  ignoreEventParameters: 1
 --- !u!1 &1788610947506780
 GameObject:
   m_ObjectHideFlags: 0
@@ -20051,11 +20126,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4351300061492424}
     m_Modifications:
-    - target: {fileID: 5727419819541986045, guid: cbc30d6ea1e254f4fa16c0e54ff898eb,
-        type: 3}
-      propertyPath: m_Name
-      value: Shield Break EFT
-      objectReference: {fileID: 0}
     - target: {fileID: 5727419819541986046, guid: cbc30d6ea1e254f4fa16c0e54ff898eb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -20110,6 +20180,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727419819541986045, guid: cbc30d6ea1e254f4fa16c0e54ff898eb,
+        type: 3}
+      propertyPath: m_Name
+      value: Shield Break EFT
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbc30d6ea1e254f4fa16c0e54ff898eb, type: 3}

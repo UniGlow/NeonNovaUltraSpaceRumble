@@ -1,17 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using UnityEditor;
 using UnityEngine;
 
 /// <summary>
 /// 
 /// </summary>
-public static class DumpFileExport 
+public class DumpFileExport : MonoBehaviour
 {
 
 	#region Variable Declarations
 	// Serialized Fields
-
+	public bool manualExport = false;
+	[ConditionalHide("manualExport", true)]
+	[SerializeField] PlayerConfig hero1Config = null;
+	[ConditionalHide("manualExport", true)]
+	[SerializeField] PlayerConfig hero2Config = null;
+	[ConditionalHide("manualExport", true)]
+	[SerializeField] PlayerConfig hero3Config = null;
+	[ConditionalHide("manualExport", true)]
+	[SerializeField] PlayerConfig bossConfig = null;
+	[ConditionalHide("manualExport", true)]
+	[SerializeField] List<float> matchDurations = new List<float>();
+	[ConditionalHide("manualExport", true)]
+	[SerializeField] Points points = null;
+	[ConditionalHide("manualExport", true)]
+	[SerializeField] GameSettings gameSettings = null;
+	[ConditionalHide("manualExport", true)]
+	[SerializeField] VersionNumber versionNumber = null;
 	// Private
 	static string filepath = "Assets/Resources/StatsDump.txt";
     #endregion
@@ -42,7 +59,7 @@ public static class DumpFileExport
     /// <param name="points">The Points Scriptable Object</param>
     /// <param name="gameSettings">The GameSettings Scriptable Object</param>
     /// <param name="version">The VersionNumber Scriptable Object</param>
-    public static void CreateDumpFileEntry(PlayerConfig hero1, PlayerConfig hero2, PlayerConfig hero3, PlayerConfig bossConfig, List<float> matchDurations, Points points, GameSettings gameSettings, VersionNumber version)
+    public void CreateDumpFileEntry(PlayerConfig hero1, PlayerConfig hero2, PlayerConfig hero3, PlayerConfig bossConfig, List<float> matchDurations, Points points, GameSettings gameSettings, VersionNumber version)
 	{
 
 		// Declaration and initialization DumpArray with all needed Information
@@ -57,7 +74,7 @@ public static class DumpFileExport
 		}
 
 		// Each Hero Player Stats
-		// Offset between each Player in dumpArray		!!! Change when adding any new Values to Player Specific writeouts or things will break !!!
+		// Offset between each Player in dumpArray		!!! Change when adding any new Values to Player specific writeouts or things will break !!!
 		int offset = 16;
 		for (int a = 0; a < 3; a++)
 		{
@@ -130,8 +147,8 @@ public static class DumpFileExport
 				int critDamageDoneScore = 0;
 				float activeDamageTime = levelScore.DamageScore.ActiveTime;
 					// Get Score Values from Dictionary
-				damageScore.TryGetValue(gameSettings.DamageScoreCategories.Find(x => x.name == "DamageDone"), out damageDone);
-				damageScore.TryGetValue(gameSettings.DamageScoreCategories.Find(x => x.name == "CritDamageDone"), out critDamageDone);
+				damageScore.TryGetValue(gameSettings.DamageScoreCategories.Find(x => x.name == "DamageDone"), out damageDoneScore);
+				damageScore.TryGetValue(gameSettings.DamageScoreCategories.Find(x => x.name == "CritDamageDone"), out critDamageDoneScore);
 
 				// Tank values
 				int damageShielded = levelScore.TankScore.Shielded;
@@ -156,8 +173,6 @@ public static class DumpFileExport
 			// Putting it all into the Dump Array
 				// Damage
 				dumpArray[a * offset + 1][i] = damageDone.ToString() + PutRightLineEnding(i);
-				Debug.Log(dumpArray[a * offset + 1][i]);
-				Debug.Log(damageDone);
 				dumpArray[a * offset + 2][i] = damageDoneScore + PutRightLineEnding(i);
 				dumpArray[a * offset + 3][i] = critDamageDone + PutRightLineEnding(i);
 				dumpArray[a * offset + 4][i] = critDamageDoneScore + PutRightLineEnding(i);
@@ -271,6 +286,11 @@ public static class DumpFileExport
         }
 		Debug.Log(dumpText);
 	}
+
+	public void CreateTestDump()
+	{
+		CreateDumpFileEntry(hero1Config, hero2Config, hero3Config, bossConfig, matchDurations, points, gameSettings, versionNumber);
+	}
     #endregion
 
 
@@ -281,7 +301,7 @@ public static class DumpFileExport
     /// </summary>
     /// <param name="i">Column</param>
     /// <returns></returns>
-    private static string PutRightLineEnding(int i)
+    private string PutRightLineEnding(int i)
 	{
 		if (i == 5)
 		{
@@ -307,3 +327,23 @@ public static class DumpFileExport
 	#endregion
 }
 
+#if UNITY_EDITOR
+
+[CustomEditor(typeof(DumpFileExport))]
+class DumpFileExportEditor : Editor
+{
+	public override void OnInspectorGUI()
+	{
+		DumpFileExport script = (DumpFileExport)target;
+		base.OnInspectorGUI();
+		if (script.manualExport)
+		{
+			if (GUILayout.Button("Export now!"))
+			{
+				script.CreateTestDump();
+			}
+		}
+	}
+}
+
+#endif
