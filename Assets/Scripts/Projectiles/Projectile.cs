@@ -50,6 +50,7 @@ public class Projectile : MonoBehaviour
     public virtual void Initialize(int damage, PlayerConfig playerConfig, Vector3 velocity, float lifeTime = 1f)
     {
         this.playerConfig = playerConfig;
+        this.playerColor = playerConfig.ColorConfig;
         this.damage = damage;
         this.lifeTime = lifeTime;
         rigidbody.velocity = velocity;

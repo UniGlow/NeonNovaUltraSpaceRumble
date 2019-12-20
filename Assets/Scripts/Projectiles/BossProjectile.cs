@@ -37,10 +37,10 @@ public class BossProjectile : Projectile
 
         if (other.tag == Constants.TAG_HERO)
         {
-            if (playerConfig == other.transform.parent.GetComponent<Hero>().PlayerConfig.ColorConfig)
+            if (playerColor == other.transform.parent.GetComponent<Hero>().PlayerConfig.ColorConfig)
             {
                 points.ScorePoints(Faction.Boss, Mathf.RoundToInt(damage * gameSettings.CritDamageMultiplier));
-                points.UpdateBossPoints(Mathf.RoundToInt(damage * gameSettings.CritDamageMultiplier), false);
+                points.UpdateBossPoints(Mathf.RoundToInt(damage * gameSettings.CritDamageMultiplier), false, true);
                 Instantiate(critHitPS, other.ClosestPointOnBounds(transform.position), Quaternion.identity);
                 AudioManager.Instance.PlayClip(critHitSound, critHitVolume);
             }
