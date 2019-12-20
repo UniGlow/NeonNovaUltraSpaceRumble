@@ -27,6 +27,11 @@ public class GameSettings : ScriptableObject
     [Space]
     [SerializeField] private float bossColorSwitchInterval = 10f;
 
+    [Space]
+    [SerializeField] private bool useEndScores = true;
+    [ConditionalHide("useEndScores", true)]
+    [SerializeField] private int bestOf = 5;
+
     // TODO: Otimal scores for each class go here
     [Header("Hero Scoring")]
     [SerializeField] float optimalScorePerSecond = 100f;
@@ -56,6 +61,8 @@ public class GameSettings : ScriptableObject
     public List<ScoreCategory> DamageScoreCategories { get { return damageScoreCategories; } }
     public List<ScoreCategory> TankScoreCategories { get { return tankScoreCategories; } }
     public List<ScoreCategory> RunnerScoreCategories { get { return runnerScoreCategories; } }
+    public bool UseEndScores { get { return useEndScores; } }
+    public int BestOf { get { return bestOf; } }
     #endregion
 
 
