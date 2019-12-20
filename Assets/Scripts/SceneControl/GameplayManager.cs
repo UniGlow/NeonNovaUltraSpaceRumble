@@ -87,8 +87,9 @@ public class GameplayManager : LevelManager
 
     public void WaitForContinueInput()
     {
+        Time.timeScale = 0f;
         if (gameSettings.UseEndScores)
-            waitingForInputToContinue = true;
+            StartCoroutine(SetWaitForInputDelayed());
     }
     #endregion
 
@@ -139,6 +140,12 @@ public class GameplayManager : LevelManager
         yield return new WaitForSeconds(3f);
 
         RaiseLevelStarted();
+    }
+
+    IEnumerator SetWaitForInputDelayed()
+    {
+        yield return new WaitForSecondsRealtime(gameSettings.DelayForButtonPrompt);
+        waitingForInputToContinue = true;
     }
     #endregion
 }

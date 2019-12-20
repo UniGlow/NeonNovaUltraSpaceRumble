@@ -362,6 +362,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: {fileID: 689689924888366857}
   heroScore: {fileID: 11400000, guid: b27417fdb61f3db46a8afbc2656de549, type: 2}
+  availableTotalWidth: 4726
+  tweeningDuration: 0.7
 --- !u!222 &4025464464571025271
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -490,7 +492,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4969210031567163051
 RectTransform:
   m_ObjectHideFlags: 0

@@ -1666,6 +1666,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c960190ecc1261249afa261cb260fe2f, type: 3}
+--- !u!1 &1798142182 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1690773440578928, guid: c960190ecc1261249afa261cb260fe2f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1798142181}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1798142183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798142182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1602d1c11f9eac54e9db80015942bcfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manualExport: 1
+  hero1Config: {fileID: 11400000, guid: 0d24b38cff3ab7645a78e798c43bbfd7, type: 2}
+  hero2Config: {fileID: 11400000, guid: d6c98b3edc55ae84cb27c6305d3154cd, type: 2}
+  hero3Config: {fileID: 11400000, guid: d4656183e05243d4bab4bc739760ed99, type: 2}
+  bossConfig: {fileID: 11400000, guid: ca08c440eca8d854190afe2ee3e321e7, type: 2}
+  matchDurations:
+  - 35.4
+  points: {fileID: 11400000, guid: 5be3ffe199c802f45a47f0dbbedb0be5, type: 2}
+  gameSettings: {fileID: 11400000, guid: 4cbf2bb18122f9d4c92c9dbd86d8b7fa, type: 2}
+  versionNumber: {fileID: 11400000, guid: 4376f295786dbd748978747cd58dc0f4, type: 2}
 --- !u!1001 &1836055309
 PrefabInstance:
   m_ObjectHideFlags: 0

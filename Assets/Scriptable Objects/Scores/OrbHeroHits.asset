@@ -15,4 +15,4 @@ MonoBehaviour:
   name: OrbHeroHits
   displayName: Heroes hit by Orb
   optimalValue: 0
-  worstValue: 0.3
+  worstValue: 0.5

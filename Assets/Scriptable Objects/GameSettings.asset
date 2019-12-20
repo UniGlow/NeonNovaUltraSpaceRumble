@@ -17,6 +17,9 @@ MonoBehaviour:
   intensifyTime: 20
   intensifyAmount: 0.1
   bossColorSwitchInterval: 15
+  useEndScores: 0
+  delayForButtonPrompt: 10
+  bestOf: 5
   optimalScorePerSecond: 100
   damageScoreCategories:
   - {fileID: 11400000, guid: 47c8105dfa1edd64da4bb9f32b371f71, type: 2}

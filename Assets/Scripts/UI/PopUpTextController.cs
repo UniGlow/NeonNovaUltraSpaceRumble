@@ -20,6 +20,9 @@ public class PopUpTextController : MonoBehaviour
     [SerializeField] private string bossWinText = "Boss wins!";
     [SerializeField] private string herosWinText = "Heros win!";
 
+    [Header("References")]
+    [SerializeField] GameSettings gameSettings = null;
+
     // Private
     
     #endregion
@@ -44,6 +47,21 @@ public class PopUpTextController : MonoBehaviour
     #region Public Functions
     public void WinTextPopUp(Faction faction)
     {
+        if (DOTween.IsTweening(this))
+            DOTween.Kill(this);
+        text.gameObject.SetActive(true);
+        text.transform.localScale = Vector3.zero;
+        if (faction == Faction.Boss)
+            text.text = bossWinText;
+        else
+            text.text = herosWinText;
+        text.transform.DOScale(maxSize, popUpAnimationDuration).SetEase(Ease.OutBounce).SetUpdate(true).SetDelay(popUpAnimationDelay);
+    }
+
+    public void CenterScreenWinTextPopUp(Faction faction)
+    {
+        if (gameSettings.UseEndScores) return;
+
         if (DOTween.IsTweening(this))
             DOTween.Kill(this);
         text.gameObject.SetActive(true);
