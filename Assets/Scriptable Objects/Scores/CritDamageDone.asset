@@ -16,3 +16,4 @@ MonoBehaviour:
   displayName: Crit damage dealt
   optimalValue: 213
   worstValue: 0
+  color: {r: 1, g: 0.029948387, b: 0, a: 1}

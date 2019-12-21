@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: OrbHeroHits
   m_EditorClassIdentifier: 
   name: OrbHeroHits
-  displayName: Heroes hit by Orb
+  displayName: Kept team safe from Orb
   optimalValue: 0
-  worstValue: 0.5
+  worstValue: 0.3
+  color: {r: 1, g: 0.8173368, b: 0, a: 1}

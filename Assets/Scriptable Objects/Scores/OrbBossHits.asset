@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: OrbBossHits
   m_EditorClassIdentifier: 
   name: OrbBossHits
-  displayName: Boss hit by Orb
+  displayName: Guided Orb into Boss
   optimalValue: 0.5
   worstValue: 0
+  color: {r: 0.5049739, g: 0, b: 1, a: 1}

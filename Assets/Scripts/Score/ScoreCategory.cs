@@ -9,4 +9,5 @@ public class ScoreCategory : ScriptableObject
     public string displayName;
     public float optimalValue;
     public float worstValue;
+    public Color color;
 }

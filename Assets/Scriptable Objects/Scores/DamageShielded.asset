@@ -16,3 +16,4 @@ MonoBehaviour:
   displayName: Shielded damage
   optimalValue: 0.42
   worstValue: 0
+  color: {r: 0.4470588, g: 0.9411763, b: 1, a: 1}

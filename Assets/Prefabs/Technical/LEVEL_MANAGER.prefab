@@ -64,7 +64,8 @@ GameObject:
   - component: {fileID: 114780710039012894}
   - component: {fileID: 114619018464177134}
   - component: {fileID: 1267570422}
-  - component: {fileID: 6488506679400822623}
+  - component: {fileID: 5470466541486728547}
+  - component: {fileID: 1055673655189560648}
   m_Layer: 0
   m_Name: GameplayManager
   m_TagString: Untagged
@@ -165,7 +166,7 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   linkedMethods: []
   ignoreEventParameters: 0
---- !u!114 &6488506679400822623
+--- !u!114 &5470466541486728547
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -182,7 +183,38 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114780710039012894}
-        m_MethodName: WaitForContinueInput
+        m_MethodName: StopLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  linkedMethods: []
+  ignoreEventParameters: 1
+--- !u!114 &1055673655189560648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1491103438566612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: fc9864b96ef97744f821cc8269a0d460, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114780710039012894}
+        m_MethodName: ActivateContinueInput
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

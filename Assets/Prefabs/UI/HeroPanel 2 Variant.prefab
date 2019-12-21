@@ -10,13 +10,25 @@ PrefabInstance:
     - target: {fileID: 1995627627889868559, guid: 2db423a0bf7e78e419091b49110691d0,
         type: 3}
       propertyPath: m_Name
-      value: HeroPanel (1)
+      value: HeroPanel 2 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 5255127317134108324, guid: 2db423a0bf7e78e419091b49110691d0,
         type: 3}
       propertyPath: heroScore
       value: 
       objectReference: {fileID: 11400000, guid: 93243f85dea67a545889900416409d0b,
+        type: 2}
+    - target: {fileID: 5255127317134108324, guid: 2db423a0bf7e78e419091b49110691d0,
+        type: 3}
+      propertyPath: playerConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: d6c98b3edc55ae84cb27c6305d3154cd,
+        type: 2}
+    - target: {fileID: 5255127317134108324, guid: 2db423a0bf7e78e419091b49110691d0,
+        type: 3}
+      propertyPath: otherHeroConfigs.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0d24b38cff3ab7645a78e798c43bbfd7,
         type: 2}
     - target: {fileID: 689689924888366857, guid: 2db423a0bf7e78e419091b49110691d0,
         type: 3}

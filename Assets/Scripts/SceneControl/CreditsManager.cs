@@ -24,6 +24,7 @@ public class CreditsManager : LevelManager
     {
         StartCoroutine(StartAudioNextFrame());
         ruleSets = InputHelper.ChangeRuleSetForAllPlayers(RewiredConsts.LayoutManagerRuleSet.RULESETMENU);
+        Time.timeScale = 1f;
     }
 	
 	private void Update()

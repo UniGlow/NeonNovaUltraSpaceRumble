@@ -16,3 +16,4 @@ MonoBehaviour:
   displayName: Damage dealt
   optimalValue: 106.5
   worstValue: 0
+  color: {r: 0.6792453, g: 0.11854753, b: 0.11854753, a: 1}

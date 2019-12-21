@@ -24,25 +24,27 @@ public class ScoreScreenController : MonoBehaviour
 
     [SerializeField] float tweeningDuration = 0.7f;
 
+    [Header("Other Settings")]
+    [SerializeField] string endScoreText = "";
+
     [Header("Upper Panels References")]
     [SerializeField] GameObject scoreScreenParent = null;
+    [SerializeField] TextMeshProUGUI winner = null;
     [SerializeField] TextMeshProUGUI heroScore = null;
     [SerializeField] TextMeshProUGUI bossScore = null;
     [SerializeField] TextMeshProUGUI roundTime = null;
     [SerializeField] TextMeshProUGUI currentCategory = null;
 
     [Header("Scores Panels References")]
-    [SerializeField] TextMeshProUGUI bossDamageScore = null;
-    [SerializeField] TextMeshProUGUI bossCritDamageScore = null;
-    [SerializeField] TextMeshProUGUI bossShieldedScore = null;
     [SerializeField] List<HeroScoreController> heroScoreControllers = new List<HeroScoreController>();
-    //[SerializeField] 
+    [SerializeField] BossScoreController bossScoreController = null;
 
     [Header("Out Of Prefab References")]
     [SerializeField] Points points = null;
     [SerializeField] GameSettings gameSettings = null;
-    [SerializeField] List<PlayerConfig> playerConfigs = new List<PlayerConfig>();
     [SerializeField] VersionNumber versionNumber = null;
+    [SerializeField] GameEvent scoreScreenFinishedEvent = null;
+    [SerializeField] PlayerConfig bossPlayerConfig = null;
 
     // Private
     Faction winnerOfCurrentRound;
@@ -81,25 +83,36 @@ public class ScoreScreenController : MonoBehaviour
         winnerOfCurrentRound = points.WinningFactions[points.WinningFactions.Count - 1];
 
         // Display the scores of previous rounds
-        if (winnerOfCurrentRound == Faction.Boss) bossScore.text = (points.BossWins - 1).ToString();
-        if (winnerOfCurrentRound == Faction.Heroes) heroScore.text = (points.HeroWins - 1).ToString();
-
-        // TODO: Display texts ("Red", "Blue", "Green") in correct Hero colors
+        if (winnerOfCurrentRound == Faction.Boss)
+        {
+            bossScore.text = (points.BossWins - 1).ToString();
+            heroScore.text = points.HeroWins.ToString();
+        }
+        else if (winnerOfCurrentRound == Faction.Heroes)
+        {
+            bossScore.text = points.BossWins.ToString();
+            heroScore.text = (points.HeroWins - 1).ToString();
+        }
 
         // Set all Hero Scores to values previous to this round
-        foreach (HeroScoreController heroScoreController in heroScoreControllers) heroScoreController.DisplayTotalPoints(false, true);
+        foreach (HeroScoreController heroScoreController in heroScoreControllers)
+        {
+            // Calculate total points to have the leading hero available (necessary for bar scales)
+            heroScoreController.CalculateTotalPoints();
+            // Then display the points without the current level
+            heroScoreController.DisplayTotalPoints(false, true);
+        }
 
-        // Clear/hide all other texts
+        // Set round time, but hide it for now
         roundTime.transform.localScale = Vector3.zero;
-        // TODO: Someone needs to provide the actual playtime of the round here
-        int roundTimeMinutes = Mathf.FloorToInt((Time.timeSinceLevelLoad - 4f) / 60);
-        int roundTimeSeconds = Mathf.RoundToInt(((Time.timeSinceLevelLoad - 4f) % 60));
+        int roundTimeMinutes = Mathf.FloorToInt(points.LevelTimes[points.LevelTimes.Count - 1] / 60);
+        int roundTimeSeconds = Mathf.RoundToInt(((points.LevelTimes[points.LevelTimes.Count - 1]) % 60));
         if (roundTimeSeconds < 10) roundTime.text = roundTimeMinutes.ToString() + ":0" + roundTimeSeconds.ToString();
         else roundTime.text = roundTimeMinutes.ToString() + ":" + roundTimeSeconds.ToString();
+
+        // Reset anything else
+        bossScoreController.Clear();
         currentCategory.text = "";
-        bossDamageScore.text = "";
-        bossCritDamageScore.text = "";
-        bossShieldedScore.text = "";
 
         // Show the screen
         scoreScreenParent.SetActive(true);
@@ -109,7 +122,8 @@ public class ScoreScreenController : MonoBehaviour
         {
             bossScore.transform.DOScale(0f, 0.1f).SetUpdate(true).SetDelay(factionScoreIncreaseDelay).OnComplete(() =>
             {
-                bossScore.transform.DOScale(1f, tweeningDuration).SetEase(Ease.OutBounce).SetUpdate(true).SetDelay(factionScoreIncreaseDelay).OnStart(() =>
+                bossScore.text = points.BossWins.ToString();
+                bossScore.transform.DOScale(1f, tweeningDuration).SetEase(Ease.OutBounce).SetUpdate(true).OnStart(() =>
                 {
                     roundTime.transform.DOScale(1f, tweeningDuration).SetEase(Ease.OutBounce).SetUpdate(true).SetDelay(roundTimeDelay).OnStart(() =>
                     {
@@ -147,7 +161,7 @@ public class ScoreScreenController : MonoBehaviour
     {
         // TODO: Display Winner
 
-        dumpFileExporter.CreateDumpFileEntry(playerConfigs[0], playerConfigs[1], playerConfigs[2], playerConfigs[3], points.LevelTimes, points, gameSettings, versionNumber);
+        dumpFileExporter.CreateDumpFileEntry(heroScoreControllers[0].PlayerConfig, heroScoreControllers[1].PlayerConfig, heroScoreControllers[2].PlayerConfig, bossPlayerConfig, points.LevelTimes, points, gameSettings, versionNumber);
     }
     #endregion
 
@@ -166,13 +180,50 @@ public class ScoreScreenController : MonoBehaviour
             {
                 heroScoreController.DisplayScoreCategory(scoreCategory);
             }
+            bossScoreController.DisplayScoreCategory(scoreCategory);
             yield return new WaitForSecondsRealtime(scoreCategoryDelay);
         }
 
         // Show end scores
+        currentCategory.transform.localScale = Vector3.zero;
+        currentCategory.text = endScoreText;
+        currentCategory.transform.DOScale(1f, tweeningDuration).SetUpdate(true).SetEase(Ease.OutBounce);
         foreach (HeroScoreController heroScoreController in heroScoreControllers) heroScoreController.DisplayTotalPoints(true, false);
 
         yield return new WaitForSecondsRealtime(buttonPromptDelay);
+        
+        // Announce winner on final score screen
+        if (points.BossWins > gameSettings.BestOf / 2)
+        {
+            winner.transform.localScale = Vector2.zero;
+            winner.text = "Boss Wins!";
+            winner.transform.DOScale(1f, tweeningDuration).SetUpdate(true).OnComplete(() => 
+            {
+                winner.transform.DOScale(0.7f, tweeningDuration).SetUpdate(true).SetLoops(99, LoopType.Yoyo);
+            });
+            RaiseScoreScreenFinished(true);
+        }
+        else if (points.HeroWins > gameSettings.BestOf / 2)
+        {
+            winner.transform.localScale = Vector2.zero;
+            HeroScoreController winningHero = null;
+            foreach (HeroScoreController heroScoreController in heroScoreControllers)
+            {
+                if (winningHero == null || heroScoreController.TotalScore > winningHero.TotalScore) winningHero = heroScoreController;
+            }
+            winner.text = winningHero.PlayerConfig.ColorConfig.name + " Hero Wins!";
+            winner.transform.DOScale(1f, tweeningDuration).SetUpdate(true).OnComplete(() =>
+            {
+                winner.transform.DOScale(0.7f, tweeningDuration).SetUpdate(true).SetLoops(99, LoopType.Yoyo);
+            });
+            RaiseScoreScreenFinished(true);
+        }
+        else RaiseScoreScreenFinished(false);
+    }
+
+    void RaiseScoreScreenFinished(bool finalScoreScreen)
+    {
+        scoreScreenFinishedEvent.Raise(this, finalScoreScreen);
     }
     #endregion
 }

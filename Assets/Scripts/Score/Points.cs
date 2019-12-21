@@ -23,7 +23,7 @@ public class Points : ScriptableObject
     // Private
     int currentHeroesPointLead = 0;
 
-    int bossTotalPoints = 0; // total points including shielded damage
+    int bossTotalPointsInLevel = 0; // total points including shielded damage
     int bossPointsNormal = 0;
     int bossPointsCritical = 0;
     int bossTotalPointsShielded = 0;
@@ -35,6 +35,7 @@ public class Points : ScriptableObject
     List<int> bossDamageShieldedInLevels = new List<int>();
 
     List<float> levelTimes = new List<float>();
+    int pointsForLeadingHero;
     #endregion
 
 
@@ -50,7 +51,7 @@ public class Points : ScriptableObject
             pointLeadToWin = value;
         }
     }
-    public int BossTotalPoints { get { return bossTotalPoints; } }
+    public int BossTotalPointsInLevel { get { return bossTotalPointsInLevel; } }
     public List<Faction> WinningFactions { get { return winningFactions; } }
     public int BossWins
     {
@@ -80,6 +81,12 @@ public class Points : ScriptableObject
     public List<int> BossCritDamageInLevels { get { return bossCritDamageInLevels; } }
     public List<int> BossDamageShieldedInLevels { get { return bossDamageShieldedInLevels; } }
     public List<float> LevelTimes { get { return levelTimes; } }
+    public int PointsForLeadingHero { get { return pointsForLeadingHero; }
+        set
+        {
+            if (value > pointsForLeadingHero) pointsForLeadingHero = value;
+        }
+    }
     #endregion
 
 
@@ -120,16 +127,16 @@ public class Points : ScriptableObject
         if (currentHeroesPointLead >= pointLeadToWin)
         {
             winningFactions.Add(Faction.Heroes);
-            RaiseLevelCompleted(Faction.Heroes);
             SaveBossPoints();
             currentHeroesPointLead = 0;
+            RaiseLevelCompleted(Faction.Heroes);
         }
         else if (-currentHeroesPointLead >= pointLeadToWin)
         {
             winningFactions.Add(Faction.Boss);
-            RaiseLevelCompleted(Faction.Boss);
             SaveBossPoints();
             currentHeroesPointLead = 0;
+            RaiseLevelCompleted(Faction.Boss);
         }
     }
 
@@ -140,7 +147,7 @@ public class Points : ScriptableObject
     public void ResetLevelPoints(bool endlessHealth)
     {
         currentHeroesPointLead = 0;
-        bossTotalPoints = 0;
+        bossTotalPointsInLevel = 0;
         bossTotalPointsShielded = 0;
 
         bossPointsNormal = 0;
@@ -152,7 +159,7 @@ public class Points : ScriptableObject
 
     public void UpdateBossPoints(int amount, bool shielded, bool crit = false)
     {
-        bossTotalPoints += amount;
+        bossTotalPointsInLevel += amount;
         if (shielded) bossTotalPointsShielded += amount;
         if (crit) bossPointsCritical += amount;
         else bossPointsNormal += amount;
@@ -169,6 +176,7 @@ public class Points : ScriptableObject
         bossCritDamageInLevels.Clear();
         bossDamageShieldedInLevels.Clear();
         levelTimes.Clear();
+        pointsForLeadingHero = 0;
     }
     #endregion
 

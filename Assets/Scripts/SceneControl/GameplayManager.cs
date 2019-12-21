@@ -45,7 +45,6 @@ public class GameplayManager : LevelManager
 
         HandleIntensify();
 
-        //TODO: Delay
         if (waitingForInputToContinue)
         {
             if((points.BossWins > gameSettings.BestOf / 2) || (points.HeroWins > gameSettings.BestOf / 2))
@@ -85,11 +84,14 @@ public class GameplayManager : LevelManager
         StartCoroutine(InitializeLevelCoroutine());
     }
 
-    public void WaitForContinueInput()
+    public void ActivateContinueInput()
+    {
+        waitingForInputToContinue = true;
+    }
+
+    public void StopLevel()
     {
         Time.timeScale = 0f;
-        if (gameSettings.UseEndScores)
-            StartCoroutine(SetWaitForInputDelayed());
     }
     #endregion
 
@@ -140,12 +142,6 @@ public class GameplayManager : LevelManager
         yield return new WaitForSeconds(3f);
 
         RaiseLevelStarted();
-    }
-
-    IEnumerator SetWaitForInputDelayed()
-    {
-        yield return new WaitForSecondsRealtime(gameSettings.DelayForButtonPrompt);
-        waitingForInputToContinue = true;
     }
     #endregion
 }

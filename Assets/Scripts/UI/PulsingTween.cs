@@ -40,13 +40,13 @@ public class PulsingTween : MonoBehaviour
             textMesh = GetComponent<TextMeshProUGUI>();
             originalAlpha = textMesh.color.a;
             textMesh.color = new Color(textMesh.color.r, textMesh.color.g, textMesh.color.b, minAlpha);
-            DOTween.ToAlpha(() => textMesh.color, x => textMesh.color = x, maxAlpha, duration).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad).SetId(this);
+            DOTween.ToAlpha(() => textMesh.color, x => textMesh.color = x, maxAlpha, duration).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad).SetId(this).SetUpdate(true);
         }
 
         if (rectTransform != null)
         {
             originalScale = rectTransform.localScale;
-            rectTransform.DOScale(Vector3.one * scaleTo, duration).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad).SetId(this);
+            rectTransform.DOScale(Vector3.one * scaleTo, duration).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad).SetId(this).SetUpdate(true);
         }
 	}
 
@@ -69,7 +69,19 @@ public class PulsingTween : MonoBehaviour
     #region Public Functions
     public void SetActive(bool value)
     {
-        gameObject.SetActive(value);
+        if (textMesh != null) textMesh.gameObject.SetActive(value);
+        if (rectTransform != null) rectTransform.gameObject.SetActive(value);
+    }
+
+    /// <summary>
+    /// Sets the active inverted.
+    /// </summary>
+    /// <param name="value">if set to <c>true</c> [value].</param>
+    /// <remarks>Specified "inverted" for use with GameEvents.</remarks>
+    public void SetActiveInverted(bool value)
+    {
+        if (textMesh != null) textMesh.gameObject.SetActive(!value);
+        if (rectTransform != null) rectTransform.gameObject.SetActive(!value);
     }
     #endregion
 }
