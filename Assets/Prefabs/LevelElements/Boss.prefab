@@ -429,15 +429,15 @@ MonoBehaviour:
   attackDamagePerShot: 20
   attackProjectileSpeed: 70
   attackProjectileLifeTime: 1
-  attackCooldown: 0.18
+  attackCooldown: 0.165
   abilityDamagePerShot: 6
   numberOfProjectiles: 11
-  abilityProjectileSpeed: 10
+  abilityProjectileSpeed: 12
   abilityProjectileLifeTime: 2
   numberOfNovas: 25
   timeBetweenNovas: 0.1
   consecutiveNovaOffset: 0.06
-  abilityCooldown: 13
+  abilityCooldown: 12
   movementSpeedReduction: 0.5
   abilityAnnounceDuration: 1.5
   rumbleStrengthDeep: 1
@@ -758,12 +758,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7451406894877567741, guid: e0d465a34b1d7c043a79f60146f27edd,
+    - target: {fileID: 7451406894093603596, guid: e0d465a34b1d7c043a79f60146f27edd,
         type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7451406894093603596, guid: e0d465a34b1d7c043a79f60146f27edd,
+    - target: {fileID: 7451406894877567741, guid: e0d465a34b1d7c043a79f60146f27edd,
         type: 3}
       propertyPath: m_IsActive
       value: 1
