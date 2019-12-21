@@ -82,7 +82,6 @@ public class HeroScoreController : MonoBehaviour
 
         // Inform the points for check for leading hero
         points.PointsForLeadingHero = totalScore;
-        Debug.Log(totalScore, gameObject);
 
         // Subtract the points gained in the current level
         scoresDictCurrentLevel.Clear();

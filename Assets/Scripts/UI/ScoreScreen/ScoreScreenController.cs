@@ -157,12 +157,7 @@ public class ScoreScreenController : MonoBehaviour
 
 
     #region Private Functions
-    void DisplayWinner()
-    {
-        // TODO: Display Winner
-
-        dumpFileExporter.CreateDumpFileEntry(heroScoreControllers[0].PlayerConfig, heroScoreControllers[1].PlayerConfig, heroScoreControllers[2].PlayerConfig, bossPlayerConfig, points.LevelTimes, points, gameSettings, versionNumber);
-    }
+    
     #endregion
 
 
@@ -201,6 +196,7 @@ public class ScoreScreenController : MonoBehaviour
             {
                 winner.transform.DOScale(0.7f, tweeningDuration).SetUpdate(true).SetLoops(99, LoopType.Yoyo);
             });
+            dumpFileExporter.CreateDumpFileEntry(heroScoreControllers[0].PlayerConfig, heroScoreControllers[1].PlayerConfig, heroScoreControllers[2].PlayerConfig, bossPlayerConfig, points.LevelTimes, points, gameSettings, versionNumber);
             RaiseScoreScreenFinished(true);
         }
         else if (points.HeroWins > gameSettings.BestOf / 2)
@@ -216,6 +212,7 @@ public class ScoreScreenController : MonoBehaviour
             {
                 winner.transform.DOScale(0.7f, tweeningDuration).SetUpdate(true).SetLoops(99, LoopType.Yoyo);
             });
+            dumpFileExporter.CreateDumpFileEntry(heroScoreControllers[0].PlayerConfig, heroScoreControllers[1].PlayerConfig, heroScoreControllers[2].PlayerConfig, bossPlayerConfig, points.LevelTimes, points, gameSettings, versionNumber);
             RaiseScoreScreenFinished(true);
         }
         else RaiseScoreScreenFinished(false);
