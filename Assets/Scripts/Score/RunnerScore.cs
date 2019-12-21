@@ -17,7 +17,7 @@ public class RunnerScore : ClassScore, IScore
     public int OrbBossHits { get { return orbBossHits; } }
     public int OrbHeroHits { get { return orbHeroHits; } }
 
-    public RunnerScore(GameSettings gameSettings, Points points) : base (gameSettings, points) 
+    public RunnerScore(GameSettings gameSettings, Points points) : base (gameSettings, points)
     {
         orbBossHitsCategory = gameSettings.RunnerScoreCategories.Find(x => x.name == "OrbBossHits");
         orbHeroHitsCategory = gameSettings.RunnerScoreCategories.Find(x => x.name == "OrbHeroHits");
@@ -47,7 +47,7 @@ public class RunnerScore : ClassScore, IScore
         {
             // hero orb hits
             float orbHeroHitsPerSecond = orbHeroHits / activeTime;
-            int heroHitScore = Mathf.RoundToInt(orbHeroHitsPerSecond.Remap(orbHeroHitsCategory.worstValue, 0f, orbHeroHitsCategory.optimalValue, gameSettings.OptimalScorePerSecond / gameSettings.RunnerScoreCategories.Count));
+            int heroHitScore = orbHeroHits <= orbHeroHitsCategory.worstValue ? Mathf.RoundToInt(orbHeroHitsPerSecond.Remap(orbHeroHitsCategory.worstValue, 0f, orbHeroHitsCategory.optimalValue, gameSettings.OptimalScorePerSecond / gameSettings.RunnerScoreCategories.Count)) : 0;
             scores.Add(new ScoreCategoryResult(orbHeroHitsCategory, heroHitScore));
 
             // boss orb hits
