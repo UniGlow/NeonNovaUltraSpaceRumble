@@ -33,7 +33,7 @@ public class TankScore : ClassScore, IScore
 
         float score = 0;
         if(shieldedPercentage != 0)
-            score = (shieldedPercentage / damageShieldedCategory.optimalValue) * gameSettings.OptimalScorePerSecond;
+            score = ((shieldedPercentage / damageShieldedCategory.optimalValue) * gameSettings.OptimalScorePerSecond) * activeTime;
         scores.Add(new ScoreCategoryResult(damageShieldedCategory, Mathf.RoundToInt(score)));
 
         scoreCategoryResults = scores;
