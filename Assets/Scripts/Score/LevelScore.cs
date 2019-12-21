@@ -8,6 +8,9 @@ public class LevelScore : IScore
     DamageScore damageScore;
     TankScore tankScore;
     RunnerScore runnerScore;
+    List<ScoreCategoryResult> scoreCategoryResults = new List<ScoreCategoryResult>();
+
+
 
     public DamageScore DamageScore { get { return damageScore; } }
     public TankScore TankScore { get { return tankScore; } }
@@ -22,28 +25,29 @@ public class LevelScore : IScore
         runnerScore = new RunnerScore(gameSettings, points);
     }
 
-    public Dictionary<ScoreCategory, int> GetScore()
+    public List<ScoreCategoryResult> GetScore()
     {
-        Dictionary<ScoreCategory, int> scores = new Dictionary<ScoreCategory, int>();
+        List<ScoreCategoryResult> scores = new List<ScoreCategoryResult>();
 
-        Dictionary<ScoreCategory, int> damageScores = damageScore.GetScore();
-        foreach (KeyValuePair<ScoreCategory, int> damageScore in damageScores)
+        List<ScoreCategoryResult> damageScores = damageScore.GetScore();
+        foreach (ScoreCategoryResult damageScoreResults in damageScores)
         {
-            scores.Add(damageScore.Key, damageScore.Value);
+            scores.Add(new ScoreCategoryResult(damageScoreResults.scoreCategory, damageScoreResults.result));
         }
 
-        Dictionary<ScoreCategory, int> tankScores = tankScore.GetScore();
-        foreach (KeyValuePair<ScoreCategory, int> tankScore in tankScores)
+        List<ScoreCategoryResult> tankScores = tankScore.GetScore();
+        foreach (ScoreCategoryResult tankScore in tankScores)
         {
-            scores.Add(tankScore.Key, tankScore.Value);
+            scores.Add(new ScoreCategoryResult(tankScore.scoreCategory, tankScore.result));
         }
 
-        Dictionary<ScoreCategory, int> runnerScores = runnerScore.GetScore();
-        foreach (KeyValuePair<ScoreCategory, int> runnerScore in runnerScores)
+        List<ScoreCategoryResult> runnerScores = runnerScore.GetScore();
+        foreach (ScoreCategoryResult runnerScore in runnerScores)
         {
-            scores.Add(runnerScore.Key, runnerScore.Value);
+            scores.Add(new ScoreCategoryResult(runnerScore.scoreCategory, runnerScore.result));
         }
 
+        scoreCategoryResults = scores;
         return scores;
     }
 }

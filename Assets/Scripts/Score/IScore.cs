@@ -4,5 +4,18 @@ using UnityEngine;
 
 public interface IScore
 {
-    Dictionary<ScoreCategory, int> GetScore();
+    List<ScoreCategoryResult> GetScore();
+}
+
+[System.Serializable]
+public class ScoreCategoryResult
+{
+    public ScoreCategory scoreCategory;
+    public int result;
+
+    public ScoreCategoryResult(ScoreCategory scoreCategory, int result)
+    {
+        this.scoreCategory = scoreCategory;
+        this.result = result;
+    }
 }

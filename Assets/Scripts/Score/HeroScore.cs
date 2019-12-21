@@ -11,7 +11,8 @@ public class HeroScore : ScriptableObject, IScore
 
     List<LevelScore> levelScores = new List<LevelScore>();
     LevelScore currentLevelScore = null;
-    
+    List<ScoreCategoryResult> scoreCategoryResults = new List<ScoreCategoryResult>();
+
 
 
     public LevelScore CurrentLevelScore { get { return currentLevelScore; } }
@@ -67,11 +68,11 @@ public class HeroScore : ScriptableObject, IScore
         CurrentLevelScore.RunnerScore.StopTimer(timeStamp);
     }
 
-    public Dictionary<ScoreCategory, int> GetScore()
+    public List<ScoreCategoryResult> GetScore()
     {
-        Dictionary<ScoreCategory, int> scores = new Dictionary<ScoreCategory, int>();
+        List<ScoreCategoryResult> scores = new List<ScoreCategoryResult>();
 
-        List<Dictionary<ScoreCategory, int>> levelScoresResults = new List<Dictionary<ScoreCategory, int>>();
+        List<List<ScoreCategoryResult>> levelScoresResults = new List<List<ScoreCategoryResult>>();
 
         foreach (LevelScore levelScore in levelScores)
         {
@@ -79,15 +80,16 @@ public class HeroScore : ScriptableObject, IScore
         }
 
         // merge all level scores
-        foreach (Dictionary<ScoreCategory, int> levelScore in levelScoresResults)
+        foreach (List<ScoreCategoryResult> levelScore in levelScoresResults)
         {
-            foreach (KeyValuePair<ScoreCategory, int> scoreCategory in levelScore)
+            foreach (ScoreCategoryResult scoreCategoryResult in levelScore)
             {
-                if (!scores.ContainsKey(scoreCategory.Key)) scores.Add(scoreCategory.Key, scoreCategory.Value);
-                else scores[scoreCategory.Key] += scoreCategory.Value;
+                if (!scores.Contains(scoreCategoryResult)) scores.Add(new ScoreCategoryResult(scoreCategoryResult.scoreCategory, scoreCategoryResult.result));
+                else scores.Find(x => x == scoreCategoryResult).result += scoreCategoryResult.result;
             }
         }
 
+        scoreCategoryResults = scores;
         return scores;
     }
 }

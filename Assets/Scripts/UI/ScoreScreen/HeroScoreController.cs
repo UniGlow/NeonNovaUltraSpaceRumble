@@ -17,15 +17,14 @@ public class HeroScoreController : MonoBehaviour
 
     [Header("References")]
     [SerializeField] PlayerConfig playerConfig = null;
-    [SerializeField] List<PlayerConfig> otherHeroConfigs = new List<PlayerConfig>();
     [SerializeField] Points points = null;
     [SerializeField] GameObject scoreCategoryBarPrefab = null;
     [SerializeField] GameObject scoreCategorySeperatorPrefab = null;
 
     // Private
-    Dictionary<ScoreCategory, int> scoresDictTotalPoints = new Dictionary<ScoreCategory, int>();
+    List<ScoreCategoryResult> totalPoints = new List<ScoreCategoryResult>();
 
-    Dictionary<ScoreCategory, int> scoresDictCurrentLevel = new Dictionary<ScoreCategory, int>();
+    List<ScoreCategoryResult> currentLevelPoints = new List<ScoreCategoryResult>();
     int totalScore;
     int totalScoreWithoutCurrentLevel;
     #endregion
@@ -65,7 +64,7 @@ public class HeroScoreController : MonoBehaviour
 
     public void DisplayScoreCategory(ScoreCategory scoreCategory)
     {
-        DisplayScore(scoresDictCurrentLevel[scoreCategory], scoreCategory, true);
+        DisplayScore(currentLevelPoints.Find(x => x.scoreCategory == scoreCategory).result, scoreCategory, true);
     }
 
     public void CalculateTotalPoints()
@@ -73,25 +72,25 @@ public class HeroScoreController : MonoBehaviour
         totalScore = 0;
 
         // Calculate total points
-        scoresDictTotalPoints.Clear();
-        scoresDictTotalPoints = playerConfig.HeroScore.GetScore();
-        foreach (KeyValuePair<ScoreCategory, int> scoreForCategory in scoresDictTotalPoints)
+        totalPoints.Clear();
+        totalPoints = playerConfig.HeroScore.GetScore();
+        foreach (ScoreCategoryResult scoreForCategoryResult in totalPoints)
         {
-            totalScore += scoreForCategory.Value;
+            totalScore += scoreForCategoryResult.result;
         }
 
         // Inform the points for check for leading hero
         points.PointsForLeadingHero = totalScore;
 
         // Subtract the points gained in the current level
-        scoresDictCurrentLevel.Clear();
-        scoresDictCurrentLevel = playerConfig.HeroScore.CurrentLevelScore.GetScore();
+        currentLevelPoints.Clear();
+        currentLevelPoints = playerConfig.HeroScore.CurrentLevelScore.GetScore();
         if (PlayerConfig.HeroScore.LevelScores.Count > 1)
         {
             totalScoreWithoutCurrentLevel = totalScore;
-            foreach (KeyValuePair<ScoreCategory, int> currentLevelDictEntry in scoresDictCurrentLevel)
+            foreach (ScoreCategoryResult currentScoreCategoryResult in currentLevelPoints)
             {
-                totalScoreWithoutCurrentLevel -= currentLevelDictEntry.Value;
+                totalScoreWithoutCurrentLevel -= currentScoreCategoryResult.result;
             }
         }
         else totalScoreWithoutCurrentLevel = 0;
@@ -134,13 +133,13 @@ public class HeroScoreController : MonoBehaviour
             if (levelScore == playerConfig.HeroScore.CurrentLevelScore) continue;
 
             // Draw the bars
-            Dictionary<ScoreCategory, int> levelScores = levelScore.GetScore();
-            foreach (KeyValuePair<ScoreCategory, int> scoreForCategory in levelScores)
+            List<ScoreCategoryResult> levelScores = levelScore.GetScore();
+            foreach (ScoreCategoryResult scoreForCategory in levelScores)
             {
                 GameObject scoreBar = Instantiate(scoreCategoryBarPrefab, scorePanel);
-                scoreBar.GetComponent<Image>().color = scoreForCategory.Key.color;
+                scoreBar.GetComponent<Image>().color = scoreForCategory.scoreCategory.color;
                 RectTransform rectTransform = scoreBar.GetComponent<RectTransform>();
-                rectTransform.sizeDelta = new Vector2(scoreForCategory.Value * widthPerPoint, rectTransform.sizeDelta.y);
+                rectTransform.sizeDelta = new Vector2(scoreForCategory.result * widthPerPoint, rectTransform.sizeDelta.y);
             }
 
             // Draw seperator line

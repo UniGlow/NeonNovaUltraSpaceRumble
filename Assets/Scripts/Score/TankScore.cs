@@ -10,6 +10,9 @@ public class TankScore : ClassScore, IScore
     float shieldedPercentage = 0f;
     int bossTotalPointsOnLastStart = 0;
     ScoreCategory damageShieldedCategory;
+    List<ScoreCategoryResult> scoreCategoryResults = new List<ScoreCategoryResult>();
+
+
 
     public int Shielded { get { return damageShielded; } }
     public int BossTotalPointsDuringActivation { get { return bossTotalPointsDuringActivation; } }
@@ -22,17 +25,18 @@ public class TankScore : ClassScore, IScore
 
 
     
-    public Dictionary<ScoreCategory, int> GetScore()
+    public List<ScoreCategoryResult> GetScore()
     {
         StopTimer(Time.timeSinceLevelLoad);
-        
-        Dictionary<ScoreCategory, int> scores = new Dictionary<ScoreCategory, int>();
+
+        List<ScoreCategoryResult> scores = new List<ScoreCategoryResult>();
 
         float score = 0;
         if(shieldedPercentage != 0)
             score = (shieldedPercentage / damageShieldedCategory.optimalValue) * gameSettings.OptimalScorePerSecond;
-        scores.Add(damageShieldedCategory, Mathf.RoundToInt(score));
+        scores.Add(new ScoreCategoryResult(damageShieldedCategory, Mathf.RoundToInt(score)));
 
+        scoreCategoryResults = scores;
         return scores;
     }
 

@@ -105,10 +105,10 @@ public class DumpFileExport : MonoBehaviour
 			dumpArray[a * offset][4] = "EndScore;";
 			// Generating End Score
 			int endScore = 0;
-			Dictionary<ScoreCategory, int> heroEndScores = hero.HeroScore.GetScore();
-			foreach (KeyValuePair<ScoreCategory, int> valuePair in heroEndScores)
+            List<ScoreCategoryResult> heroEndScores = hero.HeroScore.GetScore();
+			foreach (ScoreCategoryResult scoreCategoryResult in heroEndScores)
 			{
-				endScore += valuePair.Value;
+				endScore += scoreCategoryResult.result;
 			}
 			dumpArray[a * offset][5] = endScore + "\n";
 
@@ -134,62 +134,49 @@ public class DumpFileExport : MonoBehaviour
 			int i = 1;
 			foreach (LevelScore levelScore in heroScores)
 			{
-			// Collecting all the Data
-				// Getting all Score-Dictionaries
-				Dictionary<ScoreCategory, int> damageScore = levelScore.DamageScore.GetScore();
-				Dictionary<ScoreCategory, int> tankScore = levelScore.TankScore.GetScore();
-				Dictionary<ScoreCategory, int> runnerScore = levelScore.RunnerScore.GetScore();
+                // Collecting all the Data
+                // Getting all Score-Dictionaries
+                List<ScoreCategoryResult> damageScores = levelScore.DamageScore.GetScore();
+                List<ScoreCategoryResult> tankScores = levelScore.TankScore.GetScore();
+                List<ScoreCategoryResult> runnerScores = levelScore.RunnerScore.GetScore();
 
 				// Damage values
 				int damageDone = levelScore.DamageScore.Damage;
-				int damageDoneScore = 0;
 				int critDamageDone = levelScore.DamageScore.CritDamage;
-				int critDamageDoneScore = 0;
 				float activeDamageTime = levelScore.DamageScore.ActiveTime;
-					// Get Score Values from Dictionary
-				damageScore.TryGetValue(gameSettings.DamageScoreCategories.Find(x => x.name == "DamageDone"), out damageDoneScore);
-				damageScore.TryGetValue(gameSettings.DamageScoreCategories.Find(x => x.name == "CritDamageDone"), out critDamageDoneScore);
 
 				// Tank values
 				int damageShielded = levelScore.TankScore.Shielded;
 				int bossTotalPointsDuringActivation = levelScore.TankScore.BossTotalPointsDuringActivation;
 				float shieldedPercentage = levelScore.TankScore.ShieldedPercentage;
-				int shieldedScore = 0;
 				float activeShieldTime = levelScore.TankScore.ActiveTime;
-					// Get Score Values from Dictionary
-				tankScore.TryGetValue(gameSettings.TankScoreCategories.Find(x => x.name == "DamageShielded"), out shieldedScore);
 
 				// Runner values
 				int orbHeroHits = levelScore.RunnerScore.OrbHeroHits;
-				int orbHeroHitsScore = 0;
 				int orbBossHits = levelScore.RunnerScore.OrbBossHits;
-				int orbBossHitsScore = 0;
 				float activeRunnerTime = levelScore.RunnerScore.ActiveTime;
-					// Get Score Values from Dictionary
-				runnerScore.TryGetValue(gameSettings.RunnerScoreCategories.Find(x => x.name == "OrbHeroHits"), out orbHeroHitsScore);
-				runnerScore.TryGetValue(gameSettings.RunnerScoreCategories.Find(x => x.name == "OrbBossHits"), out orbBossHitsScore);
 
 
 			// Putting it all into the Dump Array
 				// Damage
 				dumpArray[a * offset + 1][i] = damageDone.ToString() + PutRightLineEnding(i);
-				dumpArray[a * offset + 2][i] = damageDoneScore + PutRightLineEnding(i);
+				dumpArray[a * offset + 2][i] = damageScores.Find(x => x.scoreCategory.name == "DamageDone").result + PutRightLineEnding(i);
 				dumpArray[a * offset + 3][i] = critDamageDone + PutRightLineEnding(i);
-				dumpArray[a * offset + 4][i] = critDamageDoneScore + PutRightLineEnding(i);
+				dumpArray[a * offset + 4][i] = damageScores.Find(x => x.scoreCategory.name == "CritDamageDone").result + PutRightLineEnding(i);
 				dumpArray[a * offset + 5][i] = activeDamageTime + PutRightLineEnding(i);
 
 				// Tank
 				dumpArray[a * offset + 6][i] = damageShielded + PutRightLineEnding(i);
 				dumpArray[a * offset + 7][i] = bossTotalPointsDuringActivation + PutRightLineEnding(i);
 				dumpArray[a * offset + 8][i] = shieldedPercentage + PutRightLineEnding(i);
-				dumpArray[a * offset + 9][i] = shieldedScore + PutRightLineEnding(i);
+				dumpArray[a * offset + 9][i] = tankScores.Find(x => x.scoreCategory.name == "DamageShielded").result + PutRightLineEnding(i);
 				dumpArray[a * offset + 10][i] = activeShieldTime + PutRightLineEnding(i);
 
 				// Runner
 				dumpArray[a * offset + 11][i] = orbHeroHits + PutRightLineEnding(i);
-				dumpArray[a * offset + 12][i] = orbHeroHitsScore + PutRightLineEnding(i);
+				dumpArray[a * offset + 12][i] = runnerScores.Find(x => x.scoreCategory.name == "OrbHeroHits").result + PutRightLineEnding(i);
 				dumpArray[a * offset + 13][i] = orbBossHits + PutRightLineEnding(i);
-				dumpArray[a * offset + 14][i] = orbBossHitsScore + PutRightLineEnding(i);
+				dumpArray[a * offset + 14][i] = runnerScores.Find(x => x.scoreCategory.name == "OrbBossHits").result + PutRightLineEnding(i);
 				dumpArray[a * offset + 15][i] = activeRunnerTime + PutRightLineEnding(i);
 
 				i++;

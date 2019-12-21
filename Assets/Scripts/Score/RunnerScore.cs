@@ -10,6 +10,9 @@ public class RunnerScore : ClassScore, IScore
 
     ScoreCategory orbBossHitsCategory;
     ScoreCategory orbHeroHitsCategory;
+    List<ScoreCategoryResult> scoreCategoryResults = new List<ScoreCategoryResult>();
+
+
 
     public int OrbBossHits { get { return orbBossHits; } }
     public int OrbHeroHits { get { return orbHeroHits; } }
@@ -34,30 +37,31 @@ public class RunnerScore : ClassScore, IScore
         }
     }
 
-    public Dictionary<ScoreCategory, int> GetScore()
+    public List<ScoreCategoryResult> GetScore()
     {
         StopTimer(Time.timeSinceLevelLoad);
 
-        Dictionary<ScoreCategory, int> scores = new Dictionary<ScoreCategory, int>();
+        List<ScoreCategoryResult> scores = new List<ScoreCategoryResult>();
 
         if (activeTime != 0)
         {
             // hero orb hits
             float orbHeroHitsPerSecond = orbHeroHits / activeTime;
             int heroHitScore = Mathf.RoundToInt(orbHeroHitsPerSecond.Remap(orbHeroHitsCategory.worstValue, 0f, orbHeroHitsCategory.optimalValue, gameSettings.OptimalScorePerSecond / gameSettings.RunnerScoreCategories.Count));
-            scores.Add(orbHeroHitsCategory, heroHitScore);
+            scores.Add(new ScoreCategoryResult(orbHeroHitsCategory, heroHitScore));
 
             // boss orb hits
             float orbBossHitsPerSecond = orbBossHits / activeTime;
             int bossHitScore = Mathf.RoundToInt((orbBossHitsPerSecond / orbBossHitsCategory.optimalValue) * gameSettings.OptimalScorePerSecond / gameSettings.RunnerScoreCategories.Count);
-            scores.Add(orbBossHitsCategory, bossHitScore);
+            scores.Add(new ScoreCategoryResult(orbBossHitsCategory, bossHitScore));
         }
         else
         {
-            scores.Add(orbHeroHitsCategory, 0);
-            scores.Add(orbBossHitsCategory, 0);
+            scores.Add(new ScoreCategoryResult(orbHeroHitsCategory, 0));
+            scores.Add(new ScoreCategoryResult(orbBossHitsCategory, 0));
         }
 
+        scoreCategoryResults = scores;
         return scores;
     }
 }
