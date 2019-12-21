@@ -42,9 +42,9 @@ public class TankScore : ClassScore, IScore
 
     public override void StartTimer(float timeStamp, bool isBossWeaknessColor = false)
     {
-        base.StartTimer(timeStamp, isBossWeaknessColor);
+        if (timeStamp == -1) bossTotalPointsOnLastStart = points.BossTotalPointsInLevel;
 
-        bossTotalPointsOnLastStart = points.BossTotalPointsInLevel;
+        base.StartTimer(timeStamp, isBossWeaknessColor);
     }
 
     public override void StopTimer(float timeStamp)

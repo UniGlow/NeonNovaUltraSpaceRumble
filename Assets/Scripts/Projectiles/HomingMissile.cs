@@ -95,7 +95,7 @@ public class HomingMissile : MonoBehaviour
         if (other.tag.Contains(Constants.TAG_HERO))
         {
             points.ScorePoints(Faction.Boss, damage);
-            target.GetComponent<Hero>().PlayerConfig.HeroScore.CurrentLevelScore.RunnerScore.RegisterOrbHit(Faction.Heroes);
+            if (!fixedTarget) target.GetComponent<Hero>().PlayerConfig.HeroScore.CurrentLevelScore.RunnerScore.RegisterOrbHit(Faction.Heroes);
 
             recentHits.Add(new HitDetails
             {
@@ -109,7 +109,7 @@ public class HomingMissile : MonoBehaviour
 
             if (enableCameraShake) EZCameraShake.CameraShaker.Instance.ShakeOnce(magnitude, roughness, fadeIn, fadeOut);
 
-            if (!character.PlayerConfig.AIControlled)
+            if (!fixedTarget && !character.PlayerConfig.AIControlled)
             {
                 character.PlayerConfig.Player.SetVibration(0, rumbleStrengthDeep, rumbleDuration, false);
                 character.PlayerConfig.Player.SetVibration(1, rumbleStrengthHigh, rumbleDuration, false);
