@@ -125,6 +125,11 @@ public class NewSirAlfredLobby : MonoBehaviour
 
         // Reset Points
         points.ResetPoints();
+        // Delete last Score Session
+        bossConfig.HeroScore.ClearAllLevels();
+        hero1Config.HeroScore.ClearAllLevels();
+        hero2Config.HeroScore.ClearAllLevels();
+        hero3Config.HeroScore.ClearAllLevels();
 
         AudioManager.Instance.StartTutorialTrack();
     }

@@ -44,7 +44,7 @@ public class RunnerScore : ClassScore, IScore
         {
             // hero orb hits
             float orbHeroHitsPerSecond = orbHeroHits / activeTime;
-            int heroHitScore = Mathf.RoundToInt(orbHeroHitsPerSecond.Remap(orbHeroHitsCategory.worstValue, 0f, orbHeroHitsCategory.optimalValue, gameSettings.OptimalScorePerSecond / gameSettings.RunnerScoreCategories.Count));
+            int heroHitScore = orbHeroHits <= orbHeroHitsCategory.worstValue ? Mathf.RoundToInt(orbHeroHitsPerSecond.Remap(orbHeroHitsCategory.worstValue, 0f, orbHeroHitsCategory.optimalValue, gameSettings.OptimalScorePerSecond / gameSettings.RunnerScoreCategories.Count)) : 0;
             scores.Add(orbHeroHitsCategory, heroHitScore);
 
             // boss orb hits
