@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityClass: 2
   mesh: {fileID: 4300000, guid: f32514971f6af494ab733f3081f0746e, type: 3}
-  speedModifier: 1
+  speedModifier: 1.5
   cooldownRingScale: 0.8
   autofire: 0
   soundClip: {fileID: 0}
