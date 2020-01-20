@@ -17,7 +17,7 @@ MonoBehaviour:
   intensifyTime: 20
   intensifyAmount: 0.1
   bossColorSwitchInterval: 15
-  useEndScores: 1
+  useEndScores: 0
   delayForButtonPrompt: 10
   bestOf: 5
   optimalScorePerSecond: 100
