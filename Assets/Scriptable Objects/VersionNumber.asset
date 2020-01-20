@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: VersionNumber
   m_EditorClassIdentifier: 
   releaseText: Demo
-  versionNumber: v0.3.0a
+  versionNumber: v1.0.0
