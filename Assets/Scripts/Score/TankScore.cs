@@ -31,9 +31,19 @@ public class TankScore : ClassScore, IScore
 
         List<ScoreCategoryResult> scores = new List<ScoreCategoryResult>();
 
-        float score = 0;
-        if(shieldedPercentage != 0)
-            score = ((shieldedPercentage / damageShieldedCategory.optimalValue) * gameSettings.OptimalScorePerSecond) * activeTime;
+        float score = 0f;
+        if(shieldedPercentage > 0)
+        {
+            float shieldedPercentageDevidedOptimalValue;
+            
+            if (shieldedPercentage > damageShieldedCategory.optimalValue)
+                shieldedPercentageDevidedOptimalValue = damageShieldedCategory.optimalValue;
+            else
+                shieldedPercentageDevidedOptimalValue = shieldedPercentage / damageShieldedCategory.optimalValue;
+            
+            score = (shieldedPercentageDevidedOptimalValue * gameSettings.OptimalScorePerSecond) * activeTime;
+        }
+            
         scores.Add(new ScoreCategoryResult(damageShieldedCategory, Mathf.RoundToInt(score)));
 
         scoreCategoryResults = scores;

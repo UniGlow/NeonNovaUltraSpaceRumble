@@ -82,8 +82,9 @@ public class DamageScore : ClassScore, IScore
 
         // crit damage score
         float critDamageDonePerSecond = 0f;
-        critDamageDonePerSecond = critDamageDone / activeCritTime;
-        
+        if (activeCritTime > 0f)
+            critDamageDonePerSecond = critDamageDone / activeCritTime;
+
         int critDamageScore = 0;
         if(critDamageDone != 0)
             critDamageScore = Mathf.RoundToInt(((critDamageDonePerSecond / critDamageDoneCategory.optimalValue) * gameSettings.OptimalScorePerSecond) * activeCritTime);
@@ -91,7 +92,8 @@ public class DamageScore : ClassScore, IScore
 
         // normal damage score
         float damageDonePerSecond = 0f;
-        damageDonePerSecond = damageDone / activeTime;
+        if(activeTime > 0f)
+            damageDonePerSecond = damageDone / activeTime;
 
         int damageScore = 0;
         if(damageDone != 0)
