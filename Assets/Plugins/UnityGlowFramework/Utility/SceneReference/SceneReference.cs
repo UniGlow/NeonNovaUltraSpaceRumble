@@ -184,6 +184,7 @@ public class SceneReferencePropertyDrawer : PropertyDrawer
         position = boxPadding.Remove(position);
         position.height = lineHeight;
 
+        // TODO: Make this Tooltip overridable!!!
         // Draw the main Object field
         label.tooltip = "The actual Scene Asset reference.\nOn serialize this is also stored as the asset's path.";
 
