@@ -380,7 +380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   punchAmountOnHit: 0.2
   punchDuration: 0.3
-  healthbarParent: {fileID: 224574849193851268}
+  healthbarParent: {fileID: 224276542516630424}
   heroHealthbar: {fileID: 224021146107754300}
   bossHealthbar: {fileID: 224622094418840524}
   middleImage: {fileID: 224722489234444246}

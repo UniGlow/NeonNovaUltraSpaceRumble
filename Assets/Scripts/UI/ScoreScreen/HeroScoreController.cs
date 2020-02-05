@@ -76,9 +76,7 @@ public class HeroScoreController : MonoBehaviour
         totalPoints = playerConfig.HeroScore.GetScore();
         foreach (ScoreCategoryResult scoreForCategoryResult in totalPoints)
         {
-            // TODO: Division by 2 shouldn't be necessary here. There is an error somewhere in the score calculation of the tank
-            if (scoreForCategoryResult.scoreCategory.name == "DamageShielded") totalScore += (scoreForCategoryResult.result / 2);
-            else totalScore += scoreForCategoryResult.result;
+            totalScore += scoreForCategoryResult.result;
         }
 
         // Inform the points for check for leading hero

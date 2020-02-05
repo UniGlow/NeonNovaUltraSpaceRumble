@@ -161,7 +161,7 @@ public class Points : ScriptableObject
     {
         bossTotalPointsInLevel += amount;
         if (shielded) bossTotalPointsShielded += amount;
-        if (crit) bossPointsCritical += amount;
+        else if (crit) bossPointsCritical += amount;
         else bossPointsNormal += amount;
     }
 
