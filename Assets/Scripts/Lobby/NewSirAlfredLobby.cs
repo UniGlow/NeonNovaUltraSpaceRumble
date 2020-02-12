@@ -530,6 +530,7 @@ public class NewSirAlfredLobby : MonoBehaviour
                         characters[i] = PlayerCharacter.Boss;
                         break;
                     case PlayerCharacter.Damage:
+                        players[i].playerColor = FallbackColorCheck(i);
                         hero1Config.Initialize(players[i].player, players[i].playerNumber, Faction.Heroes, players[i].playerColor, false);
                         hero1Config.ability = damageAbility;
                         characters[i] = PlayerCharacter.Damage;
@@ -537,6 +538,7 @@ public class NewSirAlfredLobby : MonoBehaviour
                         availablePlayers.Remove(players[i].player);
                         break;
                     case PlayerCharacter.Runner:
+                        players[i].playerColor = FallbackColorCheck(i);
                         hero2Config.Initialize(players[i].player, players[i].playerNumber, Faction.Heroes, players[i].playerColor, false);
                         hero2Config.ability = runnerAbility;
                         characters[i] = PlayerCharacter.Runner;
@@ -544,6 +546,7 @@ public class NewSirAlfredLobby : MonoBehaviour
                         availablePlayers.Remove(players[i].player);
                         break;
                     case PlayerCharacter.Tank:
+                        players[i].playerColor = FallbackColorCheck(i);
                         hero3Config.Initialize(players[i].player, players[i].playerNumber, Faction.Heroes, players[i].playerColor, false);
                         hero3Config.ability = tankAbility;
                         characters[i] = PlayerCharacter.Tank;
@@ -614,12 +617,42 @@ public class NewSirAlfredLobby : MonoBehaviour
         GameManager.Instance.activeColorSet = activeColorSet;
         GameManager.Instance.IsInitialized = true;
     }
-	#endregion
-	
-	
-	
-	#region GameEvent Raiser
-	void RaiseSlotsListeningForInputs(bool[] playerListeningForInput)
+
+    /// <summary>
+    /// Fallback Check to provent a Bug that could enable two Players to choose the same Color.
+    /// </summary>
+    /// <param name="position">Position in Players-Array up to which should be checked.</param>
+    /// <returns>A valid free PlayerColor</returns>
+    private PlayerColor FallbackColorCheck(int position)
+    {
+        for (int j = 0; j < position; j++)
+        {
+            if (players[position].playerColor == players[j].playerColor)
+            {
+                PlayerColor invalidColor = players[position].playerColor;
+                Debug.LogError("A Player Color was taken twice. This shouldn't have happend! Fallback to find a free Color for Player: " + players[position].PlayerCharacter.ToString());
+                for (int x = 0; x < availableColors.PlayerColors.Count; x++)
+                {
+                    bool colorIsFree = true;
+                    for (int y = 0; y < 3; y++)
+                    {
+                        if (players[y].playerColor == availableColors.PlayerColors[x])
+                            colorIsFree = false;
+                    }
+                    if (colorIsFree)
+                        return availableColors.PlayerColors[x];
+                }
+                Debug.LogError("ERROR! Fallback Failed! There is no Color left to asign to this Player!");
+            }
+        }
+        return players[position].playerColor;
+    }
+    #endregion
+
+
+
+    #region GameEvent Raiser
+    void RaiseSlotsListeningForInputs(bool[] playerListeningForInput)
     {
         slotListeningForInputEvent.Raise(this, playerListeningForInput);
     }
