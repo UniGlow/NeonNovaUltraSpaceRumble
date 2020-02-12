@@ -87,7 +87,7 @@ public class HeroAI : Hero
 
             foreach (Hero hero in friends)
             {
-                if (hero.PlayerConfig.ability.Class == Ability.AbilityClass.Damage) damage = hero.transform;
+                if (hero.PlayerConfig.Ability.Class == Ability.AbilityClass.Damage) damage = hero.transform;
             }
         }));
     }
@@ -107,7 +107,7 @@ public class HeroAI : Hero
             randomnessTimer += Time.deltaTime;
 
             if (ability != null) ability.Tick(Time.deltaTime, CheckTriggerConditions());
-            else playerConfig.ability.Tick(Time.deltaTime, CheckTriggerConditions());
+            else playerConfig.Ability.Tick(Time.deltaTime, CheckTriggerConditions());
 
             // Apply class-dependant movement speed modifier
             if (ability)
@@ -117,8 +117,8 @@ public class HeroAI : Hero
             }
             else
             {
-                agent.speed = normalAgentSpeed * playerConfig.ability.SpeedModifier;
-                agent.speed = normalAgentSpeed * playerConfig.ability.SpeedModifier;
+                agent.speed = normalAgentSpeed * playerConfig.Ability.SpeedModifier;
+                agent.speed = normalAgentSpeed * playerConfig.Ability.SpeedModifier;
             }
         }
     }
@@ -321,7 +321,7 @@ public class HeroAI : Hero
 
         }
 
-        if (ability == null && playerConfig.ability.Class == abilityClass)
+        if (ability == null && playerConfig.Ability.Class == abilityClass)
             return true;
 
         return false;

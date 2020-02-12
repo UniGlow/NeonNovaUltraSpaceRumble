@@ -73,6 +73,8 @@ public class PlayerManager : MonoBehaviour
                         humanPlayerCount++;
                     }
 
+                    hero1PlayerConfig.ChangeToDefaultAbility();
+
                     player1 = player1Transform.GetComponent<Hero>();
                     player1.SetPlayerConfig(hero1PlayerConfig);
                     hero1PlayerConfig.playerTransform = player1Transform;
@@ -88,6 +90,8 @@ public class PlayerManager : MonoBehaviour
                         humanPlayerCount++;
                     }
 
+                    hero2PlayerConfig.ChangeToDefaultAbility();
+
                     player2 = player2Transform.GetComponent<Hero>();
                     player2.SetPlayerConfig(hero2PlayerConfig);
                     hero2PlayerConfig.playerTransform = player2Transform;
@@ -102,6 +106,8 @@ public class PlayerManager : MonoBehaviour
                         player3Transform = Instantiate(heroPrefab, go.transform.position, go.transform.rotation).transform;
                         humanPlayerCount++;
                     }
+
+                    hero3PlayerConfig.ChangeToDefaultAbility();
 
                     player3 = player3Transform.GetComponent<Hero>();
                     player3.SetPlayerConfig(hero3PlayerConfig);

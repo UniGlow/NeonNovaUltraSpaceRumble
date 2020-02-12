@@ -30,15 +30,15 @@ public class CooldownUpdater : MonoBehaviour
 	{
         if (!hero.PlayerConfig) return;
 
-        if (hero.PlayerConfig.ability.HasEnergyPool)
+        if (hero.PlayerConfig.Ability.HasEnergyPool)
         {
-            Mathf.Clamp(indicator.fillAmount = hero.PlayerConfig.ability.CurrentEnergy / hero.PlayerConfig.ability.MaxEnergy, 0f, 1f);
+            Mathf.Clamp(indicator.fillAmount = hero.PlayerConfig.Ability.CurrentEnergy / hero.PlayerConfig.Ability.MaxEnergy, 0f, 1f);
         }
         else
         {
-            if (hero.PlayerConfig.ability.CooldownVisualized && hero.PlayerConfig.ability.Cooldown != 0)
+            if (hero.PlayerConfig.Ability.CooldownVisualized && hero.PlayerConfig.Ability.Cooldown != 0)
             {
-                Mathf.Clamp(indicator.fillAmount = hero.PlayerConfig.ability.CooldownTimer / hero.PlayerConfig.ability.Cooldown, 0f, 1f);
+                Mathf.Clamp(indicator.fillAmount = hero.PlayerConfig.Ability.CooldownTimer / hero.PlayerConfig.Ability.Cooldown, 0f, 1f);
             }
         }
 	}
@@ -49,14 +49,14 @@ public class CooldownUpdater : MonoBehaviour
 	#region Public Functions
 	public void ResizeRing()
     {
-        float x = hero.PlayerConfig.ability.CooldownRingScale;
+        float x = hero.PlayerConfig.Ability.CooldownRingScale;
         Vector3 newScale = new Vector3(x, x, x);
         transform.localScale = newScale;
     }
 
     public void ResetRing()
     {
-        if (!hero.PlayerConfig.ability.CooldownVisualized)
+        if (!hero.PlayerConfig.Ability.CooldownVisualized)
         {
             indicator.fillAmount = 1f;
         }

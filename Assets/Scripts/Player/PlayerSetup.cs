@@ -14,25 +14,25 @@ public static class PlayerSetup
                 bossPlayerConfig.Initialize(ReInput.players.GetPlayer(0), 0, Faction.Boss, colorSet.GetRandomColor(), false);
                 ReInput.players.GetPlayer(0).isPlaying = true;
                 hero1PlayerConfig.Initialize(ReInput.players.GetPlayer(1), 1, Faction.Heroes, colorSet.color1, true);
-                hero1PlayerConfig.ability = damageAbility;
+                hero1PlayerConfig.SetupAbility(damageAbility);
                 ReInput.players.GetPlayer(1).isPlaying = false;
                 hero2PlayerConfig.Initialize(ReInput.players.GetPlayer(2), 2, Faction.Heroes, colorSet.color2, true);
-                hero2PlayerConfig.ability = tankAbility;
+                hero2PlayerConfig.SetupAbility(tankAbility);
                 ReInput.players.GetPlayer(2).isPlaying = false;
                 hero3PlayerConfig.Initialize(ReInput.players.GetPlayer(3), 3, Faction.Heroes, colorSet.color3, true);
-                hero3PlayerConfig.ability = victimAbility;
+                hero3PlayerConfig.SetupAbility(victimAbility);
                 ReInput.players.GetPlayer(3).isPlaying = false;
                 break;
 
             case 2:
                 hero1PlayerConfig.Initialize(ReInput.players.GetPlayer(0), 0, Faction.Heroes, colorSet.color1, false);
-                hero1PlayerConfig.ability = damageAbility;
+                hero1PlayerConfig.SetupAbility(damageAbility);
                 ReInput.players.GetPlayer(0).isPlaying = true;
                 hero2PlayerConfig.Initialize(ReInput.players.GetPlayer(1), 1, Faction.Heroes, colorSet.color2, false);
-                hero2PlayerConfig.ability = tankAbility;
+                hero2PlayerConfig.SetupAbility(tankAbility);
                 ReInput.players.GetPlayer(1).isPlaying = true;
                 hero3PlayerConfig.Initialize(ReInput.players.GetPlayer(2), 2, Faction.Heroes, colorSet.color3, true);
-                hero3PlayerConfig.ability = victimAbility;
+                hero3PlayerConfig.SetupAbility(victimAbility);
                 ReInput.players.GetPlayer(2).isPlaying = false;
                 bossPlayerConfig.Initialize(ReInput.players.GetPlayer(3), 3, Faction.Boss, colorSet.GetRandomColor(), true);
                 ReInput.players.GetPlayer(3).isPlaying = false;
@@ -40,13 +40,13 @@ public static class PlayerSetup
 
             case 3:
                 hero1PlayerConfig.Initialize(ReInput.players.GetPlayer(0), 0, Faction.Heroes, colorSet.color1, false);
-                hero1PlayerConfig.ability = damageAbility;
+                hero1PlayerConfig.SetupAbility(damageAbility);
                 ReInput.players.GetPlayer(0).isPlaying = true;
                 hero2PlayerConfig.Initialize(ReInput.players.GetPlayer(1), 1, Faction.Heroes, colorSet.color2, false);
-                hero2PlayerConfig.ability = tankAbility;
+                hero2PlayerConfig.SetupAbility(tankAbility);
                 ReInput.players.GetPlayer(1).isPlaying = true;
                 hero3PlayerConfig.Initialize(ReInput.players.GetPlayer(2), 2, Faction.Heroes, colorSet.color3, false);
-                hero3PlayerConfig.ability = victimAbility;
+                hero3PlayerConfig.SetupAbility(victimAbility);
                 ReInput.players.GetPlayer(2).isPlaying = true;
                 bossPlayerConfig.Initialize(ReInput.players.GetPlayer(3), 3, Faction.Boss, colorSet.GetRandomColor(), true);
                 ReInput.players.GetPlayer(3).isPlaying = false;
@@ -56,13 +56,13 @@ public static class PlayerSetup
                 bossPlayerConfig.Initialize(ReInput.players.GetPlayer(0), 0, Faction.Boss, colorSet.GetRandomColor(), false);
                 ReInput.players.GetPlayer(0).isPlaying = true;
                 hero1PlayerConfig.Initialize(ReInput.players.GetPlayer(1), 1, Faction.Heroes, colorSet.color1, false);
-                hero1PlayerConfig.ability = damageAbility;
+                hero1PlayerConfig.SetupAbility(damageAbility);
                 ReInput.players.GetPlayer(1).isPlaying = true;
                 hero2PlayerConfig.Initialize(ReInput.players.GetPlayer(2), 2, Faction.Heroes, colorSet.color2, false);
-                hero2PlayerConfig.ability = tankAbility;
+                hero2PlayerConfig.SetupAbility(tankAbility);
                 ReInput.players.GetPlayer(2).isPlaying = true;
                 hero3PlayerConfig.Initialize(ReInput.players.GetPlayer(3), 3, Faction.Heroes, colorSet.color3, false);
-                hero3PlayerConfig.ability = victimAbility;
+                hero3PlayerConfig.SetupAbility(victimAbility);
                 ReInput.players.GetPlayer(3).isPlaying = true;
                 break;
 

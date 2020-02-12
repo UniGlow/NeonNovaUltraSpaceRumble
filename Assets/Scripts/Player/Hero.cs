@@ -39,11 +39,11 @@ public class Hero : Character
 
         if (active)
         {
-            playerConfig.ability.Tick(Time.deltaTime, AbilityButtonPressed());
+            playerConfig.Ability.Tick(Time.deltaTime, AbilityButtonPressed());
 
             // Apply class-dependant movement speed modifier
-            horizontalMovement *= playerConfig.ability.SpeedModifier;
-            verticalMovement *= playerConfig.ability.SpeedModifier;
+            horizontalMovement *= playerConfig.Ability.SpeedModifier;
+            verticalMovement *= playerConfig.Ability.SpeedModifier;
         }
     }
     #endregion
@@ -67,21 +67,21 @@ public class Hero : Character
         playerMesh.GetComponent<Renderer>().material = playerConfig.ColorConfig.heroMaterial;
         cooldownIndicator.color = playerConfig.ColorConfig.uiElementColor;
 
-        SetAbility(playerConfig.ability);
+        SetAbility(playerConfig.Ability);
     }
 
     public void SetAbility(Ability ability)
     {
         // Cancel currently active ability
-        if (playerConfig.ability.Binded)
+        if (playerConfig.Ability.Binded)
         {
             ability.DeactivateAbility();
             // TODO: Actually not needed (I believe?), but just to be safe, because the bug haunted us pretty long...
-            playerConfig.ability.DeactivateAbility();
+            playerConfig.Ability.DeactivateAbility();
         }
 
         // Set new ability
-        playerConfig.ability = ability;
+        playerConfig.Ability = ability;
         ability.BindTo(this);
 
         // Update Mesh
@@ -96,7 +96,7 @@ public class Hero : Character
     public override void ResetCooldowns(bool maximum)
     {
         base.ResetCooldowns(maximum);
-        PlayerConfig.ability.ResetCooldowns(maximum);
+        PlayerConfig.Ability.ResetCooldowns(maximum);
     }
     #endregion
 
@@ -105,7 +105,7 @@ public class Hero : Character
     #region Private Functions
     bool AbilityButtonPressed()
     {
-        if (playerConfig.ability.Autofire)
+        if (playerConfig.Ability.Autofire)
         {
             if (playerConfig.Player.GetButton(RewiredConsts.Action.TRIGGER_HEROABILITY))
                 return true;
