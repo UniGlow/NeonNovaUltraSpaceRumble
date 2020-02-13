@@ -559,7 +559,7 @@ MonoBehaviour:
     scenePath: Assets/Scenes/UILevel.unity
   uiLobby:
     sceneAsset: {fileID: 102900000, guid: 76ad05bca7494984582b8d71bdf1a217, type: 3}
-    scenePath: Assets/Scenes/UINewLobby.unity
+    scenePath: Assets/Scenes/UILobby.unity
   uiCredits:
     sceneAsset: {fileID: 102900000, guid: 7933299e2ef63134581d1c40c5075fa5, type: 3}
     scenePath: Assets/Scenes/UICredits.unity
@@ -574,6 +574,8 @@ MonoBehaviour:
     scenePath: Assets/Scenes/Level004.unity
   - sceneAsset: {fileID: 102900000, guid: bc87a24c10ccdda4e8b6f7a7e0fd9b25, type: 3}
     scenePath: Assets/Scenes/Level005.unity
+  - sceneAsset: {fileID: 102900000, guid: e9574251a168e2743a6b22325bb866e7, type: 3}
+    scenePath: Assets/Scenes/TestLevels Friedemann/Level006.unity
   delayAtLevelEnd: 9
   levelLoadedEvent: {fileID: 11400000, guid: 4ccd4681e54ddf24fb501d2a15f51590, type: 2}
 --- !u!114 &114099424982140412
