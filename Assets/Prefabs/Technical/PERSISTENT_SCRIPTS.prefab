@@ -576,6 +576,8 @@ MonoBehaviour:
     scenePath: Assets/Scenes/Level005.unity
   - sceneAsset: {fileID: 102900000, guid: e9574251a168e2743a6b22325bb866e7, type: 3}
     scenePath: Assets/Scenes/TestLevels Friedemann/Level006.unity
+  - sceneAsset: {fileID: 102900000, guid: 2d2af8652b5767d4da1171f551c90704, type: 3}
+    scenePath: Assets/Scenes/TestLevels Friedemann/Level007.unity
   delayAtLevelEnd: 9
   levelLoadedEvent: {fileID: 11400000, guid: 4ccd4681e54ddf24fb501d2a15f51590, type: 2}
 --- !u!114 &114099424982140412

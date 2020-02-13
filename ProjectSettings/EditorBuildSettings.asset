@@ -53,4 +53,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TestLevels Friedemann/Level006.unity
     guid: e9574251a168e2743a6b22325bb866e7
+  - enabled: 1
+    path: Assets/Scenes/TestLevels Friedemann/Level007.unity
+    guid: 2d2af8652b5767d4da1171f551c90704
   m_configObjects: {}
