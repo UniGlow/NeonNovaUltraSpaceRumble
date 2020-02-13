@@ -183,6 +183,14 @@ public class AudioManager : MonoBehaviour
     {
         audioSourceSFX.PlayOneShot(menuCancel, menuCancelVolume);
     }
+
+    public void PauseMusic(bool pause)
+    {
+        if (pause)
+            audioSourceMusic.Pause();
+        else
+            audioSourceMusic.UnPause();
+    }
     #endregion
 
 

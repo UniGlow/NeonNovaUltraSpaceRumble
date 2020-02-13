@@ -384,6 +384,9 @@ MonoBehaviour:
     type: 2}
   availableColors: {fileID: 11400000, guid: 866142ef2b107ab4f968660c69adec4f, type: 2}
   activeColorSet: {fileID: 11400000, guid: 68d47b220c1450a46a2330237d217b40, type: 2}
+  lobbyUI:
+    sceneAsset: {fileID: 102900000, guid: 18a75db664b8e714e9db0b03a4be6bf7, type: 3}
+    scenePath: Assets/Scenes/UINewLobby.unity
   bossConfig: {fileID: 11400000, guid: ca08c440eca8d854190afe2ee3e321e7, type: 2}
   hero1Config: {fileID: 11400000, guid: 0d24b38cff3ab7645a78e798c43bbfd7, type: 2}
   hero2Config: {fileID: 11400000, guid: d6c98b3edc55ae84cb27c6305d3154cd, type: 2}

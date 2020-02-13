@@ -682,6 +682,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 114424577701179020}
+        m_MethodName: StopRumble
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   linkedMethods: []
@@ -758,12 +769,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7451406894877567741, guid: e0d465a34b1d7c043a79f60146f27edd,
+    - target: {fileID: 7451406894093603596, guid: e0d465a34b1d7c043a79f60146f27edd,
         type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7451406894093603596, guid: e0d465a34b1d7c043a79f60146f27edd,
+    - target: {fileID: 7451406894877567741, guid: e0d465a34b1d7c043a79f60146f27edd,
         type: 3}
       propertyPath: m_IsActive
       value: 1

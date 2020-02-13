@@ -58,6 +58,8 @@ public class NewSirAlfredLobby : MonoBehaviour
     [SerializeField] AvailableColors availableColors = null;
     [Tooltip("The Scriptable Object that will be used during the battles which only holds 3 Colors")]
     [SerializeField] ColorSet activeColorSet = null;
+    [Space]
+    [SerializeField] SceneReference lobbyUI = null;
 
     [Header("PlayerConfigs")]
     [SerializeField] PlayerConfig bossConfig = null;
@@ -112,6 +114,13 @@ public class NewSirAlfredLobby : MonoBehaviour
 
     private void Start()
     {
+#if UNITY_EDITOR
+        if(UnityEngine.SceneManagement.SceneManager.sceneCount == 1)
+        {
+            SceneManager.Instance.LoadUIAdditive(lobbyUI);
+        }
+#endif
+
         audioSource = GetComponent<AudioSource>();
         Time.timeScale = 1;
         InputHelper.ChangeRuleSetForAllPlayers(RewiredConsts.LayoutManagerRuleSet.RULESETLOBBY);

@@ -98,6 +98,11 @@ public class Character : MonoBehaviour
     }
 
     public virtual void ResetCooldowns(bool maximum) { }
+
+    public void StopRumble()
+    {
+        playerConfig.Player.SetVibration(0, 0, true);
+    }
     #endregion
 
 
