@@ -52,6 +52,7 @@ public class NewSirAlfredLobby : MonoBehaviour
     [SerializeField] GameEvent readyToStartEvent = null;
     [SerializeField] GameEvent playerSelectedCharacterEvent = null;
     [SerializeField] GameEvent messagePlayer5Event = null;
+    [SerializeField] GameEvent bestOfModeChangedEvent = null;
 
     [Header("References")]
     [Tooltip("The Scriptable Object that holds all available Colors in the Game")]
@@ -59,6 +60,7 @@ public class NewSirAlfredLobby : MonoBehaviour
     [Tooltip("The Scriptable Object that will be used during the battles which only holds 3 Colors")]
     [SerializeField] ColorSet activeColorSet = null;
     [SerializeField] Points points = null;
+    [SerializeField] GameSettings gameSettings = null;
 
     [Header("PlayerConfigs")]
     [SerializeField] PlayerConfig bossConfig = null;
@@ -79,6 +81,8 @@ public class NewSirAlfredLobby : MonoBehaviour
     [Header("General Settings")]
     [Tooltip("Determines how long a Player has to hold B to return to the Main Menu")]
     [SerializeField] float abortPressDuration = 1.5f;
+    [Tooltip("Time between possible Selections while choosing Best-of-Variation")]
+    [SerializeField] float changeTimer = 0.5f;
 
     [Header("Sounds")]
     [SerializeField] AudioClip readyToFight = null;
@@ -94,7 +98,11 @@ public class NewSirAlfredLobby : MonoBehaviour
     PlayerCharacter[] lastPlayerCharacters = new PlayerCharacter[4] { PlayerCharacter.Empty, PlayerCharacter.Empty, PlayerCharacter.Empty, PlayerCharacter.Empty };
     bool gameReadyToStart = false;
     float abortTimer = 0f;
+    float selectionTimer = 0f;
     AudioSource audioSource = null;
+
+    // Best-Of-Selection
+    private int bestOfSelectedElement = 0;
     #endregion
 
 
@@ -133,6 +141,8 @@ public class NewSirAlfredLobby : MonoBehaviour
         hero3Config.HeroScore.ClearAllLevels();
 
         AudioManager.Instance.StartTutorialTrack();
+
+        bestOfSelectedElement = gameSettings.BestOfRange.Count / 2;
     }
 
     private void Update()
@@ -151,6 +161,8 @@ public class NewSirAlfredLobby : MonoBehaviour
         }
         if (gameReadyToStart)
         {
+            if(selectionTimer <= changeTimer)
+                selectionTimer += Time.deltaTime;
             //bool humans = false;
             foreach (PlayerSettings player in players)
             {
@@ -159,10 +171,40 @@ public class NewSirAlfredLobby : MonoBehaviour
                     //humans = true;
                     if (player.player.GetButtonDown(RewiredConsts.Action.UISTART))
                     {
-                        // TODO: Setup PlayerConfigs and load first Level
                         SetupPlayerConfigs();
                         AudioManager.Instance.StopPlaying();
                         SceneManager.Instance.StartNextLevel();
+                    }
+
+                    // Select Best-of-Mode
+                    bool changed = false;
+
+                    if (selectionTimer < changeTimer)
+                        return;
+                        
+                    if (player.player.GetAxis(RewiredConsts.Action.UIHORIZONTAL) > 0)
+                    {
+                        if (bestOfSelectedElement != (gameSettings.BestOfRange.Count - 1))
+                        {
+                            bestOfSelectedElement += 1;
+                            changed = true;
+                            selectionTimer = 0f;
+                        }
+                    }
+
+                    else if (player.player.GetAxis(RewiredConsts.Action.UIHORIZONTAL) < 0)
+                    {
+                        if (bestOfSelectedElement != 0)
+                        {
+                            bestOfSelectedElement -= 1;
+                            changed = true;
+                            selectionTimer = 0f;
+                        }
+                    }
+
+                    if (changed)
+                    {
+                        RaiseBestOfModeChanged(gameSettings.BestOfRange[bestOfSelectedElement].ToString());
                     }
                 }
             }
@@ -471,6 +513,7 @@ public class NewSirAlfredLobby : MonoBehaviour
                 gameReadyToStart = true;
                 audioSource.PlayOneShot(readyToFight, readyToFightVolume);
                 RaiseReadyToStart(true);
+                RaiseBestOfModeChanged(gameSettings.BestOfRange[bestOfSelectedElement].ToString());
             }
         }
         else
@@ -504,6 +547,7 @@ public class NewSirAlfredLobby : MonoBehaviour
     /// </summary>
     void SetupPlayerConfigs()
     {
+        gameSettings.BestOf = gameSettings.BestOfRange[bestOfSelectedElement];
         List<PlayerCharacter> characters = new List<PlayerCharacter>();
         characters.Add(PlayerCharacter.Empty);
         characters.Add(PlayerCharacter.Empty);
@@ -647,6 +691,11 @@ public class NewSirAlfredLobby : MonoBehaviour
         }
         return players[position].playerColor;
     }
+
+    private void ManageBestOfSelection()
+    {
+        
+    }
     #endregion
 
 
@@ -675,6 +724,11 @@ public class NewSirAlfredLobby : MonoBehaviour
     void RaiseMessagePlayer5()
     {
         messagePlayer5Event.Raise(this);
+    }
+
+    void RaiseBestOfModeChanged(string text)
+    {
+        bestOfModeChangedEvent.Raise(this, text);
     }
     #endregion
 
