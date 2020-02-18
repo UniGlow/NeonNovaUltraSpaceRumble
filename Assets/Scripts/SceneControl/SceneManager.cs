@@ -26,6 +26,7 @@ public class SceneManager : MonoBehaviour
     [SerializeField] List<SceneReference> levels = new List<SceneReference>();
 
     [Header("Properties")]
+    [SerializeField] bool preventDoubleLevels = true;
     [SerializeField] float delayAtLevelEnd = 12f;
 
     [Header("Game Events")]
@@ -33,6 +34,8 @@ public class SceneManager : MonoBehaviour
 
     // Private
     bool manualContinue = false;
+
+    private List<SceneReference> availableLevels = new List<SceneReference>();
     #endregion
 
 
@@ -105,8 +108,31 @@ public class SceneManager : MonoBehaviour
     /// </summary>
     public void LoadNextLevel(float optionalDelay = -1f)
     {
-        bool levelFound = false;
+        //bool levelFound = false;
+
+        SceneReference nextLevel = GetRandomLevel();
+
         Scene activeScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+        if (lobby.Equals(activeScene))
+        {
+            LoadNextScene(nextLevel);
+            LoadUIAdditive();
+            return;
+        }
+       
+        if (nextLevel.Equals(credits))
+        {
+            StartCoroutine(LoadCreditsCoroutine(optionalDelay >= 0f ? optionalDelay : delayAtLevelEnd));
+            Time.timeScale = 0.0f;
+        }
+        else
+        {
+            StartCoroutine(LoadNextLevelCoroutine(nextLevel, optionalDelay >= 0f ? optionalDelay : delayAtLevelEnd));
+            Time.timeScale = 0.0f;
+        }
+
+
+        /*
         if (lobby.Equals(activeScene))
         {
             LoadNextScene(levels[0]);
@@ -137,7 +163,7 @@ public class SceneManager : MonoBehaviour
             {
                 Debug.LogError("There isn't a next Level in this Level Set!");
             }
-        }
+        }*/
     }
 
     public void ReloadLevel()
@@ -216,6 +242,38 @@ public class SceneManager : MonoBehaviour
         {
             RaiseLevelLoaded();
         }
+    }
+
+    private SceneReference GetRandomLevel()
+    {
+        if (availableLevels.Count == 0)
+        {
+            if (preventDoubleLevels)
+            {
+                // Repopulate available Levels
+
+                foreach(SceneReference sr in levels)
+                {
+                    availableLevels.Add(sr);
+                }
+            }
+            else
+            {
+                // If this Error is thrown there are no Levels set to this SceneManager OR something switched the preventDoubleLevels variable while in Playmode!
+                Debug.LogError("There are no available Levels left! Are there Levels linked to the SceneManager?");
+                return credits;
+            }
+        }
+
+        int random = Random.Range(0, availableLevels.Count);
+        SceneReference chosenLevel = availableLevels[random];
+
+        if (preventDoubleLevels)
+        {
+            availableLevels.Remove(chosenLevel);
+        }
+
+        return chosenLevel;
     }
     #endregion
 

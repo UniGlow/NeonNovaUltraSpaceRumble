@@ -30,8 +30,6 @@ public class GameSettings : ScriptableObject
     [Space]
     [SerializeField] private bool useEndScores = true;
     [SerializeField] private float delayForButtonPrompt = 10f;
-    [ConditionalHide("useEndScores", true)]
-    [SerializeField] private int bestOf = 5;
 
     // TODO: Otimal scores for each class go here
     [Header("Hero Scoring")]
@@ -42,11 +40,13 @@ public class GameSettings : ScriptableObject
     [SerializeField] List<ScoreCategory> tankScoreCategories = new List<ScoreCategory>();
     [SerializeField] List<ScoreCategory> runnerScoreCategories = new List<ScoreCategory>();
 
-
+    [Space]
+    [Tooltip("List of available Best-of-Versions. Players will be able to choose between these in the Lobby.")]
+    [SerializeField] private List<int> bestOfRange = new List<int>();
 
     // Private
     private ColorSet activeColorSet = null;
-    
+    private int bestOf = 5;
     #endregion
 
 
@@ -63,8 +63,16 @@ public class GameSettings : ScriptableObject
     public List<ScoreCategory> TankScoreCategories { get { return tankScoreCategories; } }
     public List<ScoreCategory> RunnerScoreCategories { get { return runnerScoreCategories; } }
     public bool UseEndScores { get { return useEndScores; } }
-    public int BestOf { get { return bestOf; } }
+    public int BestOf { get { return bestOf; } set { bestOf = value; } }
     public float DelayForButtonPrompt { get { return delayForButtonPrompt; } }
+    public List<int> BestOfRange {
+        get {
+            List<int> returnValue = new List<int>();
+            foreach (int i in bestOfRange)
+                returnValue.Add(i);
+            return returnValue;
+        }
+    }
     #endregion
 
 
