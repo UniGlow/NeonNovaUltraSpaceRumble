@@ -97,7 +97,7 @@ LightmapSettings:
     m_ShowResolutionOverlay: 1
     m_ExportTrainingData: 0
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -666,6 +666,17 @@ PrefabInstance:
     - target: {fileID: 4337183692543796, guid: c74db29e4432b04408ef57b00d406ffd, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114972387587253454, guid: c74db29e4432b04408ef57b00d406ffd,
+        type: 3}
+      propertyPath: uiLobby.sceneAsset
+      value: 
+      objectReference: {fileID: 102900000, guid: 18a75db664b8e714e9db0b03a4be6bf7,
+        type: 3}
+    - target: {fileID: 114972387587253454, guid: c74db29e4432b04408ef57b00d406ffd,
+        type: 3}
+      propertyPath: uiLobby.scenePath
+      value: Assets/Scenes/UINewLobby.unity
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c74db29e4432b04408ef57b00d406ffd, type: 3}
@@ -2618,11 +2629,6 @@ PrefabInstance:
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1041059724}
-    - target: {fileID: 5876816615699373331, guid: e236933714a8bb8488392190b1eccff7,
-        type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1041059724}
     - target: {fileID: 5876816615367280652, guid: e236933714a8bb8488392190b1eccff7,
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -2631,6 +2637,11 @@ PrefabInstance:
     - target: {fileID: 5876816616688051532, guid: e236933714a8bb8488392190b1eccff7,
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1041059724}
+    - target: {fileID: 5876816615699373331, guid: e236933714a8bb8488392190b1eccff7,
+        type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1041059724}
     m_RemovedComponents: []
