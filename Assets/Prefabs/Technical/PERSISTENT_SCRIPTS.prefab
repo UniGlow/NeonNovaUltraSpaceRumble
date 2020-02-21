@@ -226,6 +226,12 @@ MonoBehaviour:
   intensifyTime: 
   intensifyAmount: 
   pointLeadToWin: 
+  optimalScorePerSecond: 
+  optimalCritDamage: 
+  optimalDamage: 
+  optimalShieldingPercentage: 
+  optimalBossOrbHits: 
+  worstHeroOrbHits: 
 --- !u!1 &1804402235904528
 GameObject:
   m_ObjectHideFlags: 0
@@ -622,8 +628,8 @@ MonoBehaviour:
     sceneAsset: {fileID: 102900000, guid: fdd8b6d462605b0439d91bf7382d1c18, type: 3}
     scenePath: Assets/Scenes/UILevel.unity
   uiLobby:
-    sceneAsset: {fileID: 102900000, guid: 76ad05bca7494984582b8d71bdf1a217, type: 3}
-    scenePath: Assets/Scenes/UILobby.unity
+    sceneAsset: {fileID: 102900000, guid: 18a75db664b8e714e9db0b03a4be6bf7, type: 3}
+    scenePath: Assets/Scenes/UINewLobby.unity
   uiCredits:
     sceneAsset: {fileID: 102900000, guid: 7933299e2ef63134581d1c40c5075fa5, type: 3}
     scenePath: Assets/Scenes/UICredits.unity
@@ -638,6 +644,7 @@ MonoBehaviour:
     scenePath: Assets/Scenes/Level004.unity
   - sceneAsset: {fileID: 102900000, guid: bc87a24c10ccdda4e8b6f7a7e0fd9b25, type: 3}
     scenePath: Assets/Scenes/Level005.unity
+  preventDoubleLevels: 1
   delayAtLevelEnd: 9
   levelLoadedEvent: {fileID: 11400000, guid: 4ccd4681e54ddf24fb501d2a15f51590, type: 2}
 --- !u!114 &114099424982140412
