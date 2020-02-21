@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f7357740885c474faa930f4bca4cf92, type: 3}
   m_Name: Hero3PlayerConfig
   m_EditorClassIdentifier: 
-  ability: {fileID: 0}
+  ability: {fileID: 11400000, guid: ea651a0727fca904886ca5fea0d3c71b, type: 2}
+  defaultAbility: {fileID: 11400000, guid: ea651a0727fca904886ca5fea0d3c71b, type: 2}
   playerTransform: {fileID: 0}
   heroScore: {fileID: 11400000, guid: 3600eceb8d4d1ea44b58bdbd4ee491ae, type: 2}
