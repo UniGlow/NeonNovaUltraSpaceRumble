@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 
+///
 /// </summary>
-public class NewSirAlfredLobby : MonoBehaviour 
+public class NewSirAlfredLobby : MonoBehaviour
 {
     [System.Serializable]
     class PlayerSettings
@@ -42,7 +42,7 @@ public class NewSirAlfredLobby : MonoBehaviour
         Damage,
         Runner
     }
-    
+
     #region Variable Declarations
     public static NewSirAlfredLobby Instance = null;
     // Serialized Fields
@@ -61,6 +61,8 @@ public class NewSirAlfredLobby : MonoBehaviour
     [SerializeField] ColorSet activeColorSet = null;
     [SerializeField] Points points = null;
     [SerializeField] GameSettings gameSettings = null;
+    [Space]
+    [SerializeField] SceneReference lobbyUI = null;
 
     [Header("PlayerConfigs")]
     [SerializeField] PlayerConfig bossConfig = null;
@@ -92,7 +94,7 @@ public class NewSirAlfredLobby : MonoBehaviour
     // Private
     // Player Settings for PlayerConfigs
     PlayerSettings[] players = new PlayerSettings[4] { new PlayerSettings(), new PlayerSettings(), new PlayerSettings(), new PlayerSettings() };
-    
+
     // Data
     List<PlayerColor> availablePlayerColors = new List<PlayerColor>();
     PlayerCharacter[] lastPlayerCharacters = new PlayerCharacter[4] { PlayerCharacter.Empty, PlayerCharacter.Empty, PlayerCharacter.Empty, PlayerCharacter.Empty };
@@ -121,6 +123,13 @@ public class NewSirAlfredLobby : MonoBehaviour
 
     private void Start()
     {
+#if UNITY_EDITOR
+        if(UnityEngine.SceneManagement.SceneManager.sceneCount == 1)
+        {
+            SceneManager.Instance.LoadUIAdditive(lobbyUI);
+        }
+#endif
+
         audioSource = GetComponent<AudioSource>();
         Time.timeScale = 1;
         InputHelper.ChangeRuleSetForAllPlayers(RewiredConsts.LayoutManagerRuleSet.RULESETLOBBY);
@@ -181,7 +190,7 @@ public class NewSirAlfredLobby : MonoBehaviour
 
                     if (selectionTimer < changeTimer)
                         return;
-                        
+
                     if (player.player.GetAxis(RewiredConsts.Action.UIHORIZONTAL) > 0)
                     {
                         if (bestOfSelectedElement != (gameSettings.BestOfRange.Count - 1))
@@ -454,7 +463,7 @@ public class NewSirAlfredLobby : MonoBehaviour
         availableCharacters.Add(PlayerCharacter.Tank);
         availableCharacters.Add(PlayerCharacter.Runner);
 
-        
+
         // delete currently logged in characters
         foreach (PlayerSettings player in players)
         {
@@ -576,7 +585,7 @@ public class NewSirAlfredLobby : MonoBehaviour
                     case PlayerCharacter.Damage:
                         players[i].playerColor = FallbackColorCheck(i);
                         hero1Config.Initialize(players[i].player, players[i].playerNumber, Faction.Heroes, players[i].playerColor, false);
-                        hero1Config.ability = damageAbility;
+                        hero1Config.SetupAbility(damageAbility);
                         characters[i] = PlayerCharacter.Damage;
                         colorsNotToUse.Add(players[i].playerColor);
                         availablePlayers.Remove(players[i].player);
@@ -584,7 +593,7 @@ public class NewSirAlfredLobby : MonoBehaviour
                     case PlayerCharacter.Runner:
                         players[i].playerColor = FallbackColorCheck(i);
                         hero2Config.Initialize(players[i].player, players[i].playerNumber, Faction.Heroes, players[i].playerColor, false);
-                        hero2Config.ability = runnerAbility;
+                        hero2Config.SetupAbility(runnerAbility);
                         characters[i] = PlayerCharacter.Runner;
                         colorsNotToUse.Add(players[i].playerColor);
                         availablePlayers.Remove(players[i].player);
@@ -592,7 +601,7 @@ public class NewSirAlfredLobby : MonoBehaviour
                     case PlayerCharacter.Tank:
                         players[i].playerColor = FallbackColorCheck(i);
                         hero3Config.Initialize(players[i].player, players[i].playerNumber, Faction.Heroes, players[i].playerColor, false);
-                        hero3Config.ability = tankAbility;
+                        hero3Config.SetupAbility(tankAbility);
                         characters[i] = PlayerCharacter.Tank;
                         colorsNotToUse.Add(players[i].playerColor);
                         availablePlayers.Remove(players[i].player);
@@ -610,7 +619,7 @@ public class NewSirAlfredLobby : MonoBehaviour
                         (colorsNotToUse.Count == 1 ? availableColors.GetRandomColorExcept(colorsNotToUse[0]) :
                             (colorsNotToUse.Count == 2 ? availableColors.GetRandomColorExcept(colorsNotToUse[0], colorsNotToUse[1]) : availablePlayerColors[0]));
                     hero1Config.Initialize(availablePlayers[0], i, Faction.Heroes, color, true);
-                    hero1Config.ability = damageAbility;
+                    hero1Config.SetupAbility(damageAbility);
                     availablePlayers.RemoveAt(0);
                     characters[i] = PlayerCharacter.Damage;
                     colorsNotToUse.Add(color);
@@ -621,7 +630,7 @@ public class NewSirAlfredLobby : MonoBehaviour
                         (colorsNotToUse.Count == 1 ? availableColors.GetRandomColorExcept(colorsNotToUse[0]) :
                             (colorsNotToUse.Count == 2 ? availableColors.GetRandomColorExcept(colorsNotToUse[0], colorsNotToUse[1]) : availablePlayerColors[0]));
                     hero2Config.Initialize(availablePlayers[0], i, Faction.Heroes, color, true);
-                    hero2Config.ability = runnerAbility;
+                    hero2Config.SetupAbility(runnerAbility);
                     availablePlayers.RemoveAt(0);
                     characters[i] = PlayerCharacter.Runner;
                     colorsNotToUse.Add(color);
@@ -632,7 +641,7 @@ public class NewSirAlfredLobby : MonoBehaviour
                         (colorsNotToUse.Count == 1 ? availableColors.GetRandomColorExcept(colorsNotToUse[0]) :
                             (colorsNotToUse.Count == 2 ? availableColors.GetRandomColorExcept(colorsNotToUse[0], colorsNotToUse[1]) : availablePlayerColors[0]));
                     hero3Config.Initialize(availablePlayers[0], i, Faction.Heroes, color, true);
-                    hero3Config.ability = tankAbility;
+                    hero3Config.SetupAbility(tankAbility);
                     availablePlayers.RemoveAt(0);
                     characters[i] = PlayerCharacter.Tank;
                     colorsNotToUse.Add(color);
@@ -694,7 +703,7 @@ public class NewSirAlfredLobby : MonoBehaviour
 
     private void ManageBestOfSelection()
     {
-        
+
     }
     #endregion
 

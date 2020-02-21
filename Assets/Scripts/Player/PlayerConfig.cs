@@ -4,11 +4,11 @@ using UnityEngine;
 using Rewired;
 
 /// <summary>
-/// 
+///
 /// </summary>
 
 [CreateAssetMenu(menuName = "Scriptable Objects/Player Config")]
-public class PlayerConfig : ScriptableObject 
+public class PlayerConfig : ScriptableObject
 {
 
     #region Variable Declarations
@@ -18,17 +18,20 @@ public class PlayerConfig : ScriptableObject
     private Faction faction;
     private PlayerColor colorConfig;
     //bleibt Public, da es sich ändern kann
-    public Ability ability;
+    [SerializeField]
+    private Ability ability;
+    [SerializeField]
+    private Ability defaultAbility;
     private bool aiControlled;
     public Transform playerTransform;
     [SerializeField] HeroScore heroScore = null;
 
 	// Private
-	
+
 	#endregion
-	
-	
-	
+
+
+
 	#region Public Properties
 	public Player Player { get { return player; } }
     public int PlayerNumber { get { return playerNumber; } }
@@ -48,11 +51,12 @@ public class PlayerConfig : ScriptableObject
     }
     public bool AIControlled { get { return aiControlled; } }
     public HeroScore HeroScore { get { return heroScore; } }
-	#endregion
-	
-	
-	
-	#region Public Functions
+    public Ability Ability { get { return ability; } set { ability = value; } }
+    #endregion
+
+
+
+    #region Public Functions
     /// <summary>
     /// Call this Method to Initialize this Players Config. It's not Recommended to do this outside the Lobby! Once set these Parameters can't be set without this Initialize-Method.
     /// </summary>
@@ -60,7 +64,7 @@ public class PlayerConfig : ScriptableObject
     /// <param name="faction">The Players Faction</param>
     /// <param name="colorConfig">The Players Color Configuration</param>
     /// <param name="aiControlled">Set this to True if the AI should control this Player</param>
-	public void Initialize(Player player, int playerNumber, Faction faction, PlayerColor colorConfig, bool aiControlled)
+    public void Initialize(Player player, int playerNumber, Faction faction, PlayerColor colorConfig, bool aiControlled)
     {
         this.player = player;
         this.playerNumber = playerNumber;
@@ -68,12 +72,22 @@ public class PlayerConfig : ScriptableObject
         this.colorConfig = colorConfig;
         this.aiControlled = aiControlled;
     }
+
+    public void ChangeToDefaultAbility()
+    {
+        ability = defaultAbility;
+    }
+
+    public void SetupAbility(Ability ability)
+    {
+        this.ability = ability;
+        defaultAbility = ability;
+    }
 	#endregion
-	
-	
-	
+
+
+
 	#region Private Functions
 
 	#endregion
 }
-

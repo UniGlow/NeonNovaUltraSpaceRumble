@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 
+///
 /// </summary>
 public class BossProjectile : Projectile
 {
@@ -29,9 +29,10 @@ public class BossProjectile : Projectile
         if (other.tag.Contains(Constants.TAG_SHIELD))
         {
             Hero hero = other.transform.GetComponentInParent<Hero>();
-            hero.PlayerConfig.ability.AddEnergy(-damage);
+            hero.PlayerConfig.Ability.AddEnergy(-damage);
             hero.PlayerConfig.HeroScore.CurrentLevelScore.TankScore.DamageShielded(damage);
             points.UpdateBossPoints(damage, true);
+            other.transform.GetComponentInParent<Hero>().PlayerConfig.Ability.AddEnergy(-damage);
             Destroy(gameObject);
         }
 

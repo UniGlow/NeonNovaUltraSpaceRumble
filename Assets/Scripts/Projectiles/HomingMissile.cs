@@ -169,15 +169,15 @@ public class HomingMissile : MonoBehaviour
     #region Public Functions
     public void AcquireNewTarget(PlayerConfig hero1, PlayerConfig hero2)
     {
-        if (hero1.ability.Class == Ability.AbilityClass.Runner) target = hero1.playerTransform;
-        else if (hero2.ability.Class == Ability.AbilityClass.Runner) target = hero2.playerTransform;
+        if (hero1.Ability.Class == Ability.AbilityClass.Runner) target = hero1.playerTransform;
+        else if (hero2.Ability.Class == Ability.AbilityClass.Runner) target = hero2.playerTransform;
     }
 
     public void AcquireNewTarget(PlayerConfig hero1, PlayerConfig hero2, PlayerConfig hero3, PlayerConfig boss)
     {
-        if (hero1.ability.Class == Ability.AbilityClass.Runner) target = hero1.playerTransform;
-        else if (hero2.ability.Class == Ability.AbilityClass.Runner) target = hero2.playerTransform;
-        else if (hero3.ability.Class == Ability.AbilityClass.Runner) target = hero3.playerTransform;
+        if (hero1.Ability.Class == Ability.AbilityClass.Runner) target = hero1.playerTransform;
+        else if (hero2.Ability.Class == Ability.AbilityClass.Runner) target = hero2.playerTransform;
+        else if (hero3.Ability.Class == Ability.AbilityClass.Runner) target = hero3.playerTransform;
     }
 
     public void PauseMissile(bool pause)

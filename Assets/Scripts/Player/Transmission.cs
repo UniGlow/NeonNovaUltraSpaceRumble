@@ -199,10 +199,10 @@ public class Transmission : MonoBehaviour
                     if (receiver.transmitter.state == State.Searching || receiver.transmitter.state == State.ReadyToTransmit)
                     {
                         receiver.transmitter.transmissionPartner = this;
-                        receiver.transmitter.receivingAbility = hero.PlayerConfig.ability;
+                        receiver.transmitter.receivingAbility = hero.PlayerConfig.Ability;
                         receiver.transmitter.ChangeState(State.Transmitting);
                         transmissionPartner = receiver.transmitter;
-                        receivingAbility = receiver.transmitter.hero.PlayerConfig.ability;
+                        receivingAbility = receiver.transmitter.hero.PlayerConfig.Ability;
                         ChangeState(State.Transmitting);
                     }
                 }

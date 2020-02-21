@@ -237,6 +237,8 @@ GameObject:
   - component: {fileID: 4004861661574766}
   - component: {fileID: 114025425383758264}
   - component: {fileID: 114512588774349416}
+  - component: {fileID: 1573602693076385316}
+  - component: {fileID: 4791899056423370312}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -320,6 +322,68 @@ MonoBehaviour:
     chosenID: 1
     methodNames: []
     gameObject: {fileID: 1804402235904528}
+  ignoreEventParameters: 0
+--- !u!114 &1573602693076385316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804402235904528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 1ea968f9ad57732498b111a663021061, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114025425383758264}
+        m_MethodName: PauseMusic
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  linkedMethods: []
+  ignoreEventParameters: 0
+--- !u!114 &4791899056423370312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804402235904528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: cfef13325ec1499459137fbb9b3d8888, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114025425383758264}
+        m_MethodName: PauseMusic
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  linkedMethods: []
   ignoreEventParameters: 0
 --- !u!1 &1907598853651340
 GameObject:
@@ -559,7 +623,7 @@ MonoBehaviour:
     scenePath: Assets/Scenes/UILevel.unity
   uiLobby:
     sceneAsset: {fileID: 102900000, guid: 76ad05bca7494984582b8d71bdf1a217, type: 3}
-    scenePath: Assets/Scenes/UINewLobby.unity
+    scenePath: Assets/Scenes/UILobby.unity
   uiCredits:
     sceneAsset: {fileID: 102900000, guid: 7933299e2ef63134581d1c40c5075fa5, type: 3}
     scenePath: Assets/Scenes/UICredits.unity

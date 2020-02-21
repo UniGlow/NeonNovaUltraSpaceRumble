@@ -98,6 +98,11 @@ public class Character : MonoBehaviour
     }
 
     public virtual void ResetCooldowns(bool maximum) { }
+
+    public void StopRumble()
+    {
+        playerConfig.Player.SetVibration(0, 0, true);
+    }
     #endregion
 
 
@@ -117,7 +122,7 @@ public class Character : MonoBehaviour
     private void RotateCharacter()
     {
         // Ignore rotational inputs when playing victim
-        if (playerConfig.ability && playerConfig.ability.Class == Ability.AbilityClass.Runner && rigidbody.velocity.magnitude != 0f)
+        if (playerConfig.Ability && playerConfig.Ability.Class == Ability.AbilityClass.Runner && rigidbody.velocity.magnitude != 0f)
         {
             transform.forward = rigidbody.velocity;
         }

@@ -28,4 +28,4 @@ MonoBehaviour:
   runnerScoreCategories:
   - {fileID: 11400000, guid: b87460883dbd2ff43ad9f7e0cc43e008, type: 2}
   - {fileID: 11400000, guid: 3cd2bfe1694953740a8c037cc60d6a2a, type: 2}
-  bestOfRange: 03000000050000000700000009000000
+  bestOfRange: 030000000500000007000000
