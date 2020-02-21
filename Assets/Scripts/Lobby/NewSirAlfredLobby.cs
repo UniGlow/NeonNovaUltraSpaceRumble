@@ -170,8 +170,8 @@ public class NewSirAlfredLobby : MonoBehaviour
         }
         if (gameReadyToStart)
         {
-            //if(selectionTimer <= changeTimer)
-            //    selectionTimer += Time.deltaTime;
+            if(selectionTimer <= changeTimer)
+                selectionTimer += Time.deltaTime;
             //bool humans = false;
             foreach (PlayerSettings player in players)
             {
@@ -186,7 +186,7 @@ public class NewSirAlfredLobby : MonoBehaviour
                     }
 
                     // Select Best-of-Mode
-                    /*bool changed = false;
+                    bool changed = false;
 
                     if (selectionTimer < changeTimer)
                         return;
@@ -214,7 +214,7 @@ public class NewSirAlfredLobby : MonoBehaviour
                     if (changed)
                     {
                         RaiseBestOfModeChanged(gameSettings.BestOfRange[bestOfSelectedElement].ToString());
-                    }*/
+                    }
                 }
             }
             /* TODO: After AI-Rework, implement this to be able to Start a Game with nothing but AI
@@ -556,7 +556,7 @@ public class NewSirAlfredLobby : MonoBehaviour
     /// </summary>
     void SetupPlayerConfigs()
     {
-        //gameSettings.BestOf = gameSettings.BestOfRange[bestOfSelectedElement];
+        gameSettings.BestOf = gameSettings.BestOfRange[bestOfSelectedElement];
         List<PlayerCharacter> characters = new List<PlayerCharacter>();
         characters.Add(PlayerCharacter.Empty);
         characters.Add(PlayerCharacter.Empty);

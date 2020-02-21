@@ -24,7 +24,7 @@ public class PopUpTextController : MonoBehaviour
     [SerializeField] GameSettings gameSettings = null;
 
     // Private
-    bool menuIsOn = false;
+    
     #endregion
 
 
