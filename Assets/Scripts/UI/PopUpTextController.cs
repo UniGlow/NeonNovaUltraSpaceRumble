@@ -24,7 +24,7 @@ public class PopUpTextController : MonoBehaviour
     [SerializeField] GameSettings gameSettings = null;
 
     // Private
-    
+    bool countdownIsOn = false;
     #endregion
 
 
@@ -75,6 +75,7 @@ public class PopUpTextController : MonoBehaviour
 
     public void StartCountdown(float duration)
     {
+        CountdownOn(true);
         text.transform.localScale = Vector3.zero;
         text.gameObject.SetActive(true);
         text.text = "3";
@@ -89,9 +90,22 @@ public class PopUpTextController : MonoBehaviour
                 text.transform.DOScale(maxSize, duration/4f).SetEase(Ease.OutBounce).SetUpdate(false).OnComplete(() =>
                 {
                     text.gameObject.SetActive(false);
+                    CountdownOn(false);
                 });
             });
         });
+    }
+
+    public void CountdownOn(bool state)
+    {
+        countdownIsOn = state;
+    }
+
+    public void GamePaused(bool state)
+    {
+        Debug.Log("Game paused? [" + state + "]\nCountdown is on? [" + countdownIsOn + "]");
+        if (countdownIsOn)
+            text.gameObject.SetActive(!state);
     }
 	#endregion
 	
