@@ -107,7 +107,8 @@ public class AudioManager : MonoBehaviour
 
     public void StartTitleTrack()
     {
-        if (startingTrack) return;
+        //if (startingTrack) return;
+        if (audioSourceMusic.clip == titleTrack.intro || audioSourceMusic.clip == titleTrack.loop) return;
         startingTrack = true;
 
         audioSourceMusic.clip = titleTrack.intro;
