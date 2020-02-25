@@ -17,8 +17,12 @@ MonoBehaviour:
   speedModifier: 1
   cooldownRingScale: 0.9
   autofire: 1
-  soundClip: {fileID: 8300000, guid: 9a5792dc479bb5c47878c1c076adf5d0, type: 3}
-  volume: 0.6
+  abilitySound: {fileID: 8300000, guid: 9a5792dc479bb5c47878c1c076adf5d0, type: 3}
+  abilityVolume: 0.5
+  breakSound: {fileID: 0}
+  breakVolume: 1
+  deactivateSound: {fileID: 0}
+  deactivateVolume: 1
   cooldownVisualized: 0
   hasEnergyPool: 0
   cooldown: 0.15

@@ -31,9 +31,15 @@ public abstract class Ability : ScriptableObject
     [SerializeField] protected bool autofire = false;
 
     [Header("Sound")]
-    [SerializeField] protected AudioClip soundClip = null;
+    [SerializeField] protected AudioClip abilitySound = null;
     [Range(0, 1)]
-    [SerializeField] protected float volume = 1f;
+    [SerializeField] protected float abilityVolume = 1f;
+    [SerializeField] protected AudioClip breakSound = null;
+    [Range(0, 1)]
+    [SerializeField] protected float breakVolume = 1f;
+    [SerializeField] protected AudioClip deactivateSound = null;
+    [Range(0, 1)]
+    [SerializeField] protected float deactivateVolume = 1f;
 
     [Header("Cooldown")]
     [SerializeField] protected bool cooldownVisualized = false;
@@ -197,6 +203,7 @@ public abstract class Ability : ScriptableObject
             currentEnergy = 0f;
             cooldownTimer = 0f;
             energyPoolRecharging = true;
+            if(breakSound != null) audioSource.PlayOneShot(breakSound, breakVolume);
         }
     }
 
@@ -225,6 +232,7 @@ public abstract class Ability : ScriptableObject
 
     public virtual void DeactivateAbility()
     {
+        if (deactivateSound != null) audioSource.PlayOneShot(deactivateSound, deactivateVolume);
         abilityActive = false;
     }
     #endregion

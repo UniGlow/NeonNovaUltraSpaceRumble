@@ -32,7 +32,7 @@ public class Tank_WobbleBobble : Ability
 
         hero.Shield.SetActive(true);
         hero.Rigidbody.mass = 100f;
-        audioSource.PlayOneShot(soundClip, volume);
+        audioSource.PlayOneShot(abilitySound, abilityVolume);
     }
 
     public override void DeactivateAbility()

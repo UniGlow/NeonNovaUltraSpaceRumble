@@ -39,7 +39,7 @@ public class Damage : Ability
         GameObject projectile = Instantiate(projectilePrefab, hero.transform.position + Vector3.up * 0.5f, hero.transform.rotation);
         projectile.GetComponent<HeroProjectile>().Initialize(damagePerShot, hero.PlayerConfig, hero.transform.forward * projectileSpeed);
 
-        audioSource.PlayOneShot(soundClip, volume);
+        audioSource.PlayOneShot(abilitySound, abilityVolume);
     }
     #endregion
 
