@@ -14446,6 +14446,7 @@ GameObject:
   - component: {fileID: 23009700766749820}
   - component: {fileID: 4262755773136910779}
   - component: {fileID: 5024024949774975253}
+  - component: {fileID: 1348178382214707629}
   m_Layer: 10
   m_Name: Shield
   m_TagString: Shield
@@ -14542,6 +14543,21 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 0
   m_Center: {x: 0, y: 0.6, z: 1.16}
   m_TimeToStationary: 0.5
+--- !u!114 &1348178382214707629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521786441716086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51179161ba81a9b40a73592b1ed8c972, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsRelativeXShapeOffset: 0.67
+  physicsRelativeYShapeOffset: 0.61
+  physicsCubeDimensions: {x: 5.64, y: 0.98, z: 2.58}
 --- !u!1 &1742559250600126
 GameObject:
   m_ObjectHideFlags: 0
