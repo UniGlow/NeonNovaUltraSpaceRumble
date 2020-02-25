@@ -52,11 +52,11 @@ public class SelectionController : MonoBehaviour
     bool inputsLocked = false;
     Rewired.Player player = null;
     Step activeStep = Step.Offline;
-    NewSirAlfredLobby.PlayerCharacter selectedCharacter = NewSirAlfredLobby.PlayerCharacter.Empty; // This will be used, to show only the relevant Steps to the Player - Example: Boss cannot choose Color
+    SirAlfredLobby.PlayerCharacter selectedCharacter = SirAlfredLobby.PlayerCharacter.Empty; // This will be used, to show only the relevant Steps to the Player - Example: Boss cannot choose Color
     PlayerColor activeColor = null;
     float changeTimer = 0f;
     float autoRotatingCountdown = 0f;
-    List<NewSirAlfredLobby.PlayerCharacter> availableCharacters = new List<NewSirAlfredLobby.PlayerCharacter>();
+    List<SirAlfredLobby.PlayerCharacter> availableCharacters = new List<SirAlfredLobby.PlayerCharacter>();
     #endregion
 
 
@@ -126,7 +126,7 @@ public class SelectionController : MonoBehaviour
     {
         if(panelNumber != this.panelNumber && colorNotToUse != null && colorNotToUse == activeColor)
         {
-            activeColor = NewSirAlfredLobby.Instance.GetNextAvailableColor(true, activeColor);
+            activeColor = SirAlfredLobby.Instance.GetNextAvailableColor(true, activeColor);
             RaisePlayerChangedColor(this.panelNumber, activeColor);
         }
     }
@@ -135,7 +135,7 @@ public class SelectionController : MonoBehaviour
     /// Saves the List of availableCharacters the Player can choose from.
     /// </summary>
     /// <param name="availableCharacters">List of available Characters</param>
-    public void UpdateAvailableCharacters(List<NewSirAlfredLobby.PlayerCharacter> availableCharacters)
+    public void UpdateAvailableCharacters(List<SirAlfredLobby.PlayerCharacter> availableCharacters)
     {
         this.availableCharacters = availableCharacters;
     }
@@ -154,10 +154,10 @@ public class SelectionController : MonoBehaviour
         {
             playerPressedButton = true;
             Rewired.Player tempPlayer = InputHelper.GetPlayerButtonDown(RewiredConsts.Action.UISUBMIT);
-            if (tempPlayer != null && !NewSirAlfredLobby.Instance.IsPlayerActive(tempPlayer))
+            if (tempPlayer != null && !SirAlfredLobby.Instance.IsPlayerActive(tempPlayer))
             {
                 this.player = tempPlayer;
-                NewSirAlfredLobby.Instance.SetPlayer(panelNumber, tempPlayer);
+                SirAlfredLobby.Instance.SetPlayer(panelNumber, tempPlayer);
                 activeStep = Step.CharacterSelection;
                 RaisePlayerChangedStep(panelNumber, activeStep);
                 AudioManager.Instance.PlayMenuConfirm();
@@ -185,7 +185,7 @@ public class SelectionController : MonoBehaviour
                         activeStep = Step.CharacterSelection;
                         break;
                     case Step.AbilitySelection:
-                        if (selectedCharacter == NewSirAlfredLobby.PlayerCharacter.Boss)
+                        if (selectedCharacter == SirAlfredLobby.PlayerCharacter.Boss)
                         {
                             RaisePlayerChangedStep(panelNumber, Step.CharacterSelection);
                             activeStep = Step.CharacterSelection;
@@ -193,7 +193,7 @@ public class SelectionController : MonoBehaviour
                         else
                         {
                             RaisePlayerSelectedColor(panelNumber, activeColor);
-                            NewSirAlfredLobby.Instance.SetPlayerColor(panelNumber, null);
+                            SirAlfredLobby.Instance.SetPlayerColor(panelNumber, null);
                             RaisePlayerChangedStep(panelNumber, Step.ColorSelection);
                             activeStep = Step.ColorSelection;
                         }
@@ -202,21 +202,21 @@ public class SelectionController : MonoBehaviour
                         // TODO: Uncomment following Lines once Abilities should be selectable in Lobby! Delete the rest
                         //RaisePlayerChangedStepEvent(panelNumber, Step.AbilitySelection);
                         //activeStep = Step.AbilitySelection;
-                        if (selectedCharacter == NewSirAlfredLobby.PlayerCharacter.Boss)
+                        if (selectedCharacter == SirAlfredLobby.PlayerCharacter.Boss)
                         {
                             RaisePlayerChangedStep(panelNumber, Step.CharacterSelection);
                             activeStep = Step.CharacterSelection;
-                            NewSirAlfredLobby.Instance.UpdateAvailableCharacters(NewSirAlfredLobby.PlayerCharacter.Empty, panelNumber);
+                            SirAlfredLobby.Instance.UpdateAvailableCharacters(SirAlfredLobby.PlayerCharacter.Empty, panelNumber);
                         }
                         else
                         {
                             RaisePlayerSelectedColor(panelNumber, activeColor);
-                            NewSirAlfredLobby.Instance.SetPlayerColor(panelNumber, null);
+                            SirAlfredLobby.Instance.SetPlayerColor(panelNumber, null);
                             RaisePlayerChangedStep(panelNumber, Step.ColorSelection);
                             activeStep = Step.ColorSelection;
                         }
                         // But don't delete this
-                        NewSirAlfredLobby.Instance.SetReadyToPlay(panelNumber, false);
+                        SirAlfredLobby.Instance.SetReadyToPlay(panelNumber, false);
                         break;
                     default:
                         Debug.LogWarning("Something went wrong here! Eather a new Step didn't get implemented or some Error accured!");
@@ -237,7 +237,7 @@ public class SelectionController : MonoBehaviour
                     case Step.CharacterSelection:
                         if (availableCharacters.Contains(selectedCharacter))
                         {
-                            if (selectedCharacter == NewSirAlfredLobby.PlayerCharacter.Boss)
+                            if (selectedCharacter == SirAlfredLobby.PlayerCharacter.Boss)
                             {
                                 RaisePlayerChangedStep(panelNumber, Step.ReadyToPlay);
                                 activeStep = Step.ReadyToPlay;
@@ -247,12 +247,12 @@ public class SelectionController : MonoBehaviour
                                 RaisePlayerChangedStep(panelNumber, Step.ColorSelection);
                                 activeStep = Step.ColorSelection;
                             }
-                            NewSirAlfredLobby.Instance.UpdateAvailableCharacters(selectedCharacter, panelNumber);
+                            SirAlfredLobby.Instance.UpdateAvailableCharacters(selectedCharacter, panelNumber);
                         }
                         break;
                     case Step.ColorSelection:
                         RaisePlayerSelectedColor(panelNumber, activeColor);
-                        NewSirAlfredLobby.Instance.SetPlayerColor(panelNumber, activeColor);
+                        SirAlfredLobby.Instance.SetPlayerColor(panelNumber, activeColor);
                         // TODO: Uncomment following Lines once Abilities should be selectable in Lobby! Delete the Rest.
                         //RaisePlayerChangedStepEvent(panelNumber, Step.AbilitySelection);
                         //activeStep = Step.AbilitySelection;
@@ -276,22 +276,22 @@ public class SelectionController : MonoBehaviour
             switch (activeStep)
             {
                 case Step.Offline:
-                    NewSirAlfredLobby.Instance.SetPlayer(panelNumber, null);
+                    SirAlfredLobby.Instance.SetPlayer(panelNumber, null);
                     player = null;
                     break;
                 case Step.CharacterSelection:
                     // TODO: GetNextAvailableCharacter
-                    if (selectedCharacter == NewSirAlfredLobby.PlayerCharacter.Empty) selectedCharacter = NewSirAlfredLobby.PlayerCharacter.Boss;
-                    if (selectedCharacter != NewSirAlfredLobby.PlayerCharacter.Boss)
-                        NewSirAlfredLobby.Instance.UpdateAvailableCharacters(NewSirAlfredLobby.PlayerCharacter.Empty, panelNumber);
+                    if (selectedCharacter == SirAlfredLobby.PlayerCharacter.Empty) selectedCharacter = SirAlfredLobby.PlayerCharacter.Boss;
+                    if (selectedCharacter != SirAlfredLobby.PlayerCharacter.Boss)
+                        SirAlfredLobby.Instance.UpdateAvailableCharacters(SirAlfredLobby.PlayerCharacter.Empty, panelNumber);
                     break;
                 case Step.ColorSelection:
                     if (activeColor == null)
-                        activeColor = NewSirAlfredLobby.Instance.GetStartingColor(selectedCharacter);
+                        activeColor = SirAlfredLobby.Instance.GetStartingColor(selectedCharacter);
                     RaisePlayerChangedColor(panelNumber, activeColor);
                     break;
                 case Step.ReadyToPlay:
-                    NewSirAlfredLobby.Instance.SetReadyToPlay(panelNumber, true);
+                    SirAlfredLobby.Instance.SetReadyToPlay(panelNumber, true);
                     break;
             }
         }
@@ -310,7 +310,7 @@ public class SelectionController : MonoBehaviour
                     //Debug.Log("UIHorizontal: " + player.GetAxis(RewiredConsts.Action.UIHORIZONTAL));
                     inputsLocked = true;
                     Vector3 targetRotation = new Vector3(wheel.transform.rotation.eulerAngles.x, wheel.transform.rotation.eulerAngles.y + 90, wheel.transform.rotation.eulerAngles.z);
-                    selectedCharacter = NewSirAlfredLobby.Instance.SwitchPlayerCharacter(panelNumber, Direction.Right);
+                    selectedCharacter = SirAlfredLobby.Instance.SwitchPlayerCharacter(panelNumber, Direction.Right);
                     //Debug.Log("Old Rotation: " + wheel.transform.rotation + " | New Rotation: " + targetRotation);
                     wheel.DORotate(targetRotation, rotationDuration).SetEase(animationCurve).OnComplete(() =>
                     {
@@ -322,7 +322,7 @@ public class SelectionController : MonoBehaviour
                 case Step.ColorSelection:
                     if (changeTimer == 0f)
                     {
-                        PlayerColor tempColor = NewSirAlfredLobby.Instance.GetNextAvailableColor(true, activeColor);
+                        PlayerColor tempColor = SirAlfredLobby.Instance.GetNextAvailableColor(true, activeColor);
                         if (activeColor != tempColor)
                         {
                             activeColor = tempColor;
@@ -343,7 +343,7 @@ public class SelectionController : MonoBehaviour
                     //Debug.Log("UIHorizontal: " + player.GetAxis(RewiredConsts.Action.UIHORIZONTAL));
                     inputsLocked = true;
                     Vector3 targetRotation = new Vector3(wheel.transform.rotation.eulerAngles.x, wheel.transform.rotation.eulerAngles.y - 90, wheel.transform.rotation.eulerAngles.z);
-                    selectedCharacter = NewSirAlfredLobby.Instance.SwitchPlayerCharacter(panelNumber, Direction.Left);
+                    selectedCharacter = SirAlfredLobby.Instance.SwitchPlayerCharacter(panelNumber, Direction.Left);
                     //Debug.Log("Old Rotation: " + wheel.transform.rotation +  " | New Rotation: " + targetRotation);
                     wheel.DORotate(targetRotation, rotationDuration).SetEase(animationCurve).OnComplete(() =>
                     {
@@ -355,7 +355,7 @@ public class SelectionController : MonoBehaviour
                 case Step.ColorSelection:
                     if (changeTimer == 0f)
                     {
-                        PlayerColor tempColor = NewSirAlfredLobby.Instance.GetNextAvailableColor(false, activeColor);
+                        PlayerColor tempColor = SirAlfredLobby.Instance.GetNextAvailableColor(false, activeColor);
                         if (activeColor != tempColor)
                         {
                             activeColor = tempColor;

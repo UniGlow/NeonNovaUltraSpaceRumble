@@ -103,7 +103,6 @@ public class PopUpTextController : MonoBehaviour
 
     public void GamePaused(bool state)
     {
-        Debug.Log("Game paused? [" + state + "]\nCountdown is on? [" + countdownIsOn + "]");
         if (countdownIsOn)
             text.gameObject.SetActive(!state);
     }

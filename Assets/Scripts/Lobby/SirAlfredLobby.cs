@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 ///
 /// </summary>
-public class NewSirAlfredLobby : MonoBehaviour
+public class SirAlfredLobby : MonoBehaviour
 {
     [System.Serializable]
     class PlayerSettings
@@ -44,7 +44,7 @@ public class NewSirAlfredLobby : MonoBehaviour
     }
 
     #region Variable Declarations
-    public static NewSirAlfredLobby Instance = null;
+    public static SirAlfredLobby Instance = null;
     // Serialized Fields
     [Header("Game Events")]
     [SerializeField] GameEvent slotListeningForInputEvent = null;

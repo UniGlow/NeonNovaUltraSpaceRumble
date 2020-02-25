@@ -72,7 +72,7 @@ public class SelectionUI : MonoBehaviour
                     selectionMarker.gameObject.SetActive(false);
                     break;
                 case SelectionController.Step.ColorSelection:
-                    playerColors = CopyColorList(NewSirAlfredLobby.Instance.AvailableColors);
+                    playerColors = CopyColorList(SirAlfredLobby.Instance.AvailableColors);
                     FillTopPanel(SelectionController.Step.ColorSelection);
                     leftArrow.gameObject.SetActive(true);
                     rightArrow.gameObject.SetActive(true);
@@ -115,7 +115,7 @@ public class SelectionUI : MonoBehaviour
     /// </summary>
     /// <param name="panelNumber">The Panel Number of the Player</param>
     /// <param name="activeCharacter">The Active Character that Player can see to display its Name</param>
-    public void ChangeText(int panelNumber, NewSirAlfredLobby.PlayerCharacter activeCharacter)
+    public void ChangeText(int panelNumber, SirAlfredLobby.PlayerCharacter activeCharacter)
     {
         if(panelNumber == this.panelNumber)
         {
@@ -214,7 +214,7 @@ public class SelectionUI : MonoBehaviour
         bool somethingChanged = false;
         switch (activeStep) {
             case SelectionController.Step.ColorSelection:
-                List<PlayerColor> tempColors = NewSirAlfredLobby.Instance.AvailableColors;
+                List<PlayerColor> tempColors = SirAlfredLobby.Instance.AvailableColors;
                 foreach (PlayerColor pc in tempColors)
                 {
                     if (!playerColors.Contains(pc))

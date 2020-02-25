@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: ea52997c431bf204f882253cfe60c29d
   - enabled: 0
-    path: Assets/Scenes/LobbyLevel.unity
+    path: Assets/Scenes/ShowcaseLevel.unity
     guid: 409fc4bbec8102043aa9759a56f2fa4f
   - enabled: 1
     path: Assets/Scenes/Level001.unity
@@ -48,6 +48,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Lobby.unity
     guid: d10d7da2b4177ba47b94633deb92069e
   - enabled: 1
-    path: Assets/Scenes/UINewLobby.unity
+    path: Assets/Scenes/UILobby.unity
     guid: 18a75db664b8e714e9db0b03a4be6bf7
   m_configObjects: {}

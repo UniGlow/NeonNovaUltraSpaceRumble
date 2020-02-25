@@ -147,8 +147,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   sharedProfile: {fileID: 11400000, guid: 3b9e0808ac29c4b41b6bd6a98fa97a7d, type: 2}
   isGlobal: 1
   blendDistance: 0
@@ -345,8 +345,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   gameEvent: {fileID: 11400000, guid: 61d960440cf04714e8f0dac62b89ca5b, type: 2}
   response:
     m_PersistentCalls:
@@ -370,9 +370,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2137147708}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e92c82a7561dc242b332ccc214754f9, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Script: {fileID: 11500000, guid: aa705e14a1983bb48955bcc5c5bfd5df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   slotListeningForInputEvent: {fileID: 11400000, guid: 6f53a27eda7561c46a754969fff2405f,
     type: 2}
   playerCharacterChangedLobbyEvent: {fileID: 11400000, guid: fd7aa754cc3970a4bbe1f5173be3d5a1,
@@ -390,7 +390,7 @@ MonoBehaviour:
   gameSettings: {fileID: 11400000, guid: 4cbf2bb18122f9d4c92c9dbd86d8b7fa, type: 2}
   lobbyUI:
     sceneAsset: {fileID: 102900000, guid: 18a75db664b8e714e9db0b03a4be6bf7, type: 3}
-    scenePath: Assets/Scenes/UINewLobby.unity
+    scenePath: Assets/Scenes/UILobby.unity
   bossConfig: {fileID: 11400000, guid: ca08c440eca8d854190afe2ee3e321e7, type: 2}
   hero1Config: {fileID: 11400000, guid: 0d24b38cff3ab7645a78e798c43bbfd7, type: 2}
   hero2Config: {fileID: 11400000, guid: d6c98b3edc55ae84cb27c6305d3154cd, type: 2}
