@@ -17,7 +17,7 @@ MonoBehaviour:
   intensifyTime: 20
   intensifyAmount: 0.1
   bossColorSwitchInterval: 15
-  useEndScores: 1
+  useEndScores: 0
   delayForButtonPrompt: 10
   optimalScorePerSecond: 100
   damageScoreCategories:
@@ -28,4 +28,5 @@ MonoBehaviour:
   runnerScoreCategories:
   - {fileID: 11400000, guid: 3cd2bfe1694953740a8c037cc60d6a2a, type: 2}
   - {fileID: 11400000, guid: b87460883dbd2ff43ad9f7e0cc43e008, type: 2}
+  useBestOfFeature: 0
   bestOfRange: 030000000500000007000000

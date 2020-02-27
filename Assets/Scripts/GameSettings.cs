@@ -41,7 +41,9 @@ public class GameSettings : ScriptableObject
     [SerializeField] List<ScoreCategory> runnerScoreCategories = new List<ScoreCategory>();
 
     [Space]
+    [SerializeField] private bool useBestOfFeature = false;
     [Tooltip("List of available Best-of-Versions. Players will be able to choose between these in the Lobby.")]
+    [ConditionalHide("useBestOfFeature", true, false)]
     [SerializeField] private List<int> bestOfRange = new List<int>();
 
     // Private
@@ -73,6 +75,7 @@ public class GameSettings : ScriptableObject
             return returnValue;
         }
     }
+    public bool UseBestOfFeature { get { return useBestOfFeature; } }
     #endregion
 
 

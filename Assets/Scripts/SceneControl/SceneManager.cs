@@ -13,6 +13,9 @@ public class SceneManager : MonoBehaviour
     // Serialized Fields
     public static SceneManager Instance;
 
+    [Header("References")]
+    [SerializeField] GameSettings gameSettings = null;
+
     [Header("Scenes")]
     [SerializeField] SceneReference mainMenu = null;
     [SerializeField] SceneReference lobby = null;
@@ -69,6 +72,14 @@ public class SceneManager : MonoBehaviour
         else if (Instance != this)
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        foreach (SceneReference sr in levels)
+        {
+            availableLevels.Add(sr);
         }
     }
     #endregion
@@ -248,8 +259,12 @@ public class SceneManager : MonoBehaviour
     {
         if (availableLevels.Count == 0)
         {
-            if (preventDoubleLevels)
+            if (preventDoubleLevels || !gameSettings.UseBestOfFeature)
             {
+                // All Levels played, break the Game up here
+                return credits;
+
+
                 // Repopulate available Levels
 
                 foreach(SceneReference sr in levels)

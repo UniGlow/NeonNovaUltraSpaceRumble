@@ -151,7 +151,8 @@ public class SirAlfredLobby : MonoBehaviour
 
         AudioManager.Instance.StartTutorialTrack();
 
-        bestOfSelectedElement = gameSettings.BestOfRange.Count / 2;
+        if(gameSettings.UseBestOfFeature)
+            bestOfSelectedElement = gameSettings.BestOfRange.Count / 2;
     }
 
     private void Update()
@@ -170,8 +171,9 @@ public class SirAlfredLobby : MonoBehaviour
         }
         if (gameReadyToStart)
         {
-            if(selectionTimer <= changeTimer)
-                selectionTimer += Time.deltaTime;
+            if(gameSettings.UseBestOfFeature)
+                if(selectionTimer <= changeTimer)
+                    selectionTimer += Time.deltaTime;
             //bool humans = false;
             foreach (PlayerSettings player in players)
             {
@@ -190,30 +192,32 @@ public class SirAlfredLobby : MonoBehaviour
 
                     if (selectionTimer < changeTimer)
                         return;
-
-                    if (player.player.GetAxis(RewiredConsts.Action.UIHORIZONTAL) > 0)
+                    if (gameSettings.UseBestOfFeature)
                     {
-                        if (bestOfSelectedElement != (gameSettings.BestOfRange.Count - 1))
+                        if (player.player.GetAxis(RewiredConsts.Action.UIHORIZONTAL) > 0)
                         {
-                            bestOfSelectedElement += 1;
-                            changed = true;
-                            selectionTimer = 0f;
+                            if (bestOfSelectedElement != (gameSettings.BestOfRange.Count - 1))
+                            {
+                                bestOfSelectedElement += 1;
+                                changed = true;
+                                selectionTimer = 0f;
+                            }
                         }
-                    }
 
-                    else if (player.player.GetAxis(RewiredConsts.Action.UIHORIZONTAL) < 0)
-                    {
-                        if (bestOfSelectedElement != 0)
+                        else if (player.player.GetAxis(RewiredConsts.Action.UIHORIZONTAL) < 0)
                         {
-                            bestOfSelectedElement -= 1;
-                            changed = true;
-                            selectionTimer = 0f;
+                            if (bestOfSelectedElement != 0)
+                            {
+                                bestOfSelectedElement -= 1;
+                                changed = true;
+                                selectionTimer = 0f;
+                            }
                         }
-                    }
 
-                    if (changed)
-                    {
-                        RaiseBestOfModeChanged(gameSettings.BestOfRange[bestOfSelectedElement].ToString());
+                        if (changed)
+                        {
+                            RaiseBestOfModeChanged(gameSettings.BestOfRange[bestOfSelectedElement].ToString());
+                        }
                     }
                 }
             }
@@ -556,7 +560,8 @@ public class SirAlfredLobby : MonoBehaviour
     /// </summary>
     void SetupPlayerConfigs()
     {
-        gameSettings.BestOf = gameSettings.BestOfRange[bestOfSelectedElement];
+        if(gameSettings.UseBestOfFeature)
+            gameSettings.BestOf = gameSettings.BestOfRange[bestOfSelectedElement];
         List<PlayerCharacter> characters = new List<PlayerCharacter>();
         characters.Add(PlayerCharacter.Empty);
         characters.Add(PlayerCharacter.Empty);
