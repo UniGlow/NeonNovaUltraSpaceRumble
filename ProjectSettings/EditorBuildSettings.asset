@@ -42,12 +42,33 @@ EditorBuildSettings:
     path: Assets/Scenes/UILevel.unity
     guid: fdd8b6d462605b0439d91bf7382d1c18
   - enabled: 0
-    path: Assets/Scenes/UILobby.unity
+    path:
     guid: 26ddaa2e2b9eb2f47a441d2053afa0db
   - enabled: 1
     path: Assets/Scenes/Lobby.unity
     guid: d10d7da2b4177ba47b94633deb92069e
   - enabled: 1
     path: Assets/Scenes/UILobby.unity
-    guid: 18a75db664b8e714e9db0b03a4be6bf7
+    guid: 76ad05bca7494984582b8d71bdf1a217
+  - enabled: 1
+    path: Assets/Scenes/TestLevels Friedemann/Level006.unity
+    guid: e9574251a168e2743a6b22325bb866e7
+  - enabled: 1
+    path: Assets/Scenes/TestLevels Friedemann/Level007.unity
+    guid: 2d2af8652b5767d4da1171f551c90704
+  - enabled: 1
+    path: Assets/Scenes/TestLevels Friedemann/Level008.unity
+    guid: eb3d0d7abed18fe43b04f3c70b1dd05a
+  - enabled: 1
+    path: Assets/Scenes/TestLevels Friedemann/Level009.unity
+    guid: b149299e0d631d9488788fdd032dae5f
+  - enabled: 1
+    path: Assets/Scenes/TestLevels Friedemann/Level010.unity
+    guid: 619f3e2097bfe174587d3f8596f4725f
+  - enabled: 1
+    path: Assets/Scenes/TestLevels Friedemann/Level011.unity
+    guid: 84b3d16223c4b514eb0385baacdfa089
+  - enabled: 1
+    path: Assets/Scenes/TestLevels Friedemann/Level012.unity
+    guid: f3da9943bc4493b47a84081218438746
   m_configObjects: {}
