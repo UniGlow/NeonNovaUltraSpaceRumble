@@ -45,10 +45,15 @@ public class GameSettings : ScriptableObject
     [Tooltip("List of available Best-of-Versions. Players will be able to choose between these in the Lobby.")]
     [ConditionalHide("useBestOfFeature", true, false)]
     [SerializeField] private List<int> bestOfRange = new List<int>();
+    [ConditionalHide("useBestOfFeature", true, true)]
+    [Tooltip("List of available Match-Durations. If unlimited Matches should be possible add \"-1\" at the End!")]
+    [SerializeField] private List<int> matchRange = new List<int>();
 
     // Private
     private ColorSet activeColorSet = null;
     private int bestOf = 5;
+    private int defaultMatchNumber = 5;
+    private int numberOfMatches = 5;
     #endregion
 
 
@@ -76,6 +81,10 @@ public class GameSettings : ScriptableObject
         }
     }
     public bool UseBestOfFeature { get { return useBestOfFeature; } }
+
+    public List<int> MatchRange { get { return matchRange; } }
+    public int DefaultMatchNumber { get { return defaultMatchNumber; } }
+    public int NumberOfMatches { get { return numberOfMatches; } set { numberOfMatches = value; } }
     #endregion
 
 

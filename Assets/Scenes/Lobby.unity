@@ -384,6 +384,8 @@ MonoBehaviour:
     type: 2}
   bestOfModeChangedEvent: {fileID: 11400000, guid: 478392b57a96a1f4dbf007a89d36fc7d,
     type: 2}
+  matchNumberChangedEvent: {fileID: 11400000, guid: 717dfed8efecf6e4bbb65a8d810530c6,
+    type: 2}
   availableColors: {fileID: 11400000, guid: 866142ef2b107ab4f968660c69adec4f, type: 2}
   activeColorSet: {fileID: 11400000, guid: 68d47b220c1450a46a2330237d217b40, type: 2}
   points: {fileID: 11400000, guid: 5be3ffe199c802f45a47f0dbbedb0be5, type: 2}
@@ -402,7 +404,7 @@ MonoBehaviour:
   tankHeroColor: {fileID: 11400000, guid: 78cebc80fe6c61d4aae129fa4ed0829f, type: 2}
   runnerHeroColor: {fileID: 11400000, guid: 5747b0f3d3c16d34e9f62cf2382f2370, type: 2}
   abortPressDuration: 1.5
-  changeTimer: 0.5
+  changeTimer: 0.25
   readyToFight: {fileID: 8300000, guid: 0d2aef47a3b27b347833cc71a455a70c, type: 3}
   readyToFightVolume: 1
 --- !u!4 &2137147711
