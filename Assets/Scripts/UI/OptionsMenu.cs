@@ -85,12 +85,13 @@ public class OptionsMenu : MonoBehaviour
 
     public void SetSFXVolume(float volume)
     {
-        masterMixer.SetFloat(Constants.MIXER_SFX_VOLUME, ExtensionMethods.Remap(Mathf.Log10(volume) * 20, -80f, 0f, -80f, maxSFX));
+        Debug.Log("volume: " + volume + " | " + ExtensionMethods.Remap(Mathf.Log10(volume) * 20, -80f, -80f, 0, maxSFX));
+        masterMixer.SetFloat(Constants.MIXER_SFX_VOLUME, ExtensionMethods.Remap(Mathf.Log10(volume) * 20, -80f, -80f, 0f, maxSFX));
     }
 
     public void SetMusicVolume(float volume)
     {
-        masterMixer.SetFloat(Constants.MIXER_MUSIC_VOLUME, ExtensionMethods.Remap(Mathf.Log10(volume) * 20, -80f, 0f, -80f, maxMusic));
+        masterMixer.SetFloat(Constants.MIXER_MUSIC_VOLUME, ExtensionMethods.Remap(Mathf.Log10(volume) * 20, -80f, -80f, 0f, maxMusic));
     }
     #endregion
 
