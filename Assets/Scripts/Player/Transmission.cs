@@ -376,8 +376,8 @@ public class Transmission : MonoBehaviour
                     audioSource.PlayOneShot(transmissionSound, transmissionSoundVolume);
 
                     // Bend time back to normal
-                    JuiceLib.TimeFX.BendTime(1f, transmissionDuration * slowMotionFadeOutDuration);
-                    AudioManager.Instance.BendTime(1f, transmissionDuration * slowMotionFadeOutDuration);
+                    if (Time.timeScale != 0) JuiceLib.TimeFX.BendTime(1f, transmissionDuration * slowMotionFadeOutDuration);
+                    if (Time.timeScale != 0) AudioManager.Instance.BendTime(1f, transmissionDuration * slowMotionFadeOutDuration);
                 }
 
                 EndTransmission();
