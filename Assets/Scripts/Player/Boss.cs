@@ -290,7 +290,7 @@ public class Boss : Character
             abilityProjectileLifeTime);
         }
 
-        //audioSource.PlayOneShot(abilitySound, abilitySoundVolume);
+        audioSource.PlayOneShot(abilitySound, abilitySoundVolume);
         if (enableCameraShake) EZCameraShake.CameraShaker.Instance.ShakeOnce(magnitude, roughness, fadeIn, fadeOut);
         playerConfig.Player.SetVibration(0, rumbleStrengthDeep, rumbleDuration);
         playerConfig.Player.SetVibration(1, rumbleStrengthHigh, rumbleDuration);
@@ -317,8 +317,6 @@ public class Boss : Character
 
     protected IEnumerator ShootNovas (int numberOfNovas, float timeBetweenNovas, System.Action onComplete = null)
     {
-        audioSource.PlayOneShot(abilitySound, abilitySoundVolume);
-
         for (int i = 0; i < numberOfNovas; i++)
         {
             ShootNova(consecutiveNovaOffset * i);
