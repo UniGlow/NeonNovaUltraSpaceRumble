@@ -27,6 +27,7 @@ public class BossAI : Boss
     List<Transform> allAITargets = new List<Transform>();
     float randomnessTimer;
     float repathingTimer = 0f;
+    float originalAgentSpeed;
     #endregion
 
 
@@ -202,13 +203,14 @@ public class BossAI : Boss
         {
             abilityInProgress = true;
 
-            characterStats.ModifySpeed(characterStats.Speed * (1 - movementSpeedReduction));
+            originalAgentSpeed = agent.speed;
+            agent.speed = agent.speed * (1 - movementSpeedReduction);
 
             StartCoroutine(PrepareNova(() =>
             {
                 StartCoroutine(ShootNovas(numberOfNovas, timeBetweenNovas, () =>
                 {
-                    ResetSpeed();
+                    agent.speed = originalAgentSpeed;
                     cooldownTimer = 0f;
                     abilityCooldownB = false;
                     abilityInProgress = false;
