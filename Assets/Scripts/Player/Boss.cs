@@ -272,7 +272,7 @@ public class Boss : Character
         }
     }
 
-    protected void ShootNova(float offset)
+    void ShootNova(float offset)
     {
         for (int i = 0; i < numberOfProjectiles; ++i)
         {

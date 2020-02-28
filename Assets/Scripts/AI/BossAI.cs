@@ -218,6 +218,28 @@ public class BossAI : Boss
             }));
         }
     }
+
+    void ShootNova(float offset)
+    {
+        for (int i = 0; i < numberOfProjectiles; ++i)
+        {
+            float factor = (i / (float)numberOfProjectiles) * Mathf.PI * 2f + offset;
+            Vector3 pos = new Vector3(
+                Mathf.Sin(factor) * 1.9f,
+                transform.position.y + 0.5f,
+                Mathf.Cos(factor) * 1.9f);
+
+            GameObject projectile = Instantiate(projectilePrefab, pos + transform.position, Quaternion.identity);
+            projectile.GetComponent<BossProjectile>().Initialize(
+            attackDamagePerShot,
+            strengthColor,
+            (projectile.transform.position - transform.position) * abilityProjectileSpeed,
+            abilityProjectileLifeTime);
+        }
+
+        audioSource.PlayOneShot(abilitySound, abilitySoundVolume);
+        if (enableCameraShake) EZCameraShake.CameraShaker.Instance.ShakeOnce(magnitude, roughness, fadeIn, fadeOut);
+    }
     #endregion
 
 
