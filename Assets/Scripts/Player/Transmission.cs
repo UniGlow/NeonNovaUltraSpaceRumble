@@ -204,6 +204,7 @@ public class Transmission : MonoBehaviour
                         transmissionPartner = receiver.transmitter;
                         receivingAbility = receiver.transmitter.hero.PlayerConfig.Ability;
                         ChangeState(State.Transmitting);
+                        break;
                     }
                 }
 
