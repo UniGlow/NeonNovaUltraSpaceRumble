@@ -10,7 +10,9 @@ public class TransmissionAI : Transmission
 {
 
     #region Variable Declarations
-    
+    [SerializeField] float failsafeDeactivate = 2f;
+
+    float timer = 0f;
     #endregion
 
 
@@ -22,6 +24,17 @@ public class TransmissionAI : Transmission
         {
             ChangeState(State.ReadyToTransmit);
         }
+
+        else if (state == State.ReadyToTransmit)
+        {
+            timer += Time.deltaTime;
+            if (timer >= failsafeDeactivate)
+            {
+                timer = 0f;
+                ChangeState(State.Deactivated);
+            }
+        }
+
     }
     #endregion
 
