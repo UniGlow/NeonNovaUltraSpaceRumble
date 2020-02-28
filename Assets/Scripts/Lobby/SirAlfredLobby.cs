@@ -597,7 +597,10 @@ public class SirAlfredLobby : MonoBehaviour
         if (gameSettings.UseBestOfFeature)
             gameSettings.BestOf = gameSettings.BestOfRange[bestOfSelectedElement];
         else
+        {
+            SceneManager.Instance.ClearLevelsPlayed();
             gameSettings.NumberOfMatches = gameSettings.MatchRange[matchNumberSelectedElement];
+        }
         List<PlayerCharacter> characters = new List<PlayerCharacter>();
         characters.Add(PlayerCharacter.Empty);
         characters.Add(PlayerCharacter.Empty);
