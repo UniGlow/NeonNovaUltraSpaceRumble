@@ -957,6 +957,7 @@ GameObject:
   - component: {fileID: 223380642537458990}
   - component: {fileID: 114510853262376582}
   - component: {fileID: 114407887894739348}
+  - component: {fileID: 2259858856806136641}
   m_Layer: 5
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -1176,6 +1177,37 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &2259858856806136641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1680910192414098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93699695a00d6e45b8b2d8e9668f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 447d59970781ce142a63ea883b30c2b1, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114738683751226938}
+        m_MethodName: GameOver
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  linkedMethods: []
+  ignoreEventParameters: 1
 --- !u!1 &1699363032152512
 GameObject:
   m_ObjectHideFlags: 0
@@ -1707,6 +1739,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 224128132133039138}
     m_Modifications:
+    - target: {fileID: 5876816616218716150, guid: e236933714a8bb8488392190b1eccff7,
+        type: 3}
+      propertyPath: m_Name
+      value: OptionsMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 5876816616218716153, guid: e236933714a8bb8488392190b1eccff7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1811,11 +1848,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5876816616218716150, guid: e236933714a8bb8488392190b1eccff7,
-        type: 3}
-      propertyPath: m_Name
-      value: OptionsMenu
       objectReference: {fileID: 0}
     - target: {fileID: 5876816614994923960, guid: e236933714a8bb8488392190b1eccff7,
         type: 3}

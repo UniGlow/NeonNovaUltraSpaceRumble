@@ -20,6 +20,7 @@ public class Pause : MonoBehaviour
     [SerializeField] GameEvent gameResumedEvent = null;
 
     bool gameIsPaused;
+    bool gameOver = false;
 
     List<InputHelper.PlayerRuleSet> playerRuleSets = new List<InputHelper.PlayerRuleSet>();
 
@@ -37,7 +38,7 @@ public class Pause : MonoBehaviour
             resumeButton.GetComponent<Button>().onClick.Invoke();
         }
 
-        if (InputHelper.GetButtonDown(RewiredConsts.Action.PAUSE))
+        if (!gameOver && InputHelper.GetButtonDown(RewiredConsts.Action.PAUSE))
         {
             if (gameIsPaused)
             {
@@ -93,6 +94,11 @@ public class Pause : MonoBehaviour
     public void ExitGame()
     {
         SceneManager.Instance.ExitGame();
+    }
+
+    public void GameOver()
+    {
+        gameOver = true;
     }
 
     private void RaiseGamePaused()
