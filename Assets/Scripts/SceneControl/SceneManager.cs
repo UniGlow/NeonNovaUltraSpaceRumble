@@ -247,6 +247,11 @@ public class SceneManager : MonoBehaviour
             UnityEngine.SceneManagement.SceneManager.LoadScene(uiLevel, LoadSceneMode.Additive);
         }
     }
+
+    public void ClearLevelsPlayed()
+    {
+        matchesPlayed = 0;
+    }
     #endregion
 
 
