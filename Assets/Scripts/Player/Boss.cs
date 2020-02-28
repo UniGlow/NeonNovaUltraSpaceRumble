@@ -315,7 +315,7 @@ public class Boss : Character
         attackCooldownB = true;
     }
 
-    protected IEnumerator ShootNovas (int numberOfNovas, float timeBetweenNovas, System.Action onComplete = null)
+    IEnumerator ShootNovas (int numberOfNovas, float timeBetweenNovas, System.Action onComplete = null)
     {
         for (int i = 0; i < numberOfNovas; i++)
         {

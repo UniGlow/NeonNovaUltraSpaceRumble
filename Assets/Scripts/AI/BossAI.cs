@@ -254,6 +254,17 @@ public class BossAI : Boss
 
 
     #region Coroutines
+    IEnumerator ShootNovas(int numberOfNovas, float timeBetweenNovas, System.Action onComplete = null)
+    {
+        for (int i = 0; i < numberOfNovas; i++)
+        {
+            ShootNova(consecutiveNovaOffset * i);
+            yield return new WaitForSeconds(timeBetweenNovas);
+        }
+
+        if (onComplete != null) onComplete.Invoke();
+    }
+
     IEnumerator Wait (int frames, System.Action onComplete)
     {
         yield return null;

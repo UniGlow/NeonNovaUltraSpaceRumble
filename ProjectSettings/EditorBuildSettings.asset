@@ -67,5 +67,5 @@ EditorBuildSettings:
     guid: f3da9943bc4493b47a84081218438746
   - enabled: 1
     path: Assets/Scenes/UILobby.unity
-    guid: 18a75db664b8e714e9db0b03a4be6bf7
+    guid: 26ddaa2e2b9eb2f47a441d2053afa0db
   m_configObjects: {}

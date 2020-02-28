@@ -97,7 +97,7 @@ LightmapSettings:
     m_ShowResolutionOverlay: 1
     m_ExportTrainingData: 0
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -401,7 +401,7 @@ MonoBehaviour:
   points: {fileID: 11400000, guid: 5be3ffe199c802f45a47f0dbbedb0be5, type: 2}
   gameSettings: {fileID: 11400000, guid: 4cbf2bb18122f9d4c92c9dbd86d8b7fa, type: 2}
   lobbyUI:
-    sceneAsset: {fileID: 102900000, guid: 18a75db664b8e714e9db0b03a4be6bf7, type: 3}
+    sceneAsset: {fileID: 102900000, guid: 26ddaa2e2b9eb2f47a441d2053afa0db, type: 3}
     scenePath: Assets/Scenes/UILobby.unity
   bossConfig: {fileID: 11400000, guid: ca08c440eca8d854190afe2ee3e321e7, type: 2}
   hero1Config: {fileID: 11400000, guid: 0d24b38cff3ab7645a78e798c43bbfd7, type: 2}
