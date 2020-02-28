@@ -609,6 +609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80d7d46c3a841d84e872c4b00b3be70f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameSettings: {fileID: 11400000, guid: 4cbf2bb18122f9d4c92c9dbd86d8b7fa, type: 2}
   mainMenu:
     sceneAsset: {fileID: 102900000, guid: ea52997c431bf204f882253cfe60c29d, type: 3}
     scenePath: Assets/Scenes/MainMenu.unity

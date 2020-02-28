@@ -37,6 +37,7 @@ public class SceneManager : MonoBehaviour
 
     // Private
     bool manualContinue = false;
+    private int matchesPlayed = 0;
 
     private List<SceneReference> availableLevels = new List<SceneReference>();
     #endregion
@@ -108,10 +109,16 @@ public class SceneManager : MonoBehaviour
 #endif
     }
 
-    public void StartNextLevel()
+    /// <summary>
+    /// Starts next Level (will count as Played Level)
+    /// </summary>
+    public void StartNextLevel(float optionalDelay = -1f)
     {
         if (!manualContinue)
-            LoadNextLevel();
+        {
+            matchesPlayed += 1;
+            LoadNextLevel(optionalDelay);
+        }
     }
 
     /// <summary>
@@ -120,6 +127,11 @@ public class SceneManager : MonoBehaviour
     public void LoadNextLevel(float optionalDelay = -1f)
     {
         //bool levelFound = false;
+        if (gameSettings.NumberOfMatches != -1 && matchesPlayed > gameSettings.NumberOfMatches)
+        {
+            StartCoroutine(LoadCreditsCoroutine(optionalDelay >= 0f ? optionalDelay : delayAtLevelEnd));
+            return;
+        }
 
         SceneReference nextLevel = GetRandomLevel();
 
@@ -262,7 +274,8 @@ public class SceneManager : MonoBehaviour
             if (preventDoubleLevels || !gameSettings.UseBestOfFeature)
             {
                 // All Levels played, break the Game up here
-                return credits;
+                if(gameSettings.NumberOfMatches != -1)
+                    return credits;
 
 
                 // Repopulate available Levels

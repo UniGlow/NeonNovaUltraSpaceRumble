@@ -112,7 +112,7 @@ public class DebugMode : MonoBehaviour
             {
                 Debug.Log("Debug Mode: Loading next scene.");
                 //TODO: Schnelles Szenenladen ermöglichen, ohne das Delay nach Levelende
-                SceneManager.Instance.StartNextLevel();
+                SceneManager.Instance.StartNextLevel(0.5f);
             }
             if (GUILayout.Button("Reload scene"))
             {
