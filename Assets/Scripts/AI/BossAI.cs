@@ -59,6 +59,8 @@ public class BossAI : Boss
             if (i < corners.Count) allAITargets.Add(corners[i].transform);
             else allAITargets.Add(middleTargets[i - corners.Count].transform);
         }
+
+        ResetCooldowns(false);
     }
 
     new private void FixedUpdate()
@@ -196,29 +198,22 @@ public class BossAI : Boss
 
     private void Ability()
     {
-        if (abilityCooldownB)
+        if (abilityCooldownB && !abilityInProgress)
         {
+            abilityInProgress = true;
 
-            for (int i = 0; i < numberOfProjectiles; ++i)
+            characterStats.ModifySpeed(characterStats.Speed * (1 - movementSpeedReduction));
+
+            StartCoroutine(PrepareNova(() =>
             {
-                float factor = (i / (float)numberOfProjectiles) * Mathf.PI * 2f;
-                Vector3 pos = new Vector3(
-                    Mathf.Sin(factor) * 1.9f,
-                    transform.position.y + 0.5f,
-                    Mathf.Cos(factor) * 1.9f);
-
-                GameObject projectile = Instantiate(projectilePrefab, pos + transform.position, Quaternion.identity);
-                projectile.GetComponent<BossProjectile>().Initialize(
-                    attackDamagePerShot, 
-                    strengthColor, 
-                    (projectile.transform.position - transform.position) * abilityProjectileSpeed, 
-                    attackProjectileLifeTime);
-            }
-
-            audioSource.PlayOneShot(abilitySound, abilitySoundVolume);
-
-            abilityCooldownB = false;
-            cooldownTimer = 0f;
+                StartCoroutine(ShootNovas(numberOfNovas, timeBetweenNovas, () =>
+                {
+                    ResetSpeed();
+                    cooldownTimer = 0f;
+                    abilityCooldownB = false;
+                    abilityInProgress = false;
+                }));
+            }));
         }
     }
     #endregion

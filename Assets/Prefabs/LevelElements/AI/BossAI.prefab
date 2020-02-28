@@ -146,24 +146,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterStats: {fileID: 11400000, guid: 9eab235bee7a65c4e8d326fd50253853, type: 2}
-  attackDamagePerShot: 15
-  attackProjectileSpeed: 40
+  attackDamagePerShot: 20
+  attackProjectileSpeed: 70
   attackProjectileLifeTime: 1
-  attackCooldown: 0.18
-  abilityDamagePerShot: 20
-  numberOfProjectiles: 20
-  abilityProjectileSpeed: 20
-  abilityProjectileLifeTime: 1
-  numberOfNovas: 10
-  timeBetweenNovas: 0.2
-  consecutiveNovaOffset: 0.1
-  abilityCooldown: 3
+  attackCooldown: 0.165
+  abilityDamagePerShot: 6
+  numberOfProjectiles: 11
+  abilityProjectileSpeed: 12
+  abilityProjectileLifeTime: 2
+  numberOfNovas: 25
+  timeBetweenNovas: 0.1
+  consecutiveNovaOffset: 0.06
+  abilityCooldown: 12
   movementSpeedReduction: 0.5
-  abilityAnnounceDuration: 3
+  abilityAnnounceDuration: 1.1
   rumbleStrengthDeep: 1
   rumbleStrengthHigh: 1
   rumbleDuration: 0.5
-  materialGlowOnSwitch: 3
+  materialGlowOnSwitch: 2
   abilitySound: {fileID: 8300000, guid: ddbdc3544101111438a9b6c3b546a294, type: 3}
   abilitySoundVolume: 1
   attackSound: {fileID: 8300000, guid: cf3ba19d968b8e249b2a4b68126fb355, type: 3}
@@ -171,10 +171,10 @@ MonoBehaviour:
   colorChangeSound: {fileID: 8300000, guid: cb3b90f02c52c49418a9a3fd50874d2b, type: 3}
   colorChangeSoundVolume: 1
   enableCameraShake: 1
-  magnitude: 1.2
+  magnitude: 1
   roughness: 10
   fadeIn: 0.1
-  fadeOut: 0.8
+  fadeOut: 1
   projectilePrefab: {fileID: 1693907411783006, guid: 0f758c9824c38e64e8607ba9dc4c8d64,
     type: 3}
   bossMeshRenderer: {fileID: 23088180500308686}
@@ -773,12 +773,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7451406894093603596, guid: e0d465a34b1d7c043a79f60146f27edd,
+    - target: {fileID: 7451406894877567741, guid: e0d465a34b1d7c043a79f60146f27edd,
         type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7451406894877567741, guid: e0d465a34b1d7c043a79f60146f27edd,
+    - target: {fileID: 7451406894093603596, guid: e0d465a34b1d7c043a79f60146f27edd,
         type: 3}
       propertyPath: m_IsActive
       value: 1
